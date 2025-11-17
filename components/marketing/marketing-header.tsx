@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { Logo } from './logo';
+import Image from 'next/image';
 
 export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,12 +20,15 @@ export function MarketingHeader() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <Logo className="h-8 w-8 text-[#4a9fd8]" />
-            <span className="text-xl font-bold tracking-wide">
-              <span className="text-white">PATRICK</span>{' '}
-              <span className="text-[#4a9fd8] font-light">FARRELL</span>
-            </span>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Patrick Farrell"
+              width={220}
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
