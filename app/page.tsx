@@ -1,14 +1,13 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Sparkles, Zap, Users } from 'lucide-react';
-import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { getPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Patrick Farrell | Tech Strategy, App Development & Business Growth',
-  description: 'Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches Ready to Scale while Maintaining Their Freedom.',
-};
+export async function generateMetadata() {
+  return await getPageMetadata('home');
+}
 
 export default function HomePage() {
   return (
