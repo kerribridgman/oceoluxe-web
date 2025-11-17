@@ -5,11 +5,12 @@ import { existsSync } from 'fs';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
+    const { path: pathSegments } = await params;
     // Sanitize the path to prevent directory traversal
-    const requestedPath = params.path.join('/');
+    const requestedPath = pathSegments.join('/');
 
     // Prevent directory traversal
     if (requestedPath.includes('..') || requestedPath.includes('~')) {

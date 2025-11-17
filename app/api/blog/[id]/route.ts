@@ -13,7 +13,7 @@ import { NewBlogPost } from '@/lib/db/schema';
 // GET /api/blog/[id] - Get a blog post by ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getUser();
@@ -22,7 +22,8 @@ export async function GET(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const id = parseInt(params.id);
+    const { id: idParam } = await params;
+    const id = parseInt(idParam);
     if (isNaN(id)) {
       return NextResponse.json({ message: 'Invalid ID' }, { status: 400 });
     }
@@ -46,7 +47,7 @@ export async function GET(
 // PUT /api/blog/[id] - Update a blog post
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getUser();
@@ -55,7 +56,8 @@ export async function PUT(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const id = parseInt(params.id);
+    const { id: idParam } = await params;
+    const id = parseInt(idParam);
     if (isNaN(id)) {
       return NextResponse.json({ message: 'Invalid ID' }, { status: 400 });
     }
@@ -142,7 +144,7 @@ export async function PUT(
 // DELETE /api/blog/[id] - Delete a blog post
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getUser();
@@ -151,7 +153,8 @@ export async function DELETE(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const id = parseInt(params.id);
+    const { id: idParam } = await params;
+    const id = parseInt(idParam);
     if (isNaN(id)) {
       return NextResponse.json({ message: 'Invalid ID' }, { status: 400 });
     }

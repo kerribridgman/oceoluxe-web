@@ -11,8 +11,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MarkdownRenderer } from '@/components/blog/markdown-renderer';
 
-export default function EditBlogPostPage({ params }: { params: { id: string } }) {
+export default function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
+  const [postId, setPostId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
@@ -34,12 +35,21 @@ export default function EditBlogPostPage({ params }: { params: { id: string } })
   const [uploadingOg, setUploadingOg] = useState(false);
 
   useEffect(() => {
-    fetchPost();
-  }, [params.id]);
+    params.then(({ id }) => {
+      setPostId(id);
+    });
+  }, [params]);
+
+  useEffect(() => {
+    if (postId) {
+      fetchPost();
+    }
+  }, [postId]);
 
   async function fetchPost() {
+    if (!postId) return;
     try {
-      const response = await fetch(`/api/blog/${params.id}`);
+      const response = await fetch(`/api/blog/${postId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch blog post');
       }
@@ -110,7 +120,7 @@ export default function EditBlogPostPage({ params }: { params: { id: string } })
   }
 
   async function handleSubmit(publish?: boolean) {
-    if (!title || !content) {
+    if (!postId || !title || !content) {
       setError('Title and content are required');
       return;
     }
@@ -119,7 +129,7 @@ export default function EditBlogPostPage({ params }: { params: { id: string } })
     setError(null);
 
     try {
-      const response = await fetch(`/api/blog/${params.id}`, {
+      const response = await fetch(`/api/blog/${postId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

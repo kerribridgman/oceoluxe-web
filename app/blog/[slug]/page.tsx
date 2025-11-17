@@ -8,11 +8,12 @@ import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPublishedBlogPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPublishedBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -57,7 +58,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const post = await getPublishedBlogPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getPublishedBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
