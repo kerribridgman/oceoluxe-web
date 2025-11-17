@@ -1,19 +1,19 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { Manrope } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
 
 export const metadata: Metadata = {
-  title: 'Next.js SaaS Starter',
-  description: 'Get started quickly with Next.js, Postgres, and Stripe.'
+  title: 'Patrick Farrell | Tech Strategy & Business Growth',
+  description: 'Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches.'
 };
 
 export const viewport: Viewport = {
   maximumScale: 1
 };
 
-const manrope = Manrope({ subsets: ['latin'] });
+const raleway = Raleway({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700', '800'] });
 
 export default function RootLayout({
   children
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
+      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${raleway.className}`}
     >
       <body className="min-h-[100dvh] bg-gray-50">
         <SWRConfig

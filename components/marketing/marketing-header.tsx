@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Logo } from './logo';
 
 export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,13 +16,15 @@ export function MarketingHeader() {
   ];
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-[#1a2332] border-b border-[#2a3342] sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-gray-900">
-              Patrick <span className="text-orange-600">Farrell</span>
+          <Link href="/" className="flex items-center gap-3">
+            <Logo className="h-8 w-8 text-[#4a9fd8]" />
+            <span className="text-xl font-bold tracking-wide">
+              <span className="text-white">PATRICK</span>{' '}
+              <span className="text-[#4a9fd8] font-light">FARRELL</span>
             </span>
           </Link>
 
@@ -31,13 +34,13 @@ export function MarketingHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-orange-600 font-medium transition-colors"
+                className="text-gray-300 hover:text-[#4a9fd8] font-medium transition-colors uppercase text-sm tracking-wider"
               >
                 {item.name}
               </Link>
             ))}
             <Link href="/sign-in">
-              <Button variant="outline" className="border-gray-300">
+              <Button variant="outline" className="border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8] hover:text-white">
                 Sign In
               </Button>
             </Link>
@@ -49,28 +52,28 @@ export function MarketingHeader() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-gray-900" />
+              <X className="h-6 w-6 text-white" />
             ) : (
-              <Menu className="h-6 w-6 text-gray-900" />
+              <Menu className="h-6 w-6 text-white" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4">
+          <div className="md:hidden py-4 space-y-4 border-t border-[#2a3342]">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block text-gray-700 hover:text-orange-600 font-medium py-2"
+                className="block text-gray-300 hover:text-[#4a9fd8] font-medium py-2 uppercase text-sm tracking-wider"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
             <Link href="/sign-in">
-              <Button variant="outline" className="w-full border-gray-300">
+              <Button variant="outline" className="w-full border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8] hover:text-white">
                 Sign In
               </Button>
             </Link>

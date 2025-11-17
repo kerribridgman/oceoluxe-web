@@ -15,22 +15,22 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <MarketingHeader />
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a2332] via-[#1e2838] to-[#1a2332]">
         {/* Decorative elements */}
-        <div className="absolute top-20 left-10 text-6xl text-orange-500/10 font-mono">&lt;/&gt;</div>
-        <div className="absolute top-40 right-20 text-6xl text-blue-500/10 font-mono">&#123;&#125;</div>
-        <div className="absolute bottom-20 left-1/4 text-6xl text-purple-500/10 font-mono">( )</div>
+        <div className="absolute top-20 left-10 text-6xl text-[#4a9fd8]/10 font-mono">&lt;/&gt;</div>
+        <div className="absolute top-40 right-20 text-6xl text-[#4a9fd8]/10 font-mono">&#123;&#125;</div>
+        <div className="absolute bottom-20 left-1/4 text-6xl text-[#4a9fd8]/10 font-mono">( )</div>
 
         {/* Colored blur effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
               Unlock Your Voice.<br />
               Build Your App.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4a9fd8] to-[#6bb8f0]">
                 Grow Your Digital Business.
               </span>
             </h1>
@@ -39,13 +39,13 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="#services">
-                <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-6">
+                <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg px-8 py-6">
                   Explore Services
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link href="/blog">
-                <Button variant="outline" size="lg" className="border-gray-600 text-white hover:bg-gray-800 text-lg px-8 py-6">
+                <Button variant="outline" size="lg" className="border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8]/10 text-lg px-8 py-6">
                   Read the Blog
                 </Button>
               </Link>
@@ -68,32 +68,32 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4">
-                <Sparkles className="w-8 h-8 text-orange-600" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
+                <Sparkles className="w-8 h-8 text-[#4a9fd8]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Clarity + Positioning</h3>
               <p className="text-gray-600">Define your offering and align with your ideal audience</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-                <Users className="w-8 h-8 text-blue-600" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
+                <Users className="w-8 h-8 text-[#4a9fd8]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Content + Visibility</h3>
               <p className="text-gray-600">Build consistent credibility-generating content systems</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
-                <Zap className="w-8 h-8 text-purple-600" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
+                <Zap className="w-8 h-8 text-[#4a9fd8]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Digital Infrastructure</h3>
               <p className="text-gray-600">Develop lead capture and automation systems</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                <Code className="w-8 h-8 text-green-600" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
+                <Code className="w-8 h-8 text-[#4a9fd8]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">App Design & Development</h3>
               <p className="text-gray-600">Build sustainable, profitable web and mobile solutions</p>
@@ -126,7 +126,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-orange-500 to-purple-600 rounded-2xl opacity-20"></div>
+              <div className="aspect-square bg-gradient-to-br from-[#4a9fd8] to-[#1a2332] rounded-2xl opacity-20"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center text-gray-900 p-8 bg-white/90 rounded-xl backdrop-blur">
                   <div className="text-4xl font-bold mb-2">800+</div>
@@ -160,16 +160,16 @@ export default function HomePage() {
                 Build once, scale forever.
               </p>
               <Link href="/services#ai-consulting">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
                   Learn More
                 </Button>
               </Link>
             </div>
 
             {/* 1:1 Tech Coaching */}
-            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-orange-500">
+            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-[#4a9fd8]">
               <div className="text-4xl mb-4">🔥</div>
-              <div className="inline-block px-3 py-1 bg-orange-100 text-orange-800 text-xs font-semibold rounded-full mb-4">
+              <div className="inline-block px-3 py-1 bg-[#4a9fd8]/10 text-[#4a9fd8] text-xs font-semibold rounded-full mb-4">
                 MOST POPULAR
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -180,7 +180,7 @@ export default function HomePage() {
                 Clarity. Confidence. Clients.
               </p>
               <Link href="/services#tech-coaching">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
                   Apply Now
                 </Button>
               </Link>
@@ -197,7 +197,7 @@ export default function HomePage() {
                 Scale on your terms.
               </p>
               <Link href="/services#mastermind">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
                   Join the Circle
                 </Button>
               </Link>
@@ -216,22 +216,22 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-500 to-orange-600">
+      <section className="py-20 bg-gradient-to-br from-[#1a2332] to-[#1e2838]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Build Your Digital Business?
           </h2>
-          <p className="text-xl text-orange-100 mb-8">
+          <p className="text-xl text-gray-300 mb-8">
             Book a free alignment call and let's build a game plan together
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/services">
-              <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 text-lg px-8 py-6">
+              <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg px-8 py-6">
                 Book a Discovery Call
               </Button>
             </Link>
             <Link href="/blog">
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-orange-600 text-lg px-8 py-6">
+              <Button variant="outline" size="lg" className="border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8]/10 text-lg px-8 py-6">
                 Read the Blog
               </Button>
             </Link>

@@ -15,14 +15,14 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-white">
       <MarketingHeader />
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a2332] via-[#1e2838] to-[#1a2332]">
         {/* Decorative elements */}
-        <div className="absolute top-20 left-10 text-6xl text-orange-500/10 font-mono">&lt;/&gt;</div>
-        <div className="absolute bottom-20 right-20 text-6xl text-blue-500/10 font-mono">&#123;&#125;</div>
+        <div className="absolute top-20 left-10 text-6xl text-[#4a9fd8]/10 font-mono">&lt;/&gt;</div>
+        <div className="absolute bottom-20 right-20 text-6xl text-[#4a9fd8]/10 font-mono">&#123;&#125;</div>
 
         {/* Colored blur effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
@@ -48,7 +48,7 @@ export default function ServicesPage() {
                 <h2 className="text-4xl font-bold text-gray-900 mb-4">
                   AI, App Development & Automation Consulting
                 </h2>
-                <p className="text-xl text-orange-600 font-semibold mb-4">
+                <p className="text-xl text-[#4a9fd8] font-semibold mb-4">
                   Work smarter, not harder.
                 </p>
                 <p className="text-lg text-gray-700 mb-6">
@@ -71,13 +71,13 @@ export default function ServicesPage() {
                     'Ongoing tech support and optimization'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
-                      <Check className="w-6 h-6 text-orange-500 mr-3 flex-shrink-0 mt-0.5" />
+                      <Check className="w-6 h-6 text-[#4a9fd8] mr-3 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700">{item}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="mt-8">
-                  <Button size="lg" className="w-full bg-orange-500 hover:bg-orange-600">
+                  <Button size="lg" className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
                     Book a Free Discovery Call
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
@@ -89,8 +89,8 @@ export default function ServicesPage() {
           {/* Service 2: 1:1 Tech Coaching */}
           <div id="tech-coaching" className="scroll-mt-16">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-8 border-2 border-orange-200">
-                <div className="inline-block px-4 py-2 bg-orange-500 text-white text-sm font-bold rounded-full mb-6">
+              <div className="order-2 md:order-1 bg-gradient-to-br from-[#4a9fd8]/10 to-[#4a9fd8]/20 rounded-xl p-8 border-2 border-[#4a9fd8]/30">
+                <div className="inline-block px-4 py-2 bg-[#4a9fd8] text-white text-sm font-bold rounded-full mb-6">
                   MOST POPULAR
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Deliverables</h3>
@@ -103,17 +103,17 @@ export default function ServicesPage() {
                     'Fully developed technology systems for organizing business and selling digital products/services'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
-                      <Check className="w-6 h-6 text-orange-600 mr-3 flex-shrink-0 mt-0.5" />
+                      <Check className="w-6 h-6 text-[#4a9fd8] mr-3 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-800 font-medium">{item}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="mt-8 space-y-3">
-                  <Button size="lg" className="w-full bg-orange-500 hover:bg-orange-600">
+                  <Button size="lg" className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
                     Apply For 1:1 Tech Coaching
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
-                  <Button variant="outline" size="lg" className="w-full border-orange-500 text-orange-600 hover:bg-orange-50">
+                  <Button variant="outline" size="lg" className="w-full border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8]/10">
                     Book a FREE 30-Min Strategy Session
                   </Button>
                 </div>
@@ -124,7 +124,7 @@ export default function ServicesPage() {
                 <h2 className="text-4xl font-bold text-gray-900 mb-4">
                   Ignite Your Online Business
                 </h2>
-                <p className="text-xl text-orange-600 font-semibold mb-4">
+                <p className="text-xl text-[#4a9fd8] font-semibold mb-4">
                   1:1 Tech Coaching
                 </p>
                 <p className="text-lg text-gray-700 mb-6">
@@ -194,7 +194,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
+      <section className="py-20 bg-gradient-to-br from-[#1a2332] to-[#1e2838]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Not Sure Which is Right for You?
@@ -202,7 +202,7 @@ export default function ServicesPage() {
           <p className="text-xl text-gray-300 mb-8">
             Book a free alignment call and let's build a game plan together
           </p>
-          <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-lg px-8 py-6">
+          <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-lg px-8 py-6">
             Book a Free Discovery Call
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>

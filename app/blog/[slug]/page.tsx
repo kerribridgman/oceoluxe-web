@@ -102,7 +102,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <Link
               href="/blog"
-              className="inline-flex items-center text-gray-600 hover:text-orange-600 transition-colors"
+              className="inline-flex items-center text-gray-600 hover:text-[#4a9fd8] transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Blog
@@ -156,7 +156,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Excerpt */}
             {post.excerpt && (
-              <p className="text-xl text-gray-600 mt-6 leading-relaxed border-l-4 border-orange-500 pl-6 italic">
+              <p className="text-xl text-gray-600 mt-6 leading-relaxed border-l-4 border-[#4a9fd8] pl-6 italic">
                 {post.excerpt}
               </p>
             )}
@@ -172,7 +172,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="flex items-center justify-between">
               <Link
                 href="/blog"
-                className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium"
+                className="inline-flex items-center text-[#4a9fd8] hover:text-[#3a8fc8] font-medium"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to all posts
