@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: 'Read the latest articles on technology, entrepreneurship, and personal development.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogPage() {
   const posts = await getPublishedBlogPosts();
 
