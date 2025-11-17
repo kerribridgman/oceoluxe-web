@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/db/queries';
-import { writeFile, mkdir } from 'fs/promises';
+import { getStorageService } from '@/lib/storage';
 import path from 'path';
-import { existsSync } from 'fs';
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +22,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate the type parameter to prevent path traversal
+    // SECURITY: Validate the type parameter to prevent path traversal
     const allowedTypes = ['cover', 'og', 'blog'];
     if (!type || !allowedTypes.includes(type) || type.includes('/') || type.includes('\\') || type.includes('..')) {
       return NextResponse.json(
@@ -49,30 +48,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const storage = getStorageService();
     const buffer = Buffer.from(await file.arrayBuffer());
 
     // Generate unique filename
     const timestamp = Date.now();
     const fileExt = path.extname(file.name);
-    const fileName = `${type}-${timestamp}${fileExt}`;
+    const fileName = `${type}-${user.id}-${timestamp}${fileExt}`;
+    const filePath = `users/${user.id}/${fileName}`;
 
-    // Create uploads/blog directory if it doesn't exist
-    const uploadDir = path.join(process.cwd(), 'uploads', 'blog');
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
+    // Upload to storage
+    const uploadedUrl = await storage.upload(buffer, filePath, file.type);
 
-    // Save file
-    const filePath = path.join(uploadDir, fileName);
-    await writeFile(filePath, buffer);
-
-    // Return URL path
-    const url = `/uploads/blog/${fileName}`;
-
+    // The upload method returns the correct URL:
+    // - For Vercel Blob: full public URL (https://...vercel-storage.com/...)
+    // Use it directly without calling getSignedUrl
     return NextResponse.json({
       message: 'File uploaded successfully',
-      url,
+      url: uploadedUrl,
       fileName,
+      filePath, // Also return the relative file path for reference
     });
   } catch (error: any) {
     console.error('Error uploading file:', error);
