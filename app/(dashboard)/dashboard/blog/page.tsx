@@ -93,14 +93,14 @@ export default function BlogManagementPage() {
   }
 
   return (
-    <div className="p-6">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-6 space-y-6">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Blog Management</h1>
-          <p className="text-gray-600 mt-1">Create and manage your blog posts</p>
+          <h1 className="text-2xl font-bold text-gray-900">Blog Management</h1>
+          <p className="text-sm text-gray-600 mt-1">Create and manage your blog posts</p>
         </div>
         <Link href="/dashboard/blog/new">
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+          <Button className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white">
             <Plus className="w-4 h-4 mr-2" />
             New Post
           </Button>
@@ -122,7 +122,7 @@ export default function BlogManagementPage() {
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No blog posts yet</h3>
             <p className="text-gray-600 mb-6">Get started by creating your first blog post</p>
             <Link href="/dashboard/blog/new">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white">
+              <Button className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white">
                 <Plus className="w-4 h-4 mr-2" />
                 Create Your First Post
               </Button>
