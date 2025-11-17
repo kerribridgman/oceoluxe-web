@@ -171,7 +171,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
   }
 
   return (
-    <div className="space-y-4">
+    <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href="/dashboard/blog">
@@ -181,8 +181,8 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Edit Blog Post</h1>
-            <p className="text-gray-600 mt-1">Update your blog post</p>
+            <h1 className="text-2xl font-bold text-gray-900">Edit Blog Post</h1>
+            <p className="text-sm text-gray-600 mt-1">Update your blog post</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -203,7 +203,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
           </Button>
           {!isPublished && (
             <Button
-              className="bg-orange-500 hover:bg-orange-600"
+              className="bg-[#4a9fd8] hover:bg-[#3a8fc8]"
               onClick={() => handleSubmit(true)}
               disabled={saving}
             >
@@ -260,7 +260,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
               <CardHeader>
                 <CardTitle>Content</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="p-6 space-y-6">
                 <div>
                   <Label htmlFor="title">Title *</Label>
                   <Input
@@ -322,12 +322,12 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
             </Card>
           </div>
 
-          <div className="space-y-4">
+          <div className="p-6 space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Images</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="p-6 space-y-6">
                 <div>
                   <Label>Cover Image</Label>
                   {coverImageUrl ? (
@@ -345,7 +345,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
                   ) : (
                     <div className="mt-2">
                       <label className="cursor-pointer block">
-                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-orange-500 transition-colors">
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#4a9fd8] transition-colors">
                           <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
                           <p className="text-sm text-gray-600">
                             {uploadingCover ? 'Uploading...' : 'Upload cover image'}
@@ -380,7 +380,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
                   ) : (
                     <div className="mt-2">
                       <label className="cursor-pointer block">
-                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-orange-500 transition-colors">
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#4a9fd8] transition-colors">
                           <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
                           <p className="text-sm text-gray-600">
                             {uploadingOg ? 'Uploading...' : 'Upload OG image'}
@@ -404,7 +404,7 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
               <CardHeader>
                 <CardTitle>SEO</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="p-6 space-y-6">
                 <div>
                   <Label htmlFor="metaTitle">Meta Title (60 chars)</Label>
                   <Input
