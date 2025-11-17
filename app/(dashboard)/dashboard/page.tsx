@@ -241,7 +241,7 @@ function InviteTeamMember() {
           )}
           <Button
             type="submit"
-            className="bg-orange-500 hover:bg-orange-600 text-white"
+            className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white"
             disabled={isInvitePending || !isOwner}
           >
             {isInvitePending ? (
