@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { MarketingHeader } from '@/components/marketing/marketing-header';
+import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 interface Props {
   params: { slug: string };
@@ -92,6 +94,7 @@ export default async function BlogPostPage({ params }: Props) {
       />
 
       <div className="min-h-screen bg-white">
+        <MarketingHeader />
         {/* Header Navigation */}
         <div className="bg-gray-50 border-b border-gray-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -175,6 +178,8 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </footer>
         </article>
+
+        <MarketingFooter />
       </div>
     </>
   );

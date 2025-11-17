@@ -1,6 +1,8 @@
 import { getPublishedBlogPosts } from '@/lib/db/queries-blogs';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { MarketingHeader } from '@/components/marketing/marketing-header';
+import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 export const metadata: Metadata = {
   title: 'Blog | Patrick Farrell',
@@ -11,7 +13,9 @@ export default async function BlogPage() {
   const posts = await getPublishedBlogPosts();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen bg-white">
+      <MarketingHeader />
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         {/* Decorative elements */}
@@ -94,6 +98,9 @@ export default async function BlogPage() {
           </div>
         )}
       </div>
+      </div>
+
+      <MarketingFooter />
     </div>
   );
 }
