@@ -1,48 +1,168 @@
 @import "tailwindcss";
-/*
-  ---break---
-*/
-@custom-variant dark (&:is(.dark *));
-
 @import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
 @variant dark (&:is(.dark *));
+
+/* ===================================
+   BRAND COLORS & THEME CONFIGURATION
+   ===================================
+
+   To customize the entire site appearance, modify these variables:
+   - Brand colors (blue, navy, etc.)
+   - Typography (font family)
+   - Spacing and sizing
+   - Component styles
+*/
+
+:root {
+  /* Brand Color Palette */
+  --brand-blue: #4a9fd8;
+  --brand-blue-hover: #3a8fc8;
+  --brand-blue-light: #e8f4fb;
+  --brand-navy: #1a2332;
+  --brand-navy-medium: #1e2838;
+  --brand-navy-light: #2a3342;
+
+  /* Semantic Brand Colors */
+  --color-brand-primary: var(--brand-blue);
+  --color-brand-primary-hover: var(--brand-blue-hover);
+  --color-brand-primary-light: var(--brand-blue-light);
+  --color-brand-background: var(--brand-navy);
+  --color-brand-background-medium: var(--brand-navy-medium);
+  --color-brand-border: var(--brand-navy-light);
+
+  /* Status Colors */
+  --color-success: #10b981;
+  --color-success-light: #d1fae5;
+  --color-warning: #f59e0b;
+  --color-warning-light: #fef3c7;
+  --color-error: #ef4444;
+  --color-error-light: #fee2e2;
+  --color-info: var(--brand-blue);
+  --color-info-light: var(--brand-blue-light);
+
+  /* Gray Scale */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* Typography */
+  --font-family-primary: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Base Tailwind Variables (for compatibility) */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  --radius: 0.5rem;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+.dark {
+  --brand-blue: #4a9fd8;
+  --brand-blue-hover: #5aafea;
+  --brand-navy: #0f1419;
+  --brand-navy-medium: #1a1f26;
+
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+/* ===================================
+   TAILWIND THEME INTEGRATION
+   =================================== */
 
 @theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
-
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-
   --color-chart-1: hsl(var(--chart-1));
   --color-chart-2: hsl(var(--chart-2));
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
-
   --color-sidebar: hsl(var(--sidebar-background));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
   --color-sidebar-primary: hsl(var(--sidebar-primary));
@@ -51,184 +171,18 @@
   --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
-
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  /* Extended Tailwind Colors with Brand Colors */
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-hover: var(--brand-blue-hover);
+  --color-brand-blue-light: var(--brand-blue-light);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-medium: var(--brand-navy-medium);
+  --color-brand-navy-light: var(--brand-navy-light);
 }
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-}
-
-@layer utilities {
-  body {
-    font-family: "Manrope", Arial, Helvetica, sans-serif;
-  }
-}
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/*
-  ---break---
-*/
-
-:root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 3.9%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 10% 3.9%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 10% 3.9%);
-  --primary: hsl(240 5.9% 10%);
-  --primary-foreground: hsl(0 0% 98%);
-  --secondary: hsl(240 4.8% 95.9%);
-  --secondary-foreground: hsl(240 5.9% 10%);
-  --muted: hsl(240 4.8% 95.9%);
-  --muted-foreground: hsl(240 3.8% 46.1%);
-  --accent: hsl(240 4.8% 95.9%);
-  --accent-foreground: hsl(240 5.9% 10%);
-  --destructive: hsl(0 84.2% 60.2%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 5.9% 90%);
-  --input: hsl(240 5.9% 90%);
-  --ring: hsl(240 10% 3.9%);
-  --chart-1: hsl(12 76% 61%);
-  --chart-2: hsl(173 58% 39%);
-  --chart-3: hsl(197 37% 24%);
-  --chart-4: hsl(43 74% 66%);
-  --chart-5: hsl(27 87% 67%);
-  --radius: 0.6rem;
-}
-
-/*
-  ---break---
-*/
-
-.dark {
-  --background: hsl(240 10% 3.9%);
-  --foreground: hsl(0 0% 98%);
-  --card: hsl(240 10% 3.9%);
-  --card-foreground: hsl(0 0% 98%);
-  --popover: hsl(240 10% 3.9%);
-  --popover-foreground: hsl(0 0% 98%);
-  --primary: hsl(0 0% 98%);
-  --primary-foreground: hsl(240 5.9% 10%);
-  --secondary: hsl(240 3.7% 15.9%);
-  --secondary-foreground: hsl(0 0% 98%);
-  --muted: hsl(240 3.7% 15.9%);
-  --muted-foreground: hsl(240 5% 64.9%);
-  --accent: hsl(240 3.7% 15.9%);
-  --accent-foreground: hsl(0 0% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 3.7% 15.9%);
-  --input: hsl(240 3.7% 15.9%);
-  --ring: hsl(240 4.9% 83.9%);
-  --chart-1: hsl(220 70% 50%);
-  --chart-2: hsl(160 60% 45%);
-  --chart-3: hsl(30 80% 55%);
-  --chart-4: hsl(280 65% 60%);
-  --chart-5: hsl(340 75% 55%);
-}
-
-/*
-  ---break---
-*/
 
 @theme inline {
   --color-background: var(--background);
@@ -261,15 +215,232 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/*
-  ---break---
-*/
+/* ===================================
+   BASE STYLES
+   =================================== */
 
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-family-primary);
+  }
+}
+
+/* ===================================
+   BRAND UTILITY CLASSES
+   ===================================
+
+   Use these classes instead of hardcoded colors
+   Examples:
+   - bg-brand-primary instead of bg-[#4a9fd8]
+   - text-brand-navy instead of text-[#1a2332]
+*/
+
+@layer utilities {
+  /* Background Colors */
+  .bg-brand-primary {
+    background-color: var(--brand-blue);
+  }
+
+  .bg-brand-primary-hover {
+    background-color: var(--brand-blue-hover);
+  }
+
+  .bg-brand-primary-light {
+    background-color: var(--brand-blue-light);
+  }
+
+  .bg-brand-navy {
+    background-color: var(--brand-navy);
+  }
+
+  .bg-brand-navy-medium {
+    background-color: var(--brand-navy-medium);
+  }
+
+  /* Hover States */
+  .hover\:bg-brand-primary:hover {
+    background-color: var(--brand-blue);
+  }
+
+  .hover\:bg-brand-primary-hover:hover {
+    background-color: var(--brand-blue-hover);
+  }
+
+  /* Text Colors */
+  .text-brand-primary {
+    color: var(--brand-blue);
+  }
+
+  .text-brand-primary-hover {
+    color: var(--brand-blue-hover);
+  }
+
+  .text-brand-navy {
+    color: var(--brand-navy);
+  }
+
+  /* Hover Text Colors */
+  .hover\:text-brand-primary:hover {
+    color: var(--brand-blue);
+  }
+
+  .hover\:text-brand-primary-hover:hover {
+    color: var(--brand-blue-hover);
+  }
+
+  /* Border Colors */
+  .border-brand-primary {
+    border-color: var(--brand-blue);
+  }
+
+  .border-brand-navy {
+    border-color: var(--brand-navy);
+  }
+
+  .border-brand-navy-light {
+    border-color: var(--brand-navy-light);
+  }
+
+  /* Hover Border Colors */
+  .hover\:border-brand-primary:hover {
+    border-color: var(--brand-blue);
+  }
+
+  /* Focus Ring Colors */
+  .focus\:ring-brand-primary:focus {
+    --tw-ring-color: var(--brand-blue);
+  }
+
+  .focus\:border-brand-primary:focus {
+    border-color: var(--brand-blue);
+  }
+
+  /* Opacity Variants */
+  .bg-brand-primary\/10 {
+    background-color: rgb(from var(--brand-blue) r g b / 0.1);
+  }
+
+  .bg-brand-primary\/20 {
+    background-color: rgb(from var(--brand-blue) r g b / 0.2);
+  }
+
+  .border-brand-primary\/20 {
+    border-color: rgb(from var(--brand-blue) r g b / 0.2);
+  }
+
+  .border-brand-primary\/50 {
+    border-color: rgb(from var(--brand-blue) r g b / 0.5);
+  }
+
+  .text-brand-primary\/10 {
+    color: rgb(from var(--brand-blue) r g b / 0.1);
+  }
+
+  .shadow-brand-primary\/10 {
+    --tw-shadow-color: rgb(from var(--brand-blue) r g b / 0.1);
+  }
+
+  /* Gradients */
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-medium) 50%, var(--brand-navy) 100%);
+  }
+
+  .bg-brand-gradient-navy {
+    background: linear-gradient(to bottom right, var(--brand-navy), var(--brand-navy-medium), var(--brand-navy));
+  }
+
+  .bg-brand-gradient-blue-navy {
+    background: linear-gradient(to bottom right, var(--brand-blue), var(--brand-navy));
+  }
+}
+
+/* ===================================
+   COMPONENT-SPECIFIC STYLES
+   ===================================
+
+   Common component patterns
+*/
+
+@layer components {
+  /* Primary Button */
+  .btn-brand-primary {
+    background-color: var(--brand-blue);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+
+  .btn-brand-primary:hover {
+    background-color: var(--brand-blue-hover);
+  }
+
+  .btn-brand-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--brand-blue-light), 0 0 0 4px var(--brand-blue);
+  }
+
+  /* Brand Input */
+  .input-brand {
+    border-radius: 9999px;
+    border: 1px solid var(--gray-300);
+    padding: 0.5rem 0.75rem;
+  }
+
+  .input-brand:focus {
+    outline: none;
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 1px var(--brand-blue);
+  }
+
+  /* Brand Card */
+  .card-brand {
+    border: 1px solid var(--gray-200);
+    border-radius: 0.75rem;
+    background: white;
+    transition: all 0.3s;
+  }
+
+  .card-brand:hover {
+    border-color: rgb(from var(--brand-blue) r g b / 0.5);
+    box-shadow: 0 20px 25px -5px rgb(from var(--brand-blue) r g b / 0.1),
+                0 8px 10px -6px rgb(from var(--brand-blue) r g b / 0.1);
+  }
+
+  /* Brand Header */
+  .header-brand {
+    background-color: var(--brand-navy);
+    border-bottom: 1px solid var(--brand-navy-light);
+  }
+
+  /* Brand Footer */
+  .footer-brand {
+    background-color: var(--brand-navy);
+    color: var(--gray-300);
+  }
+
+  /* Sidebar Active Link */
+  .sidebar-link-active {
+    background-color: rgb(from var(--brand-blue) r g b / 0.1);
+    color: var(--brand-blue);
+  }
+
+  .sidebar-link-active:hover {
+    background-color: rgb(from var(--brand-blue) r g b / 0.2);
+    color: var(--brand-blue);
   }
 }
