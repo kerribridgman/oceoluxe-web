@@ -5,6 +5,7 @@ import {
   text,
   timestamp,
   integer,
+  boolean,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
@@ -68,6 +69,37 @@ export const invitations = pgTable('invitations', {
   status: varchar('status', { length: 20 }).notNull().default('pending'),
 });
 
+export const blogPosts = pgTable('blog_posts', {
+  id: serial('id').primaryKey(),
+  title: varchar('title', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull().unique(),
+  author: varchar('author', { length: 100 }).notNull(),
+  excerpt: text('excerpt'),
+  content: text('content').notNull(),
+  coverImageUrl: text('cover_image_url'),
+  ogImageUrl: text('og_image_url'),
+  ogTitle: varchar('og_title', { length: 255 }),
+  ogDescription: text('og_description'),
+  metaTitle: varchar('meta_title', { length: 60 }),
+  metaDescription: varchar('meta_description', { length: 160 }),
+  metaKeywords: text('meta_keywords'),
+  focusKeyword: varchar('focus_keyword', { length: 100 }),
+  canonicalUrl: text('canonical_url'),
+  metaRobots: varchar('meta_robots', { length: 50 }).default('index, follow'),
+  articleType: varchar('article_type', { length: 50 }).default('BlogPosting'),
+  industry: varchar('industry', { length: 100 }),
+  targetAudience: text('target_audience'),
+  keyConcepts: text('key_concepts'),
+  publishedAt: timestamp('published_at'),
+  isPublished: boolean('is_published').default(false),
+  readingTimeMinutes: integer('reading_time_minutes'),
+  createdBy: integer('created_by')
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -77,6 +109,7 @@ export const teamsRelations = relations(teams, ({ many }) => ({
 export const usersRelations = relations(users, ({ many }) => ({
   teamMembers: many(teamMembers),
   invitationsSent: many(invitations),
+  blogPosts: many(blogPosts),
 }));
 
 export const invitationsRelations = relations(invitations, ({ one }) => ({
@@ -112,6 +145,13 @@ export const activityLogsRelations = relations(activityLogs, ({ one }) => ({
   }),
 }));
 
+export const blogPostsRelations = relations(blogPosts, ({ one }) => ({
+  createdBy: one(users, {
+    fields: [blogPosts.createdBy],
+    references: [users.id],
+  }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Team = typeof teams.$inferSelect;
@@ -127,6 +167,8 @@ export type TeamDataWithMembers = Team & {
     user: Pick<User, 'id' | 'name' | 'email'>;
   })[];
 };
+export type BlogPost = typeof blogPosts.$inferSelect;
+export type NewBlogPost = typeof blogPosts.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',

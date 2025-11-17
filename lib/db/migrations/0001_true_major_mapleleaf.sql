@@ -1,0 +1,31 @@
+CREATE TABLE "blog_posts" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"title" varchar(255) NOT NULL,
+	"slug" varchar(255) NOT NULL,
+	"author" varchar(100) NOT NULL,
+	"excerpt" text,
+	"content" text NOT NULL,
+	"cover_image_url" text,
+	"og_image_url" text,
+	"og_title" varchar(255),
+	"og_description" text,
+	"meta_title" varchar(60),
+	"meta_description" varchar(160),
+	"meta_keywords" text,
+	"focus_keyword" varchar(100),
+	"canonical_url" text,
+	"meta_robots" varchar(50) DEFAULT 'index, follow',
+	"article_type" varchar(50) DEFAULT 'BlogPosting',
+	"industry" varchar(100),
+	"target_audience" text,
+	"key_concepts" text,
+	"published_at" timestamp,
+	"is_published" boolean DEFAULT false,
+	"reading_time_minutes" integer,
+	"created_by" integer NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT "blog_posts_slug_unique" UNIQUE("slug")
+);
+--> statement-breakpoint
+ALTER TABLE "blog_posts" ADD CONSTRAINT "blog_posts_created_by_users_id_fk" FOREIGN KEY ("created_by") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
