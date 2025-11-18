@@ -1,119 +1,287 @@
-# Next.js SaaS Starter
+# Patrick Farrell's Personal Website & Blog
 
-This is a starter template for building a SaaS application using **Next.js** with support for authentication, Stripe integration for payments, and a dashboard for logged-in users.
+A modern personal website and blog platform with Model Context Protocol (MCP) integration, allowing blog management directly through Claude Desktop.
 
-**Demo: [https://next-saas-start.vercel.app/](https://next-saas-start.vercel.app/)**
+**Live Site: [https://iampatrickfarrell.com](https://iampatrickfarrell.com)**
 
 ## Features
 
-- Marketing landing page (`/`) with animated Terminal element
-- Pricing page (`/pricing`) which connects to Stripe Checkout
-- Dashboard pages with CRUD operations on users/teams
-- Basic RBAC with Owner and Member roles
-- Subscription management with Stripe Customer Portal
-- Email/password authentication with JWTs stored to cookies
-- Global middleware to protect logged-in routes
-- Local middleware to protect Server Actions or validate Zod schemas
-- Activity logging system for any user events
+### Blog Platform
+- Full-featured blog with markdown support
+- Rich image upload and management (Vercel Blob storage)
+- SEO optimization with custom meta tags
+- Draft and publish workflows
+- Application forms (coaching, entrepreneur circle)
+- Analytics and link tracking
+
+### MCP Integration
+- **Claude Desktop Integration**: Manage blog posts directly from Claude Desktop using natural language
+- **API Key Management**: Secure API key generation with granular permissions
+- **8 MCP Tools Available**:
+  - Create blog posts
+  - List and filter posts
+  - Update existing posts
+  - Publish/unpublish posts
+  - Delete posts
+  - Upload images
+  - Full markdown support
+
+### Authentication & Dashboard
+- Email/password authentication with JWTs
+- Role-based access control (Owner, Member)
+- Activity logging system
+- User management
+- Team collaboration features
+
+### Content Import
+- Notion integration for importing blog posts
+- Automatic image downloading and re-uploading to Vercel Blob
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Database**: [Postgres](https://www.postgresql.org/)
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
 - **ORM**: [Drizzle](https://orm.drizzle.team/)
+- **Image Storage**: [Vercel Blob](https://vercel.com/docs/storage/vercel-blob)
 - **Payments**: [Stripe](https://stripe.com/)
-- **UI Library**: [shadcn/ui](https://ui.shadcn.com/)
+- **UI**: [shadcn/ui](https://ui.shadcn.com/) + [Tailwind CSS](https://tailwindcss.com/)
+- **MCP Server**: [Model Context Protocol SDK](https://modelcontextprotocol.io/)
+- **Markdown**: [react-markdown](https://github.com/remarkjs/react-markdown) with rehype plugins
 
 ## Getting Started
 
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL database
+- pnpm package manager
+
+### Installation
+
 ```bash
-git clone https://github.com/nextjs/saas-starter
-cd saas-starter
+git clone https://github.com/yourusername/iampatrickfarrell.git
+cd iampatrickfarrell
 pnpm install
 ```
 
-## Running Locally
+### Environment Setup
 
-[Install](https://docs.stripe.com/stripe-cli) and log in to your Stripe account:
+Create a `.env` file with the following variables:
 
-```bash
-stripe login
+```env
+# Database
+POSTGRES_URL=your_postgres_connection_string
+
+# Authentication
+AUTH_SECRET=your_random_secret_key
+
+# Vercel Blob (for image uploads)
+BLOB_READ_WRITE_TOKEN=your_vercel_blob_token
+
+# Stripe (optional, for payments)
+STRIPE_SECRET_KEY=your_stripe_secret
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+
+# Base URL
+BASE_URL=http://localhost:3000
 ```
 
-Use the included setup script to create your `.env` file:
-
+Generate `AUTH_SECRET` with:
 ```bash
-pnpm db:setup
+openssl rand -base64 32
 ```
 
-Run the database migrations and seed the database with a default user and team:
+### Database Setup
+
+Run the database migrations and seed:
 
 ```bash
 pnpm db:migrate
 pnpm db:seed
 ```
 
-This will create the following user and team:
-
-- User: `test@test.com`
+This creates a default user:
+- Email: `test@test.com`
 - Password: `admin123`
 
-You can also create new users through the `/sign-up` route.
-
-Finally, run the Next.js development server:
+### Run Development Server
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app in action.
+Open [http://localhost:3000](http://localhost:3000) to see the site.
 
-You can listen for Stripe webhooks locally through their CLI to handle subscription change events:
+## MCP Integration Setup
 
+### 1. Generate an API Key
+
+1. Navigate to [http://localhost:3000/dashboard/integrations](http://localhost:3000/dashboard/integrations)
+2. Click "Create API Key"
+3. Name your key (e.g., "Claude Desktop")
+4. Select permissions (Read/Write for blog management)
+5. **Copy the API key immediately** - you won't see it again!
+
+### 2. Configure Claude Desktop
+
+Open your Claude Desktop config file:
+
+**macOS:**
 ```bash
-stripe listen --forward-to localhost:3000/api/stripe/webhook
+~/Library/Application Support/Claude/claude_desktop_config.json
 ```
 
-## Testing Payments
+**Linux:**
+```bash
+~/.config/Claude/claude_desktop_config.json
+```
 
-To test Stripe payments, use the following test card details:
+**Windows:**
+```
+%APPDATA%\Claude\claude_desktop_config.json
+```
 
-- Card Number: `4242 4242 4242 4242`
-- Expiration: Any future date
-- CVC: Any 3-digit number
+Add the MCP server configuration:
 
-## Going to Production
+```json
+{
+  "mcpServers": {
+    "iampatrickfarrell-blog": {
+      "command": "node",
+      "args": ["/absolute/path/to/iampatrickfarrell/mcp-server/index.js"],
+      "env": {
+        "MCP_API_KEY": "mcp_live_your_actual_key_here",
+        "API_BASE_URL": "http://localhost:3000"
+      }
+    }
+  }
+}
+```
 
-When you're ready to deploy your SaaS application to production, follow these steps:
+### 3. Restart Claude Desktop
 
-### Set up a production Stripe webhook
+Completely quit and restart Claude Desktop to load the MCP server.
 
-1. Go to the Stripe Dashboard and create a new webhook for your production environment.
-2. Set the endpoint URL to your production API route (e.g., `https://yourdomain.com/api/stripe/webhook`).
-3. Select the events you want to listen for (e.g., `checkout.session.completed`, `customer.subscription.updated`).
+### 4. Test It Out
 
-### Deploy to Vercel
+In Claude Desktop, try:
 
-1. Push your code to a GitHub repository.
-2. Connect your repository to [Vercel](https://vercel.com/) and deploy it.
-3. Follow the Vercel deployment process, which will guide you through setting up your project.
+```
+Create a blog post titled "Hello World" with content about testing the MCP integration
+```
 
-### Add environment variables
+Check your dashboard at [http://localhost:3000/dashboard/blog](http://localhost:3000/dashboard/blog) to see the new post!
 
-In your Vercel project settings (or during deployment), add all the necessary environment variables. Make sure to update the values for the production environment, including:
+For more details, see [MCP_SETUP_GUIDE.md](./MCP_SETUP_GUIDE.md)
 
-1. `BASE_URL`: Set this to your production domain.
-2. `STRIPE_SECRET_KEY`: Use your Stripe secret key for the production environment.
-3. `STRIPE_WEBHOOK_SECRET`: Use the webhook secret from the production webhook you created in step 1.
-4. `POSTGRES_URL`: Set this to your production database URL.
-5. `AUTH_SECRET`: Set this to a random string. `openssl rand -base64 32` will generate one.
+## Available Scripts
 
-## Other Templates
+```bash
+pnpm dev           # Start development server
+pnpm build         # Build for production
+pnpm start         # Start production server
+pnpm db:setup      # Create .env file
+pnpm db:migrate    # Run database migrations
+pnpm db:seed       # Seed database with test data
+pnpm db:generate   # Generate new migration
+pnpm db:studio     # Open Drizzle Studio
+```
 
-While this template is intentionally minimal and to be used as a learning resource, there are other paid versions in the community which are more full-featured:
+## Project Structure
 
-- https://achromatic.dev
-- https://shipfa.st
-- https://makerkit.dev
-- https://zerotoshipped.com
-- https://turbostarter.dev
+```
+├── app/                      # Next.js app directory
+│   ├── (dashboard)/         # Dashboard routes (protected)
+│   ├── api/                 # API routes
+│   │   ├── blog/           # Blog CRUD endpoints
+│   │   ├── mcp/            # MCP API endpoints
+│   │   ├── mcp-keys/       # API key management
+│   │   └── notion/         # Notion import
+│   └── blog/               # Public blog pages
+├── components/              # React components
+│   ├── blog/               # Blog-specific components
+│   └── ui/                 # shadcn/ui components
+├── lib/                     # Utilities and helpers
+│   ├── auth/               # Authentication & MCP auth
+│   ├── db/                 # Database, schema, queries
+│   └── notion-to-markdown.ts
+├── mcp-server/             # MCP server for Claude Desktop
+│   ├── index.js            # MCP server entry point
+│   └── tools/              # MCP tool definitions
+└── public/                 # Static assets
+```
+
+## API Endpoints
+
+### Blog Management
+- `GET /api/blog` - List all blog posts
+- `POST /api/blog` - Create new post
+- `GET /api/blog/[id]` - Get specific post
+- `PUT /api/blog/[id]` - Update post
+- `DELETE /api/blog/[id]` - Delete post
+
+### MCP Integration
+- `POST /api/mcp-keys` - Create API key
+- `GET /api/mcp-keys` - List API keys
+- `DELETE /api/mcp-keys/[id]` - Delete API key
+- `GET /api/mcp/blog` - List posts (MCP auth)
+- `POST /api/mcp/blog` - Create post (MCP auth)
+- `POST /api/mcp/upload-image` - Upload image (MCP auth)
+
+### Content Import
+- `POST /api/notion/import` - Import from Notion
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push code to GitHub
+2. Connect repository to [Vercel](https://vercel.com/)
+3. Add environment variables in Vercel project settings
+4. Deploy
+
+### Environment Variables for Production
+
+Update these for production:
+- `BASE_URL` - Your production domain
+- `POSTGRES_URL` - Production database URL
+- `BLOB_READ_WRITE_TOKEN` - Vercel Blob token
+- `STRIPE_SECRET_KEY` - Production Stripe key
+- `STRIPE_WEBHOOK_SECRET` - Production webhook secret
+- `AUTH_SECRET` - Secure random string
+
+### MCP Server in Production
+
+Update your Claude Desktop config to use the production URL:
+
+```json
+{
+  "mcpServers": {
+    "iampatrickfarrell-blog-prod": {
+      "command": "node",
+      "args": ["/absolute/path/to/iampatrickfarrell/mcp-server/index.js"],
+      "env": {
+        "MCP_API_KEY": "mcp_live_production_key_here",
+        "API_BASE_URL": "https://iampatrickfarrell.com"
+      }
+    }
+  }
+}
+```
+
+## Security Features
+
+- SHA-256 hashed API keys
+- Permission-based access control
+- JWT authentication with HTTP-only cookies
+- RBAC for team members
+- Activity logging for audit trails
+- Secure image uploads with validation
+
+## License
+
+MIT License - feel free to use this as a template for your own projects!
+
+## Acknowledgments
+
+Built on the [Next.js SaaS Starter](https://github.com/nextjs/saas-starter) template with extensive customization for blogging and MCP integration.
