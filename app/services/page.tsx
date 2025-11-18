@@ -4,13 +4,15 @@ import { Check, ArrowRight } from 'lucide-react';
 import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { getLinkSettings } from '@/lib/db/link-queries';
 
 export const metadata: Metadata = {
   title: 'Services | Patrick Farrell',
   description: 'AI & Automation Consulting, 1:1 Tech Coaching, and Entrepreneur Circle Mastermind for purpose-driven founders.',
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const links = await getLinkSettings();
   return (
     <div className="min-h-screen bg-white">
       <MarketingHeader />
@@ -77,10 +79,12 @@ export default function ServicesPage() {
                   ))}
                 </ul>
                 <div className="mt-8">
-                  <Button size="lg" className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
-                    Book a Free Discovery Call
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
+                  <Link href={links.discovery_call?.url || '#'} className="block">
+                    <Button size="lg" className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
+                      {links.discovery_call?.label || 'Book a Free Discovery Call'}
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -109,13 +113,17 @@ export default function ServicesPage() {
                   ))}
                 </ul>
                 <div className="mt-8 space-y-3">
-                  <Button size="lg" className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
-                    Apply For 1:1 Tech Coaching
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                  <Button variant="outline" size="lg" className="w-full border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8]/10">
-                    Book a FREE 30-Min Strategy Session
-                  </Button>
+                  <Link href="/apply/coaching" className="block">
+                    <Button size="lg" className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
+                      Apply For 1:1 Tech Coaching
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </Button>
+                  </Link>
+                  <Link href={links.strategy_session?.url || '#'} className="block">
+                    <Button variant="outline" size="lg" className="w-full border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8]/10">
+                      {links.strategy_session?.label || 'Book a FREE 30-Min Strategy Session'}
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
@@ -202,10 +210,12 @@ export default function ServicesPage() {
           <p className="text-xl text-gray-300 mb-8">
             Book a free alignment call and let's build a game plan together
           </p>
-          <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-lg px-8 py-6">
-            Book a Free Discovery Call
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+          <Link href={links.discovery_call?.url || '#'}>
+            <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-lg px-8 py-6">
+              {links.discovery_call?.label || 'Book a Free Discovery Call'}
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 

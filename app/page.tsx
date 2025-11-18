@@ -4,12 +4,14 @@ import { ArrowRight, Code, Sparkles, Zap, Users } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
+import { getLinkSettings } from '@/lib/db/link-queries';
 
 export async function generateMetadata() {
   return await getPageMetadata('home');
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const links = await getLinkSettings();
   return (
     <div className="min-h-screen bg-white">
       <MarketingHeader />
@@ -222,9 +224,9 @@ export default function HomePage() {
             Book a free alignment call and let's build a game plan together
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/services">
+            <Link href={links.discovery_call?.url || '/services'}>
               <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg px-8 py-6">
-                Book a Discovery Call
+                {links.discovery_call?.label || 'Book a Discovery Call'}
               </Button>
             </Link>
             <Link href="/blog">
