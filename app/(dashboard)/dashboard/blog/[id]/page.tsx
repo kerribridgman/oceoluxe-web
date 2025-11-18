@@ -171,69 +171,72 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link href="/dashboard/blog">
-            <Button variant="outline" size="sm">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Edit Blog Post</h1>
-            <p className="text-sm text-gray-600 mt-1">Update your blog post</p>
+    <div className="flex-1 space-y-6">
+      <div className="page-header-gradient mb-8">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-4">
+            <Link href="/dashboard/blog">
+              <Button variant="outline" size="sm" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back
+              </Button>
+            </Link>
+            <div>
+              <h1 className="text-3xl font-bold mb-2">Edit Blog Post</h1>
+              <p>Update your blog post</p>
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            onClick={() => setShowPreview(!showPreview)}
-          >
-            <Eye className="w-4 h-4 mr-2" />
-            {showPreview ? 'Edit' : 'Preview'}
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => handleSubmit()}
-            disabled={saving}
-          >
-            <Save className="w-4 h-4 mr-2" />
-            Save
-          </Button>
-          {!isPublished && (
-            <Button
-              className="bg-[#4a9fd8] hover:bg-[#3a8fc8]"
-              onClick={() => handleSubmit(true)}
-              disabled={saving}
-            >
-              Publish
-            </Button>
-          )}
-          {isPublished && (
+          <div className="flex items-center gap-2">
             <Button
               variant="outline"
-              onClick={() => handleSubmit(false)}
-              disabled={saving}
+              onClick={() => setShowPreview(!showPreview)}
+              className="bg-white/90 hover:bg-white text-gray-900 border-white shadow-md font-semibold"
             >
-              Unpublish
+              <Eye className="w-4 h-4 mr-2" />
+              {showPreview ? 'Edit' : 'Preview'}
             </Button>
-          )}
+            <Button
+              onClick={() => handleSubmit()}
+              disabled={saving}
+              className="bg-white hover:bg-gray-50 text-gray-900 shadow-lg font-semibold"
+            >
+              <Save className="w-4 h-4 mr-2" />
+              Save
+            </Button>
+            {!isPublished && (
+              <Button
+                className="bg-green-600 hover:bg-green-700 text-white shadow-lg font-semibold"
+                onClick={() => handleSubmit(true)}
+                disabled={saving}
+              >
+                Publish
+              </Button>
+            )}
+            {isPublished && (
+              <Button
+                className="bg-orange-600 hover:bg-orange-700 text-white shadow-lg font-semibold"
+                onClick={() => handleSubmit(false)}
+                disabled={saving}
+              >
+                Unpublish
+              </Button>
+            )}
+          </div>
         </div>
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-          {error}
+        <div className="alert-error">
+          <p className="text-sm font-medium">{error}</p>
         </div>
       )}
 
       {showPreview ? (
-        <Card>
-          <CardHeader>
-            <CardTitle>Preview</CardTitle>
+        <Card className="dashboard-card border-0">
+          <CardHeader className="border-b border-gray-100 pb-3">
+            <CardTitle className="text-xl font-semibold text-gray-900">Preview</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-4">
             <div className="max-w-4xl mx-auto">
               {coverImageUrl && (
                 <img
@@ -254,13 +257,13 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2 space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Content</CardTitle>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            <Card className="dashboard-card border-0">
+              <CardHeader className="border-b border-gray-100 pb-3">
+                <CardTitle className="text-xl font-semibold text-gray-900">Content</CardTitle>
               </CardHeader>
-              <CardContent className="p-6 space-y-6">
+              <CardContent className="pt-4 space-y-6">
                 <div>
                   <Label htmlFor="title">Title *</Label>
                   <Input
@@ -322,12 +325,12 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
             </Card>
           </div>
 
-          <div className="p-6 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Images</CardTitle>
+          <div className="space-y-6">
+            <Card className="dashboard-card border-0">
+              <CardHeader className="border-b border-gray-100 pb-3">
+                <CardTitle className="text-xl font-semibold text-gray-900">Images</CardTitle>
               </CardHeader>
-              <CardContent className="p-6 space-y-6">
+              <CardContent className="pt-4 space-y-6">
                 <div>
                   <Label>Cover Image</Label>
                   {coverImageUrl ? (
@@ -345,9 +348,9 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
                   ) : (
                     <div className="mt-2">
                       <label className="cursor-pointer block">
-                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#4a9fd8] transition-colors">
-                          <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
-                          <p className="text-sm text-gray-600">
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-brand-primary hover:bg-brand-primary/5 transition-all">
+                          <Upload className="w-10 h-10 mx-auto mb-2 text-brand-primary" />
+                          <p className="text-sm text-gray-600 font-medium">
                             {uploadingCover ? 'Uploading...' : 'Upload cover image'}
                           </p>
                         </div>
@@ -380,9 +383,9 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
                   ) : (
                     <div className="mt-2">
                       <label className="cursor-pointer block">
-                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#4a9fd8] transition-colors">
-                          <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
-                          <p className="text-sm text-gray-600">
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-brand-primary hover:bg-brand-primary/5 transition-all">
+                          <Upload className="w-10 h-10 mx-auto mb-2 text-brand-primary" />
+                          <p className="text-sm text-gray-600 font-medium">
                             {uploadingOg ? 'Uploading...' : 'Upload OG image'}
                           </p>
                         </div>
@@ -400,11 +403,11 @@ export default function EditBlogPostPage({ params }: { params: Promise<{ id: str
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>SEO</CardTitle>
+            <Card className="dashboard-card border-0">
+              <CardHeader className="border-b border-gray-100 pb-3">
+                <CardTitle className="text-xl font-semibold text-gray-900">SEO</CardTitle>
               </CardHeader>
-              <CardContent className="p-6 space-y-6">
+              <CardContent className="pt-4 space-y-6">
                 <div>
                   <Label htmlFor="metaTitle">Meta Title (60 chars)</Label>
                   <Input

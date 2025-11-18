@@ -93,18 +93,20 @@ export default function BlogManagementPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Blog Management</h1>
-          <p className="text-sm text-gray-600 mt-1">Create and manage your blog posts</p>
+    <div className="flex-1 space-y-6">
+      <div className="page-header-gradient mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Blog Management</h1>
+            <p>Create and manage your blog posts</p>
+          </div>
+          <Link href="/dashboard/blog/new">
+            <Button className="bg-white hover:bg-gray-50 text-brand-navy shadow-lg hover:shadow-xl transition-all duration-200 border border-white/30">
+              <Plus className="w-4 h-4 mr-2" />
+              New Post
+            </Button>
+          </Link>
         </div>
-        <Link href="/dashboard/blog/new">
-          <Button className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white">
-            <Plus className="w-4 h-4 mr-2" />
-            New Post
-          </Button>
-        </Link>
       </div>
 
       {error && (

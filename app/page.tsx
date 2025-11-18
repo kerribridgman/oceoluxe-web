@@ -109,7 +109,7 @@ export default function HomePage() {
               <h2 className="text-4xl font-bold text-gray-900 mb-6">About Patrick</h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Former senior software engineer with two degrees in Electrical Engineering from Virginia Tech.
+                  Senior software engineer with two degrees in Electrical Engineering from Virginia Tech.
                   Transitioned from corporate software engineering in NYC to founding tech ventures and coaching
                   entrepreneurs around the world.
                 </p>
@@ -124,14 +124,12 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-[#4a9fd8] to-[#1a2332] rounded-2xl opacity-20"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-gray-900 p-8 bg-white/90 rounded-xl backdrop-blur">
-                  <div className="text-4xl font-bold mb-2">800+</div>
-                  <div className="text-sm uppercase tracking-wide text-gray-600">Entrepreneurs Coached</div>
-                </div>
-              </div>
+            <div>
+              <img
+                src="/patrick_budapest1.jpg"
+                alt="Patrick Farrell"
+                className="w-full aspect-square object-cover rounded-2xl shadow-2xl"
+              />
             </div>
           </div>
         </div>
