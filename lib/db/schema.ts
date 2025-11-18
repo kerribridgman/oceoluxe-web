@@ -140,6 +140,15 @@ export const applications = pgTable('applications', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
 });
 
+export const linkSettings = pgTable('link_settings', {
+  id: serial('id').primaryKey(),
+  key: varchar('key', { length: 100 }).notNull().unique(), // 'discovery_call', 'strategy_session', etc.
+  label: varchar('label', { length: 255 }).notNull(), // Display label
+  url: text('url').notNull(),
+  updatedBy: integer('updated_by').references(() => users.id),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -213,6 +222,8 @@ export type SeoSettings = typeof seoSettings.$inferSelect;
 export type NewSeoSettings = typeof seoSettings.$inferInsert;
 export type Application = typeof applications.$inferSelect;
 export type NewApplication = typeof applications.$inferInsert;
+export type LinkSettings = typeof linkSettings.$inferSelect;
+export type NewLinkSettings = typeof linkSettings.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
