@@ -3,6 +3,10 @@ import { db } from '@/lib/db/drizzle';
 import { blogPosts } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 
+// Make sitemap dynamic to avoid build-time database queries
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
+
 /**
  * Generates sitemap.xml dynamically based on Google's standards
  * Automatically includes all published blog posts and main pages
@@ -10,15 +14,22 @@ import { eq } from 'drizzle-orm';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com';
 
-  // Fetch all published blog posts
-  const posts = await db
-    .select({
-      slug: blogPosts.slug,
-      updatedAt: blogPosts.updatedAt,
-      publishedAt: blogPosts.publishedAt,
-    })
-    .from(blogPosts)
-    .where(eq(blogPosts.isPublished, true));
+  // Fetch all published blog posts with error handling
+  let posts: Array<{ slug: string; updatedAt: Date; publishedAt: Date | null }> = [];
+
+  try {
+    posts = await db
+      .select({
+        slug: blogPosts.slug,
+        updatedAt: blogPosts.updatedAt,
+        publishedAt: blogPosts.publishedAt,
+      })
+      .from(blogPosts)
+      .where(eq(blogPosts.isPublished, true));
+  } catch (error) {
+    console.error('Error fetching blog posts for sitemap:', error);
+    // Continue with empty posts array if database is unavailable
+  }
 
   // Main static pages with priority and change frequency
   const staticPages: MetadataRoute.Sitemap = [
