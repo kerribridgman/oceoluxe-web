@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MarkdownRenderer } from '@/components/blog/markdown-renderer';
 import { NotionImportModal } from '@/components/notion-import-modal';
-import { RichTextEditor } from '@/components/blog/rich-text-editor';
+import { MarkdownEditorWithImages } from '@/components/blog/markdown-editor-with-images';
 
 export default function NewBlogPostPage() {
   const router = useRouter();
@@ -20,7 +20,6 @@ export default function NewBlogPostPage() {
   const [author, setAuthor] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
-  const [contentJson, setContentJson] = useState<any>(null);
   const [coverImageUrl, setCoverImageUrl] = useState('');
   const [ogImageUrl, setOgImageUrl] = useState('');
   const [ogTitle, setOgTitle] = useState('');
@@ -126,7 +125,6 @@ export default function NewBlogPostPage() {
           author: author || undefined,
           excerpt: excerpt || undefined,
           content,
-          contentJson,
           coverImageUrl: coverImageUrl || undefined,
           ogImageUrl: ogImageUrl || undefined,
           ogTitle: ogTitle || undefined,
@@ -290,18 +288,13 @@ export default function NewBlogPostPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="content">Content *</Label>
+                  <Label htmlFor="content">Content (Markdown) *</Label>
                   <div className="mt-1">
-                    <RichTextEditor
-                      initialContent={content}
-                      initialContentJson={contentJson}
-                      onChange={(markdown, json) => {
-                        setContent(markdown);
-                        setContentJson(json);
-                      }}
+                    <MarkdownEditorWithImages
+                      value={content}
+                      onChange={setContent}
                     />
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">Use slash (/) for commands. Images and embeds supported.</p>
                 </div>
               </CardContent>
             </Card>

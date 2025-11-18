@@ -62,7 +62,6 @@ export async function POST(request: NextRequest) {
       author: body.author || user.name || user.email,
       excerpt: body.excerpt || null,
       content: body.content,
-      contentJson: body.contentJson || null,
       coverImageUrl: body.coverImageUrl || null,
       ogImageUrl: body.ogImageUrl || null,
       ogTitle: body.ogTitle || null,
