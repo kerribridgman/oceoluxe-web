@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { NotionAPI } from 'notion-client';
+import { put } from '@vercel/blob';
 import { getUser } from '@/lib/db/queries';
 import {
   extractNotionPageId,
@@ -107,30 +108,35 @@ export async function POST(request: NextRequest) {
     // Download and upload images
     for (const imageUrl of imageUrls) {
       try {
-        // Download image
+        console.log(`Processing image: ${imageUrl}`);
+
+        // Download image from Notion
         const imageResponse = await fetch(imageUrl);
-        if (!imageResponse.ok) continue;
+        if (!imageResponse.ok) {
+          console.error(`Failed to download image: ${imageResponse.status} ${imageResponse.statusText}`);
+          continue;
+        }
 
         const imageBlob = await imageResponse.blob();
-        const filename = `notion-${pageId}-${Date.now()}-${Math.random().toString(36).substring(7)}.${imageBlob.type.split('/')[1] || 'png'}`;
 
-        // Upload to Vercel Blob
-        const formData = new FormData();
-        formData.append('file', imageBlob, filename);
-        formData.append('type', 'cover');
+        // Determine file extension from content type
+        const contentType = imageResponse.headers.get('content-type') || 'image/png';
+        const extension = contentType.split('/')[1]?.split(';')[0] || 'png';
 
-        const uploadResponse = await fetch(
-          `${request.nextUrl.origin}/api/upload`,
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
+        // Generate unique filename
+        const timestamp = Date.now();
+        const randomString = Math.random().toString(36).substring(7);
+        const filename = `blog-images/notion-${pageId}-${timestamp}-${randomString}.${extension}`;
 
-        if (uploadResponse.ok) {
-          const uploadResult = await uploadResponse.json();
-          urlMap.set(imageUrl, uploadResult.url);
-        }
+        // Upload directly to Vercel Blob
+        const blob = await put(filename, imageBlob, {
+          access: 'public',
+          addRandomSuffix: false,
+          contentType: contentType,
+        });
+
+        console.log(`Image uploaded successfully: ${blob.url}`);
+        urlMap.set(imageUrl, blob.url);
       } catch (error) {
         console.error(`Failed to process image ${imageUrl}:`, error);
         // Continue with other images

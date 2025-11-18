@@ -236,6 +236,30 @@
     @apply bg-background text-foreground;
     font-family: var(--font-family-primary);
   }
+
+  /* Text selection highlighting */
+  ::selection {
+    background-color: var(--brand-blue);
+    color: white;
+  }
+
+  ::-moz-selection {
+    background-color: var(--brand-blue);
+    color: white;
+  }
+
+  /* Ensure selection is visible in inputs and textareas */
+  input::selection,
+  textarea::selection {
+    background-color: var(--brand-blue);
+    color: white;
+  }
+
+  input::-moz-selection,
+  textarea::-moz-selection {
+    background-color: var(--brand-blue);
+    color: white;
+  }
 }
 
 /* ===================================
