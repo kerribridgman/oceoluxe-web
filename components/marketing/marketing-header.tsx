@@ -16,7 +16,7 @@ export function MarketingHeader() {
   ];
 
   return (
-    <header className="bg-[#1a2332] border-b border-[#2a3342] sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-[#1a2332] via-[#1e2838] to-[#243442] border-b border-[#2a3342]/50 sticky top-0 z-50 shadow-lg">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}

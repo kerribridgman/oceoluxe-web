@@ -34,18 +34,24 @@ export default function SecurityPage() {
   >(deleteAccount, {});
 
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">
-        Security Settings
-      </h1>
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Password</CardTitle>
+    <section className="flex-1">
+      <div className="page-header-gradient mb-8">
+        <h1 className="text-3xl font-bold mb-2">
+          Security Settings
+        </h1>
+        <p>
+          Manage your password and account security
+        </p>
+      </div>
+
+      <Card className="dashboard-card border-0 mb-8">
+        <CardHeader className="border-b border-gray-100 pb-3">
+          <CardTitle className="text-xl font-semibold text-gray-900">Password</CardTitle>
         </CardHeader>
-        <CardContent>
-          <form className="space-y-4" action={passwordAction}>
+        <CardContent className="pt-4">
+          <form className="space-y-6" action={passwordAction}>
             <div>
-              <Label htmlFor="current-password" className="mb-2">
+              <Label htmlFor="current-password" className="mb-2 text-sm font-medium text-gray-700">
                 Current Password
               </Label>
               <Input
@@ -57,10 +63,11 @@ export default function SecurityPage() {
                 minLength={8}
                 maxLength={100}
                 defaultValue={passwordState.currentPassword}
+                className="mt-1"
               />
             </div>
             <div>
-              <Label htmlFor="new-password" className="mb-2">
+              <Label htmlFor="new-password" className="mb-2 text-sm font-medium text-gray-700">
                 New Password
               </Label>
               <Input
@@ -72,10 +79,11 @@ export default function SecurityPage() {
                 minLength={8}
                 maxLength={100}
                 defaultValue={passwordState.newPassword}
+                className="mt-1"
               />
             </div>
             <div>
-              <Label htmlFor="confirm-password" className="mb-2">
+              <Label htmlFor="confirm-password" className="mb-2 text-sm font-medium text-gray-700">
                 Confirm New Password
               </Label>
               <Input
@@ -86,47 +94,56 @@ export default function SecurityPage() {
                 minLength={8}
                 maxLength={100}
                 defaultValue={passwordState.confirmPassword}
+                className="mt-1"
               />
             </div>
             {passwordState.error && (
-              <p className="text-red-600 text-sm">{passwordState.error}</p>
+              <div className="alert-error">
+                <p className="text-sm font-medium">{passwordState.error}</p>
+              </div>
             )}
             {passwordState.success && (
-              <p className="text-green-600 text-sm">{passwordState.success}</p>
+              <div className="alert-success">
+                <p className="text-sm font-medium">{passwordState.success}</p>
+              </div>
             )}
-            <Button
-              type="submit"
-              className="bg-brand-primary hover:bg-brand-primary-hover text-white"
-              disabled={isPasswordPending}
-            >
-              {isPasswordPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Updating...
-                </>
-              ) : (
-                <>
-                  <Lock className="mr-2 h-4 w-4" />
-                  Update Password
-                </>
-              )}
-            </Button>
+            <div className="pt-4 border-t border-gray-100">
+              <Button
+                type="submit"
+                className="bg-brand-primary hover:bg-brand-primary-hover text-white shadow-lg shadow-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/30 transition-all duration-200"
+                disabled={isPasswordPending}
+              >
+                {isPasswordPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Updating...
+                  </>
+                ) : (
+                  <>
+                    <Lock className="mr-2 h-4 w-4" />
+                    Update Password
+                  </>
+                )}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Delete Account</CardTitle>
+      <Card className="dashboard-card border-0 border-l-4 border-l-red-500">
+        <CardHeader className="border-b border-gray-100 pb-3">
+          <CardTitle className="text-xl font-semibold text-gray-900">Danger Zone</CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm text-gray-600 mb-4">
-            Account deletion is non-reversable. Please proceed with caution.
-          </p>
-          <form action={deleteAction} className="space-y-4">
+        <CardContent className="pt-4">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-red-800 font-medium">
+              ⚠️ Account deletion is permanent and cannot be undone. All your data will be permanently removed.
+            </p>
+          </div>
+          <form action={deleteAction} className="space-y-6">
             <div>
-              <Label htmlFor="delete-password" className="mb-2">
-                Confirm Password
+              <Label htmlFor="delete-password" className="mb-2 text-sm font-medium text-gray-700">
+                Confirm Your Password
               </Label>
               <Input
                 id="delete-password"
@@ -136,28 +153,34 @@ export default function SecurityPage() {
                 minLength={8}
                 maxLength={100}
                 defaultValue={deleteState.password}
+                className="mt-1"
               />
             </div>
             {deleteState.error && (
-              <p className="text-red-600 text-sm">{deleteState.error}</p>
+              <div className="alert-error">
+                <p className="text-sm font-medium">{deleteState.error}</p>
+              </div>
             )}
-            <Button
-              type="submit"
-              variant="destructive"
-              disabled={isDeletePending}
-            >
-              {isDeletePending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Deleting...
-                </>
-              ) : (
-                <>
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete Account
-                </>
-              )}
-            </Button>
+            <div className="pt-4 border-t border-gray-100">
+              <Button
+                type="submit"
+                variant="destructive"
+                disabled={isDeletePending}
+                className="shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                {isDeletePending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    Delete Account
+                  </>
+                )}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

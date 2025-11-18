@@ -177,48 +177,56 @@ export default function SeoSettingsPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">SEO & Open Graph Settings</h1>
-          <p className="text-sm text-gray-600 mt-1">
-            Manage meta tags, Open Graph, and Twitter Card metadata
-          </p>
-        </div>
+    <div className="flex-1 space-y-6">
+      <div className="page-header-gradient mb-8">
+        <h1 className="text-3xl font-bold mb-2">
+          SEO & Open Graph Settings
+        </h1>
+        <p>
+          Manage meta tags, Open Graph, and Twitter Card metadata for better social sharing
+        </p>
       </div>
 
-      <div className="mb-6">
-        <Label htmlFor="page-select">Select Page</Label>
-        <Select value={selectedPage} onValueChange={setSelectedPage}>
-          <SelectTrigger className="max-w-xs mt-1">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="home">Home Page</SelectItem>
-            <SelectItem value="services">Services Page</SelectItem>
-            <SelectItem value="blog">Blog Page</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      <Card className="dashboard-card border-0">
+        <CardContent className="pt-6 pb-6">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 min-w-fit">
+              <Search className="w-5 h-5 text-brand-primary" />
+              <Label htmlFor="page-select" className="text-base font-semibold text-gray-900 whitespace-nowrap">Select Page</Label>
+            </div>
+            <Select value={selectedPage} onValueChange={setSelectedPage}>
+              <SelectTrigger className="max-w-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="home">Home Page</SelectItem>
+                <SelectItem value="services">Services Page</SelectItem>
+                <SelectItem value="blog">Blog Page</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-          {error}
+        <div className="alert-error">
+          <p className="text-sm font-medium">{error}</p>
         </div>
       )}
 
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
-          {success}
+        <div className="alert-success">
+          <p className="text-sm font-medium">{success}</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Basic SEO</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="dashboard-card border-0">
+            <CardHeader className="border-b border-gray-100 pb-3">
+              <CardTitle className="text-xl font-semibold text-gray-900">Basic SEO</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 pt-4">
             <div>
               <Label htmlFor="title">Page Title *</Label>
               <Input
@@ -291,11 +299,11 @@ export default function SeoSettingsPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Open Graph (Facebook/WhatsApp)</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+          <Card className="dashboard-card border-0">
+            <CardHeader className="border-b border-gray-100 pb-3">
+              <CardTitle className="text-xl font-semibold text-gray-900">Open Graph (Facebook/WhatsApp)</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 pt-4">
             <div>
               <Label htmlFor="ogTitle">OG Title</Label>
               <Input
@@ -390,12 +398,13 @@ export default function SeoSettingsPage() {
             </div>
           </CardContent>
         </Card>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Twitter Card</CardTitle>
+        <Card className="dashboard-card border-0">
+          <CardHeader className="border-b border-gray-100 pb-3">
+            <CardTitle className="text-xl font-semibold text-gray-900">Twitter Card</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 pt-4">
             <div>
               <Label htmlFor="twitterCard">Card Type</Label>
               <Select
@@ -491,10 +500,10 @@ export default function SeoSettingsPage() {
           </CardContent>
         </Card>
 
-        <div className="flex items-center justify-end gap-4">
+        <div className="flex items-center justify-end gap-4 pt-4 border-t border-gray-100">
           <Button
             type="submit"
-            className="bg-brand-primary hover:bg-brand-primary-hover text-white"
+            className="bg-brand-primary hover:bg-brand-primary-hover text-white shadow-lg shadow-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/30 transition-all duration-200"
             disabled={saving}
           >
             <Save className="w-4 h-4 mr-2" />

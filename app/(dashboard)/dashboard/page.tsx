@@ -41,18 +41,18 @@ function ManageSubscription() {
   const { data: teamData } = useSWR<TeamDataWithMembers>('/api/team', fetcher);
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>Team Subscription</CardTitle>
+    <Card className="dashboard-card border-0 mb-8">
+      <CardHeader className="border-b border-gray-100 pb-3">
+        <CardTitle className="text-xl font-semibold text-gray-900">Team Subscription</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-4">
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
             <div className="mb-4 sm:mb-0">
-              <p className="font-medium">
+              <p className="font-medium text-gray-900">
                 Current Plan: {teamData?.planName || 'Free'}
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-gray-600">
                 {teamData?.subscriptionStatus === 'active'
                   ? 'Billed monthly'
                   : teamData?.subscriptionStatus === 'trialing'
@@ -106,23 +106,23 @@ function TeamMembers() {
 
   if (!teamData?.teamMembers?.length) {
     return (
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Team Members</CardTitle>
+      <Card className="dashboard-card border-0 mb-8">
+        <CardHeader className="border-b border-gray-100 pb-3">
+          <CardTitle className="text-xl font-semibold text-gray-900">Team Members</CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">No team members yet.</p>
+        <CardContent className="pt-4">
+          <p className="text-gray-600">No team members yet.</p>
         </CardContent>
       </Card>
     );
   }
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>Team Members</CardTitle>
+    <Card className="dashboard-card border-0 mb-8">
+      <CardHeader className="border-b border-gray-100 pb-3">
+        <CardTitle className="text-xl font-semibold text-gray-900">Team Members</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-4">
         <ul className="space-y-4">
           {teamData.teamMembers.map((member, index) => (
             <li key={member.id} className="flex items-center justify-between">
@@ -145,10 +145,10 @@ function TeamMembers() {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium">
+                  <p className="font-medium text-gray-900">
                     {getUserDisplayName(member.user)}
                   </p>
-                  <p className="text-sm text-muted-foreground capitalize">
+                  <p className="text-sm text-gray-600 capitalize">
                     {member.role}
                   </p>
                 </div>
@@ -170,7 +170,9 @@ function TeamMembers() {
           ))}
         </ul>
         {removeState?.error && (
-          <p className="text-red-500 mt-4">{removeState.error}</p>
+          <div className="alert-error mt-4">
+            <p className="text-sm font-medium">{removeState.error}</p>
+          </div>
         )}
       </CardContent>
     </Card>
@@ -196,14 +198,14 @@ function InviteTeamMember() {
   >(inviteTeamMember, {});
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Invite Team Member</CardTitle>
+    <Card className="dashboard-card border-0">
+      <CardHeader className="border-b border-gray-100 pb-3">
+        <CardTitle className="text-xl font-semibold text-gray-900">Invite Team Member</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-4">
         <form action={inviteAction} className="space-y-4">
           <div>
-            <Label htmlFor="email" className="mb-2">
+            <Label htmlFor="email" className="mb-2 text-sm font-medium text-gray-700">
               Email
             </Label>
             <Input
@@ -213,10 +215,11 @@ function InviteTeamMember() {
               placeholder="Enter email"
               required
               disabled={!isOwner}
+              className="mt-1"
             />
           </div>
           <div>
-            <Label>Role</Label>
+            <Label className="text-sm font-medium text-gray-700">Role</Label>
             <RadioGroup
               defaultValue="member"
               name="role"
@@ -234,14 +237,18 @@ function InviteTeamMember() {
             </RadioGroup>
           </div>
           {inviteState?.error && (
-            <p className="text-red-500">{inviteState.error}</p>
+            <div className="alert-error">
+              <p className="text-sm font-medium">{inviteState.error}</p>
+            </div>
           )}
           {inviteState?.success && (
-            <p className="text-green-500">{inviteState.success}</p>
+            <div className="alert-success">
+              <p className="text-sm font-medium">{inviteState.success}</p>
+            </div>
           )}
           <Button
             type="submit"
-            className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white"
+            className="bg-brand-primary hover:bg-brand-primary-hover text-white shadow-lg shadow-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/30 transition-all duration-200"
             disabled={isInvitePending || !isOwner}
           >
             {isInvitePending ? (
@@ -259,8 +266,8 @@ function InviteTeamMember() {
         </form>
       </CardContent>
       {!isOwner && (
-        <CardFooter>
-          <p className="text-sm text-muted-foreground">
+        <CardFooter className="border-t border-gray-100 pt-4">
+          <p className="text-sm text-gray-600">
             You must be a team owner to invite new members.
           </p>
         </CardFooter>
@@ -271,8 +278,11 @@ function InviteTeamMember() {
 
 export default function SettingsPage() {
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium mb-6">Team Settings</h1>
+    <section className="flex-1">
+      <div className="page-header-gradient mb-8">
+        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+        <p>Manage your team subscription and members</p>
+      </div>
       <Suspense fallback={<SubscriptionSkeleton />}>
         <ManageSubscription />
       </Suspense>

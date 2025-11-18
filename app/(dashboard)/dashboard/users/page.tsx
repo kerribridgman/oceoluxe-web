@@ -218,112 +218,117 @@ export default function UsersPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
-          <p className="text-sm text-gray-600 mt-1">Manage users, roles, and permissions</p>
-        </div>
-        <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white">
-              <Plus className="w-4 h-4 mr-2" />
-              Add User
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create New User</DialogTitle>
-              <DialogDescription>
-                Add a new user to the system with specified role and permissions.
-              </DialogDescription>
-            </DialogHeader>
-            <form onSubmit={handleCreateUser}>
-              <div className="space-y-4 py-4">
-                <div>
-                  <Label htmlFor="create-name">Name</Label>
-                  <Input
-                    id="create-name"
-                    value={createForm.name}
-                    onChange={(e) => setCreateForm({ ...createForm, name: e.target.value })}
-                    placeholder="Enter full name"
-                    className="mt-1"
-                  />
+    <div className="flex-1 space-y-6">
+      <div className="page-header-gradient mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">User Management</h1>
+            <p>Manage users, roles, and permissions</p>
+          </div>
+          <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-white hover:bg-gray-50 text-brand-navy shadow-lg hover:shadow-xl transition-all duration-200 border border-white/30">
+                <Plus className="w-4 h-4 mr-2" />
+                Add User
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Create New User</DialogTitle>
+                <DialogDescription>
+                  Add a new user to the system with specified role and permissions.
+                </DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handleCreateUser}>
+                <div className="space-y-4 py-4">
+                  <div>
+                    <Label htmlFor="create-name">Name</Label>
+                    <Input
+                      id="create-name"
+                      value={createForm.name}
+                      onChange={(e) => setCreateForm({ ...createForm, name: e.target.value })}
+                      placeholder="Enter full name"
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="create-email">Email *</Label>
+                    <Input
+                      id="create-email"
+                      type="email"
+                      value={createForm.email}
+                      onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })}
+                      placeholder="user@example.com"
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="create-password">Password *</Label>
+                    <Input
+                      id="create-password"
+                      type="password"
+                      value={createForm.password}
+                      onChange={(e) => setCreateForm({ ...createForm, password: e.target.value })}
+                      placeholder="Enter password"
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="create-role">Role</Label>
+                    <Select
+                      value={createForm.role}
+                      onValueChange={(value) => setCreateForm({ ...createForm, role: value })}
+                    >
+                      <SelectTrigger className="mt-1">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="member">Member</SelectItem>
+                        <SelectItem value="admin">Admin</SelectItem>
+                        <SelectItem value="owner">Owner</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-                <div>
-                  <Label htmlFor="create-email">Email *</Label>
-                  <Input
-                    id="create-email"
-                    type="email"
-                    value={createForm.email}
-                    onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })}
-                    placeholder="user@example.com"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="create-password">Password *</Label>
-                  <Input
-                    id="create-password"
-                    type="password"
-                    value={createForm.password}
-                    onChange={(e) => setCreateForm({ ...createForm, password: e.target.value })}
-                    placeholder="Enter password"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="create-role">Role</Label>
-                  <Select
-                    value={createForm.role}
-                    onValueChange={(value) => setCreateForm({ ...createForm, role: value })}
+                <DialogFooter>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setCreateDialogOpen(false)}
+                    disabled={creating}
                   >
-                    <SelectTrigger className="mt-1">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="member">Member</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="owner">Owner</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <DialogFooter>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setCreateDialogOpen(false)}
-                  disabled={creating}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  className="bg-[#4a9fd8] hover:bg-[#3a8fc8]"
-                  disabled={creating}
-                >
-                  {creating ? 'Creating...' : 'Create User'}
-                </Button>
-              </DialogFooter>
-            </form>
-          </DialogContent>
-        </Dialog>
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    className="bg-brand-primary hover:bg-brand-primary-hover"
+                    disabled={creating}
+                  >
+                    {creating ? 'Creating...' : 'Create User'}
+                  </Button>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-          {error}
+        <div className="alert-error">
+          <p className="text-sm font-medium">{error}</p>
         </div>
       )}
 
-      <Card>
-        <CardHeader>
-          <CardTitle>All Users ({users.length})</CardTitle>
+      <Card className="dashboard-card border-0">
+        <CardHeader className="border-b border-gray-100 pb-3">
+          <CardTitle className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+            <UserCog className="w-5 h-5 text-brand-primary" />
+            All Users ({users.length})
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           {users.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
               No users found. Create your first user to get started.
@@ -503,7 +508,7 @@ export default function UsersPage() {
               </Button>
               <Button
                 type="submit"
-                className="bg-[#4a9fd8] hover:bg-[#3a8fc8]"
+                className="bg-brand-primary hover:bg-brand-primary-hover"
                 disabled={editing}
               >
                 {editing ? 'Saving...' : 'Save Changes'}

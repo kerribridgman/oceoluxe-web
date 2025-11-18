@@ -79,40 +79,51 @@ export default function GeneralPage() {
   );
 
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">
-        General Settings
-      </h1>
+    <section className="flex-1">
+      <div className="page-header-gradient mb-8">
+        <h1 className="text-3xl font-bold mb-2">
+          General Settings
+        </h1>
+        <p>
+          Manage your account information and preferences
+        </p>
+      </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Account Information</CardTitle>
+      <Card className="dashboard-card border-0">
+        <CardHeader className="border-b border-gray-100 pb-3">
+          <CardTitle className="text-xl font-semibold text-gray-900">Account Information</CardTitle>
         </CardHeader>
-        <CardContent>
-          <form className="space-y-4" action={formAction}>
+        <CardContent className="pt-4">
+          <form className="space-y-6" action={formAction}>
             <Suspense fallback={<AccountForm state={state} />}>
               <AccountFormWithData state={state} />
             </Suspense>
             {state.error && (
-              <p className="text-red-600 text-sm">{state.error}</p>
+              <div className="alert-error">
+                <p className="text-sm font-medium">{state.error}</p>
+              </div>
             )}
             {state.success && (
-              <p className="text-green-600 text-sm">{state.success}</p>
+              <div className="alert-success">
+                <p className="text-sm font-medium">{state.success}</p>
+              </div>
             )}
-            <Button
-              type="submit"
-              className="bg-brand-primary hover:bg-brand-primary-hover text-white"
-              disabled={isPending}
-            >
-              {isPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Saving...
-                </>
-              ) : (
-                'Save Changes'
-              )}
-            </Button>
+            <div className="pt-4 border-t border-gray-100">
+              <Button
+                type="submit"
+                className="bg-brand-primary hover:bg-brand-primary-hover text-white shadow-lg shadow-brand-primary/20 hover:shadow-xl hover:shadow-brand-primary/30 transition-all duration-200"
+                disabled={isPending}
+              >
+                {isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  'Save Changes'
+                )}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
