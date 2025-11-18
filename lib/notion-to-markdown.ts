@@ -115,8 +115,7 @@ function blockToMarkdown(block: NotionBlock, recordMap: RecordMap, level: number
 
     case 'bulleted_list':
     case 'numbered_list':
-      // Convert all lists to bullet lists for BlockNote compatibility
-      // BlockNote has issues parsing numbered lists
+      // Convert all lists to bullet lists for consistency
       markdown = `- ${getText()}\n`;
       break;
 
