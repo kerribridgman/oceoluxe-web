@@ -120,6 +120,26 @@ export const seoSettings = pgTable('seo_settings', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+export const applications = pgTable('applications', {
+  id: serial('id').primaryKey(),
+  type: varchar('type', { length: 50 }).notNull(), // 'coaching' or 'entrepreneur-circle'
+  name: varchar('name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  phone: varchar('phone', { length: 50 }).notNull(),
+  socialHandle: varchar('social_handle', { length: 255 }).notNull(),
+  interest: text('interest').notNull(),
+  experiences: text('experiences').notNull(),
+  growthAreas: text('growth_areas').notNull(),
+  obstacles: text('obstacles').notNull(),
+  willingToInvest: varchar('willing_to_invest', { length: 10 }).notNull(),
+  additionalInfo: text('additional_info'),
+  status: varchar('status', { length: 20 }).notNull().default('pending'), // 'pending', 'approved', 'rejected'
+  notes: text('notes'), // Admin notes
+  reviewedBy: integer('reviewed_by').references(() => users.id),
+  reviewedAt: timestamp('reviewed_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -191,6 +211,8 @@ export type BlogPost = typeof blogPosts.$inferSelect;
 export type NewBlogPost = typeof blogPosts.$inferInsert;
 export type SeoSettings = typeof seoSettings.$inferSelect;
 export type NewSeoSettings = typeof seoSettings.$inferInsert;
+export type Application = typeof applications.$inferSelect;
+export type NewApplication = typeof applications.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',

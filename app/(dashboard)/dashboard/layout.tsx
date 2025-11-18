@@ -42,6 +42,7 @@ export default function DashboardLayout({
       title: 'CONTENT',
       items: [
         { href: '/dashboard/blog', icon: FileText, label: 'Blog Posts' },
+        { href: '/dashboard/applications', icon: FileText, label: 'Applications' },
       ]
     }
   ];

@@ -176,7 +176,7 @@ export default function HomePage() {
                 High-touch experience for founders ready to create aligned and profitable online businesses.
                 Clarity. Confidence. Clients.
               </p>
-              <Link href="/services#tech-coaching">
+              <Link href="/apply/coaching">
                 <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
                   Apply Now
                 </Button>
@@ -193,7 +193,7 @@ export default function HomePage() {
                 Year-long mastermind for purpose-driven entrepreneurs. Grow together. Lead with clarity.
                 Scale on your terms.
               </p>
-              <Link href="/services#mastermind">
+              <Link href="/apply/entrepreneur-circle">
                 <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
                   Join the Circle
                 </Button>
