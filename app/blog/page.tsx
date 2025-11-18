@@ -58,7 +58,7 @@ export default async function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group"
               >
-                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-[#4a9fd8]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#4a9fd8]/10 h-full flex flex-col">
+                <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
                   {post.coverImageUrl && (
                     <div className="aspect-video overflow-hidden">
                       <img
