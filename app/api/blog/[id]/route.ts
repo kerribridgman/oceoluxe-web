@@ -99,6 +99,7 @@ export async function PUT(
       author: body.author !== undefined ? body.author : existingPost.author,
       excerpt: body.excerpt !== undefined ? body.excerpt : existingPost.excerpt,
       content: body.content !== undefined ? body.content : existingPost.content,
+      contentJson: body.contentJson !== undefined ? body.contentJson : existingPost.contentJson,
       coverImageUrl: body.coverImageUrl !== undefined ? body.coverImageUrl : existingPost.coverImageUrl,
       ogImageUrl: body.ogImageUrl !== undefined ? body.ogImageUrl : existingPost.ogImageUrl,
       ogTitle: body.ogTitle !== undefined ? body.ogTitle : existingPost.ogTitle,

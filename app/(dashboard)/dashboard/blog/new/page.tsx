@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MarkdownRenderer } from '@/components/blog/markdown-renderer';
 import { NotionImportModal } from '@/components/notion-import-modal';
+import { RichTextEditor } from '@/components/blog/rich-text-editor';
 
 export default function NewBlogPostPage() {
   const router = useRouter();
@@ -19,6 +20,7 @@ export default function NewBlogPostPage() {
   const [author, setAuthor] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
+  const [contentJson, setContentJson] = useState<any>(null);
   const [coverImageUrl, setCoverImageUrl] = useState('');
   const [ogImageUrl, setOgImageUrl] = useState('');
   const [ogTitle, setOgTitle] = useState('');
@@ -124,6 +126,7 @@ export default function NewBlogPostPage() {
           author: author || undefined,
           excerpt: excerpt || undefined,
           content,
+          contentJson,
           coverImageUrl: coverImageUrl || undefined,
           ogImageUrl: ogImageUrl || undefined,
           ogTitle: ogTitle || undefined,
@@ -287,15 +290,18 @@ export default function NewBlogPostPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="content">Content (Markdown) *</Label>
-                  <Textarea
-                    id="content"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    placeholder="# Your post content here&#10;&#10;Write in **Markdown**..."
-                    rows={20}
-                    className="mt-1 font-mono"
-                  />
+                  <Label htmlFor="content">Content *</Label>
+                  <div className="mt-1">
+                    <RichTextEditor
+                      initialContent={content}
+                      initialContentJson={contentJson}
+                      onChange={(markdown, json) => {
+                        setContent(markdown);
+                        setContentJson(json);
+                      }}
+                    />
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Use slash (/) for commands. Images and embeds supported.</p>
                 </div>
               </CardContent>
             </Card>

@@ -115,8 +115,9 @@ function blockToMarkdown(block: NotionBlock, recordMap: RecordMap, level: number
 
     case 'bulleted_list':
     case 'numbered_list':
-      const bullet = type === 'bulleted_list' ? '-' : '1.';
-      markdown = `${bullet} ${getText()}\n`;
+      // Convert all lists to bullet lists for BlockNote compatibility
+      // BlockNote has issues parsing numbered lists
+      markdown = `- ${getText()}\n`;
       break;
 
     case 'to_do':

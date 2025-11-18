@@ -6,6 +6,7 @@ import {
   timestamp,
   integer,
   boolean,
+  jsonb,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
@@ -76,6 +77,7 @@ export const blogPosts = pgTable('blog_posts', {
   author: varchar('author', { length: 100 }).notNull(),
   excerpt: text('excerpt'),
   content: text('content').notNull(),
+  contentJson: jsonb('content_json'), // BlockNote editor state for lossless editing
   coverImageUrl: text('cover_image_url'),
   ogImageUrl: text('og_image_url'),
   ogTitle: varchar('og_title', { length: 255 }),
