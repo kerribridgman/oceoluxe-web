@@ -27,7 +27,7 @@ export async function getPageMetadata(page: string): Promise<Metadata> {
       openGraph: {
         title: settings.ogTitle || settings.title,
         description: settings.ogDescription || settings.description,
-        type: settings.ogType as 'website' | 'article' | 'profile' | undefined,
+        type: (settings.ogType as 'website' | 'article' | 'profile') || 'website',
         url: settings.canonicalUrl || `${baseUrl}/${page === 'home' ? '' : page}`,
         images: settings.ogImageUrl ? [
           {
@@ -39,7 +39,7 @@ export async function getPageMetadata(page: string): Promise<Metadata> {
         ] : undefined,
       },
       twitter: {
-        card: settings.twitterCard as 'summary' | 'summary_large_image' | undefined,
+        card: (settings.twitterCard as 'summary' | 'summary_large_image') || 'summary_large_image',
         title: settings.twitterTitle || settings.ogTitle || settings.title,
         description: settings.twitterDescription || settings.ogDescription || settings.description,
         images: settings.twitterImageUrl || settings.ogImageUrl ? [
