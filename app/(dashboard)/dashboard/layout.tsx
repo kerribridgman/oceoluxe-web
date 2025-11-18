@@ -23,6 +23,13 @@ export default function DashboardLayout({
       ]
     },
     {
+      title: 'CONTENT',
+      items: [
+        { href: '/dashboard/blog', icon: FileText, label: 'Blog Posts' },
+        { href: '/dashboard/applications', icon: FileText, label: 'Applications' },
+      ]
+    },
+    {
       title: 'SETTINGS',
       items: [
         { href: '/dashboard/general', icon: Settings, label: 'General' },
@@ -37,13 +44,6 @@ export default function DashboardLayout({
       items: [
         { href: '/dashboard', icon: Users, label: 'Team Members' },
         { href: '/dashboard/users', icon: UserCog, label: 'User Management' },
-      ]
-    },
-    {
-      title: 'CONTENT',
-      items: [
-        { href: '/dashboard/blog', icon: FileText, label: 'Blog Posts' },
-        { href: '/dashboard/applications', icon: FileText, label: 'Applications' },
       ]
     }
   ];
