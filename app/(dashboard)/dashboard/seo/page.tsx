@@ -13,7 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search, Save, Upload, X, ExternalLink } from 'lucide-react';
+import { Search, Save, Upload, X, ExternalLink, FileCode } from 'lucide-react';
+import Link from 'next/link';
 
 interface SeoSettings {
   id?: number;
@@ -179,12 +180,25 @@ export default function SeoSettingsPage() {
   return (
     <div className="flex-1 space-y-6">
       <div className="page-header-gradient mb-8">
-        <h1 className="text-3xl font-bold mb-2">
-          SEO & Open Graph Settings
-        </h1>
-        <p>
-          Manage meta tags, Open Graph, and Twitter Card metadata for better social sharing
-        </p>
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">
+              SEO & Open Graph Settings
+            </h1>
+            <p>
+              Manage meta tags, Open Graph, and Twitter Card metadata for better social sharing
+            </p>
+          </div>
+          <Link href="/dashboard/seo/seo-tools">
+            <Button
+              variant="outline"
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-green-600 shadow-md font-semibold"
+            >
+              <FileCode className="w-4 h-4 mr-2" />
+              SEO Tools
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <Card className="dashboard-card border-0">
