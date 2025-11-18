@@ -6,10 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Save, Eye, Upload, X } from 'lucide-react';
+import { ArrowLeft, Save, Eye, Upload, X, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MarkdownRenderer } from '@/components/blog/markdown-renderer';
+import { NotionImportModal } from '@/components/notion-import-modal';
 
 export default function NewBlogPostPage() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function NewBlogPostPage() {
   const [error, setError] = useState<string | null>(null);
   const [uploadingCover, setUploadingCover] = useState(false);
   const [uploadingOg, setUploadingOg] = useState(false);
+  const [notionImportOpen, setNotionImportOpen] = useState(false);
 
   function handleTitleChange(value: string) {
     setTitle(value);
@@ -82,6 +84,24 @@ export default function NewBlogPostPage() {
       } else {
         setUploadingOg(false);
       }
+    }
+  }
+
+  function handleNotionImportSuccess(data: {
+    title: string;
+    slug: string;
+    content: string;
+    excerpt: string;
+    coverImageUrl?: string;
+    author: string;
+  }) {
+    setTitle(data.title);
+    setSlug(data.slug);
+    setContent(data.content);
+    setExcerpt(data.excerpt);
+    setAuthor(data.author);
+    if (data.coverImageUrl) {
+      setCoverImageUrl(data.coverImageUrl);
     }
   }
 
@@ -145,6 +165,14 @@ export default function NewBlogPostPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setNotionImportOpen(true)}
+              className="bg-purple-500 hover:bg-purple-600 text-white border-purple-600 shadow-md font-semibold"
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              Import from Notion
+            </Button>
             <Button
               variant="outline"
               onClick={() => setShowPreview(!showPreview)}
@@ -423,6 +451,12 @@ export default function NewBlogPostPage() {
           </div>
         </div>
       )}
+
+      <NotionImportModal
+        open={notionImportOpen}
+        onOpenChange={setNotionImportOpen}
+        onImportSuccess={handleNotionImportSuccess}
+      />
     </div>
   );
 }
