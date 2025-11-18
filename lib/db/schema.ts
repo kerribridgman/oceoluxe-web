@@ -151,6 +151,22 @@ export const linkSettings = pgTable('link_settings', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+export const mcpApiKeys = pgTable('mcp_api_keys', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  name: varchar('name', { length: 255 }).notNull(), // Friendly name for the key
+  keyHash: text('key_hash').notNull(), // Hashed API key
+  keyPrefix: varchar('key_prefix', { length: 10 }).notNull(), // First 8 chars for identification
+  permissions: jsonb('permissions').notNull().default('{"blog": ["read", "write"]}'), // Granular permissions
+  lastUsedAt: timestamp('last_used_at'),
+  expiresAt: timestamp('expires_at'), // Optional expiration
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -161,6 +177,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   teamMembers: many(teamMembers),
   invitationsSent: many(invitations),
   blogPosts: many(blogPosts),
+  mcpApiKeys: many(mcpApiKeys),
 }));
 
 export const invitationsRelations = relations(invitations, ({ one }) => ({
@@ -203,6 +220,13 @@ export const blogPostsRelations = relations(blogPosts, ({ one }) => ({
   }),
 }));
 
+export const mcpApiKeysRelations = relations(mcpApiKeys, ({ one }) => ({
+  user: one(users, {
+    fields: [mcpApiKeys.userId],
+    references: [users.id],
+  }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Team = typeof teams.$inferSelect;
@@ -226,6 +250,8 @@ export type Application = typeof applications.$inferSelect;
 export type NewApplication = typeof applications.$inferInsert;
 export type LinkSettings = typeof linkSettings.$inferSelect;
 export type NewLinkSettings = typeof linkSettings.$inferInsert;
+export type McpApiKey = typeof mcpApiKeys.$inferSelect;
+export type NewMcpApiKey = typeof mcpApiKeys.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
