@@ -21,11 +21,14 @@ interface McpApiKey {
   updatedAt: string;
 }
 
-export default function McpApiKeysPage() {
+export default function IntegrationsPage() {
   const [apiKeys, setApiKeys] = useState<McpApiKey[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [newKeyName, setNewKeyName] = useState('');
+  const [selectedPermissions, setSelectedPermissions] = useState({
+    blog: { read: true, write: true }
+  });
   const [newlyCreatedKey, setNewlyCreatedKey] = useState<string | null>(null);
   const [copiedKey, setCopiedKey] = useState<number | null>(null);
   const [showNewKey, setShowNewKey] = useState(false);
@@ -59,12 +62,21 @@ export default function McpApiKeysPage() {
     setError(null);
 
     try {
+      // Build permissions object from selected permissions
+      const permissions: any = {};
+      if (selectedPermissions.blog.read || selectedPermissions.blog.write) {
+        const blogPerms: string[] = [];
+        if (selectedPermissions.blog.read) blogPerms.push('read');
+        if (selectedPermissions.blog.write) blogPerms.push('write');
+        permissions.blog = blogPerms;
+      }
+
       const response = await fetch('/api/mcp-keys', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: newKeyName.trim(),
-          permissions: { blog: ['read', 'write'] },
+          permissions,
         }),
       });
 
@@ -115,6 +127,7 @@ export default function McpApiKeysPage() {
     setNewlyCreatedKey(null);
     setShowNewKey(false);
     setNewKeyName('');
+    setSelectedPermissions({ blog: { read: true, write: true } });
     setError(null);
   }
 
@@ -131,8 +144,8 @@ export default function McpApiKeysPage() {
       <div className="page-header-gradient mb-8">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-3xl font-bold mb-2">MCP API Keys</h1>
-            <p>Manage API keys for Model Context Protocol integration</p>
+            <h1 className="text-3xl font-bold mb-2">Integrations</h1>
+            <p>Manage API keys and third-party integrations</p>
           </div>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
@@ -164,6 +177,41 @@ export default function McpApiKeysPage() {
                     <p className="text-xs text-gray-500 mt-1">
                       Choose a name that helps you identify where this key is used
                     </p>
+                  </div>
+
+                  <div>
+                    <Label className="text-sm font-semibold mb-3 block">Permissions</Label>
+                    <div className="space-y-3 bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <div>
+                        <h4 className="text-sm font-medium text-gray-900 mb-2">Blog Management</h4>
+                        <div className="space-y-2 ml-4">
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={selectedPermissions.blog.read}
+                              onChange={(e) => setSelectedPermissions({
+                                ...selectedPermissions,
+                                blog: { ...selectedPermissions.blog, read: e.target.checked }
+                              })}
+                              className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
+                            />
+                            <span className="text-sm text-gray-700">Read - List and view blog posts</span>
+                          </label>
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={selectedPermissions.blog.write}
+                              onChange={(e) => setSelectedPermissions({
+                                ...selectedPermissions,
+                                blog: { ...selectedPermissions.blog, write: e.target.checked }
+                              })}
+                              className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
+                            />
+                            <span className="text-sm text-gray-700">Write - Create, edit, and delete blog posts</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   {error && (
