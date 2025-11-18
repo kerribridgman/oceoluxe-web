@@ -14,8 +14,8 @@ export function generateMcpApiKey(): { apiKey: string; keyHash: string; keyPrefi
   // Hash the full API key for storage
   const keyHash = createHash('sha256').update(apiKey).digest('hex');
 
-  // Store first 8 chars of random part for identification
-  const keyPrefix = `mcp_live_${randomPart.substring(0, 8)}`;
+  // Store first 8 chars of random part for identification (without mcp_live_ prefix)
+  const keyPrefix = randomPart.substring(0, 8);
 
   return { apiKey, keyHash, keyPrefix };
 }

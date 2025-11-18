@@ -321,7 +321,7 @@ export default function IntegrationsPage() {
                     <CardTitle className="text-xl font-semibold text-gray-900">{key.name}</CardTitle>
                     <CardDescription className="mt-1">
                       <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">
-                        {key.keyPrefix}...
+                        mcp_{key.keyPrefix}...
                       </span>
                     </CardDescription>
                   </div>
