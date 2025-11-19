@@ -354,28 +354,29 @@ export default function ProductsPage() {
 
       {/* Add API Key Dialog */}
       {showAddKeyDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-lg">
-            <CardHeader>
-              <CardTitle>Add MMFC API Key</CardTitle>
-              <CardDescription>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-lg bg-white shadow-2xl border-2 border-gray-200">
+            <CardHeader className="border-b bg-gradient-to-r from-gray-50 to-white">
+              <CardTitle className="text-2xl">Add MMFC API Key</CardTitle>
+              <CardDescription className="text-base">
                 Connect your Make Money from Coding account to sync products
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleAddApiKey} className="space-y-4">
+            <CardContent className="pt-6">
+              <form onSubmit={handleAddApiKey} className="space-y-5">
                 <div>
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name" className="text-sm font-semibold text-gray-700">Name</Label>
                   <Input
                     id="name"
                     placeholder="My MMFC Account"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
+                    className="mt-1.5"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="apiKey">API Key</Label>
+                  <Label htmlFor="apiKey" className="text-sm font-semibold text-gray-700">API Key</Label>
                   <Input
                     id="apiKey"
                     type="password"
@@ -383,55 +384,60 @@ export default function ProductsPage() {
                     value={formData.apiKey}
                     onChange={(e) => setFormData({ ...formData, apiKey: e.target.value })}
                     required
+                    className="mt-1.5"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
-                    Get your API key from Settings → API Integrations on Make Money from Coding
+                  <p className="text-xs text-gray-600 mt-2 bg-blue-50 border border-blue-200 rounded p-2">
+                    💡 Get your API key from Settings → API Integrations on Make Money from Coding
                   </p>
                 </div>
                 <div>
-                  <Label htmlFor="baseUrl">Base URL (Optional)</Label>
+                  <Label htmlFor="baseUrl" className="text-sm font-semibold text-gray-700">Base URL (Optional)</Label>
                   <Input
                     id="baseUrl"
                     placeholder="https://makemoneyfromcoding.com"
                     value={formData.baseUrl}
                     onChange={(e) => setFormData({ ...formData, baseUrl: e.target.value })}
+                    className="mt-1.5"
                   />
                 </div>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    id="autoSync"
-                    checked={formData.autoSync}
-                    onChange={(e) => setFormData({ ...formData, autoSync: e.target.checked })}
-                    className="w-4 h-4 text-brand-primary rounded border-gray-300"
-                  />
-                  <Label htmlFor="autoSync" className="cursor-pointer">
-                    Enable auto-sync
-                  </Label>
-                </div>
-                {formData.autoSync && (
-                  <div>
-                    <Label htmlFor="syncFrequency">Sync Frequency</Label>
-                    <select
-                      id="syncFrequency"
-                      value={formData.syncFrequency}
-                      onChange={(e) => setFormData({ ...formData, syncFrequency: e.target.value })}
-                      className="w-full mt-1 rounded-md border border-gray-300 p-2"
-                    >
-                      <option value="daily">Daily</option>
-                      <option value="weekly">Weekly</option>
-                    </select>
+                <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="autoSync"
+                      checked={formData.autoSync}
+                      onChange={(e) => setFormData({ ...formData, autoSync: e.target.checked })}
+                      className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
+                    />
+                    <Label htmlFor="autoSync" className="cursor-pointer font-semibold text-gray-700">
+                      Enable auto-sync
+                    </Label>
                   </div>
-                )}
-                <div className="flex gap-2 justify-end pt-4">
+                  {formData.autoSync && (
+                    <div className="mt-3 ml-6">
+                      <Label htmlFor="syncFrequency" className="text-sm font-semibold text-gray-700">Sync Frequency</Label>
+                      <select
+                        id="syncFrequency"
+                        value={formData.syncFrequency}
+                        onChange={(e) => setFormData({ ...formData, syncFrequency: e.target.value })}
+                        className="w-full mt-1.5 rounded-md border border-gray-300 p-2.5 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
+                      >
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                      </select>
+                    </div>
+                  )}
+                </div>
+                <div className="flex gap-3 justify-end pt-6 border-t">
                   <Button
                     type="button"
                     variant="outline"
                     onClick={() => setShowAddKeyDialog(false)}
+                    className="px-6"
                   >
                     Cancel
                   </Button>
-                  <Button type="submit" className="bg-brand-primary hover:bg-brand-primary/90">
+                  <Button type="submit" className="bg-brand-primary hover:bg-brand-primary/90 px-6">
                     Add API Key
                   </Button>
                 </div>
