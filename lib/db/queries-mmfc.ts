@@ -7,7 +7,16 @@ import { mmfcApiKeys, mmfcProducts } from './schema';
 import { eq, and, desc } from 'drizzle-orm';
 import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
 
-const ENCRYPTION_KEY = process.env.MMFC_ENCRYPTION_KEY || process.env.AUTH_SECRET || 'default-encryption-key-change-in-prod';
+const ENCRYPTION_KEY = process.env.MMFC_ENCRYPTION_KEY || process.env.AUTH_SECRET;
+
+if (!ENCRYPTION_KEY) {
+  throw new Error('MMFC_ENCRYPTION_KEY or AUTH_SECRET environment variable must be set');
+}
+
+if (ENCRYPTION_KEY.length < 32) {
+  throw new Error('Encryption key must be at least 32 characters long');
+}
+
 const ALGORITHM = 'aes-256-cbc';
 
 /**

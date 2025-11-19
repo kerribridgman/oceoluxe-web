@@ -9,8 +9,27 @@ export async function middleware(request: NextRequest) {
   const sessionCookie = request.cookies.get('session');
   const isProtectedRoute = pathname.startsWith(protectedRoutes);
 
-  if (isProtectedRoute && !sessionCookie) {
-    return NextResponse.redirect(new URL('/sign-in', request.url));
+  // CRITICAL FIX: Validate token for protected routes
+  if (isProtectedRoute) {
+    if (!sessionCookie) {
+      return NextResponse.redirect(new URL('/sign-in', request.url));
+    }
+
+    try {
+      const parsed = await verifyToken(sessionCookie.value);
+
+      // Check if token is expired
+      if (new Date(parsed.expires) < new Date()) {
+        const response = NextResponse.redirect(new URL('/sign-in', request.url));
+        response.cookies.delete('session');
+        return response;
+      }
+    } catch (error) {
+      console.error('Invalid session token:', error);
+      const response = NextResponse.redirect(new URL('/sign-in', request.url));
+      response.cookies.delete('session');
+      return response;
+    }
   }
 
   let res = NextResponse.next();
