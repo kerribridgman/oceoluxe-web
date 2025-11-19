@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ShoppingCart, CheckCircle, Package, Download, GitBranch, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { MarketingHeader } from '@/components/marketing/marketing-header';
+import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 export async function generateStaticParams() {
   const products = await getPublicMmfcProducts();
@@ -48,19 +50,22 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+    <div className="min-h-screen bg-white">
+      <MarketingHeader />
+
       {/* Back Button */}
-      <div className="bg-white border-b">
+      <div className="bg-gray-50 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/products" className="text-brand-primary hover:underline flex items-center gap-2">
+          <Link href="/products" className="text-[#4a9fd8] hover:underline flex items-center gap-2">
             ← Back to Products
           </Link>
         </div>
       </div>
 
       {/* Product Detail */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <div className="bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid lg:grid-cols-2 gap-12">
           {/* Images */}
           <div>
             {displayImages.length > 0 ? (
@@ -111,7 +116,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {/* Price */}
             <div className="mb-6">
               <div className="flex items-baseline gap-4">
-                <p className="text-5xl font-bold text-brand-primary">
+                <p className="text-5xl font-bold text-[#4a9fd8]">
                   ${product.salePrice || product.price}
                 </p>
                 {product.salePrice && (
@@ -133,7 +138,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 rel="noopener noreferrer"
                 className="block"
               >
-                <Button size="lg" className="w-full bg-brand-primary hover:bg-brand-primary/90 text-lg py-6">
+                <Button size="lg" className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8] text-lg py-6">
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   Buy Now
                   <ExternalLink className="w-4 h-4 ml-2" />
@@ -151,7 +156,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <div className="space-y-3">
                   {product.hasFiles && (
                     <div className="flex items-start gap-3">
-                      <Download className="w-5 h-5 text-brand-primary flex-shrink-0 mt-0.5" />
+                      <Download className="w-5 h-5 text-[#4a9fd8] flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-medium">Downloadable Files</p>
                         <p className="text-sm text-gray-600">{product.fileCount} file(s) included</p>
@@ -160,7 +165,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   )}
                   {product.hasRepository && (
                     <div className="flex items-start gap-3">
-                      <GitBranch className="w-5 h-5 text-brand-primary flex-shrink-0 mt-0.5" />
+                      <GitBranch className="w-5 h-5 text-[#4a9fd8] flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-medium">Git Repository Access</p>
                         <p className="text-sm text-gray-600">Clone and modify the source code</p>
@@ -168,14 +173,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     </div>
                   )}
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-brand-primary flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-[#4a9fd8] flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="font-medium">Instant Access</p>
                       <p className="text-sm text-gray-600">Get started immediately after purchase</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-brand-primary flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-[#4a9fd8] flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="font-medium">Lifetime Updates</p>
                       <p className="text-sm text-gray-600">Free updates and improvements</p>
@@ -196,7 +201,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             )}
           </div>
         </div>
+        </div>
       </div>
+
+      <MarketingFooter />
     </div>
   );
 }
