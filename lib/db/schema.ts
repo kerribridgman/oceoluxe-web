@@ -167,6 +167,54 @@ export const mcpApiKeys = pgTable('mcp_api_keys', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+// Make Money from Coding API Integration
+export const mmfcApiKeys = pgTable('mmfc_api_keys', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  name: varchar('name', { length: 255 }).notNull(), // Friendly name (e.g., "Personal Account", "Business Account")
+  apiKey: text('api_key').notNull(), // Encrypted API key
+  baseUrl: varchar('base_url', { length: 500 }).notNull().default('https://makemoneyfromcoding.com'),
+  autoSync: boolean('auto_sync').notNull().default(false),
+  syncFrequency: varchar('sync_frequency', { length: 20 }).default('daily'), // daily, weekly, manual
+  lastSyncAt: timestamp('last_sync_at'),
+  lastSyncStatus: varchar('last_sync_status', { length: 20 }), // success, error
+  lastSyncError: text('last_sync_error'),
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Synced products from MMFC
+export const mmfcProducts = pgTable('mmfc_products', {
+  id: serial('id').primaryKey(),
+  apiKeyId: integer('api_key_id')
+    .notNull()
+    .references(() => mmfcApiKeys.id),
+  externalId: integer('external_id').notNull(), // Product ID from MMFC
+  title: varchar('title', { length: 500 }).notNull(),
+  slug: varchar('slug', { length: 500 }).notNull(),
+  description: text('description'),
+  pricingType: varchar('pricing_type', { length: 50 }), // free, one_time, subscription
+  price: varchar('price', { length: 20 }), // Stored as string to preserve decimal precision
+  salePrice: varchar('sale_price', { length: 20 }),
+  deliveryType: varchar('delivery_type', { length: 50 }),
+  coverImage: text('cover_image'),
+  featuredImageUrl: text('featured_image_url'),
+  featuredImageAlt: varchar('featured_image_alt', { length: 500 }),
+  images: jsonb('images'), // Array of image objects
+  videoUrl: text('video_url'),
+  hasFiles: boolean('has_files').notNull().default(false),
+  fileCount: integer('file_count').notNull().default(0),
+  hasRepository: boolean('has_repository').notNull().default(false),
+  checkoutUrl: text('checkout_url'), // Direct link to MMFC checkout
+  isVisible: boolean('is_visible').notNull().default(true), // Can be hidden by admin
+  syncedAt: timestamp('synced_at').notNull().defaultNow(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -178,6 +226,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   invitationsSent: many(invitations),
   blogPosts: many(blogPosts),
   mcpApiKeys: many(mcpApiKeys),
+  mmfcApiKeys: many(mmfcApiKeys),
 }));
 
 export const invitationsRelations = relations(invitations, ({ one }) => ({
@@ -227,6 +276,21 @@ export const mcpApiKeysRelations = relations(mcpApiKeys, ({ one }) => ({
   }),
 }));
 
+export const mmfcApiKeysRelations = relations(mmfcApiKeys, ({ one, many }) => ({
+  user: one(users, {
+    fields: [mmfcApiKeys.userId],
+    references: [users.id],
+  }),
+  products: many(mmfcProducts),
+}));
+
+export const mmfcProductsRelations = relations(mmfcProducts, ({ one }) => ({
+  apiKey: one(mmfcApiKeys, {
+    fields: [mmfcProducts.apiKeyId],
+    references: [mmfcApiKeys.id],
+  }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Team = typeof teams.$inferSelect;
@@ -252,6 +316,10 @@ export type LinkSettings = typeof linkSettings.$inferSelect;
 export type NewLinkSettings = typeof linkSettings.$inferInsert;
 export type McpApiKey = typeof mcpApiKeys.$inferSelect;
 export type NewMcpApiKey = typeof mcpApiKeys.$inferInsert;
+export type MmfcApiKey = typeof mmfcApiKeys.$inferSelect;
+export type NewMmfcApiKey = typeof mmfcApiKeys.$inferInsert;
+export type MmfcProduct = typeof mmfcProducts.$inferSelect;
+export type NewMmfcProduct = typeof mmfcProducts.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
