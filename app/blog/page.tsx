@@ -59,15 +59,26 @@ export default async function BlogPage() {
                 className="group"
               >
                 <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                  {post.coverImageUrl && (
-                    <div className="aspect-video overflow-hidden">
+                  <div className="aspect-video overflow-hidden">
+                    {post.coverImageUrl ? (
                       <img
                         src={post.coverImageUrl}
                         alt={post.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                    </div>
-                  )}
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-[#1a2332] via-[#1e2838] to-[#243442] relative overflow-hidden">
+                        {/* Decorative code symbols */}
+                        <div className="absolute top-4 left-4 text-3xl text-[#4a9fd8]/20 font-mono">&lt;/&gt;</div>
+                        <div className="absolute bottom-4 right-4 text-3xl text-[#4a9fd8]/20 font-mono">&#123;&#125;</div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-20 h-20 border-4 border-[#4a9fd8]/30 rounded-lg rotate-12"></div>
+                        </div>
+                        {/* Subtle glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#4a9fd8]/10 to-transparent"></div>
+                      </div>
+                    )}
+                  </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex-1">
                       <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#4a9fd8] transition-colors">
