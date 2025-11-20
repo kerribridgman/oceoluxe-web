@@ -1,240 +1,278 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Code, Sparkles, Zap, Users } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Check, X, Layers, Zap, Heart, ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
-import { getLinkSettings } from '@/lib/db/link-queries';
 
 export async function generateMetadata() {
   return await getPageMetadata('home');
 }
 
 export default async function HomePage() {
-  const links = await getLinkSettings();
+  const oceoMethodSteps = [
+    {
+      icon: <Layers className="h-12 w-12 text-[#CDA7B2]" />,
+      title: "Organize",
+      description: "Set up your supplier systems, calendars, and costing templates so you always know what's coming."
+    },
+    {
+      icon: <Zap className="h-12 w-12 text-[#CDA7B2]" />,
+      title: "Optimize",
+      description: "Streamline communication with human-first scripts that reduce ghosting and get faster replies."
+    },
+    {
+      icon: <Heart className="h-12 w-12 text-[#CDA7B2]" />,
+      title: "Own It",
+      description: "Implement nervous system practices + decision-making tools so you scale without sacrificing yourself."
+    }
+  ];
+
+  const struggles = [
+    "Scrambling to source fabrics last-minute with zero clarity on timelines",
+    "Writing (& rewriting) follow-up emails to factories that never respond",
+    "Missing deadlines, late deliveries, and constant rescheduling",
+    "Focusing on everything except the reason they started",
+    "Guessing at pricing, unsure if you're actually making a profit",
+    "Spending more time managing chaos than designing your collection"
+  ];
+
+  const solutions = [
+    "Working from a finalized sourcing list with vetted sustainable suppliers and materials",
+    "Using plug-and-play email scripts to get factory replies fast (no more ghosting)",
+    "Following a mapped-out production calendar that runs from sampling to delivery",
+    "Making confident pricing decisions with costing sheets that show your margins, line by line",
+    "Reclaiming 10+ hours a week to design, create, and actually breathe — without burning out",
+    "Designing from a place of flow while your systems work for you"
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
-      {/* Hero Section - Oceo Luxe Theme */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#3B3937] via-[#4A4745] to-[#3B3937]">
-        {/* Decorative elements */}
-        <div className="absolute top-20 left-10 text-6xl text-[#CDA7B2]/10 font-mono">&lt;/&gt;</div>
-        <div className="absolute top-40 right-20 text-6xl text-[#CDA7B2]/10 font-mono">&#123;&#125;</div>
-        <div className="absolute bottom-20 left-1/4 text-6xl text-[#CDA7B2]/10 font-mono">( )</div>
 
-        {/* Colored blur effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#CDA7B2]/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#967F71]/20 rounded-full blur-3xl"></div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Unlock Your Voice.<br />
-              Build Your App.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#CDA7B2] to-[#E8D4DB]">
-                Grow Your Digital Business.
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto">
-              Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches Ready to Scale while Maintaining Their Freedom.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="#services">
-                <Button size="lg" className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white text-lg px-8 py-6">
-                  Explore Services
-                  <ArrowRight className="ml-2 w-5 h-5" />
+      {/* Hero Section - Split Layout */}
+      <section className="bg-[#f5f0ea]">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Content */}
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
+                  The Membership That Gives Designers <span className="italic">& Visionaries</span>{' '}
+                  <span className="text-[#CDA7B2]">Structure as Support</span>
+                </h1>
+                <p className="text-xl text-[#967F71] font-light leading-relaxed">
+                  Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
+                </p>
+              </div>
+              <Link href="/apply/entrepreneur-circle">
+                <Button
+                  size="lg"
+                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
+                >
+                  Join Now for $39/month
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <Link href="/blog">
-                <Button variant="outline" size="lg" className="border-[#CDA7B2] text-[#CDA7B2] hover:bg-[#CDA7B2]/10 text-lg px-8 py-6">
-                  Read the Blog
-                </Button>
-              </Link>
+              <p className="text-sm text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
+            </div>
+            {/* Right: Image */}
+            <div className="relative">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="/images/hero-workspace.jpg"
+                  alt="Fashion design workspace with mood boards"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Value Proposition */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Tagline Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-2xl md:text-3xl font-serif font-light text-[#3B3937] leading-relaxed">
+            ✨ Where clarity meets calm in modern fashion production
+          </p>
+        </div>
+      </section>
+
+      {/* Problem Section */}
+      <section className="py-16 bg-[#faf8f5]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            {/* Image */}
+            <div className="order-2 lg:order-1">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="/images/sewing-machine.png"
+                  alt="Hands working on sewing machine"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            {/* Content */}
+            <div className="order-1 lg:order-2 space-y-10">
+              <div>
+                <p className="text-xl text-[#967F71] mb-6 font-light italic">In my 12 years of working in the fashion industry...</p>
+                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
+                  I've seen fashion designers fall into the trap of...
+                </h2>
+              </div>
+              <div className="space-y-4">
+                {struggles.slice(0, 4).map((struggle, index) => (
+                  <div key={index} className="flex items-start gap-4 bg-white p-5 rounded-lg border border-[#967F71]/10 shadow-sm">
+                    <X className="h-5 w-5 text-red-400 flex-shrink-0 mt-1" />
+                    <span className="text-[#3B3937] font-light leading-relaxed">{struggle}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Where Strategy Meets Soul
+            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-4 leading-tight">
+              When really you should be...
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Where execution meets alignment. Helping ambitious professionals move from ideation to implementation.
-            </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
-                <Sparkles className="w-8 h-8 text-[#CDA7B2]" />
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {solutions.map((solution, index) => (
+              <div key={index} className="flex items-start gap-4 bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/5 p-8 rounded-xl border border-[#CDA7B2]/20 shadow-sm hover:shadow-md transition-shadow">
+                <Check className="h-6 w-6 text-[#CDA7B2] flex-shrink-0 mt-1" />
+                <span className="text-[#3B3937] font-light leading-relaxed text-lg">{solution}</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Clarity + Positioning</h3>
-              <p className="text-gray-600">Define your offering and align with your ideal audience</p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
-                <Users className="w-8 h-8 text-[#CDA7B2]" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Content + Visibility</h3>
-              <p className="text-gray-600">Build consistent credibility-generating content systems</p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
-                <Zap className="w-8 h-8 text-[#CDA7B2]" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Digital Infrastructure</h3>
-              <p className="text-gray-600">Develop lead capture and automation systems</p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
-                <Code className="w-8 h-8 text-[#CDA7B2]" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">App Design & Development</h3>
-              <p className="text-gray-600">Build sustainable, profitable web and mobile solutions</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">About Patrick</h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p>
-                  Senior software engineer with two degrees in Electrical Engineering from Virginia Tech.
-                  Transitioned from corporate software engineering in NYC to founding tech ventures and coaching
-                  entrepreneurs around the world.
-                </p>
-                <p>
-                  I've hosted international retreats, built an 800+ entrepreneur community, and developed the
-                  Gravity Web Framework and Gravity OS. Yoga Alliance-certified instructor and Mindvalley-certified
-                  life coach.
-                </p>
-                <p className="font-semibold text-gray-900">
-                  I help founders and entrepreneurs convert their expertise into revenue-generating offerings,
-                  leverage AI and automation for intelligent scaling, and build sustainable digital businesses.
-                </p>
-              </div>
+      {/* The Oceo Method - Full Width Image Background */}
+      <section className="relative py-32 overflow-hidden">
+        {/* Background with Overlay */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/95 to-white/95"></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <div className="inline-block bg-[#CDA7B2]/10 px-8 py-3 rounded-full mb-8">
+              <span className="text-[#CDA7B2] font-medium text-lg">The Signature Framework</span>
             </div>
+            <h2 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
+              The Oceo Method™
+            </h2>
+            <p className="text-2xl text-[#967F71] max-w-3xl mx-auto leading-relaxed font-light">
+              A calm, connected approach to production — for fashion founders and visionaries who value both structure and sanity.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-10 mb-16">
+            {oceoMethodSteps.map((step, index) => (
+              <Card key={index} className="border-none bg-white shadow-xl hover:shadow-2xl transition-shadow">
+                <CardContent className="pt-12 pb-10 text-center">
+                  <div className="flex justify-center mb-8">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6 tracking-wide">
+                    {step.title}
+                  </h3>
+                  <p className="text-[#967F71] leading-relaxed font-light text-lg">
+                    {step.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center max-w-4xl mx-auto">
+            <p className="text-xl text-[#3B3937]/90 leading-relaxed italic font-light">
+              If you're someone who is looking to bring more clarity to your processes, connection to your creative and operational flow, and capacity to scale your vision without burning out, this membership was built for you.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Luxury Pricing Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
+            A Luxury-Level Membership<br />for the Price of Coffee & Croissant
+          </h2>
+          <div className="my-8">
+            <p className="text-[#967F71] line-through text-lg mb-2 font-light">Final Price: $80/month</p>
+            <div className="text-6xl font-serif font-light text-[#3B3937] mb-2">
+              $39<span className="text-3xl text-[#967F71]">/month</span>
+            </div>
+            <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
+            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Limited Time: $39/month for the first 20 members only</p>
+          </div>
+          <Link href="/apply/entrepreneur-circle">
+            <Button
+              size="lg"
+              className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light mt-8"
+            >
+              Yes, I'm In — Join Now
+            </Button>
+          </Link>
+          <p className="text-sm text-[#967F71] mt-6 font-light">
+            No thanks, I'll figure it out on my own
+          </p>
+        </div>
+      </section>
+
+      {/* Inspiration Quote with Image */}
+      <section className="relative py-32 overflow-hidden bg-[#faf8f5]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
+              <blockquote className="text-3xl md:text-4xl font-serif font-light text-[#3B3937] leading-relaxed italic">
+                "You didn't become a designer to chase deadlines or question your worth. You became one to create — to bring beauty and meaning into the world."
+              </blockquote>
+              <p className="text-lg text-[#967F71] mt-8 font-light">
+                — Studio Systems by Oceo Luxe
+              </p>
+            </div>
+            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/patrick_budapest1.jpg"
-                alt="Patrick Farrell"
-                className="w-full aspect-square object-cover rounded-2xl shadow-2xl"
+                src="/images/runway.png"
+                alt="Fashion runway show"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section id="services" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">How I Can Help</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Choose the right support for your stage of growth
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* AI & Automation Consulting */}
-            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
-              <div className="text-4xl mb-4">🚀</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                AI & Automation Consulting
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Leverage AI and digital systems to streamline operations, reduce manual work, and multiply impact.
-                Build once, scale forever.
-              </p>
-              <Link href="/services#ai-consulting">
-                <Button className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2]">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
-
-            {/* 1:1 Tech Coaching */}
-            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-[#CDA7B2]">
-              <div className="text-4xl mb-4">🔥</div>
-              <div className="inline-block px-3 py-1 bg-[#CDA7B2]/10 text-[#CDA7B2] text-xs font-semibold rounded-full mb-4">
-                MOST POPULAR
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                1:1 Tech Coaching
-              </h3>
-              <p className="text-gray-600 mb-6">
-                High-touch experience for founders ready to create aligned and profitable online businesses.
-                Clarity. Confidence. Clients.
-              </p>
-              <Link href="/apply/coaching">
-                <Button className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2]">
-                  Apply Now
-                </Button>
-              </Link>
-            </div>
-
-            {/* Entrepreneur Circle */}
-            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
-              <div className="text-4xl mb-4">🌍</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Entrepreneur Circle
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Year-long mastermind for purpose-driven entrepreneurs. Grow together. Lead with clarity.
-                Scale on your terms.
-              </p>
-              <Link href="/apply/entrepreneur-circle">
-                <Button className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2]">
-                  Join the Circle
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href="/services">
-              <Button variant="outline" size="lg" className="border-gray-300">
-                View All Services
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section - Oceo Luxe Theme */}
-      <section className="py-20 bg-gradient-to-br from-[#3B3937] to-[#4A4745]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Build Your Digital Business?
+      {/* Final CTA */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
+            Ready to Reclaim Your Time<br />and Creative Flow?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Book a free alignment call and let's build a game plan together
+          <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
+            Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
+            monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={links.discovery_call?.url || '/services'}>
-              <Button size="lg" className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white text-lg px-8 py-6">
-                {links.discovery_call?.label || 'Book a Discovery Call'}
-              </Button>
-            </Link>
-            <Link href="/blog">
-              <Button variant="outline" size="lg" className="border-[#CDA7B2] text-[#CDA7B2] hover:bg-[#CDA7B2]/10 text-lg px-8 py-6">
-                Read the Blog
-              </Button>
-            </Link>
-          </div>
+          <Link href="/apply/entrepreneur-circle">
+            <Button
+              size="lg"
+              className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group"
+            >
+              Join as Founding Member
+              <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+          <p className="text-lg text-[#967F71] mt-8 font-light">
+            $39/month for the first 20 members • After that, price increases to $59/month
+          </p>
         </div>
       </section>
 
