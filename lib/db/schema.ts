@@ -235,7 +235,9 @@ export const mmfcSchedulingLinks = pgTable('mmfc_scheduling_links', {
   syncedAt: timestamp('synced_at').notNull().defaultNow(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
-});
+}, (table) => ({
+  uniqueApiKeyExternal: unique('mmfc_scheduling_links_api_key_id_external_id_key').on(table.apiKeyId, table.externalId),
+}));
 
 export const mmfcServices = pgTable('mmfc_services', {
   id: serial('id').primaryKey(),
