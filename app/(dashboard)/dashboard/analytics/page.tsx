@@ -217,18 +217,36 @@ export default function AnalyticsPage() {
       <Card className="dashboard-card border-0 mb-6">
         <CardHeader className="border-b border-gray-100 pb-3">
           <CardTitle className="text-xl font-semibold text-gray-900">
-            Implementation Status
+            Implementation Instructions
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-4">
           <div className="space-y-4">
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+              <h4 className="font-semibold text-amber-900 mb-2">📝 Required Setup</h4>
+              <p className="text-sm text-amber-800 mb-3">
+                To enable analytics tracking on your site, you need to set environment variables:
+              </p>
+              <div className="bg-white/50 rounded border border-amber-300 p-3 mb-3">
+                <code className="text-xs font-mono text-gray-800 block space-y-1">
+                  <div>NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX</div>
+                  <div>NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX</div>
+                </code>
+              </div>
+              <ul className="text-sm text-amber-800 space-y-1 list-disc list-inside">
+                <li>Add these to your <code className="bg-amber-100 px-1 rounded">.env.local</code> file for local development</li>
+                <li>Add them to your hosting platform (Vercel, etc.) for production</li>
+                <li>After adding, restart your dev server or redeploy your site</li>
+              </ul>
+            </div>
+
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <h4 className="font-semibold text-blue-900 mb-2">How It Works</h4>
               <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-                <li>Save your tracking IDs above to store them in your database</li>
-                <li>The tracking scripts will be automatically added to your site's {`<head>`}</li>
-                <li>Analytics will start collecting data once the IDs are configured</li>
-                <li>You can view your analytics data in the respective dashboards</li>
+                <li>The database stores your tracking IDs for reference</li>
+                <li>Environment variables are used to inject tracking scripts</li>
+                <li>Analytics scripts are loaded client-side after page hydration</li>
+                <li>This approach ensures static page generation works correctly</li>
               </ul>
             </div>
 
