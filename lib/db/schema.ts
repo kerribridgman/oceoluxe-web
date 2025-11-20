@@ -8,6 +8,7 @@ import {
   boolean,
   jsonb,
   decimal,
+  unique,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
@@ -253,7 +254,9 @@ export const mmfcServices = pgTable('mmfc_services', {
   syncedAt: timestamp('synced_at').notNull().defaultNow(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
-});
+}, (table) => ({
+  uniqueApiKeyExternal: unique('mmfc_services_api_key_id_external_id_key').on(table.apiKeyId, table.externalId),
+}));
 
 export const analyticsSettings = pgTable('analytics_settings', {
   id: serial('id').primaryKey(),
