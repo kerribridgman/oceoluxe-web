@@ -41,19 +41,15 @@ export function MarketingHeader() {
   ];
 
   return (
-    <header className="bg-gradient-to-r from-[#1a2332] via-[#1e2838] to-[#243442] border-b border-[#2a3342]/50 sticky top-0 z-50 shadow-lg">
+    <header className="bg-[#faf8f5] border-b border-[#967F71]/10 sticky top-0 z-50 shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.png"
-              alt="Patrick Farrell"
-              width={220}
-              height={40}
-              className="h-8 w-auto"
-              priority
-            />
+            <div>
+              <h1 className="text-xl font-serif font-light text-[#3B3937] tracking-wide">Studio Systems</h1>
+              <p className="text-xs text-[#967F71] italic font-light">by Oceo Luxe</p>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -62,7 +58,7 @@ export function MarketingHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-[#4a9fd8] font-medium transition-colors uppercase text-sm tracking-wider"
+                className="text-[#967F71] hover:text-[#CDA7B2] font-light transition-colors uppercase text-sm tracking-wider"
               >
                 {item.name}
               </Link>
@@ -75,21 +71,21 @@ export function MarketingHeader() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-white" />
+              <X className="h-6 w-6 text-[#3B3937]" />
             ) : (
-              <Menu className="h-6 w-6 text-white" />
+              <Menu className="h-6 w-6 text-[#3B3937]" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-[#2a3342]">
+          <div className="md:hidden py-4 space-y-4 border-t border-[#967F71]/10">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block text-gray-300 hover:text-[#4a9fd8] font-medium py-2 uppercase text-sm tracking-wider"
+                className="block text-[#967F71] hover:text-[#CDA7B2] font-light py-2 uppercase text-sm tracking-wider"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
