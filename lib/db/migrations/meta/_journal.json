@@ -57,6 +57,20 @@
       "when": 1763592557452,
       "tag": "0007_green_blackheart",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1732070100000,
+      "tag": "0010_create_analytics_settings",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1732074400000,
+      "tag": "0011_create_mmfc_scheduling_links",
+      "breakpoints": true
     }
   ]
 }

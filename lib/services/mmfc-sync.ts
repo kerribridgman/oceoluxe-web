@@ -1,5 +1,5 @@
 /**
- * Service for syncing products from Make Money from Coding API
+ * Service for syncing products and scheduling links from Make Money from Coding API
  */
 
 import {
@@ -8,6 +8,10 @@ import {
   upsertMmfcProducts,
   updateSyncStatus,
 } from '../db/queries-mmfc';
+import {
+  upsertSchedulingLinks,
+  type SchedulingLinkData,
+} from '../db/queries-mmfc-scheduling';
 
 interface MmfcProduct {
   id: number;
@@ -163,6 +167,101 @@ export async function syncMmfcProducts(
     return {
       success: false,
       productsCount: 0,
+      error: error.message,
+    };
+  }
+}
+
+/**
+ * Fetch scheduling availability from MMFC API
+ */
+async function fetchMmfcScheduling(
+  apiKey: string,
+  baseUrl: string
+): Promise<{
+  scheduling_links: Array<{
+    id: number;
+    slug: string;
+    title: string;
+    description?: string;
+    duration_minutes: number;
+    booking_url: string;
+    max_advance_booking_days?: number;
+    min_notice_minutes?: number;
+  }>;
+}> {
+  const url = `${baseUrl}/api/v1/scheduling/availability`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+      `MMFC API error: ${response.status} ${response.statusText} - ${errorText}`
+    );
+  }
+
+  return await response.json();
+}
+
+/**
+ * Sync scheduling links for a specific API key
+ */
+export async function syncMmfcScheduling(
+  apiKeyId: number,
+  userId: number
+): Promise<{ success: boolean; linksCount: number; error?: string }> {
+  try {
+    // Get API key details
+    const apiKeyRecord = await getMmfcApiKeyById(apiKeyId, userId);
+    if (!apiKeyRecord) {
+      throw new Error('API key not found');
+    }
+
+    if (!apiKeyRecord.isActive) {
+      throw new Error('API key is inactive');
+    }
+
+    // Get decrypted API key
+    const apiKey = await getDecryptedMmfcApiKey(apiKeyId, userId);
+    if (!apiKey) {
+      throw new Error('Failed to decrypt API key');
+    }
+
+    // Fetch scheduling links
+    const response = await fetchMmfcScheduling(apiKey, apiKeyRecord.baseUrl);
+
+    // Transform scheduling links for database
+    const linksToUpsert: SchedulingLinkData[] = response.scheduling_links.map((link) => ({
+      externalId: link.id,
+      slug: link.slug,
+      title: link.title,
+      description: link.description,
+      durationMinutes: link.duration_minutes,
+      bookingUrl: link.booking_url,
+      maxAdvanceBookingDays: link.max_advance_booking_days,
+      minNoticeMinutes: link.min_notice_minutes,
+    }));
+
+    // Upsert scheduling links to database
+    await upsertSchedulingLinks(apiKeyId, linksToUpsert);
+
+    return {
+      success: true,
+      linksCount: linksToUpsert.length,
+    };
+  } catch (error: any) {
+    console.error('MMFC scheduling sync error:', error);
+
+    return {
+      success: false,
+      linksCount: 0,
       error: error.message,
     };
   }
