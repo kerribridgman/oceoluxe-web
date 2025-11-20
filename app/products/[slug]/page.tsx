@@ -132,6 +132,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
 
+            {/* Description */}
+            {product.description && (
+              <div className="mb-8">
+                <h3 className="font-semibold text-lg mb-3">About This Product</h3>
+                <div className="prose max-w-none text-gray-700 whitespace-pre-wrap">
+                  {product.description}
+                </div>
+              </div>
+            )}
+
             {/* CTA Button */}
             <div className="mb-8">
               <a
@@ -191,16 +201,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 </div>
               </CardContent>
             </Card>
-
-            {/* Description */}
-            {product.description && (
-              <div>
-                <h3 className="font-semibold text-lg mb-3">About This Product</h3>
-                <div className="prose max-w-none text-gray-700 whitespace-pre-wrap">
-                  {product.description}
-                </div>
-              </div>
-            )}
           </div>
         </div>
         </div>
