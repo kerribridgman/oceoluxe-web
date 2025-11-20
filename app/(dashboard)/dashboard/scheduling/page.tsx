@@ -262,7 +262,7 @@ export default function SchedulingPage() {
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {links.map((link) => (
-              <Card key={link.id} className="dashboard-card border-0 hover:shadow-xl transition-shadow duration-300">
+              <Card key={link.id} className="dashboard-card border-0 hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
@@ -275,8 +275,8 @@ export default function SchedulingPage() {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
+                <CardContent className="flex-1 flex flex-col">
+                  <div className="space-y-4 flex-1">
                     {/* Duration */}
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Clock className="w-4 h-4" />
@@ -302,27 +302,27 @@ export default function SchedulingPage() {
                         From: {link.apiKeyName}
                       </div>
                     )}
-
-                    {/* Toggle Button */}
-                    <Button
-                      size="sm"
-                      variant={link.isEnabled ? 'default' : 'outline'}
-                      onClick={() => toggleLinkStatus(link.id, !link.isEnabled)}
-                      className={`w-full ${link.isEnabled ? 'bg-green-600 hover:bg-green-700' : ''}`}
-                    >
-                      {link.isEnabled ? (
-                        <>
-                          <Eye className="w-4 h-4 mr-1" />
-                          Enabled
-                        </>
-                      ) : (
-                        <>
-                          <EyeOff className="w-4 h-4 mr-1" />
-                          Disabled
-                        </>
-                      )}
-                    </Button>
                   </div>
+
+                  {/* Toggle Button - Sticky to bottom */}
+                  <Button
+                    size="sm"
+                    variant={link.isEnabled ? 'default' : 'outline'}
+                    onClick={() => toggleLinkStatus(link.id, !link.isEnabled)}
+                    className={`w-full mt-4 ${link.isEnabled ? 'bg-green-600 hover:bg-green-700' : ''}`}
+                  >
+                    {link.isEnabled ? (
+                      <>
+                        <Eye className="w-4 h-4 mr-1" />
+                        Enabled
+                      </>
+                    ) : (
+                      <>
+                        <EyeOff className="w-4 h-4 mr-1" />
+                        Disabled
+                      </>
+                    )}
+                  </Button>
                 </CardContent>
               </Card>
             ))}

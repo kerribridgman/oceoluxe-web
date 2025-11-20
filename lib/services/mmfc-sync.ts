@@ -238,16 +238,25 @@ export async function syncMmfcScheduling(
     const response = await fetchMmfcScheduling(apiKey, apiKeyRecord.baseUrl);
 
     // Transform scheduling links for database
-    const linksToUpsert: SchedulingLinkData[] = response.scheduling_links.map((link) => ({
-      externalId: link.id,
-      slug: link.slug,
-      title: link.title,
-      description: link.description,
-      durationMinutes: link.duration_minutes,
-      bookingUrl: link.booking_url,
-      maxAdvanceBookingDays: link.max_advance_booking_days,
-      minNoticeMinutes: link.min_notice_minutes,
-    }));
+    const linksToUpsert: SchedulingLinkData[] = response.scheduling_links.map((link) => {
+      // Transform localhost URLs to use the actual MMFC base URL
+      let bookingUrl = link.booking_url;
+      if (bookingUrl.includes('localhost')) {
+        // Replace localhost:port with the actual MMFC base URL
+        bookingUrl = bookingUrl.replace(/https?:\/\/localhost:\d+/, apiKeyRecord.baseUrl);
+      }
+
+      return {
+        externalId: link.id,
+        slug: link.slug,
+        title: link.title,
+        description: link.description,
+        durationMinutes: link.duration_minutes,
+        bookingUrl: bookingUrl,
+        maxAdvanceBookingDays: link.max_advance_booking_days,
+        minNoticeMinutes: link.min_notice_minutes,
+      };
+    });
 
     // Upsert scheduling links to database
     await upsertSchedulingLinks(apiKeyId, linksToUpsert);
