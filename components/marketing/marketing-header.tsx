@@ -3,16 +3,34 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hasProducts, setHasProducts] = useState(false);
+
+  // Check if there are any visible products
+  useEffect(() => {
+    async function checkProducts() {
+      try {
+        const response = await fetch('/api/mmfc-products/public');
+        if (response.ok) {
+          const data = await response.json();
+          setHasProducts(data.products && data.products.length > 0);
+        }
+      } catch (error) {
+        console.error('Error checking products:', error);
+      }
+    }
+    checkProducts();
+  }, []);
 
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
     { name: 'Blog', href: '/blog' },
+    ...(hasProducts ? [{ name: 'Products', href: '/products' }] : []),
   ];
 
   return (
