@@ -47,10 +47,7 @@ export function MarketingHeader() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div>
-              <h1 className="text-xl font-serif font-light text-[#3B3937] tracking-wide">Studio Systems</h1>
-              <p className="text-xs text-[#967F71] italic font-light">by Oceo Luxe</p>
-            </div>
+            <h1 className="text-2xl font-serif font-light text-[#3B3937] tracking-wide">Oceo Luxe</h1>
           </Link>
 
           {/* Desktop Navigation */}

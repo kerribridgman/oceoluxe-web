@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, ArrowRight, Brain, Zap, Target, Calendar, Users, LineChart } from 'lucide-react';
+import { Check, ArrowRight, Layers, Heart, Users } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
@@ -23,19 +23,19 @@ export default async function HomePage() {
 
   const offerings = [
     {
-      icon: <Calendar className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Timeline Tracking",
-      description: "Keep projects on schedule with clarity and confidence"
+      icon: <Layers className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Systems Implementation & Workflow Setup",
+      description: "Notion templates, custom dashboards, and streamlined workflows for fashion businesses and creative founders"
     },
     {
       icon: <Users className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Team Onboarding",
-      description: "Streamlined systems to bring team members up to speed"
+      title: "Visionary Support & Business Evolution",
+      description: "Executive support, personalized EA placement, and systems that protect your energy while scaling your vision"
     },
     {
-      icon: <LineChart className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Schedule Clarity",
-      description: "Professional systems used with creative brands and startups"
+      icon: <Heart className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Elevate Your Style Journey",
+      description: "Personalized style analysis, wardrobe audits, and styling plans that align your appearance with your professional evolution"
     }
   ];
 
@@ -50,9 +50,6 @@ export default async function HomePage() {
             {/* Left: Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-4">
-                  <span className="text-[#CDA7B2] font-medium">Oceo Luxe Studio Systems</span>
-                </div>
                 <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
                   Proven systems for <span className="text-[#CDA7B2]">visionaries and executives</span> — now optimized for your next chapter.
                 </h1>
@@ -132,17 +129,26 @@ export default async function HomePage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6">
-                  AI-Powered Automation
+                  Notion Templates & Digital Products
                 </h3>
-                <p className="text-[#967F71] leading-relaxed font-light text-lg">
-                  AI integrations enable automation of administrative planning and communication streamlining, freeing mental space for strategic leadership. Custom solutions are available upon request.
+                <p className="text-[#967F71] leading-relaxed font-light text-lg mb-6">
+                  Ready-to-use templates for fashion entrepreneurs: production calendars, pricing calculators, fabric libraries, and workflow planners. Many available for free to help you get started.
                 </p>
+                <Link href="/products">
+                  <Button
+                    variant="outline"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white"
+                  >
+                    Browse Products
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
               <div className="flex justify-center">
                 <div className="aspect-square w-full max-w-md rounded-xl overflow-hidden shadow-lg relative">
                   <Image
                     src="/images/ai-systems.png"
-                    alt="AI-powered business systems"
+                    alt="Notion templates and digital products"
                     fill
                     className="object-cover"
                     quality={95}
