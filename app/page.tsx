@@ -15,23 +15,23 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <MarketingHeader />
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a2332] via-[#1e2838] to-[#1a2332]">
+      {/* Hero Section - Oceo Luxe Theme */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#3B3937] via-[#4A4745] to-[#3B3937]">
         {/* Decorative elements */}
-        <div className="absolute top-20 left-10 text-6xl text-[#4a9fd8]/10 font-mono">&lt;/&gt;</div>
-        <div className="absolute top-40 right-20 text-6xl text-[#4a9fd8]/10 font-mono">&#123;&#125;</div>
-        <div className="absolute bottom-20 left-1/4 text-6xl text-[#4a9fd8]/10 font-mono">( )</div>
+        <div className="absolute top-20 left-10 text-6xl text-[#CDA7B2]/10 font-mono">&lt;/&gt;</div>
+        <div className="absolute top-40 right-20 text-6xl text-[#CDA7B2]/10 font-mono">&#123;&#125;</div>
+        <div className="absolute bottom-20 left-1/4 text-6xl text-[#CDA7B2]/10 font-mono">( )</div>
 
         {/* Colored blur effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#CDA7B2]/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#967F71]/20 rounded-full blur-3xl"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
               Unlock Your Voice.<br />
               Build Your App.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4a9fd8] to-[#6bb8f0]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#CDA7B2] to-[#E8D4DB]">
                 Grow Your Digital Business.
               </span>
             </h1>
@@ -40,13 +40,13 @@ export default async function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="#services">
-                <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg px-8 py-6">
+                <Button size="lg" className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white text-lg px-8 py-6">
                   Explore Services
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link href="/blog">
-                <Button variant="outline" size="lg" className="border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8]/10 text-lg px-8 py-6">
+                <Button variant="outline" size="lg" className="border-[#CDA7B2] text-[#CDA7B2] hover:bg-[#CDA7B2]/10 text-lg px-8 py-6">
                   Read the Blog
                 </Button>
               </Link>
@@ -69,32 +69,32 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
-                <Sparkles className="w-8 h-8 text-[#4a9fd8]" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
+                <Sparkles className="w-8 h-8 text-[#CDA7B2]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Clarity + Positioning</h3>
               <p className="text-gray-600">Define your offering and align with your ideal audience</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
-                <Users className="w-8 h-8 text-[#4a9fd8]" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
+                <Users className="w-8 h-8 text-[#CDA7B2]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Content + Visibility</h3>
               <p className="text-gray-600">Build consistent credibility-generating content systems</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
-                <Zap className="w-8 h-8 text-[#4a9fd8]" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
+                <Zap className="w-8 h-8 text-[#CDA7B2]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Digital Infrastructure</h3>
               <p className="text-gray-600">Develop lead capture and automation systems</p>
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#4a9fd8]/10 rounded-full mb-4">
-                <Code className="w-8 h-8 text-[#4a9fd8]" />
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#CDA7B2]/10 rounded-full mb-4">
+                <Code className="w-8 h-8 text-[#CDA7B2]" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">App Design & Development</h3>
               <p className="text-gray-600">Build sustainable, profitable web and mobile solutions</p>
@@ -159,16 +159,16 @@ export default async function HomePage() {
                 Build once, scale forever.
               </p>
               <Link href="/services#ai-consulting">
-                <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
+                <Button className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2]">
                   Learn More
                 </Button>
               </Link>
             </div>
 
             {/* 1:1 Tech Coaching */}
-            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-[#4a9fd8]">
+            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-[#CDA7B2]">
               <div className="text-4xl mb-4">🔥</div>
-              <div className="inline-block px-3 py-1 bg-[#4a9fd8]/10 text-[#4a9fd8] text-xs font-semibold rounded-full mb-4">
+              <div className="inline-block px-3 py-1 bg-[#CDA7B2]/10 text-[#CDA7B2] text-xs font-semibold rounded-full mb-4">
                 MOST POPULAR
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -179,7 +179,7 @@ export default async function HomePage() {
                 Clarity. Confidence. Clients.
               </p>
               <Link href="/apply/coaching">
-                <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
+                <Button className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2]">
                   Apply Now
                 </Button>
               </Link>
@@ -196,7 +196,7 @@ export default async function HomePage() {
                 Scale on your terms.
               </p>
               <Link href="/apply/entrepreneur-circle">
-                <Button className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8]">
+                <Button className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2]">
                   Join the Circle
                 </Button>
               </Link>
@@ -214,8 +214,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#1a2332] to-[#1e2838]">
+      {/* CTA Section - Oceo Luxe Theme */}
+      <section className="py-20 bg-gradient-to-br from-[#3B3937] to-[#4A4745]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Build Your Digital Business?
@@ -225,12 +225,12 @@ export default async function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href={links.discovery_call?.url || '/services'}>
-              <Button size="lg" className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg px-8 py-6">
+              <Button size="lg" className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white text-lg px-8 py-6">
                 {links.discovery_call?.label || 'Book a Discovery Call'}
               </Button>
             </Link>
             <Link href="/blog">
-              <Button variant="outline" size="lg" className="border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8]/10 text-lg px-8 py-6">
+              <Button variant="outline" size="lg" className="border-[#CDA7B2] text-[#CDA7B2] hover:bg-[#CDA7B2]/10 text-lg px-8 py-6">
                 Read the Blog
               </Button>
             </Link>

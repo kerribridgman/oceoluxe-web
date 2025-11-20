@@ -2,7 +2,7 @@
 
 # Default target - show help
 help:
-	@echo "iampatrickfarrell.com - Docker Management"
+	@echo "oceoluxe.com - Docker Management"
 	@echo ""
 	@echo "Available commands:"
 	@echo "  make build       - Build the Docker image for the application"
@@ -47,7 +47,7 @@ db-up:
 	@echo ""
 	@echo "For local development:"
 	@echo "  1. Update your local .env to use localhost URLs:"
-	@echo "     POSTGRES_URL=postgresql://postgres:postgres@localhost:54322/iampatrickfarrell"
+	@echo "     POSTGRES_URL=postgresql://postgres:postgres@localhost:54322/oceoluxe"
 	@echo "  2. Run 'npm run dev' to start the Next.js app locally"
 	@echo "  3. Run 'npm run db:migrate' to apply migrations"
 	@echo ""
@@ -58,7 +58,7 @@ app-dev:
 	@echo "Starting app container with logs..."
 	@echo "⚠️  Note: PostgreSQL must already be running!"
 	@echo ""
-	@if ! docker ps --format '{{.Names}}' | grep -q 'iampatrickfarrell_postgres'; then \
+	@if ! docker ps --format '{{.Names}}' | grep -q 'oceoluxe_postgres'; then \
 		echo "❌ Error: PostgreSQL container is not running"; \
 		echo "   Run 'make db-up' first to start the database"; \
 		exit 1; \
@@ -75,7 +75,7 @@ app-up:
 	@echo "Starting app container in detached mode..."
 	@echo "⚠️  Note: PostgreSQL must already be running!"
 	@echo ""
-	@if ! docker ps --format '{{.Names}}' | grep -q 'iampatrickfarrell_postgres'; then \
+	@if ! docker ps --format '{{.Names}}' | grep -q 'oceoluxe_postgres'; then \
 		echo "❌ Error: PostgreSQL container is not running"; \
 		echo "   Run 'make db-up' first to start the database"; \
 		exit 1; \
@@ -181,7 +181,7 @@ shell:
 # Open PostgreSQL shell
 db-shell:
 	@echo "Opening PostgreSQL shell..."
-	docker-compose exec postgres psql -U postgres -d iampatrickfarrell
+	docker-compose exec postgres psql -U postgres -d oceoluxe
 
 # Build and start everything (fresh setup)
 setup: build up

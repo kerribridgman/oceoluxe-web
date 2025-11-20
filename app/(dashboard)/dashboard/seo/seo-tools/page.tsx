@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink, CheckCircle2, FileCode, Search } from 'lucide-react';
 
 export default function SeoToolsPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
 
   const tools = [
     {

@@ -1,6 +1,6 @@
 -- Migration: 0000_initial_schema
 -- Created: 2025-11-20
--- Description: Initial schema with all 15 tables for iampatrickfarrell application
+-- Description: Initial schema with all 15 tables for oceoluxe application
 -- This migration creates the complete database schema including:
 -- - User authentication and team management
 -- - Blog and SEO management

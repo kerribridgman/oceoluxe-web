@@ -23,7 +23,7 @@ npm install
 
 ### 2. Get Your API Key
 
-1. Visit https://iampatrickfarrell.com/dashboard/mcp
+1. Visit https://oceoluxe.com/dashboard/mcp
 2. Sign in to your account
 3. Click "Create API Key"
 4. Give it a name (e.g., "Claude Desktop")
@@ -39,12 +39,12 @@ Add to your Claude Desktop configuration file:
 ```json
 {
   "mcpServers": {
-    "iampatrickfarrell-blog": {
+    "oceoluxe-blog": {
       "command": "node",
       "args": ["/ABSOLUTE/PATH/TO/mcp-server/index.js"],
       "env": {
         "MCP_API_KEY": "mcp_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "API_BASE_URL": "https://iampatrickfarrell.com"
+        "API_BASE_URL": "https://oceoluxe.com"
       }
     }
   }
@@ -159,7 +159,7 @@ npm run dev
 ## Support
 
 For issues or questions:
-- Dashboard: https://iampatrickfarrell.com/dashboard
+- Dashboard: https://oceoluxe.com/dashboard
 - GitHub Issues: [Report an issue]
 
 ## License

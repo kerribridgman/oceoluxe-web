@@ -1,11 +1,11 @@
 {
   "mcpServers": {
-    "iampatrickfarrell-blog": {
+    "oceoluxe-blog": {
       "command": "node",
-      "args": ["/ABSOLUTE/PATH/TO/iampatrickfarrell/mcp-server/index.js"],
+      "args": ["/ABSOLUTE/PATH/TO/oceoluxe/mcp-server/index.js"],
       "env": {
         "MCP_API_KEY": "mcp_live_your_api_key_here",
-        "API_BASE_URL": "https://iampatrickfarrell.com"
+        "API_BASE_URL": "https://oceoluxe.com"
       }
     }
   }

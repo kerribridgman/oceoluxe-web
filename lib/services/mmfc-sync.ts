@@ -57,7 +57,7 @@ async function fetchMmfcProducts(
   page: number = 1
 ): Promise<MmfcApiResponse> {
   // Include referral parameter so MMFC API returns checkout URLs with tracking
-  const url = `${baseUrl}/api/v1/products?page=${page}&limit=100&ref=iampatrickfarrell`;
+  const url = `${baseUrl}/api/v1/products?page=${page}&limit=100&ref=oceoluxe`;
 
   const response = await fetch(url, {
     method: 'GET',
@@ -125,7 +125,7 @@ export async function syncMmfcProducts(
       // Use checkout_url from API if available, otherwise construct it
       // The MMFC API now provides checkout_url with referral tracking built-in
       const checkoutUrl = product.checkout_url ||
-        `${apiKeyRecord.baseUrl}/store/patrick/${product.slug}?ref=iampatrickfarrell`;
+        `${apiKeyRecord.baseUrl}/store/patrick/${product.slug}?ref=oceoluxe`;
 
       return {
         externalId: product.id,

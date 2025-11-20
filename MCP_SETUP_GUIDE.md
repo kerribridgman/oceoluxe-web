@@ -67,9 +67,9 @@ Your blog now has full Model Context Protocol (MCP) integration! This allows you
    ```json
    {
      "mcpServers": {
-       "iampatrickfarrell-blog": {
+       "oceoluxe-blog": {
          "command": "node",
-         "args": ["/Users/pfarrell/projects/vercel/iampatrickfarrell/mcp-server/index.js"],
+         "args": ["/Users/pfarrell/projects/vercel/oceoluxe/mcp-server/index.js"],
          "env": {
            "MCP_API_KEY": "mcp_live_your_actual_key_here",
            "API_BASE_URL": "http://localhost:3000"
@@ -158,12 +158,12 @@ When deploying to production:
    ```json
    {
      "mcpServers": {
-       "iampatrickfarrell-blog-prod": {
+       "oceoluxe-blog-prod": {
          "command": "node",
-         "args": ["/Users/pfarrell/projects/vercel/iampatrickfarrell/mcp-server/index.js"],
+         "args": ["/Users/pfarrell/projects/vercel/oceoluxe/mcp-server/index.js"],
          "env": {
            "MCP_API_KEY": "mcp_live_production_key",
-           "API_BASE_URL": "https://iampatrickfarrell.com"
+           "API_BASE_URL": "https://oceoluxe.com"
          }
        }
      }

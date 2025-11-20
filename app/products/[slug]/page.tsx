@@ -60,7 +60,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   ];
 
   // Build checkout URL with return_url pointing back to this product page
-  const currentProductUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com'}/products/${slug}`;
+  const currentProductUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com'}/products/${slug}`;
   let checkoutUrl = product.checkoutUrl || '#';
 
   // Add return_url parameter if we have a valid checkout URL

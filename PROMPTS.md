@@ -1,7 +1,7 @@
 
 you have access in this project to a Next.js project that is connected to postgres. We are going to use
   it to build a simple website with a blog for now. This is going to build my personal website
-  "iampatrickfarrell.com" You are going to rebuild the home page with information from my current website
+  "oceoluxe.com" You are going to rebuild the home page with information from my current website
   https://patrickfarrell.life and I want you to also build a blog feature for this site based on the blog
   engine in the make-money-from-coding admin blog, you have access to this code base as a separate folder
   right now, pull that admin blog into this system. Also create a services page based on
@@ -9,7 +9,7 @@ you have access in this project to a Next.js project that is connected to postgr
   you have anymore questions please let me know before you build 
 
 
-Implementation Plan: iampatrickfarrell.com
+Implementation Plan: oceoluxe.com
 
      Phase 1: Database Schema & Setup
 

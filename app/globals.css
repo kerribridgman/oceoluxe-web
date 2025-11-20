@@ -16,21 +16,22 @@
 */
 
 :root {
-  /* Brand Color Palette */
-  --brand-blue: #4a9fd8;
-  --brand-blue-hover: #3a8fc8;
-  --brand-blue-light: #e8f4fb;
-  --brand-navy: #1a2332;
-  --brand-navy-medium: #1e2838;
-  --brand-navy-light: #2a3342;
+  /* Oceo Luxe Brand Color Palette */
+  --brand-charcoal: #3B3937;
+  --brand-taupe: #967F71;
+  --brand-taupe-light: #B19A8C;
+  --brand-cream: #F4F4F4;
+  --brand-rose: #CDA7B2;
+  --brand-rose-hover: #BD97A2;
+  --brand-rose-light: #E8D4DB;
 
   /* Semantic Brand Colors */
-  --color-brand-primary: var(--brand-blue);
-  --color-brand-primary-hover: var(--brand-blue-hover);
-  --color-brand-primary-light: var(--brand-blue-light);
-  --color-brand-background: var(--brand-navy);
-  --color-brand-background-medium: var(--brand-navy-medium);
-  --color-brand-border: var(--brand-navy-light);
+  --color-brand-primary: var(--brand-rose);
+  --color-brand-primary-hover: var(--brand-rose-hover);
+  --color-brand-primary-light: var(--brand-rose-light);
+  --color-brand-background: var(--brand-charcoal);
+  --color-brand-background-medium: #4A4745;
+  --color-brand-border: #5A5755;
 
   /* Status Colors */
   --color-success: #10b981;
@@ -58,47 +59,47 @@
   --font-family-primary: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
 
-  /* Base Tailwind Variables (for compatibility) */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  /* Base Tailwind Variables - Oceo Luxe Theme */
+  --background: 0 0% 96%; /* cream #F4F4F4 */
+  --foreground: 15 3% 22%; /* charcoal #3B3937 */
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 15 3% 22%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  --popover-foreground: 15 3% 22%;
+  --primary: 15 3% 22%; /* charcoal #3B3937 */
+  --primary-foreground: 0 0% 96%;
+  --secondary: 21 18% 52%; /* taupe #967F71 */
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 21 18% 40%;
+  --accent: 344 30% 73%; /* dusty rose #CDA7B2 */
+  --accent-foreground: 15 3% 22%;
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
-  --chart-1: 12 76% 61%;
-  --chart-2: 173 58% 39%;
-  --chart-3: 197 37% 24%;
-  --chart-4: 43 74% 66%;
-  --chart-5: 27 87% 67%;
-  --radius: 0.5rem;
-  --sidebar-background: 0 0% 98%;
-  --sidebar-foreground: 240 5.3% 26.1%;
-  --sidebar-primary: 240 5.9% 10%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 21 18% 85%;
+  --input: 21 18% 90%;
+  --ring: 344 30% 73%;
+  --chart-1: 344 30% 73%;
+  --chart-2: 21 18% 52%;
+  --chart-3: 15 3% 22%;
+  --chart-4: 21 18% 65%;
+  --chart-5: 344 30% 60%;
+  --radius: 0.75rem; /* slightly more rounded for luxury feel */
+  --sidebar-background: 15 3% 22%; /* charcoal #3B3937 */
+  --sidebar-foreground: 0 0% 96%;
+  --sidebar-primary: 344 30% 73%; /* dusty rose accent */
+  --sidebar-primary-foreground: 15 3% 22%;
+  --sidebar-accent: 21 18% 52%; /* taupe */
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 15 3% 30%;
+  --sidebar-ring: 344 30% 73%;
 }
 
 .dark {
-  --brand-blue: #4a9fd8;
-  --brand-blue-hover: #5aafea;
-  --brand-navy: #0f1419;
-  --brand-navy-medium: #1a1f26;
+  --brand-rose: #CDA7B2;
+  --brand-rose-hover: #DD B7C2;
+  --brand-charcoal: #1F1D1C;
+  --brand-charcoal-medium: #2A2725;
 
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
@@ -175,13 +176,14 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  /* Extended Tailwind Colors with Brand Colors */
-  --color-brand-blue: var(--brand-blue);
-  --color-brand-blue-hover: var(--brand-blue-hover);
-  --color-brand-blue-light: var(--brand-blue-light);
-  --color-brand-navy: var(--brand-navy);
-  --color-brand-navy-medium: var(--brand-navy-medium);
-  --color-brand-navy-light: var(--brand-navy-light);
+  /* Extended Tailwind Colors with Oceo Luxe Brand Colors */
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-taupe: var(--brand-taupe);
+  --color-brand-taupe-light: var(--brand-taupe-light);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-rose: var(--brand-rose);
+  --color-brand-rose-hover: var(--brand-rose-hover);
+  --color-brand-rose-light: var(--brand-rose-light);
 }
 
 @theme inline {
@@ -237,157 +239,169 @@
     font-family: var(--font-family-primary);
   }
 
-  /* Text selection highlighting */
+  /* Text selection highlighting - Oceo Luxe Rose */
   ::selection {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-rose);
     color: white;
   }
 
   ::-moz-selection {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-rose);
     color: white;
   }
 
   /* Ensure selection is visible in inputs and textareas */
   input::selection,
   textarea::selection {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-rose);
     color: white;
   }
 
   input::-moz-selection,
   textarea::-moz-selection {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-rose);
     color: white;
   }
 }
 
 /* ===================================
-   BRAND UTILITY CLASSES
+   BRAND UTILITY CLASSES - OCEO LUXE
    ===================================
 
    Use these classes instead of hardcoded colors
    Examples:
-   - bg-brand-primary instead of bg-[#4a9fd8]
-   - text-brand-navy instead of text-[#1a2332]
+   - bg-brand-primary instead of bg-[#CDA7B2]
+   - text-brand-charcoal instead of text-[#3B3937]
 */
 
 @layer utilities {
   /* Background Colors */
   .bg-brand-primary {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-rose);
   }
 
   .bg-brand-primary-hover {
-    background-color: var(--brand-blue-hover);
+    background-color: var(--brand-rose-hover);
   }
 
   .bg-brand-primary-light {
-    background-color: var(--brand-blue-light);
+    background-color: var(--brand-rose-light);
   }
 
-  .bg-brand-navy {
-    background-color: var(--brand-navy);
+  .bg-brand-charcoal {
+    background-color: var(--brand-charcoal);
   }
 
-  .bg-brand-navy-medium {
-    background-color: var(--brand-navy-medium);
+  .bg-brand-taupe {
+    background-color: var(--brand-taupe);
+  }
+
+  .bg-brand-cream {
+    background-color: var(--brand-cream);
   }
 
   /* Hover States */
   .hover\:bg-brand-primary:hover {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-rose);
   }
 
   .hover\:bg-brand-primary-hover:hover {
-    background-color: var(--brand-blue-hover);
+    background-color: var(--brand-rose-hover);
   }
 
   /* Text Colors */
   .text-brand-primary {
-    color: var(--brand-blue);
+    color: var(--brand-rose);
   }
 
   .text-brand-primary-hover {
-    color: var(--brand-blue-hover);
+    color: var(--brand-rose-hover);
   }
 
-  .text-brand-navy {
-    color: var(--brand-navy);
+  .text-brand-charcoal {
+    color: var(--brand-charcoal);
+  }
+
+  .text-brand-taupe {
+    color: var(--brand-taupe);
   }
 
   /* Hover Text Colors */
   .hover\:text-brand-primary:hover {
-    color: var(--brand-blue);
+    color: var(--brand-rose);
   }
 
   .hover\:text-brand-primary-hover:hover {
-    color: var(--brand-blue-hover);
+    color: var(--brand-rose-hover);
   }
 
   /* Border Colors */
   .border-brand-primary {
-    border-color: var(--brand-blue);
+    border-color: var(--brand-rose);
   }
 
-  .border-brand-navy {
-    border-color: var(--brand-navy);
+  .border-brand-charcoal {
+    border-color: var(--brand-charcoal);
   }
 
-  .border-brand-navy-light {
-    border-color: var(--brand-navy-light);
+  .border-brand-taupe {
+    border-color: var(--brand-taupe);
   }
 
   /* Hover Border Colors */
   .hover\:border-brand-primary:hover {
-    border-color: var(--brand-blue);
+    border-color: var(--brand-rose);
   }
 
   /* Focus Ring Colors */
   .focus\:ring-brand-primary:focus {
-    --tw-ring-color: var(--brand-blue);
+    --tw-ring-color: var(--brand-rose);
   }
 
   .focus\:border-brand-primary:focus {
-    border-color: var(--brand-blue);
+    border-color: var(--brand-rose);
   }
 
   /* Opacity Variants */
   .bg-brand-primary\/10 {
-    background-color: rgb(from var(--brand-blue) r g b / 0.1);
+    background-color: rgb(from var(--brand-rose) r g b / 0.1);
   }
 
   .bg-brand-primary\/20 {
-    background-color: rgb(from var(--brand-blue) r g b / 0.2);
+    background-color: rgb(from var(--brand-rose) r g b / 0.2);
   }
 
   .border-brand-primary\/20 {
-    border-color: rgb(from var(--brand-blue) r g b / 0.2);
+    border-color: rgb(from var(--brand-rose) r g b / 0.2);
   }
 
   .border-brand-primary\/50 {
-    border-color: rgb(from var(--brand-blue) r g b / 0.5);
+    border-color: rgb(from var(--brand-rose) r g b / 0.5);
   }
 
   .text-brand-primary\/10 {
-    color: rgb(from var(--brand-blue) r g b / 0.1);
+    color: rgb(from var(--brand-rose) r g b / 0.1);
   }
 
   .shadow-brand-primary\/10 {
-    --tw-shadow-color: rgb(from var(--brand-blue) r g b / 0.1);
+    --tw-shadow-color: rgb(from var(--brand-rose) r g b / 0.1);
   }
 
-  /* Gradients */
+  /* Gradients - Oceo Luxe Theme */
   .bg-brand-gradient {
-    background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-medium) 50%, var(--brand-navy) 100%);
+    background: linear-gradient(135deg, var(--brand-charcoal) 0%, #4A4745 50%, var(--brand-charcoal) 100%);
   }
 
-  .bg-brand-gradient-navy {
-    background: linear-gradient(to bottom right, var(--brand-navy), var(--brand-navy-medium), var(--brand-navy));
+  .bg-brand-gradient-charcoal {
+    background: linear-gradient(to bottom right, var(--brand-charcoal), #4A4745, var(--brand-charcoal));
   }
 
-  .bg-brand-gradient-blue-navy {
-    background: linear-gradient(to bottom right, var(--brand-blue), var(--brand-navy));
+  .bg-brand-gradient-rose-taupe {
+    background: linear-gradient(to bottom right, var(--brand-rose), var(--brand-taupe));
+  }
+
+  .bg-brand-gradient-cream-rose {
+    background: linear-gradient(135deg, var(--brand-cream) 0%, var(--brand-rose-light) 100%);
   }
 }
 
@@ -399,9 +413,9 @@
 */
 
 @layer components {
-  /* Primary Button */
+  /* Primary Button - Oceo Luxe Rose */
   .btn-brand-primary {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-rose);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 9999px;
@@ -410,25 +424,25 @@
   }
 
   .btn-brand-primary:hover {
-    background-color: var(--brand-blue-hover);
+    background-color: var(--brand-rose-hover);
   }
 
   .btn-brand-primary:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--brand-blue-light), 0 0 0 4px var(--brand-blue);
+    box-shadow: 0 0 0 2px var(--brand-rose-light), 0 0 0 4px var(--brand-rose);
   }
 
   /* Brand Input */
   .input-brand {
-    border-radius: 9999px;
+    border-radius: 0.75rem; /* luxury feel */
     border: 1px solid var(--gray-300);
     padding: 0.5rem 0.75rem;
   }
 
   .input-brand:focus {
     outline: none;
-    border-color: var(--brand-blue);
-    box-shadow: 0 0 0 1px var(--brand-blue);
+    border-color: var(--brand-rose);
+    box-shadow: 0 0 0 1px var(--brand-rose);
   }
 
   /* Brand Card - Professional Dashboard Style */

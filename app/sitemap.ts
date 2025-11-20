@@ -12,7 +12,7 @@ export const revalidate = 3600; // Revalidate every hour
  * Automatically includes all published blog posts and main pages
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
 
   // Fetch all published blog posts with error handling
   let posts: Array<{ slug: string; updatedAt: Date; publishedAt: Date | null }> = [];

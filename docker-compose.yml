@@ -1,9 +1,9 @@
 services:
   postgres:
     image: postgres:16.4-alpine
-    container_name: iampatrickfarrell_postgres
+    container_name: oceoluxe_postgres
     environment:
-      POSTGRES_DB: iampatrickfarrell
+      POSTGRES_DB: oceoluxe
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -11,7 +11,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - iampatrickfarrell_network
+      - oceoluxe_network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: iampatrickfarrell_app
+    container_name: oceoluxe_app
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -35,7 +35,7 @@ services:
       postgres:
         condition: service_healthy
     networks:
-      - iampatrickfarrell_network
+      - oceoluxe_network
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/"]
       interval: 30s
@@ -47,5 +47,5 @@ volumes:
   postgres_data:
 
 networks:
-  iampatrickfarrell_network:
+  oceoluxe_network:
     driver: bridge

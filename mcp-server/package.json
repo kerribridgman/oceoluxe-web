@@ -1,11 +1,11 @@
 {
-  "name": "@iampatrickfarrell/mcp-server",
+  "name": "@oceoluxe/mcp-server",
   "version": "1.0.0",
   "description": "MCP Server for Patrick Farrell's Blog - AI-powered blog management with Claude Desktop",
   "type": "module",
   "main": "index.js",
   "bin": {
-    "iampatrickfarrell-mcp": "./index.js"
+    "oceoluxe-mcp": "./index.js"
   },
   "files": [
     "index.js",
@@ -22,11 +22,11 @@
     "claude",
     "anthropic",
     "blog",
-    "iampatrickfarrell",
+    "oceoluxe",
     "ai",
     "automation"
   ],
-  "author": "Patrick Farrell <patrick@iampatrickfarrell.com>",
+  "author": "Patrick Farrell <patrick@oceoluxe.com>",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"

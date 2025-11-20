@@ -287,7 +287,7 @@ export default function SeoSettingsPage() {
                   id="canonicalUrl"
                   value={formData.canonicalUrl || ''}
                   onChange={(e) => setFormData({ ...formData, canonicalUrl: e.target.value })}
-                  placeholder="https://iampatrickfarrell.com"
+                  placeholder="https://oceoluxe.com"
                   className="mt-1"
                 />
               </div>

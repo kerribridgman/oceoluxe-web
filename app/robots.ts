@@ -5,7 +5,7 @@ import { MetadataRoute } from 'next';
  * Follows SEO best practices for crawling and indexing
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
 
   return {
     rules: [

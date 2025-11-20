@@ -2,7 +2,7 @@
 
 A modern personal website and blog platform with Model Context Protocol (MCP) integration, allowing blog management directly through Claude Desktop.
 
-**Live Site: [https://iampatrickfarrell.com](https://iampatrickfarrell.com)**
+**Live Site: [https://oceoluxe.com](https://oceoluxe.com)**
 
 ## Features
 
@@ -59,8 +59,8 @@ A modern personal website and blog platform with Model Context Protocol (MCP) in
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/iampatrickfarrell.git
-cd iampatrickfarrell
+git clone https://github.com/yourusername/oceoluxe.git
+cd oceoluxe
 pnpm install
 ```
 
@@ -146,9 +146,9 @@ Add the MCP server configuration:
 ```json
 {
   "mcpServers": {
-    "iampatrickfarrell-blog": {
+    "oceoluxe-blog": {
       "command": "node",
-      "args": ["/absolute/path/to/iampatrickfarrell/mcp-server/index.js"],
+      "args": ["/absolute/path/to/oceoluxe/mcp-server/index.js"],
       "env": {
         "MCP_API_KEY": "mcp_live_your_actual_key_here",
         "API_BASE_URL": "http://localhost:3000"
@@ -257,12 +257,12 @@ Update your Claude Desktop config to use the production URL:
 ```json
 {
   "mcpServers": {
-    "iampatrickfarrell-blog-prod": {
+    "oceoluxe-blog-prod": {
       "command": "node",
-      "args": ["/absolute/path/to/iampatrickfarrell/mcp-server/index.js"],
+      "args": ["/absolute/path/to/oceoluxe/mcp-server/index.js"],
       "env": {
         "MCP_API_KEY": "mcp_live_production_key_here",
-        "API_BASE_URL": "https://iampatrickfarrell.com"
+        "API_BASE_URL": "https://oceoluxe.com"
       }
     }
   }

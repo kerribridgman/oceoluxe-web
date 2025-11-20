@@ -16,7 +16,7 @@ export async function getPageMetadata(page: string): Promise<Metadata> {
       return getDefaultMetadata(page);
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
     const baseUrl = siteUrl.replace(/\/$/, ''); // Remove trailing slash
 
     const metadata: Metadata = {
@@ -59,7 +59,7 @@ export async function getPageMetadata(page: string): Promise<Metadata> {
 }
 
 function getDefaultMetadata(page: string): Metadata {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
   const baseUrl = siteUrl.replace(/\/$/, '');
 
   const defaults: Record<string, Metadata> = {

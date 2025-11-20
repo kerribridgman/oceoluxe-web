@@ -23,7 +23,7 @@ import * as unpublishBlogPost from './tools/unpublish-blog-post.js';
 import * as uploadImage from './tools/upload-image.js';
 
 // Configuration
-const API_BASE_URL = process.env.API_BASE_URL || 'https://iampatrickfarrell.com';
+const API_BASE_URL = process.env.API_BASE_URL || 'https://oceoluxe.com';
 const API_KEY = process.env.MCP_API_KEY || '';
 
 if (!API_KEY) {
@@ -48,7 +48,7 @@ class BlogMCPServer {
   constructor() {
     this.server = new Server(
       {
-        name: 'iampatrickfarrell-blog',
+        name: 'oceoluxe-blog',
         version: '1.0.0',
       },
       {
