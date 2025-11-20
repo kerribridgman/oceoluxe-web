@@ -3,7 +3,17 @@ import { getUser } from '@/lib/db/queries';
 import {
   getUserMmfcApiKeys,
   createMmfcApiKey,
+  decryptApiKey,
 } from '@/lib/db/queries-mmfc';
+
+// Helper to mask API key for display (matches MMFC format)
+function maskApiKey(apiKey: string): string {
+  // Show first 12 characters (including int_) and mask the rest
+  // Example: int_4P-xifr... (matches MMFC display)
+  if (apiKey.length <= 15) return apiKey;
+  const start = apiKey.substring(0, 11); // int_4P-xifr
+  return `${start}...`;
+}
 
 /**
  * GET /api/mmfc-keys
@@ -19,22 +29,26 @@ export async function GET(request: NextRequest) {
   try {
     const keys = await getUserMmfcApiKeys(user.id);
 
-    // Return encrypted key for display purposes (masked on client)
-    // The encrypted key can be safely shown as it can't be decrypted without the server-side key
-    const sanitizedKeys = keys.map((key) => ({
-      id: key.id,
-      name: key.name,
-      baseUrl: key.baseUrl,
-      encryptedKey: key.apiKey, // Safe to send - it's already encrypted (field name is apiKey in DB)
-      autoSync: key.autoSync,
-      syncFrequency: key.syncFrequency,
-      lastSyncAt: key.lastSyncAt,
-      lastSyncStatus: key.lastSyncStatus,
-      lastSyncError: key.lastSyncError,
-      isActive: key.isActive,
-      createdAt: key.createdAt,
-      updatedAt: key.updatedAt,
-    }));
+    // Decrypt and mask API keys for display (matches MMFC format)
+    const sanitizedKeys = keys.map((key) => {
+      const decryptedKey = decryptApiKey(key.apiKey);
+      const maskedKey = maskApiKey(decryptedKey);
+
+      return {
+        id: key.id,
+        name: key.name,
+        baseUrl: key.baseUrl,
+        maskedApiKey: maskedKey, // Masked version for display (e.g., "int_4P-xifr...")
+        autoSync: key.autoSync,
+        syncFrequency: key.syncFrequency,
+        lastSyncAt: key.lastSyncAt,
+        lastSyncStatus: key.lastSyncStatus,
+        lastSyncError: key.lastSyncError,
+        isActive: key.isActive,
+        createdAt: key.createdAt,
+        updatedAt: key.updatedAt,
+      };
+    });
 
     return NextResponse.json({ keys: sanitizedKeys });
   } catch (error: any) {

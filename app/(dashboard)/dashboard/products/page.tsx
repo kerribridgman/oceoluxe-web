@@ -12,7 +12,7 @@ interface MmfcApiKey {
   id: number;
   name: string;
   baseUrl: string;
-  encryptedKey: string; // Encrypted API key
+  maskedApiKey: string; // Masked API key for display (e.g., "int_4P-xifr...")
   autoSync: boolean;
   syncFrequency: string;
   lastSyncAt: string | null;
@@ -34,15 +34,6 @@ interface MmfcProduct {
   featuredImageUrl: string | null;
   isVisible: boolean;
   syncedAt: string;
-}
-
-// Helper function to display masked API key for identification
-function maskApiKey(encryptedKey: string): string {
-  // Show first 8 and last 4 characters of the encrypted key
-  if (encryptedKey.length <= 12) return encryptedKey;
-  const start = encryptedKey.substring(0, 8);
-  const end = encryptedKey.substring(encryptedKey.length - 4);
-  return `${start}...${end}`;
 }
 
 export default function ProductsPage() {
@@ -232,7 +223,7 @@ export default function ProductsPage() {
                       </CardDescription>
                       <div className="mt-2 flex items-center gap-2">
                         <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded border border-gray-300 text-gray-600">
-                          {maskApiKey(key.encryptedKey)}
+                          {key.maskedApiKey}
                         </code>
                       </div>
                     </div>

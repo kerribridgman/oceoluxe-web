@@ -35,7 +35,7 @@ function encryptApiKey(apiKey: string): string {
 /**
  * Decrypt API key from storage
  */
-function decryptApiKey(encryptedKey: string): string {
+export function decryptApiKey(encryptedKey: string): string {
   const key = Buffer.from(ENCRYPTION_KEY.slice(0, 32).padEnd(32, '0'));
   const parts = encryptedKey.split(':');
   const iv = Buffer.from(parts[0], 'hex');
