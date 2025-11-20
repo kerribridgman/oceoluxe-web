@@ -43,7 +43,7 @@ export default async function ProductsPage() {
       </div>
 
       {/* Products Grid */}
-      <div className="bg-white py-16">
+      <div className="bg-[#faf8f5] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {products.length === 0 ? (
             <div className="text-center py-16">
