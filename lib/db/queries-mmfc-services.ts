@@ -61,6 +61,19 @@ export async function getVisibleServicesForUser(userId: number) {
 }
 
 /**
+ * Get all visible MMFC services (public, no auth required)
+ */
+export async function getAllVisibleServices() {
+  const result = await db
+    .select()
+    .from(mmfcServices)
+    .where(eq(mmfcServices.isVisible, true))
+    .orderBy(desc(mmfcServices.syncedAt));
+
+  return result;
+}
+
+/**
  * Upsert MMFC services from API
  */
 export async function upsertServices(apiKeyId: number, services: ServiceData[]) {

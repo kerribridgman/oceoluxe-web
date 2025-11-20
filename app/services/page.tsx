@@ -5,8 +5,7 @@ import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getLinkSettings } from '@/lib/db/link-queries';
-import { getUser } from '@/lib/db/queries';
-import { getVisibleServicesForUser } from '@/lib/db/queries-mmfc-services';
+import { getAllVisibleServices } from '@/lib/db/queries-mmfc-services';
 
 export const metadata: Metadata = {
   title: 'Services | Patrick Farrell',
@@ -15,8 +14,7 @@ export const metadata: Metadata = {
 
 export default async function ServicesPage() {
   const links = await getLinkSettings();
-  const user = await getUser();
-  const mmfcServices = user ? await getVisibleServicesForUser(user.id) : [];
+  const mmfcServices = await getAllVisibleServices();
 
   return (
     <div className="min-h-screen bg-white">
