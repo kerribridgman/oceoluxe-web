@@ -9,6 +9,12 @@ import Image from 'next/image';
 export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hasProducts, setHasProducts] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Mark that we're on the client to avoid hydration mismatch
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Check if there are any visible products
   useEffect(() => {
@@ -30,7 +36,8 @@ export function MarketingHeader() {
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
     { name: 'Blog', href: '/blog' },
-    ...(hasProducts ? [{ name: 'Products', href: '/products' }] : []),
+    // Only show Products link on client-side after checking
+    ...(isClient && hasProducts ? [{ name: 'Products', href: '/products' }] : []),
   ];
 
   return (
