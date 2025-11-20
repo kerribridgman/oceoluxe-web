@@ -307,6 +307,30 @@ export async function getUserMmfcProducts(userId: number) {
 }
 
 /**
+ * Get ALL products for a user (including hidden ones) - for dashboard management
+ */
+export async function getAllUserMmfcProducts(userId: number) {
+  // First get all API key IDs for this user
+  const userApiKeys = await db
+    .select({ id: mmfcApiKeys.id })
+    .from(mmfcApiKeys)
+    .where(eq(mmfcApiKeys.userId, userId));
+
+  if (userApiKeys.length === 0) {
+    return [];
+  }
+
+  const apiKeyIds = userApiKeys.map(k => k.id);
+
+  // Get ALL products (visible and hidden) for those API keys
+  return await db
+    .select()
+    .from(mmfcProducts)
+    .where(inArray(mmfcProducts.apiKeyId, apiKeyIds))
+    .orderBy(desc(mmfcProducts.createdAt));
+}
+
+/**
  * Get all visible products (public - for products page)
  */
 export async function getPublicMmfcProducts() {

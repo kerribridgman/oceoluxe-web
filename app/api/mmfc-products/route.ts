@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/db/queries';
 import {
-  getUserMmfcProducts,
+  getAllUserMmfcProducts,
   toggleMmfcProductVisibility,
 } from '@/lib/db/queries-mmfc';
 
 /**
  * GET /api/mmfc-products
- * List all MMFC products for the authenticated user
+ * List all MMFC products for the authenticated user (including hidden ones for dashboard management)
  */
 export async function GET(request: NextRequest) {
   const user = await getUser();
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const products = await getUserMmfcProducts(user.id);
+    const products = await getAllUserMmfcProducts(user.id);
 
     return NextResponse.json({ products });
   } catch (error: any) {
