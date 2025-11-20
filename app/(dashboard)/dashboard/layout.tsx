@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog } from 'lucide-react';
+import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog, Calendar } from 'lucide-react';
 
 export default function DashboardLayout({
   children
@@ -27,6 +27,7 @@ export default function DashboardLayout({
       items: [
         { href: '/dashboard/blog', icon: FileText, label: 'Blog Posts' },
         { href: '/dashboard/products', icon: Package, label: 'Products' },
+        { href: '/dashboard/scheduling', icon: Calendar, label: 'Scheduling' },
         { href: '/dashboard/applications', icon: FileText, label: 'Applications' },
       ]
     },
@@ -35,6 +36,7 @@ export default function DashboardLayout({
       items: [
         { href: '/dashboard/general', icon: Settings, label: 'General' },
         { href: '/dashboard/security', icon: Shield, label: 'Security' },
+        { href: '/dashboard/api-keys', icon: Key, label: 'API Keys' },
         { href: '/dashboard/integrations', icon: Plug, label: 'Integrations' },
         { href: '/dashboard/seo', icon: Search, label: 'SEO' },
         { href: '/dashboard/analytics', icon: BarChart3, label: 'Analytics' },

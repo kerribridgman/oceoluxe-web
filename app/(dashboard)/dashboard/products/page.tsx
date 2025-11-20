@@ -195,11 +195,13 @@ export default function ProductsPage() {
             </div>
           </div>
           <Button
-            onClick={() => setShowAddKeyDialog(true)}
+            asChild
             className="bg-white text-brand-primary hover:bg-white/90 shadow-lg"
           >
-            <Plus className="w-4 h-4 mr-2" />
-            Add API Key
+            <a href="/dashboard/api-keys">
+              <Plus className="w-4 h-4 mr-2" />
+              Manage API Keys
+            </a>
           </Button>
         </div>
       </div>
@@ -212,9 +214,11 @@ export default function ProductsPage() {
             <CardContent className="py-12 text-center">
               <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-600 mb-4">No API keys configured</p>
-              <Button onClick={() => setShowAddKeyDialog(true)} variant="outline">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Your First API Key
+              <Button asChild variant="outline">
+                <a href="/dashboard/api-keys">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Your First API Key
+                </a>
               </Button>
             </CardContent>
           </Card>
