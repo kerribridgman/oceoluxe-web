@@ -235,8 +235,10 @@ export default function ProductsPage() {
                         size="sm"
                         variant="destructive"
                         onClick={() => handleDeleteKey(key.id)}
+                        title="Delete API Key"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-4 h-4 mr-2" />
+                        Delete
                       </Button>
                     </div>
                   </div>
