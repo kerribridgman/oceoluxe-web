@@ -287,11 +287,14 @@ async function fetchMmfcServices(
     id: number;
     title: string;
     slug: string;
-    url?: string;
+    service_url?: string;
     description?: string;
-    price?: number;
-    sale_price?: number;
-    featured_image_url?: string;
+    pricing_type?: string;
+    hourly_rate?: string;
+    sale_hourly_rate?: string;
+    project_price?: string;
+    sale_project_price?: string;
+    featured_image?: string;
     cover_image?: string;
   }>;
 }> {
@@ -355,17 +358,31 @@ export async function syncMmfcServices(
       salePrice?: string | null;
       featuredImageUrl?: string | null;
       coverImage?: string | null;
-    }> = response.services.map((service) => ({
-      externalId: service.id,
-      title: service.title,
-      slug: service.slug,
-      url: service.url,
-      description: service.description,
-      price: service.price?.toString(),
-      salePrice: service.sale_price?.toString(),
-      featuredImageUrl: service.featured_image_url,
-      coverImage: service.cover_image,
-    }));
+    }> = response.services.map((service) => {
+      // Determine price based on pricing type
+      let price = null;
+      let salePrice = null;
+
+      if (service.pricing_type === 'hourly') {
+        price = service.hourly_rate;
+        salePrice = service.sale_hourly_rate;
+      } else if (service.pricing_type === 'project') {
+        price = service.project_price;
+        salePrice = service.sale_project_price;
+      }
+
+      return {
+        externalId: service.id,
+        title: service.title,
+        slug: service.slug,
+        url: service.service_url,
+        description: service.description,
+        price: price,
+        salePrice: salePrice,
+        featuredImageUrl: service.featured_image,
+        coverImage: service.cover_image,
+      };
+    });
 
     // Upsert services to database
     await upsertServices(apiKeyId, servicesToUpsert);
