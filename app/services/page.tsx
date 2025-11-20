@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, ExternalLink } from 'lucide-react';
 import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getLinkSettings } from '@/lib/db/link-queries';
+import { getUser } from '@/lib/db/queries';
+import { getVisibleServicesForUser } from '@/lib/db/queries-mmfc-services';
 
 export const metadata: Metadata = {
   title: 'Services | Patrick Farrell',
@@ -13,6 +15,9 @@ export const metadata: Metadata = {
 
 export default async function ServicesPage() {
   const links = await getLinkSettings();
+  const user = await getUser();
+  const mmfcServices = user ? await getVisibleServicesForUser(user.id) : [];
+
   return (
     <div className="min-h-screen bg-white">
       <MarketingHeader />
@@ -200,6 +205,87 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* MMFC Services Section */}
+      {mmfcServices.length > 0 && (
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                Additional Services & Resources
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Explore our full catalog of courses, templates, and digital products
+              </p>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {mmfcServices.map((service) => (
+                <div
+                  key={service.id}
+                  className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col"
+                >
+                  {/* Service Image */}
+                  {(service.coverImage || service.featuredImageUrl) && (
+                    <div className="aspect-video bg-gray-100 overflow-hidden">
+                      <img
+                        src={service.coverImage || service.featuredImageUrl || ''}
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+
+                  {/* Service Content */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3 line-clamp-2">
+                      {service.title}
+                    </h3>
+
+                    {service.description && (
+                      <p className="text-gray-600 mb-4 line-clamp-3 flex-1">
+                        {service.description}
+                      </p>
+                    )}
+
+                    {/* Price */}
+                    <div className="flex items-baseline gap-2 mb-4">
+                      {service.salePrice ? (
+                        <>
+                          <span className="text-3xl font-bold text-[#4a9fd8]">
+                            ${service.salePrice}
+                          </span>
+                          <span className="text-lg text-gray-500 line-through">
+                            ${service.price}
+                          </span>
+                          <span className="ml-2 px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded">
+                            SALE
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-3xl font-bold text-gray-900">
+                          ${service.price}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Learn More Link */}
+                    <a
+                      href={`https://makemoneyfromcoding.com/services/${service.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center px-6 py-3 bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white font-semibold rounded-lg transition-colors duration-200"
+                    >
+                      Learn More
+                      <ExternalLink className="ml-2 w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-[#1a2332] to-[#1e2838]">
