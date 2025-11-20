@@ -5,14 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Package, Plus, Trash2, RefreshCw, Eye, EyeOff, Settings as SettingsIcon, ExternalLink, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Package, Plus, Trash2, RefreshCw, Eye, EyeOff, ExternalLink, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface MmfcApiKey {
   id: number;
   name: string;
   baseUrl: string;
-  maskedApiKey: string; // Masked API key for display (e.g., "int_4P-xifr...")
+  maskedApiKey: string;
   autoSync: boolean;
   syncFrequency: string;
   lastSyncAt: string | null;
@@ -32,6 +32,7 @@ interface MmfcProduct {
   price: string;
   salePrice: string | null;
   featuredImageUrl: string | null;
+  coverImage: string | null;
   isVisible: boolean;
   syncedAt: string;
 }
@@ -180,16 +181,23 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="dashboard-page-container">
-      <div className="mb-8">
+    <section className="flex-1">
+      {/* Page Header */}
+      <div className="page-header-gradient mb-8">
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="page-title">Products</h1>
-            <p className="page-subtitle">
-              Manage products synced from Make Money from Coding
-            </p>
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
+              <Package className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold mb-2">Products</h1>
+              <p>Manage products synced from Make Money from Coding</p>
+            </div>
           </div>
-          <Button onClick={() => setShowAddKeyDialog(true)} className="btn-add">
+          <Button
+            onClick={() => setShowAddKeyDialog(true)}
+            className="bg-white text-brand-primary hover:bg-white/90 shadow-lg"
+          >
             <Plus className="w-4 h-4 mr-2" />
             Add API Key
           </Button>
@@ -198,9 +206,9 @@ export default function ProductsPage() {
 
       {/* API Keys Section */}
       <div className="mb-8">
-        <h2 className="section-title">API Keys</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">API Keys</h2>
         {apiKeys.length === 0 ? (
-          <Card className="empty-state-card">
+          <Card className="dashboard-card border-0">
             <CardContent className="py-12 text-center">
               <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-600 mb-4">No API keys configured</p>
@@ -211,73 +219,67 @@ export default function ProductsPage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-6">
+          <div className="space-y-4">
             {apiKeys.map((key) => (
-              <Card key={key.id} className="api-key-card">
-                <CardHeader className="api-key-card-header">
-                  <div className="flex items-start justify-between flex-wrap gap-4">
-                    <div className="flex-1 min-w-0">
-                      <CardTitle className="text-2xl font-bold text-gray-900">{key.name}</CardTitle>
-                      <CardDescription className="mt-2 text-base font-medium text-gray-700">
-                        {key.baseUrl}
-                      </CardDescription>
-                      <div className="mt-2 flex items-center gap-2">
-                        <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded border border-gray-300 text-gray-600">
-                          {key.maskedApiKey}
-                        </code>
-                      </div>
+              <Card key={key.id} className="dashboard-card border-0">
+                <CardContent className="pt-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">{key.name}</h3>
+                      <p className="text-sm text-gray-600 mt-1">{key.baseUrl}</p>
+                      <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded border border-gray-200 text-gray-600 mt-2 inline-block">
+                        {key.maskedApiKey}
+                      </code>
                     </div>
-                    <div className="flex gap-3 flex-shrink-0">
+                    <div className="flex gap-2">
                       <Button
                         onClick={() => handleSyncProducts(key.id)}
                         disabled={syncingKeyId === key.id}
-                        className="btn-sync"
+                        size="sm"
+                        className="bg-brand-primary hover:bg-brand-primary-hover"
                       >
-                        <RefreshCw className={`w-5 h-5 mr-2 ${syncingKeyId === key.id ? 'animate-spin' : ''}`} />
+                        <RefreshCw className={`w-4 h-4 mr-2 ${syncingKeyId === key.id ? 'animate-spin' : ''}`} />
                         Sync
                       </Button>
                       <Button
                         variant="destructive"
                         onClick={() => handleDeleteKey(key.id)}
-                        title="Delete API Key"
-                        className="btn-delete"
+                        size="sm"
                       >
-                        <Trash2 className="w-5 h-5 mr-2" />
-                        Delete
+                        <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <div className="grid grid-cols-2 gap-6 text-base">
-                    <div className="info-box">
-                      <p className="info-box-label">Auto Sync</p>
-                      <p className="info-box-value">{key.autoSync ? `Yes (${key.syncFrequency})` : 'No'}</p>
+
+                  <div className="grid grid-cols-3 gap-4 text-sm pt-4 border-t border-gray-100">
+                    <div>
+                      <p className="text-gray-500">Auto Sync</p>
+                      <p className="font-medium text-gray-900">{key.autoSync ? `Yes (${key.syncFrequency})` : 'No'}</p>
                     </div>
-                    <div className="info-box">
-                      <p className="info-box-label">Last Sync</p>
-                      <p className="info-box-value">
-                        {key.lastSyncAt ? format(new Date(key.lastSyncAt), 'MMM d, yyyy h:mm a') : 'Never'}
+                    <div>
+                      <p className="text-gray-500">Last Sync</p>
+                      <p className="font-medium text-gray-900">
+                        {key.lastSyncAt ? format(new Date(key.lastSyncAt), 'MMM d, h:mm a') : 'Never'}
                       </p>
                     </div>
-                    {key.lastSyncStatus && (
-                      <div className="col-span-2 info-box">
-                        <p className="info-box-label mb-2">Status</p>
-                        <div className="flex items-center gap-2">
-                          {key.lastSyncStatus === 'success' ? (
-                            <>
-                              <CheckCircle2 className="w-5 h-5 text-green-600" />
-                              <span className="status-success">Success</span>
-                            </>
-                          ) : (
-                            <>
-                              <AlertCircle className="w-5 h-5 text-red-600" />
-                              <span className="status-error">Error: {key.lastSyncError}</span>
-                            </>
-                          )}
-                        </div>
+                    <div>
+                      <p className="text-gray-500">Status</p>
+                      <div className="flex items-center gap-1.5">
+                        {key.lastSyncStatus === 'success' ? (
+                          <>
+                            <CheckCircle2 className="w-4 h-4 text-green-600" />
+                            <span className="font-medium text-green-600">Success</span>
+                          </>
+                        ) : key.lastSyncStatus === 'error' ? (
+                          <>
+                            <AlertCircle className="w-4 h-4 text-red-600" />
+                            <span className="font-medium text-red-600">Error</span>
+                          </>
+                        ) : (
+                          <span className="font-medium text-gray-400">-</span>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -289,20 +291,20 @@ export default function ProductsPage() {
       {/* Products Section */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="section-title">Synced Products</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Synced Products</h2>
           <a
             href="/products"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#4a9fd8] hover:text-[#3a8fc8] font-semibold flex items-center gap-2 text-lg"
+            className="text-brand-primary hover:text-brand-primary-hover font-medium flex items-center gap-2 text-sm"
           >
             View Public Page
-            <ExternalLink className="w-5 h-5" />
+            <ExternalLink className="w-4 h-4" />
           </a>
         </div>
 
         {products.length === 0 ? (
-          <Card className="empty-state-card">
+          <Card className="dashboard-card border-0">
             <CardContent className="py-12 text-center">
               <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-600">No products synced yet</p>
@@ -310,21 +312,25 @@ export default function ProductsPage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
-              <Card key={product.id} className="overflow-hidden">
-                {product.featuredImageUrl && (
-                  <img
-                    src={product.featuredImageUrl}
-                    alt={product.title}
-                    className="w-full h-48 object-cover"
-                  />
+              <Card key={product.id} className="dashboard-card border-0 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                {(product.featuredImageUrl || product.coverImage) && (
+                  <div className="aspect-video overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                    <img
+                      src={product.featuredImageUrl || product.coverImage || ''}
+                      alt={product.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 )}
-                <CardHeader>
+                <CardHeader className="pb-3">
                   <CardTitle className="text-lg line-clamp-2">{product.title}</CardTitle>
-                  <CardDescription className="line-clamp-2">
-                    {product.description}
-                  </CardDescription>
+                  {product.description && (
+                    <CardDescription className="line-clamp-2 text-sm">
+                      {product.description}
+                    </CardDescription>
+                  )}
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between">
@@ -340,15 +346,16 @@ export default function ProductsPage() {
                       size="sm"
                       variant={product.isVisible ? 'default' : 'outline'}
                       onClick={() => toggleProductVisibility(product.id, !product.isVisible)}
+                      className={product.isVisible ? 'bg-green-600 hover:bg-green-700' : ''}
                     >
                       {product.isVisible ? (
                         <>
-                          <Eye className="w-4 h-4 mr-2" />
+                          <Eye className="w-4 h-4 mr-1" />
                           Visible
                         </>
                       ) : (
                         <>
-                          <EyeOff className="w-4 h-4 mr-2" />
+                          <EyeOff className="w-4 h-4 mr-1" />
                           Hidden
                         </>
                       )}
@@ -364,9 +371,9 @@ export default function ProductsPage() {
       {/* Add API Key Dialog */}
       {showAddKeyDialog && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-lg bg-white shadow-2xl border-2 border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-gray-50 to-white">
-              <CardTitle className="text-2xl">Add MMFC API Key</CardTitle>
+          <Card className="w-full max-w-lg bg-white shadow-2xl border-0">
+            <CardHeader className="border-b border-gray-100 pb-4">
+              <CardTitle className="text-2xl font-bold">Add MMFC API Key</CardTitle>
               <CardDescription className="text-base">
                 Connect your Make Money from Coding account to sync products
               </CardDescription>
@@ -374,7 +381,7 @@ export default function ProductsPage() {
             <CardContent className="pt-6">
               <form onSubmit={handleAddApiKey} className="space-y-5">
                 <div>
-                  <Label htmlFor="name" className="text-sm font-semibold text-gray-700">Name</Label>
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-700">Name</Label>
                   <Input
                     id="name"
                     placeholder="My MMFC Account"
@@ -385,7 +392,7 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="apiKey" className="text-sm font-semibold text-gray-700">API Key</Label>
+                  <Label htmlFor="apiKey" className="text-sm font-medium text-gray-700">API Key</Label>
                   <Input
                     id="apiKey"
                     type="password"
@@ -400,7 +407,7 @@ export default function ProductsPage() {
                   </p>
                 </div>
                 <div>
-                  <Label htmlFor="baseUrl" className="text-sm font-semibold text-gray-700">Base URL (Optional)</Label>
+                  <Label htmlFor="baseUrl" className="text-sm font-medium text-gray-700">Base URL (Optional)</Label>
                   <Input
                     id="baseUrl"
                     placeholder="https://makemoneyfromcoding.com"
@@ -419,13 +426,13 @@ export default function ProductsPage() {
                         onChange={(e) => setFormData({ ...formData, autoSync: e.target.checked })}
                         className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
                       />
-                      <Label htmlFor="autoSync" className="cursor-pointer font-semibold text-gray-700">
+                      <Label htmlFor="autoSync" className="cursor-pointer font-medium text-gray-700">
                         Enable auto-sync
                       </Label>
                     </div>
                     {formData.autoSync && (
                       <div className="mt-3 ml-6">
-                        <Label htmlFor="syncFrequency" className="text-sm font-semibold text-gray-700">Sync Frequency</Label>
+                        <Label htmlFor="syncFrequency" className="text-sm font-medium text-gray-700">Sync Frequency</Label>
                         <select
                           id="syncFrequency"
                           value={formData.syncFrequency}
@@ -448,7 +455,7 @@ export default function ProductsPage() {
                         onChange={(e) => setFormData({ ...formData, skipValidation: e.target.checked })}
                         className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
                       />
-                      <Label htmlFor="skipValidation" className="cursor-pointer font-semibold text-gray-700">
+                      <Label htmlFor="skipValidation" className="cursor-pointer font-medium text-gray-700">
                         Skip API key validation
                       </Label>
                     </div>
@@ -457,7 +464,7 @@ export default function ProductsPage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-3 justify-end pt-6 border-t">
+                <div className="flex gap-3 justify-end pt-6 border-t border-gray-100">
                   <Button
                     type="button"
                     variant="outline"
@@ -475,6 +482,6 @@ export default function ProductsPage() {
           </Card>
         </div>
       )}
-    </div>
+    </section>
   );
 }
