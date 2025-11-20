@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { Calendar, Clock, BookOpen } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Blog | Patrick Farrell',
-  description: 'Read the latest articles on technology, entrepreneurship, and personal development.',
+  title: 'Blog | Oceo Luxe',
+  description: 'Insights on fashion production, business systems, and building sustainable creative ventures.',
 };
 
 export const dynamic = 'force-dynamic';
@@ -15,40 +16,34 @@ export default async function BlogPage() {
   const posts = await getPublishedBlogPosts();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
-      <div className="bg-gradient-to-br from-[#1a2332] via-[#1e2838] to-[#1a2332]">
+
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-20 left-10 text-6xl text-[#4a9fd8]/10 font-mono">&lt;/&gt;</div>
-        <div className="absolute top-40 right-20 text-6xl text-[#4a9fd8]/10 font-mono">&#123;&#125;</div>
-        <div className="absolute bottom-20 left-1/4 text-6xl text-[#4a9fd8]/10 font-mono">( )</div>
-
-        {/* Colored blur effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#4a9fd8]/20 rounded-full blur-3xl"></div>
-
+      <div className="bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5] relative overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-[#4a9fd8]/10 border border-[#4a9fd8]/20 rounded-full">
-              <span className="text-[#4a9fd8] text-sm font-medium">Blog</span>
+            <div className="inline-flex items-center gap-2 mb-6 px-6 py-2 bg-[#CDA7B2]/10 border border-[#CDA7B2]/20 rounded-full">
+              <BookOpen className="w-4 h-4 text-[#CDA7B2]" />
+              <span className="text-[#CDA7B2] text-sm font-medium">Blog</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
               Insights & Articles
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Exploring technology, entrepreneurship, and the journey of building meaningful digital experiences.
+            <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
+              Exploring fashion production, business systems, and the journey of building sustainable creative ventures.
             </p>
           </div>
         </div>
       </div>
 
       {/* Blog Posts Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {posts.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-gray-300 text-lg">No blog posts yet. Check back soon!</p>
+            <BookOpen className="w-16 h-16 text-[#967F71] mx-auto mb-4" />
+            <h2 className="text-2xl font-serif font-light text-[#3B3937] mb-2">No Blog Posts Yet</h2>
+            <p className="text-[#967F71] font-light">Check back soon for insights and articles!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -58,7 +53,7 @@ export default async function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group"
               >
-                <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-[#967F71]/10">
                   <div className="aspect-video overflow-hidden">
                     {post.coverImageUrl ? (
                       <img
@@ -67,41 +62,43 @@ export default async function BlogPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#1a2332] via-[#1e2838] to-[#243442] relative overflow-hidden">
-                        {/* Decorative code symbols */}
-                        <div className="absolute top-4 left-4 text-3xl text-[#4a9fd8]/20 font-mono">&lt;/&gt;</div>
-                        <div className="absolute bottom-4 right-4 text-3xl text-[#4a9fd8]/20 font-mono">&#123;&#125;</div>
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                          <div className="w-20 h-20 border-4 border-[#4a9fd8]/30 rounded-lg rotate-12"></div>
+                      <div className="w-full h-full bg-gradient-to-br from-[#f5f0ea] via-[#faf8f5] to-[#CDA7B2]/10 relative overflow-hidden">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <BookOpen className="w-20 h-20 text-[#CDA7B2]/30" />
                         </div>
-                        {/* Subtle glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#4a9fd8]/10 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#CDA7B2]/5 to-transparent"></div>
                       </div>
                     )}
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex-1">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#4a9fd8] transition-colors">
+                      <h2 className="text-2xl font-serif font-light text-[#3B3937] mb-3 group-hover:text-[#CDA7B2] transition-colors leading-tight">
                         {post.title}
                       </h2>
                       {post.excerpt && (
-                        <p className="text-gray-600 mb-4 line-clamp-3">
+                        <p className="text-[#967F71] mb-4 line-clamp-3 font-light leading-relaxed">
                           {post.excerpt}
                         </p>
                       )}
                     </div>
-                    <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-200">
-                      <span>
-                        {post.publishedAt
-                          ? new Date(post.publishedAt).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
-                            })
-                          : 'Draft'}
-                      </span>
+                    <div className="flex items-center justify-between text-sm text-[#967F71] pt-4 border-t border-[#967F71]/10">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="w-4 h-4" />
+                        <span className="font-light">
+                          {post.publishedAt
+                            ? new Date(post.publishedAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                              })
+                            : 'Draft'}
+                        </span>
+                      </div>
                       {post.readingTimeMinutes && (
-                        <span>{post.readingTimeMinutes} min read</span>
+                        <div className="flex items-center gap-1.5">
+                          <Clock className="w-4 h-4" />
+                          <span className="font-light">{post.readingTimeMinutes} min</span>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -110,7 +107,6 @@ export default async function BlogPage() {
             ))}
           </div>
         )}
-      </div>
       </div>
 
       <MarketingFooter />
