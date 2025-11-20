@@ -277,6 +277,113 @@ export async function syncMmfcScheduling(
 }
 
 /**
+ * Fetch services from MMFC API
+ */
+async function fetchMmfcServices(
+  apiKey: string,
+  baseUrl: string
+): Promise<{
+  services: Array<{
+    id: number;
+    title: string;
+    slug: string;
+    description?: string;
+    price?: number;
+    sale_price?: number;
+    featured_image_url?: string;
+    cover_image?: string;
+  }>;
+}> {
+  const url = `${baseUrl}/api/v1/services`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+      `MMFC API error: ${response.status} ${response.statusText} - ${errorText}`
+    );
+  }
+
+  return await response.json();
+}
+
+/**
+ * Sync services for a specific API key
+ */
+export async function syncMmfcServices(
+  apiKeyId: number,
+  userId: number
+): Promise<{ success: boolean; servicesCount: number; error?: string }> {
+  try {
+    // Get API key details
+    const apiKeyRecord = await getMmfcApiKeyById(apiKeyId, userId);
+    if (!apiKeyRecord) {
+      throw new Error('API key not found');
+    }
+
+    if (!apiKeyRecord.isActive) {
+      throw new Error('API key is inactive');
+    }
+
+    // Get decrypted API key
+    const apiKey = await getDecryptedMmfcApiKey(apiKeyId, userId);
+    if (!apiKey) {
+      throw new Error('Failed to decrypt API key');
+    }
+
+    // Fetch services
+    const response = await fetchMmfcServices(apiKey, apiKeyRecord.baseUrl);
+
+    // Transform services for database
+    const { upsertServices } = await import('../db/queries-mmfc-services');
+    const { ServiceData } = await import('../db/queries-mmfc-services');
+
+    const servicesToUpsert: Array<{
+      externalId: number;
+      title: string;
+      slug: string;
+      description?: string | null;
+      price?: string | null;
+      salePrice?: string | null;
+      featuredImageUrl?: string | null;
+      coverImage?: string | null;
+    }> = response.services.map((service) => ({
+      externalId: service.id,
+      title: service.title,
+      slug: service.slug,
+      description: service.description,
+      price: service.price?.toString(),
+      salePrice: service.sale_price?.toString(),
+      featuredImageUrl: service.featured_image_url,
+      coverImage: service.cover_image,
+    }));
+
+    // Upsert services to database
+    await upsertServices(apiKeyId, servicesToUpsert);
+
+    return {
+      success: true,
+      servicesCount: servicesToUpsert.length,
+    };
+  } catch (error: any) {
+    console.error('MMFC services sync error:', error);
+
+    return {
+      success: false,
+      servicesCount: 0,
+      error: error.message,
+    };
+  }
+}
+
+/**
  * Sync products for all API keys that have auto-sync enabled
  * This can be called by a cron job
  */

@@ -235,6 +235,25 @@ export const mmfcSchedulingLinks = pgTable('mmfc_scheduling_links', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+export const mmfcServices = pgTable('mmfc_services', {
+  id: serial('id').primaryKey(),
+  apiKeyId: integer('api_key_id')
+    .notNull()
+    .references(() => mmfcApiKeys.id, { onDelete: 'cascade' }),
+  externalId: integer('external_id').notNull(), // Service ID from MMFC
+  title: varchar('title', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull(),
+  description: text('description'),
+  price: decimal('price', { precision: 10, scale: 2 }),
+  salePrice: decimal('sale_price', { precision: 10, scale: 2 }),
+  featuredImageUrl: text('featured_image_url'),
+  coverImage: text('cover_image'),
+  isVisible: boolean('is_visible').notNull().default(true), // Can be disabled on this site
+  syncedAt: timestamp('synced_at').notNull().defaultNow(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const analyticsSettings = pgTable('analytics_settings', {
   id: serial('id').primaryKey(),
   userId: integer('user_id')
@@ -333,6 +352,13 @@ export const mmfcSchedulingLinksRelations = relations(mmfcSchedulingLinks, ({ on
   }),
 }));
 
+export const mmfcServicesRelations = relations(mmfcServices, ({ one }) => ({
+  apiKey: one(mmfcApiKeys, {
+    fields: [mmfcServices.apiKeyId],
+    references: [mmfcApiKeys.id],
+  }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Team = typeof teams.$inferSelect;
@@ -364,6 +390,8 @@ export type MmfcProduct = typeof mmfcProducts.$inferSelect;
 export type NewMmfcProduct = typeof mmfcProducts.$inferInsert;
 export type MmfcSchedulingLink = typeof mmfcSchedulingLinks.$inferSelect;
 export type NewMmfcSchedulingLink = typeof mmfcSchedulingLinks.$inferInsert;
+export type MmfcService = typeof mmfcServices.$inferSelect;
+export type NewMmfcService = typeof mmfcServices.$inferInsert;
 export type AnalyticsSettings = typeof analyticsSettings.$inferSelect;
 export type NewAnalyticsSettings = typeof analyticsSettings.$inferInsert;
 
