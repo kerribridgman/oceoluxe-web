@@ -19,11 +19,13 @@ export async function GET(request: NextRequest) {
   try {
     const keys = await getUserMmfcApiKeys(user.id);
 
-    // Don't return the encrypted API key to the client
+    // Return encrypted key for display purposes (masked on client)
+    // The encrypted key can be safely shown as it can't be decrypted without the server-side key
     const sanitizedKeys = keys.map((key) => ({
       id: key.id,
       name: key.name,
       baseUrl: key.baseUrl,
+      encryptedKey: key.encryptedKey, // Safe to send - it's already encrypted
       autoSync: key.autoSync,
       syncFrequency: key.syncFrequency,
       lastSyncAt: key.lastSyncAt,

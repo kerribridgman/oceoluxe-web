@@ -12,6 +12,7 @@ interface MmfcApiKey {
   id: number;
   name: string;
   baseUrl: string;
+  encryptedKey: string; // Encrypted API key
   autoSync: boolean;
   syncFrequency: string;
   lastSyncAt: string | null;
@@ -33,6 +34,15 @@ interface MmfcProduct {
   featuredImageUrl: string | null;
   isVisible: boolean;
   syncedAt: string;
+}
+
+// Helper function to display masked API key for identification
+function maskApiKey(encryptedKey: string): string {
+  // Show first 8 and last 4 characters of the encrypted key
+  if (encryptedKey.length <= 12) return encryptedKey;
+  const start = encryptedKey.substring(0, 8);
+  const end = encryptedKey.substring(encryptedKey.length - 4);
+  return `${start}...${end}`;
 }
 
 export default function ProductsPage() {
@@ -179,16 +189,16 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
+    <div className="dashboard-page-container">
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Products</h1>
-            <p className="text-gray-600">
+            <h1 className="page-title">Products</h1>
+            <p className="page-subtitle">
               Manage products synced from Make Money from Coding
             </p>
           </div>
-          <Button onClick={() => setShowAddKeyDialog(true)} className="bg-brand-primary hover:bg-brand-primary/90">
+          <Button onClick={() => setShowAddKeyDialog(true)} className="btn-add">
             <Plus className="w-4 h-4 mr-2" />
             Add API Key
           </Button>
@@ -197,9 +207,9 @@ export default function ProductsPage() {
 
       {/* API Keys Section */}
       <div className="mb-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">API Keys</h2>
+        <h2 className="section-title">API Keys</h2>
         {apiKeys.length === 0 ? (
-          <Card>
+          <Card className="empty-state-card">
             <CardContent className="py-12 text-center">
               <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-600 mb-4">No API keys configured</p>
@@ -210,64 +220,68 @@ export default function ProductsPage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-4">
+          <div className="grid gap-6">
             {apiKeys.map((key) => (
-              <Card key={key.id}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <CardTitle className="text-xl">{key.name}</CardTitle>
-                      <CardDescription className="mt-1">
+              <Card key={key.id} className="api-key-card">
+                <CardHeader className="api-key-card-header">
+                  <div className="flex items-start justify-between flex-wrap gap-4">
+                    <div className="flex-1 min-w-0">
+                      <CardTitle className="text-2xl font-bold text-gray-900">{key.name}</CardTitle>
+                      <CardDescription className="mt-2 text-base font-medium text-gray-700">
                         {key.baseUrl}
                       </CardDescription>
+                      <div className="mt-2 flex items-center gap-2">
+                        <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded border border-gray-300 text-gray-600">
+                          {maskApiKey(key.encryptedKey)}
+                        </code>
+                      </div>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-3 flex-shrink-0">
                       <Button
-                        size="sm"
                         onClick={() => handleSyncProducts(key.id)}
                         disabled={syncingKeyId === key.id}
-                        className="bg-brand-primary hover:bg-brand-primary/90"
+                        className="btn-sync"
                       >
-                        <RefreshCw className={`w-4 h-4 mr-2 ${syncingKeyId === key.id ? 'animate-spin' : ''}`} />
+                        <RefreshCw className={`w-5 h-5 mr-2 ${syncingKeyId === key.id ? 'animate-spin' : ''}`} />
                         Sync
                       </Button>
                       <Button
-                        size="sm"
                         variant="destructive"
                         onClick={() => handleDeleteKey(key.id)}
                         title="Delete API Key"
+                        className="btn-delete"
                       >
-                        <Trash2 className="w-4 h-4 mr-2" />
+                        <Trash2 className="w-5 h-5 mr-2" />
                         Delete
                       </Button>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="text-gray-600">Auto Sync</p>
-                      <p className="font-medium">{key.autoSync ? `Yes (${key.syncFrequency})` : 'No'}</p>
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-2 gap-6 text-base">
+                    <div className="info-box">
+                      <p className="info-box-label">Auto Sync</p>
+                      <p className="info-box-value">{key.autoSync ? `Yes (${key.syncFrequency})` : 'No'}</p>
                     </div>
-                    <div>
-                      <p className="text-gray-600">Last Sync</p>
-                      <p className="font-medium">
+                    <div className="info-box">
+                      <p className="info-box-label">Last Sync</p>
+                      <p className="info-box-value">
                         {key.lastSyncAt ? format(new Date(key.lastSyncAt), 'MMM d, yyyy h:mm a') : 'Never'}
                       </p>
                     </div>
                     {key.lastSyncStatus && (
-                      <div className="col-span-2">
-                        <p className="text-gray-600">Status</p>
-                        <div className="flex items-center gap-2 mt-1">
+                      <div className="col-span-2 info-box">
+                        <p className="info-box-label mb-2">Status</p>
+                        <div className="flex items-center gap-2">
                           {key.lastSyncStatus === 'success' ? (
                             <>
-                              <CheckCircle2 className="w-4 h-4 text-green-600" />
-                              <span className="text-green-600 font-medium">Success</span>
+                              <CheckCircle2 className="w-5 h-5 text-green-600" />
+                              <span className="status-success">Success</span>
                             </>
                           ) : (
                             <>
-                              <AlertCircle className="w-4 h-4 text-red-600" />
-                              <span className="text-red-600 font-medium">Error: {key.lastSyncError}</span>
+                              <AlertCircle className="w-5 h-5 text-red-600" />
+                              <span className="status-error">Error: {key.lastSyncError}</span>
                             </>
                           )}
                         </div>
@@ -284,20 +298,20 @@ export default function ProductsPage() {
       {/* Products Section */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold text-gray-900">Synced Products</h2>
+          <h2 className="section-title">Synced Products</h2>
           <a
             href="/products"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-primary hover:underline flex items-center gap-1"
+            className="text-[#4a9fd8] hover:text-[#3a8fc8] font-semibold flex items-center gap-2 text-lg"
           >
             View Public Page
-            <ExternalLink className="w-4 h-4" />
+            <ExternalLink className="w-5 h-5" />
           </a>
         </div>
 
         {products.length === 0 ? (
-          <Card>
+          <Card className="empty-state-card">
             <CardContent className="py-12 text-center">
               <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-600">No products synced yet</p>
