@@ -343,7 +343,6 @@ export async function syncMmfcServices(
 
     // Transform services for database
     const { upsertServices } = await import('../db/queries-mmfc-services');
-    const { ServiceData } = await import('../db/queries-mmfc-services');
 
     const servicesToUpsert: Array<{
       externalId: number;
