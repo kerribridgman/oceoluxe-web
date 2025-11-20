@@ -54,15 +54,22 @@ function UserMenu() {
   return (
     <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <DropdownMenuTrigger className="focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 rounded-full">
-        <Avatar className="cursor-pointer size-9 ring-2 ring-white/20 hover:ring-brand-primary transition-all">
-          <AvatarImage alt={user.name || ''} />
-          <AvatarFallback className="bg-brand-primary text-white font-semibold">
-            {user.email
-              .split(' ')
-              .map((n) => n[0])
-              .join('')}
-          </AvatarFallback>
-        </Avatar>
+        <div className="flex items-center gap-3 cursor-pointer group">
+          {user.name && (
+            <span className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors hidden sm:block">
+              {user.name}
+            </span>
+          )}
+          <Avatar className="size-9 ring-2 ring-white/20 group-hover:ring-brand-primary transition-all">
+            <AvatarImage alt={user.name || ''} />
+            <AvatarFallback className="bg-brand-primary text-white font-semibold">
+              {user.email
+                .split(' ')
+                .map((n) => n[0])
+                .join('')}
+            </AvatarFallback>
+          </Avatar>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 bg-white border-gray-200 shadow-xl rounded-xl p-2">
         <div className="px-3 py-2 mb-2 border-b border-gray-100">
