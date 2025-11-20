@@ -7,11 +7,19 @@ import Link from 'next/link';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
+// Revalidate every 60 seconds to ensure products are up-to-date
+export const revalidate = 60;
+
 export async function generateStaticParams() {
-  const products = await getPublicMmfcProducts();
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
+  try {
+    const products = await getPublicMmfcProducts();
+    return products.map((product) => ({
+      slug: product.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for products:', error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

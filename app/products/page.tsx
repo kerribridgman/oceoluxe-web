@@ -11,8 +11,18 @@ export const metadata = {
   description: 'Digital products and services from Patrick Farrell',
 };
 
+// Revalidate every 60 seconds to ensure products are up-to-date
+export const revalidate = 60;
+
 export default async function ProductsPage() {
-  const products = await getPublicMmfcProducts();
+  let products: Awaited<ReturnType<typeof getPublicMmfcProducts>> = [];
+
+  try {
+    products = await getPublicMmfcProducts();
+  } catch (error) {
+    console.error('Error loading products:', error);
+    // Continue with empty products array to show "No Products Yet" message
+  }
 
   return (
     <div className="min-h-screen bg-white">
