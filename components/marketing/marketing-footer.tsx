@@ -19,7 +19,7 @@ export function MarketingFooter() {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://instagram.com/oceoluxe"
+                href="https://www.instagram.com/oceoluxe"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#967F71] hover:text-[#CDA7B2] transition-colors"
@@ -28,7 +28,7 @@ export function MarketingFooter() {
                 <Instagram className="w-6 h-6" />
               </a>
               <a
-                href="https://linkedin.com/company/oceoluxe"
+                href="https://www.linkedin.com/in/kerri-bridgman/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#967F71] hover:text-[#CDA7B2] transition-colors"
