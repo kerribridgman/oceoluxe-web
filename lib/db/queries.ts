@@ -1,6 +1,6 @@
 import { desc, and, eq, isNull } from 'drizzle-orm';
 import { db } from './drizzle';
-import { activityLogs, teamMembers, teams, users } from './schema';
+import { activityLogs, teamMembers, teams, users, analyticsSettings } from './schema';
 import { cookies } from 'next/headers';
 import { verifyToken } from '@/lib/auth/session';
 
@@ -127,4 +127,51 @@ export async function getTeamForUser() {
   });
 
   return result?.team || null;
+}
+
+
+// Analytics Settings
+export async function getAnalyticsSettings(userId: number) {
+  const [settings] = await db
+    .select()
+    .from(analyticsSettings)
+    .where(eq(analyticsSettings.userId, userId))
+    .limit(1);
+  
+  return settings || null;
+}
+
+export async function upsertAnalyticsSettings(
+  userId: number,
+  data: {
+    googleAnalyticsId?: string;
+    googleTagManagerId?: string;
+    plausibleDomain?: string;
+    plausibleApiKey?: string;
+  }
+) {
+  const existing = await getAnalyticsSettings(userId);
+  
+  if (existing) {
+    const [updated] = await db
+      .update(analyticsSettings)
+      .set({
+        ...data,
+        updatedAt: new Date(),
+      })
+      .where(eq(analyticsSettings.userId, userId))
+      .returning();
+    
+    return updated;
+  } else {
+    const [created] = await db
+      .insert(analyticsSettings)
+      .values({
+        userId,
+        ...data,
+      })
+      .returning();
+    
+    return created;
+  }
 }

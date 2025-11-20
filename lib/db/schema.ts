@@ -215,6 +215,20 @@ export const mmfcProducts = pgTable('mmfc_products', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+export const analyticsSettings = pgTable('analytics_settings', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id)
+    .unique(), // One settings record per user
+  googleAnalyticsId: varchar('google_analytics_id', { length: 255 }),
+  googleTagManagerId: varchar('google_tag_manager_id', { length: 255 }),
+  plausibleDomain: varchar('plausible_domain', { length: 255 }),
+  plausibleApiKey: text('plausible_api_key'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -320,6 +334,8 @@ export type MmfcApiKey = typeof mmfcApiKeys.$inferSelect;
 export type NewMmfcApiKey = typeof mmfcApiKeys.$inferInsert;
 export type MmfcProduct = typeof mmfcProducts.$inferSelect;
 export type NewMmfcProduct = typeof mmfcProducts.$inferInsert;
+export type AnalyticsSettings = typeof analyticsSettings.$inferSelect;
+export type NewAnalyticsSettings = typeof analyticsSettings.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
