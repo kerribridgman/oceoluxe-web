@@ -59,6 +59,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     ...images
   ];
 
+  // Build checkout URL with return_url pointing back to this product page
+  const currentProductUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://iampatrickfarrell.com'}/products/${slug}`;
+  let checkoutUrl = product.checkoutUrl || '#';
+
+  // Add return_url parameter if we have a valid checkout URL
+  if (checkoutUrl !== '#') {
+    const separator = checkoutUrl.includes('?') ? '&' : '?';
+    checkoutUrl = `${checkoutUrl}${separator}return_url=${encodeURIComponent(currentProductUrl)}`;
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <MarketingHeader />
@@ -153,7 +163,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {/* CTA Button */}
             <div className="mb-8">
               <a
-                href={product.checkoutUrl || '#'}
+                href={checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"
