@@ -84,6 +84,11 @@ export function MarketingFooter() {
                   Mastermind
                 </Link>
               </li>
+              <li>
+                <Link href="/sign-in" className="text-gray-400 hover:text-[#4a9fd8] transition-colors">
+                  Sign In
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

@@ -67,11 +67,6 @@ export function MarketingHeader() {
                 {item.name}
               </Link>
             ))}
-            <Link href="/sign-in">
-              <Button variant="outline" className="border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8] hover:text-white">
-                Sign In
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -100,11 +95,6 @@ export function MarketingHeader() {
                 {item.name}
               </Link>
             ))}
-            <Link href="/sign-in">
-              <Button variant="outline" className="w-full border-[#4a9fd8] text-[#4a9fd8] hover:bg-[#4a9fd8] hover:text-white">
-                Sign In
-              </Button>
-            </Link>
           </div>
         )}
       </nav>
