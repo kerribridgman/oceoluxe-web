@@ -71,6 +71,13 @@
       "when": 1732074400000,
       "tag": "0011_create_mmfc_scheduling_links",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1732078800000,
+      "tag": "0012_add_scheduling_constraint",
+      "breakpoints": true
     }
   ]
 }
