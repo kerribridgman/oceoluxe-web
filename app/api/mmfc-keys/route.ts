@@ -90,20 +90,50 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Optional: Validate API key by attempting to fetch products
+    // Optional: Validate API key by attempting to fetch products or scheduling
     // Only validate if skipValidation is not set
     const skipValidation = body.skipValidation === true;
 
     if (!skipValidation) {
-      const testUrl = `${baseUrl || 'https://makemoneyfromcoding.com'}/api/v1/products?limit=1`;
+      const base = baseUrl || 'https://makemoneyfromcoding.com';
+      const productsUrl = `${base}/api/v1/products?limit=1`;
+      const schedulingUrl = `${base}/api/v1/scheduling/availability`;
 
-      let testResponse;
+      let validationPassed = false;
+      let lastError = '';
+
+      // Try products endpoint first
       try {
-        testResponse = await fetch(testUrl, {
+        const productsResponse = await fetch(productsUrl, {
           headers: {
             'Authorization': `Bearer ${apiKey}`,
           },
         });
+
+        if (productsResponse.ok) {
+          validationPassed = true;
+        } else {
+          const errorText = await productsResponse.text();
+          lastError = `Products endpoint: Status ${productsResponse.status}`;
+
+          // If products fails, try scheduling endpoint
+          try {
+            const schedulingResponse = await fetch(schedulingUrl, {
+              headers: {
+                'Authorization': `Bearer ${apiKey}`,
+              },
+            });
+
+            if (schedulingResponse.ok) {
+              validationPassed = true;
+            } else {
+              const schedErrorText = await schedulingResponse.text();
+              lastError += `. Scheduling endpoint: Status ${schedulingResponse.status}`;
+            }
+          } catch (schedError: any) {
+            lastError += `. Scheduling endpoint error: ${schedError.message}`;
+          }
+        }
       } catch (fetchError: any) {
         console.error('Failed to connect to MMFC:', fetchError);
         return NextResponse.json(
@@ -112,25 +142,10 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      if (!testResponse.ok) {
-        const errorText = await testResponse.text();
-        console.error('MMFC API key validation failed:', {
-          status: testResponse.status,
-          statusText: testResponse.statusText,
-          body: errorText,
-          url: testUrl
-        });
-
-        let errorMessage = `Invalid API key (Status: ${testResponse.status}).`;
-        try {
-          const errorJson = JSON.parse(errorText);
-          if (errorJson.message) {
-            errorMessage += ` ${errorJson.message}`;
-          }
-        } catch {}
-
+      if (!validationPassed) {
+        console.error('MMFC API key validation failed:', lastError);
         return NextResponse.json(
-          { error: errorMessage + ' You can skip validation if you trust your API key.' },
+          { error: `Invalid API key or insufficient permissions. ${lastError}. You can skip validation if you trust your API key.` },
           { status: 400 }
         );
       }
