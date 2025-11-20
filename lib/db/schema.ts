@@ -7,6 +7,7 @@ import {
   integer,
   boolean,
   jsonb,
+  decimal,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 

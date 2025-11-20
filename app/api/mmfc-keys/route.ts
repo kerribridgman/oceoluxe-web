@@ -118,6 +118,7 @@ export async function POST(request: NextRequest) {
       const base = baseUrl || 'https://makemoneyfromcoding.com';
       const productsUrl = `${base}/api/v1/products?limit=1`;
       const schedulingUrl = `${base}/api/v1/scheduling/availability`;
+      const servicesUrl = `${base}/api/v1/services?limit=1`;
 
       let validationPassed = false;
       let lastError = '';
@@ -149,6 +150,24 @@ export async function POST(request: NextRequest) {
             } else {
               const schedErrorText = await schedulingResponse.text();
               lastError += `. Scheduling endpoint: Status ${schedulingResponse.status}`;
+
+              // If scheduling fails, try services endpoint
+              try {
+                const servicesResponse = await fetch(servicesUrl, {
+                  headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                  },
+                });
+
+                if (servicesResponse.ok) {
+                  validationPassed = true;
+                } else {
+                  const servErrorText = await servicesResponse.text();
+                  lastError += `. Services endpoint: Status ${servicesResponse.status}`;
+                }
+              } catch (servError: any) {
+                lastError += `. Services endpoint error: ${servError.message}`;
+              }
             }
           } catch (schedError: any) {
             lastError += `. Scheduling endpoint error: ${schedError.message}`;

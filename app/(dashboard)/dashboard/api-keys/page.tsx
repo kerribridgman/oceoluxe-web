@@ -369,6 +369,16 @@ export default function ApiKeysPage() {
                           Sync Scheduling
                         </a>
                       </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        asChild
+                      >
+                        <a href="/dashboard/mmfc-services">
+                          <RefreshCw className="w-3 h-3 mr-1" />
+                          Sync Services
+                        </a>
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
