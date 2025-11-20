@@ -2,13 +2,13 @@ import { getPublicMmfcProducts } from '@/lib/db/queries-mmfc';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, ShoppingCart } from 'lucide-react';
+import { ExternalLink, ShoppingCart, Download, Gift } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 export const metadata = {
-  title: 'Products | Patrick Farrell',
-  description: 'Digital products and services from Patrick Farrell',
+  title: 'Products | Oceo Luxe',
+  description: 'Notion templates, digital products, and resources for fashion entrepreneurs and creative founders',
 };
 
 // Revalidate every 60 seconds to ensure products are up-to-date
@@ -24,95 +24,189 @@ export default async function ProductsPage() {
     // Continue with empty products array to show "No Products Yet" message
   }
 
+  // Separate free and paid products
+  const freeProducts = products.filter(p => p.price === 0 || p.title.toLowerCase().includes('free'));
+  const paidProducts = products.filter(p => p.price > 0 && !p.title.toLowerCase().includes('free'));
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#1a2332] via-[#1e2838] to-[#1a2332] text-white relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-10 left-10 text-4xl text-[#4a9fd8]/10 font-mono">&lt;/&gt;</div>
-        <div className="absolute bottom-10 right-20 text-4xl text-[#4a9fd8]/10 font-mono">&#123;&#125;</div>
-
+      <div className="bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5] text-[#3B3937] relative overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="text-5xl font-bold mb-4">Products</h1>
-          <p className="text-xl text-gray-300 max-w-2xl">
-            Digital products, tools, and services to help you build and grow your business
+          <h1 className="text-5xl md:text-6xl font-serif font-light mb-4">Products & Templates</h1>
+          <p className="text-xl text-[#967F71] max-w-2xl font-light leading-relaxed">
+            Notion templates, digital products, and resources to streamline your fashion business operations
           </p>
         </div>
       </div>
 
       {/* Products Grid */}
-      <div className="bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {products.length === 0 ? (
             <div className="text-center py-16">
-              <ShoppingCart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h2 className="text-2xl font-semibold text-gray-900 mb-2">No Products Yet</h2>
-              <p className="text-gray-600">Check back soon for new products and services!</p>
+              <ShoppingCart className="w-16 h-16 text-[#967F71] mx-auto mb-4" />
+              <h2 className="text-2xl font-serif font-light text-[#3B3937] mb-2">No Products Yet</h2>
+              <p className="text-[#967F71] font-light">Check back soon for new templates and resources!</p>
             </div>
           ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {products.map((product) => (
-                <Link key={product.id} href={`/products/${product.slug}`} className="group">
-                  <Card className="h-full hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 hover:border-[#4a9fd8]">
-                    {(product.featuredImageUrl || product.coverImage) && (
-                      <div className="relative h-56 overflow-hidden bg-gray-100">
-                        <img
-                          src={product.featuredImageUrl || product.coverImage || ''}
-                          alt={product.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        {product.salePrice && (
-                          <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
-                            SALE
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    <CardHeader>
-                      <CardTitle className="text-2xl line-clamp-2 group-hover:text-[#4a9fd8] transition-colors">
-                        {product.title}
-                      </CardTitle>
-                      <CardDescription className="line-clamp-3 text-base">
-                        {product.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-3xl font-bold text-[#4a9fd8]">
-                            ${product.salePrice || product.price}
-                          </p>
-                          {product.salePrice && (
-                            <p className="text-sm text-gray-500 line-through">
-                              ${product.price}
-                            </p>
+            <>
+              {/* Free Products Section */}
+              {freeProducts.length > 0 && (
+                <div className="mb-16">
+                  <div className="flex items-center gap-3 mb-8">
+                    <Gift className="w-8 h-8 text-[#CDA7B2]" />
+                    <h2 className="text-3xl font-serif font-light text-[#3B3937]">Free Resources</h2>
+                  </div>
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {freeProducts.map((product) => (
+                      <Link key={product.id} href={`/products/${product.slug}`} className="group">
+                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#967F71]/20 hover:border-[#CDA7B2]">
+                          {(product.featuredImageUrl || product.coverImage) && (
+                            <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
+                              <img
+                                src={product.featuredImageUrl || product.coverImage || ''}
+                                alt={product.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                              <div className="absolute top-4 right-4 bg-[#CDA7B2] text-white px-3 py-1 rounded-full text-sm font-medium">
+                                FREE
+                              </div>
+                            </div>
                           )}
-                        </div>
-                        <Button className="bg-[#4a9fd8] hover:bg-[#3a8fc8]">
-                          View Details
-                          <ExternalLink className="w-4 h-4 ml-2" />
-                        </Button>
-                      </div>
-                      {product.deliveryType && (
-                        <div className="mt-4 pt-4 border-t border-gray-100">
-                          <p className="text-sm text-gray-600">
-                            <span className="font-medium">Delivery:</span>{' '}
-                            {product.deliveryType === 'download' && 'Instant Download'}
-                            {product.deliveryType === 'repository' && 'Git Repository Access'}
-                            {product.deliveryType === 'service' && 'Service / Consultation'}
-                          </p>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
+                          <CardHeader>
+                            <CardTitle className="text-2xl line-clamp-2 group-hover:text-[#CDA7B2] transition-colors font-serif font-light">
+                              {product.title}
+                            </CardTitle>
+                            {product.description && (
+                              <CardDescription className="line-clamp-3 text-base text-[#967F71] font-light">
+                                {product.description}
+                              </CardDescription>
+                            )}
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-3xl font-serif font-light text-[#CDA7B2]">
+                                  Free
+                                </p>
+                              </div>
+                              <Button className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white">
+                                Get Now
+                                <Download className="w-4 h-4 ml-2" />
+                              </Button>
+                            </div>
+                            {product.deliveryType && (
+                              <div className="mt-4 pt-4 border-t border-[#967F71]/10">
+                                <p className="text-sm text-[#967F71] font-light">
+                                  <span className="font-medium">Delivery:</span>{' '}
+                                  {product.deliveryType === 'download' && 'Instant Download'}
+                                  {product.deliveryType === 'repository' && 'Git Repository Access'}
+                                  {product.deliveryType === 'service' && 'Service / Consultation'}
+                                </p>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Paid Products Section */}
+              {paidProducts.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-8">
+                    <ShoppingCart className="w-8 h-8 text-[#CDA7B2]" />
+                    <h2 className="text-3xl font-serif font-light text-[#3B3937]">Premium Products</h2>
+                  </div>
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {paidProducts.map((product) => (
+                      <Link key={product.id} href={`/products/${product.slug}`} className="group">
+                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#967F71]/20 hover:border-[#CDA7B2]">
+                          {(product.featuredImageUrl || product.coverImage) && (
+                            <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
+                              <img
+                                src={product.featuredImageUrl || product.coverImage || ''}
+                                alt={product.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                              {product.salePrice && (
+                                <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                  SALE
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          <CardHeader>
+                            <CardTitle className="text-2xl line-clamp-2 group-hover:text-[#CDA7B2] transition-colors font-serif font-light">
+                              {product.title}
+                            </CardTitle>
+                            {product.description && (
+                              <CardDescription className="line-clamp-3 text-base text-[#967F71] font-light">
+                                {product.description}
+                              </CardDescription>
+                            )}
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-3xl font-serif font-light text-[#3B3937]">
+                                  ${product.salePrice || product.price}
+                                </p>
+                                {product.salePrice && (
+                                  <p className="text-sm text-[#967F71] line-through font-light">
+                                    ${product.price}
+                                  </p>
+                                )}
+                              </div>
+                              <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white">
+                                View Details
+                                <ExternalLink className="w-4 h-4 ml-2" />
+                              </Button>
+                            </div>
+                            {product.deliveryType && (
+                              <div className="mt-4 pt-4 border-t border-[#967F71]/10">
+                                <p className="text-sm text-[#967F71] font-light">
+                                  <span className="font-medium">Delivery:</span>{' '}
+                                  {product.deliveryType === 'download' && 'Instant Download'}
+                                  {product.deliveryType === 'repository' && 'Git Repository Access'}
+                                  {product.deliveryType === 'service' && 'Service / Consultation'}
+                                </p>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-6">
+            Need Something Custom?
+          </h2>
+          <p className="text-xl text-[#967F71] font-light mb-8 leading-relaxed">
+            We create custom Notion templates and workflows tailored to your specific business needs
+          </p>
+          <Link href="/services">
+            <Button size="lg" className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white text-lg px-8 h-14">
+              Explore Custom Services
+              <ExternalLink className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
+        </div>
+      </section>
 
       <MarketingFooter />
     </div>

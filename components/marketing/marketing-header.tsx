@@ -36,9 +36,8 @@ export function MarketingHeader() {
     { name: 'Home', href: '/' },
     { name: 'Studio Systems', href: '/studio-systems' },
     { name: 'Services', href: '/services' },
+    { name: 'Products', href: '/products' },
     { name: 'Blog', href: '/blog' },
-    // Only show Products link on client-side after checking
-    ...(isClient && hasProducts ? [{ name: 'Products', href: '/products' }] : []),
   ];
 
   return (
