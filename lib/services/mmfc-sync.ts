@@ -287,6 +287,7 @@ async function fetchMmfcServices(
     id: number;
     title: string;
     slug: string;
+    url?: string;
     description?: string;
     price?: number;
     sale_price?: number;
@@ -348,6 +349,7 @@ export async function syncMmfcServices(
       externalId: number;
       title: string;
       slug: string;
+      url?: string | null;
       description?: string | null;
       price?: string | null;
       salePrice?: string | null;
@@ -357,6 +359,7 @@ export async function syncMmfcServices(
       externalId: service.id,
       title: service.title,
       slug: service.slug,
+      url: service.url,
       description: service.description,
       price: service.price?.toString(),
       salePrice: service.sale_price?.toString(),

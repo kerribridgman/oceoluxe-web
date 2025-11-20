@@ -245,6 +245,7 @@ export const mmfcServices = pgTable('mmfc_services', {
   externalId: integer('external_id').notNull(), // Service ID from MMFC
   title: varchar('title', { length: 255 }).notNull(),
   slug: varchar('slug', { length: 255 }).notNull(),
+  url: text('url'), // Full URL to service page on MMFC
   description: text('description'),
   price: decimal('price', { precision: 10, scale: 2 }),
   salePrice: decimal('sale_price', { precision: 10, scale: 2 }),

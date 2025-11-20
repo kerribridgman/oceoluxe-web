@@ -262,16 +262,16 @@ export default async function ServicesPage() {
                             SALE
                           </span>
                         </>
-                      ) : (
+                      ) : service.price ? (
                         <span className="text-3xl font-bold text-gray-900">
                           ${service.price}
                         </span>
-                      )}
+                      ) : null}
                     </div>
 
                     {/* Learn More Link */}
                     <a
-                      href={`https://makemoneyfromcoding.com/services/${service.slug}`}
+                      href={service.url || `https://makemoneyfromcoding.com/services/${service.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center px-6 py-3 bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white font-semibold rounded-lg transition-colors duration-200"

@@ -10,6 +10,7 @@ export interface ServiceData {
   externalId: number;
   title: string;
   slug: string;
+  url?: string | null;
   description?: string | null;
   price?: string | null;
   salePrice?: string | null;
@@ -72,6 +73,7 @@ export async function upsertServices(apiKeyId: number, services: ServiceData[]) 
         externalId: service.externalId,
         title: service.title,
         slug: service.slug,
+        url: service.url,
         description: service.description,
         price: service.price,
         salePrice: service.salePrice,
@@ -84,6 +86,7 @@ export async function upsertServices(apiKeyId: number, services: ServiceData[]) 
         set: {
           title: service.title,
           slug: service.slug,
+          url: service.url,
           description: service.description,
           price: service.price,
           salePrice: service.salePrice,
