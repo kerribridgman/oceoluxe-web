@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
       id: key.id,
       name: key.name,
       baseUrl: key.baseUrl,
-      encryptedKey: key.encryptedKey, // Safe to send - it's already encrypted
+      encryptedKey: key.apiKey, // Safe to send - it's already encrypted (field name is apiKey in DB)
       autoSync: key.autoSync,
       syncFrequency: key.syncFrequency,
       lastSyncAt: key.lastSyncAt,
