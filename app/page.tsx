@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, X, Layers, Zap, Heart, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Brain, Zap, Target, Calendar, Users, LineChart } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
@@ -11,79 +12,85 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  const oceoMethodSteps = [
+  const idealClientIndicators = [
+    "Decision fatigue from competing priorities",
+    "Overwhelm navigating supplier/manufacturer options",
+    "Strong creative ideas but weak backend systems",
+    "Planning without producing",
+    "Overly complex organizational systems",
+    "Misalignment between vision and execution method"
+  ];
+
+  const offerings = [
     {
-      icon: <Layers className="h-12 w-12 text-[#CDA7B2]" />,
-      title: "Organize",
-      description: "Set up your supplier systems, calendars, and costing templates so you always know what's coming."
+      icon: <Calendar className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Timeline Tracking",
+      description: "Keep projects on schedule with clarity and confidence"
     },
     {
-      icon: <Zap className="h-12 w-12 text-[#CDA7B2]" />,
-      title: "Optimize",
-      description: "Streamline communication with human-first scripts that reduce ghosting and get faster replies."
+      icon: <Users className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Team Onboarding",
+      description: "Streamlined systems to bring team members up to speed"
     },
     {
-      icon: <Heart className="h-12 w-12 text-[#CDA7B2]" />,
-      title: "Own It",
-      description: "Implement nervous system practices + decision-making tools so you scale without sacrificing yourself."
+      icon: <LineChart className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Schedule Clarity",
+      description: "Professional systems used with creative brands and startups"
     }
-  ];
-
-  const struggles = [
-    "Scrambling to source fabrics last-minute with zero clarity on timelines",
-    "Writing (& rewriting) follow-up emails to factories that never respond",
-    "Missing deadlines, late deliveries, and constant rescheduling",
-    "Focusing on everything except the reason they started",
-    "Guessing at pricing, unsure if you're actually making a profit",
-    "Spending more time managing chaos than designing your collection"
-  ];
-
-  const solutions = [
-    "Working from a finalized sourcing list with vetted sustainable suppliers and materials",
-    "Using plug-and-play email scripts to get factory replies fast (no more ghosting)",
-    "Following a mapped-out production calendar that runs from sampling to delivery",
-    "Making confident pricing decisions with costing sheets that show your margins, line by line",
-    "Reclaiming 10+ hours a week to design, create, and actually breathe — without burning out",
-    "Designing from a place of flow while your systems work for you"
   ];
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
-      {/* Hero Section - Split Layout */}
+      {/* Hero Section */}
       <section className="bg-[#f5f0ea]">
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left: Content */}
             <div className="space-y-8">
               <div className="space-y-6">
+                <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-4">
+                  <span className="text-[#CDA7B2] font-medium">Oceo Luxe Studio Systems</span>
+                </div>
                 <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
-                  The Membership That Gives Designers <span className="italic">& Visionaries</span>{' '}
-                  <span className="text-[#CDA7B2]">Structure as Support</span>
+                  Proven systems for <span className="text-[#CDA7B2]">visionaries and executives</span> — now optimized for your next chapter.
                 </h1>
                 <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
+                  The studio combines "vision and the ocean" (Oceo) with "luxury at every level" (Luxe), positioning itself as a curated business systems hub for founders and creatives focused on clarifying backend operations, automating repetitive tasks with AI, and maintaining creative momentum.
                 </p>
               </div>
-              <Link href="/apply/entrepreneur-circle">
-                <Button
-                  size="lg"
-                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
-                >
-                  Join Now for $39/month
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <p className="text-sm text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/services">
+                  <Button
+                    size="lg"
+                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group w-full sm:w-auto"
+                  >
+                    Explore Services
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link href="/products">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-14 px-10 text-lg font-light w-full sm:w-auto"
+                  >
+                    View Products
+                  </Button>
+                </Link>
+              </div>
             </div>
             {/* Right: Image */}
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src="/images/hero-workspace.jpg"
-                  alt="Fashion design workspace with mood boards"
-                  className="w-full h-full object-cover"
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
+                <Image
+                  src="/images/hero-systems.png"
+                  alt="Business systems and organization"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                  priority
                 />
               </div>
             </div>
@@ -91,42 +98,90 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Tagline Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-2xl md:text-3xl font-serif font-light text-[#3B3937] leading-relaxed">
-            ✨ Where clarity meets calm in modern fashion production
-          </p>
+      {/* What You Will Find Here Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
+              What You Will Find Here
+            </h2>
+            <p className="text-xl text-[#967F71] max-w-4xl mx-auto leading-relaxed font-light">
+              Ready-to-use Notion templates, project workflows, and sustainable business systems designed for visionary founders and teams.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {offerings.map((offering, index) => (
+              <Card key={index} className="border-[#967F71]/20 bg-gradient-to-br from-[#faf8f5] to-white hover:shadow-lg transition-shadow">
+                <CardContent className="pt-10 pb-8 text-center">
+                  <div className="flex justify-center mb-6">
+                    {offering.icon}
+                  </div>
+                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4">
+                    {offering.title}
+                  </h3>
+                  <p className="text-[#967F71] leading-relaxed font-light">
+                    {offering.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/5 rounded-2xl p-10 border border-[#CDA7B2]/20">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6">
+                  AI-Powered Automation
+                </h3>
+                <p className="text-[#967F71] leading-relaxed font-light text-lg">
+                  AI integrations enable automation of administrative planning and communication streamlining, freeing mental space for strategic leadership. Custom solutions are available upon request.
+                </p>
+              </div>
+              <div className="flex justify-center">
+                <div className="aspect-square w-full max-w-md rounded-xl overflow-hidden shadow-lg relative">
+                  <Image
+                    src="/images/ai-systems.png"
+                    alt="AI-powered business systems"
+                    fill
+                    className="object-cover"
+                    quality={95}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Problem Section */}
-      <section className="py-16 bg-[#faf8f5]">
+      {/* Ideal Client Section */}
+      <section className="py-24 bg-[#faf8f5]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
             <div className="order-2 lg:order-1">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img
-                  src="/images/sewing-machine.png"
-                  alt="Hands working on sewing machine"
-                  className="w-full h-full object-cover"
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl relative">
+                <Image
+                  src="/images/ideal-client.png"
+                  alt="Creative professional working"
+                  fill
+                  className="object-cover"
+                  quality={95}
                 />
               </div>
             </div>
             {/* Content */}
             <div className="order-1 lg:order-2 space-y-10">
               <div>
-                <p className="text-xl text-[#967F71] mb-6 font-light italic">In my 12 years of working in the fashion industry...</p>
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
-                  I've seen fashion designers fall into the trap of...
+                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
+                  You're in the right place if you're experiencing...
                 </h2>
               </div>
               <div className="space-y-4">
-                {struggles.slice(0, 4).map((struggle, index) => (
+                {idealClientIndicators.map((indicator, index) => (
                   <div key={index} className="flex items-start gap-4 bg-white p-5 rounded-lg border border-[#967F71]/10 shadow-sm">
-                    <X className="h-5 w-5 text-red-400 flex-shrink-0 mt-1" />
-                    <span className="text-[#3B3937] font-light leading-relaxed">{struggle}</span>
+                    <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-1" />
+                    <span className="text-[#3B3937] font-light leading-relaxed">{indicator}</span>
                   </div>
                 ))}
               </div>
@@ -135,144 +190,35 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-4 leading-tight">
-              When really you should be...
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {solutions.map((solution, index) => (
-              <div key={index} className="flex items-start gap-4 bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/5 p-8 rounded-xl border border-[#CDA7B2]/20 shadow-sm hover:shadow-md transition-shadow">
-                <Check className="h-6 w-6 text-[#CDA7B2] flex-shrink-0 mt-1" />
-                <span className="text-[#3B3937] font-light leading-relaxed text-lg">{solution}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* The Oceo Method - Full Width Image Background */}
-      <section className="relative py-32 overflow-hidden">
-        {/* Background with Overlay */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/95 to-white/95"></div>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="inline-block bg-[#CDA7B2]/10 px-8 py-3 rounded-full mb-8">
-              <span className="text-[#CDA7B2] font-medium text-lg">The Signature Framework</span>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
-              The Oceo Method™
-            </h2>
-            <p className="text-2xl text-[#967F71] max-w-3xl mx-auto leading-relaxed font-light">
-              A calm, connected approach to production — for fashion founders and visionaries who value both structure and sanity.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-10 mb-16">
-            {oceoMethodSteps.map((step, index) => (
-              <Card key={index} className="border-none bg-white shadow-xl hover:shadow-2xl transition-shadow">
-                <CardContent className="pt-12 pb-10 text-center">
-                  <div className="flex justify-center mb-8">
-                    {step.icon}
-                  </div>
-                  <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6 tracking-wide">
-                    {step.title}
-                  </h3>
-                  <p className="text-[#967F71] leading-relaxed font-light text-lg">
-                    {step.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center max-w-4xl mx-auto">
-            <p className="text-xl text-[#3B3937]/90 leading-relaxed italic font-light">
-              If you're someone who is looking to bring more clarity to your processes, connection to your creative and operational flow, and capacity to scale your vision without burning out, this membership was built for you.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Luxury Pricing Section */}
+      {/* CTA Section */}
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-            A Luxury-Level Membership<br />for the Price of Coffee & Croissant
-          </h2>
-          <div className="my-8">
-            <p className="text-[#967F71] line-through text-lg mb-2 font-light">Final Price: $80/month</p>
-            <div className="text-6xl font-serif font-light text-[#3B3937] mb-2">
-              $39<span className="text-3xl text-[#967F71]">/month</span>
-            </div>
-            <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
-            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Limited Time: $39/month for the first 20 members only</p>
-          </div>
-          <Link href="/apply/entrepreneur-circle">
-            <Button
-              size="lg"
-              className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light mt-8"
-            >
-              Yes, I'm In — Join Now
-            </Button>
-          </Link>
-          <p className="text-sm text-[#967F71] mt-6 font-light">
-            No thanks, I'll figure it out on my own
-          </p>
-        </div>
-      </section>
-
-      {/* Inspiration Quote with Image */}
-      <section className="relative py-32 overflow-hidden bg-[#faf8f5]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <blockquote className="text-3xl md:text-4xl font-serif font-light text-[#3B3937] leading-relaxed italic">
-                "You didn't become a designer to chase deadlines or question your worth. You became one to create — to bring beauty and meaning into the world."
-              </blockquote>
-              <p className="text-lg text-[#967F71] mt-8 font-light">
-                — Studio Systems by Oceo Luxe
-              </p>
-            </div>
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="/images/runway.png"
-                alt="Fashion runway show"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-            Ready to Reclaim Your Time<br />and Creative Flow?
+          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
+            Ready to bring clarity to your<br />backend operations?
           </h2>
           <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
-            Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
-            monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
+            Explore our services, products, and custom solutions designed to free your mental space for strategic leadership.
           </p>
-          <Link href="/apply/entrepreneur-circle">
-            <Button
-              size="lg"
-              className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group"
-            >
-              Join as Founding Member
-              <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
-          <p className="text-lg text-[#967F71] mt-8 font-light">
-            $39/month for the first 20 members • After that, price increases to $59/month
-          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/services">
+              <Button
+                size="lg"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group w-full sm:w-auto"
+              >
+                Explore Services
+                <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link href="/products">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
+              >
+                Browse Products
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

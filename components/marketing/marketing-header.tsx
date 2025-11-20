@@ -34,6 +34,7 @@ export function MarketingHeader() {
 
   const navItems = [
     { name: 'Home', href: '/' },
+    { name: 'Studio Systems', href: '/studio-systems' },
     { name: 'Services', href: '/services' },
     { name: 'Blog', href: '/blog' },
     // Only show Products link on client-side after checking
