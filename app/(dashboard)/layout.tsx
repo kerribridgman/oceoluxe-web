@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { use, useState, Suspense } from 'react';
+import { use, useState, Suspense, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Home, LogOut } from 'lucide-react';
 import Image from 'next/image';
@@ -17,7 +17,12 @@ import { useRouter } from 'next/navigation';
 import { User } from '@/lib/db/schema';
 import useSWR, { mutate } from 'swr';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => {
+  if (res.status === 401) {
+    throw new Error('Unauthorized');
+  }
+  return res.json();
+});
 
 function UserMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -107,6 +112,33 @@ function Header() {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const { data: user, error } = useSWR<User>('/api/user', fetcher);
+
+  useEffect(() => {
+    // If API returns unauthorized, redirect to sign-in
+    if (error && error.message === 'Unauthorized') {
+      router.push('/sign-in');
+    }
+  }, [error, router]);
+
+  // Show loading state while checking auth
+  if (!user && !error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-primary mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If there's an error (unauthorized), show nothing (redirect will happen)
+  if (error) {
+    return null;
+  }
+
   return (
     <section className="flex flex-col min-h-screen">
       <Header />

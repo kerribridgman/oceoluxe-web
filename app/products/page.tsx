@@ -46,10 +46,10 @@ export default async function ProductsPage() {
               {products.map((product) => (
                 <Link key={product.id} href={`/products/${product.slug}`} className="group">
                   <Card className="h-full hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 hover:border-[#4a9fd8]">
-                    {product.featuredImageUrl && (
+                    {(product.featuredImageUrl || product.coverImage) && (
                       <div className="relative h-56 overflow-hidden bg-gray-100">
                         <img
-                          src={product.featuredImageUrl}
+                          src={product.featuredImageUrl || product.coverImage || ''}
                           alt={product.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />

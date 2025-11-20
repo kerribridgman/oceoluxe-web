@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: product.title,
       description: product.description || '',
-      images: product.featuredImageUrl ? [product.featuredImageUrl] : [],
+      images: (product.featuredImageUrl || product.coverImage) ? [product.featuredImageUrl || product.coverImage || ''] : [],
     },
   };
 }
@@ -45,7 +45,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const images = product.images as any[] || [];
   const displayImages = [
-    ...(product.featuredImageUrl ? [{ url: product.featuredImageUrl, alt: product.featuredImageAlt }] : []),
+    // Use featuredImageUrl if available, otherwise use coverImage
+    ...(product.featuredImageUrl ? [{ url: product.featuredImageUrl, alt: product.featuredImageAlt || product.title }] :
+        product.coverImage ? [{ url: product.coverImage, alt: product.title }] : []),
     ...images
   ];
 

@@ -4,19 +4,20 @@
 
 import { db } from './drizzle';
 import { mmfcApiKeys, mmfcProducts } from './schema';
-import { eq, and, desc } from 'drizzle-orm';
+import { eq, and, desc, inArray } from 'drizzle-orm';
 import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
 
-const ENCRYPTION_KEY = process.env.MMFC_ENCRYPTION_KEY || process.env.AUTH_SECRET;
+const ENCRYPTION_KEY_RAW = process.env.MMFC_ENCRYPTION_KEY || process.env.AUTH_SECRET;
 
-if (!ENCRYPTION_KEY) {
+if (!ENCRYPTION_KEY_RAW) {
   throw new Error('MMFC_ENCRYPTION_KEY or AUTH_SECRET environment variable must be set');
 }
 
-if (ENCRYPTION_KEY.length < 32) {
+if (ENCRYPTION_KEY_RAW.length < 32) {
   throw new Error('Encryption key must be at least 32 characters long');
 }
 
+const ENCRYPTION_KEY: string = ENCRYPTION_KEY_RAW;
 const ALGORITHM = 'aes-256-cbc';
 
 /**
@@ -280,16 +281,29 @@ export async function upsertMmfcProducts(
  * Get all visible products across all API keys for a user
  */
 export async function getUserMmfcProducts(userId: number) {
-  return await db.query.mmfcProducts.findMany({
-    where: and(
-      eq(mmfcApiKeys.userId, userId),
-      eq(mmfcProducts.isVisible, true)
-    ),
-    with: {
-      apiKey: true,
-    },
-    orderBy: [desc(mmfcProducts.createdAt)],
-  });
+  // First get all API key IDs for this user
+  const userApiKeys = await db
+    .select({ id: mmfcApiKeys.id })
+    .from(mmfcApiKeys)
+    .where(eq(mmfcApiKeys.userId, userId));
+
+  if (userApiKeys.length === 0) {
+    return [];
+  }
+
+  const apiKeyIds = userApiKeys.map(k => k.id);
+
+  // Then get all visible products for those API keys
+  return await db
+    .select()
+    .from(mmfcProducts)
+    .where(
+      and(
+        eq(mmfcProducts.isVisible, true),
+        inArray(mmfcProducts.apiKeyId, apiKeyIds)
+      )
+    )
+    .orderBy(desc(mmfcProducts.createdAt));
 }
 
 /**

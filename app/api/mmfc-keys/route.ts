@@ -66,19 +66,58 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate API key by attempting to fetch products
-    const testUrl = `${baseUrl || 'https://makemoneyfromcoding.com'}/api/v1/products?limit=1`;
-    const testResponse = await fetch(testUrl, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-      },
-    });
-
-    if (!testResponse.ok) {
+    // Validate API key format
+    if (!apiKey.startsWith('int_')) {
       return NextResponse.json(
-        { error: 'Invalid API key or unable to connect to MMFC' },
+        { error: 'Invalid API key format. Must start with "int_"' },
         { status: 400 }
       );
+    }
+
+    // Optional: Validate API key by attempting to fetch products
+    // Only validate if skipValidation is not set
+    const skipValidation = body.skipValidation === true;
+
+    if (!skipValidation) {
+      const testUrl = `${baseUrl || 'https://makemoneyfromcoding.com'}/api/v1/products?limit=1`;
+
+      let testResponse;
+      try {
+        testResponse = await fetch(testUrl, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+          },
+        });
+      } catch (fetchError: any) {
+        console.error('Failed to connect to MMFC:', fetchError);
+        return NextResponse.json(
+          { error: `Unable to connect to MMFC: ${fetchError.message}. You can skip validation by enabling "Skip Validation" option.` },
+          { status: 400 }
+        );
+      }
+
+      if (!testResponse.ok) {
+        const errorText = await testResponse.text();
+        console.error('MMFC API key validation failed:', {
+          status: testResponse.status,
+          statusText: testResponse.statusText,
+          body: errorText,
+          url: testUrl
+        });
+
+        let errorMessage = `Invalid API key (Status: ${testResponse.status}).`;
+        try {
+          const errorJson = JSON.parse(errorText);
+          if (errorJson.message) {
+            errorMessage += ` ${errorJson.message}`;
+          }
+        } catch {}
+
+        return NextResponse.json(
+          { error: errorMessage + ' You can skip validation if you trust your API key.' },
+          { status: 400 }
+        );
+      }
     }
 
     const newKey = await createMmfcApiKey(

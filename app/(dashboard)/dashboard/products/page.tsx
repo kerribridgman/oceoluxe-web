@@ -48,7 +48,8 @@ export default function ProductsPage() {
     apiKey: '',
     baseUrl: 'https://makemoneyfromcoding.com',
     autoSync: false,
-    syncFrequency: 'daily'
+    syncFrequency: 'daily',
+    skipValidation: false
   });
 
   useEffect(() => {
@@ -101,7 +102,8 @@ export default function ProductsPage() {
         apiKey: '',
         baseUrl: 'https://makemoneyfromcoding.com',
         autoSync: false,
-        syncFrequency: 'daily'
+        syncFrequency: 'daily',
+        skipValidation: false
       });
       fetchData();
     } catch (error) {
@@ -400,33 +402,53 @@ export default function ProductsPage() {
                     className="mt-1.5"
                   />
                 </div>
-                <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      id="autoSync"
-                      checked={formData.autoSync}
-                      onChange={(e) => setFormData({ ...formData, autoSync: e.target.checked })}
-                      className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
-                    />
-                    <Label htmlFor="autoSync" className="cursor-pointer font-semibold text-gray-700">
-                      Enable auto-sync
-                    </Label>
-                  </div>
-                  {formData.autoSync && (
-                    <div className="mt-3 ml-6">
-                      <Label htmlFor="syncFrequency" className="text-sm font-semibold text-gray-700">Sync Frequency</Label>
-                      <select
-                        id="syncFrequency"
-                        value={formData.syncFrequency}
-                        onChange={(e) => setFormData({ ...formData, syncFrequency: e.target.value })}
-                        className="w-full mt-1.5 rounded-md border border-gray-300 p-2.5 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
-                      >
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                      </select>
+                <div className="space-y-3">
+                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="autoSync"
+                        checked={formData.autoSync}
+                        onChange={(e) => setFormData({ ...formData, autoSync: e.target.checked })}
+                        className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
+                      />
+                      <Label htmlFor="autoSync" className="cursor-pointer font-semibold text-gray-700">
+                        Enable auto-sync
+                      </Label>
                     </div>
-                  )}
+                    {formData.autoSync && (
+                      <div className="mt-3 ml-6">
+                        <Label htmlFor="syncFrequency" className="text-sm font-semibold text-gray-700">Sync Frequency</Label>
+                        <select
+                          id="syncFrequency"
+                          value={formData.syncFrequency}
+                          onChange={(e) => setFormData({ ...formData, syncFrequency: e.target.value })}
+                          className="w-full mt-1.5 rounded-md border border-gray-300 p-2.5 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary"
+                        >
+                          <option value="daily">Daily</option>
+                          <option value="weekly">Weekly</option>
+                        </select>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="skipValidation"
+                        checked={formData.skipValidation}
+                        onChange={(e) => setFormData({ ...formData, skipValidation: e.target.checked })}
+                        className="w-4 h-4 text-brand-primary rounded border-gray-300 focus:ring-brand-primary"
+                      />
+                      <Label htmlFor="skipValidation" className="cursor-pointer font-semibold text-gray-700">
+                        Skip API key validation
+                      </Label>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2 ml-6">
+                      Enable this if API integration is disabled on MMFC but you want to add the key anyway
+                    </p>
+                  </div>
                 </div>
                 <div className="flex gap-3 justify-end pt-6 border-t">
                   <Button

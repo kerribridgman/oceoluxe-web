@@ -18,8 +18,17 @@ export async function middleware(request: NextRequest) {
     try {
       const parsed = await verifyToken(sessionCookie.value);
 
+      // Validate the parsed token structure
+      if (!parsed || !parsed.user || typeof parsed.user.id !== 'number') {
+        console.error('Invalid token structure');
+        const response = NextResponse.redirect(new URL('/sign-in', request.url));
+        response.cookies.delete('session');
+        return response;
+      }
+
       // Check if token is expired
-      if (new Date(parsed.expires) < new Date()) {
+      if (!parsed.expires || new Date(parsed.expires) < new Date()) {
+        console.error('Token expired');
         const response = NextResponse.redirect(new URL('/sign-in', request.url));
         response.cookies.delete('session');
         return response;
@@ -37,6 +46,27 @@ export async function middleware(request: NextRequest) {
   if (sessionCookie && request.method === 'GET') {
     try {
       const parsed = await verifyToken(sessionCookie.value);
+
+      // Validate token structure before refreshing
+      if (!parsed || !parsed.user || typeof parsed.user.id !== 'number' || !parsed.expires) {
+        console.error('Invalid token structure during refresh');
+        res.cookies.delete('session');
+        if (isProtectedRoute) {
+          return NextResponse.redirect(new URL('/sign-in', request.url));
+        }
+        return res;
+      }
+
+      // Don't refresh if expired
+      if (new Date(parsed.expires) < new Date()) {
+        console.error('Token expired during refresh');
+        res.cookies.delete('session');
+        if (isProtectedRoute) {
+          return NextResponse.redirect(new URL('/sign-in', request.url));
+        }
+        return res;
+      }
+
       const expiresInOneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
       res.cookies.set({
