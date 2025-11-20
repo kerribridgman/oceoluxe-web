@@ -63,9 +63,13 @@ export default function ApiKeysPage() {
     setIsLoading(true);
     try {
       const response = await fetch('/api/mmfc-keys');
+      console.log('API Keys response status:', response.status);
       if (response.ok) {
         const data = await response.json();
+        console.log('API Keys data:', data);
         setKeys(data.keys || []);
+      } else {
+        console.error('API Keys response not ok:', response.status);
       }
     } catch (error) {
       console.error('Error fetching API keys:', error);
@@ -89,6 +93,7 @@ export default function ApiKeysPage() {
 
       if (!response.ok) {
         alert(data.error || 'Failed to add API key');
+        setIsSubmitting(false);
         return;
       }
 
@@ -102,7 +107,7 @@ export default function ApiKeysPage() {
         syncFrequency: 'daily',
         skipValidation: false,
       });
-      fetchKeys();
+      await fetchKeys();
     } catch (error) {
       console.error('Error adding API key:', error);
       alert('Failed to add API key');

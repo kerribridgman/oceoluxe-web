@@ -31,30 +31,50 @@ export async function GET(request: NextRequest) {
 
     // Decrypt and mask API keys for display (matches MMFC format)
     const sanitizedKeys = keys.map((key) => {
-      const decryptedKey = decryptApiKey(key.apiKey);
-      const maskedKey = maskApiKey(decryptedKey);
+      try {
+        const decryptedKey = decryptApiKey(key.apiKey);
+        const maskedKey = maskApiKey(decryptedKey);
 
-      return {
-        id: key.id,
-        name: key.name,
-        baseUrl: key.baseUrl,
-        maskedApiKey: maskedKey, // Masked version for display (e.g., "int_4P-xifr...")
-        autoSync: key.autoSync,
-        syncFrequency: key.syncFrequency,
-        lastSyncAt: key.lastSyncAt,
-        lastSyncStatus: key.lastSyncStatus,
-        lastSyncError: key.lastSyncError,
-        isActive: key.isActive,
-        createdAt: key.createdAt,
-        updatedAt: key.updatedAt,
-      };
+        return {
+          id: key.id,
+          name: key.name,
+          baseUrl: key.baseUrl,
+          maskedApiKey: maskedKey, // Masked version for display (e.g., "int_4P-xifr...")
+          autoSync: key.autoSync,
+          syncFrequency: key.syncFrequency,
+          lastSyncAt: key.lastSyncAt,
+          lastSyncStatus: key.lastSyncStatus,
+          lastSyncError: key.lastSyncError,
+          isActive: key.isActive,
+          createdAt: key.createdAt,
+          updatedAt: key.updatedAt,
+        };
+      } catch (decryptError) {
+        console.error(`Error decrypting key ${key.id}:`, decryptError);
+        // Return key with error indication
+        return {
+          id: key.id,
+          name: key.name,
+          baseUrl: key.baseUrl,
+          maskedApiKey: '••••••••', // Fallback for decryption error
+          autoSync: key.autoSync,
+          syncFrequency: key.syncFrequency,
+          lastSyncAt: key.lastSyncAt,
+          lastSyncStatus: key.lastSyncStatus,
+          lastSyncError: 'Decryption error',
+          isActive: key.isActive,
+          createdAt: key.createdAt,
+          updatedAt: key.updatedAt,
+        };
+      }
     });
 
     return NextResponse.json({ keys: sanitizedKeys });
   } catch (error: any) {
     console.error('Error fetching MMFC keys:', error);
+    console.error('Error stack:', error.stack);
     return NextResponse.json(
-      { error: 'Failed to fetch API keys' },
+      { error: 'Failed to fetch API keys: ' + error.message },
       { status: 500 }
     );
   }
