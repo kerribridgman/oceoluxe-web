@@ -247,6 +247,7 @@ export const mmfcServices = pgTable('mmfc_services', {
   slug: varchar('slug', { length: 255 }).notNull(),
   url: text('url'), // Full URL to service page on MMFC
   description: text('description'),
+  pricingType: varchar('pricing_type', { length: 50 }), // 'hourly' or 'project'
   price: decimal('price', { precision: 10, scale: 2 }),
   salePrice: decimal('sale_price', { precision: 10, scale: 2 }),
   featuredImageUrl: text('featured_image_url'),

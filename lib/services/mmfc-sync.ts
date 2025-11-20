@@ -345,6 +345,8 @@ export async function syncMmfcServices(
     // Fetch services
     const response = await fetchMmfcServices(apiKey, apiKeyRecord.baseUrl);
 
+    console.log('MMFC Services API Response:', JSON.stringify(response, null, 2));
+
     // Transform services for database
     const { upsertServices } = await import('../db/queries-mmfc-services');
 
@@ -354,6 +356,7 @@ export async function syncMmfcServices(
       slug: string;
       url?: string | null;
       description?: string | null;
+      pricingType?: string | null;
       price?: string | null;
       salePrice?: string | null;
       featuredImageUrl?: string | null;
@@ -377,6 +380,7 @@ export async function syncMmfcServices(
         slug: service.slug,
         url: service.service_url,
         description: service.description,
+        pricingType: service.pricing_type,
         price: price,
         salePrice: salePrice,
         featuredImageUrl: service.featured_image,

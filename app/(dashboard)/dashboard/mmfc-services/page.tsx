@@ -299,6 +299,9 @@ export default function MmfcServicesPage() {
                           ${service.price}
                         </span>
                       )}
+                      {service.pricingType === 'hourly' && (
+                        <span className="text-sm text-gray-600">/hr</span>
+                      )}
                     </div>
 
                     {/* API Key Source */}

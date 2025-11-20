@@ -258,14 +258,22 @@ export default async function ServicesPage() {
                           <span className="text-lg text-gray-500 line-through">
                             ${service.price}
                           </span>
+                          {service.pricingType === 'hourly' && (
+                            <span className="text-base text-gray-600">/hr</span>
+                          )}
                           <span className="ml-2 px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded">
                             SALE
                           </span>
                         </>
                       ) : service.price ? (
-                        <span className="text-3xl font-bold text-gray-900">
-                          ${service.price}
-                        </span>
+                        <>
+                          <span className="text-3xl font-bold text-gray-900">
+                            ${service.price}
+                          </span>
+                          {service.pricingType === 'hourly' && (
+                            <span className="text-base text-gray-600">/hr</span>
+                          )}
+                        </>
                       ) : null}
                     </div>
 
