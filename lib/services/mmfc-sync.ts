@@ -28,6 +28,7 @@ interface MmfcProduct {
   has_files: boolean;
   file_count: number;
   has_repository: boolean;
+  checkout_url?: string; // Direct checkout URL from MMFC API
   created_at: string;
   updated_at: string;
 }
@@ -51,7 +52,8 @@ async function fetchMmfcProducts(
   baseUrl: string,
   page: number = 1
 ): Promise<MmfcApiResponse> {
-  const url = `${baseUrl}/api/v1/products?page=${page}&limit=100`;
+  // Include referral parameter so MMFC API returns checkout URLs with tracking
+  const url = `${baseUrl}/api/v1/products?page=${page}&limit=100&ref=iampatrickfarrell`;
 
   const response = await fetch(url, {
     method: 'GET',
@@ -116,8 +118,10 @@ export async function syncMmfcProducts(
 
     // Transform products for database
     const productsToUpsert = allProducts.map((product) => {
-      // Build checkout URL with referral tracking
-      const checkoutUrl = `${apiKeyRecord.baseUrl}/store/${product.slug}?ref=iampatrickfarrell`;
+      // Use checkout_url from API if available, otherwise construct it
+      // The MMFC API now provides checkout_url with referral tracking built-in
+      const checkoutUrl = product.checkout_url ||
+        `${apiKeyRecord.baseUrl}/store/patrick/${product.slug}?ref=iampatrickfarrell`;
 
       return {
         externalId: product.id,

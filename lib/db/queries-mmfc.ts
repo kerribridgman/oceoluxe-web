@@ -334,15 +334,20 @@ export async function getMmfcProductBySlug(slug: string) {
  * Get a specific product by ID (for admin)
  */
 export async function getMmfcProductById(id: number, userId: number) {
-  return await db.query.mmfcProducts.findFirst({
-    where: and(
-      eq(mmfcProducts.id, id),
-      eq(mmfcApiKeys.userId, userId)
-    ),
+  // First get the product with its API key
+  const product = await db.query.mmfcProducts.findFirst({
+    where: eq(mmfcProducts.id, id),
     with: {
       apiKey: true,
     },
   });
+
+  // Check if the product exists and belongs to the user
+  if (!product || product.apiKey.userId !== userId) {
+    return null;
+  }
+
+  return product;
 }
 
 /**
