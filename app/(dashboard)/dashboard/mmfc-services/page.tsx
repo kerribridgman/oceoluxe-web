@@ -17,6 +17,7 @@ interface MmfcService {
   title: string;
   slug: string;
   description: string;
+  pricingType: string | null;
   price: string;
   salePrice: string | null;
   featuredImageUrl: string | null;
