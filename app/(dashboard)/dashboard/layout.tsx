@@ -48,11 +48,11 @@ export default function DashboardLayout({
   ];
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+    <div className="flex min-h-screen bg-gradient-to-br from-[#faf8f5] via-[#f5f0ea] to-[#faf8f5]">
       {/* Mobile header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-gradient-to-r from-brand-navy via-brand-navy-medium to-gray-700 backdrop-blur-lg border-b border-white/10 p-4 shadow-lg">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-[#3B3937] backdrop-blur-lg border-b border-[#CDA7B2]/20 p-4 shadow-lg">
         <Button
-          className="-ml-3 text-white hover:bg-white/10"
+          className="-ml-3 text-white hover:bg-[#CDA7B2]/20"
           variant="ghost"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
@@ -60,8 +60,8 @@ export default function DashboardLayout({
           <span className="sr-only">Toggle sidebar</span>
         </Button>
         <div className="flex items-center">
-          <span className="font-semibold text-white">
-            Dashboard
+          <span className="font-serif font-light text-white text-lg">
+            Oceo Luxe
           </span>
         </div>
         <div className="w-10" />
@@ -69,20 +69,20 @@ export default function DashboardLayout({
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 h-screen w-72 bg-gradient-to-b from-brand-navy via-brand-navy-medium to-brand-navy lg:block ${
+        className={`fixed lg:sticky top-0 h-screen w-72 bg-[#3B3937] lg:block ${
           isSidebarOpen ? 'block' : 'hidden'
         } z-40 shadow-2xl`}
       >
         <div className="h-full flex flex-col">
           {/* Sidebar Header */}
-          <div className="p-6 border-b border-white/10">
+          <div className="p-6 border-b border-[#CDA7B2]/10">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-blue-600 flex items-center justify-center shadow-lg">
-                <LayoutDashboard className="h-5 w-5 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-[#CDA7B2] flex items-center justify-center shadow-lg">
+                <LayoutDashboard className="h-5 w-5 text-[#3B3937]" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-white">Workspace</h2>
-                <p className="text-xs text-gray-400">Admin Panel</p>
+                <h2 className="text-lg font-serif font-light text-white">Oceo Luxe</h2>
+                <p className="text-xs text-[#967F71] tracking-wide">STUDIO SYSTEMS</p>
               </div>
             </div>
           </div>
@@ -102,17 +102,17 @@ export default function DashboardLayout({
                         <button
                           className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${
                             isActive
-                              ? 'bg-gradient-to-r from-brand-primary/20 to-blue-500/20 text-white shadow-lg shadow-brand-primary/10 border border-brand-primary/30'
+                              ? 'bg-[#CDA7B2]/10 text-white shadow-lg shadow-[#CDA7B2]/5 border border-[#CDA7B2]/30'
                               : 'text-gray-300 hover:bg-white/5 hover:text-white'
                           }`}
                           onClick={() => setIsSidebarOpen(false)}
                         >
                           <div className="flex items-center gap-3">
-                            <item.icon className={`h-4 w-4 ${isActive ? 'text-brand-primary' : 'text-gray-400 group-hover:text-gray-300'}`} />
+                            <item.icon className={`h-4 w-4 ${isActive ? 'text-[#CDA7B2]' : 'text-gray-400 group-hover:text-gray-300'}`} />
                             <span>{item.label}</span>
                           </div>
                           {isActive && (
-                            <ChevronRight className="h-4 w-4 text-brand-primary" />
+                            <ChevronRight className="h-4 w-4 text-[#CDA7B2]" />
                           )}
                         </button>
                       </Link>
@@ -124,10 +124,10 @@ export default function DashboardLayout({
           </nav>
 
           {/* Sidebar Footer */}
-          <div className="p-4 border-t border-white/10">
-            <div className="bg-gradient-to-r from-brand-primary/10 to-blue-500/10 rounded-lg p-4 border border-brand-primary/20">
-              <p className="text-xs font-medium text-gray-300 mb-1">Need Help?</p>
-              <p className="text-xs text-gray-400">Check our documentation</p>
+          <div className="p-4 border-t border-[#CDA7B2]/10">
+            <div className="bg-gradient-to-r from-[#CDA7B2]/10 to-[#967F71]/10 rounded-lg p-4 border border-[#CDA7B2]/20">
+              <p className="text-xs font-medium text-white mb-1">Need Help?</p>
+              <p className="text-xs text-gray-300">Check our documentation</p>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function DashboardLayout({
       )}
 
       {/* Main content */}
-      <main className="flex-1 lg:ml-0 mt-16 lg:mt-0 min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/40 to-purple-50/20">
+      <main className="flex-1 lg:ml-0 mt-16 lg:mt-0 min-h-screen">
         <div className="max-w-7xl mx-auto p-6 lg:p-8">
           {children}
         </div>

@@ -129,9 +129,9 @@ export default function DashboardPage() {
 
   return (
     <section className="flex-1">
-      <div className="page-header-gradient mb-8">
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-        <p>Welcome back! Here's what's happening with your site.</p>
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
+        <h1 className="text-3xl font-bold mb-2 text-white">Dashboard</h1>
+        <p className="text-white/90">Welcome back! Here's what's happening with your site.</p>
       </div>
 
       {/* Quick Stats */}
@@ -146,8 +146,8 @@ export default function DashboardPage() {
                   {stats.publishedBlogs} published
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                <FileText className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 rounded-full bg-[#CDA7B2]/20 flex items-center justify-center">
+                <FileText className="w-6 h-6 text-[#CDA7B2]" />
               </div>
             </div>
           </CardContent>
@@ -163,8 +163,8 @@ export default function DashboardPage() {
                   {stats.visibleProducts} visible
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                <Package className="w-6 h-6 text-green-600" />
+              <div className="w-12 h-12 rounded-full bg-[#967F71]/20 flex items-center justify-center">
+                <Package className="w-6 h-6 text-[#967F71]" />
               </div>
             </div>
           </CardContent>
@@ -180,8 +180,8 @@ export default function DashboardPage() {
                   Pending review
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
-                <Mail className="w-6 h-6 text-amber-600" />
+              <div className="w-12 h-12 rounded-full bg-[#E8D5C4]/30 flex items-center justify-center">
+                <Mail className="w-6 h-6 text-[#967F71]" />
               </div>
             </div>
           </CardContent>
@@ -197,8 +197,8 @@ export default function DashboardPage() {
                   Connect analytics
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 rounded-full bg-[#3B3937]/10 flex items-center justify-center">
+                <TrendingUp className="w-6 h-6 text-[#3B3937]" />
               </div>
             </div>
           </CardContent>
@@ -214,22 +214,22 @@ export default function DashboardPage() {
         <CardContent className="pt-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link href="/dashboard/blog/new">
-              <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-blue-50 hover:border-blue-300 transition-colors">
-                <Plus className="w-5 h-5 text-blue-600" />
+              <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-[#CDA7B2]/10 hover:border-[#CDA7B2]/30 transition-colors">
+                <Plus className="w-5 h-5 text-[#CDA7B2]" />
                 <span className="text-sm font-medium">New Blog Post</span>
               </Button>
             </Link>
 
             <Link href="/dashboard/products">
-              <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-green-50 hover:border-green-300 transition-colors">
-                <ShoppingCart className="w-5 h-5 text-green-600" />
+              <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-[#967F71]/10 hover:border-[#967F71]/30 transition-colors">
+                <ShoppingCart className="w-5 h-5 text-[#967F71]" />
                 <span className="text-sm font-medium">Sync Products</span>
               </Button>
             </Link>
 
             <Link href="/dashboard/analytics">
-              <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-purple-50 hover:border-purple-300 transition-colors">
-                <BarChart3 className="w-5 h-5 text-purple-600" />
+              <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-[#3B3937]/10 hover:border-[#3B3937]/30 transition-colors">
+                <BarChart3 className="w-5 h-5 text-[#3B3937]" />
                 <span className="text-sm font-medium">Analytics</span>
               </Button>
             </Link>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
                 <CardDescription>Your latest blog content</CardDescription>
               </div>
               <Link href="/dashboard/blog">
-                <Button variant="ghost" size="sm" className="text-brand-primary hover:text-brand-primary-hover">
+                <Button variant="ghost" size="sm" className="text-[#CDA7B2] hover:text-[#967F71]">
                   View All
                   <ArrowUpRight className="w-4 h-4 ml-1" />
                 </Button>
@@ -276,7 +276,7 @@ export default function DashboardPage() {
                 <FileText className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                 <p className="text-gray-600 mb-4">No blog posts yet</p>
                 <Link href="/dashboard/blog/new">
-                  <Button size="sm" className="bg-brand-primary hover:bg-brand-primary-hover">
+                  <Button size="sm" className="bg-[#CDA7B2] hover:bg-[#CDA7B2]-hover">
                     <Plus className="w-4 h-4 mr-2" />
                     Create Your First Post
                   </Button>
@@ -288,7 +288,7 @@ export default function DashboardPage() {
                   <div key={post.id} className="flex items-start justify-between pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                     <div className="flex-1 min-w-0">
                       <Link href={`/dashboard/blog/${post.id}`} className="block group">
-                        <h4 className="font-medium text-gray-900 group-hover:text-brand-primary transition-colors truncate mb-1">
+                        <h4 className="font-medium text-gray-900 group-hover:text-[#CDA7B2] transition-colors truncate mb-1">
                           {post.title}
                         </h4>
                         <div className="flex items-center gap-3 text-xs text-gray-500">
@@ -331,7 +331,7 @@ export default function DashboardPage() {
                 <CardDescription>Latest synced products</CardDescription>
               </div>
               <Link href="/dashboard/products">
-                <Button variant="ghost" size="sm" className="text-brand-primary hover:text-brand-primary-hover">
+                <Button variant="ghost" size="sm" className="text-[#CDA7B2] hover:text-[#CDA7B2]-hover">
                   View All
                   <ArrowUpRight className="w-4 h-4 ml-1" />
                 </Button>
@@ -353,7 +353,7 @@ export default function DashboardPage() {
                 <Package className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                 <p className="text-gray-600 mb-4">No products synced yet</p>
                 <Link href="/dashboard/products">
-                  <Button size="sm" className="bg-brand-primary hover:bg-brand-primary-hover">
+                  <Button size="sm" className="bg-[#CDA7B2] hover:bg-[#CDA7B2]-hover">
                     <Plus className="w-4 h-4 mr-2" />
                     Add API Key & Sync
                   </Button>
@@ -365,11 +365,11 @@ export default function DashboardPage() {
                   <div key={product.id} className="flex items-start justify-between pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                     <div className="flex-1 min-w-0">
                       <Link href={`/products/${product.slug}`} target="_blank" rel="noopener noreferrer" className="block group">
-                        <h4 className="font-medium text-gray-900 group-hover:text-brand-primary transition-colors truncate mb-1">
+                        <h4 className="font-medium text-gray-900 group-hover:text-[#CDA7B2] transition-colors truncate mb-1">
                           {product.title}
                         </h4>
                         <div className="flex items-center gap-3 text-xs text-gray-500">
-                          <span className="font-semibold text-brand-primary">${product.price}</span>
+                          <span className="font-semibold text-[#CDA7B2]">${product.price}</span>
                           {product.isVisible ? (
                             <span className="flex items-center gap-1 text-green-600">
                               <Eye className="w-3 h-3" />
@@ -407,7 +407,7 @@ export default function DashboardPage() {
                 <CardDescription>New coaching and circle applications</CardDescription>
               </div>
               <Link href="/dashboard/applications">
-                <Button variant="ghost" size="sm" className="text-brand-primary hover:text-brand-primary-hover">
+                <Button variant="ghost" size="sm" className="text-[#CDA7B2] hover:text-[#CDA7B2]-hover">
                   View All
                   <ArrowUpRight className="w-4 h-4 ml-1" />
                 </Button>

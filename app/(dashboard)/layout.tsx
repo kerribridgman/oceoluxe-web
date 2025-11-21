@@ -53,16 +53,16 @@ function UserMenu() {
 
   return (
     <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-      <DropdownMenuTrigger className="focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 rounded-full">
+      <DropdownMenuTrigger className="focus:outline-none focus:ring-2 focus:ring-[#CDA7B2] focus:ring-offset-2 rounded-full">
         <div className="flex items-center gap-3 cursor-pointer group">
           {user.name && (
             <span className="text-sm font-medium text-gray-200 group-hover:text-white transition-colors hidden sm:block">
               {user.name}
             </span>
           )}
-          <Avatar className="size-9 ring-2 ring-white/20 group-hover:ring-brand-primary transition-all">
+          <Avatar className="size-9 ring-2 ring-white/20 group-hover:ring-[#CDA7B2] transition-all">
             <AvatarImage alt={user.name || ''} />
-            <AvatarFallback className="bg-brand-primary text-white font-semibold">
+            <AvatarFallback className="bg-[#CDA7B2] text-white font-semibold">
               {user.email
                 .split(' ')
                 .map((n) => n[0])
@@ -76,9 +76,9 @@ function UserMenu() {
           <p className="text-sm font-semibold text-gray-900">{user.name || 'User'}</p>
           <p className="text-xs text-gray-500 truncate">{user.email}</p>
         </div>
-        <DropdownMenuItem className="cursor-pointer rounded-lg hover:bg-brand-primary/10 focus:bg-brand-primary/10 transition-colors">
+        <DropdownMenuItem className="cursor-pointer rounded-lg hover:bg-[#CDA7B2]/10 focus:bg-[#CDA7B2]/10 transition-colors">
           <Link href="/dashboard" className="flex w-full items-center py-1">
-            <Home className="mr-3 h-4 w-4 text-brand-primary" />
+            <Home className="mr-3 h-4 w-4 text-[#CDA7B2]" />
             <span className="font-medium text-gray-900">Dashboard</span>
           </Link>
         </DropdownMenuItem>
@@ -97,16 +97,16 @@ function UserMenu() {
 
 function Header() {
   return (
-    <header className="border-b border-[#2a3342]/50 bg-gradient-to-r from-[#1a2332] via-[#1e2838] to-[#243442] shadow-lg">
+    <header className="border-b border-[#CDA7B2]/20 bg-[#3B3937] shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/logo.png"
-            alt="Patrick Farrell"
-            width={220}
-            height={40}
-            className="h-8 w-auto"
-          />
+        <Link href="/" className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#CDA7B2] flex items-center justify-center shadow-lg">
+            <span className="text-[#3B3937] font-bold text-lg">OL</span>
+          </div>
+          <div>
+            <h1 className="text-lg font-serif font-light text-white">Oceo Luxe</h1>
+            <p className="text-xs text-[#967F71] tracking-wide">STUDIO SYSTEMS</p>
+          </div>
         </Link>
         <div className="flex items-center space-x-4">
           <Suspense fallback={<div className="h-9" />}>
@@ -134,7 +134,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-primary mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#CDA7B2] mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>
