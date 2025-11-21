@@ -22,63 +22,60 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
   );
 
   return (
-    <div className="min-h-[100dvh] flex bg-gradient-to-br from-[#1a2332] via-[#1e2838] to-[#243442]">
+    <div className="min-h-[100dvh] flex bg-gradient-to-br from-[#3B3937] via-[#4A4745] to-[#3B3937]">
       {/* Left side - Branding */}
       <div className="hidden lg:flex lg:flex-1 flex-col justify-center px-12 py-12 relative overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-20 left-10 text-6xl text-[#4a9fd8]/10 font-mono">&lt;/&gt;</div>
-        <div className="absolute bottom-20 right-20 text-6xl text-[#4a9fd8]/10 font-mono">&#123;&#125;</div>
-        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[#4a9fd8]/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 text-6xl text-[#CDA7B2]/10 font-serif">✦</div>
+        <div className="absolute bottom-20 right-20 text-6xl text-[#CDA7B2]/10 font-serif">✦</div>
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[#CDA7B2]/5 rounded-full blur-3xl"></div>
 
         <div className="relative z-10">
-          <Image
-            src="/logo.png"
-            alt="Patrick Farrell"
-            width={280}
-            height={50}
-            className="h-12 w-auto mb-8"
-          />
+          <h1 className="text-4xl font-serif font-light text-white mb-2">
+            Oceo Luxe
+          </h1>
+          <p className="text-[#CDA7B2] text-sm mb-8 tracking-wide">STUDIO SYSTEMS</p>
 
-          <h1 className="text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl font-serif font-light text-white mb-6">
             {mode === 'signin'
               ? 'Welcome Back!'
               : 'Start Your Journey'}
-          </h1>
+          </h2>
 
-          <p className="text-xl text-gray-300 mb-12 max-w-md leading-relaxed">
+          <p className="text-xl text-gray-300 mb-12 max-w-md leading-relaxed font-light">
             {mode === 'signin'
-              ? 'Access your dashboard and continue building amazing things.'
-              : 'Join us and unlock powerful tools to grow your business.'}
+              ? 'Access your dashboard and continue organizing your vision.'
+              : 'Join us and unlock powerful systems to elevate your creative business.'}
           </p>
 
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#4a9fd8]/10 flex items-center justify-center">
-                <Code2 className="w-5 h-5 text-[#4a9fd8]" />
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#CDA7B2]/10 flex items-center justify-center">
+                <Code2 className="w-5 h-5 text-[#CDA7B2]" />
               </div>
               <div>
-                <h3 className="text-white font-semibold mb-1">Modern Tools</h3>
-                <p className="text-gray-400 text-sm">Built with the latest technology stack</p>
+                <h3 className="text-white font-semibold mb-1">Organized Systems</h3>
+                <p className="text-gray-400 text-sm font-light">Streamlined workflows for fashion entrepreneurs</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#4a9fd8]/10 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-[#4a9fd8]" />
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#CDA7B2]/10 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-[#CDA7B2]" />
               </div>
               <div>
-                <h3 className="text-white font-semibold mb-1">AI-Powered</h3>
-                <p className="text-gray-400 text-sm">Leverage artificial intelligence to scale faster</p>
+                <h3 className="text-white font-semibold mb-1">Notion Templates</h3>
+                <p className="text-gray-400 text-sm font-light">Custom dashboards and resources for creative founders</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#4a9fd8]/10 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-[#4a9fd8]" />
+              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#CDA7B2]/10 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-[#CDA7B2]" />
               </div>
               <div>
-                <h3 className="text-white font-semibold mb-1">Lightning Fast</h3>
-                <p className="text-gray-400 text-sm">Optimized for performance and efficiency</p>
+                <h3 className="text-white font-semibold mb-1">Visionary Support</h3>
+                <p className="text-gray-400 text-sm font-light">Protect your energy while scaling your vision</p>
               </div>
             </div>
           </div>
@@ -90,13 +87,10 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
         <div className="w-full max-w-md mx-auto">
           {/* Mobile logo */}
           <div className="lg:hidden flex justify-center mb-8">
-            <Image
-              src="/logo.png"
-              alt="Patrick Farrell"
-              width={220}
-              height={40}
-              className="h-10 w-auto"
-            />
+            <div className="text-center">
+              <h1 className="text-3xl font-serif font-light text-[#3B3937]">Oceo Luxe</h1>
+              <p className="text-[#CDA7B2] text-xs tracking-wide">STUDIO SYSTEMS</p>
+            </div>
           </div>
 
           <div className="mb-8">
@@ -130,7 +124,7 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
                 defaultValue={state.email}
                 required
                 maxLength={50}
-                className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#4a9fd8] focus:border-[#4a9fd8] transition-colors"
+                className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#CDA7B2] focus:border-[#CDA7B2] transition-colors"
                 placeholder="Enter your email"
               />
             </div>
@@ -153,7 +147,7 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
                 required
                 minLength={8}
                 maxLength={100}
-                className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#4a9fd8] focus:border-[#4a9fd8] transition-colors"
+                className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#CDA7B2] focus:border-[#CDA7B2] transition-colors"
                 placeholder="Enter your password"
               />
             </div>
@@ -167,7 +161,7 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
             <div>
               <Button
                 type="submit"
-                className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-semibold text-white bg-[#4a9fd8] hover:bg-[#3a8fc8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4a9fd8] transition-colors"
+                className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-semibold text-white bg-[#CDA7B2] hover:bg-[#BD97A2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#CDA7B2] transition-colors"
                 disabled={pending}
               >
                 {pending ? (
@@ -203,7 +197,7 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
                 href={`${mode === 'signin' ? '/sign-up' : '/sign-in'}${
                   redirect ? `?redirect=${redirect}` : ''
                 }${priceId ? `&priceId=${priceId}` : ''}`}
-                className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4a9fd8] transition-colors"
+                className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#CDA7B2] transition-colors"
               >
                 {mode === 'signin'
                   ? 'Create an account'

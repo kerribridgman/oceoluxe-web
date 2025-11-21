@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, FileText, Eye, Edit, Trash2 } from 'lucide-react';
+import { Plus, FileText, Eye, Edit, Trash2, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
 interface BlogPost {
@@ -17,10 +17,24 @@ interface BlogPost {
   readingTimeMinutes: number | null;
 }
 
+interface SyncResult {
+  success: boolean;
+  message?: string;
+  synced?: number;
+  errors?: string[];
+  posts?: Array<{
+    id: string;
+    title: string;
+    status: 'created' | 'updated' | 'skipped';
+  }>;
+}
+
 export default function BlogManagementPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [syncing, setSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState<SyncResult | null>(null);
 
   useEffect(() => {
     fetchPosts();
@@ -84,6 +98,37 @@ export default function BlogManagementPage() {
     }
   }
 
+  async function syncFromNotion() {
+    setSyncing(true);
+    setSyncResult(null);
+
+    try {
+      const response = await fetch('/api/notion/sync-blog', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to sync from Notion');
+      }
+
+      setSyncResult(data);
+
+      // Refresh posts list after successful sync
+      if (data.success) {
+        await fetchPosts();
+      }
+    } catch (err) {
+      setSyncResult({
+        success: false,
+        message: err instanceof Error ? err.message : 'Failed to sync from Notion',
+      });
+    } finally {
+      setSyncing(false);
+    }
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16">
@@ -100,12 +145,23 @@ export default function BlogManagementPage() {
             <h1 className="text-3xl font-bold mb-2">Blog Management</h1>
             <p>Create and manage your blog posts</p>
           </div>
-          <Link href="/dashboard/blog/new">
-            <Button className="bg-white hover:bg-gray-50 text-brand-navy shadow-lg hover:shadow-xl transition-all duration-200 border border-white/30">
-              <Plus className="w-4 h-4 mr-2" />
-              New Post
+          <div className="flex items-center gap-3">
+            <Button
+              onClick={syncFromNotion}
+              disabled={syncing}
+              variant="outline"
+              className="bg-white hover:bg-gray-50 text-brand-navy shadow-lg hover:shadow-xl transition-all duration-200 border border-white/30"
+            >
+              <RefreshCw className={`w-4 h-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
+              {syncing ? 'Syncing...' : 'Sync from Notion'}
             </Button>
-          </Link>
+            <Link href="/dashboard/blog/new">
+              <Button className="bg-white hover:bg-gray-50 text-brand-navy shadow-lg hover:shadow-xl transition-all duration-200 border border-white/30">
+                <Plus className="w-4 h-4 mr-2" />
+                New Post
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -113,6 +169,54 @@ export default function BlogManagementPage() {
         <Card className="mb-6 border-red-200 bg-red-50">
           <CardContent className="p-4">
             <p className="text-red-600">{error}</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {syncResult && (
+        <Card className={`mb-6 ${syncResult.success ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
+          <CardContent className="p-4">
+            <div className="flex items-start gap-3">
+              {syncResult.success ? (
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
+              ) : (
+                <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
+              )}
+              <div className="flex-1">
+                <p className={`font-medium ${syncResult.success ? 'text-green-900' : 'text-red-900'}`}>
+                  {syncResult.message}
+                </p>
+                {syncResult.posts && syncResult.posts.length > 0 && (
+                  <div className="mt-2 text-sm">
+                    <p className="font-medium mb-1">Synced posts:</p>
+                    <ul className="space-y-1">
+                      {syncResult.posts.map((post) => (
+                        <li key={post.id} className="flex items-center gap-2">
+                          <span className={`inline-block px-2 py-0.5 rounded text-xs ${
+                            post.status === 'created' ? 'bg-green-200 text-green-900' :
+                            post.status === 'updated' ? 'bg-blue-200 text-blue-900' :
+                            'bg-gray-200 text-gray-900'
+                          }`}>
+                            {post.status}
+                          </span>
+                          <span className="text-gray-700">{post.title}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {syncResult.errors && syncResult.errors.length > 0 && (
+                  <div className="mt-2 text-sm">
+                    <p className="font-medium text-red-900 mb-1">Errors:</p>
+                    <ul className="list-disc list-inside space-y-1 text-red-800">
+                      {syncResult.errors.map((error, index) => (
+                        <li key={index}>{error}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
           </CardContent>
         </Card>
       )}
