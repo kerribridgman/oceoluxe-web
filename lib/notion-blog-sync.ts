@@ -152,7 +152,7 @@ export async function syncNotionBlogPosts(userId: number): Promise<SyncResult> {
             status: 'updated',
           });
         } else {
-          // Create new post
+          // Create new post (auto-publish posts from Notion)
           await db.insert(blogPosts).values({
             title,
             slug,
@@ -161,6 +161,7 @@ export async function syncNotionBlogPosts(userId: number): Promise<SyncResult> {
             coverImageUrl,
             author: 'Kerri Bridgman',
             createdBy: userId,
+            isPublished: true, // Auto-publish posts synced from Notion
             publishedAt: publishedAt || new Date(),
             createdAt: new Date(),
             updatedAt: new Date(),
