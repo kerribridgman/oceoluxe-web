@@ -110,7 +110,7 @@ export default function SchedulingPage() {
   return (
     <section className="flex-1">
       {/* Page Header */}
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
@@ -139,8 +139,8 @@ export default function SchedulingPage() {
                 <p className="text-sm text-gray-600 mb-1">Total Links</p>
                 <p className="text-3xl font-bold text-gray-900">{links.length}</p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 rounded-full bg-[#CDA7B2]/20 flex items-center justify-center">
+                <Calendar className="w-6 h-6 text-[#CDA7B2]" />
               </div>
             </div>
           </CardContent>
@@ -153,8 +153,8 @@ export default function SchedulingPage() {
                 <p className="text-sm text-gray-600 mb-1">Enabled Links</p>
                 <p className="text-3xl font-bold text-gray-900">{enabledLinksCount}</p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                <Eye className="w-6 h-6 text-green-600" />
+              <div className="w-12 h-12 rounded-full bg-[#967F71]/20 flex items-center justify-center">
+                <Eye className="w-6 h-6 text-[#967F71]" />
               </div>
             </div>
           </CardContent>
@@ -167,8 +167,8 @@ export default function SchedulingPage() {
                 <p className="text-sm text-gray-600 mb-1">API Keys</p>
                 <p className="text-3xl font-bold text-gray-900">{apiKeys.length}</p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                <Package className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 rounded-full bg-[#3B3937]/10 flex items-center justify-center">
+                <Package className="w-6 h-6 text-[#3B3937]" />
               </div>
             </div>
           </CardContent>

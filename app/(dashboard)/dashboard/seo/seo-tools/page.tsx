@@ -36,7 +36,7 @@ export default function SeoToolsPage() {
 
   return (
     <div className="flex-1 space-y-6">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div>
           <h1 className="text-3xl font-bold mb-2">SEO Tools</h1>
           <p>Automatically generated SEO files following Google's standards</p>
@@ -88,8 +88,8 @@ export default function SeoToolsPage() {
                 </Button>
               </div>
 
-              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-xs text-blue-800">
+              <div className="mt-4 p-3 bg-[#CDA7B2]/20 border border-[#CDA7B2] rounded-lg">
+                <p className="text-xs text-[#3B3937]">
                   <strong>Note:</strong> These files are automatically generated and updated.
                   The sitemap updates whenever you publish or modify blog posts.
                 </p>
@@ -99,8 +99,8 @@ export default function SeoToolsPage() {
         ))}
       </div>
 
-      <Card className="dashboard-card border-0 bg-gradient-to-br from-blue-50 to-indigo-50">
-        <CardHeader className="border-b border-blue-100 pb-3">
+      <Card className="dashboard-card border-0 bg-gradient-to-br from-[#CDA7B2]/20 to-[#967F71]/20">
+        <CardHeader className="border-b border-[#967F71]/20 pb-3">
           <CardTitle className="text-xl font-semibold text-gray-900">
             Google Search Console
           </CardTitle>
@@ -117,7 +117,7 @@ export default function SeoToolsPage() {
           </ol>
           <Button
             onClick={() => window.open('https://search.google.com/search-console', '_blank')}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white"
+            className="bg-gradient-to-r from-[#CDA7B2] to-[#967F71] hover:from-[#CDA7B2]/90 hover:to-[#967F71]/90 text-white"
           >
             Open Google Search Console
             <ExternalLink className="w-4 h-4 ml-2" />

@@ -165,7 +165,7 @@ export default function ApiKeysPage() {
   return (
     <section className="flex-1">
       {/* Page Header */}
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
@@ -187,11 +187,11 @@ export default function ApiKeysPage() {
       </div>
 
       {/* Info Card */}
-      <Card className="dashboard-card border-0 mb-8 bg-blue-50 border-blue-100">
+      <Card className="dashboard-card border-0 mb-8 bg-[#CDA7B2]/20 border-[#CDA7B2]">
         <CardContent className="pt-6">
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <AlertCircle className="w-5 h-5 text-blue-600" />
+            <div className="w-10 h-10 rounded-full bg-[#CDA7B2]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <AlertCircle className="w-5 h-5 text-[#CDA7B2]" />
             </div>
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">About MMFC API Keys</h3>

@@ -141,7 +141,7 @@ export default function IntegrationsPage() {
 
   return (
     <div className="flex-1 space-y-6">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-3xl font-bold mb-2">Integrations</h1>
@@ -290,12 +290,12 @@ export default function IntegrationsPage() {
         </div>
       </div>
 
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <h3 className="text-sm font-semibold text-blue-900 mb-2 flex items-center gap-2">
+      <div className="bg-[#CDA7B2]/20 border border-[#CDA7B2] rounded-lg p-4 mb-6">
+        <h3 className="text-sm font-semibold text-[#CDA7B2] mb-2 flex items-center gap-2">
           <Key className="w-4 h-4" />
           What are MCP API Keys?
         </h3>
-        <p className="text-sm text-blue-800">
+        <p className="text-sm text-[#3B3937]">
           Model Context Protocol (MCP) API keys allow you to integrate your blog with Claude Desktop and other MCP-compatible tools.
           With an API key, you can create, edit, and manage blog posts directly from Claude Desktop.
         </p>

@@ -109,7 +109,7 @@ export default function ApplicationsPage() {
 
   return (
     <div className="flex-1 space-y-6">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
             <FileText className="w-6 h-6 text-white" />
@@ -212,7 +212,7 @@ export default function ApplicationsPage() {
                           {getStatusIcon(app.status)}
                           {app.status.charAt(0).toUpperCase() + app.status.slice(1)}
                         </Badge>
-                        <Badge variant="outline" className="bg-blue-50 border-blue-200 text-blue-800">
+                        <Badge variant="outline" className="bg-[#CDA7B2]/20 border-[#CDA7B2] text-[#CDA7B2]">
                           {app.type === 'coaching' ? '1:1 Coaching' : 'Entrepreneur Circle'}
                         </Badge>
                       </div>

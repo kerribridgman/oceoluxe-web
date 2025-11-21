@@ -80,7 +80,7 @@ export default function GeneralPage() {
 
   return (
     <section className="flex-1">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <h1 className="text-3xl font-bold mb-2">
           General Settings
         </h1>

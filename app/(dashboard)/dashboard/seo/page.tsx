@@ -179,7 +179,7 @@ export default function SeoSettingsPage() {
 
   return (
     <div className="flex-1 space-y-6">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-3xl font-bold mb-2">

@@ -77,7 +77,7 @@ export default function LinksPage() {
   if (loading) {
     return (
       <div className="flex-1 space-y-6">
-        <div className="page-header-gradient mb-8">
+        <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
           <h1 className="text-3xl font-bold mb-2">Links</h1>
           <p>Loading...</p>
         </div>
@@ -87,7 +87,7 @@ export default function LinksPage() {
 
   return (
     <div className="flex-1 space-y-6">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-3xl font-bold mb-2">Links</h1>
@@ -96,7 +96,7 @@ export default function LinksPage() {
           <Button
             onClick={handleSave}
             disabled={saving}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg font-semibold"
+            className="bg-gradient-to-r from-[#CDA7B2] to-[#967F71] hover:from-[#CDA7B2]/90 hover:to-[#967F71]/90 text-white shadow-lg font-semibold"
           >
             <Save className="w-4 h-4 mr-2" />
             {saving ? 'Saving...' : 'Save Changes'}

@@ -151,7 +151,7 @@ export default function NewBlogPostPage() {
 
   return (
     <div className="flex-1 space-y-6">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-4">
             <Link href="/dashboard/blog">
@@ -169,7 +169,7 @@ export default function NewBlogPostPage() {
             <Button
               variant="outline"
               onClick={() => setNotionImportOpen(true)}
-              className="bg-purple-500 hover:bg-purple-600 text-white border-purple-600 shadow-md font-semibold"
+              className="bg-[#3B3937] hover:bg-[#3B3937]/90 text-white border-[#3B3937] shadow-md font-semibold"
             >
               <FileText className="w-4 h-4 mr-2" />
               Import from Notion

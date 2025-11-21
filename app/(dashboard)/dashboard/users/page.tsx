@@ -219,7 +219,7 @@ export default function UsersPage() {
 
   return (
     <div className="flex-1 space-y-6">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">User Management</h1>
@@ -361,8 +361,8 @@ export default function UsersPage() {
                       </td>
                       <td className="py-4 px-4">
                         <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold ${
-                          user.role === 'owner' ? 'bg-purple-100 text-purple-800' :
-                          user.role === 'admin' ? 'bg-blue-100 text-blue-800' :
+                          user.role === 'owner' ? 'bg-[#3B3937]/10 text-[#3B3937]' :
+                          user.role === 'admin' ? 'bg-[#CDA7B2]/20 text-[#CDA7B2]' :
                           'bg-gray-100 text-gray-800'
                         }`}>
                           {user.role === 'owner' || user.role === 'admin' ? (

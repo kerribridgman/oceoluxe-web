@@ -70,7 +70,7 @@ export default function AnalyticsPage() {
 
   return (
     <section className="flex-1">
-      <div className="page-header-gradient mb-8">
+      <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
             <BarChart3 className="w-6 h-6 text-white" />
@@ -240,9 +240,9 @@ export default function AnalyticsPage() {
               </ul>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h4 className="font-semibold text-blue-900 mb-2">How It Works</h4>
-              <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
+            <div className="bg-[#CDA7B2]/20 border border-[#CDA7B2] rounded-lg p-4">
+              <h4 className="font-semibold text-[#CDA7B2] mb-2">How It Works</h4>
+              <ul className="text-sm text-[#3B3937] space-y-1 list-disc list-inside">
                 <li>The database stores your tracking IDs for reference</li>
                 <li>Environment variables are used to inject tracking scripts</li>
                 <li>Analytics scripts are loaded client-side after page hydration</li>
