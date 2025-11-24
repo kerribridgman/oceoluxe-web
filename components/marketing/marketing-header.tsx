@@ -34,6 +34,7 @@ export function MarketingHeader() {
 
   const navItems = [
     { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
     { name: 'Studio Systems', href: '/studio-systems' },
     { name: 'Services', href: '/services' },
     { name: 'Products', href: '/products' },
@@ -49,23 +50,11 @@ export function MarketingHeader() {
             <h1 className="text-2xl font-serif font-light text-[#3B3937] tracking-wide">Oceo Luxe</h1>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-[#967F71] hover:text-[#CDA7B2] font-light transition-colors uppercase text-sm tracking-wider"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile menu button */}
+          {/* Menu button - All screen sizes */}
           <button
-            className="md:hidden p-2"
+            className="p-2 hover:bg-[#967F71]/10 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6 text-[#3B3937]" />
@@ -75,14 +64,14 @@ export function MarketingHeader() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Dropdown Navigation - All screen sizes */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-[#967F71]/10">
+          <div className="py-4 space-y-2 border-t border-[#967F71]/10 bg-white/50 backdrop-blur-sm">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block text-[#967F71] hover:text-[#CDA7B2] font-light py-2 uppercase text-sm tracking-wider"
+                className="block text-[#967F71] hover:text-[#CDA7B2] hover:bg-[#CDA7B2]/5 font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
