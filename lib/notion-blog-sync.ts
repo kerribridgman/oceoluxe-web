@@ -123,7 +123,7 @@ export async function syncNotionBlogPosts(userId: number): Promise<SyncResult> {
         if (publishedProp) {
           if (publishedProp.type === 'date' && publishedProp.date) {
             publishedAt = new Date(publishedProp.date.start);
-          } else if (publishedProp.type === 'created_time') {
+          } else if (publishedProp.type === 'created_time' && 'created_time' in page) {
             publishedAt = new Date(page.created_time);
           }
         }

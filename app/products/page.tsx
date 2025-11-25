@@ -25,8 +25,8 @@ export default async function ProductsPage() {
   }
 
   // Separate free and paid products
-  const freeProducts = products.filter(p => p.price === 0 || p.title.toLowerCase().includes('free'));
-  const paidProducts = products.filter(p => p.price > 0 && !p.title.toLowerCase().includes('free'));
+  const freeProducts = products.filter(p => Number(p.price) === 0 || p.price === null || p.title.toLowerCase().includes('free'));
+  const paidProducts = products.filter(p => Number(p.price) > 0 && !p.title.toLowerCase().includes('free'));
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
