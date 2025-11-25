@@ -36,22 +36,20 @@ export default async function AboutPage() {
 
       {/* Hero Section */}
       <section className="bg-[#f5f0ea]">
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-5xl mx-auto px-6 py-12 lg:py-16">
+          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Left: Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
-                  Hi, I'm <span className="text-[#CDA7B2]">Kerri Bridgman</span>
-                </h1>
-                <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  Founder of Oceo Luxe, an operations strategist dedicated to building systems that support creative vision.
-                </p>
-              </div>
+            <div className="flex-1 space-y-4">
+              <h1 className="text-4xl lg:text-5xl font-serif font-light text-[#3B3937] leading-tight">
+                Hi, I'm <span className="text-[#CDA7B2]">Kerri Bridgman</span>
+              </h1>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                Founder of Oceo Luxe, an operations strategist dedicated to building systems that support creative vision.
+              </p>
             </div>
             {/* Right: Image */}
-            <div className="relative flex justify-center lg:justify-end">
-              <div className="aspect-square w-full max-w-md rounded-2xl overflow-hidden shadow-2xl relative">
+            <div className="flex-shrink-0">
+              <div className="aspect-square w-48 lg:w-56 rounded-2xl overflow-hidden shadow-xl relative">
                 <Image
                   src="/images/kerri-profile.png"
                   alt="Kerri Bridgman"
