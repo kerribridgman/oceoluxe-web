@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation';
-import { getUser } from '@/lib/db/queries';
-import { getEnabledSchedulingLinksForUser } from '@/lib/db/queries-mmfc-scheduling';
+import { getAllEnabledSchedulingLinks } from '@/lib/db/queries-mmfc-scheduling';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Clock, ExternalLink, AlertCircle } from 'lucide-react';
@@ -11,31 +10,8 @@ import Link from 'next/link';
 export const dynamic = 'force-dynamic';
 
 export default async function BookPage() {
-  // Get the site owner's enabled scheduling links
-  const user = await getUser();
-
-  if (!user) {
-    // If no user is logged in, show a message
-    return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <MarketingHeader />
-        <main className="flex-1 flex items-center justify-center p-6">
-          <Card className="max-w-md">
-            <CardContent className="pt-6 text-center">
-              <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-4" />
-              <h2 className="text-xl font-semibold mb-2">Scheduling Not Available</h2>
-              <p className="text-gray-600">
-                The booking page is currently unavailable. Please check back later.
-              </p>
-            </CardContent>
-          </Card>
-        </main>
-        <MarketingFooter />
-      </div>
-    );
-  }
-
-  const enabledLinks = await getEnabledSchedulingLinksForUser(user.id);
+  // Get all enabled scheduling links for the public booking page
+  const enabledLinks = await getAllEnabledSchedulingLinks();
 
   // If only one link is enabled, redirect directly to it
   if (enabledLinks.length === 1) {

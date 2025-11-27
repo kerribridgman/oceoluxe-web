@@ -159,3 +159,19 @@ export async function deleteSchedulingLinksByApiKey(apiKeyId: number) {
     .delete(mmfcSchedulingLinks)
     .where(eq(mmfcSchedulingLinks.apiKeyId, apiKeyId));
 }
+
+/**
+ * Get all enabled scheduling links (for public booking page)
+ * This fetches enabled links regardless of which user owns them
+ */
+export async function getAllEnabledSchedulingLinks() {
+  const result = await db
+    .select({
+      link: mmfcSchedulingLinks,
+    })
+    .from(mmfcSchedulingLinks)
+    .where(eq(mmfcSchedulingLinks.isEnabled, true))
+    .orderBy(desc(mmfcSchedulingLinks.syncedAt));
+
+  return result.map(({ link }) => link);
+}

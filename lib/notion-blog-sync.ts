@@ -99,16 +99,24 @@ export async function syncNotionBlogPosts(userId: number): Promise<SyncResult> {
           }
         }
 
-        // Download and rehost cover image if it's a Notion URL
-        if (coverImageUrl && coverImageUrl.includes('notion')) {
+        // Download and rehost cover image if it's a Notion URL (includes S3 URLs used by Notion)
+        const isNotionUrl = coverImageUrl && (
+          coverImageUrl.includes('notion') ||
+          coverImageUrl.includes('s3.us-west-2.amazonaws.com') ||
+          coverImageUrl.includes('prod-files-secure')
+        );
+
+        if (isNotionUrl) {
           try {
             const imageResponse = await fetch(coverImageUrl);
             if (imageResponse.ok) {
               const imageBlob = await imageResponse.blob();
-              const filename = `blog-covers/notion-${page.id}-${Date.now()}.png`;
+              const contentType = imageResponse.headers.get('content-type') || 'image/png';
+              const extension = contentType.includes('jpeg') || contentType.includes('jpg') ? 'jpg' : 'png';
+              const filename = `blog-covers/notion-${page.id}-${Date.now()}.${extension}`;
               const blob = await put(filename, imageBlob, {
                 access: 'public',
-                contentType: 'image/png',
+                contentType,
               });
               coverImageUrl = blob.url;
             }
