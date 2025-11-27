@@ -6,8 +6,8 @@ import { SWRConfig } from 'swr';
 import { AnalyticsLoader } from '@/components/analytics-loader';
 
 export const metadata: Metadata = {
-  title: 'Patrick Farrell | Tech Strategy & Business Growth',
-  description: 'Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches.'
+  title: 'Oceo Luxe | Notion Templates for Fashion Entrepreneurs',
+  description: 'Helping fashion founders build efficient, elegant businesses. Premium Notion templates, digital products, and consulting for creative entrepreneurs.',
 };
 
 export const viewport: Viewport = {
