@@ -5,9 +5,36 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-if (!process.env.POSTGRES_URL) {
-  throw new Error('POSTGRES_URL environment variable is not set');
+// Lazy initialization to avoid build-time errors when POSTGRES_URL is not set
+let _client: ReturnType<typeof postgres> | null = null;
+let _db: ReturnType<typeof drizzle<typeof schema>> | null = null;
+
+function getClient() {
+  if (!_client) {
+    if (!process.env.POSTGRES_URL) {
+      throw new Error('POSTGRES_URL environment variable is not set');
+    }
+    _client = postgres(process.env.POSTGRES_URL);
+  }
+  return _client;
 }
 
-export const client = postgres(process.env.POSTGRES_URL);
-export const db = drizzle(client, { schema });
+function getDb() {
+  if (!_db) {
+    _db = drizzle(getClient(), { schema });
+  }
+  return _db;
+}
+
+// Export proxies that lazily initialize the connection
+export const client = new Proxy({} as ReturnType<typeof postgres>, {
+  get(_, prop) {
+    return (getClient() as any)[prop];
+  },
+});
+
+export const db = new Proxy({} as ReturnType<typeof drizzle<typeof schema>>, {
+  get(_, prop) {
+    return (getDb() as any)[prop];
+  },
+});
