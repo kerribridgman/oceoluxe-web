@@ -51,10 +51,13 @@ export default async function HomePage() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
-                  Proven systems for <span className="text-[#CDA7B2]">visionaries and executives</span> — now optimized for your next chapter.
+                  Build a Fashion Brand With <span className="text-[#CDA7B2]">Clarity, Structure</span> & Zero Guesswork
                 </h1>
                 <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  The studio combines "vision and the ocean" (Oceo) with "luxury at every level" (Luxe), positioning itself as a curated business systems hub for founders and creatives focused on clarifying backend operations, automating repetitive tasks with AI, and maintaining creative momentum.
+                  Oceo Luxe helps independent designers and visionary founders bring their ideas to life with real production guidance, streamlined systems, and AI-powered operations support.
+                </p>
+                <p className="text-lg text-[#3B3937] font-light leading-relaxed">
+                  Turn your creative vision into a profitable, organized, sustainable fashion business.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -67,13 +70,13 @@ export default async function HomePage() {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link href="/products">
+                <Link href="/studio-systems">
                   <Button
                     size="lg"
                     variant="outline"
                     className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-14 px-10 text-lg font-light w-full sm:w-auto"
                   >
-                    View Products
+                    Join Studio Systems
                   </Button>
                 </Link>
               </div>
