@@ -66,23 +66,18 @@ export function MarketingFooter() {
             <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Get Started</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/apply/entrepreneur-circle" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                <Link href="/studio-systems" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
                   Join Membership
                 </Link>
               </li>
               <li>
-                <Link href="/apply/coaching" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  1:1 Coaching
+                <Link href="/quiz/about" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                  Take the Quiz
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
                   Resources
-                </Link>
-              </li>
-              <li>
-                <Link href="/sign-in" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  Sign In
                 </Link>
               </li>
             </ul>
