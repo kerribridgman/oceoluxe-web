@@ -66,16 +66,15 @@ export default async function StudioSystemsPage() {
                   Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
                 </p>
               </div>
-              <Link href="/apply/entrepreneur-circle">
+              <Link href="/quiz">
                 <Button
                   size="lg"
                   className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
                 >
-                  Join Now for $39/month
+                  Discover Your Designer Archetype
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <p className="text-sm text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
             </div>
             {/* Right: Image */}
             <div className="relative">
@@ -91,12 +90,36 @@ export default async function StudioSystemsPage() {
         </div>
       </section>
 
-      {/* Tagline Section */}
-      <section className="py-16 bg-white">
+      {/* Quiz Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-2xl md:text-3xl font-serif font-light text-[#3B3937] leading-relaxed">
-            ✨ Where clarity meets calm in modern fashion production
+          <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6">
+            <span className="text-[#CDA7B2] font-medium text-sm tracking-wide">Free Quiz</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
+            What Kind of Designer Are You?
+          </h2>
+          <p className="text-xl text-[#967F71] font-light leading-relaxed mb-4 max-w-2xl mx-auto">
+            You do not have to produce 300 pieces in every color just because that is what the industry tells you.
+            You do not have to position yourself as mass fashion if that is not your vision.
           </p>
+          <p className="text-xl text-[#967F71] font-light leading-relaxed mb-4 max-w-2xl mx-auto">
+            Whether you are building a luxury atelier with 50 devoted clients or scaling a collection that reaches thousands—your
+            production strategy should match <span className="italic">your</span> design philosophy, not someone else's playbook.
+          </p>
+          <p className="text-lg text-[#3B3937] font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+            This 2-minute quiz reveals your Designer Archetype—so you can finally build production and marketing
+            systems that align with who you actually are.
+          </p>
+          <Link href="/quiz">
+            <Button
+              size="lg"
+              className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light group"
+            >
+              Discover Your Archetype
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -214,12 +237,12 @@ export default async function StudioSystemsPage() {
             <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
             <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Limited Time: $39/month for the first 20 members only</p>
           </div>
-          <Link href="/apply/entrepreneur-circle">
+          <Link href="/quiz">
             <Button
               size="lg"
               className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light mt-8"
             >
-              Yes, I'm In — Join Now
+              Take the Quiz to Get Started
             </Button>
           </Link>
           <p className="text-sm text-[#967F71] mt-6 font-light">
@@ -261,12 +284,12 @@ export default async function StudioSystemsPage() {
             Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
             monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
           </p>
-          <Link href="/apply/entrepreneur-circle">
+          <Link href="/quiz">
             <Button
               size="lg"
               className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group"
             >
-              Join as Founding Member
+              Discover Your Designer Archetype
               <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
