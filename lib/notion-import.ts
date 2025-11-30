@@ -93,6 +93,9 @@ export function replaceImageUrls(
  * Generate a slug from a title
  */
 export function generateSlug(title: string): string {
+  if (!title) {
+    return `untitled-${Date.now()}`;
+  }
   return title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
