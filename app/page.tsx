@@ -30,11 +30,11 @@ export default async function HomePage() {
     {
       icon: <Users className="h-10 w-10 text-[#CDA7B2]" />,
       title: "Visionary Support & Business Evolution",
-      description: "Executive support, personalized EA placement, and systems that protect your energy while scaling your vision"
+      description: "Executive support, strategic guidance, and systems that protect your energy while scaling your vision"
     },
     {
       icon: <Heart className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Elevate Your Style Journey",
+      title: "Elevate Your Style Journey\nYour Way",
       description: "Personalized style analysis, wardrobe audits, and styling plans that align your appearance with your professional evolution"
     }
   ];
@@ -117,7 +117,7 @@ export default async function HomePage() {
                   <div className="flex justify-center mb-6">
                     {offering.icon}
                   </div>
-                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4">
+                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 whitespace-pre-line">
                     {offering.title}
                   </h3>
                   <p className="text-[#967F71] leading-relaxed font-light">
