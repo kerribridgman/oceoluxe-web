@@ -114,18 +114,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
               {/* Price */}
               <div className="mb-6">
-                <div className="flex items-baseline gap-4">
+                <div className="flex items-baseline gap-3">
                   {isFree ? (
-                    <p className="text-5xl font-serif font-light text-[#CDA7B2]">Free</p>
+                    <p className="text-3xl font-serif font-light text-[#CDA7B2]">Free</p>
                   ) : (
                     <>
-                      <p className="text-5xl font-serif font-light text-[#3B3937]">
+                      <p className="text-3xl font-serif font-light text-[#3B3937]">
                         {product.salePrice || product.price}
                       </p>
                       {product.salePrice && product.price && (
                         <>
-                          <p className="text-2xl text-[#967F71] line-through font-light">{product.price}</p>
-                          <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                          <p className="text-xl text-[#967F71] line-through font-light">{product.price}</p>
+                          <span className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">
                             SALE
                           </span>
                         </>
