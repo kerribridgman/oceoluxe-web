@@ -106,7 +106,7 @@ export async function syncNotionBlogPosts(userId: number): Promise<SyncResult> {
           coverImageUrl.includes('prod-files-secure')
         );
 
-        if (isNotionUrl) {
+        if (isNotionUrl && coverImageUrl) {
           try {
             const imageResponse = await fetch(coverImageUrl);
             if (imageResponse.ok) {
