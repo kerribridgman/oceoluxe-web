@@ -39,12 +39,15 @@ export default async function AboutPage() {
         <div className="max-w-5xl mx-auto px-6 py-12 lg:py-16">
           <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Left: Content */}
-            <div className="flex-1 space-y-4">
+            <div className="flex-1 space-y-6">
               <h1 className="text-4xl lg:text-5xl font-serif font-light text-[#3B3937] leading-tight">
                 Hi, I'm <span className="text-[#CDA7B2]">Kerri Bridgman</span>
               </h1>
               <p className="text-lg text-[#967F71] font-light leading-relaxed">
                 Founder of Oceo Luxe, an operations strategist dedicated to building systems that support creative vision.
+              </p>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                My mission is simple: help designers and visionaries understand who they are designing for and how to build their business in a way that is sustainable, intentional, and true to their creative vision.
               </p>
             </div>
             {/* Right: Image */}
