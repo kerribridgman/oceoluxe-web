@@ -132,12 +132,12 @@ export default async function HomePage() {
             <CardContent className="pt-10 pb-8">
               <div className="grid md:grid-cols-2 gap-8 items-start">
                 <div className="text-center md:text-left">
-                  <div className="flex justify-center md:justify-start mb-6">
-                    <FileText className="h-10 w-10 text-[#CDA7B2]" />
+                  <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+                    <FileText className="h-12 w-12 text-[#CDA7B2] flex-shrink-0" />
+                    <h3 className="text-2xl font-serif font-light text-[#3B3937] whitespace-pre-line">
+                      {"Production Resources\n& Notion Templates"}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 whitespace-pre-line">
-                    {"Production Resources\n& Notion Templates"}
-                  </h3>
                   <p className="text-[#967F71] leading-relaxed font-light mb-6">
                     Ready-to-use Notion templates designed specifically for fashion production. Collection planners to map your creative vision, costing sheets to protect your margins, supplier trackers to manage relationships, and production calendars to keep everything on schedule. Discover the tools that can transform your workflow.
                   </p>
