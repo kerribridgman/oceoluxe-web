@@ -166,9 +166,9 @@ export async function syncNotionProducts(userId: number, onProgress?: ProgressCa
           previewUrl = previewProp.rich_text.map((t: any) => t.plain_text).join('');
         }
 
-        // Get published status
-        const publishedProp = page.properties.Published || page.properties.Status;
-        let isPublished = true; // Default to published
+        // Get published status - check for Live, Published, or Status properties
+        const publishedProp = page.properties.Live || page.properties.Published || page.properties.Status;
+        let isPublished = false; // Default to NOT published for safety
         if (publishedProp?.type === 'checkbox') {
           isPublished = publishedProp.checkbox as boolean;
         } else if (publishedProp?.type === 'select' && publishedProp.select) {
