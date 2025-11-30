@@ -159,11 +159,19 @@ function cleanContent(content: string): { cleanedContent: string; tallyFormIds: 
   // Matches: ![alt](filename.jpg) where there's no http/https
   cleaned = cleaned.replace(/!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/gi, '');
 
-  // Also remove standalone image filenames like "IMG_1234.jpeg" on their own line
+  // Remove images pointing to Notion's temporary S3 URLs (they expire quickly)
+  // These URLs contain prod-files-secure.s3 and have X-Amz-* query params
+  cleaned = cleaned.replace(/!\[[^\]]*\]\(https?:\/\/prod-files-secure\.s3[^)]+\)/gi, '');
+
+  // Remove standalone image filenames like "IMG_1234.jpeg" on their own line
   cleaned = cleaned.replace(/^[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)$/gim, '');
 
-  // Clean up multiple consecutive newlines
-  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
+  // Remove image filenames that appear anywhere (inline or with surrounding text)
+  // This catches patterns like "IMG_9124.jpeg" that might not be on their own line
+  cleaned = cleaned.replace(/\b[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)\b/gi, '');
+
+  // Clean up multiple consecutive newlines - reduce to single newline for tighter spacing
+  cleaned = cleaned.replace(/\n{2,}/g, '\n');
 
   // Remove trailing whitespace from each line
   cleaned = cleaned.split('\n').map(line => line.trimEnd()).join('\n');
@@ -184,21 +192,21 @@ export function ProductMarkdownRenderer({ content }: ProductMarkdownRendererProp
         components={{
           // Headings
           h1: ({ node, ...props }) => (
-            <h1 className="text-4xl font-serif font-light text-[#3B3937] mb-6 mt-8" {...props} />
+            <h1 className="text-4xl font-serif font-light text-[#3B3937] mb-2 mt-6" {...props} />
           ),
           h2: ({ node, ...props }) => (
-            <h2 className="text-3xl font-serif font-light text-[#3B3937] mb-6 mt-8" {...props} />
+            <h2 className="text-3xl font-serif font-light text-[#3B3937] mb-2 mt-6" {...props} />
           ),
           h3: ({ node, ...props }) => (
-            <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 mt-6" {...props} />
+            <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-2 mt-4" {...props} />
           ),
           h4: ({ node, ...props }) => (
-            <h4 className="text-xl font-medium text-[#3B3937] mb-4 mt-6" {...props} />
+            <h4 className="text-xl font-medium text-[#3B3937] mb-2 mt-4" {...props} />
           ),
 
           // Paragraphs
           p: ({ node, ...props }) => (
-            <p className="text-[#967F71] leading-relaxed mb-6 text-lg font-light" {...props} />
+            <p className="text-[#967F71] leading-relaxed mb-0 text-lg font-light" {...props} />
           ),
 
           // Lists
@@ -233,7 +241,7 @@ export function ProductMarkdownRenderer({ content }: ProductMarkdownRendererProp
           // Images
           img: ({ node, ...props }) => (
             <img
-              className="rounded-xl shadow-lg my-8 w-full"
+              className="rounded-xl shadow-lg mt-0 mb-0 w-full"
               loading="lazy"
               {...props}
             />
