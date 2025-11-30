@@ -13,29 +13,29 @@ export async function generateMetadata() {
 
 export default async function HomePage() {
   const idealClientIndicators = [
-    "Decision fatigue from competing priorities",
-    "Overwhelm navigating supplier/manufacturer options",
-    "Strong creative ideas but weak backend systems",
-    "Planning without producing",
-    "Overly complex organizational systems",
-    "Misalignment between vision and execution method"
+    "Overwhelmed by supplier and manufacturer options",
+    "Strong design vision but unclear production process",
+    "Unsure how many pieces to produce or how to price them",
+    "Spending more time managing chaos than designing",
+    "Following industry advice that does not fit your brand",
+    "Ready to build a sustainable fashion business on your terms"
   ];
 
   const offerings = [
     {
       icon: <Layers className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Systems Implementation & Workflow Setup",
-      description: "Notion templates, custom dashboards, and streamlined workflows for fashion businesses and creative founders"
+      title: "Production Systems\n& Workflow Setup",
+      description: "Notion templates, production calendars, and streamlined workflows that take you from concept to finished collection"
     },
     {
       icon: <Users className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Visionary Support & Business Evolution",
-      description: "Executive support, strategic guidance, and systems that protect your energy while scaling your vision"
+      title: "Understand Your\nIdeal Client",
+      description: "Discover your designer archetype and learn how to position your brand for the clients who truly value your work"
     },
     {
       icon: <Heart className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Elevate Your Style Journey\nYour Way",
-      description: "Personalized style analysis, wardrobe audits, and styling plans that align your appearance with your professional evolution"
+      title: "Build With\nClarity & Calm",
+      description: "Strategic guidance and sustainable systems that protect your creative energy while scaling your fashion business"
     }
   ];
 
@@ -103,10 +103,10 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-              What You Will Find Here
+              How We Help Fashion Designers
             </h2>
             <p className="text-xl text-[#967F71] max-w-4xl mx-auto leading-relaxed font-light">
-              Ready-to-use Notion templates, project workflows, and sustainable business systems designed for visionary founders and teams.
+              Production guidance, Notion templates, and sustainable systems designed specifically for independent fashion brands.
             </p>
           </div>
 
@@ -132,17 +132,17 @@ export default async function HomePage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6">
-                  Notion Templates & Digital Products
+                  Production Resources & Notion Templates
                 </h3>
                 <p className="text-[#967F71] leading-relaxed font-light text-lg mb-6">
-                  Ready-to-use templates for fashion entrepreneurs: production calendars, pricing calculators, fabric libraries, and workflow planners. Many available for free to help you get started.
+                  Ready-to-use Notion templates for fashion production: collection planners, costing sheets, supplier trackers, and production calendars. Many available for free to help you get started.
                 </p>
                 <Link href="/products">
                   <Button
                     variant="outline"
                     className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white"
                   >
-                    Browse Products
+                    Browse Resources
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -151,7 +151,7 @@ export default async function HomePage() {
                 <div className="aspect-square w-full max-w-md rounded-xl overflow-hidden shadow-lg relative">
                   <Image
                     src="/images/ai-systems.png"
-                    alt="Notion templates and digital products"
+                    alt="Fashion production Notion templates"
                     fill
                     className="object-cover"
                     quality={95}
@@ -203,28 +203,28 @@ export default async function HomePage() {
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
-            Ready to bring clarity to your<br />backend operations?
+            Ready to bring clarity to<br />your fashion business?
           </h2>
           <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
-            Explore our services, products, and custom solutions designed to free your mental space for strategic leadership.
+            Take the quiz to discover your designer archetype, or explore our production resources and membership.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/services">
+            <Link href="/quiz/about">
               <Button
                 size="lg"
                 className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group w-full sm:w-auto"
               >
-                Explore Services
+                Take the Quiz
                 <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link href="/products">
+            <Link href="/studio-systems">
               <Button
                 size="lg"
                 variant="outline"
                 className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
               >
-                Browse Products
+                Join Studio Systems
               </Button>
             </Link>
           </div>

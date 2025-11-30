@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, Sparkles, Layout, Users, Heart } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Layout, Users } from 'lucide-react';
 import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 export const metadata: Metadata = {
   title: 'Services | Oceo Luxe',
-  description: 'Custom systems, strategic support, and personal optimization for fashion founders, creative entrepreneurs, and visionaries.',
+  description: 'Production systems, strategic support, and workflow setup for independent fashion designers and founders.',
 };
 
 export default async function ServicesPage() {
@@ -23,7 +23,7 @@ export default async function ServicesPage() {
               Services & Programs
             </h1>
             <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
-              Choose the right support for your stage of growth. From custom systems to strategic support and personal styling.
+              Choose the right support for your stage of growth. From production systems to strategic guidance for your fashion business.
             </p>
           </div>
         </div>
@@ -130,22 +130,22 @@ export default async function ServicesPage() {
             </div>
           </div>
 
-          {/* Service 3: Visionary Support */}
-          <div id="visionary-support" className="scroll-mt-16">
+          {/* Service 3: Strategic Guidance */}
+          <div id="strategic-guidance" className="scroll-mt-16">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <Users className="w-16 h-16 text-[#CDA7B2] mb-6" />
                 <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Visionary Support & Business Evolution
+                  Strategic Guidance & Business Evolution
                 </h2>
                 <p className="text-xl text-[#CDA7B2] font-light mb-4">
                   Custom pricing upon request
                 </p>
                 <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For visionaries wanting someone who thinks like you, moves like you, and protects your energy. We'll assess your processes, provide temporary executive support, and help you find the perfect long-term Executive Assistant.
+                  For fashion founders ready to scale with clarity. We will assess your current processes, identify bottlenecks, and create a roadmap for sustainable growth that protects your creative energy.
                 </p>
                 <blockquote className="text-lg text-[#3B3937] font-light italic border-l-4 border-[#CDA7B2] pl-6 mb-6">
-                  "The right support transforms how you work and live."
+                  "The right strategy transforms how you build and grow."
                 </blockquote>
               </div>
 
@@ -153,10 +153,10 @@ export default async function ServicesPage() {
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What You Get</h3>
                 <ul className="space-y-4">
                   {[
-                    'Assessment of work processes and pain points',
-                    'Temporary executive support during system building',
-                    'Personalized Executive Assistant profile creation',
-                    'Full sourcing, vetting, and placement of long-term EA'
+                    'Assessment of current processes and pain points',
+                    'Production strategy aligned with your brand positioning',
+                    'Pricing and quantity guidance based on your archetype',
+                    'Roadmap for sustainable business growth'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
@@ -176,52 +176,6 @@ export default async function ServicesPage() {
             </div>
           </div>
 
-          {/* Service 4: Style Journey */}
-          <div id="style-journey" className="scroll-mt-16">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1 bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/5 rounded-2xl p-8 border border-[#CDA7B2]/20">
-                <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">Services Include</h3>
-                <ul className="space-y-4">
-                  {[
-                    'Personalized style and color analysis',
-                    'Wardrobe audits and organization',
-                    'Personal shopping (virtual or in-person)',
-                    'Seasonal styling plans',
-                    'Special event outfit sourcing'
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#3B3937] font-light">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <a href="mailto:kerrib@oceoluxe.com">
-                    <Button size="lg" className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2] text-white">
-                      Request Custom Pricing
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </a>
-                </div>
-              </div>
-
-              <div className="order-1 md:order-2">
-                <Heart className="w-16 h-16 text-[#CDA7B2] mb-6" />
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Elevate Your Style Journey
-                </h2>
-                <p className="text-xl text-[#CDA7B2] font-light mb-4">
-                  Custom pricing upon request
-                </p>
-                <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For individuals aligning appearance with professional evolution or public presence. From style analysis to wardrobe curation, we'll help you look and feel like the visionary you are.
-                </p>
-                <p className="text-xl font-light text-[#3B3937]">
-                  Your style, elevated to match your vision.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
