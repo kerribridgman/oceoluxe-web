@@ -2,7 +2,7 @@
 
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface ProductMarkdownRendererProps {
   content: string;
@@ -10,6 +10,8 @@ interface ProductMarkdownRendererProps {
 
 // Component to render Tally embeds
 function TallyEmbed({ formId }: { formId: string }) {
+  const [submitted, setSubmitted] = useState(false);
+
   useEffect(() => {
     // Load Tally widget script if not already loaded
     if (typeof window !== 'undefined' && !(window as any).Tally) {
@@ -20,7 +22,27 @@ function TallyEmbed({ formId }: { formId: string }) {
     } else if ((window as any).Tally) {
       (window as any).Tally.loadEmbeds();
     }
+
+    // Listen for Tally form submission
+    const handleTallyMessage = (event: MessageEvent) => {
+      if (event.data?.event === 'Tally.FormSubmitted') {
+        setSubmitted(true);
+      }
+    };
+
+    window.addEventListener('message', handleTallyMessage);
+    return () => window.removeEventListener('message', handleTallyMessage);
   }, [formId]);
+
+  if (submitted) {
+    return (
+      <div className="my-8 p-8 bg-[#CDA7B2]/10 rounded-lg text-center">
+        <div className="text-4xl mb-4">✓</div>
+        <h3 className="text-xl font-serif font-light text-[#3B3937] mb-2">Thank you!</h3>
+        <p className="text-[#967F71] font-light">Your submission was successful. Check your email for your download link.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="my-8">
@@ -28,7 +50,7 @@ function TallyEmbed({ formId }: { formId: string }) {
         data-tally-src={`https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
         loading="lazy"
         width="100%"
-        height="300"
+        height="500"
         frameBorder="0"
         marginHeight={0}
         marginWidth={0}
