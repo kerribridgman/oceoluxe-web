@@ -1,4 +1,4 @@
-import { getPublicMmfcProducts } from '@/lib/db/queries-mmfc';
+import { getPublicNotionProducts } from '@/lib/db/queries-notion-products';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -15,18 +15,24 @@ export const metadata = {
 export const revalidate = 60;
 
 export default async function ProductsPage() {
-  let products: Awaited<ReturnType<typeof getPublicMmfcProducts>> = [];
+  let products: Awaited<ReturnType<typeof getPublicNotionProducts>> = [];
 
   try {
-    products = await getPublicMmfcProducts();
+    products = await getPublicNotionProducts();
   } catch (error) {
     console.error('Error loading products:', error);
     // Continue with empty products array to show "No Products Yet" message
   }
 
-  // Separate free and paid products
-  const freeProducts = products.filter(p => Number(p.price) === 0 || p.price === null || p.title.toLowerCase().includes('free'));
-  const paidProducts = products.filter(p => Number(p.price) > 0 && !p.title.toLowerCase().includes('free'));
+  // Separate free and paid products - check for "Free", "$0", or no price
+  const isFreeProduct = (p: typeof products[0]) => {
+    if (!p.price) return true;
+    const priceStr = p.price.toLowerCase();
+    return priceStr === 'free' || priceStr === '$0' || priceStr === '0' || p.title.toLowerCase().includes('free');
+  };
+
+  const freeProducts = products.filter(isFreeProduct);
+  const paidProducts = products.filter(p => !isFreeProduct(p));
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
@@ -64,10 +70,10 @@ export default async function ProductsPage() {
                     {freeProducts.map((product) => (
                       <Link key={product.id} href={`/products/${product.slug}`} className="group">
                         <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#967F71]/20 hover:border-[#CDA7B2]">
-                          {(product.featuredImageUrl || product.coverImage) && (
+                          {product.coverImageUrl && (
                             <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
                               <img
-                                src={product.featuredImageUrl || product.coverImage || ''}
+                                src={product.coverImageUrl}
                                 alt={product.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               />
@@ -98,13 +104,10 @@ export default async function ProductsPage() {
                                 <Download className="w-4 h-4 ml-2" />
                               </Button>
                             </div>
-                            {product.deliveryType && (
+                            {product.productType && (
                               <div className="mt-4 pt-4 border-t border-[#967F71]/10">
                                 <p className="text-sm text-[#967F71] font-light">
-                                  <span className="font-medium">Delivery:</span>{' '}
-                                  {product.deliveryType === 'download' && 'Instant Download'}
-                                  {product.deliveryType === 'repository' && 'Git Repository Access'}
-                                  {product.deliveryType === 'service' && 'Service / Consultation'}
+                                  <span className="font-medium">Type:</span> {product.productType}
                                 </p>
                               </div>
                             )}
@@ -127,10 +130,10 @@ export default async function ProductsPage() {
                     {paidProducts.map((product) => (
                       <Link key={product.id} href={`/products/${product.slug}`} className="group">
                         <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#967F71]/20 hover:border-[#CDA7B2]">
-                          {(product.featuredImageUrl || product.coverImage) && (
+                          {product.coverImageUrl && (
                             <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
                               <img
-                                src={product.featuredImageUrl || product.coverImage || ''}
+                                src={product.coverImageUrl}
                                 alt={product.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               />
@@ -155,11 +158,11 @@ export default async function ProductsPage() {
                             <div className="flex items-center justify-between">
                               <div>
                                 <p className="text-3xl font-serif font-light text-[#3B3937]">
-                                  ${product.salePrice || product.price}
+                                  {product.salePrice || product.price}
                                 </p>
                                 {product.salePrice && (
                                   <p className="text-sm text-[#967F71] line-through font-light">
-                                    ${product.price}
+                                    {product.price}
                                   </p>
                                 )}
                               </div>
@@ -168,13 +171,10 @@ export default async function ProductsPage() {
                                 <ExternalLink className="w-4 h-4 ml-2" />
                               </Button>
                             </div>
-                            {product.deliveryType && (
+                            {product.productType && (
                               <div className="mt-4 pt-4 border-t border-[#967F71]/10">
                                 <p className="text-sm text-[#967F71] font-light">
-                                  <span className="font-medium">Delivery:</span>{' '}
-                                  {product.deliveryType === 'download' && 'Instant Download'}
-                                  {product.deliveryType === 'repository' && 'Git Repository Access'}
-                                  {product.deliveryType === 'service' && 'Service / Consultation'}
+                                  <span className="font-medium">Type:</span> {product.productType}
                                 </p>
                               </div>
                             )}
