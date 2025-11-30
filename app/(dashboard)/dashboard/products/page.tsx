@@ -252,7 +252,7 @@ export default function ProductsPage() {
           const updated = data.products?.filter((p: any) => p.status === 'updated').length || 0;
 
           if (data.errors?.length > 0) {
-            alert(`Sync completed with errors.\nCreated: ${created}\nUpdated: ${updated}\nErrors: ${data.errors.length}`);
+            alert(`Sync completed with errors.\nCreated: ${created}\nUpdated: ${updated}\nErrors: ${data.errors.join('\n')}`);
           } else {
             alert(`Sync completed!\nCreated: ${created}\nUpdated: ${updated}`);
           }
