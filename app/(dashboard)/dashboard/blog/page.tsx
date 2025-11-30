@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, FileText, Eye, Edit, Trash2, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react';
+import { Plus, FileText, Eye, Edit, Trash2, RefreshCw, CheckCircle, AlertCircle, RotateCw, X } from 'lucide-react';
 import Link from 'next/link';
 
 interface BlogPost {
@@ -29,12 +29,23 @@ interface SyncResult {
   }>;
 }
 
+interface SyncProgress {
+  current: number;
+  total: number;
+  title: string;
+  status: string;
+  percentage: number;
+}
+
 export default function BlogManagementPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
   const [syncResult, setSyncResult] = useState<SyncResult | null>(null);
+  const [syncProgress, setSyncProgress] = useState<SyncProgress | null>(null);
+  const [syncingPostId, setSyncingPostId] = useState<number | null>(null);
+  const [showSyncModal, setShowSyncModal] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -98,34 +109,93 @@ export default function BlogManagementPage() {
     }
   }
 
-  async function syncFromNotion() {
+  async function syncFromNotion(limit?: number) {
     setSyncing(true);
     setSyncResult(null);
+    setSyncProgress(null);
+    setShowSyncModal(false);
 
     try {
-      const response = await fetch('/api/notion/sync-blog', {
+      const url = limit
+        ? `/api/notion/sync-blog/stream?limit=${limit}`
+        : '/api/notion/sync-blog/stream';
+      const eventSource = new EventSource(url);
+
+      eventSource.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+
+        if (data.type === 'progress') {
+          setSyncProgress({
+            current: data.current,
+            total: data.total,
+            title: data.title,
+            status: data.status,
+            percentage: data.percentage,
+          });
+        } else if (data.type === 'complete') {
+          setSyncResult({
+            success: data.success,
+            message: `Successfully synced ${data.synced} blog posts`,
+            synced: data.synced,
+            posts: data.posts,
+            errors: data.errors,
+          });
+          setSyncProgress(null);
+          setSyncing(false);
+          eventSource.close();
+          fetchPosts();
+        } else if (data.type === 'error') {
+          setSyncResult({
+            success: false,
+            message: data.message,
+          });
+          setSyncProgress(null);
+          setSyncing(false);
+          eventSource.close();
+        }
+      };
+
+      eventSource.onerror = () => {
+        setSyncResult({
+          success: false,
+          message: 'Connection lost during sync',
+        });
+        setSyncProgress(null);
+        setSyncing(false);
+        eventSource.close();
+      };
+    } catch (err) {
+      setSyncResult({
+        success: false,
+        message: err instanceof Error ? err.message : 'Failed to sync from Notion',
+      });
+      setSyncing(false);
+    }
+  }
+
+  async function syncSinglePost(postId: number) {
+    setSyncingPostId(postId);
+
+    try {
+      const response = await fetch(`/api/notion/sync-blog/${postId}`, {
         method: 'POST',
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to sync from Notion');
+        throw new Error(data.error || data.message || 'Failed to sync post');
       }
 
-      setSyncResult(data);
+      // Show success message briefly
+      alert(data.message);
 
-      // Refresh posts list after successful sync
-      if (data.success) {
-        await fetchPosts();
-      }
+      // Refresh posts list
+      await fetchPosts();
     } catch (err) {
-      setSyncResult({
-        success: false,
-        message: err instanceof Error ? err.message : 'Failed to sync from Notion',
-      });
+      alert(err instanceof Error ? err.message : 'Failed to sync post');
     } finally {
-      setSyncing(false);
+      setSyncingPostId(null);
     }
   }
 
@@ -147,7 +217,7 @@ export default function BlogManagementPage() {
           </div>
           <div className="flex items-center gap-3">
             <Button
-              onClick={syncFromNotion}
+              onClick={() => setShowSyncModal(true)}
               disabled={syncing}
               variant="outline"
               className="bg-white hover:bg-gray-50 text-brand-navy shadow-lg hover:shadow-xl transition-all duration-200 border border-white/30"
@@ -169,6 +239,43 @@ export default function BlogManagementPage() {
         <Card className="mb-6 border-red-200 bg-red-50">
           <CardContent className="p-4">
             <p className="text-red-600">{error}</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Progress Bar */}
+      {syncing && syncProgress && (
+        <Card className="mb-6 border-blue-200 bg-blue-50">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3 mb-3">
+              <RefreshCw className="w-5 h-5 text-blue-600 animate-spin" />
+              <div className="flex-1">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-blue-900">
+                    Syncing: {syncProgress.title}
+                  </span>
+                  <span className="text-sm text-blue-700">
+                    {syncProgress.current} / {syncProgress.total} ({syncProgress.percentage}%)
+                  </span>
+                </div>
+                <div className="w-full bg-blue-200 rounded-full h-2.5">
+                  <div
+                    className="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
+                    style={{ width: `${syncProgress.percentage}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-blue-700">
+              <span className={`inline-block px-2 py-0.5 rounded ${
+                syncProgress.status === 'created' ? 'bg-green-200 text-green-800' :
+                syncProgress.status === 'updated' ? 'bg-blue-200 text-blue-800' :
+                syncProgress.status === 'error' ? 'bg-red-200 text-red-800' :
+                'bg-gray-200 text-gray-800'
+              }`}>
+                {syncProgress.status}
+              </span>
+            </div>
           </CardContent>
         </Card>
       )}
@@ -272,6 +379,15 @@ export default function BlogManagementPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 ml-4">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => syncSinglePost(post.id)}
+                      disabled={syncingPostId === post.id || syncing}
+                      title="Sync this post from Notion"
+                    >
+                      <RotateCw className={`w-4 h-4 ${syncingPostId === post.id ? 'animate-spin' : ''}`} />
+                    </Button>
                     {post.isPublished && (
                       <Link href={`/blog/${post.slug}`} target="_blank">
                         <Button variant="outline" size="sm">
@@ -306,6 +422,90 @@ export default function BlogManagementPage() {
               </CardContent>
             </Card>
           ))}
+        </div>
+      )}
+
+      {/* Sync Options Modal */}
+      {showSyncModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-xl font-semibold text-gray-900">Sync from Notion</h2>
+              <button
+                onClick={() => setShowSyncModal(false)}
+                className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+            <div className="p-4 space-y-3">
+              <p className="text-sm text-gray-600 mb-4">
+                Choose how many posts to sync from your Notion database:
+              </p>
+              <button
+                onClick={() => syncFromNotion(1)}
+                className="w-full p-4 text-left rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-medium text-gray-900 group-hover:text-blue-900">
+                      Sync Latest Post
+                    </h3>
+                    <p className="text-sm text-gray-500 group-hover:text-blue-700">
+                      Only sync the most recent post from Notion
+                    </p>
+                  </div>
+                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                    Fastest
+                  </span>
+                </div>
+              </button>
+              <button
+                onClick={() => syncFromNotion(10)}
+                className="w-full p-4 text-left rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-medium text-gray-900 group-hover:text-blue-900">
+                      Sync Last 10 Posts
+                    </h3>
+                    <p className="text-sm text-gray-500 group-hover:text-blue-700">
+                      Sync the 10 most recent posts from Notion
+                    </p>
+                  </div>
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                    Recommended
+                  </span>
+                </div>
+              </button>
+              <button
+                onClick={() => syncFromNotion()}
+                className="w-full p-4 text-left rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-medium text-gray-900 group-hover:text-blue-900">
+                      Sync All Posts
+                    </h3>
+                    <p className="text-sm text-gray-500 group-hover:text-blue-700">
+                      Sync all posts from your Notion database
+                    </p>
+                  </div>
+                  <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded">
+                    ~60 posts
+                  </span>
+                </div>
+              </button>
+            </div>
+            <div className="p-4 bg-gray-50 border-t">
+              <button
+                onClick={() => setShowSyncModal(false)}
+                className="w-full py-2 text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
