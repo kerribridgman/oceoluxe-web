@@ -16,20 +16,19 @@ interface StripeButton {
 
 // Component to render Stripe Buy Button
 function StripeBuyButton({ buyButtonId, publishableKey }: StripeButton) {
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-
   return (
-    <div className="my-8">
-      <Script
-        src="https://js.stripe.com/v3/buy-button.js"
-        strategy="lazyOnload"
-        onLoad={() => setScriptLoaded(true)}
-      />
-      {/* @ts-ignore - stripe-buy-button is a custom element */}
-      <stripe-buy-button
-        buy-button-id={buyButtonId}
-        publishable-key={publishableKey}
-      />
+    <div className="my-10 flex justify-center">
+      <div className="w-full max-w-md">
+        <Script
+          src="https://js.stripe.com/v3/buy-button.js"
+          strategy="lazyOnload"
+        />
+        {/* @ts-ignore - stripe-buy-button is a custom element */}
+        <stripe-buy-button
+          buy-button-id={buyButtonId}
+          publishable-key={publishableKey}
+        />
+      </div>
     </div>
   );
 }
@@ -158,6 +157,12 @@ function cleanContent(content: string): { cleanedContent: string; tallyFormIds: 
 
   // Clean up multiple consecutive newlines
   cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
+
+  // Remove trailing whitespace from each line
+  cleaned = cleaned.split('\n').map(line => line.trimEnd()).join('\n');
+
+  // Remove empty lines at the end
+  cleaned = cleaned.replace(/\n+$/g, '');
 
   return { cleanedContent: cleaned.trim(), tallyFormIds, stripeButtons };
 }
