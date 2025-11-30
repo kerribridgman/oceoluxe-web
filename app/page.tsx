@@ -211,7 +211,7 @@ export default async function HomePage() {
             Ready to bring clarity to<br />your fashion business?
           </h2>
           <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
-            Take the quiz to discover your designer archetype, or explore our production resources and membership.
+            Take the quiz to discover your designer archetype, or explore<br />our production resources and membership.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/quiz/about">
