@@ -4,9 +4,48 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
+import { useEffect } from 'react';
+import Script from 'next/script';
 
 interface MarkdownRendererProps {
   content: string;
+}
+
+// Component to render Tally embeds
+function TallyEmbed({ formId }: { formId: string }) {
+  useEffect(() => {
+    // Load Tally widget script if not already loaded
+    if (typeof window !== 'undefined' && !(window as any).Tally) {
+      const script = document.createElement('script');
+      script.src = 'https://tally.so/widgets/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+    } else if ((window as any).Tally) {
+      (window as any).Tally.loadEmbeds();
+    }
+  }, [formId]);
+
+  return (
+    <div className="my-8">
+      <iframe
+        data-tally-src={`https://tally.so/embed/${formId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
+        loading="lazy"
+        width="100%"
+        height="300"
+        frameBorder="0"
+        marginHeight={0}
+        marginWidth={0}
+        title="Tally Form"
+        className="rounded-lg"
+      />
+    </div>
+  );
+}
+
+// Extract Tally form ID from embed code
+function extractTallyFormId(code: string): string | null {
+  const match = code.match(/tally\.so\/embed\/([a-zA-Z0-9]+)/);
+  return match ? match[1] : null;
 }
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
@@ -58,6 +97,14 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
 
           // Code blocks
           code: ({ node, inline, className, children, ...props }: any) => {
+            const codeContent = String(children).replace(/\n$/, '');
+
+            // Check if this is a Tally embed
+            const tallyFormId = extractTallyFormId(codeContent);
+            if (tallyFormId && !inline) {
+              return <TallyEmbed formId={tallyFormId} />;
+            }
+
             if (inline) {
               return (
                 <code
