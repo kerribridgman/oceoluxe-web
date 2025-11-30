@@ -63,7 +63,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <MarketingHeader />
 
       {/* Back Button */}
-      <div className="bg-[#f5f0ea] border-b border-[#967F71]/20">
+      <div className="bg-[#f5f0ea]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link href="/products" className="text-[#CDA7B2] hover:text-[#BD97A2] flex items-center gap-2 font-light">
             ← Back to Products
@@ -72,7 +72,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Product Detail */}
-      <div className="bg-[#faf8f5]">
+      <section className="bg-[#f5f0ea]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Image */}
@@ -206,7 +206,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           )}
         </div>
-      </div>
+      </section>
 
       <MarketingFooter />
     </div>
