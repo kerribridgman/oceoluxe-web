@@ -67,24 +67,27 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* I Understand Section */}
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-12 text-center leading-tight">
-            My Story
+            I Understand Where You Are
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              I studied Production Management at the Fashion Institute of Technology and have spent the last decade working behind the scenes in fashion production, supply chain management, and executive support.
+              You have the talent. You have the vision. But somewhere between the design and the delivery, things get overwhelming.
             </p>
             <p>
-              My approach centers on a fundamental belief: <span className="italic text-[#3B3937] font-medium">"structure is the soul of sustainable creativity."</span> My work focuses on organizing operational chaos so that creative leaders can concentrate on their core mission—making exceptional work.
+              Maybe you are drowning in supplier quotes, unsure which manufacturer is right for your brand. Maybe you are second-guessing your pricing because nothing feels quite right. Or maybe you are producing collections the way everyone says you should, but it is draining your creative energy instead of fueling it.
             </p>
             <p>
-              Oceo Luxe was created in direct response to challenges I witnessed repeatedly among creatives and founders. I identified a critical gap: the absence of systematized processes that transform ideas into measurable momentum.
+              I have spent a decade in fashion production and supply chain management. I studied Production Management at FIT and have worked behind the scenes with designers who felt exactly the way you do right now.
             </p>
             <p>
-              The tools and templates available through Oceo Luxe represent more than generic frameworks. They are the exact systems I have personally used to support founders, creative professionals, and executives building meaningful ventures. Now these proven methodologies are accessible to others pursuing ambitious goals.
+              What I learned is this: <span className="italic text-[#3B3937] font-medium">the problem is not your talent or your vision. It is the lack of systems designed for how you actually work.</span>
+            </p>
+            <p>
+              The industry hands you one-size-fits-all advice. Produce 300 units. Use this pricing formula. Follow this timeline. But your brand is not one-size-fits-all, and your production strategy should not be either.
             </p>
           </div>
         </div>
@@ -122,49 +125,49 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Expertise Section */}
+      {/* How I Help Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <h2 className="text-4xl font-serif font-light text-[#3B3937] leading-tight">
-                Background & Expertise
+                How I Help
               </h2>
               <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
                 <p>
-                  <span className="font-semibold text-[#3B3937]">Fashion Production & Supply Chain:</span> A decade of hands-on experience in production management, vendor relationships, and operational logistics in the fashion industry.
+                  <span className="font-semibold text-[#3B3937]">Understand Your Archetype:</span> Through the Designer Archetype quiz, discover how you naturally create so you can build a production strategy that works with your vision, not against it.
                 </p>
                 <p>
-                  <span className="font-semibold text-[#3B3937]">Systems Implementation:</span> From Notion templates to custom dashboards, I build systematized workflows that organize operational chaos and create measurable momentum.
+                  <span className="font-semibold text-[#3B3937]">Build Your Systems:</span> Notion templates, production calendars, costing sheets, and workflows designed specifically for fashion designers who need structure without the overwhelm.
                 </p>
                 <p>
-                  <span className="font-semibold text-[#3B3937]">Executive Support:</span> Experience providing high-level operational support to founders and creative leaders, enabling them to focus on strategic vision rather than administrative details.
+                  <span className="font-semibold text-[#3B3937]">Find Your Strategy:</span> Whether you are producing 50 pieces for a devoted client base or scaling to thousands, get guidance that fits your brand positioning and creative goals.
                 </p>
                 <p>
-                  <span className="font-semibold text-[#3B3937]">Operations Strategy:</span> Specializing in identifying the critical gap between creative vision and operational execution, then building the infrastructure to bridge it.
+                  <span className="font-semibold text-[#3B3937]">Protect Your Energy:</span> Sustainable systems that free up mental space so you can focus on what you do best: designing.
                 </p>
               </div>
             </div>
             <div className="bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/10 rounded-2xl p-12 border border-[#CDA7B2]/20">
               <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-8 text-center">
-                Who I Work With
+                This Is For You If...
               </h3>
               <ul className="space-y-4 text-lg text-[#967F71] font-light leading-relaxed">
                 <li className="flex items-start gap-3">
                   <span className="text-[#CDA7B2] text-2xl">•</span>
-                  <span>Fashion and creative entrepreneurs navigating production and operations</span>
+                  <span>You are an independent designer ready to get organized</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#CDA7B2] text-2xl">•</span>
-                  <span>Visionary founders who need backend systems to match their big ideas</span>
+                  <span>You have a strong vision but unclear production process</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#CDA7B2] text-2xl">•</span>
-                  <span>Executives experiencing decision fatigue and overwhelm</span>
+                  <span>You are tired of following advice that does not fit your brand</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[#CDA7B2] text-2xl">•</span>
-                  <span>Leaders ready to align their personal style with their professional presence</span>
+                  <span>You want to build sustainably without burning out</span>
                 </li>
               </ul>
             </div>
