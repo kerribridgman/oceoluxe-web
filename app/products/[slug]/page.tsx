@@ -6,7 +6,7 @@ import { ShoppingCart, CheckCircle, Package, ExternalLink, Eye } from 'lucide-re
 import Link from 'next/link';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
-import ReactMarkdown from 'react-markdown';
+import { ProductMarkdownRenderer } from '@/components/products/product-markdown-renderer';
 
 // Revalidate every 60 seconds to ensure products are up-to-date
 export const revalidate = 60;
@@ -211,9 +211,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {/* Product Content (Markdown from Notion) */}
           {product.content && (
             <div className="mt-16 max-w-4xl mx-auto">
-              <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-light prose-headings:text-[#3B3937] prose-p:text-[#967F71] prose-p:font-light prose-a:text-[#CDA7B2] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#3B3937] prose-li:text-[#967F71]">
-                <ReactMarkdown>{product.content}</ReactMarkdown>
-              </div>
+              <ProductMarkdownRenderer content={product.content} />
             </div>
           )}
         </div>
