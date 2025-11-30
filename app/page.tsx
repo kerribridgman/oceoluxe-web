@@ -132,10 +132,10 @@ export default async function HomePage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6">
-                  Production Resources & Notion Templates
+                  Production Resources<br />& Notion Templates
                 </h3>
                 <p className="text-[#967F71] leading-relaxed font-light text-lg mb-6">
-                  Ready-to-use Notion templates for fashion production: collection planners, costing sheets, supplier trackers, and production calendars. Many available for free to help you get started.
+                  Ready-to-use Notion templates for fashion production: collection planners, costing sheets, supplier trackers, and production calendars. Discover the tools that can transform your workflow.
                 </p>
                 <Link href="/products">
                   <Button
