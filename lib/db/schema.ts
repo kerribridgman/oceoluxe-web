@@ -276,6 +276,32 @@ export const analyticsSettings = pgTable('analytics_settings', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+// Notion Products - synced from Notion database
+export const notionProducts = pgTable('notion_products', {
+  id: serial('id').primaryKey(),
+  notionPageId: varchar('notion_page_id', { length: 100 }).notNull().unique(),
+  title: varchar('title', { length: 500 }).notNull(),
+  slug: varchar('slug', { length: 500 }).notNull().unique(),
+  description: text('description'),
+  content: text('content'), // Full markdown content from Notion
+  excerpt: text('excerpt'),
+  price: varchar('price', { length: 50 }), // Price as string to handle "Free", "$29", etc.
+  salePrice: varchar('sale_price', { length: 50 }),
+  productType: varchar('product_type', { length: 100 }), // template, course, ebook, etc.
+  category: varchar('category', { length: 100 }),
+  coverImageUrl: text('cover_image_url'),
+  checkoutUrl: text('checkout_url'), // Link to purchase
+  previewUrl: text('preview_url'), // Link to preview/demo
+  isPublished: boolean('is_published').default(false),
+  isFeatured: boolean('is_featured').default(false),
+  displayOrder: integer('display_order').default(0),
+  createdBy: integer('created_by')
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const teamsRelations = relations(teams, ({ many }) => ({
   teamMembers: many(teamMembers),
   activityLogs: many(activityLogs),
@@ -367,6 +393,13 @@ export const mmfcServicesRelations = relations(mmfcServices, ({ one }) => ({
   }),
 }));
 
+export const notionProductsRelations = relations(notionProducts, ({ one }) => ({
+  createdBy: one(users, {
+    fields: [notionProducts.createdBy],
+    references: [users.id],
+  }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Team = typeof teams.$inferSelect;
@@ -402,6 +435,8 @@ export type MmfcService = typeof mmfcServices.$inferSelect;
 export type NewMmfcService = typeof mmfcServices.$inferInsert;
 export type AnalyticsSettings = typeof analyticsSettings.$inferSelect;
 export type NewAnalyticsSettings = typeof analyticsSettings.$inferInsert;
+export type NotionProduct = typeof notionProducts.$inferSelect;
+export type NewNotionProduct = typeof notionProducts.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
