@@ -20,22 +20,22 @@ export default async function BlogPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5] relative overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <section className="bg-[#f5f0ea]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 mb-6 px-6 py-2 bg-[#CDA7B2]/10 border border-[#CDA7B2]/20 rounded-full">
               <BookOpen className="w-4 h-4 text-[#CDA7B2]" />
               <span className="text-[#CDA7B2] text-sm font-medium">Blog</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
+            <h1 className="text-4xl lg:text-5xl font-serif font-light text-[#3B3937] mb-6">
               Insights & Articles
             </h1>
-            <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
+            <p className="text-lg text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
               Exploring fashion production, business systems, and the journey of building sustainable creative ventures.
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Blog Posts Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
