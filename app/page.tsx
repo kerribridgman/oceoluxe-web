@@ -34,7 +34,7 @@ export default async function HomePage() {
     },
     {
       icon: <Heart className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Build With\nClarity & Calm",
+      title: "Build With\nClarity & Connection",
       description: "Strategic guidance and sustainable systems that protect your creative energy while scaling your fashion business"
     }
   ];
