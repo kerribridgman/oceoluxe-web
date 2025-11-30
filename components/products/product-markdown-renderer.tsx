@@ -16,12 +16,15 @@ interface StripeButton {
 
 // Component to render Stripe Buy Button
 function StripeBuyButton({ buyButtonId, publishableKey }: StripeButton) {
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+
   return (
     <div className="my-10 flex justify-center">
       <div className="w-full max-w-md">
         <Script
           src="https://js.stripe.com/v3/buy-button.js"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
+          onLoad={() => setScriptLoaded(true)}
         />
         {/* @ts-ignore - stripe-buy-button is a custom element */}
         <stripe-buy-button
@@ -137,6 +140,12 @@ function cleanContent(content: string): { cleanedContent: string; tallyFormIds: 
 
   let cleaned = content;
 
+  // Remove code blocks that contain embed code (super-embed, stripe, tally, etc.)
+  // These are wrapped in ```javascript or ``` backticks
+  cleaned = cleaned.replace(/```(?:javascript|js|html)?\s*\n?super-embed:[\s\S]*?```/gi, '');
+  cleaned = cleaned.replace(/```(?:javascript|js|html)?\s*\n?[\s\S]*?<stripe-buy-button[\s\S]*?```/gi, '');
+  cleaned = cleaned.replace(/```(?:javascript|js|html)?\s*\n?[\s\S]*?tally\.so[\s\S]*?```/gi, '');
+
   // Remove "super-embed:" lines and everything after them that looks like embed code
   // This handles the Notion super-embed format
   cleaned = cleaned.replace(/super-embed:\s*\n?<iframe[\s\S]*?<\/iframe>\s*\n?<script[\s\S]*?<\/script>/gi, '');
@@ -170,8 +179,27 @@ function cleanContent(content: string): { cleanedContent: string; tallyFormIds: 
   // This catches patterns like "IMG_9124.jpeg" that might not be on their own line
   cleaned = cleaned.replace(/\b[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)\b/gi, '');
 
-  // Clean up multiple consecutive newlines - reduce to single newline for tighter spacing
-  cleaned = cleaned.replace(/\n{2,}/g, '\n');
+  // Extract "Inside, you'll find:" or similar intro phrases and make them standalone paragraphs with bold formatting
+  // This handles text like "...before production. Inside, you'll find:" splitting it properly
+  cleaned = cleaned.replace(/(\.|!|\?)\s*(Inside,?\s+you'?l?l?\s+find:?|What's included:?|Here's what you get:?|You'll get:?|Includes:?)/gi, '$1\n\n**$2**\n');
+  // Also handle when these phrases are already on their own line (not after punctuation)
+  cleaned = cleaned.replace(/^(Inside,?\s+you'?l?l?\s+find:?|What's included:?|Here's what you get:?|You'll get:?|Includes:?)$/gim, '**$1**');
+
+  // Convert inline checkmarks (✓ or ✔) into proper list items
+  // Only add newline before checkmark if there's content before it
+  cleaned = cleaned.replace(/([^\n])\s*[✓✔️]\s*/g, '$1\n- ');
+  // Handle checkmarks at the start of content or after newlines
+  cleaned = cleaned.replace(/^\s*[✓✔️]\s*/gm, '- ');
+
+  // Remove empty list items (just "- " with nothing after or only whitespace)
+  cleaned = cleaned.replace(/^-\s*$/gm, '');
+
+  // Remove duplicate dashes that might result from the replacements
+  cleaned = cleaned.replace(/^-\s*-\s*/gm, '- ');
+
+  // Clean up excessive newlines (3+) to double newlines (paragraph break)
+  // Keep double newlines for paragraph separation
+  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
 
   // Remove trailing whitespace from each line
   cleaned = cleaned.split('\n').map(line => line.trimEnd()).join('\n');
