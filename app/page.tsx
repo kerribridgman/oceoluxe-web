@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, ArrowRight, Layers, Heart, Users } from 'lucide-react';
+import { Check, ArrowRight, Layers, Heart, Users, FileText } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
@@ -128,38 +128,43 @@ export default async function HomePage() {
             ))}
           </div>
 
-          <div className="bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/5 rounded-2xl p-10 border border-[#CDA7B2]/20">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6">
-                  Production Resources<br />& Notion Templates
-                </h3>
-                <p className="text-[#967F71] leading-relaxed font-light text-lg mb-6">
-                  Ready-to-use Notion templates for fashion production: collection planners, costing sheets, supplier trackers, and production calendars. Discover the tools that can transform your workflow.
-                </p>
-                <Link href="/products">
-                  <Button
-                    variant="outline"
-                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white"
-                  >
-                    Browse Resources
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-              <div className="flex justify-center">
-                <div className="aspect-square w-full max-w-md rounded-xl overflow-hidden shadow-lg relative">
-                  <Image
-                    src="/images/ai-systems.png"
-                    alt="Fashion production Notion templates"
-                    fill
-                    className="object-cover"
-                    quality={95}
-                  />
+          <Card className="border-[#967F71]/20 bg-gradient-to-br from-[#faf8f5] to-white hover:shadow-lg transition-shadow">
+            <CardContent className="pt-10 pb-8">
+              <div className="grid md:grid-cols-2 gap-8 items-start">
+                <div className="text-center md:text-left">
+                  <div className="flex justify-center md:justify-start mb-6">
+                    <FileText className="h-10 w-10 text-[#CDA7B2]" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 whitespace-pre-line">
+                    {"Production Resources\n& Notion Templates"}
+                  </h3>
+                  <p className="text-[#967F71] leading-relaxed font-light mb-6">
+                    Ready-to-use Notion templates designed specifically for fashion production. Collection planners to map your creative vision, costing sheets to protect your margins, supplier trackers to manage relationships, and production calendars to keep everything on schedule. Discover the tools that can transform your workflow.
+                  </p>
+                  <Link href="/products">
+                    <Button
+                      variant="outline"
+                      className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white"
+                    >
+                      Browse Resources
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+                <div className="flex justify-center">
+                  <div className="aspect-square w-full max-w-xs rounded-xl overflow-hidden shadow-lg relative">
+                    <Image
+                      src="/images/ai-systems.png"
+                      alt="Fashion production Notion templates"
+                      fill
+                      className="object-cover"
+                      quality={95}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
