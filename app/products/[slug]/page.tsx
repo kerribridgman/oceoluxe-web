@@ -123,12 +123,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         {product.salePrice || product.price}
                       </p>
                       {product.salePrice && product.price && (
-                        <>
-                          <p className="text-xl text-[#967F71] line-through font-light">{product.price}</p>
-                          <span className="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">
-                            SALE
-                          </span>
-                        </>
+                        <p className="text-xl text-[#967F71] line-through font-light">{product.price}</p>
                       )}
                     </>
                   )}
