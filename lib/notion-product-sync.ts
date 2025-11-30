@@ -134,7 +134,7 @@ export async function syncNotionProducts(userId: number, onProgress?: ProgressCa
         const typeProp = page.properties.Type || page.properties['Product Type'];
         let productType: string | undefined;
         if (typeProp?.type === 'select' && typeProp.select) {
-          productType = typeProp.select.name;
+          productType = (typeProp.select as any).name;
         } else if (typeProp?.type === 'rich_text') {
           productType = typeProp.rich_text.map((t: any) => t.plain_text).join('');
         }
@@ -143,16 +143,16 @@ export async function syncNotionProducts(userId: number, onProgress?: ProgressCa
         const categoryProp = page.properties.Category;
         let category: string | undefined;
         if (categoryProp?.type === 'select' && categoryProp.select) {
-          category = categoryProp.select.name;
+          category = (categoryProp.select as any).name;
         } else if (categoryProp?.type === 'multi_select') {
-          category = categoryProp.multi_select.map((t: any) => t.name).join(', ');
+          category = (categoryProp.multi_select as any[]).map((t: any) => t.name).join(', ');
         }
 
         // Get checkout URL
         const checkoutProp = page.properties['Checkout URL'] || page.properties.Checkout || page.properties.URL;
         let checkoutUrl: string | undefined;
         if (checkoutProp?.type === 'url') {
-          checkoutUrl = checkoutProp.url || undefined;
+          checkoutUrl = (checkoutProp.url as string) || undefined;
         } else if (checkoutProp?.type === 'rich_text') {
           checkoutUrl = checkoutProp.rich_text.map((t: any) => t.plain_text).join('');
         }
@@ -161,7 +161,7 @@ export async function syncNotionProducts(userId: number, onProgress?: ProgressCa
         const previewProp = page.properties['Preview URL'] || page.properties.Preview || page.properties.Demo;
         let previewUrl: string | undefined;
         if (previewProp?.type === 'url') {
-          previewUrl = previewProp.url || undefined;
+          previewUrl = (previewProp.url as string) || undefined;
         } else if (previewProp?.type === 'rich_text') {
           previewUrl = previewProp.rich_text.map((t: any) => t.plain_text).join('');
         }
@@ -170,23 +170,23 @@ export async function syncNotionProducts(userId: number, onProgress?: ProgressCa
         const publishedProp = page.properties.Published || page.properties.Status;
         let isPublished = true; // Default to published
         if (publishedProp?.type === 'checkbox') {
-          isPublished = publishedProp.checkbox;
+          isPublished = publishedProp.checkbox as boolean;
         } else if (publishedProp?.type === 'select' && publishedProp.select) {
-          isPublished = publishedProp.select.name.toLowerCase() === 'published';
+          isPublished = (publishedProp.select as any).name.toLowerCase() === 'published';
         }
 
         // Get featured status
         const featuredProp = page.properties.Featured;
         let isFeatured = false;
         if (featuredProp?.type === 'checkbox') {
-          isFeatured = featuredProp.checkbox;
+          isFeatured = featuredProp.checkbox as boolean;
         }
 
         // Get display order
         const orderProp = page.properties.Order || page.properties['Display Order'];
         let displayOrder = 0;
         if (orderProp?.type === 'number' && orderProp.number !== null) {
-          displayOrder = orderProp.number;
+          displayOrder = orderProp.number as number;
         }
 
         // Get cover image if exists
@@ -410,14 +410,14 @@ export async function syncSingleProduct(userId: number, productId: number): Prom
     const typeProp = page.properties.Type || page.properties['Product Type'];
     let productType: string | undefined;
     if (typeProp?.type === 'select' && typeProp.select) {
-      productType = typeProp.select.name;
+      productType = (typeProp.select as any).name;
     }
 
     // Get category
     const categoryProp = page.properties.Category;
     let category: string | undefined;
     if (categoryProp?.type === 'select' && categoryProp.select) {
-      category = categoryProp.select.name;
+      category = (categoryProp.select as any).name;
     } else if (categoryProp?.type === 'multi_select') {
       category = categoryProp.multi_select.map((t: any) => t.name).join(', ');
     }
