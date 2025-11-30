@@ -155,6 +155,13 @@ function cleanContent(content: string): { cleanedContent: string; tallyFormIds: 
   // Remove any remaining tally embed URLs that might be floating around
   cleaned = cleaned.replace(/https?:\/\/tally\.so\/embed\/[a-zA-Z0-9]+[^\s]*/gi, '');
 
+  // Remove broken image references (images with just filenames, no URLs)
+  // Matches: ![alt](filename.jpg) where there's no http/https
+  cleaned = cleaned.replace(/!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/gi, '');
+
+  // Also remove standalone image filenames like "IMG_1234.jpeg" on their own line
+  cleaned = cleaned.replace(/^[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)$/gim, '');
+
   // Clean up multiple consecutive newlines
   cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
 
