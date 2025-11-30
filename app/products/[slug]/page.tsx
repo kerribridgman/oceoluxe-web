@@ -135,15 +135,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 </div>
               </div>
 
-              {/* Description */}
-              {product.description && (
-                <div className="mb-8">
-                  <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                    {product.description}
-                  </p>
-                </div>
-              )}
-
               {/* CTA Buttons */}
               <div className="mb-8 space-y-3">
                 {product.checkoutUrl && (
