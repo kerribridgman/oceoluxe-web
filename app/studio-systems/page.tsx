@@ -147,7 +147,7 @@ export default async function StudioSystemsPage() {
               </div>
               <div className="space-y-4">
                 {struggles.slice(0, 4).map((struggle, index) => (
-                  <div key={index} className="flex items-start gap-4 bg-white p-5 rounded-lg border border-[#967F71]/10 shadow-sm">
+                  <div key={index} className="flex items-start gap-4 bg-[#F5F3F0] p-5 rounded-lg border border-[#EDEBE8] shadow-sm">
                     <X className="h-5 w-5 text-red-400 flex-shrink-0 mt-1" />
                     <span className="text-[#3B3937] font-light leading-relaxed">{struggle}</span>
                   </div>
@@ -168,7 +168,7 @@ export default async function StudioSystemsPage() {
           </div>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {solutions.map((solution, index) => (
-              <div key={index} className="flex items-start gap-4 bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/5 p-8 rounded-xl border border-[#CDA7B2]/20 shadow-sm hover:shadow-md transition-shadow">
+              <div key={index} className="flex items-start gap-4 bg-[#F5F3F0] p-8 rounded-xl border border-[#EDEBE8] shadow-sm hover:shadow-md transition-shadow">
                 <Check className="h-6 w-6 text-[#CDA7B2] flex-shrink-0 mt-1" />
                 <span className="text-[#3B3937] font-light leading-relaxed text-lg">{solution}</span>
               </div>
@@ -199,15 +199,15 @@ export default async function StudioSystemsPage() {
 
           <div className="grid md:grid-cols-3 gap-10 mb-16">
             {oceoMethodSteps.map((step, index) => (
-              <Card key={index} className="border-none bg-white shadow-xl hover:shadow-2xl transition-shadow">
+              <Card key={index} className="border border-[#EDEBE8] bg-[#F5F3F0] shadow-xl hover:shadow-2xl transition-shadow">
                 <CardContent className="pt-12 pb-10 text-center">
-                  <div className="flex justify-center mb-8">
+                  <div className="flex justify-center mb-8 bg-[#CDA7B2]/10 w-20 h-20 rounded-full items-center mx-auto">
                     {step.icon}
                   </div>
                   <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6 tracking-wide">
                     {step.title}
                   </h3>
-                  <p className="text-[#967F71] leading-relaxed font-light text-lg">
+                  <p className="text-[#6B655C] leading-relaxed font-light text-lg">
                     {step.description}
                   </p>
                 </CardContent>

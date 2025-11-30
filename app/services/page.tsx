@@ -57,7 +57,7 @@ export default async function ServicesPage() {
                 </p>
               </div>
 
-              <div className="bg-white rounded-2xl p-8 shadow-xl border border-[#967F71]/10">
+              <div className="bg-[#F5F3F0] rounded-2xl p-8 shadow-xl border border-[#EDEBE8]">
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What's Included</h3>
                 <ul className="space-y-4">
                   {[
@@ -68,7 +68,7 @@ export default async function ServicesPage() {
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#967F71] font-light">{item}</span>
+                      <span className="text-[#6B655C] font-light">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -87,7 +87,7 @@ export default async function ServicesPage() {
           {/* Service 2: Systems Implementation */}
           <div id="systems-implementation" className="scroll-mt-16">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1 bg-gradient-to-br from-[#faf8f5] to-[#CDA7B2]/5 rounded-2xl p-8 border border-[#CDA7B2]/20">
+              <div className="order-2 md:order-1 bg-[#F5F3F0] rounded-2xl p-8 border border-[#EDEBE8]">
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">Services Include</h3>
                 <ul className="space-y-4">
                   {[
@@ -98,7 +98,7 @@ export default async function ServicesPage() {
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#3B3937] font-light">{item}</span>
+                      <span className="text-[#6B655C] font-light">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -149,7 +149,7 @@ export default async function ServicesPage() {
                 </blockquote>
               </div>
 
-              <div className="bg-white rounded-2xl p-8 shadow-xl border border-[#967F71]/10">
+              <div className="bg-[#F5F3F0] rounded-2xl p-8 shadow-xl border border-[#EDEBE8]">
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What You Get</h3>
                 <ul className="space-y-4">
                   {[
@@ -160,7 +160,7 @@ export default async function ServicesPage() {
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#967F71] font-light">{item}</span>
+                      <span className="text-[#6B655C] font-light">{item}</span>
                     </li>
                   ))}
                 </ul>

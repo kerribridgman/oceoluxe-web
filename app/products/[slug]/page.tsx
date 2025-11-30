@@ -163,7 +163,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
 
               {/* Features */}
-              <Card className="border-[#967F71]/20">
+              <Card className="border-[#EDEBE8] bg-[#F5F3F0]">
                 <CardContent className="pt-6">
                   <h3 className="font-serif font-light text-lg mb-4 text-[#3B3937]">What's Included</h3>
                   <div className="space-y-3">

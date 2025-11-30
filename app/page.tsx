@@ -112,15 +112,15 @@ export default async function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {offerings.map((offering, index) => (
-              <Card key={index} className="border-[#967F71]/20 bg-gradient-to-br from-[#faf8f5] to-white hover:shadow-lg transition-shadow">
+              <Card key={index} className="border-[#EDEBE8] bg-[#F5F3F0] hover:shadow-lg transition-shadow">
                 <CardContent className="pt-10 pb-8 text-center">
-                  <div className="flex justify-center mb-6">
+                  <div className="flex justify-center mb-6 bg-[#CDA7B2]/10 w-16 h-16 rounded-full items-center mx-auto">
                     {offering.icon}
                   </div>
                   <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 whitespace-pre-line">
                     {offering.title}
                   </h3>
-                  <p className="text-[#967F71] leading-relaxed font-light">
+                  <p className="text-[#6B655C] leading-relaxed font-light">
                     {offering.description}
                   </p>
                 </CardContent>
@@ -128,17 +128,19 @@ export default async function HomePage() {
             ))}
           </div>
 
-          <Card className="border-[#967F71]/20 bg-gradient-to-br from-[#faf8f5] to-white hover:shadow-lg transition-shadow">
+          <Card className="border-[#EDEBE8] bg-[#F5F3F0] hover:shadow-lg transition-shadow">
             <CardContent className="pt-10 pb-8">
               <div className="grid md:grid-cols-2 gap-8 items-start">
                 <div className="text-center md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                    <FileText className="h-12 w-12 text-[#CDA7B2] flex-shrink-0" />
+                    <div className="bg-[#CDA7B2]/10 w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
+                      <FileText className="h-10 w-10 text-[#CDA7B2]" />
+                    </div>
                     <h3 className="text-2xl font-serif font-light text-[#3B3937] whitespace-pre-line">
                       {"Production Resources\n& Notion Templates"}
                     </h3>
                   </div>
-                  <p className="text-[#967F71] leading-relaxed font-light mb-6">
+                  <p className="text-[#6B655C] leading-relaxed font-light mb-6">
                     Ready-to-use Notion templates designed specifically for fashion production. Collection planners to map your creative vision, costing sheets to protect your margins, supplier trackers to manage relationships, and production calendars to keep everything on schedule. Discover the tools that can transform your workflow.
                   </p>
                   <Link href="/products">
@@ -193,7 +195,7 @@ export default async function HomePage() {
               </div>
               <div className="space-y-4">
                 {idealClientIndicators.map((indicator, index) => (
-                  <div key={index} className="flex items-start gap-4 bg-white p-5 rounded-lg border border-[#967F71]/10 shadow-sm">
+                  <div key={index} className="flex items-start gap-4 bg-[#F5F3F0] p-5 rounded-lg border border-[#EDEBE8] shadow-sm">
                     <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-1" />
                     <span className="text-[#3B3937] font-light leading-relaxed">{indicator}</span>
                   </div>

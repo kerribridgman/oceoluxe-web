@@ -69,7 +69,7 @@ export default async function ProductsPage() {
                   <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {freeProducts.map((product) => (
                       <Link key={product.id} href={`/products/${product.slug}`} className="group">
-                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#967F71]/20 hover:border-[#CDA7B2]">
+                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#EDEBE8] bg-[#F5F3F0] hover:border-[#CDA7B2]">
                           {product.coverImageUrl && (
                             <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
                               <img
@@ -129,7 +129,7 @@ export default async function ProductsPage() {
                   <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {paidProducts.map((product) => (
                       <Link key={product.id} href={`/products/${product.slug}`} className="group">
-                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#967F71]/20 hover:border-[#CDA7B2]">
+                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#EDEBE8] bg-[#F5F3F0] hover:border-[#CDA7B2]">
                           {product.coverImageUrl && (
                             <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
                               <img

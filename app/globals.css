@@ -25,6 +25,18 @@
   --brand-rose-hover: #BD97A2;
   --brand-rose-light: #E8D4DB;
 
+  /* Warm Gray Palette - Luxury Depth */
+  --brand-gray-50: #FAFAF9;
+  --brand-gray-100: #F5F3F0;
+  --brand-gray-200: #EDEBE8;
+  --brand-gray-300: #D8D5D0;
+  --brand-gray-400: #B5B0A8;
+  --brand-gray-500: #8E877D;
+  --brand-gray-600: #6B655C;
+  --brand-gray-700: #4A453E;
+  --brand-gray-800: #2D2A26;
+  --brand-gray-900: #1A1816;
+
   /* Semantic Brand Colors */
   --color-brand-primary: var(--brand-rose);
   --color-brand-primary-hover: var(--brand-rose-hover);
@@ -385,6 +397,48 @@
 
   .shadow-brand-primary\/10 {
     --tw-shadow-color: rgb(from var(--brand-rose) r g b / 0.1);
+  }
+
+  /* Warm Gray Backgrounds */
+  .bg-brand-gray-50 {
+    background-color: var(--brand-gray-50);
+  }
+  .bg-brand-gray-100 {
+    background-color: var(--brand-gray-100);
+  }
+  .bg-brand-gray-200 {
+    background-color: var(--brand-gray-200);
+  }
+  .bg-brand-gray-300 {
+    background-color: var(--brand-gray-300);
+  }
+  .bg-brand-gray-400 {
+    background-color: var(--brand-gray-400);
+  }
+  .bg-brand-gray-500 {
+    background-color: var(--brand-gray-500);
+  }
+
+  /* Warm Gray Text */
+  .text-brand-gray-400 {
+    color: var(--brand-gray-400);
+  }
+  .text-brand-gray-500 {
+    color: var(--brand-gray-500);
+  }
+  .text-brand-gray-600 {
+    color: var(--brand-gray-600);
+  }
+  .text-brand-gray-700 {
+    color: var(--brand-gray-700);
+  }
+
+  /* Warm Gray Borders */
+  .border-brand-gray-200 {
+    border-color: var(--brand-gray-200);
+  }
+  .border-brand-gray-300 {
+    border-color: var(--brand-gray-300);
   }
 
   /* Gradients - Oceo Luxe Theme */
