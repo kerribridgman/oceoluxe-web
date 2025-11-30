@@ -3,9 +3,35 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useEffect, useMemo, useState } from 'react';
+import Script from 'next/script';
 
 interface ProductMarkdownRendererProps {
   content: string;
+}
+
+interface StripeButton {
+  buyButtonId: string;
+  publishableKey: string;
+}
+
+// Component to render Stripe Buy Button
+function StripeBuyButton({ buyButtonId, publishableKey }: StripeButton) {
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+
+  return (
+    <div className="my-8">
+      <Script
+        src="https://js.stripe.com/v3/buy-button.js"
+        strategy="lazyOnload"
+        onLoad={() => setScriptLoaded(true)}
+      />
+      {/* @ts-ignore - stripe-buy-button is a custom element */}
+      <stripe-buy-button
+        buy-button-id={buyButtonId}
+        publishable-key={publishableKey}
+      />
+    </div>
+  );
 }
 
 // Component to render Tally embeds
@@ -69,14 +95,44 @@ function extractTallyFormId(text: string): string | null {
 }
 
 // Clean content by removing super-embed blocks and raw HTML/script tags
-function cleanContent(content: string): { cleanedContent: string; tallyFormIds: string[] } {
+function cleanContent(content: string): { cleanedContent: string; tallyFormIds: string[]; stripeButtons: StripeButton[] } {
   const tallyFormIds: string[] = [];
+  const stripeButtons: StripeButton[] = [];
 
   // Find all Tally form IDs in the content
   const tallyMatches = content.matchAll(/tally\.so\/(?:embed|r)\/([a-zA-Z0-9]+)/g);
   for (const match of tallyMatches) {
     if (match[1] && !tallyFormIds.includes(match[1])) {
       tallyFormIds.push(match[1]);
+    }
+  }
+
+  // Find all Stripe buy buttons in the content
+  // Match pattern: <stripe-buy-button buy-button-id="..." publishable-key="...">
+  const stripeMatches = content.matchAll(/<stripe-buy-button[\s\S]*?buy-button-id=["']([^"']+)["'][\s\S]*?publishable-key=["']([^"']+)["'][\s\S]*?(?:\/>|<\/stripe-buy-button>)/gi);
+  for (const match of stripeMatches) {
+    if (match[1] && match[2]) {
+      const exists = stripeButtons.some(b => b.buyButtonId === match[1]);
+      if (!exists) {
+        stripeButtons.push({
+          buyButtonId: match[1],
+          publishableKey: match[2]
+        });
+      }
+    }
+  }
+
+  // Also try alternate attribute order
+  const stripeMatchesAlt = content.matchAll(/<stripe-buy-button[\s\S]*?publishable-key=["']([^"']+)["'][\s\S]*?buy-button-id=["']([^"']+)["'][\s\S]*?(?:\/>|<\/stripe-buy-button>)/gi);
+  for (const match of stripeMatchesAlt) {
+    if (match[1] && match[2]) {
+      const exists = stripeButtons.some(b => b.buyButtonId === match[2]);
+      if (!exists) {
+        stripeButtons.push({
+          buyButtonId: match[2],
+          publishableKey: match[1]
+        });
+      }
     }
   }
 
@@ -94,17 +150,20 @@ function cleanContent(content: string): { cleanedContent: string; tallyFormIds: 
   // Remove raw script tags
   cleaned = cleaned.replace(/<script[\s\S]*?<\/script>/gi, '');
 
+  // Remove Stripe buy button tags
+  cleaned = cleaned.replace(/<stripe-buy-button[\s\S]*?(?:\/>|<\/stripe-buy-button>)/gi, '');
+
   // Remove any remaining tally embed URLs that might be floating around
   cleaned = cleaned.replace(/https?:\/\/tally\.so\/embed\/[a-zA-Z0-9]+[^\s]*/gi, '');
 
   // Clean up multiple consecutive newlines
   cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
 
-  return { cleanedContent: cleaned.trim(), tallyFormIds };
+  return { cleanedContent: cleaned.trim(), tallyFormIds, stripeButtons };
 }
 
 export function ProductMarkdownRenderer({ content }: ProductMarkdownRendererProps) {
-  const { cleanedContent, tallyFormIds } = useMemo(() => cleanContent(content), [content]);
+  const { cleanedContent, tallyFormIds, stripeButtons } = useMemo(() => cleanContent(content), [content]);
 
   return (
     <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-light prose-headings:text-[#3B3937] prose-p:text-[#967F71] prose-p:font-light prose-a:text-[#CDA7B2] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#3B3937] prose-li:text-[#967F71]">
@@ -211,6 +270,15 @@ export function ProductMarkdownRenderer({ content }: ProductMarkdownRendererProp
       >
         {cleanedContent}
       </ReactMarkdown>
+
+      {/* Render Stripe buy buttons */}
+      {stripeButtons.map((button, index) => (
+        <StripeBuyButton
+          key={`stripe-${button.buyButtonId}-${index}`}
+          buyButtonId={button.buyButtonId}
+          publishableKey={button.publishableKey}
+        />
+      ))}
 
       {/* Render Tally embeds at the end */}
       {tallyFormIds.map((formId) => (
