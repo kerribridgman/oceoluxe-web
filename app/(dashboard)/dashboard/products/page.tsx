@@ -628,6 +628,15 @@ export default function ProductsPage() {
                         </>
                       )}
                     </Button>
+                    <Link href={`/dashboard/products/${product.id}/edit`}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-[#CDA7B2] text-[#CDA7B2] hover:bg-[#CDA7B2] hover:text-white"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                    </Link>
                     <Button
                       size="sm"
                       variant="outline"

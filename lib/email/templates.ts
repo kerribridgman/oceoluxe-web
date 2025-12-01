@@ -58,6 +58,15 @@ export function generatePurchaseConfirmationEmail(data: PurchaseEmailData): { su
         </div>
       </div>
     `;
+  } else if (data.deliveryType === 'email' && data.accessInstructions) {
+    deliveryContent = `
+      <div class="card">
+        <h2 style="margin-top: 0;">📧 Your Product Details</h2>
+        <div class="instructions">
+          <p style="white-space: pre-wrap; margin: 0;">${data.accessInstructions}</p>
+        </div>
+      </div>
+    `;
   }
 
   const subscriptionNote = data.isSubscription

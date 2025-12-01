@@ -1,17 +1,42 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Save, Upload, X, DollarSign, Package } from 'lucide-react';
+import { ArrowLeft, Save, Upload, X, DollarSign, Package, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
-export default function NewProductPage() {
+interface DashboardProduct {
+  id: number;
+  name: string;
+  slug: string;
+  description: string | null;
+  shortDescription: string | null;
+  coverImageUrl: string | null;
+  productType: 'one_time' | 'subscription';
+  priceInCents: number;
+  currency: string;
+  yearlyPriceInCents: number | null;
+  stripeProductId: string | null;
+  stripePriceId: string | null;
+  stripeSyncedAt: string | null;
+  deliveryType: 'download' | 'access' | 'email';
+  downloadUrl: string | null;
+  accessInstructions: string | null;
+  isPublished: boolean;
+  isFeatured: boolean;
+}
+
+export default function EditProductPage() {
   const router = useRouter();
+  const params = useParams();
+  const productId = params.id as string;
+
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [uploadingCover, setUploadingCover] = useState(false);
@@ -33,19 +58,43 @@ export default function NewProductPage() {
     isFeatured: false,
   });
 
-  function handleNameChange(value: string) {
-    setFormData(prev => ({
-      ...prev,
-      name: value,
-      slug: prev.slug || value
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, ''),
-    }));
+  useEffect(() => {
+    fetchProduct();
+  }, [productId]);
+
+  async function fetchProduct() {
+    try {
+      const response = await fetch(`/api/dashboard-products/${productId}`);
+      if (!response.ok) {
+        throw new Error('Product not found');
+      }
+
+      const data = await response.json();
+      const product: DashboardProduct = data.product;
+
+      setFormData({
+        name: product.name,
+        slug: product.slug,
+        description: product.description || '',
+        shortDescription: product.shortDescription || '',
+        coverImageUrl: product.coverImageUrl || '',
+        productType: product.productType,
+        price: (product.priceInCents / 100).toFixed(2),
+        yearlyPrice: product.yearlyPriceInCents ? (product.yearlyPriceInCents / 100).toFixed(2) : '',
+        deliveryType: product.deliveryType,
+        downloadUrl: product.downloadUrl || '',
+        accessInstructions: product.accessInstructions || '',
+        isPublished: product.isPublished,
+        isFeatured: product.isFeatured,
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load product');
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handlePriceChange(value: string) {
-    // Allow only numbers and decimal point
     const cleaned = value.replace(/[^0-9.]/g, '');
     setFormData(prev => ({ ...prev, price: cleaned }));
   }
@@ -86,7 +135,7 @@ export default function NewProductPage() {
     }
   }
 
-  async function handleSubmit(publish: boolean) {
+  async function handleSubmit(publish?: boolean) {
     if (!formData.name) {
       setError('Product name is required');
       return;
@@ -101,35 +150,40 @@ export default function NewProductPage() {
     setError(null);
 
     try {
-      // Convert price to cents
       const priceInCents = Math.round(parseFloat(formData.price) * 100);
       const yearlyPriceInCents = formData.yearlyPrice
         ? Math.round(parseFloat(formData.yearlyPrice) * 100)
         : null;
 
-      const response = await fetch('/api/dashboard-products', {
-        method: 'POST',
+      const updateData: Record<string, unknown> = {
+        name: formData.name,
+        slug: formData.slug || undefined,
+        description: formData.description || undefined,
+        shortDescription: formData.shortDescription || undefined,
+        coverImageUrl: formData.coverImageUrl || undefined,
+        productType: formData.productType,
+        priceInCents,
+        yearlyPriceInCents,
+        deliveryType: formData.deliveryType,
+        downloadUrl: formData.downloadUrl || undefined,
+        accessInstructions: formData.accessInstructions || undefined,
+        isFeatured: formData.isFeatured,
+      };
+
+      // Only set isPublished if explicitly changing it
+      if (publish !== undefined) {
+        updateData.isPublished = publish;
+      }
+
+      const response = await fetch(`/api/dashboard-products/${productId}`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          slug: formData.slug || undefined,
-          description: formData.description || undefined,
-          shortDescription: formData.shortDescription || undefined,
-          coverImageUrl: formData.coverImageUrl || undefined,
-          productType: formData.productType,
-          priceInCents,
-          yearlyPriceInCents,
-          deliveryType: formData.deliveryType,
-          downloadUrl: formData.downloadUrl || undefined,
-          accessInstructions: formData.accessInstructions || undefined,
-          isPublished: publish,
-          isFeatured: formData.isFeatured,
-        }),
+        body: JSON.stringify(updateData),
       });
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.message || 'Failed to create product');
+        throw new Error(data.message || 'Failed to update product');
       }
 
       router.push('/dashboard/products');
@@ -138,6 +192,14 @@ export default function NewProductPage() {
     } finally {
       setSaving(false);
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex-1 flex items-center justify-center py-20">
+        <Loader2 className="w-8 h-8 animate-spin text-[#CDA7B2]" />
+      </div>
+    );
   }
 
   return (
@@ -157,27 +219,29 @@ export default function NewProductPage() {
                 <Package className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold mb-1">New Product</h1>
-                <p>Create a new digital product with Stripe integration</p>
+                <h1 className="text-3xl font-bold mb-1">Edit Product</h1>
+                <p>Update your digital product details</p>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Button
-              onClick={() => handleSubmit(false)}
+              onClick={() => handleSubmit()}
               disabled={saving}
               className="bg-white hover:bg-gray-50 text-gray-900 shadow-lg font-semibold"
             >
               <Save className="w-4 h-4 mr-2" />
-              Save Draft
+              {saving ? 'Saving...' : 'Save Changes'}
             </Button>
-            <Button
-              className="bg-green-600 hover:bg-green-700 text-white shadow-lg font-semibold"
-              onClick={() => handleSubmit(true)}
-              disabled={saving}
-            >
-              Publish
-            </Button>
+            {!formData.isPublished && (
+              <Button
+                className="bg-green-600 hover:bg-green-700 text-white shadow-lg font-semibold"
+                onClick={() => handleSubmit(true)}
+                disabled={saving}
+              >
+                Publish
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -201,7 +265,7 @@ export default function NewProductPage() {
                 <Input
                   id="name"
                   value={formData.name}
-                  onChange={(e) => handleNameChange(e.target.value)}
+                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="Enter product name"
                   className="mt-1"
                 />
@@ -472,6 +536,17 @@ export default function NewProductPage() {
                   <p className="text-xs text-gray-500">Display prominently on the products page</p>
                 </div>
               </label>
+
+              <div className="pt-4 border-t border-gray-100">
+                <p className="text-sm font-medium text-gray-900 mb-2">Status</p>
+                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                  formData.isPublished
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-gray-100 text-gray-600'
+                }`}>
+                  {formData.isPublished ? 'Published' : 'Draft'}
+                </span>
+              </div>
             </CardContent>
           </Card>
 
@@ -488,11 +563,11 @@ export default function NewProductPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-900">Stripe Integration</p>
-                  <p className="text-xs text-gray-500">Product will be synced after saving</p>
+                  <p className="text-xs text-gray-500">Re-sync after making changes</p>
                 </div>
               </div>
               <p className="text-xs text-gray-600">
-                After saving, use the "Sync to Stripe" button on the products page to create this product in Stripe and enable checkout.
+                After saving changes, use the "Sync to Stripe" button on the products page to update the product in Stripe.
               </p>
             </CardContent>
           </Card>
