@@ -1,8 +1,9 @@
 import { getPublicNotionProducts } from '@/lib/db/queries-notion-products';
+import { getPublicDashboardProducts } from '@/lib/db/queries-dashboard-products';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, ShoppingCart, Download, Gift } from 'lucide-react';
+import { ExternalLink, ShoppingCart, Download, Gift, Sparkles } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
@@ -14,15 +15,29 @@ export const metadata = {
 // Revalidate every 60 seconds to ensure products are up-to-date
 export const revalidate = 60;
 
+function formatPrice(cents: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(cents / 100);
+}
+
 export default async function ProductsPage() {
-  let products: Awaited<ReturnType<typeof getPublicNotionProducts>> = [];
+  let notionProducts: Awaited<ReturnType<typeof getPublicNotionProducts>> = [];
+  let dashboardProducts: Awaited<ReturnType<typeof getPublicDashboardProducts>> = [];
 
   try {
-    products = await getPublicNotionProducts();
+    [notionProducts, dashboardProducts] = await Promise.all([
+      getPublicNotionProducts(),
+      getPublicDashboardProducts(),
+    ]);
   } catch (error) {
     console.error('Error loading products:', error);
     // Continue with empty products array to show "No Products Yet" message
   }
+
+  // For backwards compatibility, keep using the notion products variable name
+  const products = notionProducts;
 
   // Separate free and paid products - check for "Free", "$0", or no price
   const isFreeProduct = (p: typeof products[0]) => {
@@ -51,7 +66,7 @@ export default async function ProductsPage() {
       {/* Products Grid */}
       <div className="bg-[#faf8f5] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {products.length === 0 ? (
+          {products.length === 0 && dashboardProducts.length === 0 ? (
             <div className="text-center py-16">
               <ShoppingCart className="w-16 h-16 text-[#967F71] mx-auto mb-4" />
               <h2 className="text-2xl font-serif font-light text-[#3B3937] mb-2">No Products Yet</h2>
@@ -184,6 +199,70 @@ export default async function ProductsPage() {
           )}
         </div>
       </div>
+
+      {/* Dashboard Products Section */}
+      {dashboardProducts.length > 0 && (
+        <div className="bg-[#faf8f5] pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-3 mb-8">
+              <Sparkles className="w-8 h-8 text-[#CDA7B2]" />
+              <h2 className="text-3xl font-serif font-light text-[#3B3937]">Digital Products</h2>
+            </div>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {dashboardProducts.map((product) => (
+                <Link
+                  key={product.id}
+                  href={`/checkout/${product.slug}`}
+                  className="group"
+                >
+                  <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#EDEBE8] bg-[#F5F3F0] hover:border-[#CDA7B2]">
+                    {product.coverImageUrl && (
+                      <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
+                        <img
+                          src={product.coverImageUrl}
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        {product.productType === 'subscription' && (
+                          <div className="absolute top-4 right-4 bg-[#3B3937] text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Subscription
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <CardHeader>
+                      <CardTitle className="text-2xl line-clamp-2 group-hover:text-[#CDA7B2] transition-colors font-serif font-light">
+                        {product.name}
+                      </CardTitle>
+                      {product.shortDescription && (
+                        <CardDescription className="line-clamp-3 text-base text-[#967F71] font-light">
+                          {product.shortDescription}
+                        </CardDescription>
+                      )}
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-3xl font-serif font-light text-[#3B3937]">
+                            {formatPrice(product.priceInCents)}
+                          </p>
+                          {product.productType === 'subscription' && (
+                            <p className="text-sm text-[#967F71] font-light">/month</p>
+                          )}
+                        </div>
+                        <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white">
+                          {product.productType === 'subscription' ? 'Subscribe' : 'Buy Now'}
+                          <ShoppingCart className="w-4 h-4 ml-2" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5]">

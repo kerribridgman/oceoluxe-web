@@ -232,10 +232,10 @@ export default async function StudioSystemsPage() {
           <div className="my-8">
             <p className="text-[#967F71] line-through text-lg mb-2 font-light">Final Price: $80/month</p>
             <div className="text-6xl font-serif font-light text-[#3B3937] mb-2">
-              $39<span className="text-3xl text-[#967F71]">/month</span>
+              $33<span className="text-3xl text-[#967F71]">/month</span>
             </div>
             <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
-            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Limited Time: $39/month for the first 20 members only</p>
+            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Limited Time: $33/month for the first 20 members only</p>
           </div>
           <Link href="/studio-systems/join">
             <Button
@@ -294,7 +294,7 @@ export default async function StudioSystemsPage() {
             </Button>
           </Link>
           <p className="text-lg text-[#967F71] mt-8 font-light">
-            $39/month for the first 20 members • After that, price increases to $59/month
+            $33/month for the first 20 members • After that, price increases to $59/month
           </p>
         </div>
       </section>

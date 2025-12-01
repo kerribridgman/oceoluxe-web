@@ -5,8 +5,30 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Package, Plus, Trash2, RefreshCw, Eye, EyeOff, ExternalLink, AlertCircle, CheckCircle2, RotateCw, Star, X, Download } from 'lucide-react';
+import { Package, Plus, Trash2, RefreshCw, Eye, EyeOff, ExternalLink, AlertCircle, CheckCircle2, RotateCw, Star, X, Download, CreditCard, Loader2, Edit, DollarSign } from 'lucide-react';
 import { format } from 'date-fns';
+import Link from 'next/link';
+
+interface DashboardProduct {
+  id: number;
+  name: string;
+  slug: string;
+  description: string | null;
+  shortDescription: string | null;
+  coverImageUrl: string | null;
+  productType: 'one_time' | 'subscription';
+  priceInCents: number;
+  currency: string;
+  yearlyPriceInCents: number | null;
+  stripeProductId: string | null;
+  stripePriceId: string | null;
+  stripeSyncedAt: string | null;
+  deliveryType: 'download' | 'access' | 'email';
+  isPublished: boolean;
+  isFeatured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface MmfcApiKey {
   id: number;
@@ -66,6 +88,7 @@ export default function ProductsPage() {
   const [apiKeys, setApiKeys] = useState<MmfcApiKey[]>([]);
   const [products, setProducts] = useState<MmfcProduct[]>([]);
   const [notionProducts, setNotionProducts] = useState<NotionProduct[]>([]);
+  const [dashboardProducts, setDashboardProducts] = useState<DashboardProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showAddKeyDialog, setShowAddKeyDialog] = useState(false);
   const [syncingKeyId, setSyncingKeyId] = useState<number | null>(null);
@@ -75,6 +98,9 @@ export default function ProductsPage() {
   const [syncProgress, setSyncProgress] = useState<SyncProgress | null>(null);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncingProductId, setSyncingProductId] = useState<number | null>(null);
+
+  // Dashboard products sync state
+  const [syncingStripeProductId, setSyncingStripeProductId] = useState<number | null>(null);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -93,10 +119,11 @@ export default function ProductsPage() {
   async function fetchData() {
     setIsLoading(true);
     try {
-      const [keysRes, productsRes, notionRes] = await Promise.all([
+      const [keysRes, productsRes, notionRes, dashboardRes] = await Promise.all([
         fetch('/api/mmfc-keys'),
         fetch('/api/mmfc-products'),
-        fetch('/api/notion-products')
+        fetch('/api/notion-products'),
+        fetch('/api/dashboard-products')
       ]);
 
       if (keysRes.ok) {
@@ -113,11 +140,89 @@ export default function ProductsPage() {
         const notionData = await notionRes.json();
         setNotionProducts(notionData.products || []);
       }
+
+      if (dashboardRes.ok) {
+        const dashboardData = await dashboardRes.json();
+        setDashboardProducts(dashboardData.products || []);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  async function syncToStripe(productId: number) {
+    setSyncingStripeProductId(productId);
+    try {
+      const response = await fetch(`/api/dashboard-products/${productId}/stripe-sync`, {
+        method: 'POST'
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || 'Failed to sync to Stripe');
+        return;
+      }
+
+      alert('Product synced to Stripe successfully!');
+      fetchData();
+    } catch (error) {
+      console.error('Error syncing to Stripe:', error);
+      alert('Failed to sync to Stripe');
+    } finally {
+      setSyncingStripeProductId(null);
+    }
+  }
+
+  async function toggleDashboardProductPublished(productId: number, isPublished: boolean) {
+    try {
+      const response = await fetch(`/api/dashboard-products/${productId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isPublished })
+      });
+
+      if (!response.ok) {
+        alert('Failed to update product');
+        return;
+      }
+
+      fetchData();
+    } catch (error) {
+      console.error('Error updating product:', error);
+      alert('Failed to update product');
+    }
+  }
+
+  async function deleteDashboardProduct(productId: number) {
+    if (!confirm('Are you sure you want to delete this product?')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/dashboard-products/${productId}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        alert('Failed to delete product');
+        return;
+      }
+
+      fetchData();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      alert('Failed to delete product');
+    }
+  }
+
+  function formatPrice(cents: number, currency: string = 'usd') {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency.toUpperCase(),
+    }).format(cents / 100);
   }
 
   async function handleAddApiKey(e: React.FormEvent) {
@@ -345,24 +450,33 @@ export default function ProductsPage() {
     <section className="flex-1">
       {/* Page Header */}
       <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
               <Package className="w-6 h-6 text-white" />
             </div>
             <div>
               <h1 className="text-3xl font-bold mb-2">Products</h1>
-              <p>Manage products from Notion and Make Money from Coding</p>
+              <p>Manage all your digital products</p>
             </div>
           </div>
-          <Button
-            onClick={() => setShowSyncModal(true)}
-            disabled={isSyncing}
-            className="bg-white text-brand-primary hover:bg-white/90 shadow-lg"
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Sync from Notion
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={() => setShowSyncModal(true)}
+              disabled={isSyncing}
+              variant="outline"
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Sync from Notion
+            </Button>
+            <Link href="/dashboard/products/new">
+              <Button className="bg-white text-[#3B3937] hover:bg-white/90 shadow-lg font-semibold">
+                <Plus className="w-4 h-4 mr-2" />
+                Create Product
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -394,6 +508,162 @@ export default function ProductsPage() {
           </div>
         </div>
       )}
+
+      {/* Dashboard Products Section (Stripe-integrated) */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <CreditCard className="w-5 h-5 text-[#CDA7B2]" />
+            <h2 className="text-lg font-semibold text-gray-900">Dashboard Products ({dashboardProducts.length})</h2>
+          </div>
+          <Link href="/dashboard/products/new">
+            <Button size="sm" variant="outline" className="text-[#CDA7B2] border-[#CDA7B2] hover:bg-[#CDA7B2] hover:text-white">
+              <Plus className="w-4 h-4 mr-2" />
+              Add Product
+            </Button>
+          </Link>
+        </div>
+
+        {dashboardProducts.length === 0 ? (
+          <Card className="dashboard-card border-0">
+            <CardContent className="py-12 text-center">
+              <CreditCard className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600 mb-4">No products created yet</p>
+              <p className="text-sm text-gray-500 mb-4">Create products here to sell directly with Stripe checkout</p>
+              <Link href="/dashboard/products/new">
+                <Button>
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Your First Product
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {dashboardProducts.map((product) => (
+              <Card key={product.id} className="dashboard-card border-0 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                {product.coverImageUrl && (
+                  <div className="aspect-video overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 relative">
+                    <img
+                      src={product.coverImageUrl}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                    {product.isFeatured && (
+                      <div className="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+                        <Star className="w-3 h-3" />
+                        Featured
+                      </div>
+                    )}
+                    {/* Stripe sync status indicator */}
+                    <div className={`absolute top-2 right-2 px-2 py-1 rounded text-xs font-medium flex items-center gap-1 ${
+                      product.stripeSyncedAt ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'
+                    }`}>
+                      {product.stripeSyncedAt ? (
+                        <>
+                          <CheckCircle2 className="w-3 h-3" />
+                          Stripe
+                        </>
+                      ) : (
+                        <>
+                          <AlertCircle className="w-3 h-3" />
+                          Not synced
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <CardTitle className="text-lg line-clamp-2">{product.name}</CardTitle>
+                  </div>
+                  {product.shortDescription && (
+                    <CardDescription className="line-clamp-2 text-sm">
+                      {product.shortDescription}
+                    </CardDescription>
+                  )}
+                  <div className="flex gap-2 mt-2">
+                    <span className={`text-xs px-2 py-1 rounded ${
+                      product.productType === 'subscription'
+                        ? 'bg-purple-50 text-purple-600'
+                        : 'bg-blue-50 text-blue-600'
+                    }`}>
+                      {product.productType === 'subscription' ? 'Subscription' : 'One-time'}
+                    </span>
+                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                      {product.deliveryType}
+                    </span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <p className="text-2xl font-bold text-[#CDA7B2]">
+                        {formatPrice(product.priceInCents, product.currency)}
+                        {product.productType === 'subscription' && <span className="text-sm font-normal text-gray-500">/mo</span>}
+                      </p>
+                      {product.yearlyPriceInCents && (
+                        <p className="text-sm text-gray-500">
+                          or {formatPrice(product.yearlyPriceInCents, product.currency)}/year
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex gap-2 flex-wrap">
+                    <Button
+                      size="sm"
+                      variant={product.isPublished ? 'default' : 'outline'}
+                      onClick={() => toggleDashboardProductPublished(product.id, !product.isPublished)}
+                      className={product.isPublished ? 'bg-green-600 hover:bg-green-700 flex-1' : 'flex-1'}
+                    >
+                      {product.isPublished ? (
+                        <>
+                          <Eye className="w-4 h-4 mr-1" />
+                          Published
+                        </>
+                      ) : (
+                        <>
+                          <EyeOff className="w-4 h-4 mr-1" />
+                          Draft
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => syncToStripe(product.id)}
+                      disabled={syncingStripeProductId === product.id}
+                      className={product.stripeSyncedAt ? 'border-green-500 text-green-600' : ''}
+                    >
+                      {syncingStripeProductId === product.id ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <CreditCard className="w-4 h-4" />
+                      )}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => deleteDashboardProduct(product.id)}
+                      className="text-red-600 hover:bg-red-50"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  {product.stripeSyncedAt && (
+                    <p className="text-xs text-gray-500 mt-2">
+                      Last synced: {format(new Date(product.stripeSyncedAt), 'MMM d, h:mm a')}
+                    </p>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Divider */}
+      <hr className="my-8 border-gray-200" />
 
       {/* Notion Products Section */}
       <div className="mb-8">

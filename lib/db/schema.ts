@@ -400,6 +400,130 @@ export const notionProductsRelations = relations(notionProducts, ({ one }) => ({
   }),
 }));
 
+// Dashboard Products - Products created directly in dashboard with Stripe integration
+export const dashboardProducts = pgTable('dashboard_products', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull().unique(),
+  description: text('description'),
+  shortDescription: text('short_description'),
+  coverImageUrl: text('cover_image_url'),
+  productType: varchar('product_type', { length: 20 }).notNull().default('one_time'), // 'one_time' | 'subscription'
+  priceInCents: integer('price_in_cents').notNull(),
+  currency: varchar('currency', { length: 3 }).notNull().default('usd'),
+  yearlyPriceInCents: integer('yearly_price_in_cents'), // For subscriptions with yearly option
+  stripeProductId: varchar('stripe_product_id', { length: 255 }),
+  stripePriceId: varchar('stripe_price_id', { length: 255 }),
+  stripeYearlyPriceId: varchar('stripe_yearly_price_id', { length: 255 }),
+  stripeSyncedAt: timestamp('stripe_synced_at'),
+  deliveryType: varchar('delivery_type', { length: 20 }).notNull().default('download'), // 'download' | 'access' | 'email'
+  downloadUrl: text('download_url'),
+  accessInstructions: text('access_instructions'),
+  isPublished: boolean('is_published').default(false),
+  isFeatured: boolean('is_featured').default(false),
+  displayOrder: integer('display_order').default(0),
+  createdBy: integer('created_by')
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Product Upsells - Junction table for upsell relationships
+export const productUpsells = pgTable('product_upsells', {
+  id: serial('id').primaryKey(),
+  productId: integer('product_id')
+    .notNull()
+    .references(() => dashboardProducts.id, { onDelete: 'cascade' }),
+  upsellProductId: integer('upsell_product_id')
+    .notNull()
+    .references(() => dashboardProducts.id, { onDelete: 'cascade' }),
+  displayOrder: integer('display_order').default(0),
+  discountPercent: integer('discount_percent'), // Optional discount for upsell
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+}, (table) => ({
+  uniqueUpsell: unique('product_upsells_product_upsell_key').on(table.productId, table.upsellProductId),
+}));
+
+// Purchases - Track customer purchases
+export const purchases = pgTable('purchases', {
+  id: serial('id').primaryKey(),
+  customerEmail: varchar('customer_email', { length: 255 }).notNull(),
+  customerName: varchar('customer_name', { length: 255 }),
+  stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),
+  stripePaymentIntentId: varchar('stripe_payment_intent_id', { length: 255 }),
+  stripeSubscriptionId: varchar('stripe_subscription_id', { length: 255 }),
+  productId: integer('product_id')
+    .notNull()
+    .references(() => dashboardProducts.id),
+  amountPaidCents: integer('amount_paid_cents').notNull(),
+  currency: varchar('currency', { length: 3 }).notNull().default('usd'),
+  billingInterval: varchar('billing_interval', { length: 10 }), // 'month' | 'year' for subscriptions
+  status: varchar('status', { length: 20 }).notNull().default('pending'), // 'pending' | 'completed' | 'failed' | 'refunded'
+  deliveryEmailSentAt: timestamp('delivery_email_sent_at'),
+  accessGrantedAt: timestamp('access_granted_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Purchase Items - Individual items in a purchase (for upsells)
+export const purchaseItems = pgTable('purchase_items', {
+  id: serial('id').primaryKey(),
+  purchaseId: integer('purchase_id')
+    .notNull()
+    .references(() => purchases.id, { onDelete: 'cascade' }),
+  productId: integer('product_id')
+    .notNull()
+    .references(() => dashboardProducts.id),
+  priceAtPurchaseCents: integer('price_at_purchase_cents').notNull(),
+  isUpsell: boolean('is_upsell').default(false),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+// Relations for Dashboard Products
+export const dashboardProductsRelations = relations(dashboardProducts, ({ one, many }) => ({
+  createdBy: one(users, {
+    fields: [dashboardProducts.createdBy],
+    references: [users.id],
+  }),
+  upsells: many(productUpsells, { relationName: 'productUpsells' }),
+  upsellFor: many(productUpsells, { relationName: 'upsellProducts' }),
+  purchases: many(purchases),
+  purchaseItems: many(purchaseItems),
+}));
+
+export const productUpsellsRelations = relations(productUpsells, ({ one }) => ({
+  product: one(dashboardProducts, {
+    fields: [productUpsells.productId],
+    references: [dashboardProducts.id],
+    relationName: 'productUpsells',
+  }),
+  upsellProduct: one(dashboardProducts, {
+    fields: [productUpsells.upsellProductId],
+    references: [dashboardProducts.id],
+    relationName: 'upsellProducts',
+  }),
+}));
+
+export const purchasesRelations = relations(purchases, ({ one, many }) => ({
+  product: one(dashboardProducts, {
+    fields: [purchases.productId],
+    references: [dashboardProducts.id],
+  }),
+  items: many(purchaseItems),
+}));
+
+export const purchaseItemsRelations = relations(purchaseItems, ({ one }) => ({
+  purchase: one(purchases, {
+    fields: [purchaseItems.purchaseId],
+    references: [purchases.id],
+  }),
+  product: one(dashboardProducts, {
+    fields: [purchaseItems.productId],
+    references: [dashboardProducts.id],
+  }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Team = typeof teams.$inferSelect;
@@ -437,6 +561,14 @@ export type AnalyticsSettings = typeof analyticsSettings.$inferSelect;
 export type NewAnalyticsSettings = typeof analyticsSettings.$inferInsert;
 export type NotionProduct = typeof notionProducts.$inferSelect;
 export type NewNotionProduct = typeof notionProducts.$inferInsert;
+export type DashboardProduct = typeof dashboardProducts.$inferSelect;
+export type NewDashboardProduct = typeof dashboardProducts.$inferInsert;
+export type ProductUpsell = typeof productUpsells.$inferSelect;
+export type NewProductUpsell = typeof productUpsells.$inferInsert;
+export type Purchase = typeof purchases.$inferSelect;
+export type NewPurchase = typeof purchases.$inferInsert;
+export type PurchaseItem = typeof purchaseItems.$inferSelect;
+export type NewPurchaseItem = typeof purchaseItems.$inferInsert;
 
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
