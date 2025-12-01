@@ -8,6 +8,8 @@ import {
   markDeliveryEmailSent,
 } from '@/lib/db/queries-purchases';
 import { getDashboardProductById } from '@/lib/db/queries-dashboard-products';
+import { getNotionProductBySlug } from '@/lib/db/queries-notion-products';
+import { getNotionProductPriceConfig, getNotionProductDeliveryUrl } from '@/lib/config/notion-product-prices';
 import { sendPurchaseConfirmationEmail, sendSubscriptionWelcomeEmail } from '@/lib/email/purchase-emails';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
@@ -52,7 +54,15 @@ export async function POST(request: NextRequest) {
 
 async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent) {
   console.log('Processing payment_intent.succeeded:', paymentIntent.id);
+  console.log('Payment intent metadata:', paymentIntent.metadata);
 
+  // Check if this is a Notion product purchase (has source: 'notion_product' in metadata)
+  if (paymentIntent.metadata?.source === 'notion_product') {
+    await handleNotionProductPayment(paymentIntent);
+    return;
+  }
+
+  // Otherwise, handle as a dashboard product purchase
   // Find the purchase by payment intent ID
   const purchase = await getPurchaseByPaymentIntentId(paymentIntent.id);
 
@@ -96,6 +106,61 @@ async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent)
     console.log('Purchase confirmation email sent for purchase:', purchase.id);
   } else {
     console.error('Failed to send purchase email:', emailResult.error);
+  }
+}
+
+/**
+ * Handle Notion product payment - send delivery email with template link
+ */
+async function handleNotionProductPayment(paymentIntent: Stripe.PaymentIntent) {
+  const { productSlug, customerEmail, customerName, productTitle } = paymentIntent.metadata;
+
+  console.log('Processing Notion product payment:', {
+    productSlug,
+    customerEmail,
+    productTitle,
+  });
+
+  if (!productSlug || !customerEmail) {
+    console.error('Missing required metadata for Notion product payment');
+    return;
+  }
+
+  // Get the Notion product for description
+  const notionProduct = await getNotionProductBySlug(productSlug);
+
+  // Get the delivery URL from config
+  const deliveryUrl = getNotionProductDeliveryUrl(productSlug);
+  const priceConfig = getNotionProductPriceConfig(productSlug);
+
+  if (!deliveryUrl) {
+    console.error('No delivery URL configured for Notion product:', productSlug);
+    return;
+  }
+
+  // Send confirmation email with delivery link
+  const emailResult = await sendPurchaseConfirmationEmail(
+    {
+      name: productTitle || notionProduct?.title || productSlug,
+      description: notionProduct?.description || notionProduct?.excerpt || null,
+      deliveryType: priceConfig?.deliveryType || 'email',
+      downloadUrl: deliveryUrl,
+      accessInstructions: null,
+    },
+    {
+      customerEmail,
+      customerName: customerName || null,
+      amountPaidCents: paymentIntent.amount,
+      currency: paymentIntent.currency,
+      isSubscription: false,
+    },
+    productSlug
+  );
+
+  if (emailResult.success) {
+    console.log('Notion product delivery email sent to:', customerEmail);
+  } else {
+    console.error('Failed to send Notion product email:', emailResult.error);
   }
 }
 

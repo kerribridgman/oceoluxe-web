@@ -1,5 +1,6 @@
 import { getNotionProductBySlug, getPublicNotionProducts } from '@/lib/db/queries-notion-products';
 import { getDashboardProductBySlug, getPublicDashboardProducts } from '@/lib/db/queries-dashboard-products';
+import { getNotionProductPriceConfig, hasStripeCheckout } from '@/lib/config/notion-product-prices';
 import { notFound, redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { ProductMarkdownRenderer } from '@/components/products/product-markdown-renderer';
+import { NotionProductCheckout } from '@/components/checkout/notion-product-checkout';
 
 // Revalidate every 60 seconds to ensure products are up-to-date
 export const revalidate = 60;
@@ -93,6 +95,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     product.price === '$0' ||
     product.price === '0';
 
+  // Check if this product has Stripe checkout configured
+  const priceConfig = getNotionProductPriceConfig(slug);
+  const hasInlineCheckout = !!priceConfig && !isFree;
+
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
@@ -165,35 +171,47 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 </div>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="mb-8 space-y-3">
-                {product.checkoutUrl && (
-                  <a
-                    href={product.checkoutUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <Button size="lg" className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg py-6">
-                      <ShoppingCart className="w-5 h-5 mr-2" />
-                      {isFree ? 'Get It Now' : 'Buy Now'}
-                      <ExternalLink className="w-4 h-4 ml-2" />
-                    </Button>
-                  </a>
-                )}
-                {product.previewUrl && (
-                  <a
-                    href={product.previewUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <Button size="lg" variant="outline" className="w-full border-[#CDA7B2] text-[#CDA7B2] hover:bg-[#CDA7B2] hover:text-white text-lg py-6">
-                      <Eye className="w-5 h-5 mr-2" />
-                      Preview
-                      <ExternalLink className="w-4 h-4 ml-2" />
-                    </Button>
-                  </a>
+              {/* CTA Buttons or Inline Checkout */}
+              <div className="mb-8">
+                {hasInlineCheckout ? (
+                  /* Inline Stripe Checkout */
+                  <NotionProductCheckout
+                    productSlug={slug}
+                    productTitle={product.title}
+                    priceInCents={priceConfig!.priceInCents}
+                  />
+                ) : (
+                  /* External Links */
+                  <div className="space-y-3">
+                    {product.checkoutUrl && (
+                      <a
+                        href={product.checkoutUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Button size="lg" className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg py-6">
+                          <ShoppingCart className="w-5 h-5 mr-2" />
+                          {isFree ? 'Get It Now' : 'Buy Now'}
+                          <ExternalLink className="w-4 h-4 ml-2" />
+                        </Button>
+                      </a>
+                    )}
+                    {product.previewUrl && (
+                      <a
+                        href={product.previewUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Button size="lg" variant="outline" className="w-full border-[#CDA7B2] text-[#CDA7B2] hover:bg-[#CDA7B2] hover:text-white text-lg py-6">
+                          <Eye className="w-5 h-5 mr-2" />
+                          Preview
+                          <ExternalLink className="w-4 h-4 ml-2" />
+                        </Button>
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
 
