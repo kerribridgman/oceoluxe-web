@@ -1,5 +1,6 @@
 import { getNotionProductBySlug, getPublicNotionProducts } from '@/lib/db/queries-notion-products';
-import { notFound } from 'next/navigation';
+import { getDashboardProductBySlug, getPublicDashboardProducts } from '@/lib/db/queries-dashboard-products';
+import { notFound, redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ShoppingCart, CheckCircle, Package, ExternalLink, Eye } from 'lucide-react';
@@ -13,10 +14,20 @@ export const revalidate = 60;
 
 export async function generateStaticParams() {
   try {
-    const products = await getPublicNotionProducts();
-    return products.map((product) => ({
+    const [notionProducts, dashboardProducts] = await Promise.all([
+      getPublicNotionProducts(),
+      getPublicDashboardProducts(),
+    ]);
+
+    const notionSlugs = notionProducts.map((product) => ({
       slug: product.slug,
     }));
+
+    const dashboardSlugs = dashboardProducts.map((product) => ({
+      slug: product.slug,
+    }));
+
+    return [...notionSlugs, ...dashboardSlugs];
   } catch (error) {
     console.error('Error generating static params for products:', error);
     return [];
@@ -25,6 +36,22 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  // Check dashboard products first
+  const dashboardProduct = await getDashboardProductBySlug(slug);
+  if (dashboardProduct) {
+    return {
+      title: `${dashboardProduct.name} | Oceo Luxe`,
+      description: dashboardProduct.shortDescription || dashboardProduct.description || `Discover ${dashboardProduct.name}`,
+      openGraph: {
+        title: dashboardProduct.name,
+        description: dashboardProduct.shortDescription || dashboardProduct.description || '',
+        images: dashboardProduct.coverImageUrl ? [dashboardProduct.coverImageUrl] : [],
+      },
+    };
+  }
+
+  // Fall back to Notion products
   const product = await getNotionProductBySlug(slug);
 
   if (!product) {
@@ -46,6 +73,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  // Check dashboard products first - redirect to checkout if found
+  const dashboardProduct = await getDashboardProductBySlug(slug);
+  if (dashboardProduct) {
+    redirect(`/checkout/${slug}`);
+  }
+
+  // Fall back to Notion product
   const product = await getNotionProductBySlug(slug);
 
   if (!product) {
