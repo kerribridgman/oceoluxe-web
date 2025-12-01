@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, Sparkles, Layout, Users } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Layout, Users, Globe } from 'lucide-react';
 import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
@@ -172,6 +172,53 @@ export default async function ServicesPage() {
                     </Button>
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Service 4: Website Development */}
+          <div id="website-development" className="scroll-mt-16">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-2 md:order-1 bg-[#F5F3F0] rounded-2xl p-8 border border-[#EDEBE8]">
+                <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What's Included</h3>
+                <ul className="space-y-4">
+                  {[
+                    'Custom website built to showcase your work and experience',
+                    'Design that reflects the quality of your craft',
+                    'Portfolio, lookbook, or service pages tailored to your role',
+                    'Mobile-responsive and optimized for how clients find you',
+                    'Guidance from someone who understands the industry'
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start">
+                      <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
+                      <span className="text-[#6B655C] font-light">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8 space-y-3">
+                  <a href="mailto:kerrib@oceoluxe.com">
+                    <Button size="lg" className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2] text-white">
+                      Request Custom Pricing
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </Button>
+                  </a>
+                </div>
+              </div>
+
+              <div className="order-1 md:order-2">
+                <Globe className="w-16 h-16 text-[#CDA7B2] mb-6" />
+                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
+                  Website Development for Fashion Professionals
+                </h2>
+                <p className="text-xl text-[#CDA7B2] font-light mb-4">
+                  Custom pricing upon request
+                </p>
+                <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
+                  For designers, production managers, stylists, consultants, and anyone in the fashion industry who needs a website that actually represents their work. Built by someone who has worked across the entire industry and understands what you do.
+                </p>
+                <blockquote className="text-lg text-[#3B3937] font-light italic border-l-4 border-[#CDA7B2] pl-6 mb-6">
+                  "Your website should work as hard as you do."
+                </blockquote>
               </div>
             </div>
           </div>
