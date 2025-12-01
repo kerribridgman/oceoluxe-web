@@ -58,6 +58,26 @@ export function generatePurchaseConfirmationEmail(data: PurchaseEmailData): { su
         </div>
       </div>
     `;
+  } else if (data.deliveryType === 'email' && data.downloadUrl) {
+    // Email delivery with a Notion template link
+    deliveryContent = `
+      <div class="card">
+        <h2 style="margin-top: 0;">🎁 Access Your Template</h2>
+        <p>Your Notion template is ready! Click the button below to duplicate it to your workspace.</p>
+        <div style="text-align: center; margin: 24px 0;">
+          <a href="${data.downloadUrl}" class="button" target="_blank" style="font-size: 16px;">Get Your Template</a>
+        </div>
+        <div style="background: #F5F3F0; padding: 16px; border-radius: 8px; margin-top: 20px;">
+          <p style="margin: 0 0 8px 0; font-weight: 500;">How to use:</p>
+          <ol style="margin: 0; padding-left: 20px; color: #967F71;">
+            <li>Click the button above to open the template</li>
+            <li>Click "Duplicate" in the top right corner</li>
+            <li>The template will be added to your Notion workspace</li>
+          </ol>
+        </div>
+        <p style="font-size: 14px; color: #967F71; margin-top: 16px;">Save this email - you can access your template anytime using the link above.</p>
+      </div>
+    `;
   } else if (data.deliveryType === 'email' && data.accessInstructions) {
     deliveryContent = `
       <div class="card">
