@@ -139,7 +139,7 @@ export default async function ProductsPage() {
                 <div>
                   <div className="flex items-center gap-3 mb-8">
                     <ShoppingCart className="w-8 h-8 text-[#CDA7B2]" />
-                    <h2 className="text-3xl font-serif font-light text-[#3B3937]">Premium Products</h2>
+                    <h2 className="text-3xl font-serif font-light text-[#3B3937]">Notion Based Products</h2>
                   </div>
                   <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {paidProducts.map((product) => (
