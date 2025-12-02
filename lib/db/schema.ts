@@ -419,6 +419,12 @@ export const dashboardProducts = pgTable('dashboard_products', {
   deliveryType: varchar('delivery_type', { length: 20 }).notNull().default('download'), // 'download' | 'access' | 'email'
   downloadUrl: text('download_url'),
   accessInstructions: text('access_instructions'),
+  // SEO / Open Graph fields
+  seoTitle: varchar('seo_title', { length: 70 }), // Optimal 50-60 chars for search
+  seoDescription: varchar('seo_description', { length: 160 }), // Optimal 150-160 chars for search
+  ogTitle: varchar('og_title', { length: 95 }), // Social media title
+  ogDescription: text('og_description'), // Social media description
+  ogImageUrl: text('og_image_url'), // Social media share image (1200x630 recommended)
   isPublished: boolean('is_published').default(false),
   isFeatured: boolean('is_featured').default(false),
   displayOrder: integer('display_order').default(0),

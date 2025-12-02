@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Save, Upload, X, DollarSign, Package } from 'lucide-react';
+import { ArrowLeft, Save, Upload, X, DollarSign, Package, Search, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -31,6 +31,12 @@ export default function NewProductPage() {
     accessInstructions: '',
     isPublished: false,
     isFeatured: false,
+    // SEO fields
+    seoTitle: '',
+    seoDescription: '',
+    ogTitle: '',
+    ogDescription: '',
+    ogImageUrl: '',
   });
 
   function handleNameChange(value: string) {
@@ -124,6 +130,12 @@ export default function NewProductPage() {
           accessInstructions: formData.accessInstructions || undefined,
           isPublished: publish,
           isFeatured: formData.isFeatured,
+          // SEO fields
+          seoTitle: formData.seoTitle || undefined,
+          seoDescription: formData.seoDescription || undefined,
+          ogTitle: formData.ogTitle || undefined,
+          ogDescription: formData.ogDescription || undefined,
+          ogImageUrl: formData.ogImageUrl || undefined,
         }),
       });
 
@@ -405,6 +417,134 @@ export default function NewProductPage() {
                   </p>
                 </div>
               )}
+            </CardContent>
+          </Card>
+
+          {/* SEO / Open Graph */}
+          <Card className="dashboard-card border-0">
+            <CardHeader className="border-b border-gray-100 pb-3">
+              <CardTitle className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+                <Share2 className="w-5 h-5 text-[#CDA7B2]" />
+                SEO & Social Sharing
+              </CardTitle>
+              <CardDescription>Customize how your product appears in search results and when shared on social media (iMessage, WhatsApp, Facebook, etc.)</CardDescription>
+            </CardHeader>
+            <CardContent className="pt-4 space-y-6">
+              {/* Search Engine SEO */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                  <Search className="w-4 h-4" />
+                  Search Engine Optimization
+                </div>
+
+                <div>
+                  <Label htmlFor="seoTitle">SEO Title</Label>
+                  <Input
+                    id="seoTitle"
+                    value={formData.seoTitle}
+                    onChange={(e) => setFormData(prev => ({ ...prev, seoTitle: e.target.value }))}
+                    placeholder={formData.name || 'Product title for search engines'}
+                    maxLength={70}
+                    className="mt-1"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {formData.seoTitle.length}/70 characters (50-60 recommended)
+                  </p>
+                </div>
+
+                <div>
+                  <Label htmlFor="seoDescription">SEO Description</Label>
+                  <Textarea
+                    id="seoDescription"
+                    value={formData.seoDescription}
+                    onChange={(e) => setFormData(prev => ({ ...prev, seoDescription: e.target.value }))}
+                    placeholder={formData.shortDescription || 'Brief description for search results'}
+                    maxLength={160}
+                    rows={2}
+                    className="mt-1"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {formData.seoDescription.length}/160 characters (150-160 recommended)
+                  </p>
+                </div>
+              </div>
+
+              {/* Social Media / Open Graph */}
+              <div className="space-y-4 pt-4 border-t border-gray-100">
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                  <Share2 className="w-4 h-4" />
+                  Social Media Preview (Open Graph)
+                </div>
+
+                <div>
+                  <Label htmlFor="ogTitle">Social Title</Label>
+                  <Input
+                    id="ogTitle"
+                    value={formData.ogTitle}
+                    onChange={(e) => setFormData(prev => ({ ...prev, ogTitle: e.target.value }))}
+                    placeholder={formData.seoTitle || formData.name || 'Title shown when shared'}
+                    maxLength={95}
+                    className="mt-1"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {formData.ogTitle.length}/95 characters - Shows in iMessage, WhatsApp, Facebook, etc.
+                  </p>
+                </div>
+
+                <div>
+                  <Label htmlFor="ogDescription">Social Description</Label>
+                  <Textarea
+                    id="ogDescription"
+                    value={formData.ogDescription}
+                    onChange={(e) => setFormData(prev => ({ ...prev, ogDescription: e.target.value }))}
+                    placeholder={formData.seoDescription || formData.shortDescription || 'Description shown when shared'}
+                    rows={2}
+                    className="mt-1"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Leave blank to use SEO description
+                  </p>
+                </div>
+
+                <div>
+                  <Label htmlFor="ogImageUrl">Social Share Image URL</Label>
+                  <Input
+                    id="ogImageUrl"
+                    value={formData.ogImageUrl}
+                    onChange={(e) => setFormData(prev => ({ ...prev, ogImageUrl: e.target.value }))}
+                    placeholder={formData.coverImageUrl || 'https://... (1200x630px recommended)'}
+                    className="mt-1"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Leave blank to use cover image. Ideal size: 1200x630 pixels
+                  </p>
+                </div>
+
+                {/* Preview */}
+                {(formData.ogTitle || formData.name || formData.ogImageUrl || formData.coverImageUrl) && (
+                  <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                    <p className="text-xs font-medium text-gray-500 mb-2">Preview (approximate)</p>
+                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden max-w-sm">
+                      {(formData.ogImageUrl || formData.coverImageUrl) && (
+                        <img
+                          src={formData.ogImageUrl || formData.coverImageUrl}
+                          alt="Preview"
+                          className="w-full h-32 object-cover"
+                        />
+                      )}
+                      <div className="p-3">
+                        <p className="text-xs text-gray-500 mb-1">oceoluxe.com</p>
+                        <p className="font-medium text-sm text-gray-900 line-clamp-2">
+                          {formData.ogTitle || formData.seoTitle || formData.name || 'Product Title'}
+                        </p>
+                        <p className="text-xs text-gray-600 line-clamp-2 mt-1">
+                          {formData.ogDescription || formData.seoDescription || formData.shortDescription || 'Product description...'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>

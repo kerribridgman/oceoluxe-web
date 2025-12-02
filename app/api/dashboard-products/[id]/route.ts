@@ -100,6 +100,12 @@ export async function PUT(
     if (body.isPublished !== undefined) updateData.isPublished = body.isPublished;
     if (body.isFeatured !== undefined) updateData.isFeatured = body.isFeatured;
     if (body.displayOrder !== undefined) updateData.displayOrder = body.displayOrder;
+    // SEO fields
+    if (body.seoTitle !== undefined) updateData.seoTitle = body.seoTitle;
+    if (body.seoDescription !== undefined) updateData.seoDescription = body.seoDescription;
+    if (body.ogTitle !== undefined) updateData.ogTitle = body.ogTitle;
+    if (body.ogDescription !== undefined) updateData.ogDescription = body.ogDescription;
+    if (body.ogImageUrl !== undefined) updateData.ogImageUrl = body.ogImageUrl;
 
     const product = await updateDashboardProduct(id, updateData);
 

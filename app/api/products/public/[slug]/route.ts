@@ -43,6 +43,12 @@ export async function GET(
         yearlyPriceInCents: product.yearlyPriceInCents,
         currency: product.currency,
         deliveryType: product.deliveryType,
+        // SEO fields
+        seoTitle: product.seoTitle,
+        seoDescription: product.seoDescription,
+        ogTitle: product.ogTitle,
+        ogDescription: product.ogDescription,
+        ogImageUrl: product.ogImageUrl,
       },
       upsells,
     });

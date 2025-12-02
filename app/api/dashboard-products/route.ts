@@ -71,6 +71,12 @@ export async function POST(request: NextRequest) {
       deliveryType: body.deliveryType || 'download',
       downloadUrl: body.downloadUrl || null,
       accessInstructions: body.accessInstructions || null,
+      // SEO fields
+      seoTitle: body.seoTitle || null,
+      seoDescription: body.seoDescription || null,
+      ogTitle: body.ogTitle || null,
+      ogDescription: body.ogDescription || null,
+      ogImageUrl: body.ogImageUrl || null,
       isPublished: body.isPublished || false,
       isFeatured: body.isFeatured || false,
       displayOrder: body.displayOrder || 0,
