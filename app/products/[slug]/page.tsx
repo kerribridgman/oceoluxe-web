@@ -11,6 +11,7 @@ import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { ProductMarkdownRenderer } from '@/components/products/product-markdown-renderer';
 import { ProductAddToCart } from '@/components/product';
+import { FreeProductClaimForm } from '@/components/products/free-product-claim-form';
 
 // Revalidate every 60 seconds to ensure products are up-to-date
 export const revalidate = 60;
@@ -333,19 +334,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 />
               )}
 
-              {/* Add to Cart for FREE configured products */}
+              {/* Free product claim form */}
               {isConfiguredFreeProduct && (
-                <ProductAddToCart
-                  product={{
-                    id: product.id,
-                    productSource: 'notion',
-                    slug: product.slug,
-                    name: product.title,
-                    priceInCents: 0,
-                    coverImageUrl: product.coverImageUrl || undefined,
-                    productType: 'one_time',
-                  }}
-                  priceDisplay="Free"
+                <FreeProductClaimForm
+                  productSlug={product.slug}
+                  productName={product.title}
                 />
               )}
 

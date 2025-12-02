@@ -576,6 +576,21 @@ export type NewPurchase = typeof purchases.$inferInsert;
 export type PurchaseItem = typeof purchaseItems.$inferSelect;
 export type NewPurchaseItem = typeof purchaseItems.$inferInsert;
 
+// Leads - Capture name/email for free product downloads
+export const leads = pgTable('leads', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 255 }).notNull(),
+  name: varchar('name', { length: 255 }),
+  productSlug: varchar('product_slug', { length: 500 }).notNull(), // Which free product they claimed
+  productName: varchar('product_name', { length: 500 }).notNull(),
+  source: varchar('source', { length: 50 }).default('free_product'), // 'free_product', 'newsletter', etc.
+  deliveryEmailSentAt: timestamp('delivery_email_sent_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export type Lead = typeof leads.$inferSelect;
+export type NewLead = typeof leads.$inferInsert;
+
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
   SIGN_IN = 'SIGN_IN',

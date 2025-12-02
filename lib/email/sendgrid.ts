@@ -5,7 +5,7 @@ if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 }
 
-const FROM_EMAIL = process.env.FROM_EMAIL || 'hello@oceoluxe.com';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'kerrib@oceoluxe.com';
 const FROM_NAME = 'Oceoluxe';
 
 interface SendEmailParams {
@@ -37,6 +37,9 @@ export async function sendEmail({ to, subject, html, text }: SendEmailParams) {
     return { success: true };
   } catch (error: any) {
     console.error('SendGrid error:', error);
+    if (error.response) {
+      console.error('SendGrid response body:', error.response.body);
+    }
     return { success: false, error: error.message };
   }
 }
