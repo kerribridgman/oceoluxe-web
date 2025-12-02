@@ -4,6 +4,7 @@ import { Raleway } from 'next/font/google';
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
 import { AnalyticsLoader } from '@/components/analytics-loader';
+import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
   title: 'Oceo Luxe | Notion Templates for Fashion Entrepreneurs',
@@ -40,7 +41,7 @@ export default async function RootLayout({
             }
           }}
         >
-          {children}
+          <Providers>{children}</Providers>
         </SWRConfig>
       </body>
     </html>

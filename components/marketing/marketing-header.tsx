@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { CartIcon } from '@/components/cart';
 
 export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -90,20 +91,26 @@ export function MarketingHeader() {
             >
               Blog
             </Link>
+
+            {/* Cart Icon */}
+            <CartIcon />
           </div>
 
-          {/* Mobile Menu button */}
-          <button
-            className="md:hidden p-2 hover:bg-[#967F71]/10 rounded-lg transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-[#3B3937]" />
-            ) : (
-              <Menu className="h-6 w-6 text-[#3B3937]" />
-            )}
-          </button>
+          {/* Mobile Cart and Menu */}
+          <div className="flex items-center gap-2 md:hidden">
+            <CartIcon />
+            <button
+              className="p-2 hover:bg-[#967F71]/10 rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6 text-[#3B3937]" />
+              ) : (
+                <Menu className="h-6 w-6 text-[#3B3937]" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

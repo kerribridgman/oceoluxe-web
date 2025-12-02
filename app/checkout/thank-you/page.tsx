@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { CheckCircle2, Download, Mail, ArrowRight, Loader2 } from 'lucide-react';
+import { useCart } from '@/lib/cart';
 
 interface Product {
   id: number;
@@ -22,11 +23,26 @@ interface Product {
 function ThankYouContent() {
   const searchParams = useSearchParams();
   const productSlug = searchParams.get('product');
+  const source = searchParams.get('source');
   const paymentIntent = searchParams.get('payment_intent');
   const redirectStatus = searchParams.get('redirect_status');
 
+  const { clearCart } = useCart();
+  const cartClearedRef = useRef(false);
+
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const isCartCheckout = source === 'cart';
+  const isSuccess = redirectStatus === 'succeeded';
+
+  // Clear cart after successful cart checkout
+  useEffect(() => {
+    if (isCartCheckout && isSuccess && !cartClearedRef.current) {
+      cartClearedRef.current = true;
+      clearCart();
+    }
+  }, [isCartCheckout, isSuccess, clearCart]);
 
   useEffect(() => {
     if (productSlug) {
@@ -49,8 +65,6 @@ function ThankYouContent() {
       setLoading(false);
     }
   }
-
-  const isSuccess = redirectStatus === 'succeeded';
 
   if (loading) {
     return (
@@ -85,6 +99,13 @@ function ThankYouContent() {
               <div className="bg-[#F5F3F0] rounded-xl p-6">
                 <h2 className="font-medium text-[#3B3937] mb-2">Order Details</h2>
                 <p className="text-lg font-serif text-[#CDA7B2]">{product.name}</p>
+              </div>
+            )}
+
+            {isCartCheckout && !product && (
+              <div className="bg-[#F5F3F0] rounded-xl p-6">
+                <h2 className="font-medium text-[#3B3937] mb-2">Order Complete</h2>
+                <p className="text-[#967F71]">Your cart purchase has been processed successfully.</p>
               </div>
             )}
 
