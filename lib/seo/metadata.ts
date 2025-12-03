@@ -64,48 +64,48 @@ function getDefaultMetadata(page: string): Metadata {
 
   const defaults: Record<string, Metadata> = {
     home: {
-      title: 'Patrick Farrell | Tech Strategy & Business Growth',
-      description: 'Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches.',
+      title: 'Oceo Luxe | Fashion Production & Operations',
+      description: 'Structure as Support for fashion designers and visionaries. Build sustainable production systems that feel like luxury.',
       openGraph: {
-        title: 'Patrick Farrell | Tech Strategy & Business Growth',
-        description: 'Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches.',
+        title: 'Oceo Luxe | Fashion Production & Operations',
+        description: 'Structure as Support for fashion designers and visionaries. Build sustainable production systems that feel like luxury.',
         type: 'website',
         url: baseUrl,
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Patrick Farrell | Tech Strategy & Business Growth',
-        description: 'Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches.',
+        title: 'Oceo Luxe | Fashion Production & Operations',
+        description: 'Structure as Support for fashion designers and visionaries. Build sustainable production systems that feel like luxury.',
       },
     },
     services: {
-      title: 'Services | Patrick Farrell',
-      description: 'Professional tech strategy and business growth services for startups and entrepreneurs.',
+      title: 'Services | Oceo Luxe',
+      description: 'Fashion production consulting, Studio Systems membership, and resources for fashion designers and creative entrepreneurs.',
       openGraph: {
-        title: 'Services | Patrick Farrell',
-        description: 'Professional tech strategy and business growth services for startups and entrepreneurs.',
+        title: 'Services | Oceo Luxe',
+        description: 'Fashion production consulting, Studio Systems membership, and resources for fashion designers and creative entrepreneurs.',
         type: 'website',
         url: `${baseUrl}/services`,
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Services | Patrick Farrell',
-        description: 'Professional tech strategy and business growth services for startups and entrepreneurs.',
+        title: 'Services | Oceo Luxe',
+        description: 'Fashion production consulting, Studio Systems membership, and resources for fashion designers and creative entrepreneurs.',
       },
     },
     blog: {
-      title: 'Blog | Patrick Farrell',
-      description: 'Insights and articles on tech strategy, business growth, and entrepreneurship.',
+      title: 'Blog | Oceo Luxe',
+      description: 'Insights and resources on fashion production, sustainable sourcing, and building a fashion business with clarity and calm.',
       openGraph: {
-        title: 'Blog | Patrick Farrell',
-        description: 'Insights and articles on tech strategy, business growth, and entrepreneurship.',
+        title: 'Blog | Oceo Luxe',
+        description: 'Insights and resources on fashion production, sustainable sourcing, and building a fashion business with clarity and calm.',
         type: 'website',
         url: `${baseUrl}/blog`,
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Blog | Patrick Farrell',
-        description: 'Insights and articles on tech strategy, business growth, and entrepreneurship.',
+        title: 'Blog | Oceo Luxe',
+        description: 'Insights and resources on fashion production, sustainable sourcing, and building a fashion business with clarity and calm.',
       },
     },
   };

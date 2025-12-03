@@ -7,8 +7,8 @@ import { AnalyticsLoader } from '@/components/analytics-loader';
 import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
-  title: 'Oceo Luxe | Notion Templates for Fashion Entrepreneurs',
-  description: 'Helping fashion founders build efficient, elegant businesses. Premium Notion templates, digital products, and consulting for creative entrepreneurs.',
+  title: 'Oceo Luxe | Fashion Production & Operations',
+  description: 'Structure as Support for fashion designers and visionaries. Build sustainable production systems that feel like luxury.',
 };
 
 export const viewport: Viewport = {
