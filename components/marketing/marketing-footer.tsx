@@ -84,8 +84,15 @@ export function MarketingFooter() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Tagline */}
         <div className="border-t border-[#967F71]/10 mt-8 pt-8 text-center">
+          <p className="text-[#3B3937] text-lg font-serif italic mb-6">
+            Structure does not limit creativity, it protects it.
+          </p>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-[#967F71]/10 pt-6 text-center">
           <p className="text-[#967F71] text-sm font-light mb-2">
             &copy; {currentYear} Studio Systems by Oceo Luxe. All rights reserved.
           </p>
