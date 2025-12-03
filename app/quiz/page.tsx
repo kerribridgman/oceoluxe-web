@@ -10,21 +10,21 @@ const questions = [
   {
     q: "Your ideal client walks into your studio. Who is she?",
     options: [
-      { text: "A woman I've been envisioning for years—I understand her life intimately", arch: "muse" },
+      { text: "A woman I've been envisioning for years -I understand her life intimately", arch: "muse" },
       { text: "Someone drawn to the universe I'm creating, not just the clothes", arch: "world" },
       { text: "A loyal client who returns season after season, trusting me completely", arch: "intimate" },
       { text: "Someone who recognizes that every piece in my collection has purpose", arch: "editor" },
-      { text: "Anyone who genuinely connects with my work—I want my designs to find their people", arch: "populist" }
+      { text: "Anyone who genuinely connects with my work -I want my designs to find their people", arch: "populist" }
     ]
   },
   {
     q: "A respected boutique wants to carry your line, but asks for more accessible pieces. How do you respond?",
     options: [
-      { text: "I gracefully decline—shifting the vision would confuse the woman I design for", arch: "muse" },
+      { text: "I gracefully decline -shifting the vision would confuse the woman I design for", arch: "muse" },
       { text: "I explain that the world I've created requires a certain commitment", arch: "world" },
       { text: "I prefer to work directly with clients I know personally", arch: "intimate" },
       { text: "I'd consider it, but only if I could maintain the integrity of the collection", arch: "editor" },
-      { text: "I'm intrigued—this could introduce my work to a wider audience", arch: "populist" }
+      { text: "I'm intrigued -this could introduce my work to a wider audience", arch: "populist" }
     ]
   },
   {
@@ -33,7 +33,7 @@ const questions = [
       { text: "I consider how many women truly embody the spirit of each piece", arch: "muse" },
       { text: "I let the narrative of the season guide those decisions", arch: "world" },
       { text: "I produce primarily to order, with a limited number of additional pieces", arch: "intimate" },
-      { text: "I keep numbers intentionally tight—I'd rather sell through than carry excess", arch: "editor" },
+      { text: "I keep numbers intentionally tight -I'd rather sell through than carry excess", arch: "editor" },
       { text: "I think carefully about demand and try to meet my audience where they are", arch: "populist" }
     ]
   },
@@ -48,9 +48,9 @@ const questions = [
     ]
   },
   {
-    q: "A prominent figure requests to wear your piece to a major event—as a gift. Your thoughts?",
+    q: "A prominent figure requests to wear your piece to a major event -as a gift. Your thoughts?",
     options: [
-      { text: "Only if she genuinely embodies my muse—visibility alone isn't enough", arch: "muse" },
+      { text: "Only if she genuinely embodies my muse -visibility alone isn't enough", arch: "muse" },
       { text: "If she can authentically represent the world I'm building, yes", arch: "world" },
       { text: "I'm more inclined to dress the loyal clients who've supported me", arch: "intimate" },
       { text: "I'd weigh whether it aligns with my broader strategy", arch: "editor" },
@@ -61,7 +61,7 @@ const questions = [
     q: "Which moment in the design process brings you the most satisfaction?",
     options: [
       { text: "Envisioning precisely how she'll feel the moment she puts it on", arch: "muse" },
-      { text: "Developing the concept—the mood, the references, the complete vision", arch: "world" },
+      { text: "Developing the concept -the mood, the references, the complete vision", arch: "world" },
       { text: "The fitting, when I see it come to life on someone I know", arch: "intimate" },
       { text: "The editing process, refining until only the essential remains", arch: "editor" },
       { text: "Knowing this piece will exist in the world and find its rightful owner", arch: "populist" }
@@ -81,7 +81,7 @@ const questions = [
     q: "When you envision your brand in five years, what does success look like?",
     options: [
       { text: "A devoted following of women who see themselves reflected in everything I create", arch: "muse" },
-      { text: "A brand that's become a recognized world—unmistakable at first glance", arch: "world" },
+      { text: "A brand that's become a recognized world -unmistakable at first glance", arch: "world" },
       { text: "An intimate client list, most of whom I know personally", arch: "intimate" },
       { text: "A refined, respected collection where nothing is extraneous", arch: "editor" },
       { text: "My designs reaching more women without compromising what makes them distinctive", arch: "populist" }
@@ -102,25 +102,25 @@ const archetypes: Record<ArchetypeKey, {
   muse: {
     title: "The Muse Chaser",
     emoji: "✨",
-    description: "You design for her. There is a woman who lives in your imagination—perhaps an amalgam of women you've encountered, perhaps the woman you aspire to be, perhaps entirely invented. Every decision passes through a single filter: would she wear this?",
+    description: "You design for her. There is a woman who lives in your imagination -perhaps an amalgam of women you've encountered, perhaps the woman you aspire to be, perhaps entirely invented. Every decision passes through a single filter: would she wear this?",
     superpower: "Your clarity of vision is unwavering. While others follow trends, you are composing a wardrobe for someone specific. That focus imbues your work with genuine soul.",
-    blindspot: "Your muse may be keeping your audience more narrow than necessary. Not every client needs to be her precisely—some simply wish to inhabit her energy for an evening.",
+    blindspot: "Your muse may be keeping your audience more narrow than necessary. Not every client needs to be her precisely -some simply wish to inhabit her energy for an evening.",
     cta: "Discover how to expand your reach while honoring your muse"
   },
   world: {
     title: "The World Builder",
     emoji: "🌙",
-    description: "You are not simply making clothes—you are creating a universe. Your brand possesses a mood, a mythology, an entire aesthetic ecosystem. Clients are not purchasing a garment; they are stepping into the world you've constructed.",
+    description: "You are not simply making clothes -you are creating a universe. Your brand possesses a mood, a mythology, an entire aesthetic ecosystem. Clients are not purchasing a garment; they are stepping into the world you've constructed.",
     superpower: "You generate desire that transcends the garment itself. Women want to inhabit your brand, not merely wear it. That is rare and remarkably powerful.",
-    blindspot: "At times, your world becomes so intricate that clients struggle to find the entrance. Ensure there is a door—not simply a window through which to observe.",
+    blindspot: "At times, your world becomes so intricate that clients struggle to find the entrance. Ensure there is a door -not simply a window through which to observe.",
     cta: "Learn how to welcome clients into your world"
   },
   intimate: {
     title: "The Intimist",
     emoji: "🤍",
-    description: "You would rather cultivate fifty devoted clients than five hundred casual ones. Your vision includes a by-appointment atelier, made-to-order pieces, and relationships that extend across years. For you, fashion is personal—nearly private.",
-    superpower: "Your clients demonstrate loyalty that mass brands will never achieve. You are not competing on price or trends—you are irreplaceable because you truly know them.",
-    blindspot: "Intimacy can become a limitation. Growth is not a betrayal—it is possible to scale thoughtfully while preserving the relationships that matter most.",
+    description: "You would rather cultivate fifty devoted clients than five hundred casual ones. Your vision includes a by-appointment atelier, made-to-order pieces, and relationships that extend across years. For you, fashion is personal -nearly private.",
+    superpower: "Your clients demonstrate loyalty that mass brands will never achieve. You are not competing on price or trends -you are irreplaceable because you truly know them.",
+    blindspot: "Intimacy can become a limitation. Growth is not a betrayal -it is possible to scale thoughtfully while preserving the relationships that matter most.",
     cta: "Explore how to grow while maintaining intimacy"
   },
   editor: {
@@ -128,14 +128,14 @@ const archetypes: Record<ArchetypeKey, {
     emoji: "✂️",
     description: "You believe in less, but exceptional. Every piece in your collection must justify its presence. You would rather delay a launch than release something that falls short of your standard. Filler has no place in your vocabulary.",
     superpower: "Your collections are focused, intentional, and respected. Buyers and clients trust that if you've made it, it matters.",
-    blindspot: "Editing can become paralysis. Sometimes releasing work that is ready, rather than perfect, is the wiser choice. The world needs what you create—don't let perfection delay its arrival.",
+    blindspot: "Editing can become paralysis. Sometimes releasing work that is ready, rather than perfect, is the wiser choice. The world needs what you create -don't let perfection delay its arrival.",
     cta: "Learn to balance refinement with momentum"
   },
   populist: {
     title: "The Populist",
     emoji: "🌍",
-    description: "You want your designs to reach women. Not in a mass-market sense—but you genuinely believe exceptional design should not be gatekept. Accessibility is integral to your vision, not a compromise of it.",
-    superpower: "You consider your client's reality—her life, her needs, her access. That makes your work wearable in the truest sense of the word.",
+    description: "You want your designs to reach women. Not in a mass-market sense -but you genuinely believe exceptional design should not be gatekept. Accessibility is integral to your vision, not a compromise of it.",
+    superpower: "You consider your client's reality -her life, her needs, her access. That makes your work wearable in the truest sense of the word.",
     blindspot: "Be careful not to underestimate the power of exclusivity. Scarcity can create desire, and desire creates value. You can serve more women without being available to everyone.",
     cta: "Discover how to balance accessibility with exclusivity"
   }
