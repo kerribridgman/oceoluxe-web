@@ -537,12 +537,13 @@ export default function ResourcesPage() {
 
               <div className="space-y-2 md:col-span-2">
                 <Label htmlFor="description">Description</Label>
-                <Textarea
+                <textarea
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="A comprehensive production calendar to track your timeline from sampling to delivery."
-                  rows={2}
+                  placeholder="Brief description of this resource"
+                  rows={3}
+                  className="w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] placeholder:text-muted-foreground"
                 />
               </div>
 

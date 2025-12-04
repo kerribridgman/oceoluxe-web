@@ -144,12 +144,16 @@ export async function syncNotionResources(
 
         const slug = generateSlug(title);
 
-        // Extract description
+        // Extract description - check multiple possible property names
         let description = '';
-        const descProp = page.properties.Description || page.properties.description;
+        const descProp = page.properties.Description || page.properties.description ||
+                         page.properties.Summary || page.properties.summary ||
+                         page.properties.Notes || page.properties.notes ||
+                         page.properties.Details || page.properties.details;
         if (descProp?.type === 'rich_text' && descProp.rich_text) {
           description = descProp.rich_text.map((t: any) => t.plain_text).join('');
         }
+
 
         // Extract category - check multiple possible property names
         let category = 'General';
@@ -158,7 +162,6 @@ export async function syncNotionResources(
         if (catValue) {
           category = mapCategory(catValue);
         }
-        console.log(`Resource "${title}" - Category property:`, catProp, '-> Value:', catValue, '-> Final:', category);
 
         // Extract download URL
         const urlProp = page.properties.URL || page.properties.Link || page.properties['Download URL'];
