@@ -20,6 +20,9 @@ import {
   ExternalLink,
   FileText,
   Star,
+  RefreshCw,
+  Check,
+  AlertCircle,
 } from 'lucide-react';
 
 interface Resource {
@@ -51,6 +54,13 @@ const CATEGORIES = [
   { value: 'general', label: 'General', color: 'bg-gray-100 text-gray-700' },
 ];
 
+interface SyncProgress {
+  current: number;
+  total: number;
+  currentTitle: string;
+  status: 'created' | 'updated' | 'skipped' | 'error';
+}
+
 export default function ResourcesPage() {
   const [resources, setResources] = useState<Resource[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -58,6 +68,16 @@ export default function ResourcesPage() {
   const [isCreating, setIsCreating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  // Notion sync state
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncProgress, setSyncProgress] = useState<SyncProgress | null>(null);
+  const [syncResult, setSyncResult] = useState<{
+    success: boolean;
+    synced: number;
+    errors: string[];
+  } | null>(null);
+  const [syncingResourceId, setSyncingResourceId] = useState<number | null>(null);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -90,6 +110,107 @@ export default function ResourcesPage() {
       console.error('Error fetching resources:', error);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function syncFromNotion() {
+    setIsSyncing(true);
+    setSyncProgress(null);
+    setSyncResult(null);
+
+    try {
+      const eventSource = new EventSource('/api/notion/sync-resources/stream');
+
+      eventSource.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+
+          if (data.type === 'progress') {
+            setSyncProgress({
+              current: data.current,
+              total: data.total,
+              currentTitle: data.currentTitle,
+              status: data.status,
+            });
+          } else if (data.type === 'complete') {
+            setSyncResult({
+              success: data.success,
+              synced: data.synced,
+              errors: data.errors,
+            });
+            setIsSyncing(false);
+            setSyncProgress(null);
+            eventSource.close();
+            fetchResources(); // Refresh the list
+          } else if (data.type === 'error') {
+            setSyncResult({
+              success: false,
+              synced: 0,
+              errors: [data.error],
+            });
+            setIsSyncing(false);
+            setSyncProgress(null);
+            eventSource.close();
+          }
+        } catch (e) {
+          console.error('Error parsing SSE data:', e);
+        }
+      };
+
+      eventSource.onerror = (error) => {
+        console.error('SSE Error:', error);
+        setSyncResult({
+          success: false,
+          synced: 0,
+          errors: ['Connection lost. Please try again.'],
+        });
+        setIsSyncing(false);
+        setSyncProgress(null);
+        eventSource.close();
+      };
+    } catch (error) {
+      console.error('Error starting sync:', error);
+      setSyncResult({
+        success: false,
+        synced: 0,
+        errors: ['Failed to start sync'],
+      });
+      setIsSyncing(false);
+    }
+  }
+
+  async function syncSingleResource(resourceId: number) {
+    setSyncingResourceId(resourceId);
+    try {
+      const response = await fetch(`/api/notion/sync-resources/${resourceId}`, {
+        method: 'POST',
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSyncResult({
+          success: true,
+          synced: 1,
+          errors: [],
+        });
+        fetchResources(); // Refresh the list
+      } else {
+        setSyncResult({
+          success: false,
+          synced: 0,
+          errors: [result.message || 'Failed to sync resource'],
+        });
+      }
+    } catch (error) {
+      console.error('Error syncing resource:', error);
+      setSyncResult({
+        success: false,
+        synced: 0,
+        errors: ['Failed to sync resource'],
+      });
+    } finally {
+      setSyncingResourceId(null);
     }
   }
 
@@ -231,12 +352,103 @@ export default function ResourcesPage() {
               </p>
             </div>
           </div>
-          <Button onClick={startCreate} className="bg-white text-[#3B3937] hover:bg-white/90">
-            <Plus className="w-4 h-4 mr-2" />
-            New Resource
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              onClick={syncFromNotion}
+              disabled={isSyncing}
+              variant="outline"
+              className="bg-white/10 border-white/30 text-white hover:bg-white/20"
+            >
+              {isSyncing ? (
+                <>
+                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                  Syncing...
+                </>
+              ) : (
+                <>
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  Sync from Notion
+                </>
+              )}
+            </Button>
+            <Button onClick={startCreate} className="bg-white text-[#3B3937] hover:bg-white/90">
+              <Plus className="w-4 h-4 mr-2" />
+              New Resource
+            </Button>
+          </div>
         </div>
       </div>
+
+      {/* Sync Progress/Result Banner */}
+      {(syncProgress || syncResult) && (
+        <div
+          className={`mb-6 p-4 rounded-lg ${
+            syncResult
+              ? syncResult.success
+                ? 'bg-green-50 border border-green-200'
+                : 'bg-red-50 border border-red-200'
+              : 'bg-blue-50 border border-blue-200'
+          }`}
+        >
+          {syncProgress && (
+            <div className="flex items-center gap-3">
+              <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
+              <div className="flex-1">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm font-medium text-blue-900">
+                    Syncing: {syncProgress.currentTitle}
+                  </span>
+                  <span className="text-sm text-blue-600">
+                    {syncProgress.current} / {syncProgress.total}
+                  </span>
+                </div>
+                <div className="w-full bg-blue-200 rounded-full h-2">
+                  <div
+                    className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                    style={{
+                      width: `${(syncProgress.current / syncProgress.total) * 100}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {syncResult && (
+            <div className="flex items-start gap-3">
+              {syncResult.success ? (
+                <Check className="w-5 h-5 text-green-600 mt-0.5" />
+              ) : (
+                <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
+              )}
+              <div>
+                <p
+                  className={`font-medium ${
+                    syncResult.success ? 'text-green-900' : 'text-red-900'
+                  }`}
+                >
+                  {syncResult.success
+                    ? `Successfully synced ${syncResult.synced} resource${syncResult.synced !== 1 ? 's' : ''}`
+                    : 'Sync failed'}
+                </p>
+                {syncResult.errors.length > 0 && (
+                  <ul className="mt-1 text-sm text-red-700">
+                    {syncResult.errors.map((error, i) => (
+                      <li key={i}>{error}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <button
+                onClick={() => setSyncResult(null)}
+                className="ml-auto text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3 mb-8">
@@ -573,11 +785,26 @@ export default function ResourcesPage() {
                       )}
                     </Button>
                     {resource.notionUrl && (
-                      <a href={resource.notionUrl} target="_blank" rel="noopener noreferrer">
-                        <Button variant="ghost" size="sm">
-                          <ExternalLink className="w-4 h-4" />
+                      <>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => syncSingleResource(resource.id)}
+                          disabled={syncingResourceId === resource.id}
+                          title="Sync from Notion"
+                        >
+                          {syncingResourceId === resource.id ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <RefreshCw className="w-4 h-4" />
+                          )}
                         </Button>
-                      </a>
+                        <a href={resource.notionUrl} target="_blank" rel="noopener noreferrer">
+                          <Button variant="ghost" size="sm" title="Open in Notion">
+                            <ExternalLink className="w-4 h-4" />
+                          </Button>
+                        </a>
+                      </>
                     )}
                     <div className="flex-1" />
                     <Button variant="ghost" size="sm" onClick={() => startEdit(resource)}>
