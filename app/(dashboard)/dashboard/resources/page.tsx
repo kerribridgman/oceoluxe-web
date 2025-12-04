@@ -45,13 +45,18 @@ interface Resource {
   updatedAt: string;
 }
 
-const CATEGORIES = [
-  { value: 'templates', label: 'Templates', color: 'bg-blue-100 text-blue-700' },
-  { value: 'guides', label: 'Guides', color: 'bg-green-100 text-green-700' },
-  { value: 'tech-packs', label: 'Tech Packs', color: 'bg-purple-100 text-purple-700' },
-  { value: 'mood-boards', label: 'Mood Boards', color: 'bg-pink-100 text-pink-700' },
-  { value: 'patterns', label: 'Patterns', color: 'bg-yellow-100 text-yellow-700' },
-  { value: 'general', label: 'General', color: 'bg-gray-100 text-gray-700' },
+// Dynamic color assignment for categories
+const CATEGORY_COLORS = [
+  'bg-blue-100 text-blue-700',
+  'bg-green-100 text-green-700',
+  'bg-purple-100 text-purple-700',
+  'bg-pink-100 text-pink-700',
+  'bg-yellow-100 text-yellow-700',
+  'bg-orange-100 text-orange-700',
+  'bg-teal-100 text-teal-700',
+  'bg-indigo-100 text-indigo-700',
+  'bg-rose-100 text-rose-700',
+  'bg-gray-100 text-gray-700',
 ];
 
 interface SyncProgress {
@@ -84,11 +89,11 @@ export default function ResourcesPage() {
     slug: '',
     description: '',
     content: '',
-    category: 'templates',
+    category: '',
     thumbnailUrl: '',
     downloadUrl: '',
     notionUrl: '',
-    fileType: 'pdf',
+    fileType: 'notion',
     requiredSubscriptionTier: '',
     isPublished: false,
     isFeatured: false,
@@ -227,11 +232,11 @@ export default function ResourcesPage() {
       slug: '',
       description: '',
       content: '',
-      category: 'templates',
+      category: '',
       thumbnailUrl: '',
       downloadUrl: '',
       notionUrl: '',
-      fileType: 'pdf',
+      fileType: 'notion',
       requiredSubscriptionTier: '',
       isPublished: false,
       isFeatured: false,
@@ -318,12 +323,13 @@ export default function ResourcesPage() {
     }
   }
 
-  function getCategoryColor(category: string) {
-    return CATEGORIES.find((c) => c.value === category)?.color || 'bg-gray-100 text-gray-700';
-  }
+  // Get unique categories from resources
+  const uniqueCategories = [...new Set(resources.map((r) => r.category))].sort();
 
-  function getCategoryLabel(category: string) {
-    return CATEGORIES.find((c) => c.value === category)?.label || category;
+  // Get color for a category (consistent based on index)
+  function getCategoryColor(category: string) {
+    const index = uniqueCategories.indexOf(category);
+    return CATEGORY_COLORS[index % CATEGORY_COLORS.length] || 'bg-gray-100 text-gray-700';
   }
 
   // Filter resources by category
@@ -542,18 +548,21 @@ export default function ResourcesPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
-                <select
+                <Input
                   id="category"
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-                >
-                  {CATEGORIES.map((cat) => (
-                    <option key={cat.value} value={cat.value}>
-                      {cat.label}
-                    </option>
+                  placeholder="e.g., Guide, Tech, Fabric"
+                  list="category-suggestions"
+                />
+                <datalist id="category-suggestions">
+                  {uniqueCategories.map((cat) => (
+                    <option key={cat} value={cat} />
                   ))}
-                </select>
+                </datalist>
+                <p className="text-xs text-gray-500">
+                  Type a category or select from existing ones
+                </p>
               </div>
 
               <div className="space-y-2">
@@ -669,7 +678,7 @@ export default function ResourcesPage() {
         </Card>
       )}
 
-      {/* Category Filter */}
+      {/* Category Filter - Dynamic from resources */}
       <div className="flex gap-2 mb-6 flex-wrap">
         <button
           onClick={() => setActiveCategory(null)}
@@ -681,17 +690,17 @@ export default function ResourcesPage() {
         >
           All
         </button>
-        {CATEGORIES.map((cat) => (
+        {uniqueCategories.map((category) => (
           <button
-            key={cat.value}
-            onClick={() => setActiveCategory(cat.value)}
+            key={category}
+            onClick={() => setActiveCategory(category)}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              activeCategory === cat.value
+              activeCategory === category
                 ? 'bg-[#CDA7B2] text-white'
-                : `${cat.color} hover:opacity-80`
+                : `${getCategoryColor(category)} hover:opacity-80`
             }`}
           >
-            {cat.label}
+            {category}
           </button>
         ))}
       </div>
@@ -745,7 +754,7 @@ export default function ResourcesPage() {
                   {/* Info */}
                   <div className="flex items-start gap-2 mb-2">
                     <span className={`text-xs px-2 py-0.5 rounded ${getCategoryColor(resource.category)}`}>
-                      {getCategoryLabel(resource.category)}
+                      {resource.category}
                     </span>
                     {resource.isFeatured && (
                       <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />

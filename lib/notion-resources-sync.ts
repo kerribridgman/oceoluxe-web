@@ -56,26 +56,12 @@ interface SyncProgress {
 type ProgressCallback = (progress: SyncProgress) => void;
 
 /**
- * Map Notion category values to our category slugs
+ * Use the Notion category value directly (no mapping)
+ * This allows new categories added in Notion to flow through automatically
  */
 function mapCategory(notionCategory: string | null): string {
-  if (!notionCategory) return 'general';
-
-  const categoryMap: Record<string, string> = {
-    'Template': 'templates',
-    'Templates': 'templates',
-    'Guide': 'guides',
-    'Guides': 'guides',
-    'Tech Pack': 'tech-packs',
-    'Tech Packs': 'tech-packs',
-    'Mood Board': 'mood-boards',
-    'Mood Boards': 'mood-boards',
-    'Pattern': 'patterns',
-    'Patterns': 'patterns',
-    'General': 'general',
-  };
-
-  return categoryMap[notionCategory] || notionCategory.toLowerCase().replace(/\s+/g, '-');
+  if (!notionCategory) return 'General';
+  return notionCategory;
 }
 
 /**
@@ -165,13 +151,14 @@ export async function syncNotionResources(
           description = descProp.rich_text.map((t: any) => t.plain_text).join('');
         }
 
-        // Extract category
-        let category = 'general';
-        const catProp = page.properties.Category || page.properties.Type || page.properties.category;
+        // Extract category - check multiple possible property names
+        let category = 'General';
+        const catProp = page.properties.Select || page.properties.Category || page.properties.Type || page.properties.category;
         const catValue = getSelectValue(catProp);
         if (catValue) {
           category = mapCategory(catValue);
         }
+        console.log(`Resource "${title}" - Category property:`, catProp, '-> Value:', catValue, '-> Final:', category);
 
         // Extract download URL
         const urlProp = page.properties.URL || page.properties.Link || page.properties['Download URL'];
