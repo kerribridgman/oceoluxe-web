@@ -591,6 +591,415 @@ export const leads = pgTable('leads', {
 export type Lead = typeof leads.$inferSelect;
 export type NewLead = typeof leads.$inferInsert;
 
+// =============================================
+// EDUCATION PLATFORM TABLES (Studio Systems)
+// =============================================
+
+// User Profiles - Extended user data for education/membership
+export const userProfiles = pgTable('user_profiles', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id)
+    .unique(),
+  displayName: varchar('display_name', { length: 100 }),
+  avatarUrl: text('avatar_url'),
+  bio: text('bio'),
+  points: integer('points').notNull().default(0),
+  streak: integer('streak').notNull().default(0),
+  lastActivityAt: timestamp('last_activity_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Courses
+export const courses = pgTable('courses', {
+  id: serial('id').primaryKey(),
+  title: varchar('title', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull().unique(),
+  description: text('description'),
+  shortDescription: text('short_description'),
+  coverImageUrl: text('cover_image_url'),
+  difficulty: varchar('difficulty', { length: 20 }).default('beginner'), // beginner, intermediate, advanced
+  estimatedMinutes: integer('estimated_minutes'),
+  isPublished: boolean('is_published').default(false),
+  isFeatured: boolean('is_featured').default(false),
+  requiredSubscriptionTier: varchar('required_subscription_tier', { length: 50 }), // null = free, 'member' = paid members only
+  displayOrder: integer('display_order').default(0),
+  createdBy: integer('created_by')
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Course Modules (sections within a course)
+export const courseModules = pgTable('course_modules', {
+  id: serial('id').primaryKey(),
+  courseId: integer('course_id')
+    .notNull()
+    .references(() => courses.id, { onDelete: 'cascade' }),
+  title: varchar('title', { length: 255 }).notNull(),
+  description: text('description'),
+  displayOrder: integer('display_order').notNull().default(0),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Lessons
+export const lessons = pgTable('lessons', {
+  id: serial('id').primaryKey(),
+  moduleId: integer('module_id')
+    .notNull()
+    .references(() => courseModules.id, { onDelete: 'cascade' }),
+  title: varchar('title', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull(),
+  description: text('description'),
+  content: text('content'), // Markdown/HTML content
+  videoUrl: text('video_url'), // YouTube, Vimeo, or direct URL
+  videoDurationMinutes: integer('video_duration_minutes'),
+  lessonType: varchar('lesson_type', { length: 20 }).default('video'), // video, text, quiz
+  displayOrder: integer('display_order').notNull().default(0),
+  isPreview: boolean('is_preview').default(false), // Free preview lesson
+  pointsReward: integer('points_reward').default(10),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Enrollments (user enrolled in course)
+export const enrollments = pgTable('enrollments', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  courseId: integer('course_id')
+    .notNull()
+    .references(() => courses.id),
+  enrolledAt: timestamp('enrolled_at').notNull().defaultNow(),
+  completedAt: timestamp('completed_at'),
+  progressPercent: integer('progress_percent').default(0),
+}, (table) => ({
+  uniqueEnrollment: unique('enrollments_user_course_key').on(table.userId, table.courseId),
+}));
+
+// Lesson Completions (track which lessons user completed)
+export const lessonCompletions = pgTable('lesson_completions', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  lessonId: integer('lesson_id')
+    .notNull()
+    .references(() => lessons.id),
+  completedAt: timestamp('completed_at').notNull().defaultNow(),
+  timeSpentMinutes: integer('time_spent_minutes'),
+  pointsAwarded: integer('points_awarded').default(0),
+}, (table) => ({
+  uniqueCompletion: unique('lesson_completions_user_lesson_key').on(table.userId, table.lessonId),
+}));
+
+// Community Posts
+export const communityPosts = pgTable('community_posts', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  title: varchar('title', { length: 255 }),
+  content: text('content').notNull(),
+  postType: varchar('post_type', { length: 20 }).default('discussion'), // discussion, question, win, resource
+  courseId: integer('course_id').references(() => courses.id), // Optional course context
+  isPinned: boolean('is_pinned').default(false),
+  likesCount: integer('likes_count').default(0),
+  commentsCount: integer('comments_count').default(0),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Post Comments
+export const postComments = pgTable('post_comments', {
+  id: serial('id').primaryKey(),
+  postId: integer('post_id')
+    .notNull()
+    .references(() => communityPosts.id, { onDelete: 'cascade' }),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  content: text('content').notNull(),
+  parentId: integer('parent_id'), // For nested/threaded comments
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Post Likes
+export const postLikes = pgTable('post_likes', {
+  id: serial('id').primaryKey(),
+  postId: integer('post_id')
+    .notNull()
+    .references(() => communityPosts.id, { onDelete: 'cascade' }),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+}, (table) => ({
+  uniqueLike: unique('post_likes_post_user_key').on(table.postId, table.userId),
+}));
+
+// Achievements
+export const achievements = pgTable('achievements', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 100 }).notNull(),
+  slug: varchar('slug', { length: 100 }).notNull().unique(),
+  description: text('description'),
+  iconUrl: text('icon_url'),
+  pointsValue: integer('points_value').default(0),
+  triggerType: varchar('trigger_type', { length: 50 }).notNull(), // lessons_completed, courses_completed, posts_created, streak_days
+  triggerValue: integer('trigger_value'), // e.g., 5 lessons, 1 course, 7 day streak
+  isSecret: boolean('is_secret').default(false),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+// User Achievements (earned badges)
+export const userAchievements = pgTable('user_achievements', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  achievementId: integer('achievement_id')
+    .notNull()
+    .references(() => achievements.id),
+  earnedAt: timestamp('earned_at').notNull().defaultNow(),
+}, (table) => ({
+  uniqueUserAchievement: unique('user_achievements_user_achievement_key').on(table.userId, table.achievementId),
+}));
+
+// Points Transactions (audit log for points)
+export const pointsTransactions = pgTable('points_transactions', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  amount: integer('amount').notNull(), // Positive for earned, negative for spent
+  reason: varchar('reason', { length: 100 }).notNull(), // lesson_complete, course_complete, post_created, comment_created, achievement_earned
+  referenceType: varchar('reference_type', { length: 50 }), // lesson, course, post, comment, achievement
+  referenceId: integer('reference_id'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+// Education Subscriptions (Studio Systems membership)
+export const educationSubscriptions = pgTable('education_subscriptions', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id)
+    .unique(),
+  tier: varchar('tier', { length: 50 }).notNull(), // 'monthly', 'yearly', 'lifetime', 'earlyBird_monthly', 'earlyBird_yearly'
+  stripeSubscriptionId: varchar('stripe_subscription_id', { length: 255 }),
+  stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),
+  status: varchar('status', { length: 20 }).notNull().default('active'), // active, canceled, past_due, trialing
+  currentPeriodStart: timestamp('current_period_start'),
+  currentPeriodEnd: timestamp('current_period_end'),
+  cancelAtPeriodEnd: boolean('cancel_at_period_end').default(false),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// =============================================
+// EDUCATION PLATFORM RELATIONS
+// =============================================
+
+export const userProfilesRelations = relations(userProfiles, ({ one }) => ({
+  user: one(users, {
+    fields: [userProfiles.userId],
+    references: [users.id],
+  }),
+}));
+
+export const coursesRelations = relations(courses, ({ one, many }) => ({
+  createdBy: one(users, {
+    fields: [courses.createdBy],
+    references: [users.id],
+  }),
+  modules: many(courseModules),
+  enrollments: many(enrollments),
+  communityPosts: many(communityPosts),
+}));
+
+export const courseModulesRelations = relations(courseModules, ({ one, many }) => ({
+  course: one(courses, {
+    fields: [courseModules.courseId],
+    references: [courses.id],
+  }),
+  lessons: many(lessons),
+}));
+
+export const lessonsRelations = relations(lessons, ({ one, many }) => ({
+  module: one(courseModules, {
+    fields: [lessons.moduleId],
+    references: [courseModules.id],
+  }),
+  completions: many(lessonCompletions),
+}));
+
+export const enrollmentsRelations = relations(enrollments, ({ one }) => ({
+  user: one(users, {
+    fields: [enrollments.userId],
+    references: [users.id],
+  }),
+  course: one(courses, {
+    fields: [enrollments.courseId],
+    references: [courses.id],
+  }),
+}));
+
+export const lessonCompletionsRelations = relations(lessonCompletions, ({ one }) => ({
+  user: one(users, {
+    fields: [lessonCompletions.userId],
+    references: [users.id],
+  }),
+  lesson: one(lessons, {
+    fields: [lessonCompletions.lessonId],
+    references: [lessons.id],
+  }),
+}));
+
+export const communityPostsRelations = relations(communityPosts, ({ one, many }) => ({
+  user: one(users, {
+    fields: [communityPosts.userId],
+    references: [users.id],
+  }),
+  course: one(courses, {
+    fields: [communityPosts.courseId],
+    references: [courses.id],
+  }),
+  comments: many(postComments),
+  likes: many(postLikes),
+}));
+
+export const postCommentsRelations = relations(postComments, ({ one, many }) => ({
+  post: one(communityPosts, {
+    fields: [postComments.postId],
+    references: [communityPosts.id],
+  }),
+  user: one(users, {
+    fields: [postComments.userId],
+    references: [users.id],
+  }),
+  parent: one(postComments, {
+    fields: [postComments.parentId],
+    references: [postComments.id],
+    relationName: 'commentReplies',
+  }),
+  replies: many(postComments, { relationName: 'commentReplies' }),
+}));
+
+export const postLikesRelations = relations(postLikes, ({ one }) => ({
+  post: one(communityPosts, {
+    fields: [postLikes.postId],
+    references: [communityPosts.id],
+  }),
+  user: one(users, {
+    fields: [postLikes.userId],
+    references: [users.id],
+  }),
+}));
+
+export const achievementsRelations = relations(achievements, ({ many }) => ({
+  userAchievements: many(userAchievements),
+}));
+
+export const userAchievementsRelations = relations(userAchievements, ({ one }) => ({
+  user: one(users, {
+    fields: [userAchievements.userId],
+    references: [users.id],
+  }),
+  achievement: one(achievements, {
+    fields: [userAchievements.achievementId],
+    references: [achievements.id],
+  }),
+}));
+
+export const pointsTransactionsRelations = relations(pointsTransactions, ({ one }) => ({
+  user: one(users, {
+    fields: [pointsTransactions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const educationSubscriptionsRelations = relations(educationSubscriptions, ({ one }) => ({
+  user: one(users, {
+    fields: [educationSubscriptions.userId],
+    references: [users.id],
+  }),
+}));
+
+// =============================================
+// EDUCATION PLATFORM TYPE EXPORTS
+// =============================================
+
+export type UserProfile = typeof userProfiles.$inferSelect;
+export type NewUserProfile = typeof userProfiles.$inferInsert;
+export type Course = typeof courses.$inferSelect;
+export type NewCourse = typeof courses.$inferInsert;
+export type CourseModule = typeof courseModules.$inferSelect;
+export type NewCourseModule = typeof courseModules.$inferInsert;
+export type Lesson = typeof lessons.$inferSelect;
+export type NewLesson = typeof lessons.$inferInsert;
+export type Enrollment = typeof enrollments.$inferSelect;
+export type NewEnrollment = typeof enrollments.$inferInsert;
+export type LessonCompletion = typeof lessonCompletions.$inferSelect;
+export type NewLessonCompletion = typeof lessonCompletions.$inferInsert;
+export type CommunityPost = typeof communityPosts.$inferSelect;
+export type NewCommunityPost = typeof communityPosts.$inferInsert;
+export type PostComment = typeof postComments.$inferSelect;
+export type NewPostComment = typeof postComments.$inferInsert;
+export type PostLike = typeof postLikes.$inferSelect;
+export type NewPostLike = typeof postLikes.$inferInsert;
+export type Achievement = typeof achievements.$inferSelect;
+export type NewAchievement = typeof achievements.$inferInsert;
+export type UserAchievement = typeof userAchievements.$inferSelect;
+export type NewUserAchievement = typeof userAchievements.$inferInsert;
+export type PointsTransaction = typeof pointsTransactions.$inferSelect;
+export type NewPointsTransaction = typeof pointsTransactions.$inferInsert;
+export type EducationSubscription = typeof educationSubscriptions.$inferSelect;
+export type NewEducationSubscription = typeof educationSubscriptions.$inferInsert;
+
+// =============================================
+// RESOURCES (Templates, Guides, Materials)
+// =============================================
+
+export const resources = pgTable('resources', {
+  id: serial('id').primaryKey(),
+  title: varchar('title', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull().unique(),
+  description: text('description'),
+  content: text('content'), // Full content/instructions
+  category: varchar('category', { length: 50 }).notNull(), // templates, guides, tech-packs, mood-boards, patterns, general
+  thumbnailUrl: text('thumbnail_url'),
+  downloadUrl: text('download_url'), // Direct download link
+  notionUrl: text('notion_url'), // Link to Notion page if applicable
+  fileType: varchar('file_type', { length: 50 }), // pdf, xlsx, docx, notion, etc.
+  isPublished: boolean('is_published').default(false),
+  isFeatured: boolean('is_featured').default(false),
+  requiredSubscriptionTier: varchar('required_subscription_tier', { length: 50 }), // null = free, 'member' = paid only
+  displayOrder: integer('display_order').default(0),
+  downloadCount: integer('download_count').default(0),
+  createdBy: integer('created_by')
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const resourcesRelations = relations(resources, ({ one }) => ({
+  createdBy: one(users, {
+    fields: [resources.createdBy],
+    references: [users.id],
+  }),
+}));
+
+export type Resource = typeof resources.$inferSelect;
+export type NewResource = typeof resources.$inferInsert;
+
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
   SIGN_IN = 'SIGN_IN',

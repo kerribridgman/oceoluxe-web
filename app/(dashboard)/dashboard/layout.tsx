@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog, Calendar, Key, Briefcase, Users } from 'lucide-react';
+import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog, Calendar, Key, Briefcase, Users, GraduationCap, BookOpen, MessageSquare, Trophy, FolderOpen } from 'lucide-react';
 
 export default function DashboardLayout({
   children
@@ -31,6 +31,16 @@ export default function DashboardLayout({
         { href: '/dashboard/mmfc-services', icon: Briefcase, label: 'MMFC Services' },
         { href: '/dashboard/scheduling', icon: Calendar, label: 'Scheduling' },
         { href: '/dashboard/applications', icon: FileText, label: 'Applications' },
+      ]
+    },
+    {
+      title: 'STUDIO SYSTEMS',
+      items: [
+        { href: '/dashboard/courses', icon: BookOpen, label: 'Courses' },
+        { href: '/dashboard/resources', icon: FolderOpen, label: 'Resources' },
+        { href: '/dashboard/students', icon: GraduationCap, label: 'Students' },
+        { href: '/dashboard/community', icon: MessageSquare, label: 'Community' },
+        { href: '/dashboard/achievements', icon: Trophy, label: 'Achievements' },
       ]
     },
     {
