@@ -384,9 +384,11 @@ async function handleStudioSubscriptionChange(subscription: Stripe.Subscription)
   }
 
   // Access subscription data directly
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const subscriptionAny = subscription as any;
   const status = subscription.status;
-  const currentPeriodStart = subscription.current_period_start;
-  const currentPeriodEnd = subscription.current_period_end;
+  const currentPeriodStart = subscriptionAny.current_period_start;
+  const currentPeriodEnd = subscriptionAny.current_period_end;
   const cancelAtPeriodEnd = subscription.cancel_at_period_end;
 
   if (status === 'active' || status === 'trialing') {
