@@ -178,33 +178,20 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
             </div>
           </form>
 
-          <div className="mt-8">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-200" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">
-                  {mode === 'signin'
-                    ? 'New to our platform?'
-                    : 'Already have an account?'}
-                </span>
-              </div>
+          {/* Only show for sign-in mode - admin sign-up is disabled */}
+          {mode === 'signin' && (
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-500">
+                Looking for Studio Systems membership?{' '}
+                <Link
+                  href="/studio-join"
+                  className="text-[#CDA7B2] hover:text-[#CDA7B2]/80 font-medium"
+                >
+                  Join here
+                </Link>
+              </p>
             </div>
-
-            <div className="mt-6">
-              <Link
-                href={`${mode === 'signin' ? '/sign-up' : '/sign-in'}${
-                  redirect ? `?redirect=${redirect}` : ''
-                }${priceId ? `&priceId=${priceId}` : ''}`}
-                className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#CDA7B2] transition-colors"
-              >
-                {mode === 'signin'
-                  ? 'Create an account'
-                  : 'Sign in to existing account'}
-              </Link>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

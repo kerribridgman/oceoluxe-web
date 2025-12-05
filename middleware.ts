@@ -2,17 +2,30 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { signToken, verifyToken } from '@/lib/auth/session';
 
-const protectedRoutes = '/dashboard';
+// Admin routes - only accessible by owner/admin roles
+const adminRoutes = '/dashboard';
+// Studio routes - accessible by any authenticated user with subscription
+const studioRoutes = '/studio';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const sessionCookie = request.cookies.get('session');
-  const isProtectedRoute = pathname.startsWith(protectedRoutes);
 
-  // CRITICAL FIX: Validate token for protected routes
+  // Exclude login/join pages and public studio pages from protection
+  const isLoginPage = pathname.startsWith('/studio-login') || pathname.startsWith('/studio-join');
+  const isPublicStudioPage = pathname === '/studio/subscribe' || pathname.startsWith('/studio-systems');
+
+  const isAdminRoute = pathname.startsWith(adminRoutes);
+  // Protected studio routes: /studio or /studio/* but NOT /studio-systems, /studio-login, etc.
+  const isStudioRoute = (pathname === '/studio' || pathname.startsWith('/studio/')) && !isPublicStudioPage;
+  const isProtectedRoute = isAdminRoute || isStudioRoute;
+
+  // Handle protected routes (both admin and studio)
   if (isProtectedRoute) {
     if (!sessionCookie) {
-      return NextResponse.redirect(new URL('/sign-in', request.url));
+      // Redirect to appropriate login page
+      const loginUrl = isStudioRoute ? '/studio-login' : '/sign-in';
+      return NextResponse.redirect(new URL(loginUrl, request.url));
     }
 
     try {
@@ -33,9 +46,19 @@ export async function middleware(request: NextRequest) {
         response.cookies.delete('session');
         return response;
       }
+
+      // Role-based access control
+      const userRole = parsed.user.role || 'member';
+
+      // Admin routes: only allow owner/admin roles
+      if (isAdminRoute && userRole !== 'owner' && userRole !== 'admin') {
+        // Non-admin users trying to access dashboard get redirected to studio
+        return NextResponse.redirect(new URL('/studio', request.url));
+      }
     } catch (error) {
       console.error('Invalid session token:', error);
-      const response = NextResponse.redirect(new URL('/sign-in', request.url));
+      const loginUrl = isStudioRoute ? '/studio-login' : '/sign-in';
+      const response = NextResponse.redirect(new URL(loginUrl, request.url));
       response.cookies.delete('session');
       return response;
     }

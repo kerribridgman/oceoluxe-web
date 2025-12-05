@@ -66,7 +66,7 @@ export default async function StudioSystemsPage() {
                   Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
                 </p>
               </div>
-              <Link href="/studio-systems/join">
+              <Link href="/studio/subscribe">
                 <Button
                   size="lg"
                   className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
@@ -237,7 +237,7 @@ export default async function StudioSystemsPage() {
             <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
             <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Limited Time: $33/month for the first 20 members only</p>
           </div>
-          <Link href="/studio-systems/join">
+          <Link href="/studio/subscribe">
             <Button
               size="lg"
               className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light mt-8"
@@ -284,7 +284,7 @@ export default async function StudioSystemsPage() {
             Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
             monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
           </p>
-          <Link href="/studio-systems/join">
+          <Link href="/studio/subscribe">
             <Button
               size="lg"
               className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group"

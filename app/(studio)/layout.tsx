@@ -284,11 +284,11 @@ export default function StudioLayout({
   const isPublicPage = publicPages.includes(pathname);
 
   useEffect(() => {
-    // If API returns unauthorized, redirect to sign-in
-    if (error && error.message === 'Unauthorized') {
-      router.push('/sign-in?redirect=/studio');
+    // If API returns unauthorized and NOT on a public page, redirect to sign-in
+    if (error && error.message === 'Unauthorized' && !isPublicPage) {
+      router.push('/studio-login?redirect=/studio');
     }
-  }, [error, router]);
+  }, [error, router, isPublicPage]);
 
   useEffect(() => {
     // If user has no active subscription and not on subscribe page, redirect
@@ -301,6 +301,11 @@ export default function StudioLayout({
       router.push('/studio/subscribe');
     }
   }, [subscription, isPublicPage, subscriptionLoading, router]);
+
+  // For public pages, render immediately without auth check
+  if (isPublicPage) {
+    return <>{children}</>;
+  }
 
   // Show loading state while checking auth and subscription
   if (!user && !error) {
@@ -331,14 +336,9 @@ export default function StudioLayout({
     );
   }
 
-  // If no subscription and not on public page, show nothing (redirect will happen)
-  if (!subscription?.isActive && !isPublicPage) {
+  // If no subscription, show nothing (redirect will happen)
+  if (!subscription?.isActive) {
     return null;
-  }
-
-  // For subscribe page, render without sidebar
-  if (isPublicPage) {
-    return <>{children}</>;
   }
 
   return (
