@@ -15,12 +15,14 @@ const PRICE_MAP: Record<string, string> = {
 export async function POST(request: NextRequest) {
   try {
     const user = await getUser();
+    console.log('Checkout - User:', user ? { id: user.id, email: user.email } : 'null');
 
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized - user not found' }, { status: 401 });
     }
 
     const { priceId } = await request.json();
+    console.log('Checkout - Price ID:', priceId, 'Mapped to:', PRICE_MAP[priceId]);
 
     if (!priceId || !PRICE_MAP[priceId]) {
       return NextResponse.json({ error: 'Invalid price ID' }, { status: 400 });

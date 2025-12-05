@@ -70,6 +70,11 @@ const plans = [
   },
 ];
 
+interface SubscriptionStatus {
+  hasSubscription: boolean;
+  isActive: boolean;
+}
+
 export default function SubscribePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -79,6 +84,19 @@ export default function SubscribePage() {
   // Check if user is logged in
   const { data: user } = useSWR('/api/user', fetcher);
   const isLoggedIn = !!user && !user.error;
+
+  // Check subscription status
+  const { data: subscription } = useSWR<SubscriptionStatus>(
+    isLoggedIn ? '/api/studio/subscription' : null,
+    fetcher
+  );
+
+  // Redirect to dashboard if user already has an active subscription
+  useEffect(() => {
+    if (subscription?.isActive) {
+      router.push('/studio');
+    }
+  }, [subscription, router]);
 
   // Check URL params for plan selection (e.g., from redirect)
   useEffect(() => {

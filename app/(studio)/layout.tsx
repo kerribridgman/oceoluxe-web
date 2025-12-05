@@ -90,12 +90,6 @@ function UserMenu({ user }: { user: UserType }) {
             <span className="font-medium text-gray-900">Profile</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer rounded-lg hover:bg-[#CDA7B2]/10 focus:bg-[#CDA7B2]/10 transition-colors">
-          <Link href="/dashboard" className="flex w-full items-center py-1">
-            <Home className="mr-3 h-4 w-4 text-[#CDA7B2]" />
-            <span className="font-medium text-gray-900">Admin Dashboard</span>
-          </Link>
-        </DropdownMenuItem>
         <form action={handleSignOut} className="w-full">
           <button type="submit" className="flex w-full">
             <DropdownMenuItem className="w-full flex-1 cursor-pointer rounded-lg hover:bg-red-50 focus:bg-red-50 transition-colors">
@@ -133,7 +127,7 @@ function Sidebar({
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed top-0 left-0 z-50 h-full w-64 bg-[#3B3937] transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:z-auto',
+          'fixed top-0 left-0 z-50 h-screen w-64 min-w-[256px] flex-shrink-0 bg-[#3B3937] transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:z-auto lg:h-screen lg:sticky lg:top-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -158,7 +152,7 @@ function Sidebar({
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-1">
+        <nav className="p-4 space-y-1 pb-24">
           {navigation.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -183,25 +177,18 @@ function Sidebar({
         </nav>
 
         {/* User info at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
-          <div className="flex items-center gap-3">
-            <Avatar className="size-10">
-              <AvatarFallback className="bg-[#CDA7B2] text-[#3B3937] font-semibold">
-                {(user.name || user.email)
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')
-                  .toUpperCase()
-                  .slice(0, 2)}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1 min-w-0">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 bg-[#3B3937]">
+          <Link href="/studio/profile" onClick={onClose} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 rounded-xl bg-[#CDA7B2] flex items-center justify-center flex-shrink-0 shadow-lg">
+              <span className="text-[#3B3937] font-bold text-lg">OL</span>
+            </div>
+            <div className="flex-1 min-w-0 overflow-hidden">
               <p className="text-sm font-medium text-white truncate">
                 {user.name || 'Member'}
               </p>
               <p className="text-xs text-white/50 truncate">{user.email}</p>
             </div>
-          </div>
+          </Link>
         </div>
       </aside>
     </>

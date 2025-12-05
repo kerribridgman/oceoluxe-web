@@ -287,8 +287,10 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   const subscriptionItem = subscriptionData.items.data[0];
   const status = subscriptionData.status || 'active';
   // Access period dates from subscription item (where they actually are in the API response)
-  const currentPeriodStart = (subscriptionItem as Record<string, unknown>).current_period_start as number | undefined;
-  const currentPeriodEnd = (subscriptionItem as Record<string, unknown>).current_period_end as number | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const subscriptionItemAny = subscriptionItem as any;
+  const currentPeriodStart = subscriptionItemAny.current_period_start as number | undefined;
+  const currentPeriodEnd = subscriptionItemAny.current_period_end as number | undefined;
   const cancelAtPeriodEnd = subscriptionData.cancel_at_period_end || false;
 
   // Use fallback dates if period dates are undefined (shouldn't happen now)
