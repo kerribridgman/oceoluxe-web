@@ -10,7 +10,7 @@ import {
 import { getDashboardProductById } from '@/lib/db/queries-dashboard-products';
 import { getNotionProductBySlug } from '@/lib/db/queries-notion-products';
 import { getNotionProductPriceConfig, getNotionProductDeliveryUrl } from '@/lib/config/notion-product-prices';
-import { sendPurchaseConfirmationEmail, sendSubscriptionWelcomeEmail } from '@/lib/email/purchase-emails';
+import { sendPurchaseConfirmationEmail, sendSubscriptionWelcomeEmail, sendStudioWelcomeEmail, sendAdminNewMemberNotification } from '@/lib/email/purchase-emails';
 import { db } from '@/lib/db/drizzle';
 import { educationSubscriptions, users } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
@@ -322,7 +322,42 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
     console.log('Created education subscription for user:', userId);
   }
 
-  // TODO: Send welcome email for Studio Systems membership
+  // Get user details for email
+  const user = await db.query.users.findFirst({
+    where: eq(users.id, parseInt(userId)),
+  });
+
+  if (user) {
+    const amountCents = subscriptionData.items.data[0]?.price?.unit_amount || 0;
+
+    // Send welcome email to new member
+    const welcomeResult = await sendStudioWelcomeEmail({
+      email: user.email,
+      name: user.name,
+      tier,
+      amountCents,
+    });
+
+    if (welcomeResult.success) {
+      console.log('Studio welcome email sent to:', user.email);
+    } else {
+      console.error('Failed to send studio welcome email:', welcomeResult.error);
+    }
+
+    // Send admin notification
+    const adminResult = await sendAdminNewMemberNotification({
+      email: user.email,
+      name: user.name,
+      tier,
+      amountCents,
+    });
+
+    if (adminResult.success) {
+      console.log('Admin notification sent for new member:', user.email);
+    } else {
+      console.error('Failed to send admin notification:', adminResult.error);
+    }
+  }
 }
 
 /**

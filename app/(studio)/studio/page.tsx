@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -14,6 +15,9 @@ import {
   Play,
   Star,
   TrendingUp,
+  Sparkles,
+  X,
+  Heart,
 } from 'lucide-react';
 import useSWR from 'swr';
 
@@ -38,18 +42,88 @@ interface EnrolledCourse {
 }
 
 export default function StudioDashboard() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [showWelcome, setShowWelcome] = useState(false);
   const { data: stats } = useSWR<DashboardStats>('/api/studio/stats', fetcher);
   const { data: recentCourses } = useSWR<EnrolledCourse[]>(
     '/api/studio/recent-courses',
     fetcher
   );
+  const { data: user } = useSWR('/api/user', fetcher);
+
+  // Check for welcome param (new member just subscribed)
+  useEffect(() => {
+    const isWelcome = searchParams.get('welcome') === 'true' || searchParams.get('success') === 'true';
+    if (isWelcome) {
+      setShowWelcome(true);
+      // Remove the query param from URL without refresh
+      router.replace('/studio', { scroll: false });
+    }
+  }, [searchParams, router]);
+
+  const closeWelcome = () => setShowWelcome(false);
 
   return (
     <div className="space-y-8">
+      {/* Welcome Modal for New Members */}
+      {showWelcome && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-lg w-full p-8 relative animate-in fade-in zoom-in duration-300">
+            <button
+              onClick={closeWelcome}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full bg-[#CDA7B2]/10 flex items-center justify-center mx-auto mb-6">
+                <Sparkles className="w-10 h-10 text-[#CDA7B2]" />
+              </div>
+
+              <h2 className="text-3xl font-serif text-[#3B3937] mb-3">
+                Welcome to Studio Systems!
+              </h2>
+
+              <p className="text-gray-600 mb-6">
+                {user?.name ? `${user.name}, you're` : "You're"} officially part of our community of fashion designers and visionaries. We're so excited to have you here.
+              </p>
+
+              <div className="bg-[#FAF8F6] rounded-xl p-4 mb-6 text-left">
+                <p className="text-sm font-medium text-[#3B3937] mb-3">Here's what to do next:</p>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <Heart className="w-4 h-4 text-[#CDA7B2] mt-0.5 flex-shrink-0" />
+                    <span>Browse our courses and start learning</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Heart className="w-4 h-4 text-[#CDA7B2] mt-0.5 flex-shrink-0" />
+                    <span>Download templates from the Resources section</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Heart className="w-4 h-4 text-[#CDA7B2] mt-0.5 flex-shrink-0" />
+                    <span>Introduce yourself in the Community</span>
+                  </li>
+                </ul>
+              </div>
+
+              <Button
+                onClick={closeWelcome}
+                className="bg-[#3B3937] hover:bg-[#4A4745] text-white px-8 py-6"
+              >
+                Let's Get Started
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Welcome Section */}
       <div className="bg-gradient-to-r from-[#3B3937] to-[#5a5654] rounded-2xl p-6 md:p-8 text-white">
         <h1 className="text-2xl md:text-3xl font-serif font-light mb-2">
-          Welcome back!
+          Welcome back{user?.name ? `, ${user.name}` : ''}!
         </h1>
         <p className="text-white/70 mb-6">
           Continue your learning journey where you left off.
