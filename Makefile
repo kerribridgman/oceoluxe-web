@@ -1,4 +1,4 @@
-.PHONY: help build dev-up db-up app-dev app-up app-down up down logs clean restart migrate db-shell
+.PHONY: help build dev-up db-up app-dev app-up app-down up down logs clean restart migrate db-shell db-init db-seed db-reset db-push
 
 # Default target - show help
 help:
@@ -26,6 +26,15 @@ help:
 	@echo "  make clean       - Stop services and remove volumes (⚠️  deletes all data)"
 	@echo "  make shell       - Open a shell in the app container"
 	@echo "  make db-shell    - Open PostgreSQL shell"
+	@echo ""
+	@echo "Database management (local development):"
+	@echo "  make db-init     - Initialize database schema from scratch"
+	@echo "  make db-seed     - Seed database with initial data"
+	@echo "  make db-push     - Push schema changes to database"
+	@echo "  make db-reset    - Reset database (drop all, recreate, seed)"
+	@echo "  make db-generate - Generate migration from schema changes"
+	@echo "  make db-migrate  - Apply pending migrations"
+	@echo "  make db-studio   - Open Drizzle Studio GUI"
 	@echo ""
 
 # Build the Docker image
@@ -189,3 +198,58 @@ setup: build up
 	@echo "✓ Initial setup complete!"
 	@echo ""
 	@echo "Follow the setup instructions above to complete configuration."
+
+# =============================================
+# DATABASE MANAGEMENT (Local Development)
+# =============================================
+
+# Initialize database schema (push schema to DB without migrations)
+db-init:
+	@echo "Initializing database schema..."
+	POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx drizzle-kit push
+	@echo "✓ Database schema initialized"
+
+# Seed database with initial data
+db-seed:
+	@echo "Seeding database..."
+	POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx tsx lib/db/seed.ts
+	@echo "✓ Database seeded"
+
+# Push schema changes to database (without migrations)
+db-push:
+	@echo "Pushing schema changes to database..."
+	POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx drizzle-kit push
+	@echo "✓ Schema pushed to database"
+
+# Reset database completely (drop all tables, recreate, and seed)
+db-reset:
+	@echo "⚠️  WARNING: This will DELETE ALL DATA in the database"
+	@read -p "Are you sure? (yes/no): " confirm; \
+	if [ "$$confirm" = "yes" ]; then \
+		echo "Dropping all tables..."; \
+		PGPASSWORD=oceoluxe_password psql -h localhost -p 5433 -U oceoluxe_user -d oceoluxe -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"; \
+		echo "Reinitializing schema..."; \
+		POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx drizzle-kit push; \
+		echo "Seeding database..."; \
+		POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx tsx lib/db/seed.ts; \
+		echo "✓ Database reset complete"; \
+	else \
+		echo "Cancelled"; \
+	fi
+
+# Generate new migration from schema changes
+db-generate:
+	@echo "Generating migration from schema changes..."
+	POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx drizzle-kit generate
+	@echo "✓ Migration generated (check lib/db/migrations/)"
+
+# Apply pending migrations
+db-migrate:
+	@echo "Applying migrations..."
+	POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx drizzle-kit migrate
+	@echo "✓ Migrations applied"
+
+# Open Drizzle Studio (database GUI)
+db-studio:
+	@echo "Opening Drizzle Studio..."
+	POSTGRES_URL="postgresql://oceoluxe_user:oceoluxe_password@localhost:5433/oceoluxe" npx drizzle-kit studio
