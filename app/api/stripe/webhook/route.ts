@@ -283,13 +283,20 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
     where: eq(educationSubscriptions.userId, parseInt(userId)),
   });
 
-  // Extract subscription data - handle both raw and response types
-  const subData = subscriptionData as unknown as {
-    status: string;
-    current_period_start: number;
-    current_period_end: number;
-    cancel_at_period_end: boolean;
-  };
+  // Extract subscription data - period dates are in items.data[0], not at top level
+  const subscriptionItem = subscriptionData.items.data[0];
+  const status = subscriptionData.status || 'active';
+  // Access period dates from subscription item (where they actually are in the API response)
+  const currentPeriodStart = (subscriptionItem as Record<string, unknown>).current_period_start as number | undefined;
+  const currentPeriodEnd = (subscriptionItem as Record<string, unknown>).current_period_end as number | undefined;
+  const cancelAtPeriodEnd = subscriptionData.cancel_at_period_end || false;
+
+  // Use fallback dates if period dates are undefined (shouldn't happen now)
+  const now = new Date();
+  const periodStart = currentPeriodStart ? new Date(currentPeriodStart * 1000) : now;
+  const periodEnd = currentPeriodEnd
+    ? new Date(currentPeriodEnd * 1000)
+    : new Date(now.getTime() + (tier === 'yearly' ? 365 : 30) * 24 * 60 * 60 * 1000);
 
   if (existingSub) {
     // Update existing subscription
@@ -299,10 +306,10 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
         stripeSubscriptionId: subscriptionId,
         stripeCustomerId: customerId,
         tier,
-        status: subData.status,
-        currentPeriodStart: new Date(subData.current_period_start * 1000),
-        currentPeriodEnd: new Date(subData.current_period_end * 1000),
-        cancelAtPeriodEnd: subData.cancel_at_period_end,
+        status,
+        currentPeriodStart: periodStart,
+        currentPeriodEnd: periodEnd,
+        cancelAtPeriodEnd,
         updatedAt: new Date(),
       })
       .where(eq(educationSubscriptions.userId, parseInt(userId)));
@@ -314,10 +321,10 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
       tier,
       stripeSubscriptionId: subscriptionId,
       stripeCustomerId: customerId,
-      status: subData.status,
-      currentPeriodStart: new Date(subData.current_period_start * 1000),
-      currentPeriodEnd: new Date(subData.current_period_end * 1000),
-      cancelAtPeriodEnd: subData.cancel_at_period_end,
+      status,
+      currentPeriodStart: periodStart,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd,
     });
     console.log('Created education subscription for user:', userId);
   }
@@ -374,15 +381,11 @@ async function handleStudioSubscriptionChange(subscription: Stripe.Subscription)
     return;
   }
 
-  // Cast to handle type differences
-  const subData = subscription as unknown as {
-    status: string;
-    current_period_start: number;
-    current_period_end: number;
-    cancel_at_period_end: boolean;
-  };
-
-  const status = subData.status;
+  // Access subscription data directly
+  const status = subscription.status;
+  const currentPeriodStart = subscription.current_period_start;
+  const currentPeriodEnd = subscription.current_period_end;
+  const cancelAtPeriodEnd = subscription.cancel_at_period_end;
 
   if (status === 'active' || status === 'trialing') {
     // Update subscription details
@@ -390,9 +393,9 @@ async function handleStudioSubscriptionChange(subscription: Stripe.Subscription)
       .update(educationSubscriptions)
       .set({
         status,
-        currentPeriodStart: new Date(subData.current_period_start * 1000),
-        currentPeriodEnd: new Date(subData.current_period_end * 1000),
-        cancelAtPeriodEnd: subData.cancel_at_period_end,
+        currentPeriodStart: new Date(currentPeriodStart * 1000),
+        currentPeriodEnd: new Date(currentPeriodEnd * 1000),
+        cancelAtPeriodEnd,
         updatedAt: new Date(),
       })
       .where(eq(educationSubscriptions.userId, parseInt(userId)));
@@ -403,7 +406,7 @@ async function handleStudioSubscriptionChange(subscription: Stripe.Subscription)
       .update(educationSubscriptions)
       .set({
         status,
-        cancelAtPeriodEnd: subData.cancel_at_period_end,
+        cancelAtPeriodEnd,
         updatedAt: new Date(),
       })
       .where(eq(educationSubscriptions.userId, parseInt(userId)));
