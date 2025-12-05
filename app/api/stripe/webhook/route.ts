@@ -11,6 +11,9 @@ import { getDashboardProductById } from '@/lib/db/queries-dashboard-products';
 import { getNotionProductBySlug } from '@/lib/db/queries-notion-products';
 import { getNotionProductPriceConfig, getNotionProductDeliveryUrl } from '@/lib/config/notion-product-prices';
 import { sendPurchaseConfirmationEmail, sendSubscriptionWelcomeEmail } from '@/lib/email/purchase-emails';
+import { db } from '@/lib/db/drizzle';
+import { educationSubscriptions, users } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
@@ -35,6 +38,10 @@ export async function POST(request: NextRequest) {
       await handlePaymentIntentSucceeded(event.data.object as Stripe.PaymentIntent);
       break;
 
+    case 'checkout.session.completed':
+      await handleCheckoutSessionCompleted(event.data.object as Stripe.Checkout.Session);
+      break;
+
     case 'invoice.payment_succeeded':
       await handleInvoicePaymentSucceeded(event.data.object);
       break;
@@ -42,7 +49,12 @@ export async function POST(request: NextRequest) {
     case 'customer.subscription.updated':
     case 'customer.subscription.deleted':
       const subscription = event.data.object as Stripe.Subscription;
-      await handleSubscriptionChange(subscription);
+      // Check if this is a Studio Systems subscription
+      if (subscription.metadata?.subscriptionType === 'studio_systems') {
+        await handleStudioSubscriptionChange(subscription);
+      } else {
+        await handleSubscriptionChange(subscription);
+      }
       break;
 
     default:
@@ -234,5 +246,132 @@ async function handleInvoicePaymentSucceeded(invoiceData: Stripe.Event.Data.Obje
     console.log('Subscription welcome email sent for purchase:', purchase.id);
   } else {
     console.error('Failed to send subscription email:', emailResult.error);
+  }
+}
+
+/**
+ * Handle checkout.session.completed for Studio Systems subscriptions
+ */
+async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) {
+  console.log('Processing checkout.session.completed:', session.id);
+  console.log('Session metadata:', session.metadata);
+
+  // Check if this is a Studio Systems subscription
+  if (session.metadata?.subscriptionType !== 'studio_systems') {
+    console.log('Not a Studio Systems subscription, skipping');
+    return;
+  }
+
+  const userId = session.metadata?.userId || session.client_reference_id;
+  const subscriptionId = session.subscription as string;
+  const customerId = session.customer as string;
+
+  if (!userId || !subscriptionId) {
+    console.error('Missing userId or subscriptionId in checkout session');
+    return;
+  }
+
+  // Retrieve the full subscription to get period dates
+  const subscriptionData = await stripe.subscriptions.retrieve(subscriptionId);
+
+  // Determine tier based on interval
+  const interval = subscriptionData.items.data[0]?.price?.recurring?.interval;
+  const tier = interval === 'year' ? 'yearly' : 'monthly';
+
+  // Check if user already has a subscription
+  const existingSub = await db.query.educationSubscriptions.findFirst({
+    where: eq(educationSubscriptions.userId, parseInt(userId)),
+  });
+
+  // Extract subscription data - handle both raw and response types
+  const subData = subscriptionData as unknown as {
+    status: string;
+    current_period_start: number;
+    current_period_end: number;
+    cancel_at_period_end: boolean;
+  };
+
+  if (existingSub) {
+    // Update existing subscription
+    await db
+      .update(educationSubscriptions)
+      .set({
+        stripeSubscriptionId: subscriptionId,
+        stripeCustomerId: customerId,
+        tier,
+        status: subData.status,
+        currentPeriodStart: new Date(subData.current_period_start * 1000),
+        currentPeriodEnd: new Date(subData.current_period_end * 1000),
+        cancelAtPeriodEnd: subData.cancel_at_period_end,
+        updatedAt: new Date(),
+      })
+      .where(eq(educationSubscriptions.userId, parseInt(userId)));
+    console.log('Updated education subscription for user:', userId);
+  } else {
+    // Create new subscription
+    await db.insert(educationSubscriptions).values({
+      userId: parseInt(userId),
+      tier,
+      stripeSubscriptionId: subscriptionId,
+      stripeCustomerId: customerId,
+      status: subData.status,
+      currentPeriodStart: new Date(subData.current_period_start * 1000),
+      currentPeriodEnd: new Date(subData.current_period_end * 1000),
+      cancelAtPeriodEnd: subData.cancel_at_period_end,
+    });
+    console.log('Created education subscription for user:', userId);
+  }
+
+  // TODO: Send welcome email for Studio Systems membership
+}
+
+/**
+ * Handle subscription updates/cancellations for Studio Systems
+ */
+async function handleStudioSubscriptionChange(subscription: Stripe.Subscription) {
+  console.log('Processing Studio Systems subscription change:', subscription.id);
+  console.log('Status:', subscription.status);
+
+  const userId = subscription.metadata?.userId;
+
+  if (!userId) {
+    console.error('No userId in Studio Systems subscription metadata');
+    return;
+  }
+
+  // Cast to handle type differences
+  const subData = subscription as unknown as {
+    status: string;
+    current_period_start: number;
+    current_period_end: number;
+    cancel_at_period_end: boolean;
+  };
+
+  const status = subData.status;
+
+  if (status === 'active' || status === 'trialing') {
+    // Update subscription details
+    await db
+      .update(educationSubscriptions)
+      .set({
+        status,
+        currentPeriodStart: new Date(subData.current_period_start * 1000),
+        currentPeriodEnd: new Date(subData.current_period_end * 1000),
+        cancelAtPeriodEnd: subData.cancel_at_period_end,
+        updatedAt: new Date(),
+      })
+      .where(eq(educationSubscriptions.userId, parseInt(userId)));
+    console.log('Updated Studio subscription for user:', userId);
+  } else if (status === 'canceled' || status === 'unpaid' || status === 'past_due') {
+    // Update status to reflect cancellation/issue
+    await db
+      .update(educationSubscriptions)
+      .set({
+        status,
+        cancelAtPeriodEnd: subData.cancel_at_period_end,
+        updatedAt: new Date(),
+      })
+      .where(eq(educationSubscriptions.userId, parseInt(userId)));
+    console.log('Studio subscription status changed to', status, 'for user:', userId);
   }
 }
