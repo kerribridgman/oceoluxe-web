@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Mail, CheckCircle2, Clock, Package } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Users, Mail, CheckCircle2, Clock, Package, Download } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface Lead {
@@ -44,18 +45,58 @@ export default function LeadsPage() {
   const emailsSent = leads.filter(l => l.deliveryEmailSentAt).length;
   const uniqueProducts = [...new Set(leads.map(l => l.productSlug))].length;
 
+  function exportToCSV() {
+    if (leads.length === 0) return;
+
+    const headers = ['Name', 'Email', 'Product', 'Source', 'Email Status', 'Date'];
+    const rows = leads.map(lead => [
+      lead.name || '',
+      lead.email,
+      lead.productName,
+      lead.source || '',
+      lead.deliveryEmailSentAt ? 'Sent' : 'Pending',
+      format(new Date(lead.createdAt), 'yyyy-MM-dd HH:mm:ss'),
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `leads-export-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <section className="flex-1">
       {/* Page Header */}
       <div className="mb-8 rounded-2xl p-8 bg-[#CDA7B2] border border-[#967F71] shadow-lg">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
-            <Users className="w-6 h-6 text-white" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center">
+              <Users className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold mb-2 text-white">Leads</h1>
+              <p className="text-white/80">Free product downloads and email captures</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-3xl font-bold mb-2 text-white">Leads</h1>
-            <p className="text-white/80">Free product downloads and email captures</p>
-          </div>
+          <Button
+            onClick={exportToCSV}
+            disabled={leads.length === 0}
+            variant="outline"
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export CSV
+          </Button>
         </div>
       </div>
 
