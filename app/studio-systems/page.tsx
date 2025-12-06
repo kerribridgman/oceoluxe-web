@@ -66,12 +66,12 @@ export default async function StudioSystemsPage() {
                   Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
                 </p>
               </div>
-              <Link href="/studio/subscribe">
+              <Link href="/studio-systems/waitlist">
                 <Button
                   size="lg"
                   className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
                 >
-                  Join Studio Systems Now
+                  Join Waitlist Now
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -237,12 +237,12 @@ export default async function StudioSystemsPage() {
             <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
             <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Limited Time: $33/month for the first 20 members only</p>
           </div>
-          <Link href="/studio/subscribe">
+          <Link href="/studio-systems/waitlist">
             <Button
               size="lg"
               className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light mt-8"
             >
-              Join Studio Systems Now
+              Join Waitlist Now
             </Button>
           </Link>
           <p className="text-sm text-[#967F71] mt-6 font-light">
@@ -284,12 +284,12 @@ export default async function StudioSystemsPage() {
             Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
             monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
           </p>
-          <Link href="/studio/subscribe">
+          <Link href="/studio-systems/waitlist">
             <Button
               size="lg"
               className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group"
             >
-              Join as Founding Member
+              Join Waitlist Now
               <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
