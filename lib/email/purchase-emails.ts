@@ -89,10 +89,13 @@ interface StudioMemberInfo {
 }
 
 /**
- * Send welcome email to new Studio Systems member
+ * Send welcome email to new Studio Systems member with guided onboarding
  */
 export async function sendStudioWelcomeEmail(member: StudioMemberInfo) {
   const dashboardUrl = `${BASE_URL}/studio`;
+  const profileUrl = `${BASE_URL}/studio/settings`;
+  const coursesUrl = `${BASE_URL}/studio/courses`;
+  const communityUrl = `${BASE_URL}/studio/community`;
 
   const html = `
     <!DOCTYPE html>
@@ -108,9 +111,9 @@ export async function sendStudioWelcomeEmail(member: StudioMemberInfo) {
             <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 16px; overflow: hidden;">
               <!-- Header -->
               <tr>
-                <td style="background: linear-gradient(135deg, #3B3937 0%, #5a5654 100%); padding: 40px; text-align: center;">
-                  <h1 style="color: #ffffff; font-size: 28px; font-weight: 300; margin: 0 0 8px 0;">Welcome to Studio Systems</h1>
-                  <p style="color: #CDA7B2; font-size: 14px; letter-spacing: 2px; margin: 0;">BY OCEO LUXE</p>
+                <td style="background: linear-gradient(135deg, #CDA7B2 0%, #967F71 100%); padding: 40px; text-align: center;">
+                  <h1 style="color: #ffffff; font-size: 28px; font-weight: 300; margin: 0 0 8px 0;">Welcome to Studio Systems!</h1>
+                  <p style="color: #ffffff; font-size: 14px; letter-spacing: 2px; margin: 0; opacity: 0.9;">BY OCEO LUXE</p>
                 </td>
               </tr>
 
@@ -118,34 +121,47 @@ export async function sendStudioWelcomeEmail(member: StudioMemberInfo) {
               <tr>
                 <td style="padding: 40px;">
                   <p style="color: #3B3937; font-size: 18px; line-height: 1.6; margin: 0 0 24px 0;">
-                    ${member.name ? `Dear ${member.name},` : 'Hello,'}
+                    ${member.name ? `Congratulations, ${member.name}!` : 'Congratulations!'}
                   </p>
 
                   <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 24px 0;">
-                    You're officially part of our community of fashion designers and visionaries. We're so excited to have you here.
+                    You're officially part of our community of fashion designers and visionaries. We're so excited to have you here!
                   </p>
 
                   <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 32px 0;">
-                    Studio Systems was built for creative founders like you — designers who want structure without sacrificing their vision. Inside, you'll find the systems, templates, and support you need to bring your ideas to life with clarity and calm.
+                    Studio Systems was built for creative founders like you — designers who want <strong style="color: #3B3937;">structure as support</strong>, not another thing on your to-do list. Inside, you'll find everything you need to bring your ideas to life with clarity and calm.
                   </p>
 
-                  <!-- What's Next Box -->
+                  <!-- Onboarding Steps Box -->
                   <div style="background-color: #FAF8F6; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
-                    <p style="color: #3B3937; font-size: 16px; font-weight: 600; margin: 0 0 16px 0;">Here's what to do next:</p>
+                    <p style="color: #3B3937; font-size: 16px; font-weight: 600; margin: 0 0 20px 0;">Your Onboarding Checklist:</p>
                     <table cellpadding="0" cellspacing="0" style="width: 100%;">
                       <tr>
-                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
-                          <span style="color: #CDA7B2; margin-right: 8px;">&#9825;</span> Browse our courses and start learning
+                        <td style="padding: 12px 0; color: #6B655C; font-size: 14px; border-bottom: 1px solid #EDEBE8;">
+                          <span style="display: inline-block; width: 24px; height: 24px; background-color: #CDA7B2; color: white; border-radius: 50%; text-align: center; line-height: 24px; font-size: 12px; margin-right: 12px;">1</span>
+                          <strong style="color: #3B3937;">Log in to your account</strong><br/>
+                          <span style="margin-left: 36px; font-size: 13px;">Use the email you signed up with: ${member.email}</span>
                         </td>
                       </tr>
                       <tr>
-                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
-                          <span style="color: #CDA7B2; margin-right: 8px;">&#9825;</span> Download templates from the Resources section
+                        <td style="padding: 12px 0; color: #6B655C; font-size: 14px; border-bottom: 1px solid #EDEBE8;">
+                          <span style="display: inline-block; width: 24px; height: 24px; background-color: #CDA7B2; color: white; border-radius: 50%; text-align: center; line-height: 24px; font-size: 12px; margin-right: 12px;">2</span>
+                          <strong style="color: #3B3937;"><a href="${profileUrl}" style="color: #3B3937; text-decoration: underline;">Complete your profile</a></strong><br/>
+                          <span style="margin-left: 36px; font-size: 13px;">Add your photo and tell us about your brand</span>
                         </td>
                       </tr>
                       <tr>
-                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
-                          <span style="color: #CDA7B2; margin-right: 8px;">&#9825;</span> Introduce yourself in the Community
+                        <td style="padding: 12px 0; color: #6B655C; font-size: 14px; border-bottom: 1px solid #EDEBE8;">
+                          <span style="display: inline-block; width: 24px; height: 24px; background-color: #CDA7B2; color: white; border-radius: 50%; text-align: center; line-height: 24px; font-size: 12px; margin-right: 12px;">3</span>
+                          <strong style="color: #3B3937;"><a href="${coursesUrl}" style="color: #3B3937; text-decoration: underline;">Start your first course</a></strong><br/>
+                          <span style="margin-left: 36px; font-size: 13px;">We recommend starting with "The Oceo Method" foundations</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0; color: #6B655C; font-size: 14px;">
+                          <span style="display: inline-block; width: 24px; height: 24px; background-color: #CDA7B2; color: white; border-radius: 50%; text-align: center; line-height: 24px; font-size: 12px; margin-right: 12px;">4</span>
+                          <strong style="color: #3B3937;"><a href="${communityUrl}" style="color: #3B3937; text-decoration: underline;">Join the community</a></strong><br/>
+                          <span style="margin-left: 36px; font-size: 13px;">Introduce yourself and connect with fellow designers</span>
                         </td>
                       </tr>
                     </table>
@@ -171,6 +187,9 @@ export async function sendStudioWelcomeEmail(member: StudioMemberInfo) {
               <!-- Footer -->
               <tr>
                 <td style="background-color: #FAF8F6; padding: 24px; text-align: center; border-top: 1px solid #EDEBE8;">
+                  <p style="color: #967F71; font-size: 14px; margin: 0 0 8px 0;">
+                    With love,<br/>The Oceo Luxe Team
+                  </p>
                   <p style="color: #967F71; font-size: 12px; margin: 0;">
                     &copy; ${new Date().getFullYear()} Oceo Luxe. All rights reserved.
                   </p>
@@ -253,6 +272,141 @@ export async function sendAdminNewMemberNotification(member: StudioMemberInfo) {
   return sendEmail({
     to: ADMIN_EMAIL,
     subject: `New Studio Member: ${member.name || member.email} (${tierLabel})`,
+    html,
+  });
+}
+
+// ============================================
+// Waitlist Emails
+// ============================================
+
+interface WaitlistSignupInfo {
+  email: string;
+  name?: string | null;
+}
+
+/**
+ * Send confirmation email to someone who joins the waitlist
+ */
+export async function sendWaitlistConfirmationEmail(signup: WaitlistSignupInfo) {
+  const quizUrl = `${BASE_URL}/quiz`;
+  const instagramUrl = 'https://instagram.com/oceoluxe';
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #FAF8F6; font-family: Georgia, 'Times New Roman', serif;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #FAF8F6; padding: 40px 20px;">
+        <tr>
+          <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 16px; overflow: hidden;">
+              <!-- Header -->
+              <tr>
+                <td style="background: linear-gradient(135deg, #CDA7B2 0%, #967F71 100%); padding: 40px; text-align: center;">
+                  <h1 style="color: #ffffff; font-size: 28px; font-weight: 300; margin: 0 0 8px 0;">You're on the List!</h1>
+                  <p style="color: #ffffff; font-size: 14px; letter-spacing: 2px; margin: 0; opacity: 0.9;">STUDIO SYSTEMS BY OCEO LUXE</p>
+                </td>
+              </tr>
+
+              <!-- Content -->
+              <tr>
+                <td style="padding: 40px;">
+                  <p style="color: #3B3937; font-size: 18px; line-height: 1.6; margin: 0 0 24px 0;">
+                    ${signup.name ? `Hi ${signup.name},` : 'Hi there,'}
+                  </p>
+
+                  <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 24px 0;">
+                    Thank you for joining the Studio Systems waitlist! We're so excited you're here.
+                  </p>
+
+                  <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 32px 0;">
+                    Studio Systems is the membership for fashion designers and visionaries who want <strong style="color: #3B3937;">structure as support</strong> — not another thing on your to-do list. When we open the doors, you'll be the first to know.
+                  </p>
+
+                  <!-- What's Inside Box -->
+                  <div style="background-color: #FAF8F6; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+                    <p style="color: #3B3937; font-size: 16px; font-weight: 600; margin: 0 0 16px 0;">What you'll get inside:</p>
+                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                      <tr>
+                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
+                          <span style="color: #CDA7B2; margin-right: 8px;">&#10003;</span> A proven production flow from vision to delivery
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
+                          <span style="color: #CDA7B2; margin-right: 8px;">&#10003;</span> Done-for-you supplier communication templates
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
+                          <span style="color: #CDA7B2; margin-right: 8px;">&#10003;</span> Pricing and costing systems that protect your margins
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
+                          <span style="color: #CDA7B2; margin-right: 8px;">&#10003;</span> A supportive community of fellow fashion founders
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <!-- While You Wait Box -->
+                  <div style="border: 1px solid #EDEBE8; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+                    <p style="color: #3B3937; font-size: 16px; font-weight: 600; margin: 0 0 16px 0;">While you wait:</p>
+                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                      <tr>
+                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
+                          <span style="color: #CDA7B2; margin-right: 8px;">1.</span>
+                          <a href="${quizUrl}" style="color: #3B3937; text-decoration: underline;">Take the Designer Archetype Quiz</a> — find out what kind of fashion business you're building
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
+                          <span style="color: #CDA7B2; margin-right: 8px;">2.</span>
+                          <a href="${instagramUrl}" style="color: #3B3937; text-decoration: underline;">Follow us on Instagram</a> — for behind-the-scenes and tips
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
+                          <span style="color: #CDA7B2; margin-right: 8px;">3.</span>
+                          Keep an eye on your inbox for exclusive updates
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 0 0; text-align: center; font-style: italic;">
+                    We'll be in touch soon with early access details and founding member pricing.
+                  </p>
+                </td>
+              </tr>
+
+              <!-- Footer -->
+              <tr>
+                <td style="background-color: #FAF8F6; padding: 24px; text-align: center; border-top: 1px solid #EDEBE8;">
+                  <p style="color: #967F71; font-size: 14px; margin: 0 0 8px 0;">
+                    With love,<br/>The Oceo Luxe Team
+                  </p>
+                  <p style="color: #967F71; font-size: 12px; margin: 0;">
+                    &copy; ${new Date().getFullYear()} Oceo Luxe. All rights reserved.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: signup.email,
+    subject: "You're on the Studio Systems waitlist!",
     html,
   });
 }

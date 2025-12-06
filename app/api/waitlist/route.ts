@@ -3,6 +3,7 @@ import { db } from '@/lib/db/drizzle';
 import { leads } from '@/lib/db/schema';
 import { eq, and } from 'drizzle-orm';
 import { sendEmail } from '@/lib/email/sendgrid';
+import { sendWaitlistConfirmationEmail } from '@/lib/email/purchase-emails';
 
 const ADMIN_EMAIL = 'kerrib@oceoluxe.com';
 
@@ -45,6 +46,12 @@ export async function POST(request: NextRequest) {
       })
       .returning();
 
+    // Send confirmation email to the user
+    await sendWaitlistConfirmationEmail({
+      email: email.toLowerCase(),
+      name: name || null,
+    });
+
     // Send admin notification email
     await sendEmail({
       to: ADMIN_EMAIL,
@@ -59,7 +66,7 @@ export async function POST(request: NextRequest) {
             <p style="margin: 10px 0 0;"><strong>Signed up:</strong> ${new Date().toLocaleString()}</p>
           </div>
           <p style="color: #666; font-size: 14px;">
-            View all waitlist signups in your <a href="https://www.oceoluxe.com/dashboard/leads">admin dashboard</a>.
+            View all waitlist signups in your <a href="https://www.oceoluxe.com/dashboard/crm">CRM dashboard</a>.
           </p>
         </div>
       `,
