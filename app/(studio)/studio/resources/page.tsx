@@ -32,6 +32,10 @@ interface Resource {
   downloadCount: number;
 }
 
+interface ResourcesResponse {
+  resources: Resource[];
+}
+
 const fileTypeIcons: Record<string, any> = {
   pdf: FileText,
   xlsx: FileSpreadsheet,
@@ -50,10 +54,12 @@ export default function ResourcesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const { data: resources, isLoading } = useSWR<Resource[]>(
+  const { data, isLoading } = useSWR<ResourcesResponse>(
     '/api/resources',
     fetcher
   );
+
+  const resources = data?.resources;
 
   const categories = resources
     ? [...new Set(resources.map((r) => r.category))].sort()
