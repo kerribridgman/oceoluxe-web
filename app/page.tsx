@@ -35,9 +35,9 @@ export default async function HomePage() {
       description: "Help creating the detailed specifications factories need, so your vision translates clearly and you avoid costly miscommunication"
     },
     {
-      icon: <Users className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Studio Systems\nMembership",
-      description: "Notion templates, production calendars, supplier trackers, and ongoing resources to keep you organized as you grow"
+      icon: <FileText className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Production Resources\n& Notion Templates",
+      description: "Ready-to-use templates designed for fashion production: collection planners, costing sheets, supplier trackers, and production calendars"
     }
   ];
 
@@ -143,21 +143,39 @@ export default async function HomePage() {
                 <div className="text-center md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
                     <div className="bg-[#CDA7B2]/10 w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
-                      <FileText className="h-10 w-10 text-[#CDA7B2]" />
+                      <Users className="h-10 w-10 text-[#CDA7B2]" />
                     </div>
-                    <h3 className="text-2xl font-serif font-light text-[#3B3937] whitespace-pre-line">
-                      {"Production Resources\n& Notion Templates"}
+                    <h3 className="text-4xl font-serif font-light text-[#3B3937] whitespace-pre-line">
+                      {"Studio Systems\nMembership"}
                     </h3>
                   </div>
-                  <p className="text-[#6B655C] leading-relaxed font-light mb-6">
-                    Ready-to-use Notion templates designed specifically for fashion production. Collection planners to map your creative vision, costing sheets to protect your margins, supplier trackers to manage relationships, and production calendars to keep everything on schedule. Discover the tools that can transform your workflow.
+                  <p className="text-[#6B655C] leading-relaxed font-light mb-4">
+                    A membership built for fashion designers who want structure as support. Learn The Oceo Method™ framework (Organize, Optimize, Own It) to bring clarity to your production process and scale without burning out.
                   </p>
-                  <Link href="/products">
+                  <ul className="text-[#6B655C] font-light mb-6 space-y-2">
+                    <li className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                      <span>Monthly Studio Sessions and community calls</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                      <span>Full course library on production and operations</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                      <span>Notion templates, calendars, and costing tools</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                      <span>A supportive community of fellow fashion founders</span>
+                    </li>
+                  </ul>
+                  <Link href="/studio-systems">
                     <Button
                       variant="outline"
                       className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white"
                     >
-                      Browse Resources
+                      Learn More
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
@@ -165,8 +183,8 @@ export default async function HomePage() {
                 <div className="flex justify-center">
                   <div className="aspect-square w-full max-w-xs rounded-xl overflow-hidden shadow-lg relative">
                     <Image
-                      src="/images/ai-systems.png"
-                      alt="Fashion production Notion templates"
+                      src="/images/hero-workspace.jpg"
+                      alt="Studio Systems Membership"
                       fill
                       className="object-cover"
                       quality={95}

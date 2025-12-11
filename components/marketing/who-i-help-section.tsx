@@ -42,7 +42,8 @@ export function WhoIHelpSection() {
             Wherever You Are in Your Journey
           </h2>
           <p className="text-xl text-[#967F71] leading-relaxed font-light">
-            Whether you're searching for your first factory or scaling an existing line, I meet you where you are.
+            Whether you're searching for your first factory or scaling an existing line,<br />
+            I meet you where you are.
           </p>
         </div>
 
