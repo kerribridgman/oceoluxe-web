@@ -5,7 +5,7 @@ export function WhoIHelpSection() {
     {
       icon: <Sparkles className="h-6 w-6 text-[#CDA7B2]" />,
       title: "Just Starting Out",
-      description: "You have sketches, samples, or a vision — but production feels like a foreign language.",
+      description: "You have sketches, samples, or a vision, but production feels like a foreign language.",
       challenges: [
         "Don't know where to find a factory or what to look for",
         "Unsure how to create tech packs or what to include",
@@ -17,7 +17,7 @@ export function WhoIHelpSection() {
       title: "In Production",
       description: "You have a factory, but something isn't clicking the way you expected.",
       challenges: [
-        "Communication feels unclear — things get lost in translation",
+        "Communication feels unclear and things get lost in translation",
         "Not sure what the factory handles vs. what you need to provide",
         "Delays keep happening and you're not sure if they're normal"
       ]
@@ -77,7 +77,7 @@ export function WhoIHelpSection() {
 
         <div className="max-w-2xl mx-auto text-center mt-16">
           <p className="text-lg text-[#967F71] font-light italic">
-            "The confusion you're feeling isn't because you're doing something wrong — it's because no one taught you how manufacturing actually works."
+            "The confusion you're feeling isn't because you're doing something wrong. It's because no one taught you how manufacturing actually works."
           </p>
         </div>
       </div>

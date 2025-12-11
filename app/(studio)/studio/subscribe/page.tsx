@@ -43,7 +43,7 @@ const experiences = [
   {
     icon: Heart,
     title: 'Feel supported instead of scattered',
-    description: 'with a community that gets it — because building a fashion brand shouldn\'t feel so isolating.',
+    description: 'with a community that gets it, because building a fashion brand shouldn\'t feel so isolating.',
   },
 ];
 
@@ -250,7 +250,7 @@ export default function SubscribePage() {
                 disabled={isLoading}
                 className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white py-6 text-base font-medium rounded-xl"
               >
-                {isLoading ? 'Processing...' : "Yes, I'm In — Join Now"}
+                {isLoading ? 'Processing...' : "Yes, I'm In - Join Now"}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
 
@@ -365,7 +365,7 @@ export default function SubscribePage() {
               size="lg"
               className="bg-[#3B3937] hover:bg-[#4A4745] text-white px-12 py-7 text-lg font-medium rounded-lg w-full max-w-md"
             >
-              {isLoading ? 'Processing...' : "Yes, I'm In — Join Now"}
+              {isLoading ? 'Processing...' : "Yes, I'm In - Join Now"}
             </Button>
 
             <button className="text-gray-400 hover:text-gray-600 text-sm block mx-auto">

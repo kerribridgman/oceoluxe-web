@@ -32,7 +32,7 @@ export default async function HomePage() {
     {
       icon: <FileText className="h-10 w-10 text-[#CDA7B2]" />,
       title: "Tech Pack &\nSpec Development",
-      description: "Help creating the detailed specifications factories need — so your vision translates clearly and you avoid costly miscommunication"
+      description: "Help creating the detailed specifications factories need, so your vision translates clearly and you avoid costly miscommunication"
     },
     {
       icon: <Users className="h-10 w-10 text-[#CDA7B2]" />,
@@ -57,10 +57,10 @@ export default async function HomePage() {
                   <span className="text-[#CDA7B2]">I'll Help You Build It.</span>
                 </h1>
                 <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  Production can feel overwhelming — the factory expectations, the fabric decisions, the timelines that never seem to make sense. You're not alone, and it doesn't have to stay that way.
+                  Production can feel overwhelming: the factory expectations, the fabric decisions, the timelines that never seem to make sense. You're not alone, and it doesn't have to stay that way.
                 </p>
                 <p className="text-lg text-[#3B3937] font-light leading-relaxed">
-                  With a decade of luxury-level production experience, I help independent designers navigate manufacturing — from first sketch to scaling production — with clarity, confidence, and systems that actually work.
+                  With a decade of luxury-level production experience, I help independent designers navigate manufacturing, from first sketch to scaling production, with clarity, confidence, and systems that actually work.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -115,7 +115,7 @@ export default async function HomePage() {
               How I Help
             </h2>
             <p className="text-xl text-[#967F71] max-w-4xl mx-auto leading-relaxed font-light">
-              Whether you're just starting out or already working with a factory, I help you understand how production actually works — so you can make better decisions and avoid costly mistakes.
+              Whether you're just starting out or already working with a factory, I help you understand how production actually works so you can make better decisions and avoid costly mistakes.
             </p>
           </div>
 

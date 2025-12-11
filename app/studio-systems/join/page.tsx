@@ -42,7 +42,7 @@ const solutions = [
   "Using plug-and-play email scripts to get factory replies fast (no more ghosting)",
   "Following a mapped-out production calendar that runs from sampling to delivery",
   "Making confident pricing decisions with costing sheets that show your margins, line by line",
-  "Reclaiming 10+ hours a week to design, create, and actually breathe — without burning out",
+  "Reclaiming 10+ hours a week to design, create, and actually breathe without burning out",
   "Designing from a place of flow while your systems work for you"
 ];
 
@@ -190,7 +190,7 @@ export default function StudioSystemsJoinPage() {
               The Oceo Method™
             </h2>
             <p className="text-2xl text-[#967F71] max-w-3xl mx-auto leading-relaxed font-light">
-              A calm, connected approach to production — for fashion founders and visionaries who value both structure and sanity.
+              A calm, connected approach to production for fashion founders and visionaries who value both structure and sanity.
             </p>
           </div>
 
@@ -242,7 +242,7 @@ export default function StudioSystemsJoinPage() {
               size="lg"
               className="bg-[#3B3937] hover:bg-[#3B3937]/90 text-white h-16 px-12 text-xl font-light mt-8"
             >
-              Yes, I'm In — Join Now
+              Yes, I'm In - Join Now
             </Button>
           </Link>
           <p className="text-sm text-[#967F71] mt-6 font-light">
@@ -257,10 +257,10 @@ export default function StudioSystemsJoinPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <blockquote className="text-3xl md:text-4xl font-serif font-light text-[#3B3937] leading-relaxed italic">
-                "You didn't become a designer to chase deadlines or question your worth. You became one to create — to bring beauty and meaning into the world."
+                "You didn't become a designer to chase deadlines or question your worth. You became one to create, to bring beauty and meaning into the world."
               </blockquote>
               <p className="text-lg text-[#967F71] mt-8 font-light">
-                — Studio Systems by Oceo Luxe
+                - Studio Systems by Oceo Luxe
               </p>
             </div>
             <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">

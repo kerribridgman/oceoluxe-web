@@ -129,7 +129,7 @@ export async function sendStudioWelcomeEmail(member: StudioMemberInfo) {
                   </p>
 
                   <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 32px 0;">
-                    Studio Systems was built for creative founders like you — designers who want <strong style="color: #3B3937;">structure as support</strong>, not another thing on your to-do list. Inside, you'll find everything you need to bring your ideas to life with clarity and calm.
+                    Studio Systems was built for creative founders like you, designers who want <strong style="color: #3B3937;">structure as support</strong>, not another thing on your to-do list. Inside, you'll find everything you need to bring your ideas to life with clarity and calm.
                   </p>
 
                   <!-- Onboarding Steps Box -->
@@ -179,7 +179,7 @@ export async function sendStudioWelcomeEmail(member: StudioMemberInfo) {
                   </table>
 
                   <p style="color: #967F71; font-size: 14px; text-align: center; margin: 32px 0 0 0;">
-                    Questions? Just reply to this email — we're here to help.
+                    Questions? Just reply to this email. We're here to help.
                   </p>
                 </td>
               </tr>
@@ -205,7 +205,7 @@ export async function sendStudioWelcomeEmail(member: StudioMemberInfo) {
 
   return sendEmail({
     to: member.email,
-    subject: "Welcome to Studio Systems — Let's Get Started!",
+    subject: "Welcome to Studio Systems - Let's Get Started!",
     html,
   });
 }
@@ -324,7 +324,7 @@ export async function sendWaitlistConfirmationEmail(signup: WaitlistSignupInfo) 
                   </p>
 
                   <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 32px 0;">
-                    Studio Systems is the membership for fashion designers and visionaries who want <strong style="color: #3B3937;">structure as support</strong> — not another thing on your to-do list. When we open the doors, you'll be the first to know.
+                    Studio Systems is the membership for fashion designers and visionaries who want <strong style="color: #3B3937;">structure as support</strong>, not another thing on your to-do list. When we open the doors, you'll be the first to know.
                   </p>
 
                   <!-- What's Inside Box -->
@@ -361,13 +361,13 @@ export async function sendWaitlistConfirmationEmail(signup: WaitlistSignupInfo) 
                       <tr>
                         <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
                           <span style="color: #CDA7B2; margin-right: 8px;">1.</span>
-                          <a href="${quizUrl}" style="color: #3B3937; text-decoration: underline;">Take the Designer Archetype Quiz</a> — find out what kind of fashion business you're building
+                          <a href="${quizUrl}" style="color: #3B3937; text-decoration: underline;">Take the Designer Archetype Quiz</a> to find out what kind of fashion business you're building
                         </td>
                       </tr>
                       <tr>
                         <td style="padding: 8px 0; color: #6B655C; font-size: 14px;">
                           <span style="color: #CDA7B2; margin-right: 8px;">2.</span>
-                          <a href="${instagramUrl}" style="color: #3B3937; text-decoration: underline;">Follow us on Instagram</a> — for behind-the-scenes and tips
+                          <a href="${instagramUrl}" style="color: #3B3937; text-decoration: underline;">Follow us on Instagram</a> for behind-the-scenes and tips
                         </td>
                       </tr>
                       <tr>

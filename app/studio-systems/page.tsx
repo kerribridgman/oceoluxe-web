@@ -43,7 +43,7 @@ export default async function StudioSystemsPage() {
     "Using plug-and-play email scripts to get factory replies fast (no more ghosting)",
     "Following a mapped-out production calendar that runs from sampling to delivery",
     "Making confident pricing decisions with costing sheets that show your margins, line by line",
-    "Reclaiming 10+ hours a week to design, create, and actually breathe — without burning out",
+    "Reclaiming 10+ hours a week to design, create, and actually breathe without burning out",
     "Designing from a place of flow while your systems work for you"
   ];
 
@@ -104,11 +104,11 @@ export default async function StudioSystemsPage() {
             You do not have to position yourself as mass fashion if that is not your vision.
           </p>
           <p className="text-xl text-[#967F71] font-light leading-relaxed mb-4 max-w-2xl mx-auto">
-            Whether you are building a luxury atelier with 50 devoted clients or scaling a collection that reaches thousands—your
+            Whether you are building a luxury atelier with 50 devoted clients or scaling a collection that reaches thousands, your
             production strategy should match <span className="italic">your</span> design philosophy, not someone else's playbook.
           </p>
           <p className="text-lg text-[#3B3937] font-light leading-relaxed mb-10 max-w-2xl mx-auto">
-            This 2-minute quiz reveals your Designer Archetype—so you can finally build production and marketing
+            This 2-minute quiz reveals your Designer Archetype so you can finally build production and marketing
             systems that align with who you actually are.
           </p>
           <Link href="/quiz">
@@ -193,7 +193,7 @@ export default async function StudioSystemsPage() {
               The Oceo Method™
             </h2>
             <p className="text-2xl text-[#967F71] max-w-3xl mx-auto leading-relaxed font-light">
-              A calm, connected approach to production — for fashion founders and visionaries who value both structure and sanity.
+              A calm, connected approach to production for fashion founders and visionaries who value both structure and sanity.
             </p>
           </div>
 
@@ -257,10 +257,10 @@ export default async function StudioSystemsPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <blockquote className="text-3xl md:text-4xl font-serif font-light text-[#3B3937] leading-relaxed italic">
-                "You didn't become a designer to chase deadlines or question your worth. You became one to create — to bring beauty and meaning into the world."
+                "You didn't become a designer to chase deadlines or question your worth. You became one to create, to bring beauty and meaning into the world."
               </blockquote>
               <p className="text-lg text-[#967F71] mt-8 font-light">
-                — Studio Systems by Oceo Luxe
+                - Studio Systems by Oceo Luxe
               </p>
             </div>
             <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">

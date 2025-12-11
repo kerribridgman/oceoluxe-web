@@ -16,7 +16,7 @@ export default async function AboutPage() {
     {
       icon: <Sparkles className="h-8 w-8 text-[#CDA7B2]" />,
       title: "Structure Supports Creativity",
-      description: "Systematized processes don't constrain creative work—they enable it. The right structure frees mental space for innovation and strategic thinking."
+      description: "Systematized processes don't constrain creative work, they enable it. The right structure frees mental space for innovation and strategic thinking."
     },
     {
       icon: <Target className="h-8 w-8 text-[#CDA7B2]" />,

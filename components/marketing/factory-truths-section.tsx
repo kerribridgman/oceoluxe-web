@@ -43,7 +43,7 @@ export function FactoryTruthsSection() {
             What I Wish Someone Had Told Me
           </h2>
           <p className="text-xl text-[#967F71] leading-relaxed font-light">
-            After years of working in luxury production, these are the truths that would have saved me — and my clients — countless headaches.
+            After years of working in luxury production, these are the truths that would have saved me (and my clients) countless headaches.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export function FactoryTruthsSection() {
 
         <div className="mt-12 text-center">
           <p className="text-lg text-[#967F71] font-light">
-            This is what I teach — so you don't have to learn it the hard way.
+            This is what I teach, so you don't have to learn it the hard way.
           </p>
         </div>
       </div>

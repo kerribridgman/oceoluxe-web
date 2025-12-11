@@ -9,7 +9,7 @@ export default function QuizAboutPage() {
     {
       icon: <Target className="h-8 w-8 text-[#CDA7B2]" />,
       title: "Align Your Production Strategy",
-      description: "Your archetype reveals how you naturally create—so you can build production systems that work with your vision, not against it."
+      description: "Your archetype reveals how you naturally create, so you can build production systems that work with your vision, not against it."
     },
     {
       icon: <Compass className="h-8 w-8 text-[#CDA7B2]" />,
@@ -19,12 +19,12 @@ export default function QuizAboutPage() {
     {
       icon: <Sparkles className="h-8 w-8 text-[#CDA7B2]" />,
       title: "Market With Confidence",
-      description: "When you understand your design philosophy, you can position your brand authentically—whether that is luxury atelier or accessible fashion."
+      description: "When you understand your design philosophy, you can position your brand authentically, whether that is luxury atelier or accessible fashion."
     }
   ];
 
   const archetypePreview = [
-    { name: "The Muse Chaser", emoji: "✨", desc: "You design for her—a specific woman who lives in your imagination." },
+    { name: "The Muse Chaser", emoji: "✨", desc: "You design for her, a specific woman who lives in your imagination." },
     { name: "The World Builder", emoji: "🌙", desc: "You are creating a universe, not just clothes." },
     { name: "The Intimist", emoji: "🤍", desc: "You cultivate deep relationships with a devoted client base." },
     { name: "The Editor", emoji: "✂️", desc: "Every piece must justify its presence. Less, but exceptional." },
@@ -70,7 +70,7 @@ export default function QuizAboutPage() {
             <p className="text-lg text-[#967F71] font-light max-w-2xl mx-auto">
               The way you design shapes the way you should produce.<br />
               Understanding your creative archetype helps you build a fashion business<br />
-              that feels aligned—not exhausting.
+              that feels aligned, not exhausting.
             </p>
           </div>
 
@@ -156,7 +156,7 @@ export default function QuizAboutPage() {
             Ready to Discover Your Archetype?
           </h2>
           <p className="text-lg text-[#967F71] font-light mb-10">
-            Answer 8 questions about how you design, and we will reveal your Designer Archetype—plus
+            Answer 8 questions about how you design, and we will reveal your Designer Archetype, plus
             insights on how to align your production and marketing with who you actually are.
           </p>
           <Link href="/quiz">

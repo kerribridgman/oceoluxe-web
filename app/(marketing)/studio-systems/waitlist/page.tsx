@@ -40,7 +40,7 @@ const experiences = [
   {
     icon: Heart,
     title: 'Feel supported instead of scattered',
-    description: 'with a community that gets it — because building a fashion brand shouldn\'t feel so isolating.',
+    description: 'with a community that gets it, because building a fashion brand shouldn\'t feel so isolating.',
   },
 ];
 
