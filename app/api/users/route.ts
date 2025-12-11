@@ -3,7 +3,7 @@ import { getUser } from '@/lib/db/queries';
 import { db } from '@/lib/db/drizzle';
 import { users } from '@/lib/db/schema';
 import { desc, isNull } from 'drizzle-orm';
-import { hashPassword } from '@/lib/auth/session';
+import { hashPassword } from '@/lib/auth/password';
 
 // GET /api/users - List all users
 export async function GET(request: NextRequest) {
