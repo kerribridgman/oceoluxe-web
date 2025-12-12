@@ -53,14 +53,13 @@ export default async function HomePage() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
-                  You Have the Vision.<br />
-                  <span className="text-[#CDA7B2]">I'll Help You Build It.</span>
+                  Clarity and Structure for Designers Who Want to Produce Consciously<span className="text-[#CDA7B2]"> - Without the Overwhelm</span>
                 </h1>
                 <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  Production can feel overwhelming: the factory expectations, the fabric decisions, the timelines that never seem to make sense. You're not alone, and it doesn't have to stay that way.
+                  I help you communicate clearly with factories, avoid costly production mistakes, choose the right materials, and build systems that support your growth.
                 </p>
                 <p className="text-lg text-[#3B3937] font-light leading-relaxed">
-                  With a decade of luxury-level production experience, I help independent designers navigate manufacturing, from first sketch to scaling production, with clarity, confidence, and systems that actually work.
+                  With a decade of luxury-level production experience and a background in production management from FIT, I guide independent designers through manufacturing with confidence and intention.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -73,13 +72,13 @@ export default async function HomePage() {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link href="/products">
+                <Link href="/quiz">
                   <Button
                     size="lg"
                     variant="outline"
                     className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-14 px-10 text-lg font-light w-full sm:w-auto"
                   >
-                    Free Resources
+                    Discover Your Archetype
                   </Button>
                 </Link>
               </div>

@@ -22,39 +22,39 @@ Oceo Luxe helps independent designers turn their ideas into sustainable, manufac
 ## DAYS 1-4: Homepage Transformation
 
 ### Day 1: Hero Section Rewrite
-- [ ] Update hero headline: "Clarity and structure for designers who want to produce consciously — without the overwhelm"
-- [ ] Update hero subheadline: "I help you communicate clearly, avoid production mistakes, choose the right materials, and build systems that support your growth"
-- [ ] Update CTA buttons to reflect new positioning
-- [ ] Update hero image if needed
+- [x] Update hero headline: "Clarity and structure for designers who want to produce consciously — without the overwhelm"
+- [x] Update hero subheadline: "I help you communicate clearly, avoid production mistakes, choose the right materials, and build systems that support your growth"
+- [x] Update CTA buttons to reflect new positioning (Work With Me + Discover Your Archetype)
+- [x] Hero image kept as-is (works with new messaging)
 
 **File:** `app/page.tsx` (lines 46-99)
 
 ### Day 2: "Who I Help" Section
-- [ ] Create new `WhoIHelpSection` component
-- [ ] Add section below hero with target audience criteria:
+- [x] Create new `WhoIHelpSection` component
+- [x] Add section below hero with target audience criteria:
   - New to factories and want guidance
   - Need clarity on timelines and expectations
   - Want sustainable suppliers without overwhelm
   - Feel unsure what to ask your factory
   - Want systems that support creativity
   - Care deeply about ethics and sustainability
-- [ ] Style to match existing brand aesthetic
+- [x] Style to match existing brand aesthetic
 
-**Create:** `components/marketing/who-i-help-section.tsx`
+**Created:** `components/marketing/who-i-help-section.tsx`
 
 ### Day 3: "What Factories Won't Tell You" Section
-- [ ] Create `FactoryTruthsSection` component
-- [ ] Add compelling intro: "Factories expect clarity; designers expect guidance. Issues occur in the gap."
-- [ ] List key truths as cards:
+- [x] Create `FactoryTruthsSection` component
+- [x] Add compelling intro: "Factories expect clarity; designers expect guidance. Issues occur in the gap."
+- [x] List key truths as cards:
   - Factories don't choose your fabrics
   - Too many options slow production
   - Communication varies internally
   - Timelines aren't always late — they're layered
   - Backup factories are essential
   - Factory visits solve miscommunication
-- [ ] Add CTA linking to resources/blog
+- [x] Add CTA linking to resources/blog
 
-**Create:** `components/marketing/factory-truths-section.tsx`
+**Created:** `components/marketing/factory-truths-section.tsx`
 
 ### Day 4: Update Homepage Offerings Section
 - [ ] Rewrite "How We Help Fashion Designers" section to focus on:
