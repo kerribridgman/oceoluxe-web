@@ -175,6 +175,42 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Studio Systems Section */}
+      <section className="py-24 bg-[#3B3937]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-light mb-4">Ongoing Support</p>
+          <h2 className="text-4xl md:text-5xl font-serif font-light text-white mb-8 leading-tight">
+            Studio Systems Membership
+          </h2>
+          <p className="text-xl text-white/80 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
+            Not ready for 1:1 work? Studio Systems gives you access to the same frameworks, templates, and guidance I use with my private clients - at a pace that works for you.
+          </p>
+          <p className="text-lg text-white/70 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
+            Monthly Studio Sessions, The Oceo Method™ course library, production templates, and a community of designers who get it. Structure as support - on your terms.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/studio-systems">
+              <Button
+                size="lg"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group w-full sm:w-auto"
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link href="/quiz">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 h-14 px-10 text-lg font-light w-full sm:w-auto"
+              >
+                Take the Quiz First
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24 bg-[#faf8f5]">
         <div className="max-w-4xl mx-auto px-6 text-center">
