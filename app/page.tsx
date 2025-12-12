@@ -73,7 +73,7 @@ export default async function HomePage() {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link href="/resources">
+                <Link href="/products">
                   <Button
                     size="lg"
                     variant="outline"

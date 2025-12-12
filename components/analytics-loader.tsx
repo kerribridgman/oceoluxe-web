@@ -1,18 +1,25 @@
 'use client';
 
-import { useEffect } from 'react';
 import Script from 'next/script';
+import { useConsent } from '@/lib/cookies/consent';
 
 /**
- * Client-side component that loads analytics settings and injects tracking scripts
- * This runs after the page is hydrated to avoid breaking static generation
+ * Client-side component that loads analytics scripts only after user consent
+ * This ensures CCPA/GDPR compliance by not loading tracking until approved
  */
 export function AnalyticsLoader() {
+  const { consent, status } = useConsent();
+
   // Use environment variables if available (for production)
   const envGaId = process.env.NEXT_PUBLIC_GA_ID;
   const envGtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
-  // If env vars are set, use them immediately (no need for API call)
+  // Don't load analytics until user has given consent
+  if (status === 'pending' || !consent?.analytics) {
+    return null;
+  }
+
+  // Only load if consent given and env vars are set
   if (envGaId || envGtmId) {
     return (
       <>
@@ -48,6 +55,5 @@ export function AnalyticsLoader() {
   }
 
   // If no env vars, component does nothing (analytics disabled)
-  // In the future, you could fetch from API here if needed
   return null;
 }
