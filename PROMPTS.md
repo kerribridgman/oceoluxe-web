@@ -70,53 +70,25 @@ Oceo Luxe helps independent designers turn their ideas into sustainable, manufac
 
 ## DAYS 5-8: New Homepage Sections
 
-### Day 5: "Sustainability Without Overwhelm" Section
-- [ ] Create `SustainabilitySection` component
-- [ ] Key messages:
-  - You don't need perfection to launch
-  - Ethical production grows through relationships
-  - Natural fibers are a strong start
-  - Transparency > greenwashing
-  - Sustainable brands evolve gradually
-- [ ] Include CTA to sustainability resources
+**DECISION:** Skipped adding more homepage sections to avoid overwhelm. Content moved to blog topics for SEO instead.
 
-**Create:** `components/marketing/sustainability-section.tsx`
+### Days 5-7: MOVED TO BLOG CONTENT
+The following were planned as homepage sections but will be blog posts instead:
 
-### Day 6: "Operations for First-Time Designers" Section
-- [ ] Create `OperationsSection` component
-- [ ] Four pillars with expandable content:
-  - Fabric Support (choosing fabrics, when fabrics "won't work")
-  - Supplier Communication (requesting materials, preventing errors)
-  - Production Timelines (realistic timelines, seasonal planning)
-  - Factory Decisions (vetting factories, red flags, backups)
-- [ ] CTA to Studio Systems or services
+- ~~Sustainability Without Overwhelm Section~~ → Blog post: "Sustainability Without Overwhelm: A Guide for First-Time Designers"
+- ~~Operations for First-Time Designers Section~~ → Blog series: Fabric Support, Supplier Communication, Production Timelines, Factory Decisions
+- ~~Factory Visit Prep CTA Section~~ → Blog post: "Factory Visit Prep Guide" (already in Day 13)
 
-**Create:** `components/marketing/operations-section.tsx`
-
-### Day 7: Factory Visit Prep CTA Section
-- [ ] Create `FactoryVisitCTA` component
-- [ ] Teaser content:
-  - What to observe during visits
-  - Questions to ask
-  - What to bring
-- [ ] Lead magnet signup for full checklist
-- [ ] Link to blog post (to be created)
-
-**Create:** `components/marketing/factory-visit-cta.tsx`
-
-### Day 8: Integrate All New Sections into Homepage
-- [ ] Import all new components into `app/page.tsx`
-- [ ] Arrange sections in optimal order:
-  1. Hero (updated)
-  2. Who I Help
-  3. What Factories Won't Tell You
-  4. How We Help (updated offerings)
-  5. Sustainability Without Overwhelm
-  6. Operations for First-Time Designers
-  7. Factory Visit Prep CTA
-  8. Final CTA (quiz + Studio Systems)
-- [ ] Test responsive design on all screen sizes
-- [ ] Review and adjust spacing/transitions
+### Day 8: Homepage Review
+- [x] Homepage structure finalized with focused sections:
+  1. Hero (updated) ✅
+  2. Who I Help ✅
+  3. What Factories Won't Tell You ✅
+  4. Studio Systems (prominent placement) ✅
+  5. How I Help (3 offerings) ✅
+  6. Ideal Client ✅
+  7. Final CTA ✅
+- [x] Decision: Keep homepage tight, drive SEO through blog content
 
 ---
 
@@ -212,7 +184,7 @@ Oceo Luxe helps independent designers turn their ideas into sustainable, manufac
 - [ ] Create downloadable PDF checklist
 - [ ] Set up lead capture form
 - [ ] Connect to email list
-- [ ] Add to Factory Visit CTA section on homepage
+- [ ] Promote via blog post and email sequence
 
 ### Day 18: Create New Designer FAQ Page
 - [ ] Create `/faq` route
