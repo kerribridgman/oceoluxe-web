@@ -7,7 +7,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
 export const metadata: Metadata = {
   title: 'Services | Oceo Luxe',
-  description: 'Production systems, strategic support, and workflow setup for independent fashion designers and founders.',
+  description: 'Factory communication support, production systems, and sustainable sourcing guidance for independent fashion designers.',
 };
 
 export default async function ServicesPage() {
@@ -20,10 +20,10 @@ export default async function ServicesPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
-              Services & Programs
+              How I Help
             </h1>
             <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
-              Choose the right support for your stage of growth. From production systems to strategic guidance for your fashion business.
+              Factory communication support, production systems, and strategic guidance for designers who want to produce consciously without the overwhelm.
             </p>
           </div>
         </div>
@@ -40,31 +40,35 @@ export default async function ServicesPage() {
                 <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6">
                   <span className="text-[#CDA7B2] font-medium flex items-center">
                     <Sparkles className="w-4 h-4 mr-2" />
-                    Enrollment Opening Soon
+                    Founding Member Pricing Available
                   </span>
                 </div>
                 <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
                   Studio Systems Membership
                 </h2>
                 <p className="text-xl text-[#CDA7B2] font-light mb-4">
-                  Custom systems, strategic support, and personal optimization
+                  Structure as support - The Oceo Method
                 </p>
                 <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For fashion founders and production managers ready to organize scattered processes into a foundation that feels grounded, intentional, and built to last.
+                  For fashion designers who want clarity in their production process. Learn The Oceo Method framework (Organize, Optimize, Own It) to communicate with factories, build sustainable systems, and scale without burning out.
                 </p>
-                <p className="text-lg font-light text-[#3B3937] mb-4">
-                  A membership that combines structure with support.
-                </p>
+                <div className="flex items-baseline gap-3 mb-4">
+                  <span className="text-3xl font-serif text-[#3B3937]">$33</span>
+                  <span className="text-lg text-[#967F71] font-light">/month</span>
+                  <span className="text-sm text-[#967F71] line-through">$77/month</span>
+                </div>
+                <p className="text-sm text-[#CDA7B2] font-light">Founding member pricing for the first 20 members</p>
               </div>
 
               <div className="bg-[#F5F3F0] rounded-2xl p-8 shadow-xl border border-[#EDEBE8]">
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What's Included</h3>
                 <ul className="space-y-4">
                   {[
-                    'Monthly templates, workflows, and setup guides for fashion businesses',
-                    'Operations support for production, sourcing, and team coordination',
-                    'Community of creative founders',
-                    'Exclusive early-member resources and workshops'
+                    'Monthly Studio Sessions and community calls',
+                    'Full course library on production and operations',
+                    'Notion templates, calendars, and costing tools',
+                    'Factory communication scripts and templates',
+                    'A supportive community of fellow fashion founders'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
@@ -75,7 +79,7 @@ export default async function ServicesPage() {
                 <div className="mt-8">
                   <Link href="/studio-systems" className="block">
                     <Button size="lg" className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white">
-                      Join the Waitlist
+                      Learn More
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </Link>
@@ -91,10 +95,11 @@ export default async function ServicesPage() {
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">Services Include</h3>
                 <ul className="space-y-4">
                   {[
-                    'Notion templates and custom dashboards',
-                    'Product development and inventory organization',
-                    'Sampling, production, or fulfillment workflow streamlining',
-                    'Client or team onboarding systems'
+                    'Factory communication setup and templates',
+                    'Supplier tracking and contact management systems',
+                    'Production calendars and timeline planning',
+                    'Sampling workflow and costing sheet setup',
+                    'Custom Notion dashboards for your production process'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
@@ -115,16 +120,16 @@ export default async function ServicesPage() {
               <div className="order-1 md:order-2">
                 <Layout className="w-16 h-16 text-[#CDA7B2] mb-6" />
                 <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Systems Implementation & Workflow Setup
+                  Production Systems Setup
                 </h2>
                 <p className="text-xl text-[#CDA7B2] font-light mb-4">
                   Custom pricing upon request
                 </p>
                 <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For founders needing a clean, centralized foundation instead of piecemeal solutions. Get professional systems tailored to your fashion business operations.
+                  For designers who need a clean, organized foundation for factory communication and production tracking. I'll build the systems tailored to how you work and what your factories need from you.
                 </p>
                 <p className="text-xl font-light text-[#3B3937]">
-                  Build the foundation your business deserves.
+                  Stop piecing together spreadsheets. Get systems that work.
                 </p>
               </div>
             </div>
@@ -136,16 +141,16 @@ export default async function ServicesPage() {
               <div>
                 <Users className="w-16 h-16 text-[#CDA7B2] mb-6" />
                 <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Strategic Guidance & Business Evolution
+                  Production Strategy & Consulting
                 </h2>
                 <p className="text-xl text-[#CDA7B2] font-light mb-4">
                   Custom pricing upon request
                 </p>
                 <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For fashion founders ready to scale with clarity. We will assess your current processes, identify bottlenecks, and create a roadmap for sustainable growth that protects your creative energy.
+                  For designers navigating factory relationships, production timelines, and scaling decisions. Get expert guidance on what to expect, how to communicate, and when to make key decisions.
                 </p>
                 <blockquote className="text-lg text-[#3B3937] font-light italic border-l-4 border-[#CDA7B2] pl-6 mb-6">
-                  "The right strategy transforms how you build and grow."
+                  "Clarity in production protects your creative energy."
                 </blockquote>
               </div>
 
@@ -153,10 +158,11 @@ export default async function ServicesPage() {
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What You Get</h3>
                 <ul className="space-y-4">
                   {[
-                    'Assessment of current processes and pain points',
-                    'Production strategy aligned with your brand positioning',
-                    'Pricing and quantity guidance based on your archetype',
-                    'Roadmap for sustainable business growth'
+                    'Factory vetting and relationship guidance',
+                    'Production timeline planning and realistic expectations',
+                    'Pricing strategy and quantity decisions',
+                    'Sustainable sourcing direction',
+                    'Ongoing support as challenges arise'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />

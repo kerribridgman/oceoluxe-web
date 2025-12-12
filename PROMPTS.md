@@ -95,35 +95,34 @@ The following were planned as homepage sections but will be blog posts instead:
 ## DAYS 9-12: Services & About Page Updates
 
 ### Day 9: Services Page Rewrite - Part 1
-- [ ] Update page hero with new positioning
-- [ ] Reframe "Studio Systems Membership" description:
+- [x] Update page hero with new positioning
+- [x] Reframe "Studio Systems Membership" description:
   - Focus on factory communication templates
   - Production tracking systems
-  - Sustainability roadmaps
+  - The Oceo Method framework
+  - $33/$77 pricing displayed
   - Community of first-time designers
 
 **File:** `app/services/page.tsx`
 
 ### Day 10: Services Page Rewrite - Part 2
-- [ ] Update "Systems Implementation" service:
-  - Add factory communication setup
-  - Add supplier tracking systems
-  - Add production calendar templates
-- [ ] Update "Strategic Guidance" service:
-  - Focus on production strategy
-  - Factory relationship building
-  - Timeline planning
+- [x] Update "Systems Implementation" service → "Production Systems Setup":
+  - Factory communication setup and templates
+  - Supplier tracking and contact management
+  - Production calendars and timeline planning
+  - Sampling workflow and costing sheets
+- [x] Update "Strategic Guidance" service → "Production Strategy & Consulting":
+  - Factory vetting and relationship guidance
+  - Production timeline planning
+  - Sustainable sourcing direction
 
 **File:** `app/services/page.tsx`
 
 ### Day 11: About Page Rewrite
-- [ ] Update Kerri's bio to emphasize:
-  - Decade of fashion production experience
-  - FIT Production Management background
-  - Factory relationship expertise
-  - Sustainable production focus
-- [ ] Update "I Understand" section with new pain points
-- [ ] Update "How I Help" section with factory-focused language
+- [x] Already has decade of fashion production experience
+- [x] Already mentions FIT Production Management background
+- [x] Already has factory-focused pain points in "I Understand" section
+- [x] Studio Systems section added (from sales audit)
 
 **File:** `app/about/page.tsx`
 
