@@ -149,9 +149,9 @@ export default async function ServicesPage() {
                 <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
                   For designers navigating factory relationships, production timelines, and scaling decisions. Get expert guidance on what to expect, how to communicate, and when to make key decisions.
                 </p>
-                <blockquote className="text-lg text-[#3B3937] font-light italic border-l-4 border-[#CDA7B2] pl-6 mb-6">
-                  "Clarity in production protects your creative energy."
-                </blockquote>
+                <p className="text-xl font-light text-[#3B3937]">
+                  Clarity in production protects your creative energy.
+                </p>
               </div>
 
               <div className="bg-[#F5F3F0] rounded-2xl p-8 shadow-xl border border-[#EDEBE8]">
@@ -222,9 +222,9 @@ export default async function ServicesPage() {
                 <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
                   For designers, production managers, stylists, consultants, and anyone in the fashion industry who needs a website that actually represents their work. Built by someone who has worked across the entire industry and understands what you do.
                 </p>
-                <blockquote className="text-lg text-[#3B3937] font-light italic border-l-4 border-[#CDA7B2] pl-6 mb-6">
-                  "Your website should work as hard as you do."
-                </blockquote>
+                <p className="text-xl font-light text-[#3B3937]">
+                  Your website should work as hard as you do.
+                </p>
               </div>
             </div>
           </div>
