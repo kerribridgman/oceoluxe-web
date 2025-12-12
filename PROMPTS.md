@@ -57,12 +57,12 @@ Oceo Luxe helps independent designers turn their ideas into sustainable, manufac
 **Created:** `components/marketing/factory-truths-section.tsx`
 
 ### Day 4: Update Homepage Offerings Section
-- [ ] Rewrite "How We Help Fashion Designers" section to focus on:
+- [x] Rewrite "How We Help Fashion Designers" section to focus on:
   - Factory Communication Support
   - Production Systems & Workflows
   - Sustainable Sourcing Guidance
-- [ ] Update card descriptions to match new niche
-- [ ] Update "Ideal Client" indicators to match new positioning
+- [x] Update card descriptions to match new niche
+- [x] Update "Ideal Client" indicators to match new positioning (already aligned)
 
 **File:** `app/page.tsx` (lines 101-207)
 

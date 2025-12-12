@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, ArrowRight, FileText, Briefcase } from 'lucide-react';
+import { Check, ArrowRight, MessageSquare, Settings, Leaf } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { WhoIHelpSection } from '@/components/marketing/who-i-help-section';
@@ -25,19 +25,19 @@ export default async function HomePage() {
 
   const offerings = [
     {
-      icon: <Briefcase className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Consulting &\nProject Support",
-      description: "Hourly or project-based guidance for factory vetting, production planning, supplier communication, and navigating challenges as they come up"
+      icon: <MessageSquare className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Factory Communication\nSupport",
+      description: "Learn what to say, how to say it, and when. Get scripts, templates, and guidance for clear factory communication that prevents costly misunderstandings."
     },
     {
-      icon: <FileText className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Tech Pack &\nSpec Development",
-      description: "Help creating the detailed specifications factories need, so your vision translates clearly and you avoid costly miscommunication"
+      icon: <Settings className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Production Systems\n& Workflows",
+      description: "Build the operational backbone your brand needs: production calendars, sampling trackers, costing sheets, and supplier management systems."
     },
     {
-      icon: <FileText className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Production Resources\n& Notion Templates",
-      description: "Ready-to-use templates designed for fashion production: collection planners, costing sheets, supplier trackers, and production calendars"
+      icon: <Leaf className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Sustainable Sourcing\nGuidance",
+      description: "Navigate ethical production without the overwhelm. Get clear guidance on materials, suppliers, and building relationships that align with your values."
     }
   ];
 
