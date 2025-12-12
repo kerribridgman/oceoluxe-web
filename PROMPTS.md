@@ -373,6 +373,135 @@ Key truths:
 
 ---
 
+# SALES AUDIT & STUDIO SYSTEMS PROMOTION
+
+## Completed (Dec 2024)
+- [x] Quiz email capture gate (requires email before showing results)
+- [x] Archetype-specific follow-up emails with personalized content
+- [x] Pricing consistency ($33 founding members / $77 regular)
+- [x] Homepage: Studio Systems section moved up (after Factory Truths pain points)
+- [x] About page: Studio Systems section added before final CTA
+- [x] Sales review slash command created (`.claude/commands/sales-review.md`)
+- [x] Returning quiz users now receive emails on retake
+
+---
+
+## Sales-Focused Blog Topics (Drive Studio Systems Interest)
+
+These blog posts naturally lead readers toward Studio Systems membership:
+
+### Pain Point Posts
+- [ ] "Why Most Designers Burn Out Before Their Third Collection"
+  - Hook: The overwhelm is real, but it's not about working harder
+  - CTA: Studio Systems provides the structure to prevent burnout
+
+- [ ] "The Hidden Cost of Disorganized Production"
+  - Hook: Calculate what chaos is actually costing you (time, money, energy)
+  - CTA: Studio Systems templates and systems
+
+- [ ] "5 Signs You Need Production Systems (Not Just Harder Work)"
+  - Hook: Recognize the symptoms of systems gaps
+  - CTA: Direct lead-in to Studio Systems
+
+- [ ] "What Happens When You Don't Have a Production Calendar"
+  - Hook: Real scenarios of missed deadlines, rushed decisions
+  - CTA: Studio Systems includes production calendars
+
+### Educational Posts (Build Trust, Show Expertise)
+- [ ] "The Oceo Method Explained: Organize, Optimize, Own It"
+  - Hook: The framework behind sustainable production
+  - CTA: Learn the full method inside Studio Systems
+
+- [ ] "How I Managed Production for Luxury Brands (And What I Learned)"
+  - Hook: Behind-the-scenes expertise
+  - CTA: Get access to these systems in Studio Systems
+
+- [ ] "Factory Communication: What to Say and How to Say It"
+  - Hook: Scripts and templates for common scenarios
+  - CTA: Full communication templates in Studio Systems
+
+- [ ] "Small Batch Production: What's Actually Realistic"
+  - Hook: Honest timeline and MOQ expectations
+  - CTA: Studio Systems community has been through this
+
+### Archetype-Specific Posts
+- [ ] "For the Muse Chaser: When Your Vision Needs Structure"
+- [ ] "For the World Builder: Creating Entry Points Without Diluting Magic"
+- [ ] "For the Intimist: Scaling Without Losing the Personal Touch"
+- [ ] "For the Editor: Moving From Concept to Delivery With Confidence"
+- [ ] "For the Populist: Accessibility and Intention Can Coexist"
+
+---
+
+## Quiz-to-Membership Nurture Sequence
+
+### Email 1: Quiz Result (Automated - DONE)
+- Archetype-specific content with gift, tricky area, key question
+- Links to products, services, and Studio Systems
+
+### Email 2: Archetype Deep Dive (Day 3)
+- [ ] Create 5 archetype-specific emails
+- Expand on how their archetype affects production decisions
+- Include 1-2 specific tips for their type
+- Soft mention of Studio Systems
+
+### Email 3: Common Struggle (Day 7)
+- [ ] Create email addressing pain point common to their archetype
+- Share a quick win or framework
+- Position Studio Systems as the full solution
+
+### Email 4: Studio Systems Invitation (Day 10)
+- [ ] Create direct pitch email
+- Founding member pricing ($33/month)
+- What's included, who it's for
+- Testimonial or case study if available
+
+### Email 5: Last Chance / FAQ (Day 14)
+- [ ] Address common objections:
+  - "I don't have time for another membership"
+  - "I can figure this out myself"
+  - "Is this right for my stage?"
+- Founding member deadline (if applicable)
+
+---
+
+## Conversion Optimization Tasks
+
+### Studio Systems Page Improvements
+- [ ] Add FAQ section addressing objections
+- [ ] Add testimonials/case studies when available
+- [ ] Add "What You Get" visual breakdown
+- [ ] Add comparison: DIY vs Studio Systems
+
+### Services Page Cross-Sell
+- [ ] Add "Not ready for 1:1?" callout linking to Studio Systems
+- [ ] Position Studio Systems as entry point to working together
+
+### Blog Post CTAs
+- [ ] Create reusable Studio Systems CTA component for blog posts
+- [ ] Add contextual CTAs to existing blog posts
+
+### Quiz Results Page
+- [ ] Add archetype-specific Studio Systems hook (DONE in email, add to results page)
+- [ ] Add "What other [Archetype]s are saying" section when testimonials available
+
+### Footer/Global Elements
+- [ ] Add Studio Systems to footer links
+- [ ] Consider exit-intent popup for Studio Systems (optional)
+
+---
+
+## Metrics to Track
+
+- [ ] Quiz completion rate
+- [ ] Quiz email capture rate
+- [ ] Quiz result email open rate
+- [ ] Studio Systems page visits (from quiz vs other sources)
+- [ ] Studio Systems conversion rate
+- [ ] Email sequence click-through rates
+
+---
+
 # FUTURE PHASES (After 20 Days)
 
 ## Phase 2 — Studio Systems Content
