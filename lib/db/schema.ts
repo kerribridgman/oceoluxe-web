@@ -591,6 +591,22 @@ export const leads = pgTable('leads', {
 export type Lead = typeof leads.$inferSelect;
 export type NewLead = typeof leads.$inferInsert;
 
+// Quiz Leads - Capture email + archetype from Designer Quiz
+export const quizLeads = pgTable('quiz_leads', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 255 }).notNull(),
+  name: varchar('name', { length: 255 }),
+  archetype: varchar('archetype', { length: 50 }).notNull(), // 'muse', 'world', 'intimate', 'editor', 'populist'
+  scores: jsonb('scores'), // Full scores breakdown for analysis
+  source: varchar('source', { length: 100 }).default('quiz'), // Track which quiz version
+  convertedToMember: boolean('converted_to_member').default(false),
+  emailSequenceStarted: boolean('email_sequence_started').default(false),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export type QuizLead = typeof quizLeads.$inferSelect;
+export type NewQuizLead = typeof quizLeads.$inferInsert;
+
 // =============================================
 // EDUCATION PLATFORM TABLES (Studio Systems)
 // =============================================
