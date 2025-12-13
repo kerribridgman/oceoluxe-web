@@ -127,16 +127,9 @@ The following were planned as homepage sections but will be blog posts instead:
 **File:** `app/about/page.tsx`
 
 ### Day 12: Create Resources Hub Page
-- [ ] Create new `/resources` route
-- [ ] Create `ResourceCard` component
-- [ ] Initial resources to feature:
-  - Factory Visit Prep Guide (link to blog)
-  - Production Timeline Overview (link to blog)
-  - Sustainability Starter Tips (link to blog)
-  - Free Notion Templates (link to products)
-- [ ] Add lead magnet signup section
+**DECISION:** Skipped - /products already serves as free resources hub, /blog handles SEO content. Adding /resources would create confusion and potentially dilute membership value.
 
-**Create:** `app/resources/page.tsx`, `components/marketing/resource-card.tsx`
+Funnel remains: Blog (SEO) → Quiz (email capture) → Products (free value) → Studio Systems (paid)
 
 ---
 
