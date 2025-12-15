@@ -30,7 +30,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",
-    "drizzle-kit": "^0.31.1",
+    "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.43.1",
     "jose": "^6.0.11",
     "lucide-react": "^0.511.0",
@@ -56,6 +56,12 @@
     "zod": "^3.24.4"
   },
   "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d",
+  "pnpm": {
+    "overrides": {
+      "mdast-util-to-hast": ">=13.2.1",
+      "esbuild": ">=0.25.0"
+    }
+  },
   "devDependencies": {
     "pg": "^8.16.3"
   }
