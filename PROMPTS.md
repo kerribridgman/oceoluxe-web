@@ -179,16 +179,21 @@ Funnel remains: Blog (SEO) → Quiz (email capture) → Products (free value) �
 - [ ] Promote via blog post and email sequence
 
 ### Day 18: Create New Designer FAQ Page
-- [ ] Create `/faq` route
-- [ ] Common questions:
+- [x] Create `/faq` route
+- [x] Common questions (10 total):
   - How do I find a factory?
   - How many units should I produce?
   - What's a realistic timeline?
   - How do I communicate with suppliers?
   - What fabrics work for small batches?
-- [ ] Link from homepage and resources
+  - What should I look for when visiting a factory?
+  - How do I price my products?
+  - What if my factory makes a mistake?
+  - How do I produce sustainably without being perfect?
+  - What's the difference between 1:1 and Studio Systems?
+- [x] Accordion-style FAQ with CTAs to quiz and contact
 
-**Create:** `app/faq/page.tsx`
+**Created:** `app/faq/page.tsx`
 
 ### Day 19: Navigation & Footer Updates
 - [ ] Update marketing header navigation:
