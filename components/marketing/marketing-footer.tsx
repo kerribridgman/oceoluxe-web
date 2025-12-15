@@ -58,6 +58,11 @@ export function MarketingFooter() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <Link href="/faq" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
