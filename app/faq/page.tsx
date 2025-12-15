@@ -35,7 +35,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "What should I look for when visiting a factory?",
-    answer: "Observe cleanliness, organization, and workflow. Watch how workers communicate between departments. Ask about their typical timeline, who your contact will be, and what their current workload looks like. Bring reference samples and ranked fabric swatches. Pay attention to red flags: disorganization, reluctance to answer questions, or pressure to commit quickly."
+    answer: "Observe cleanliness, organization, and workflow. Watch how workers communicate between departments. Ask about their typical timeline, who your contact will be, and what their current workload looks like. Bring reference samples and fabric swatches. Pay attention to red flags: disorganization, reluctance to answer questions, or pressure to commit quickly."
   },
   {
     question: "How do I price my products?",
