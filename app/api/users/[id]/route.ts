@@ -3,7 +3,7 @@ import { getUser } from '@/lib/db/queries';
 import { db } from '@/lib/db/drizzle';
 import { users } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
-import { hashPassword } from '@/lib/auth/session';
+import { hashPassword } from '@/lib/auth/password';
 
 // PUT /api/users/[id] - Update a user
 export async function PUT(

@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from 'next';
 import { Raleway } from 'next/font/google';
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
-import { AnalyticsLoader } from '@/components/analytics-loader';
 import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
@@ -27,9 +26,6 @@ export default async function RootLayout({
       lang="en"
       className={`bg-white dark:bg-gray-950 text-black dark:text-white ${raleway.className}`}
     >
-      <head>
-        <AnalyticsLoader />
-      </head>
       <body className="min-h-[100dvh] bg-gray-50">
         <SWRConfig
           value={{

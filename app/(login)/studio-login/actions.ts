@@ -4,7 +4,8 @@ import { z } from 'zod';
 import { eq } from 'drizzle-orm';
 import { db } from '@/lib/db/drizzle';
 import { users } from '@/lib/db/schema';
-import { comparePasswords, setSession } from '@/lib/auth/session';
+import { setSession } from '@/lib/auth/session';
+import { comparePasswords } from '@/lib/auth/password';
 import { redirect } from 'next/navigation';
 import { validatedAction } from '@/lib/auth/middleware';
 

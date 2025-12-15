@@ -2,9 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, ArrowRight, Layers, Heart, Users, FileText } from 'lucide-react';
+import { Check, ArrowRight, MessageSquare, Settings, Leaf } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { WhoIHelpSection } from '@/components/marketing/who-i-help-section';
+import { FactoryTruthsSection } from '@/components/marketing/factory-truths-section';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata() {
@@ -13,29 +15,29 @@ export async function generateMetadata() {
 
 export default async function HomePage() {
   const idealClientIndicators = [
-    "Overwhelmed by supplier and manufacturer options",
-    "Strong design vision but unclear production process",
-    "Unsure how many pieces to produce or how to price them",
-    "Spending more time managing chaos than designing",
-    "Following industry advice that does not fit your brand",
-    "Ready to build a sustainable fashion business on your terms"
+    "Unsure what your factory does and doesn't handle for you",
+    "Overwhelmed by fabric choices and don't know how to narrow them down",
+    "Struggling to keep track of samples, suppliers, and production details",
+    "Confused about what information to send your factory (and in what format)",
+    "Experiencing delays that feel unreasonable but might actually be normal",
+    "Want to produce sustainably but feel paralyzed by perfectionism"
   ];
 
   const offerings = [
     {
-      icon: <Layers className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Production Systems\n& Workflow Setup",
-      description: "Notion templates, production calendars, and streamlined workflows that take you from concept to finished collection"
+      icon: <MessageSquare className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Factory Communication\nSupport",
+      description: "Learn what to say, how to say it, and when. Get scripts, templates, and guidance for clear factory communication that prevents costly misunderstandings."
     },
     {
-      icon: <Users className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Understand Your\nIdeal Client",
-      description: "Discover your designer archetype and learn how to position your brand for the clients who truly value your work"
+      icon: <Settings className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Production Systems\n& Workflows",
+      description: "Build the operational backbone your brand needs: production calendars, sampling trackers, costing sheets, and supplier management systems."
     },
     {
-      icon: <Heart className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Build With\nClarity & Connection",
-      description: "Strategic guidance and sustainable systems that protect your creative energy while scaling your fashion business"
+      icon: <Leaf className="h-10 w-10 text-[#CDA7B2]" />,
+      title: "Sustainable Sourcing\nGuidance",
+      description: "Navigate ethical production without the overwhelm. Get clear guidance on materials, suppliers, and building relationships that align with your values."
     }
   ];
 
@@ -51,13 +53,13 @@ export default async function HomePage() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
-                  Build a Fashion Brand With <span className="text-[#CDA7B2]">Clarity, Structure</span> & Zero Guesswork
+                  Clarity and Structure for Designers Who Want to Produce Consciously<span className="text-[#CDA7B2]"> - Without the Overwhelm</span>
                 </h1>
                 <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  Oceo Luxe helps independent designers and visionary founders bring their ideas to life with real production guidance, streamlined systems, and AI-powered operations support.
+                  I help you communicate clearly with factories, avoid costly production mistakes, choose the right materials, and build systems that support your growth.
                 </p>
                 <p className="text-lg text-[#3B3937] font-light leading-relaxed">
-                  Turn your creative vision into a profitable, organized, sustainable fashion business.
+                  With a decade of luxury-level production experience and a background in production management from FIT, I guide independent designers through manufacturing with confidence and intention.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -66,17 +68,17 @@ export default async function HomePage() {
                     size="lg"
                     className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group w-full sm:w-auto"
                   >
-                    Explore Services
+                    Work With Me
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link href="/studio-systems">
+                <Link href="/quiz">
                   <Button
                     size="lg"
                     variant="outline"
                     className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-14 px-10 text-lg font-light w-full sm:w-auto"
                   >
-                    Join Studio Systems
+                    Discover Your Archetype
                   </Button>
                 </Link>
               </div>
@@ -86,7 +88,7 @@ export default async function HomePage() {
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
                 <Image
                   src="/images/hero-systems.png"
-                  alt="Business systems and organization"
+                  alt="Fashion production systems and factory guidance for designers"
                   fill
                   className="object-cover"
                   quality={95}
@@ -98,15 +100,87 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* What You Will Find Here Section */}
+      {/* Who I Help Section */}
+      <WhoIHelpSection />
+
+      {/* What Factories Won't Tell You Section */}
+      <FactoryTruthsSection />
+
+      {/* Studio Systems Section */}
+      <section className="py-24 bg-[#3B3937]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-light">Ongoing Support</p>
+              <h2 className="text-4xl md:text-5xl font-serif font-light text-white leading-tight">
+                Studio Systems Membership
+              </h2>
+              <p className="text-xl text-white/80 font-light leading-relaxed">
+                A membership built for fashion designers who want structure as support. Learn The Oceo Method™ framework to bring clarity to your production process and scale without burning out.
+              </p>
+              <ul className="text-white/80 font-light space-y-3">
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                  <span>Monthly Studio Sessions and community calls</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                  <span>Full course library on production and operations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                  <span>Notion templates, calendars, and costing tools</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
+                  <span>A supportive community of fellow fashion founders</span>
+                </li>
+              </ul>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link href="/studio-systems">
+                  <Button
+                    size="lg"
+                    className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group w-full sm:w-auto"
+                  >
+                    Learn More
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link href="/quiz">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10 h-14 px-10 text-lg font-light w-full sm:w-auto"
+                  >
+                    Take the Quiz First
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="aspect-square w-full max-w-md rounded-2xl overflow-hidden shadow-2xl relative">
+                <Image
+                  src="/images/hero-workspace.jpg"
+                  alt="Studio Systems Membership"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How I Help Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-              How We Help Fashion Designers
+              How I Help
             </h2>
             <p className="text-xl text-[#967F71] max-w-4xl mx-auto leading-relaxed font-light">
-              Production guidance, Notion templates, and sustainable systems designed specifically for independent fashion brands.
+              Whether you're just starting out or already working with a factory, I help you understand how production actually works so you can make better decisions and avoid costly mistakes.
             </p>
           </div>
 
@@ -128,45 +202,6 @@ export default async function HomePage() {
             ))}
           </div>
 
-          <Card className="border-[#EDEBE8] bg-[#F5F3F0] hover:shadow-lg transition-shadow">
-            <CardContent className="pt-10 pb-8">
-              <div className="grid md:grid-cols-2 gap-8 items-start">
-                <div className="text-center md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                    <div className="bg-[#CDA7B2]/10 w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0">
-                      <FileText className="h-10 w-10 text-[#CDA7B2]" />
-                    </div>
-                    <h3 className="text-2xl font-serif font-light text-[#3B3937] whitespace-pre-line">
-                      {"Production Resources\n& Notion Templates"}
-                    </h3>
-                  </div>
-                  <p className="text-[#6B655C] leading-relaxed font-light mb-6">
-                    Ready-to-use Notion templates designed specifically for fashion production. Collection planners to map your creative vision, costing sheets to protect your margins, supplier trackers to manage relationships, and production calendars to keep everything on schedule. Discover the tools that can transform your workflow.
-                  </p>
-                  <Link href="/products">
-                    <Button
-                      variant="outline"
-                      className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white"
-                    >
-                      Browse Resources
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
-                <div className="flex justify-center">
-                  <div className="aspect-square w-full max-w-xs rounded-xl overflow-hidden shadow-lg relative">
-                    <Image
-                      src="/images/ai-systems.png"
-                      alt="Fashion production Notion templates"
-                      fill
-                      className="object-cover"
-                      quality={95}
-                    />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
@@ -210,28 +245,28 @@ export default async function HomePage() {
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
-            Ready to bring clarity to<br />your fashion business?
+            Let's Make Production<br />Feel Manageable
           </h2>
           <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
-            Take the quiz to discover your designer archetype, or explore<br />our production resources and membership.
+            You don't have to figure this out alone. Whether you need a quick consultation<br />or ongoing support, I'm here to help you move forward with confidence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/quiz/about">
+            <Link href="/services">
               <Button
                 size="lg"
                 className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group w-full sm:w-auto"
               >
-                Take the Quiz
+                Work With Me
                 <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link href="/studio-systems">
+            <Link href="/quiz/about">
               <Button
                 size="lg"
                 variant="outline"
                 className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
               >
-                Join Studio Systems
+                Take the Quiz
               </Button>
             </Link>
           </div>
