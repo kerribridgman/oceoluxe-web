@@ -196,13 +196,11 @@ Funnel remains: Blog (SEO) → Quiz (email capture) → Products (free value) �
 **Created:** `app/faq/page.tsx`
 
 ### Day 19: Navigation & Footer Updates
-- [ ] Update marketing header navigation:
-  - Home, About, Services, Resources, Blog, Studio Systems
-- [ ] Update footer with:
-  - Updated tagline
-  - Resource links
-  - Social links (Instagram, LinkedIn, Pinterest)
-- [ ] Ensure mobile navigation works
+- [x] Header navigation already solid (About, Studio Systems, Shop dropdown, Blog)
+- [x] Footer updated with:
+  - FAQ link added to Quick Links
+  - Social links: Instagram, LinkedIn, Pinterest
+- [x] Mobile navigation works
 
 **Files:** `components/marketing/marketing-header.tsx`, `components/marketing/marketing-footer.tsx`
 
