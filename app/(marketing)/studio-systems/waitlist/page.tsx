@@ -6,41 +6,36 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
-  Target,
   Sparkles,
-  CheckCircle,
-  Clock,
   Heart,
   ArrowLeft,
   Loader2,
   Check,
+  Video,
+  LayoutGrid,
+  Users,
 } from 'lucide-react';
 
 const experiences = [
   {
-    icon: Target,
-    title: 'Follow a proven flow',
-    description: 'that takes your ideas from vision to production so you stop guessing and start seeing your designs come to life.',
+    icon: Video,
+    title: 'Twice-Monthly Live Q&A Calls',
+    description: 'Direct access to real-time support so you can pressure-test decisions, get unstuck fast, and move your production forward with accuracy instead of second-guessing.',
   },
   {
-    icon: Sparkles,
-    title: 'Streamline communication with suppliers',
-    description: 'using done-for-you templates so you stop stressing about being ignored and start building reliable partnerships.',
+    icon: LayoutGrid,
+    title: 'A Complete Notion System for Your Brand',
+    description: 'Instant access to done-for-you Notion templates covering production, distribution, marketing, sales, and launches... so you\'re not building systems from scratch or keeping everything in your head.',
   },
   {
-    icon: CheckCircle,
-    title: 'Master your pricing + timelines',
-    description: 'so you stop overspending and start protecting your margins like a pro.',
-  },
-  {
-    icon: Clock,
-    title: 'Save hours every week',
-    description: 'with ready-to-go systems so you stop wasting energy on chaos and start creating with clarity.',
+    icon: Users,
+    title: 'A Private Designer Community',
+    description: 'Ask questions, share wins, and get perspective from designers navigating the same stage of business. Think: supplier insider information, real-time feedback, and people who get it.',
   },
   {
     icon: Heart,
-    title: 'Feel supported instead of scattered',
-    description: 'with a community that gets it, because building a fashion brand shouldn\'t feel so isolating.',
+    title: 'Leadership, Mindset & Somatic Support',
+    description: 'Regulated leaders build sustainable brands... Enjoy practical tools to help you stay grounded and decisive, including yoga flows, body scans, and nervous-system regulation practices designed for creative founders managing real pressure.',
   },
 ];
 
@@ -99,12 +94,14 @@ export default function WaitlistPage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-bold text-[#3B3937] mb-6 leading-tight">
-              The Production + Operations Membership for Fashion Designers
+              Join the waitlist for the industry-essential fashion design membership that finally turns sketches into production.
             </h1>
 
+            <p className="text-sm font-semibold text-[#CDA7B2] uppercase tracking-wide mb-2">
+              For Waitlist Registrants Only…
+            </p>
             <p className="text-lg text-gray-600 mb-10">
-              Stop spinning your wheels and start building a brand that actually works.
-              Join the waitlist to be the first to know when we open doors.
+              <strong>Lock in a 50% monthly discount</strong> and get the membership for less than what I typically charge for just five minutes of my 1:1 time.
             </p>
 
             {/* What You'll Get */}
