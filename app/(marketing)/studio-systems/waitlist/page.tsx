@@ -153,8 +153,7 @@ export default function WaitlistPage() {
                     Join the Waitlist
                   </h2>
                   <p className="text-gray-600 mb-6">
-                    Be the first to know when Studio Systems opens its doors.
-                    Early birds get special founding member pricing.
+                    If you're serious about building a fashion brand (not just designing collections), Studio Systems was built for you.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
