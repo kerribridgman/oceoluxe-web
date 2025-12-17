@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, X, Layers, Zap, Heart, ArrowRight } from 'lucide-react';
+import { Check, X, Layers, Zap, Heart, ArrowRight, Video, LayoutGrid, Users } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
@@ -223,8 +223,88 @@ export default async function StudioSystemsPage() {
         </div>
       </section>
 
-      {/* Luxury Pricing Section */}
+      {/* What's Inside Section */}
       <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6">
+              <span className="text-[#CDA7B2] font-medium text-sm tracking-wide">What's Inside</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
+              Inside Studio Systems, You'll Get:
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Live Q&A Calls */}
+            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
+                  <Video className="w-7 h-7 text-[#CDA7B2]" />
+                </div>
+                <h3 className="text-2xl font-serif font-light text-[#3B3937]">Twice-Monthly Live Q&A Calls</h3>
+              </div>
+              <p className="text-[#6B655C] font-light leading-relaxed">
+                Direct access to real-time support so you can pressure-test decisions, get unstuck fast, and move your production forward with accuracy instead of second-guessing.
+              </p>
+            </div>
+
+            {/* Notion System */}
+            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
+                  <LayoutGrid className="w-7 h-7 text-[#CDA7B2]" />
+                </div>
+                <h3 className="text-2xl font-serif font-light text-[#3B3937]">A Complete Notion System</h3>
+              </div>
+              <p className="text-[#6B655C] font-light leading-relaxed">
+                Instant access to done-for-you Notion templates covering production, distribution, marketing, sales, and launches... so you're not building systems from scratch or keeping everything in your head.
+              </p>
+            </div>
+
+            {/* Private Community */}
+            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
+                  <Users className="w-7 h-7 text-[#CDA7B2]" />
+                </div>
+                <h3 className="text-2xl font-serif font-light text-[#3B3937]">A Private Designer Community</h3>
+              </div>
+              <p className="text-[#6B655C] font-light leading-relaxed">
+                Ask questions, share wins, and get perspective from designers navigating the same stage of business. Think: supplier insider information, real-time feedback, and people who get it.
+              </p>
+            </div>
+
+            {/* Somatic Support */}
+            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
+                  <Heart className="w-7 h-7 text-[#CDA7B2]" />
+                </div>
+                <h3 className="text-2xl font-serif font-light text-[#3B3937]">Leadership & Somatic Support</h3>
+              </div>
+              <p className="text-[#6B655C] font-light leading-relaxed">
+                Regulated leaders build sustainable brands... Enjoy practical tools to help you stay grounded and decisive, including yoga flows, body scans, and nervous-system regulation practices designed for creative founders managing real pressure.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/studio-systems/waitlist">
+              <Button
+                size="lg"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group"
+              >
+                Join the Waitlist
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Luxury Pricing Section */}
+      <section className="py-24 bg-[#faf8f5]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
             A Luxury-Level Membership<br />for the Price of Coffee & Croissant
