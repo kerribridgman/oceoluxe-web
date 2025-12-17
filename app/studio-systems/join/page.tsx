@@ -65,11 +65,11 @@ export default function StudioSystemsJoinPage() {
                 Sign In
               </Button>
             </Link>
-            <Link href="/studio-systems/join#pricing">
+            <Link href="/studio-systems/waitlist">
               <Button
                 className="bg-[#3B3937] hover:bg-[#3B3937]/90 text-white font-light px-6"
               >
-                Join Now
+                Join Waitlist
               </Button>
             </Link>
           </div>
@@ -91,12 +91,12 @@ export default function StudioSystemsJoinPage() {
                   Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
                 </p>
               </div>
-              <Link href="/studio-systems/join#pricing">
+              <Link href="/studio-systems/waitlist">
                 <Button
                   size="lg"
                   className="bg-[#3B3937] hover:bg-[#3B3937]/90 text-white h-14 px-10 text-lg font-light group"
                 >
-                  Join Now for $33/month
+                  Join the Waitlist
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -237,12 +237,12 @@ export default function StudioSystemsJoinPage() {
             <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
             <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding Member Pricing: $33/month for the first 20 members</p>
           </div>
-          <Link href="/sign-up?plan=studio-systems">
+          <Link href="/studio-systems/waitlist">
             <Button
               size="lg"
               className="bg-[#3B3937] hover:bg-[#3B3937]/90 text-white h-16 px-12 text-xl font-light mt-8"
             >
-              Yes, I'm In - Join Now
+              Join the Waitlist
             </Button>
           </Link>
           <p className="text-sm text-[#967F71] mt-6 font-light">
@@ -284,12 +284,12 @@ export default function StudioSystemsJoinPage() {
             Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
             monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
           </p>
-          <Link href="/sign-up?plan=studio-systems">
+          <Link href="/studio-systems/waitlist">
             <Button
               size="lg"
               className="bg-[#CDA7B2] hover:bg-[#CDA7B2]/90 text-white h-16 px-12 text-xl font-light group"
             >
-              Join as Founding Member
+              Join the Waitlist
               <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>

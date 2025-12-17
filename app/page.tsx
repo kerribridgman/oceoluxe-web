@@ -121,19 +121,19 @@ export default async function HomePage() {
               <ul className="text-white/80 font-light space-y-3">
                 <li className="flex items-start gap-3">
                   <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
-                  <span>Monthly Studio Sessions and community calls</span>
+                  <span>Twice-monthly live Q&A calls for real-time support</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
-                  <span>Full course library on production and operations</span>
+                  <span>Complete Notion system for production, marketing & launches</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
-                  <span>Notion templates, calendars, and costing tools</span>
+                  <span>Private designer community with insider supplier info</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
-                  <span>A supportive community of fellow fashion founders</span>
+                  <span>Leadership, mindset & somatic support for creative founders</span>
                 </li>
               </ul>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">

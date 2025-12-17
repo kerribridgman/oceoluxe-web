@@ -64,11 +64,10 @@ export default async function ServicesPage() {
                 <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What's Included</h3>
                 <ul className="space-y-4">
                   {[
-                    'Monthly Studio Sessions and community calls',
-                    'Full course library on production and operations',
-                    'Notion templates, calendars, and costing tools',
-                    'Factory communication scripts and templates',
-                    'A supportive community of fellow fashion founders'
+                    'Twice-monthly live Q&A calls for real-time support',
+                    'Complete Notion system for production, marketing & launches',
+                    'Private designer community with insider supplier info',
+                    'Leadership, mindset & somatic support for creative founders'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
