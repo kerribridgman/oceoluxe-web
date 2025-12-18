@@ -9,7 +9,6 @@ import {
   Target,
   Sparkles,
   CheckCircle,
-  Clock,
   Heart,
   ArrowRight,
   LogOut,
@@ -22,28 +21,23 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const experiences = [
   {
     icon: Target,
-    title: 'Follow a proven flow',
-    description: 'that takes your ideas from vision to production so you stop guessing and start seeing your designs come to life.',
+    title: 'Twice-Monthly Live Q&A Calls',
+    description: 'Direct access to real-time support so you can pressure-test decisions, get unstuck fast, and move your production forward with accuracy.',
   },
   {
     icon: Sparkles,
-    title: 'Streamline communication with suppliers',
-    description: 'using done-for-you templates so you stop stressing about being ignored and start building reliable partnerships.',
+    title: 'A Complete Notion System',
+    description: 'Done-for-you Notion templates covering production, distribution, marketing, sales, and launches—so you\'re not building from scratch.',
   },
   {
     icon: CheckCircle,
-    title: 'Master your pricing + timelines',
-    description: 'so you stop overspending and start protecting your margins like a pro.',
-  },
-  {
-    icon: Clock,
-    title: 'Save hours every week',
-    description: 'with ready-to-go systems so you stop wasting energy on chaos and start creating with clarity.',
+    title: 'A Private Designer Community',
+    description: 'Ask questions, share wins, and get perspective from designers navigating the same stage. Think: supplier insider info and real-time feedback.',
   },
   {
     icon: Heart,
-    title: 'Feel supported instead of scattered',
-    description: 'with a community that gets it, because building a fashion brand shouldn\'t feel so isolating.',
+    title: 'Leadership & Somatic Support',
+    description: 'Practical tools to help you stay grounded and decisive, including yoga flows, body scans, and nervous-system practices for creative founders.',
   },
 ];
 
@@ -60,9 +54,9 @@ const plans = [
   },
   {
     name: 'Yearly',
-    price: 330,
+    price: 297,
     interval: 'year',
-    description: 'Save over 15%',
+    description: 'Save over 25%',
     priceId: 'price_yearly',
     planKey: 'yearly',
     popular: true,
@@ -276,8 +270,8 @@ export default function SubscribePage() {
             What You'll Experience Inside Oceo Luxe
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {experiences.slice(0, 4).map((exp) => (
+          <div className="grid md:grid-cols-2 gap-6">
+            {experiences.map((exp) => (
               <div
                 key={exp.title}
                 className="bg-[#F5F0EB] rounded-xl p-8 border border-gray-100"
@@ -289,17 +283,6 @@ export default function SubscribePage() {
                 <p className="text-gray-600 leading-relaxed">{exp.description}</p>
               </div>
             ))}
-          </div>
-
-          {/* Centered 5th card */}
-          <div className="max-w-lg mx-auto">
-            <div className="bg-[#F5F0EB] rounded-xl p-8 border border-gray-100 text-center">
-              <div className="w-12 h-12 rounded-full bg-[#CDA7B2]/15 flex items-center justify-center mb-5 mx-auto">
-                <Heart className="w-6 h-6 text-[#CDA7B2]" />
-              </div>
-              <h3 className="font-semibold text-[#3B3937] text-lg mb-2">{experiences[4].title}</h3>
-              <p className="text-gray-600 leading-relaxed">{experiences[4].description}</p>
-            </div>
           </div>
         </div>
       </div>
