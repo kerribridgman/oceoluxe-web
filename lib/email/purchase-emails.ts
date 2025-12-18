@@ -380,7 +380,7 @@ export async function sendFoundingMemberWelcomeEmail(member: StudioMemberInfo) {
                           <a href="https://instagram.com/oceoluxe" style="display: inline-block; background-color: #3B3937; color: white; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 13px;">Instagram</a>
                         </td>
                         <td style="padding: 0 8px;">
-                          <a href="https://tiktok.com/@oceoluxe" style="display: inline-block; background-color: #3B3937; color: white; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 13px;">TikTok</a>
+                          <a href="https://www.tiktok.com/@kerribridgman?lang=en" style="display: inline-block; background-color: #3B3937; color: white; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 13px;">TikTok</a>
                         </td>
                         <td style="padding: 0 8px;">
                           <a href="https://pinterest.com/oceoluxe" style="display: inline-block; background-color: #3B3937; color: white; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 13px;">Pinterest</a>
