@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/drizzle';
-import { leads, users, educationSubscriptions, userProfiles } from '@/lib/db/schema';
+import { leads, users, educationSubscriptions, userProfiles, enrollments, lessonProgress, userProgress } from '@/lib/db/schema';
 import { eq, desc, and, sql, gte } from 'drizzle-orm';
+import { getUser } from '@/lib/db/queries';
 
 export async function GET(request: NextRequest) {
   try {
@@ -182,6 +183,58 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching CRM data:', error);
     return NextResponse.json(
       { error: 'Failed to fetch CRM data' },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE /api/crm - Delete a member/student
+export async function DELETE(request: NextRequest) {
+  try {
+    const currentUser = await getUser();
+    if (!currentUser) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const userId = searchParams.get('userId');
+    const deleteUser = searchParams.get('deleteUser') === 'true';
+
+    if (!userId) {
+      return NextResponse.json({ error: 'userId is required' }, { status: 400 });
+    }
+
+    const userIdNum = parseInt(userId, 10);
+    if (isNaN(userIdNum)) {
+      return NextResponse.json({ error: 'Invalid userId' }, { status: 400 });
+    }
+
+    // Delete related records in order (to avoid foreign key constraints)
+    // 1. Delete lesson progress
+    await db.delete(lessonProgress).where(eq(lessonProgress.userId, userIdNum));
+
+    // 2. Delete user progress
+    await db.delete(userProgress).where(eq(userProgress.userId, userIdNum));
+
+    // 3. Delete enrollments
+    await db.delete(enrollments).where(eq(enrollments.userId, userIdNum));
+
+    // 4. Delete user profile
+    await db.delete(userProfiles).where(eq(userProfiles.userId, userIdNum));
+
+    // 5. Delete education subscription
+    await db.delete(educationSubscriptions).where(eq(educationSubscriptions.userId, userIdNum));
+
+    // 6. Optionally delete the user record itself
+    if (deleteUser) {
+      await db.delete(users).where(eq(users.id, userIdNum));
+    }
+
+    return NextResponse.json({ success: true, message: 'Member deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting member:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete member' },
       { status: 500 }
     );
   }

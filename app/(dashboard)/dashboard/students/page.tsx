@@ -13,6 +13,8 @@ import {
   Download,
   CreditCard,
   Star,
+  Trash2,
+  Loader2,
 } from 'lucide-react';
 import { format } from 'date-fns';
 
@@ -64,6 +66,7 @@ export default function StudentsPage() {
   const [paidMembers, setPaidMembers] = useState<PaidMember[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'members' | 'enrollments' | 'leaderboard'>('members');
+  const [deletingId, setDeletingId] = useState<number | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -141,6 +144,33 @@ export default function StudentsPage() {
         {status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' ')}
       </span>
     );
+  }
+
+  async function handleDeleteMember(userId: number) {
+    if (!confirm('Are you sure you want to delete this member? This will also delete their subscription, progress, and enrollments.')) {
+      return;
+    }
+
+    setDeletingId(userId);
+    try {
+      const res = await fetch(`/api/crm?userId=${userId}&deleteUser=true`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        setPaidMembers(paidMembers.filter((m) => m.id !== userId));
+        setEnrollments(enrollments.filter((e) => e.userId !== userId));
+        setLeaderboard(leaderboard.filter((l) => l.userId !== userId));
+      } else {
+        const data = await res.json();
+        alert(`Failed to delete member: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error deleting member:', error);
+      alert('Failed to delete member. Please try again.');
+    } finally {
+      setDeletingId(null);
+    }
   }
 
   function exportMembersToCSV() {
@@ -337,6 +367,9 @@ export default function StudentsPage() {
                       <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">
                         Points
                       </th>
+                      <th className="text-right py-3 px-4 text-sm font-medium text-gray-500">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -378,6 +411,20 @@ export default function StudentsPage() {
                             <Star className="w-3 h-3 text-yellow-500" />
                             {member.points || 0}
                           </span>
+                        </td>
+                        <td className="py-3 px-4 text-right">
+                          <button
+                            onClick={() => handleDeleteMember(member.id)}
+                            disabled={deletingId === member.id}
+                            className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors disabled:opacity-50"
+                            title="Delete member"
+                          >
+                            {deletingId === member.id ? (
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                            ) : (
+                              <Trash2 className="w-4 h-4" />
+                            )}
+                          </button>
                         </td>
                       </tr>
                     ))}
