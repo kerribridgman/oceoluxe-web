@@ -15,8 +15,48 @@ import {
   Star,
   Trash2,
   Loader2,
+  X,
+  Calendar,
+  Zap,
 } from 'lucide-react';
 import { format } from 'date-fns';
+
+interface MemberDetails {
+  user: {
+    id: number;
+    name: string | null;
+    email: string;
+    createdAt: string;
+  };
+  subscription: {
+    id: number;
+    tier: string;
+    status: string;
+    stripeSubscriptionId: string | null;
+    currentPeriodStart: string | null;
+    currentPeriodEnd: string | null;
+    cancelAtPeriodEnd: boolean;
+    createdAt: string;
+  } | null;
+  profile: {
+    points: number;
+    streak: number;
+    lastActivityAt: string | null;
+  } | null;
+  enrollments: Array<{
+    id: number;
+    enrolledAt: string;
+    completedAt: string | null;
+    progressPercent: number | null;
+    courseTitle: string | null;
+  }>;
+  pointsHistory: Array<{
+    id: number;
+    amount: number;
+    reason: string;
+    createdAt: string;
+  }>;
+}
 
 interface Enrollment {
   id: number;
@@ -67,6 +107,9 @@ export default function StudentsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'members' | 'enrollments' | 'leaderboard'>('members');
   const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [selectedMember, setSelectedMember] = useState<PaidMember | null>(null);
+  const [memberDetails, setMemberDetails] = useState<MemberDetails | null>(null);
+  const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -171,6 +214,42 @@ export default function StudentsPage() {
     } finally {
       setDeletingId(null);
     }
+  }
+
+  async function handleMemberClick(member: PaidMember) {
+    setSelectedMember(member);
+    setIsLoadingDetails(true);
+    setMemberDetails(null);
+
+    try {
+      const res = await fetch(`/api/crm/member/${member.id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setMemberDetails(data);
+      }
+    } catch (error) {
+      console.error('Error fetching member details:', error);
+    } finally {
+      setIsLoadingDetails(false);
+    }
+  }
+
+  function closeModal() {
+    setSelectedMember(null);
+    setMemberDetails(null);
+  }
+
+  function getPointsReasonLabel(reason: string): string {
+    const labels: Record<string, string> = {
+      lesson_complete: 'Completed lesson',
+      course_complete: 'Completed course',
+      post_created: 'Created a post',
+      comment_created: 'Added a comment',
+      achievement_earned: 'Achievement earned',
+      signup_bonus: 'Signup bonus',
+      daily_login: 'Daily login',
+    };
+    return labels[reason] || reason.replace(/_/g, ' ');
   }
 
   function exportMembersToCSV() {
@@ -376,11 +455,12 @@ export default function StudentsPage() {
                     {paidMembers.map((member) => (
                       <tr
                         key={member.id}
-                        className="border-b border-gray-100 hover:bg-gray-50"
+                        className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer"
+                        onClick={() => handleMemberClick(member)}
                       >
                         <td className="py-3 px-4">
                           <div>
-                            <span className="font-medium text-gray-900">
+                            <span className="font-medium text-gray-900 hover:text-[#CDA7B2]">
                               {member.name || 'Anonymous'}
                             </span>
                             <p className="text-sm text-gray-500">{member.email}</p>
@@ -414,7 +494,10 @@ export default function StudentsPage() {
                         </td>
                         <td className="py-3 px-4 text-right">
                           <button
-                            onClick={() => handleDeleteMember(member.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteMember(member.id);
+                            }}
                             disabled={deletingId === member.id}
                             className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors disabled:opacity-50"
                             title="Delete member"
@@ -574,6 +657,170 @@ export default function StudentsPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Member Detail Modal */}
+      {selectedMember && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-[#CDA7B2]/10 to-transparent">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900">
+                  {selectedMember.name || 'Anonymous'}
+                </h2>
+                <p className="text-sm text-gray-500">{selectedMember.email}</p>
+              </div>
+              <button
+                onClick={closeModal}
+                className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+              {isLoadingDetails ? (
+                <div className="py-12 text-center">
+                  <Loader2 className="w-8 h-8 animate-spin text-[#CDA7B2] mx-auto mb-4" />
+                  <p className="text-gray-500">Loading member details...</p>
+                </div>
+              ) : memberDetails ? (
+                <div className="space-y-6">
+                  {/* Subscription Info */}
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <CreditCard className="w-4 h-4 text-[#CDA7B2]" />
+                      Subscription
+                    </h3>
+                    {memberDetails.subscription ? (
+                      <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-500">Plan</span>
+                          <span className="text-sm font-medium text-gray-900">
+                            {getTierLabel(memberDetails.subscription.tier)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-500">Status</span>
+                          {getStatusBadge(memberDetails.subscription.status, memberDetails.subscription.cancelAtPeriodEnd)}
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-500">Member since</span>
+                          <span className="text-sm text-gray-900">
+                            {format(new Date(memberDetails.subscription.createdAt), 'MMM d, yyyy')}
+                          </span>
+                        </div>
+                        {memberDetails.subscription.currentPeriodEnd && (
+                          <div className="flex justify-between">
+                            <span className="text-sm text-gray-500">
+                              {memberDetails.subscription.cancelAtPeriodEnd ? 'Access until' : 'Renews on'}
+                            </span>
+                            <span className="text-sm text-gray-900">
+                              {format(new Date(memberDetails.subscription.currentPeriodEnd), 'MMM d, yyyy')}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-500">No subscription found</p>
+                    )}
+                  </div>
+
+                  {/* Enrollments */}
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-[#CDA7B2]" />
+                      Course Progress
+                    </h3>
+                    {memberDetails.enrollments.length > 0 ? (
+                      <div className="space-y-3">
+                        {memberDetails.enrollments.map((enrollment) => (
+                          <div key={enrollment.id} className="bg-gray-50 rounded-lg p-4">
+                            <div className="flex justify-between items-start mb-2">
+                              <span className="text-sm font-medium text-gray-900">
+                                {enrollment.courseTitle || 'Unknown Course'}
+                              </span>
+                              {enrollment.completedAt ? (
+                                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">
+                                  Completed
+                                </span>
+                              ) : (
+                                <span className="text-xs text-gray-500">
+                                  {enrollment.progressPercent || 0}%
+                                </span>
+                              )}
+                            </div>
+                            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-[#CDA7B2] rounded-full transition-all"
+                                style={{ width: `${enrollment.progressPercent || 0}%` }}
+                              />
+                            </div>
+                            <p className="text-xs text-gray-500 mt-2">
+                              Enrolled {format(new Date(enrollment.enrolledAt), 'MMM d, yyyy')}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-500 bg-gray-50 rounded-lg p-4">
+                        Not enrolled in any courses yet
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Points History */}
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      Points History
+                      {memberDetails.profile && (
+                        <span className="ml-auto text-sm font-normal text-gray-500">
+                          Total: {memberDetails.profile.points.toLocaleString()} pts
+                        </span>
+                      )}
+                    </h3>
+                    {memberDetails.pointsHistory.length > 0 ? (
+                      <div className="space-y-2 max-h-48 overflow-y-auto">
+                        {memberDetails.pointsHistory.map((transaction) => (
+                          <div
+                            key={transaction.id}
+                            className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg"
+                          >
+                            <div className="flex items-center gap-2">
+                              <Zap className="w-3 h-3 text-yellow-500" />
+                              <span className="text-sm text-gray-700">
+                                {getPointsReasonLabel(transaction.reason)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <span className={`text-sm font-medium ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                {transaction.amount > 0 ? '+' : ''}{transaction.amount}
+                              </span>
+                              <span className="text-xs text-gray-400">
+                                {format(new Date(transaction.createdAt), 'MMM d')}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-500 bg-gray-50 rounded-lg p-4">
+                        No points earned yet
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="py-12 text-center">
+                  <p className="text-gray-500">Failed to load member details</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
