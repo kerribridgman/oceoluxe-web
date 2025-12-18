@@ -297,18 +297,26 @@ export async function sendFoundingMemberWelcomeEmail(member: StudioMemberInfo) {
         <tr>
           <td align="center">
             <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 16px; overflow: hidden;">
-              <!-- Header -->
+              <!-- Hero Image -->
               <tr>
-                <td style="background: linear-gradient(135deg, #3B3937 0%, #5a5654 100%); padding: 40px; text-align: center;">
-                  <p style="color: #CDA7B2; font-size: 14px; letter-spacing: 3px; margin: 0 0 12px 0; text-transform: uppercase;">Founding Member</p>
-                  <h1 style="color: #ffffff; font-size: 32px; font-weight: 300; margin: 0;">You're In!</h1>
+                <td>
+                  <img src="https://oceoluxe.com/images/hero-workspace.jpg" alt="Studio Systems by Oceo Luxe" style="width: 100%; height: auto; display: block;" />
+                </td>
+              </tr>
+
+              <!-- Header Badge -->
+              <tr>
+                <td style="padding: 32px 40px 0 40px; text-align: center;">
+                  <span style="display: inline-block; background: linear-gradient(135deg, #CDA7B2 0%, #BD97A2 100%); color: white; font-size: 12px; letter-spacing: 2px; padding: 8px 20px; border-radius: 20px; text-transform: uppercase;">Founding Member</span>
                 </td>
               </tr>
 
               <!-- Content -->
               <tr>
-                <td style="padding: 40px;">
-                  <p style="color: #3B3937; font-size: 20px; line-height: 1.6; margin: 0 0 24px 0;">
+                <td style="padding: 24px 40px 40px 40px;">
+                  <h1 style="color: #3B3937; font-size: 32px; font-weight: 300; margin: 0 0 24px 0; text-align: center;">You're In!</h1>
+
+                  <p style="color: #3B3937; font-size: 18px; line-height: 1.6; margin: 0 0 24px 0;">
                     ${member.name ? `${member.name}, welcome to the founding circle.` : 'Welcome to the founding circle.'}
                   </p>
 
@@ -352,11 +360,29 @@ export async function sendFoundingMemberWelcomeEmail(member: StudioMemberInfo) {
                   <div style="background-color: #FAF8F6; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
                     <p style="color: #3B3937; font-size: 16px; font-weight: 600; margin: 0 0 16px 0;">What happens next:</p>
                     <p style="color: #6B655C; font-size: 15px; line-height: 1.7; margin: 0 0 16px 0;">
-                      We're putting the finishing touches on Studio Systems to make sure it's exactly what you need. When we launch (coming very soon!), you'll receive an email with your login details and full access to everything.
+                      <strong style="color: #3B3937;">Studio Systems opens February 1, 2025.</strong> You'll receive an email with your login details and full access to everything on launch day.
                     </p>
                     <p style="color: #6B655C; font-size: 15px; line-height: 1.7; margin: 0;">
                       Your membership is active and your founding member rate is locked in. You won't be charged again until your next billing cycle.
                     </p>
+                  </div>
+
+                  <!-- Follow Along -->
+                  <div style="text-align: center; margin-bottom: 32px;">
+                    <p style="color: #3B3937; font-size: 16px; font-weight: 600; margin: 0 0 16px 0;">Follow along in the meantime:</p>
+                    <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
+                      <tr>
+                        <td style="padding: 0 8px;">
+                          <a href="https://instagram.com/oceoluxe" style="display: inline-block; background-color: #3B3937; color: white; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 13px;">Instagram</a>
+                        </td>
+                        <td style="padding: 0 8px;">
+                          <a href="https://tiktok.com/@oceoluxe" style="display: inline-block; background-color: #3B3937; color: white; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 13px;">TikTok</a>
+                        </td>
+                        <td style="padding: 0 8px;">
+                          <a href="https://pinterest.com/oceoluxe" style="display: inline-block; background-color: #3B3937; color: white; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 13px;">Pinterest</a>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
 
                   <p style="color: #3B3937; font-size: 16px; line-height: 1.8; margin: 0 0 0 0; text-align: center;">
