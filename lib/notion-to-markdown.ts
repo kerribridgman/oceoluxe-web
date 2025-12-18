@@ -116,12 +116,18 @@ function blockToMarkdown(block: NotionBlock, recordMap: RecordMap, level: number
     case 'bulleted_list':
     case 'numbered_list':
       // Convert all lists to bullet lists for consistency
-      markdown = `- ${getText()}\n`;
+      const listText = getText();
+      if (listText.trim()) {
+        markdown = `- ${listText}\n`;
+      }
       break;
 
     case 'to_do':
-      const checked = properties?.checked?.[0]?.[0] === 'Yes';
-      markdown = `- [${checked ? 'x' : ' '}] ${getText()}\n`;
+      const todoText = getText();
+      if (todoText.trim()) {
+        const checked = properties?.checked?.[0]?.[0] === 'Yes';
+        markdown = `- [${checked ? 'x' : ' '}] ${todoText}\n`;
+      }
       break;
 
     case 'quote':
