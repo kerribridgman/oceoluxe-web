@@ -313,7 +313,7 @@ export default function SubscribePage() {
           </h2>
 
           <p className="text-gray-500 line-through text-lg mb-2 mt-8">
-            Normal Price: $111/month
+            Normal Price: $77/month
           </p>
 
           <div className="mb-2">
