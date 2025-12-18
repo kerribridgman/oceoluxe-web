@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,7 +15,12 @@ import {
   Video,
   LayoutGrid,
   Users,
+  ArrowRight,
+  Lock,
 } from 'lucide-react';
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const experiences = [
   {
@@ -40,13 +46,54 @@ const experiences = [
 ];
 
 export default function WaitlistPage() {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showWaitlistForm, setShowWaitlistForm] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  // Check if user is logged in
+  const { data: user } = useSWR('/api/user', fetcher);
+  const isLoggedIn = !!user && !user.error;
+
+  async function handleCheckout() {
+    setIsCheckingOut(true);
+    setError(null);
+
+    // If not logged in, redirect to join page
+    if (!isLoggedIn) {
+      router.push('/studio-join?plan=monthly&founding=true');
+      return;
+    }
+
+    // If logged in, create checkout session
+    try {
+      const res = await fetch('/api/studio/subscription/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId: 'price_monthly' }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else if (data.error) {
+        console.error('Checkout error:', data.error);
+        setError('Failed to create checkout. Please try again.');
+      }
+    } catch (error) {
+      console.error('Failed to create checkout session:', error);
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsCheckingOut(false);
+    }
+  }
+
+  async function handleWaitlistSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
@@ -88,9 +135,9 @@ export default function WaitlistPage() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left Column - Value Props */}
           <div>
-            <div className="inline-flex items-center gap-2 bg-[#CDA7B2]/10 text-[#CDA7B2] px-3 py-1.5 rounded-full text-sm font-medium mb-6">
-              <Sparkles className="w-4 h-4" />
-              Coming Soon
+            <div className="inline-flex items-center gap-2 bg-[#3B3937] text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <Lock className="w-4 h-4" />
+              Founding Member Access Open
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-bold text-[#3B3937] mb-6 leading-tight">
@@ -98,7 +145,7 @@ export default function WaitlistPage() {
             </h1>
 
             <p className="text-sm font-semibold text-[#CDA7B2] uppercase tracking-wide mb-2">
-              For Waitlist Registrants Only…
+              For Founding Members Only…
             </p>
             <p className="text-lg text-gray-600 mb-10">
               <strong>Lock in a 50% monthly discount</strong> and get the membership for less than what I typically charge for just five minutes of my 1:1 time.
@@ -107,7 +154,7 @@ export default function WaitlistPage() {
             {/* What You'll Get */}
             <div className="space-y-6">
               <h2 className="text-xl font-semibold text-[#3B3937]">
-                Inside Studio Systems, you'll:
+                Inside Studio Systems, you'll get:
               </h2>
 
               {experiences.map((exp, index) => (
@@ -126,7 +173,7 @@ export default function WaitlistPage() {
             </div>
           </div>
 
-          {/* Right Column - Form */}
+          {/* Right Column - Checkout/Form */}
           <div className="lg:sticky lg:top-8">
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
               {isSubmitted ? (
@@ -147,16 +194,23 @@ export default function WaitlistPage() {
                     </Button>
                   </Link>
                 </div>
-              ) : (
+              ) : showWaitlistForm ? (
                 <>
+                  <button
+                    onClick={() => setShowWaitlistForm(false)}
+                    className="text-sm text-gray-500 hover:text-gray-700 mb-4 flex items-center gap-1"
+                  >
+                    <ArrowLeft className="w-3 h-3" />
+                    Back to checkout
+                  </button>
                   <h2 className="text-2xl font-bold text-[#3B3937] mb-2">
                     Join the Waitlist
                   </h2>
                   <p className="text-gray-600 mb-6">
-                    If you're serious about building a fashion brand (not just designing collections), Studio Systems was built for you.
+                    Get notified when we launch. No payment required.
                   </p>
 
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleWaitlistSubmit} className="space-y-4">
                     <div>
                       <Label htmlFor="name" className="text-gray-700">
                         First Name
@@ -194,7 +248,7 @@ export default function WaitlistPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#CDA7B2] hover:bg-[#CDA7B2]/90 text-white py-6 text-lg"
+                      className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white py-6 text-lg"
                     >
                       {isSubmitting ? (
                         <>
@@ -212,15 +266,87 @@ export default function WaitlistPage() {
                     Unsubscribe anytime.
                   </p>
                 </>
+              ) : (
+                <>
+                  {/* Founding Member Checkout */}
+                  <div className="text-center mb-6">
+                    <p className="text-sm font-semibold text-[#CDA7B2] uppercase tracking-wide mb-1">
+                      Founding Member Pricing
+                    </p>
+                    <div className="flex items-baseline justify-center gap-2">
+                      <span className="text-gray-400 line-through text-lg">$77</span>
+                      <span className="text-5xl font-serif text-[#3B3937]">$33</span>
+                      <span className="text-gray-500">/month</span>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-2">
+                      Lock in this rate forever
+                    </p>
+                  </div>
+
+                  <div className="bg-[#FAF8F6] rounded-xl p-4 mb-6">
+                    <p className="text-sm text-[#3B3937] font-medium mb-3">What you're getting:</p>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#CDA7B2] mt-0.5 flex-shrink-0" />
+                        <span>50% founding member discount (locked forever)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#CDA7B2] mt-0.5 flex-shrink-0" />
+                        <span>Full access when we launch (coming very soon)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[#CDA7B2] mt-0.5 flex-shrink-0" />
+                        <span>Cancel anytime, no questions asked</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {error && (
+                    <p className="text-sm text-red-600 mb-4">{error}</p>
+                  )}
+
+                  <Button
+                    onClick={handleCheckout}
+                    disabled={isCheckingOut}
+                    className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2] text-white py-6 text-lg mb-3"
+                  >
+                    {isCheckingOut ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        Lock In My Spot
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </>
+                    )}
+                  </Button>
+
+                  <p className="text-xs text-gray-500 text-center mb-6">
+                    Secure checkout powered by Stripe
+                  </p>
+
+                  <div className="border-t border-gray-100 pt-4">
+                    <button
+                      onClick={() => setShowWaitlistForm(true)}
+                      className="w-full text-sm text-gray-500 hover:text-gray-700"
+                    >
+                      Not ready to commit? <span className="underline">Join the free waitlist instead</span>
+                    </button>
+                  </div>
+                </>
               )}
             </div>
 
             {/* Social Proof */}
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-500">
-                Join the fashion designers already on the waitlist
-              </p>
-            </div>
+            {!isSubmitted && !showWaitlistForm && (
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-500">
+                  Join designers who are building brands with clarity
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

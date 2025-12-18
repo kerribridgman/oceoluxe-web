@@ -10,7 +10,7 @@ import {
 import { getDashboardProductById } from '@/lib/db/queries-dashboard-products';
 import { getNotionProductBySlug } from '@/lib/db/queries-notion-products';
 import { getNotionProductPriceConfig, getNotionProductDeliveryUrl } from '@/lib/config/notion-product-prices';
-import { sendPurchaseConfirmationEmail, sendSubscriptionWelcomeEmail, sendStudioWelcomeEmail, sendAdminNewMemberNotification } from '@/lib/email/purchase-emails';
+import { sendPurchaseConfirmationEmail, sendSubscriptionWelcomeEmail, sendStudioWelcomeEmail, sendAdminNewMemberNotification, sendFoundingMemberWelcomeEmail } from '@/lib/email/purchase-emails';
 import { db } from '@/lib/db/drizzle';
 import { educationSubscriptions, users } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
@@ -338,19 +338,37 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
 
   if (user) {
     const amountCents = subscriptionData.items.data[0]?.price?.unit_amount || 0;
+    const isStudioLaunched = process.env.NEXT_PUBLIC_STUDIO_LAUNCHED === 'true';
 
-    // Send welcome email to new member
-    const welcomeResult = await sendStudioWelcomeEmail({
-      email: user.email,
-      name: user.name,
-      tier,
-      amountCents,
-    });
+    // Send appropriate welcome email based on launch status
+    if (isStudioLaunched) {
+      // Studio is live - send regular welcome email
+      const welcomeResult = await sendStudioWelcomeEmail({
+        email: user.email,
+        name: user.name,
+        tier,
+        amountCents,
+      });
 
-    if (welcomeResult.success) {
-      console.log('Studio welcome email sent to:', user.email);
+      if (welcomeResult.success) {
+        console.log('Studio welcome email sent to:', user.email);
+      } else {
+        console.error('Failed to send studio welcome email:', welcomeResult.error);
+      }
     } else {
-      console.error('Failed to send studio welcome email:', welcomeResult.error);
+      // Pre-launch - send founding member email
+      const foundingResult = await sendFoundingMemberWelcomeEmail({
+        email: user.email,
+        name: user.name,
+        tier,
+        amountCents,
+      });
+
+      if (foundingResult.success) {
+        console.log('Founding member email sent to:', user.email);
+      } else {
+        console.error('Failed to send founding member email:', foundingResult.error);
+      }
     }
 
     // Send admin notification

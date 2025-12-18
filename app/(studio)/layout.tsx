@@ -267,8 +267,11 @@ export default function StudioLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Pages that don't require subscription
-  const publicPages = ['/studio/subscribe'];
+  const publicPages = ['/studio/subscribe', '/studio/coming-soon'];
   const isPublicPage = publicPages.includes(pathname);
+
+  // Check if studio is launched (set STUDIO_LAUNCHED=true in env when ready)
+  const isStudioLaunched = process.env.NEXT_PUBLIC_STUDIO_LAUNCHED === 'true';
 
   useEffect(() => {
     // If API returns unauthorized and NOT on a public page, redirect to sign-in
@@ -288,6 +291,18 @@ export default function StudioLayout({
       router.push('/studio/subscribe');
     }
   }, [subscription, isPublicPage, subscriptionLoading, router]);
+
+  useEffect(() => {
+    // If studio not launched yet, redirect active subscribers to coming-soon page
+    if (
+      !isStudioLaunched &&
+      subscription?.isActive &&
+      pathname !== '/studio/coming-soon' &&
+      !subscriptionLoading
+    ) {
+      router.push('/studio/coming-soon');
+    }
+  }, [isStudioLaunched, subscription, pathname, subscriptionLoading, router]);
 
   // For public pages, render immediately without auth check
   if (isPublicPage) {
@@ -325,6 +340,11 @@ export default function StudioLayout({
 
   // If no subscription, show nothing (redirect will happen)
   if (!subscription?.isActive) {
+    return null;
+  }
+
+  // If studio not launched, show nothing (redirect to coming-soon will happen)
+  if (!isStudioLaunched && pathname !== '/studio/coming-soon') {
     return null;
   }
 

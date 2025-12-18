@@ -277,6 +277,125 @@ export async function sendAdminNewMemberNotification(member: StudioMemberInfo) {
 }
 
 // ============================================
+// Founding Member Emails (Pre-Launch)
+// ============================================
+
+/**
+ * Send welcome email to founding members who paid during pre-launch
+ * Different from regular welcome - they can't access content yet
+ */
+export async function sendFoundingMemberWelcomeEmail(member: StudioMemberInfo) {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #FAF8F6; font-family: Georgia, 'Times New Roman', serif;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #FAF8F6; padding: 40px 20px;">
+        <tr>
+          <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 16px; overflow: hidden;">
+              <!-- Header -->
+              <tr>
+                <td style="background: linear-gradient(135deg, #3B3937 0%, #5a5654 100%); padding: 40px; text-align: center;">
+                  <p style="color: #CDA7B2; font-size: 14px; letter-spacing: 3px; margin: 0 0 12px 0; text-transform: uppercase;">Founding Member</p>
+                  <h1 style="color: #ffffff; font-size: 32px; font-weight: 300; margin: 0;">You're In!</h1>
+                </td>
+              </tr>
+
+              <!-- Content -->
+              <tr>
+                <td style="padding: 40px;">
+                  <p style="color: #3B3937; font-size: 20px; line-height: 1.6; margin: 0 0 24px 0;">
+                    ${member.name ? `${member.name}, welcome to the founding circle.` : 'Welcome to the founding circle.'}
+                  </p>
+
+                  <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 24px 0;">
+                    You just locked in your <strong style="color: #CDA7B2;">50% founding member discount</strong> for Studio Systems. This rate ($33/month) is yours for life, no matter what we charge in the future.
+                  </p>
+
+                  <!-- What You Locked In Box -->
+                  <div style="background: linear-gradient(135deg, #CDA7B2 0%, #BD97A2 100%); border-radius: 12px; padding: 24px; margin-bottom: 32px; color: white;">
+                    <p style="font-size: 14px; letter-spacing: 2px; margin: 0 0 12px 0; text-transform: uppercase; opacity: 0.9;">Your Founding Member Benefits</p>
+                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 15px;">
+                          <span style="margin-right: 10px;">✓</span> Lifetime rate of $33/month (50% off)
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 15px;">
+                          <span style="margin-right: 10px;">✓</span> Twice-monthly live Q&A calls
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 15px;">
+                          <span style="margin-right: 10px;">✓</span> Complete Notion system for your brand
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 15px;">
+                          <span style="margin-right: 10px;">✓</span> Private designer community access
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 8px 0; font-size: 15px;">
+                          <span style="margin-right: 10px;">✓</span> Leadership & somatic support resources
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <!-- What Happens Next -->
+                  <div style="background-color: #FAF8F6; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+                    <p style="color: #3B3937; font-size: 16px; font-weight: 600; margin: 0 0 16px 0;">What happens next:</p>
+                    <p style="color: #6B655C; font-size: 15px; line-height: 1.7; margin: 0 0 16px 0;">
+                      We're putting the finishing touches on Studio Systems to make sure it's exactly what you need. When we launch (coming very soon!), you'll receive an email with your login details and full access to everything.
+                    </p>
+                    <p style="color: #6B655C; font-size: 15px; line-height: 1.7; margin: 0;">
+                      Your membership is active and your founding member rate is locked in. You won't be charged again until your next billing cycle.
+                    </p>
+                  </div>
+
+                  <p style="color: #3B3937; font-size: 16px; line-height: 1.8; margin: 0 0 0 0; text-align: center;">
+                    Thank you for believing in this vision. I can't wait to support you on this journey.
+                  </p>
+
+                  <p style="color: #967F71; font-size: 14px; text-align: center; margin: 24px 0 0 0; font-style: italic;">
+                    Questions? Just reply to this email.
+                  </p>
+                </td>
+              </tr>
+
+              <!-- Footer -->
+              <tr>
+                <td style="background-color: #3B3937; padding: 24px; text-align: center;">
+                  <p style="color: #ffffff; font-size: 14px; margin: 0 0 8px 0;">
+                    With gratitude,<br/>Kerri & The Oceo Luxe Team
+                  </p>
+                  <p style="color: #ffffff; font-size: 12px; margin: 0; opacity: 0.7;">
+                    &copy; ${new Date().getFullYear()} Oceo Luxe. All rights reserved.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: member.email,
+    subject: "You're a Founding Member! Your spot is secured.",
+    html,
+  });
+}
+
+// ============================================
 // Waitlist Emails
 // ============================================
 
