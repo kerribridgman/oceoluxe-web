@@ -60,9 +60,9 @@ const plans = [
   },
   {
     name: 'Yearly',
-    price: 297,
+    price: 330,
     interval: 'year',
-    description: 'Save over 25%',
+    description: 'Save over 15%',
     priceId: 'price_yearly',
     planKey: 'yearly',
     popular: true,
