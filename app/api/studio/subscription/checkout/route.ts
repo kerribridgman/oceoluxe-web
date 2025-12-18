@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
       customer_email: user.email,
       client_reference_id: user.id.toString(),
       mode: 'subscription',
+      allow_promotion_codes: true,
       line_items: [
         {
           price: actualPriceId,
