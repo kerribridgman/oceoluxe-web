@@ -576,17 +576,31 @@ export type NewPurchase = typeof purchases.$inferInsert;
 export type PurchaseItem = typeof purchaseItems.$inferSelect;
 export type NewPurchaseItem = typeof purchaseItems.$inferInsert;
 
+// Lead Status Options
+export const leadStatusEnum = ['lead', 'membership', 'one_on_one', 'lost'] as const;
+export type LeadStatus = typeof leadStatusEnum[number];
+
 // Leads - Capture name/email for free product downloads
 export const leads = pgTable('leads', {
   id: serial('id').primaryKey(),
   email: varchar('email', { length: 255 }).notNull(),
   name: varchar('name', { length: 255 }),
+  instagramHandle: varchar('instagram_handle', { length: 100 }),
   productSlug: varchar('product_slug', { length: 500 }).notNull(), // Which free product they claimed
   productName: varchar('product_name', { length: 500 }).notNull(),
   source: varchar('source', { length: 50 }).default('free_product'), // 'free_product', 'newsletter', etc.
+  status: varchar('status', { length: 20 }).notNull().default('lead'), // 'lead', 'membership', 'one_on_one', 'lost'
+  addedBy: integer('added_by').references(() => users.id), // Who added this lead (null for automated/form submissions)
   deliveryEmailSentAt: timestamp('delivery_email_sent_at'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
 });
+
+export const leadsRelations = relations(leads, ({ one }) => ({
+  addedByUser: one(users, {
+    fields: [leads.addedBy],
+    references: [users.id],
+  }),
+}));
 
 export type Lead = typeof leads.$inferSelect;
 export type NewLead = typeof leads.$inferInsert;
@@ -599,6 +613,7 @@ export const quizLeads = pgTable('quiz_leads', {
   archetype: varchar('archetype', { length: 50 }).notNull(), // 'muse', 'world', 'intimate', 'editor', 'populist'
   scores: jsonb('scores'), // Full scores breakdown for analysis
   source: varchar('source', { length: 100 }).default('quiz'), // Track which quiz version
+  status: varchar('status', { length: 20 }).notNull().default('lead'), // 'lead', 'membership', 'one_on_one', 'lost'
   convertedToMember: boolean('converted_to_member').default(false),
   emailSequenceStarted: boolean('email_sequence_started').default(false),
   createdAt: timestamp('created_at').notNull().defaultNow(),
@@ -606,6 +621,74 @@ export const quizLeads = pgTable('quiz_leads', {
 
 export type QuizLead = typeof quizLeads.$inferSelect;
 export type NewQuizLead = typeof quizLeads.$inferInsert;
+
+// Lead Notes - Timestamped notes history for CRM functionality
+export const leadNotes = pgTable('lead_notes', {
+  id: serial('id').primaryKey(),
+  leadId: integer('lead_id'), // Reference to leads table (nullable for flexibility)
+  quizLeadId: integer('quiz_lead_id'), // Reference to quiz_leads table (nullable)
+  authorId: integer('author_id')
+    .notNull()
+    .references(() => users.id),
+  content: text('content').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const leadNotesRelations = relations(leadNotes, ({ one }) => ({
+  lead: one(leads, {
+    fields: [leadNotes.leadId],
+    references: [leads.id],
+  }),
+  quizLead: one(quizLeads, {
+    fields: [leadNotes.quizLeadId],
+    references: [quizLeads.id],
+  }),
+  author: one(users, {
+    fields: [leadNotes.authorId],
+    references: [users.id],
+  }),
+}));
+
+export type LeadNote = typeof leadNotes.$inferSelect;
+export type NewLeadNote = typeof leadNotes.$inferInsert;
+
+// =============================================
+// AIRTABLE INTEGRATION
+// =============================================
+
+export const airtableConfigs = pgTable('airtable_configs', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  name: varchar('name', { length: 255 }).notNull(), // Friendly name (e.g., "Lead Tracking Base")
+  apiKey: text('api_key').notNull(), // Personal Access Token
+  baseId: varchar('base_id', { length: 100 }).notNull(), // e.g., "appXXXXXXXXXXXXXX"
+  tableId: varchar('table_id', { length: 100 }).notNull(), // e.g., "tblXXXXXXXXXXXXXX" or table name
+  // Field mappings (Airtable field name -> our field)
+  fieldMappings: jsonb('field_mappings').notNull().default('{}'), // e.g., {"Email": "email", "Name": "name", "Status": "status"}
+  syncDirection: varchar('sync_direction', { length: 20 }).notNull().default('import'), // 'import', 'export', 'bidirectional'
+  autoSync: boolean('auto_sync').notNull().default(false),
+  syncFrequency: varchar('sync_frequency', { length: 20 }).default('manual'), // 'manual', 'hourly', 'daily'
+  lastSyncAt: timestamp('last_sync_at'),
+  lastSyncStatus: varchar('last_sync_status', { length: 20 }), // 'success', 'error', 'partial'
+  lastSyncError: text('last_sync_error'),
+  lastSyncCount: integer('last_sync_count'), // Number of records synced
+  isActive: boolean('is_active').notNull().default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const airtableConfigsRelations = relations(airtableConfigs, ({ one }) => ({
+  user: one(users, {
+    fields: [airtableConfigs.userId],
+    references: [users.id],
+  }),
+}));
+
+export type AirtableConfig = typeof airtableConfigs.$inferSelect;
+export type NewAirtableConfig = typeof airtableConfigs.$inferInsert;
 
 // =============================================
 // EDUCATION PLATFORM TABLES (Studio Systems)
