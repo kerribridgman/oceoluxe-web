@@ -325,36 +325,40 @@ export async function sendFoundingMemberWelcomeEmail(member: StudioMemberInfo) {
                   </p>
 
                   <!-- What You Locked In Box -->
-                  <div style="background: linear-gradient(135deg, #CDA7B2 0%, #BD97A2 100%); border-radius: 12px; padding: 24px; margin-bottom: 32px; color: white;">
-                    <p style="font-size: 14px; letter-spacing: 2px; margin: 0 0 12px 0; text-transform: uppercase; opacity: 0.9;">Your Founding Member Benefits</p>
-                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
-                      <tr>
-                        <td style="padding: 8px 0; font-size: 15px;">
-                          <span style="margin-right: 10px;">✓</span> Lifetime rate of $33/month (50% off)
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; font-size: 15px;">
-                          <span style="margin-right: 10px;">✓</span> Twice-monthly live Q&A calls
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; font-size: 15px;">
-                          <span style="margin-right: 10px;">✓</span> Complete Notion system for your brand
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; font-size: 15px;">
-                          <span style="margin-right: 10px;">✓</span> Private designer community access
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 8px 0; font-size: 15px;">
-                          <span style="margin-right: 10px;">✓</span> Leadership & somatic support resources
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
+                  <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 32px;">
+                    <tr>
+                      <td style="background-color: #CDA7B2; border-radius: 12px; padding: 24px; color: white;">
+                        <p style="font-size: 14px; letter-spacing: 2px; margin: 0 0 12px 0; text-transform: uppercase; opacity: 0.9;">Your Founding Member Benefits</p>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                          <tr>
+                            <td style="padding: 8px 0; font-size: 15px; color: white;">
+                              ✓ Lifetime rate of $33/month (50% off)
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; font-size: 15px; color: white;">
+                              ✓ Twice-monthly live Q&A calls
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; font-size: 15px; color: white;">
+                              ✓ Complete Notion system for your brand
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; font-size: 15px; color: white;">
+                              ✓ Private designer community access
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 8px 0; font-size: 15px; color: white;">
+                              ✓ Leadership & somatic support resources
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
 
                   <!-- What Happens Next -->
                   <div style="background-color: #FAF8F6; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
