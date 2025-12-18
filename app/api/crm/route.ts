@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/drizzle';
-import { leads, users, educationSubscriptions, userProfiles, enrollments, lessonProgress, userProgress } from '@/lib/db/schema';
+import { leads, users, educationSubscriptions, userProfiles, enrollments } from '@/lib/db/schema';
 import { eq, desc, and, sql, gte } from 'drizzle-orm';
 import { getUser } from '@/lib/db/queries';
 
@@ -210,22 +210,16 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete related records in order (to avoid foreign key constraints)
-    // 1. Delete lesson progress
-    await db.delete(lessonProgress).where(eq(lessonProgress.userId, userIdNum));
-
-    // 2. Delete user progress
-    await db.delete(userProgress).where(eq(userProgress.userId, userIdNum));
-
-    // 3. Delete enrollments
+    // 1. Delete enrollments
     await db.delete(enrollments).where(eq(enrollments.userId, userIdNum));
 
-    // 4. Delete user profile
+    // 2. Delete user profile
     await db.delete(userProfiles).where(eq(userProfiles.userId, userIdNum));
 
-    // 5. Delete education subscription
+    // 3. Delete education subscription
     await db.delete(educationSubscriptions).where(eq(educationSubscriptions.userId, userIdNum));
 
-    // 6. Optionally delete the user record itself
+    // 4. Optionally delete the user record itself
     if (deleteUser) {
       await db.delete(users).where(eq(users.id, userIdNum));
     }
