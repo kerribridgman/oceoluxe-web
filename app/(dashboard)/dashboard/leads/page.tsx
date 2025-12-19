@@ -428,7 +428,7 @@ export default function LeadsPage() {
               </ul>
             </div>
             <Button
-              onClick={() => router.push('/dashboard/settings/integrations')}
+              onClick={() => router.push('/dashboard/integrations')}
               className="w-full bg-[#CDA7B2] hover:bg-[#CDA7B2]/90"
             >
               <Settings className="w-4 h-4 mr-2" />
