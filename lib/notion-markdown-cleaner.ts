@@ -91,19 +91,31 @@ export function cleanNotionMarkdown(content: string): CleanedContent {
   cleaned = cleaned.replace(/([^\n])\s*[✓✔️]\s*/g, '$1\n- ');
   cleaned = cleaned.replace(/^\s*[✓✔️]\s*/gm, '- ');
 
-  // Remove empty list items (markdown style)
+  // Remove empty list items (markdown style - single dash/asterisk with optional whitespace)
   cleaned = cleaned.replace(/^-\s*$/gm, '');
+  cleaned = cleaned.replace(/^\*\s*$/gm, '');
+
+  // Remove nested empty list items (multiple dashes/asterisks like "- - " or "  - - ")
+  cleaned = cleaned.replace(/^\s*[-*]\s+[-*]\s*$/gm, '');
+  cleaned = cleaned.replace(/^\s*[-*]\s*[-*]\s*$/gm, '');
+
+  // Remove lines that are just whitespace + list markers + whitespace
+  cleaned = cleaned.replace(/^\s*[-*]+\s*$/gm, '');
 
   // Remove empty bullet point lines (• or multiple bullets with just spaces)
   // This handles notion-to-md output for column_list and other empty blocks
   cleaned = cleaned.replace(/^[•\s]+$/gm, '');
+  cleaned = cleaned.replace(/^\s*•\s*•\s*$/gm, '');
 
   // Remove lines that are just bullet characters (one or more)
   // Unicode: • (2022), ‣ (2023), ◦ (25E6), ⁃ (2043), ∙ (2219)
-  cleaned = cleaned.replace(/^[\u2022\u2023\u25E6\u2043\u2219]+\s*$/gm, '');
+  cleaned = cleaned.replace(/^[\u2022\u2023\u25E6\u2043\u2219\s]+$/gm, '');
 
-  // Remove duplicate dashes
+  // Remove duplicate dashes at start of line
   cleaned = cleaned.replace(/^-\s*-\s*/gm, '- ');
+
+  // Remove lines that only contain list markers and punctuation
+  cleaned = cleaned.replace(/^[\s\-\*•·]+$/gm, '');
 
   // Clean up excessive newlines
   cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
