@@ -107,7 +107,10 @@ export function generateSlug(title: string): string {
  * @param markdown The markdown content
  * @param maxLength Maximum length of excerpt (default: 200)
  */
-export function extractExcerpt(markdown: string, maxLength: number = 200): string {
+export function extractExcerpt(markdown: string | undefined | null, maxLength: number = 200): string {
+  if (!markdown) {
+    return '';
+  }
   // Remove markdown formatting
   let text = markdown
     .replace(/#+\s/g, '') // Remove headers
