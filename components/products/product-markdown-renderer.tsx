@@ -4,14 +4,10 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useEffect, useMemo, useState } from 'react';
 import Script from 'next/script';
+import { cleanNotionMarkdown, type StripeButton } from '@/lib/notion-markdown-cleaner';
 
 interface ProductMarkdownRendererProps {
   content: string;
-}
-
-interface StripeButton {
-  buyButtonId: string;
-  publishableKey: string;
 }
 
 // Component to render Stripe Buy Button
@@ -96,122 +92,21 @@ function extractTallyFormId(text: string): string | null {
   return match ? match[1] : null;
 }
 
-// Clean content by removing super-embed blocks and raw HTML/script tags
-function cleanContent(content: string): { cleanedContent: string; tallyFormIds: string[]; stripeButtons: StripeButton[] } {
-  const tallyFormIds: string[] = [];
-  const stripeButtons: StripeButton[] = [];
+// Extended cleaning for product pages (adds bold formatting for intro phrases)
+function cleanProductContent(content: string) {
+  const { content: baseClean, tallyFormIds, stripeButtons } = cleanNotionMarkdown(content);
 
-  // Find all Tally form IDs in the content
-  const tallyMatches = content.matchAll(/tally\.so\/(?:embed|r)\/([a-zA-Z0-9]+)/g);
-  for (const match of tallyMatches) {
-    if (match[1] && !tallyFormIds.includes(match[1])) {
-      tallyFormIds.push(match[1]);
-    }
-  }
-
-  // Find all Stripe buy buttons in the content
-  // Match pattern: <stripe-buy-button buy-button-id="..." publishable-key="...">
-  const stripeMatches = content.matchAll(/<stripe-buy-button[\s\S]*?buy-button-id=["']([^"']+)["'][\s\S]*?publishable-key=["']([^"']+)["'][\s\S]*?(?:\/>|<\/stripe-buy-button>)/gi);
-  for (const match of stripeMatches) {
-    if (match[1] && match[2]) {
-      const exists = stripeButtons.some(b => b.buyButtonId === match[1]);
-      if (!exists) {
-        stripeButtons.push({
-          buyButtonId: match[1],
-          publishableKey: match[2]
-        });
-      }
-    }
-  }
-
-  // Also try alternate attribute order
-  const stripeMatchesAlt = content.matchAll(/<stripe-buy-button[\s\S]*?publishable-key=["']([^"']+)["'][\s\S]*?buy-button-id=["']([^"']+)["'][\s\S]*?(?:\/>|<\/stripe-buy-button>)/gi);
-  for (const match of stripeMatchesAlt) {
-    if (match[1] && match[2]) {
-      const exists = stripeButtons.some(b => b.buyButtonId === match[2]);
-      if (!exists) {
-        stripeButtons.push({
-          buyButtonId: match[2],
-          publishableKey: match[1]
-        });
-      }
-    }
-  }
-
-  let cleaned = content;
-
-  // Remove code blocks that contain embed code (super-embed, stripe, tally, etc.)
-  // These are wrapped in ```javascript or ``` backticks
-  cleaned = cleaned.replace(/```(?:javascript|js|html)?\s*\n?super-embed:[\s\S]*?```/gi, '');
-  cleaned = cleaned.replace(/```(?:javascript|js|html)?\s*\n?[\s\S]*?<stripe-buy-button[\s\S]*?```/gi, '');
-  cleaned = cleaned.replace(/```(?:javascript|js|html)?\s*\n?[\s\S]*?tally\.so[\s\S]*?```/gi, '');
-
-  // Remove "super-embed:" lines and everything after them that looks like embed code
-  // This handles the Notion super-embed format
-  cleaned = cleaned.replace(/super-embed:\s*\n?<iframe[\s\S]*?<\/iframe>\s*\n?<script[\s\S]*?<\/script>/gi, '');
-  cleaned = cleaned.replace(/super-embed:\s*\n?<iframe[\s\S]*?<\/iframe>/gi, '');
-  cleaned = cleaned.replace(/super-embed:\s*/gi, '');
-
-  // Remove raw iframe tags
-  cleaned = cleaned.replace(/<iframe[\s\S]*?<\/iframe>/gi, '');
-
-  // Remove raw script tags
-  cleaned = cleaned.replace(/<script[\s\S]*?<\/script>/gi, '');
-
-  // Remove Stripe buy button tags
-  cleaned = cleaned.replace(/<stripe-buy-button[\s\S]*?(?:\/>|<\/stripe-buy-button>)/gi, '');
-
-  // Remove any remaining tally embed URLs that might be floating around
-  cleaned = cleaned.replace(/https?:\/\/tally\.so\/embed\/[a-zA-Z0-9]+[^\s]*/gi, '');
-
-  // Remove broken image references (images with just filenames, no URLs)
-  // Matches: ![alt](filename.jpg) where there's no http/https
-  cleaned = cleaned.replace(/!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/gi, '');
-
-  // Remove images pointing to Notion's temporary S3 URLs (they expire quickly)
-  // These URLs contain prod-files-secure.s3 and have X-Amz-* query params
-  cleaned = cleaned.replace(/!\[[^\]]*\]\(https?:\/\/prod-files-secure\.s3[^)]+\)/gi, '');
-
-  // Remove standalone image filenames like "IMG_1234.jpeg" on their own line
-  cleaned = cleaned.replace(/^[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)$/gim, '');
-
-  // Remove image filenames that appear anywhere (inline or with surrounding text)
-  // This catches patterns like "IMG_9124.jpeg" that might not be on their own line
-  cleaned = cleaned.replace(/\b[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)\b/gi, '');
+  let cleaned = baseClean;
 
   // Extract "Inside, you'll find:" or similar intro phrases and make them standalone paragraphs with bold formatting
-  // This handles text like "...before production. Inside, you'll find:" splitting it properly
   cleaned = cleaned.replace(/(\.|!|\?)\s*(Inside,?\s+you'?l?l?\s+find:?|What's included:?|Here's what you get:?|You'll get:?|Includes:?)/gi, '$1\n\n**$2**\n');
-  // Also handle when these phrases are already on their own line (not after punctuation)
   cleaned = cleaned.replace(/^(Inside,?\s+you'?l?l?\s+find:?|What's included:?|Here's what you get:?|You'll get:?|Includes:?)$/gim, '**$1**');
-
-  // Convert inline checkmarks (✓ or ✔) into proper list items
-  // Only add newline before checkmark if there's content before it
-  cleaned = cleaned.replace(/([^\n])\s*[✓✔️]\s*/g, '$1\n- ');
-  // Handle checkmarks at the start of content or after newlines
-  cleaned = cleaned.replace(/^\s*[✓✔️]\s*/gm, '- ');
-
-  // Remove empty list items (just "- " with nothing after or only whitespace)
-  cleaned = cleaned.replace(/^-\s*$/gm, '');
-
-  // Remove duplicate dashes that might result from the replacements
-  cleaned = cleaned.replace(/^-\s*-\s*/gm, '- ');
-
-  // Clean up excessive newlines (3+) to double newlines (paragraph break)
-  // Keep double newlines for paragraph separation
-  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
-
-  // Remove trailing whitespace from each line
-  cleaned = cleaned.split('\n').map(line => line.trimEnd()).join('\n');
-
-  // Remove empty lines at the end
-  cleaned = cleaned.replace(/\n+$/g, '');
 
   return { cleanedContent: cleaned.trim(), tallyFormIds, stripeButtons };
 }
 
 export function ProductMarkdownRenderer({ content }: ProductMarkdownRendererProps) {
-  const { cleanedContent, tallyFormIds, stripeButtons } = useMemo(() => cleanContent(content), [content]);
+  const { cleanedContent, tallyFormIds, stripeButtons } = useMemo(() => cleanProductContent(content), [content]);
 
   return (
     <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-light prose-headings:text-[#3B3937] prose-p:text-[#967F71] prose-p:font-light prose-a:text-[#CDA7B2] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#3B3937] prose-li:text-[#967F71]">

@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2, Mail, CheckCircle2, Gift } from 'lucide-react';
+import Link from 'next/link';
 
 interface FreeProductClaimFormProps {
   productSlug: string;
@@ -15,6 +16,8 @@ interface FreeProductClaimFormProps {
 export function FreeProductClaimForm({ productSlug, productName }: FreeProductClaimFormProps) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [marketingConsent, setMarketingConsent] = useState(false);
+  const [privacyConsent, setPrivacyConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,6 +39,7 @@ export function FreeProductClaimForm({ productSlug, productName }: FreeProductCl
           name: name || undefined,
           productSlug,
           productName,
+          marketingConsent,
         }),
       });
 
@@ -117,6 +121,39 @@ export function FreeProductClaimForm({ productSlug, productName }: FreeProductCl
             />
           </div>
 
+          {/* Privacy Consent (Required) */}
+          <div className="space-y-3">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={privacyConsent}
+                onChange={(e) => setPrivacyConsent(e.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded border-[#EDEBE8] text-[#CDA7B2] focus:ring-[#CDA7B2]"
+                required
+              />
+              <span className="text-xs text-[#967F71]">
+                I agree to the{' '}
+                <Link href="/privacy" className="text-[#CDA7B2] hover:underline" target="_blank">
+                  Privacy Policy
+                </Link>
+                . *
+              </span>
+            </label>
+
+            {/* Marketing Opt-in (Optional) */}
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={marketingConsent}
+                onChange={(e) => setMarketingConsent(e.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded border-[#EDEBE8] text-[#CDA7B2] focus:ring-[#CDA7B2]"
+              />
+              <span className="text-xs text-[#967F71]">
+                Yes, send me helpful tips and updates about fashion production. You can unsubscribe anytime.
+              </span>
+            </label>
+          </div>
+
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
@@ -125,8 +162,8 @@ export function FreeProductClaimForm({ productSlug, productName }: FreeProductCl
 
           <Button
             type="submit"
-            disabled={isSubmitting || !email || !name}
-            className="w-full bg-[#CDA7B2] hover:bg-[#c49aa5] text-white h-12 text-base"
+            disabled={isSubmitting || !email || !name || !privacyConsent}
+            className="w-full bg-[#CDA7B2] hover:bg-[#c49aa5] text-white h-12 text-base disabled:opacity-50"
           >
             {isSubmitting ? (
               <>
@@ -142,7 +179,7 @@ export function FreeProductClaimForm({ productSlug, productName }: FreeProductCl
           </Button>
 
           <p className="text-xs text-center text-[#967F71]">
-            We'll email you a link to access your free resource. No spam, ever.
+            We'll email you a link to access your free resource.
           </p>
         </form>
       </CardContent>

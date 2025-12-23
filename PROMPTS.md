@@ -136,13 +136,15 @@ Funnel remains: Blog (SEO) → Quiz (email capture) → Products (free value) �
 ## DAYS 13-16: Blog Content Foundation
 
 ### Day 13: Blog Post - Factory Visit Guide
-- [ ] Write/draft comprehensive factory visit guide
-- [ ] Include:
+- [x] Write/draft comprehensive factory visit guide
+- [x] Include:
   - What to observe (cleanliness, workflow, communication)
   - Questions to ask (contact, timeline, bottlenecks)
   - What to bring (samples, swatches, patterns)
   - Red flags to watch for
-- [ ] Add to blog via admin dashboard
+- [x] Add to blog via admin dashboard
+- [x] Creating Factory Visit resource for Studio Systems membership
+- [ ] **REMINDER:** Use Factory Visit resource as lead magnet (downloadable PDF checklist)
 
 ### Day 14: Blog Post - Fabric Selection Basics
 - [ ] Write/draft fabric selection guide for beginners
@@ -173,10 +175,11 @@ Funnel remains: Blog (SEO) → Quiz (email capture) → Products (free value) �
 ## DAYS 17-20: Lead Magnets & Polish
 
 ### Day 17: Create Factory Visit Prep Checklist Lead Magnet
-- [ ] Create downloadable PDF checklist
+- [ ] Convert Factory Visit resource (from Studio Systems) into downloadable PDF checklist
 - [ ] Set up lead capture form
 - [ ] Connect to email list
-- [ ] Promote via blog post and email sequence
+- [ ] Promote via Factory Visit blog post and email sequence
+- [ ] Add lead magnet CTA to Factory Visit blog post
 
 ### Day 18: Create New Designer FAQ Page
 - [x] Create `/faq` route
@@ -466,6 +469,27 @@ These blog posts naturally lead readers toward Studio Systems membership:
 - [ ] Studio Systems page visits (from quiz vs other sources)
 - [ ] Studio Systems conversion rate
 - [ ] Email sequence click-through rates
+
+---
+
+# BOOKING & CALENDAR INTEGRATION
+
+## Cal.com Setup (Dec 21, 2024)
+- [x] Cal.com account created (username: kerri-bridgman)
+- [x] Event types configured: 15min Quick Chat, 30min Discovery Call
+- [x] Google Calendar connected for conflict checking
+- [x] `/book` page created with custom styled cards
+- [x] Cal.com embed integrated for 30-min Discovery Call
+- [ ] **TOMORROW:** Verify calendar sync is working (Outlook → Google → Cal.com busy times)
+- [ ] If sync not working, investigate Zapier for real-time Outlook → Google sync
+
+## Booking Placement Throughout Site
+- [ ] Add "Book a Call" CTA to Services page
+- [ ] Add booking button to About page final CTA section
+- [ ] Add booking option to Contact page
+- [ ] Consider booking CTA in blog post footers
+- [ ] Add booking link to quiz results (for high-intent archetypes)
+- [ ] Add booking option to Studio Systems page for prospects with questions
 
 ---
 

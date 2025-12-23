@@ -25,6 +25,7 @@ export default function EntrepreneurCircleApplicationPage() {
     willingToInvest: '',
     additionalInfo: '',
   });
+  const [privacyConsent, setPrivacyConsent] = useState(false);
 
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -275,6 +276,30 @@ export default function EntrepreneurCircleApplicationPage() {
                 />
               </div>
 
+              {/* Privacy Consent */}
+              <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={privacyConsent}
+                    onChange={(e) => setPrivacyConsent(e.target.checked)}
+                    className="mt-1 h-4 w-4 rounded border-gray-300 text-[#4a9fd8] focus:ring-[#4a9fd8]"
+                    required
+                  />
+                  <span className="text-sm text-gray-600">
+                    I agree to the{' '}
+                    <Link href="/privacy" className="text-[#4a9fd8] hover:underline" target="_blank">
+                      Privacy Policy
+                    </Link>{' '}
+                    and{' '}
+                    <Link href="/terms" className="text-[#4a9fd8] hover:underline" target="_blank">
+                      Terms of Service
+                    </Link>
+                    . I consent to having my information processed for the purpose of reviewing my application and being contacted about the Entrepreneur Circle. *
+                  </span>
+                </label>
+              </div>
+
               {error && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
                   {error}
@@ -284,8 +309,8 @@ export default function EntrepreneurCircleApplicationPage() {
               <div className="pt-6 border-t border-gray-100">
                 <Button
                   type="submit"
-                  disabled={submitting}
-                  className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg py-6"
+                  disabled={submitting || !privacyConsent}
+                  className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? (
                     <>

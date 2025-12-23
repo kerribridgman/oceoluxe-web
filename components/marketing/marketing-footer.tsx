@@ -108,13 +108,20 @@ export function MarketingFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[#967F71]/10 pt-6 text-center">
-          <p className="text-[#967F71] text-sm font-light mb-2">
-            &copy; {currentYear} Studio Systems by Oceo Luxe. All rights reserved.
-          </p>
-          <p className="text-[#967F71] text-xs font-light">
-            Professional fashion production education platform
-          </p>
+        <div className="border-t border-[#967F71]/10 pt-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-[#967F71] text-sm font-light">
+              &copy; {currentYear} Studio Systems by Oceo Luxe. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy" className="text-[#967F71] hover:text-[#CDA7B2] text-sm font-light transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-[#967F71] hover:text-[#CDA7B2] text-sm font-light transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

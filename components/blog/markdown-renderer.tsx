@@ -4,8 +4,9 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import Script from 'next/script';
+import { cleanNotionMarkdown } from '@/lib/notion-markdown-cleaner';
 
 interface MarkdownRendererProps {
   content: string;
@@ -49,6 +50,11 @@ function extractTallyFormId(code: string): string | null {
 }
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  const { content: cleanedContent, tallyFormIds } = useMemo(
+    () => cleanNotionMarkdown(content),
+    [content]
+  );
+
   return (
     <div className="prose prose-lg max-w-none">
       <ReactMarkdown
@@ -184,8 +190,13 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
           ),
         }}
       >
-        {content}
+        {cleanedContent}
       </ReactMarkdown>
+
+      {/* Render extracted Tally embeds */}
+      {tallyFormIds.map((formId) => (
+        <TallyEmbed key={formId} formId={formId} />
+      ))}
     </div>
   );
 }
