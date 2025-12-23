@@ -88,8 +88,10 @@ export function cleanNotionMarkdown(content: string): CleanedContent {
   cleaned = cleaned.replace(/\b[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)\b/gi, '');
 
   // Convert inline checkmarks into list items
-  cleaned = cleaned.replace(/([^\n])\s*[✓✔️]\s*/g, '$1\n- ');
-  cleaned = cleaned.replace(/^\s*[✓✔️]\s*/gm, '- ');
+  // Note: Use Unicode escapes to avoid accidentally matching variation selectors (U+FE0F)
+  // ✓ = U+2713, ✔ = U+2714, ✔️ = U+2714 + U+FE0F
+  cleaned = cleaned.replace(/([^\n])\s*[\u2713\u2714][\uFE0F]?\s*/g, '$1\n- ');
+  cleaned = cleaned.replace(/^\s*[\u2713\u2714][\uFE0F]?\s*/gm, '- ');
 
   // Remove empty list items (markdown style - single dash/asterisk with optional whitespace)
   cleaned = cleaned.replace(/^-\s*$/gm, '');
