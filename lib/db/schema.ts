@@ -70,6 +70,8 @@ export const invitations = pgTable('invitations', {
     .references(() => users.id),
   invitedAt: timestamp('invited_at').notNull().defaultNow(),
   status: varchar('status', { length: 20 }).notNull().default('pending'),
+  token: varchar('token', { length: 255 }).unique(), // Secure token for invite links
+  expiresAt: timestamp('expires_at'), // Optional expiration
 });
 
 export const blogPosts = pgTable('blog_posts', {
