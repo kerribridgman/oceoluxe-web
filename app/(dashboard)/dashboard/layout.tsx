@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog, Calendar, Key, Briefcase, Users, GraduationCap, BookOpen, MessageSquare, Trophy, FolderOpen } from 'lucide-react';
+import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog, Calendar, Key, Briefcase, Users, GraduationCap, BookOpen, MessageSquare, Trophy, FolderOpen, Mail, UserCheck } from 'lucide-react';
 
 export default function DashboardLayout({
   children
@@ -34,6 +34,13 @@ export default function DashboardLayout({
       ]
     },
     {
+      title: 'CRM',
+      items: [
+        { href: '/dashboard/crm/clients', icon: UserCheck, label: 'Clients' },
+        { href: '/dashboard/crm/email-marketing', icon: Mail, label: 'Email Marketing' },
+      ]
+    },
+    {
       title: 'STUDIO SYSTEMS',
       items: [
         { href: '/dashboard/courses', icon: BookOpen, label: 'Courses' },
@@ -48,6 +55,7 @@ export default function DashboardLayout({
       items: [
         { href: '/dashboard/general', icon: Settings, label: 'General' },
         { href: '/dashboard/security', icon: Shield, label: 'Security' },
+        { href: '/dashboard/settings/team', icon: Users, label: 'Team' },
         { href: '/dashboard/api-keys', icon: Key, label: 'API Keys' },
         { href: '/dashboard/integrations', icon: Plug, label: 'Integrations' },
         { href: '/dashboard/seo', icon: Search, label: 'SEO' },
