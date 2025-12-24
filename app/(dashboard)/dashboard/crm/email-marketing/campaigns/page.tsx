@@ -241,6 +241,35 @@ export default function CampaignsPage() {
     }
   }
 
+  async function handleSend(campaign: Campaign) {
+    if (campaign.status !== 'draft') {
+      alert('Only draft campaigns can be sent');
+      return;
+    }
+
+    if (!confirm(`Are you sure you want to send "${campaign.name}" now? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/email-marketing/campaigns/${campaign.id}/send`, {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Campaign sent successfully! ${data.sent} emails sent, ${data.failed} failed.`);
+        fetchCampaigns();
+      } else {
+        alert(data.error || 'Failed to send campaign');
+      }
+    } catch (error) {
+      console.error('Error sending campaign:', error);
+      alert('Failed to send campaign');
+    }
+  }
+
   function getStatusIcon(status: string) {
     switch (status) {
       case 'draft':
@@ -385,6 +414,15 @@ export default function CampaignsPage() {
                     </Button>
                     {campaign.status === 'draft' && (
                       <>
+                        <Button
+                          size="sm"
+                          onClick={() => handleSend(campaign)}
+                          className="bg-green-500 hover:bg-green-600 text-white"
+                          title="Send Now"
+                        >
+                          <Send className="h-4 w-4 mr-1" />
+                          Send
+                        </Button>
                         <Button
                           variant="ghost"
                           size="sm"
