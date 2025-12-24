@@ -1099,6 +1099,360 @@ export const resourcesRelations = relations(resources, ({ one }) => ({
 export type Resource = typeof resources.$inferSelect;
 export type NewResource = typeof resources.$inferInsert;
 
+// =============================================
+// EMAIL MARKETING SYSTEM
+// =============================================
+
+// Client Status/Package Options
+export const clientPackageEnum = ['monthly', 'annual', 'package_3', 'package_6', 'package_12', 'custom'] as const;
+export type ClientPackage = typeof clientPackageEnum[number];
+
+export const clientStatusEnum = ['active', 'paused', 'completed', 'cancelled'] as const;
+export type ClientStatus = typeof clientStatusEnum[number];
+
+// 1-on-1 Coaching Clients
+export const clients = pgTable('clients', {
+  id: serial('id').primaryKey(),
+  firstName: varchar('first_name', { length: 100 }),
+  lastName: varchar('last_name', { length: 100 }),
+  email: varchar('email', { length: 255 }).notNull(),
+  phone: varchar('phone', { length: 50 }),
+  instagramHandle: varchar('instagram_handle', { length: 100 }),
+  packageType: varchar('package_type', { length: 50 }).notNull().default('monthly'), // monthly, annual, package_3, package_6, package_12, custom
+  status: varchar('status', { length: 20 }).notNull().default('active'), // active, paused, completed, cancelled
+  startDate: timestamp('start_date'),
+  endDate: timestamp('end_date'),
+  sessionsTotal: integer('sessions_total').default(0),
+  sessionsCompleted: integer('sessions_completed').default(0),
+  notes: text('notes'),
+  source: varchar('source', { length: 100 }), // How they found you
+  // Email preferences
+  unsubscribedAt: timestamp('unsubscribed_at'),
+  unsubscribeReason: text('unsubscribe_reason'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Master Email List - combines all contacts from different sources
+export const emailListSourceEnum = ['lead', 'quiz_lead', 'member', 'client', 'manual'] as const;
+export type EmailListSource = typeof emailListSourceEnum[number];
+
+export const emailList = pgTable('email_list', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  firstName: varchar('first_name', { length: 100 }),
+  lastName: varchar('last_name', { length: 100 }),
+  source: varchar('source', { length: 50 }).notNull(), // lead, quiz_lead, member, client, manual
+  sourceId: integer('source_id'), // ID from the source table
+  // Merged data from sources
+  productName: varchar('product_name', { length: 500 }), // From leads
+  archetype: varchar('archetype', { length: 50 }), // From quiz_leads
+  membershipTier: varchar('membership_tier', { length: 50 }), // From educationSubscriptions
+  clientPackage: varchar('client_package', { length: 50 }), // From clients
+  instagramHandle: varchar('instagram_handle', { length: 100 }),
+  // Email preferences (per-list unsubscribe)
+  unsubscribedFromMarketing: boolean('unsubscribed_from_marketing').default(false),
+  unsubscribedFromDrips: boolean('unsubscribed_from_drips').default(false),
+  unsubscribedFromAll: boolean('unsubscribed_from_all').default(false),
+  unsubscribedAt: timestamp('unsubscribed_at'),
+  unsubscribeReason: text('unsubscribe_reason'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Email Templates with attachment support
+export const emailTemplates = pgTable('email_templates', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  description: text('description'),
+  subject: varchar('subject', { length: 255 }).notNull(),
+  body: text('body').notNull(), // HTML content with {{variable}} placeholders
+  // Available variables: firstName, email, productName, archetype, membershipTier, clientPackage, instagramHandle
+  variables: text('variables'), // JSON array of available variables
+  category: varchar('category', { length: 100 }), // welcome, nurture, onboarding, promotional, etc.
+  audienceType: varchar('audience_type', { length: 50 }), // lead, quiz_lead, member, client, all
+  attachments: text('attachments'), // JSON array of {filename, url, type}
+  fromEmail: varchar('from_email', { length: 255 }).default('kerrib@oceoluxe.com'),
+  fromName: varchar('from_name', { length: 255 }).default('Kerri at Oceo Luxe'),
+  isActive: boolean('is_active').default(true),
+  createdBy: integer('created_by').references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Email Campaigns (one-off sends)
+export const campaignStatusEnum = ['draft', 'scheduled', 'sending', 'sent', 'cancelled'] as const;
+export type CampaignStatus = typeof campaignStatusEnum[number];
+
+export const campaigns = pgTable('campaigns', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  subject: varchar('subject', { length: 255 }).notNull(),
+  body: text('body').notNull(),
+  templateId: integer('template_id').references(() => emailTemplates.id),
+  audienceType: varchar('audience_type', { length: 50 }).notNull(), // lead, quiz_lead, member, client, all
+  audienceFilter: text('audience_filter'), // JSON for additional filtering (e.g., archetype, status)
+  attachments: text('attachments'), // JSON array of {filename, url, type}
+  fromEmail: varchar('from_email', { length: 255 }).default('kerrib@oceoluxe.com'),
+  fromName: varchar('from_name', { length: 255 }).default('Kerri at Oceo Luxe'),
+  status: varchar('status', { length: 50 }).notNull().default('draft'),
+  scheduledAt: timestamp('scheduled_at'),
+  sentAt: timestamp('sent_at'),
+  // Stats
+  totalRecipients: integer('total_recipients').default(0),
+  totalSent: integer('total_sent').default(0),
+  totalDelivered: integer('total_delivered').default(0),
+  totalOpened: integer('total_opened').default(0),
+  totalClicked: integer('total_clicked').default(0),
+  totalBounced: integer('total_bounced').default(0),
+  totalUnsubscribed: integer('total_unsubscribed').default(0),
+  createdBy: integer('created_by').references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Campaign Recipients - track who received each campaign
+export const campaignRecipients = pgTable('campaign_recipients', {
+  id: serial('id').primaryKey(),
+  campaignId: integer('campaign_id')
+    .notNull()
+    .references(() => campaigns.id, { onDelete: 'cascade' }),
+  emailListId: integer('email_list_id')
+    .notNull()
+    .references(() => emailList.id),
+  email: varchar('email', { length: 255 }).notNull(),
+  status: varchar('status', { length: 50 }).notNull().default('pending'), // pending, sent, delivered, opened, clicked, bounced, failed
+  sendgridMessageId: varchar('sendgrid_message_id', { length: 255 }),
+  sentAt: timestamp('sent_at'),
+  deliveredAt: timestamp('delivered_at'),
+  openedAt: timestamp('opened_at'),
+  clickedAt: timestamp('clicked_at'),
+  bouncedAt: timestamp('bounced_at'),
+  errorMessage: text('error_message'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+// Drip Campaigns (automated sequences)
+export const dripCampaigns = pgTable('drip_campaigns', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  description: text('description'),
+  triggerType: varchar('trigger_type', { length: 50 }).notNull(), // free_product_download, quiz_completion, member_signup, client_signup
+  triggerFilter: text('trigger_filter'), // JSON for additional filtering (e.g., specific product, archetype)
+  audienceType: varchar('audience_type', { length: 50 }).notNull(), // lead, quiz_lead, member, client
+  isActive: boolean('is_active').default(false),
+  createdBy: integer('created_by').references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Drip Campaign Steps
+export const dripCampaignSteps = pgTable('drip_campaign_steps', {
+  id: serial('id').primaryKey(),
+  dripCampaignId: integer('drip_campaign_id')
+    .notNull()
+    .references(() => dripCampaigns.id, { onDelete: 'cascade' }),
+  templateId: integer('template_id')
+    .notNull()
+    .references(() => emailTemplates.id),
+  stepOrder: integer('step_order').notNull(), // 1, 2, 3, etc.
+  delayDays: integer('delay_days').notNull().default(0),
+  delayHours: integer('delay_hours').notNull().default(0),
+  sendTime: varchar('send_time', { length: 5 }), // Specific time like "09:00" (24hr format)
+  isActive: boolean('is_active').default(true),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+// Drip Enrollments - track who's enrolled in which drip
+export const dripEnrollments = pgTable('drip_enrollments', {
+  id: serial('id').primaryKey(),
+  emailListId: integer('email_list_id')
+    .notNull()
+    .references(() => emailList.id),
+  dripCampaignId: integer('drip_campaign_id')
+    .notNull()
+    .references(() => dripCampaigns.id),
+  currentStep: integer('current_step').notNull().default(0),
+  status: varchar('status', { length: 50 }).notNull().default('active'), // active, completed, paused, cancelled
+  enrolledAt: timestamp('enrolled_at').notNull().defaultNow(),
+  nextSendAt: timestamp('next_send_at'),
+  completedAt: timestamp('completed_at'),
+  pausedAt: timestamp('paused_at'),
+  cancelledAt: timestamp('cancelled_at'),
+});
+
+// Email Send History - individual email tracking
+export const emailSends = pgTable('email_sends', {
+  id: serial('id').primaryKey(),
+  emailListId: integer('email_list_id').references(() => emailList.id),
+  campaignId: integer('campaign_id').references(() => campaigns.id),
+  dripCampaignId: integer('drip_campaign_id').references(() => dripCampaigns.id),
+  dripStepId: integer('drip_step_id').references(() => dripCampaignSteps.id),
+  templateId: integer('template_id').references(() => emailTemplates.id),
+  toEmail: varchar('to_email', { length: 255 }).notNull(),
+  subject: varchar('subject', { length: 255 }).notNull(),
+  fromEmail: varchar('from_email', { length: 255 }).notNull(),
+  status: varchar('status', { length: 50 }).notNull().default('sent'),
+  sendgridMessageId: varchar('sendgrid_message_id', { length: 255 }),
+  sentAt: timestamp('sent_at').notNull().defaultNow(),
+  deliveredAt: timestamp('delivered_at'),
+  openedAt: timestamp('opened_at'),
+  clickedAt: timestamp('clicked_at'),
+  bouncedAt: timestamp('bounced_at'),
+  unsubscribedAt: timestamp('unsubscribed_at'),
+  errorMessage: text('error_message'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+// Unsubscribe Tokens - for secure unsubscribe links
+export const unsubscribeTokens = pgTable('unsubscribe_tokens', {
+  id: serial('id').primaryKey(),
+  emailListId: integer('email_list_id')
+    .notNull()
+    .references(() => emailList.id),
+  token: varchar('token', { length: 255 }).notNull().unique(),
+  listType: varchar('list_type', { length: 50 }), // marketing, drips, all - which list to unsubscribe from
+  usedAt: timestamp('used_at'),
+  expiresAt: timestamp('expires_at'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+// =============================================
+// EMAIL MARKETING RELATIONS
+// =============================================
+
+export const clientsRelations = relations(clients, ({ many }) => ({
+  emailSends: many(emailSends),
+}));
+
+export const emailListRelations = relations(emailList, ({ many }) => ({
+  campaignRecipients: many(campaignRecipients),
+  dripEnrollments: many(dripEnrollments),
+  emailSends: many(emailSends),
+  unsubscribeTokens: many(unsubscribeTokens),
+}));
+
+export const emailTemplatesRelations = relations(emailTemplates, ({ one, many }) => ({
+  createdBy: one(users, {
+    fields: [emailTemplates.createdBy],
+    references: [users.id],
+  }),
+  dripSteps: many(dripCampaignSteps),
+  emailSends: many(emailSends),
+}));
+
+export const campaignsRelations = relations(campaigns, ({ one, many }) => ({
+  template: one(emailTemplates, {
+    fields: [campaigns.templateId],
+    references: [emailTemplates.id],
+  }),
+  createdBy: one(users, {
+    fields: [campaigns.createdBy],
+    references: [users.id],
+  }),
+  recipients: many(campaignRecipients),
+  emailSends: many(emailSends),
+}));
+
+export const campaignRecipientsRelations = relations(campaignRecipients, ({ one }) => ({
+  campaign: one(campaigns, {
+    fields: [campaignRecipients.campaignId],
+    references: [campaigns.id],
+  }),
+  emailListEntry: one(emailList, {
+    fields: [campaignRecipients.emailListId],
+    references: [emailList.id],
+  }),
+}));
+
+export const dripCampaignsRelations = relations(dripCampaigns, ({ one, many }) => ({
+  createdBy: one(users, {
+    fields: [dripCampaigns.createdBy],
+    references: [users.id],
+  }),
+  steps: many(dripCampaignSteps),
+  enrollments: many(dripEnrollments),
+  emailSends: many(emailSends),
+}));
+
+export const dripCampaignStepsRelations = relations(dripCampaignSteps, ({ one }) => ({
+  dripCampaign: one(dripCampaigns, {
+    fields: [dripCampaignSteps.dripCampaignId],
+    references: [dripCampaigns.id],
+  }),
+  template: one(emailTemplates, {
+    fields: [dripCampaignSteps.templateId],
+    references: [emailTemplates.id],
+  }),
+}));
+
+export const dripEnrollmentsRelations = relations(dripEnrollments, ({ one }) => ({
+  emailListEntry: one(emailList, {
+    fields: [dripEnrollments.emailListId],
+    references: [emailList.id],
+  }),
+  dripCampaign: one(dripCampaigns, {
+    fields: [dripEnrollments.dripCampaignId],
+    references: [dripCampaigns.id],
+  }),
+}));
+
+export const emailSendsRelations = relations(emailSends, ({ one }) => ({
+  emailListEntry: one(emailList, {
+    fields: [emailSends.emailListId],
+    references: [emailList.id],
+  }),
+  campaign: one(campaigns, {
+    fields: [emailSends.campaignId],
+    references: [campaigns.id],
+  }),
+  dripCampaign: one(dripCampaigns, {
+    fields: [emailSends.dripCampaignId],
+    references: [dripCampaigns.id],
+  }),
+  dripStep: one(dripCampaignSteps, {
+    fields: [emailSends.dripStepId],
+    references: [dripCampaignSteps.id],
+  }),
+  template: one(emailTemplates, {
+    fields: [emailSends.templateId],
+    references: [emailTemplates.id],
+  }),
+}));
+
+export const unsubscribeTokensRelations = relations(unsubscribeTokens, ({ one }) => ({
+  emailListEntry: one(emailList, {
+    fields: [unsubscribeTokens.emailListId],
+    references: [emailList.id],
+  }),
+}));
+
+// =============================================
+// EMAIL MARKETING TYPE EXPORTS
+// =============================================
+
+export type Client = typeof clients.$inferSelect;
+export type NewClient = typeof clients.$inferInsert;
+export type EmailListEntry = typeof emailList.$inferSelect;
+export type NewEmailListEntry = typeof emailList.$inferInsert;
+export type EmailTemplate = typeof emailTemplates.$inferSelect;
+export type NewEmailTemplate = typeof emailTemplates.$inferInsert;
+export type Campaign = typeof campaigns.$inferSelect;
+export type NewCampaign = typeof campaigns.$inferInsert;
+export type CampaignRecipient = typeof campaignRecipients.$inferSelect;
+export type NewCampaignRecipient = typeof campaignRecipients.$inferInsert;
+export type DripCampaign = typeof dripCampaigns.$inferSelect;
+export type NewDripCampaign = typeof dripCampaigns.$inferInsert;
+export type DripCampaignStep = typeof dripCampaignSteps.$inferSelect;
+export type NewDripCampaignStep = typeof dripCampaignSteps.$inferInsert;
+export type DripEnrollment = typeof dripEnrollments.$inferSelect;
+export type NewDripEnrollment = typeof dripEnrollments.$inferInsert;
+export type EmailSend = typeof emailSends.$inferSelect;
+export type NewEmailSend = typeof emailSends.$inferInsert;
+export type UnsubscribeToken = typeof unsubscribeTokens.$inferSelect;
+export type NewUnsubscribeToken = typeof unsubscribeTokens.$inferInsert;
+
 export enum ActivityType {
   SIGN_UP = 'SIGN_UP',
   SIGN_IN = 'SIGN_IN',
