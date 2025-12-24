@@ -167,6 +167,10 @@ export default function CampaignsPage() {
   }
 
   function handleTemplateSelect(templateId: string) {
+    if (templateId === 'none') {
+      setForm({ ...form, templateId: '' });
+      return;
+    }
     const template = templates.find((t) => t.id.toString() === templateId);
     if (template) {
       setForm({
@@ -480,7 +484,7 @@ export default function CampaignsPage() {
                     <SelectValue placeholder="Select template" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">No template</SelectItem>
+                    <SelectItem value="none">No template</SelectItem>
                     {templates.map((template) => (
                       <SelectItem key={template.id} value={template.id.toString()}>
                         {template.name}
