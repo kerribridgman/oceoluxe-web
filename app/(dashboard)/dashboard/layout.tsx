@@ -37,6 +37,7 @@ export default function DashboardLayout({
       title: 'CRM',
       items: [
         { href: '/dashboard/crm/clients', icon: UserCheck, label: 'Clients' },
+        { href: '/dashboard/crm/members', icon: Users, label: 'Members' },
         { href: '/dashboard/crm/email-marketing', icon: Mail, label: 'Email Marketing' },
       ]
     },
