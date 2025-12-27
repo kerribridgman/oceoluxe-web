@@ -1135,6 +1135,29 @@ export const clients = pgTable('clients', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+// Members - Studio Systems membership subscribers
+export const members = pgTable('members', {
+  id: serial('id').primaryKey(),
+  firstName: varchar('first_name', { length: 255 }),
+  lastName: varchar('last_name', { length: 255 }),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  phone: varchar('phone', { length: 50 }),
+  instagramHandle: varchar('instagram_handle', { length: 255 }),
+  membershipTier: varchar('membership_tier', { length: 50 }).notNull().default('monthly'), // monthly, annual, lifetime, trial
+  status: varchar('status', { length: 20 }).notNull().default('active'), // active, paused, cancelled, past_due, trialing
+  startDate: timestamp('start_date'),
+  renewalDate: timestamp('renewal_date'),
+  stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),
+  stripeSubscriptionId: varchar('stripe_subscription_id', { length: 255 }),
+  notes: text('notes'),
+  source: varchar('source', { length: 255 }), // How they found you
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export type Member = typeof members.$inferSelect;
+export type NewMember = typeof members.$inferInsert;
+
 // Master Email List - combines all contacts from different sources
 export const emailListSourceEnum = ['lead', 'quiz_lead', 'member', 'client', 'manual'] as const;
 export type EmailListSource = typeof emailListSourceEnum[number];

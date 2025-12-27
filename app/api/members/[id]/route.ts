@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/drizzle';
-import { sql } from 'drizzle-orm';
+import { members } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
 
 export async function GET(
   request: NextRequest,
@@ -14,15 +15,17 @@ export async function GET(
       return NextResponse.json({ error: 'Invalid member ID' }, { status: 400 });
     }
 
-    const result = await db.execute(sql`
-      SELECT * FROM members WHERE id = ${memberId}
-    `) as unknown as { rows: Record<string, unknown>[] };
+    const [member] = await db
+      .select()
+      .from(members)
+      .where(eq(members.id, memberId))
+      .limit(1);
 
-    if (result.rows.length === 0) {
+    if (!member) {
       return NextResponse.json({ error: 'Member not found' }, { status: 404 });
     }
 
-    return NextResponse.json(result.rows[0]);
+    return NextResponse.json(member);
   } catch (error) {
     console.error('Error fetching member:', error);
     return NextResponse.json(
@@ -61,31 +64,32 @@ export async function PUT(
       source,
     } = body;
 
-    const result = await db.execute(sql`
-      UPDATE members SET
-        first_name = ${firstName || null},
-        last_name = ${lastName || null},
-        email = ${email},
-        phone = ${phone || null},
-        instagram_handle = ${instagramHandle || null},
-        membership_tier = ${membershipTier || 'monthly'},
-        status = ${status || 'active'},
-        start_date = ${startDate || null},
-        renewal_date = ${renewalDate || null},
-        stripe_customer_id = ${stripeCustomerId || null},
-        stripe_subscription_id = ${stripeSubscriptionId || null},
-        notes = ${notes || null},
-        source = ${source || null},
-        updated_at = NOW()
-      WHERE id = ${memberId}
-      RETURNING *
-    `) as unknown as { rows: Record<string, unknown>[] };
+    const [updatedMember] = await db
+      .update(members)
+      .set({
+        firstName: firstName || null,
+        lastName: lastName || null,
+        email,
+        phone: phone || null,
+        instagramHandle: instagramHandle || null,
+        membershipTier: membershipTier || 'monthly',
+        status: status || 'active',
+        startDate: startDate ? new Date(startDate) : null,
+        renewalDate: renewalDate ? new Date(renewalDate) : null,
+        stripeCustomerId: stripeCustomerId || null,
+        stripeSubscriptionId: stripeSubscriptionId || null,
+        notes: notes || null,
+        source: source || null,
+        updatedAt: new Date(),
+      })
+      .where(eq(members.id, memberId))
+      .returning();
 
-    if (result.rows.length === 0) {
+    if (!updatedMember) {
       return NextResponse.json({ error: 'Member not found' }, { status: 404 });
     }
 
-    return NextResponse.json(result.rows[0]);
+    return NextResponse.json(updatedMember);
   } catch (error: any) {
     console.error('Error updating member:', error);
     if (error.code === '23505') {
@@ -113,11 +117,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Invalid member ID' }, { status: 400 });
     }
 
-    const result = await db.execute(sql`
-      DELETE FROM members WHERE id = ${memberId} RETURNING id
-    `) as unknown as { rows: Record<string, unknown>[] };
+    const [deletedMember] = await db
+      .delete(members)
+      .where(eq(members.id, memberId))
+      .returning({ id: members.id });
 
-    if (result.rows.length === 0) {
+    if (!deletedMember) {
       return NextResponse.json({ error: 'Member not found' }, { status: 404 });
     }
 
