@@ -170,7 +170,7 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Image */}
             <div className="order-2 lg:order-1">
-              <div className="aspect-[4/5] overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
                   src="/images/ideal-client.png"
                   alt="Creative professional working"
