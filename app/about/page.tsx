@@ -141,7 +141,7 @@ export default async function AboutPage() {
       {/* How I Help Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="space-y-8">
               <h2 className="text-4xl font-serif font-light text-[#3B3937] leading-tight">
                 How I Help
