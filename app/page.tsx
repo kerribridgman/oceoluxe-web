@@ -25,9 +25,12 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="bg-[#faf8f5]">
         <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Content */}
-            <div className="space-y-8">
+            <div className="space-y-8 lg:pt-12">
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium">
+                Production Strategy for Fashion Designers
+              </p>
               <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight">
                 Clarity and structure for designers who want to produce consciously.
               </h1>
