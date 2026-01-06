@@ -373,12 +373,12 @@ These blog posts naturally lead readers toward Studio Systems membership:
   - Hook: Recognize the symptoms of systems gaps
   - CTA: Direct lead-in to Studio Systems
 
-- [ ] "What Happens When You Don't Have a Production Calendar"
+- [x] "What Happens When You Don't Have a Production Calendar" *(Kerri writing - Jan 7, 2026)*
   - Hook: Real scenarios of missed deadlines, rushed decisions
   - CTA: Studio Systems includes production calendars
 
 ### Educational Posts (Build Trust, Show Expertise)
-- [ ] "The Oceo Method Explained: Organize, Optimize, Own It"
+- [x] "The Oceo Method Explained: Organize, Optimize, Own It" *(Kerri writing - Jan 6, 2026)*
   - Hook: The framework behind sustainable production
   - CTA: Learn the full method inside Studio Systems
 

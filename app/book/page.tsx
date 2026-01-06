@@ -1,11 +1,8 @@
-import { getAllEnabledSchedulingLinks } from '@/lib/db/queries-mmfc-scheduling';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calendar, Clock, ExternalLink, MessageCircle, Sparkles } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Calendar, Clock, MessageCircle, Sparkles } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { CalEmbed } from '@/components/cal-booking';
-
-export const dynamic = 'force-dynamic';
 
 // Define your Cal.com meeting types here
 const calMeetingTypes = [
@@ -29,19 +26,9 @@ const calMeetingTypes = [
   },
 ];
 
-export default async function BookPage() {
+export default function BookPage() {
   const calUsername = process.env.NEXT_PUBLIC_CAL_USERNAME;
-
-  // Try to get MMFC scheduling links, but don't fail if DB is unavailable
-  let enabledLinks: Awaited<ReturnType<typeof getAllEnabledSchedulingLinks>> = [];
-  try {
-    enabledLinks = await getAllEnabledSchedulingLinks();
-  } catch (error) {
-    console.error('Failed to fetch MMFC scheduling links:', error);
-  }
-
   const hasCalCom = !!calUsername;
-  const hasMmfcLinks = enabledLinks.length > 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 flex flex-col">
@@ -118,54 +105,8 @@ export default async function BookPage() {
             </div>
           )}
 
-          {/* MMFC Scheduling Links - Secondary option if available */}
-          {hasMmfcLinks && (
-            <>
-              <div className="text-center my-8">
-                <p className="text-gray-500">Additional booking options:</p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                {enabledLinks.map((link) => (
-                  <Card
-                    key={link.id}
-                    className="dashboard-card border-0 hover:shadow-xl transition-all duration-300 hover:scale-105 flex flex-col"
-                  >
-                    <CardHeader>
-                      <CardTitle className="text-xl">{link.title}</CardTitle>
-                      {link.description && (
-                        <CardDescription className="text-base mt-2">
-                          {link.description}
-                        </CardDescription>
-                      )}
-                    </CardHeader>
-                    <CardContent className="flex-1 flex flex-col">
-                      <div className="space-y-4 flex-1">
-                        <div className="flex items-center gap-2 text-gray-600">
-                          <Clock className="w-5 h-5" />
-                          <span className="font-medium">{link.durationMinutes} minutes</span>
-                        </div>
-                      </div>
-                      <a
-                        href={link.bookingUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block mt-4"
-                      >
-                        <button className="w-full bg-brand-primary hover:bg-brand-primary-hover text-white py-3 px-4 rounded-lg text-lg font-medium flex items-center justify-center gap-2">
-                          <Calendar className="w-5 h-5" />
-                          Book This Meeting
-                          <ExternalLink className="w-4 h-4" />
-                        </button>
-                      </a>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </>
-          )}
-
           {/* No booking options available */}
-          {!hasCalCom && !hasMmfcLinks && (
+          {!hasCalCom && (
             <Card className="max-w-md mx-auto">
               <CardContent className="pt-6 text-center">
                 <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
