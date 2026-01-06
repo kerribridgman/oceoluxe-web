@@ -53,13 +53,17 @@ export default async function ProductsPage() {
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
-      {/* Header */}
+      {/* Hero Section */}
       <section className="bg-[#f5f0ea]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <h1 className="text-4xl lg:text-5xl font-serif font-light text-[#3B3937] mb-4">Products & Templates</h1>
-          <p className="text-lg text-[#967F71] max-w-2xl font-light leading-relaxed">
-            Notion templates, digital products, and resources to streamline your fashion business operations
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
+              Products
+            </h1>
+            <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
+              Notion templates, digital products, and resources to streamline your fashion business operations.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -16,11 +16,11 @@ export default async function ServicesPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5]">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <section className="bg-[#f5f0ea]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
-              How I Help
+              Services
             </h1>
             <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
               Factory communication support, production systems, and strategic guidance for designers who want to produce consciously without the overwhelm.

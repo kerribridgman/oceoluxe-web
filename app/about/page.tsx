@@ -36,23 +36,10 @@ export default async function AboutPage() {
 
       {/* Hero Section */}
       <section className="bg-[#f5f0ea]">
-        <div className="max-w-5xl mx-auto px-6 py-12 lg:py-16">
-          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
-            {/* Left: Content */}
-            <div className="flex-1 space-y-6">
-              <h1 className="text-4xl lg:text-5xl font-serif font-light text-[#3B3937] leading-tight">
-                Hi, I'm <span className="text-[#CDA7B2]">Kerri Bridgman</span>
-              </h1>
-              <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                Founder of Oceo Luxe, an operations strategist dedicated to building systems that support creative vision.
-              </p>
-              <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                My mission is simple: help designers and visionaries understand who they are designing for and how to build their business in a way that is sustainable, intentional, and true to their creative vision.
-              </p>
-            </div>
-            {/* Right: Image */}
-            <div className="flex-shrink-0">
-              <div className="aspect-square w-48 lg:w-56 rounded-2xl overflow-hidden shadow-xl relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="text-center">
+            <div className="mb-8">
+              <div className="aspect-square w-40 lg:w-48 rounded-2xl overflow-hidden shadow-xl relative mx-auto">
                 <Image
                   src="/images/kerri-profile.png"
                   alt="Kerri Bridgman"
@@ -63,6 +50,12 @@ export default async function AboutPage() {
                 />
               </div>
             </div>
+            <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
+              About
+            </h1>
+            <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
+              I'm Kerri Bridgman, founder of Oceo Luxe. I help designers and visionaries build their business in a way that is sustainable, intentional, and true to their creative vision.
+            </p>
           </div>
         </div>
       </section>
