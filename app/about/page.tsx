@@ -88,10 +88,10 @@ export default async function AboutPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              You have the talent. You have the vision. But somewhere between the design and the delivery, things get overwhelming.
+              You have the talent. You have the vision. But somewhere between the design and the delivery, things became overwhelming.
             </p>
             <p>
-              Maybe you are drowning in supplier quotes, unsure which manufacturer is right for your brand. Maybe you are second-guessing your pricing because nothing feels quite right. Or maybe you are producing collections the way everyone says you should, but it is draining your creative energy instead of fueling it.
+              Maybe you are drowning in supplier quotes, unsure which manufacturer is right for your brand. Maybe you are second-guessing your pricing because the numbers do not feel quite right. Or maybe you are producing collections the way everyone says you should, but it is draining your creative energy instead of fueling it.
             </p>
             <p>
               I have spent a decade in fashion production and supply chain management. I studied Production Management at FIT and have worked behind the scenes with designers who felt exactly the way you do right now.
