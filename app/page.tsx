@@ -50,7 +50,7 @@ export default async function HomePage() {
                     size="lg"
                     className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
-                    Take the Quiz
+                    Find Your Designer Archetype
                   </Button>
                 </Link>
               </div>
