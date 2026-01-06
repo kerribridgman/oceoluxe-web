@@ -15,7 +15,7 @@ export default async function AboutPage() {
   const coreValues = [
     {
       icon: <Sparkles className="h-8 w-8 text-[#CDA7B2]" />,
-      title: "More Designing, Less Drowning",
+      title: "More Designing,\nLess Drowning",
       description: "The right systems don't constrain your creativity - they protect it. When production runs smoothly, you have the mental space to actually design."
     },
     {
@@ -125,7 +125,7 @@ export default async function AboutPage() {
                   <div className="flex justify-center mb-6">
                     {value.icon}
                   </div>
-                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 text-center">
+                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 text-center whitespace-pre-line">
                     {value.title}
                   </h3>
                   <p className="text-[#967F71] leading-relaxed font-light text-center">
