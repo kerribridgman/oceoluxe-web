@@ -24,10 +24,10 @@ export default async function HomePage() {
 
       {/* Hero Section */}
       <section className="bg-[#faf8f5]">
-        <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Content */}
-            <div className="space-y-8 lg:pt-12">
+            <div className="space-y-6">
               <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium">
                 Production Strategy for Fashion Designers
               </p>
@@ -37,7 +37,7 @@ export default async function HomePage() {
               <p className="text-xl text-[#967F71] font-light leading-relaxed">
                 I help independent fashion designers communicate with factories, build production systems, and scale without the overwhelm.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Link href="/services">
                   <Button
                     size="lg"
@@ -60,7 +60,7 @@ export default async function HomePage() {
             </div>
             {/* Image */}
             <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
                   src="/images/hero-systems.png"
                   alt="Fashion production systems"
