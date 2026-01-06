@@ -41,7 +41,7 @@ export default async function AboutPage() {
             {/* Left: Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-light">
+                <p className="text-[#967F71] text-sm uppercase tracking-widest font-medium">
                   Hi, I'm Kerri
                 </p>
                 <h1 className="text-4xl lg:text-5xl font-serif font-light text-[#3B3937] leading-tight">
