@@ -22,41 +22,52 @@ export default async function HomePage() {
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
-      {/* Hero Section - Editorial, Single Statement */}
+      {/* Hero Section */}
       <section className="bg-[#faf8f5]">
-        <div className="max-w-6xl mx-auto px-6 py-32 lg:py-40">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.2] tracking-tight mb-8">
-              Clarity and structure for designers who want to produce consciously.
-            </h1>
-            <p className="text-xl text-[#967F71] font-light leading-relaxed mb-12 max-w-2xl">
-              I help independent fashion designers communicate with factories, build production systems, and scale without the overwhelm.
-            </p>
-            <Link href="/services">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
-              >
-                Work With Me
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Full Width Image */}
-      <section className="bg-[#faf8f5]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="aspect-[16/9] lg:aspect-[21/9] overflow-hidden relative">
-            <Image
-              src="/images/hero-systems.png"
-              alt="Fashion production systems"
-              fill
-              className="object-cover"
-              quality={95}
-              priority
-            />
+        <div className="max-w-7xl mx-auto px-6 py-20 lg:py-28">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Content */}
+            <div className="space-y-8">
+              <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight">
+                Clarity and structure for designers who want to produce consciously.
+              </h1>
+              <p className="text-xl text-[#967F71] font-light leading-relaxed">
+                I help independent fashion designers communicate with factories, build production systems, and scale without the overwhelm.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/services">
+                  <Button
+                    size="lg"
+                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Work With Me
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/quiz">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Take the Quiz
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            {/* Image */}
+            <div className="relative">
+              <div className="aspect-[4/5] overflow-hidden relative">
+                <Image
+                  src="/images/hero-systems.png"
+                  alt="Fashion production systems"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
