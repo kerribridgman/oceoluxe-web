@@ -44,8 +44,8 @@ export default async function AboutPage() {
                 <p className="text-[#967F71] text-sm uppercase tracking-widest font-medium">
                   Hi, I'm Kerri
                 </p>
-                <h1 className="text-4xl lg:text-5xl font-serif font-light text-[#3B3937] leading-tight">
-                  I spent a decade watching talented designers <span className="italic">drown</span> in production chaos.
+                <h1 className="text-3xl lg:text-4xl font-serif font-light text-[#3B3937] leading-tight">
+                  I spent a decade watching talented designers <span className="italic">get lost</span> in production chaos.
                 </h1>
                 <p className="text-xl text-[#967F71] font-light leading-relaxed">
                   Now I help them build the systems that free their creativity instead of stifling it.
