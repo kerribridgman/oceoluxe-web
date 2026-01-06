@@ -220,24 +220,38 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Final CTA - Quiet */}
-      <section className="py-32 bg-[#faf8f5]">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-6 tracking-tight">
+      {/* Final CTA */}
+      <section className="py-24 bg-[#3B3937]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-light mb-6">
+            Ready to begin?
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-light text-white mb-6 tracking-tight">
             Let's make production feel manageable.
           </h2>
-          <p className="text-lg text-[#967F71] mb-10 font-light">
-            You don't have to figure this out alone.
+          <p className="text-lg text-white/70 mb-10 font-light">
+            You don't have to figure this out alone. Whether you need guidance on factory communication, production systems, or sustainable sourcing — I'm here to help.
           </p>
-          <Link href="/services">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
-            >
-              Work With Me
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/services">
+              <Button
+                size="lg"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
+              >
+                View Services
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/book">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 h-12 px-8 text-base font-normal tracking-wide"
+              >
+                Book a Discovery Call
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
