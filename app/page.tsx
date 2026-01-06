@@ -1,12 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Check, ArrowRight, MessageSquare, Settings, Leaf } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { WhoIHelpSection } from '@/components/marketing/who-i-help-section';
-import { FactoryTruthsSection } from '@/components/marketing/factory-truths-section';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata() {
@@ -15,87 +13,50 @@ export async function generateMetadata() {
 
 export default async function HomePage() {
   const idealClientIndicators = [
-    "Unsure what your factory does and doesn't handle for you",
-    "Overwhelmed by fabric choices and don't know how to narrow them down",
-    "Struggling to keep track of samples, suppliers, and production details",
-    "Confused about what information to send your factory (and in what format)",
-    "Experiencing delays that feel unreasonable but might actually be normal",
-    "Want to produce sustainably but feel paralyzed by perfectionism"
-  ];
-
-  const offerings = [
-    {
-      icon: <MessageSquare className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Factory Communication\nSupport",
-      description: "Learn what to say, how to say it, and when. Get scripts, templates, and guidance for clear factory communication that prevents costly misunderstandings."
-    },
-    {
-      icon: <Settings className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Production Systems\n& Workflows",
-      description: "Build the operational backbone your brand needs: production calendars, sampling trackers, costing sheets, and supplier management systems."
-    },
-    {
-      icon: <Leaf className="h-10 w-10 text-[#CDA7B2]" />,
-      title: "Sustainable Sourcing\nGuidance",
-      description: "Navigate ethical production without the overwhelm. Get clear guidance on materials, suppliers, and building relationships that align with your values."
-    }
+    "Overwhelmed by production decisions",
+    "Unclear on factory communication",
+    "Second-guessing your pricing",
   ];
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
-      {/* Hero Section */}
-      <section className="bg-[#f5f0ea]">
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
-                  Clarity and Structure for Designers Who Want to Produce Consciously<span className="text-[#CDA7B2]"> - Without the Overwhelm</span>
-                </h1>
-                <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  I help you communicate clearly with factories, avoid costly production mistakes, choose the right materials, and build systems that support your growth.
-                </p>
-                <p className="text-lg text-[#3B3937] font-light leading-relaxed">
-                  With a decade of luxury-level production experience and a background in production management from FIT, I guide independent designers through manufacturing with confidence and intention.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/services">
-                  <Button
-                    size="lg"
-                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group w-full sm:w-auto"
-                  >
-                    Work With Me
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <Link href="/quiz">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-14 px-10 text-lg font-light w-full sm:w-auto"
-                  >
-                    Discover Your Archetype
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            {/* Right: Image */}
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
-                <Image
-                  src="/images/hero-systems.png"
-                  alt="Fashion production systems and factory guidance for designers"
-                  fill
-                  className="object-cover"
-                  quality={95}
-                  priority
-                />
-              </div>
-            </div>
+      {/* Hero Section - Editorial, Single Statement */}
+      <section className="bg-[#faf8f5]">
+        <div className="max-w-6xl mx-auto px-6 py-32 lg:py-40">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.2] tracking-tight mb-8">
+              Clarity and structure for designers who want to produce consciously.
+            </h1>
+            <p className="text-xl text-[#967F71] font-light leading-relaxed mb-12 max-w-2xl">
+              I help independent fashion designers communicate with factories, build production systems, and scale without the overwhelm.
+            </p>
+            <Link href="/services">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+              >
+                Work With Me
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Full Width Image */}
+      <section className="bg-[#faf8f5]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="aspect-[16/9] lg:aspect-[21/9] overflow-hidden relative">
+            <Image
+              src="/images/hero-systems.png"
+              alt="Fashion production systems"
+              fill
+              className="object-cover"
+              quality={95}
+              priority
+            />
           </div>
         </div>
       </section>
@@ -103,22 +64,19 @@ export default async function HomePage() {
       {/* Who I Help Section */}
       <WhoIHelpSection />
 
-      {/* What Factories Won't Tell You Section */}
-      <FactoryTruthsSection />
-
       {/* Studio Systems Section */}
-      <section className="py-24 bg-[#3B3937]">
+      <section className="py-32 bg-[#3B3937]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
               <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-light">Ongoing Support</p>
-              <h2 className="text-4xl md:text-5xl font-serif font-light text-white leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-light text-white leading-tight tracking-tight">
                 Studio Systems Membership
               </h2>
               <p className="text-xl text-white/80 font-light leading-relaxed">
                 A membership built for fashion designers who want structure as support. Learn The Oceo Method™ framework to bring clarity to your production process and scale without burning out.
               </p>
-              <ul className="text-white/80 font-light space-y-3">
+              <ul className="text-white/70 font-light space-y-3">
                 <li className="flex items-start gap-3">
                   <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-0.5" />
                   <span>Twice-monthly live Q&A calls for real-time support</span>
@@ -140,17 +98,17 @@ export default async function HomePage() {
                 <Link href="/studio-systems">
                   <Button
                     size="lg"
-                    className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group w-full sm:w-auto"
+                    className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
                     Learn More
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/quiz">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-white/30 text-white hover:bg-white/10 h-14 px-10 text-lg font-light w-full sm:w-auto"
+                    className="border-white/30 text-white hover:bg-white/10 h-12 px-8 text-base font-normal tracking-wide"
                   >
                     Take the Quiz First
                   </Button>
@@ -158,7 +116,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="aspect-square w-full max-w-md rounded-2xl overflow-hidden shadow-2xl relative">
+              <div className="aspect-[4/5] w-full max-w-md overflow-hidden relative">
                 <Image
                   src="/images/hero-workspace.jpg"
                   alt="Studio Systems Membership"
@@ -172,58 +130,47 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* How I Help Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-              How I Help
-            </h2>
-            <p className="text-xl text-[#967F71] max-w-4xl mx-auto leading-relaxed font-light">
+      {/* How I Help Section - Simplified Text Block */}
+      <section className="py-32 bg-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-8 tracking-tight">
+            How I Help
+          </h2>
+          <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
+            <p>
               Whether you're just starting out or already working with a factory, I help you understand how production actually works so you can make better decisions and avoid costly mistakes.
             </p>
+            <p>
+              <span className="text-[#3B3937]">Factory communication support.</span> Learn what to say, how to say it, and when. Get scripts, templates, and guidance for clear communication that prevents costly misunderstandings.
+            </p>
+            <p>
+              <span className="text-[#3B3937]">Production systems & workflows.</span> Build the operational backbone your brand needs: production calendars, sampling trackers, costing sheets, and supplier management.
+            </p>
+            <p>
+              <span className="text-[#3B3937]">Sustainable sourcing guidance.</span> Navigate ethical production without the overwhelm. Get clear guidance on materials, suppliers, and relationships that align with your values.
+            </p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {offerings.map((offering, index) => (
-              <Card key={index} className="border-[#EDEBE8] bg-[#F5F3F0] hover:shadow-lg transition-shadow">
-                <CardContent className="pt-10 pb-8 text-center">
-                  <div className="flex justify-center mb-6 bg-[#CDA7B2]/10 w-16 h-16 rounded-full items-center mx-auto">
-                    {offering.icon}
-                  </div>
-                  <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-4 whitespace-pre-line">
-                    {offering.title}
-                  </h3>
-                  <p className="text-[#6B655C] leading-relaxed font-light">
-                    {offering.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
+          <div className="mt-12">
             <Link href="/book">
               <Button
+                variant="outline"
                 size="lg"
-                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group"
+                className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
               >
                 Book a Discovery Call
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
-
         </div>
       </section>
 
-      {/* Ideal Client Section */}
-      <section className="py-24 bg-[#faf8f5]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Ideal Client Section - Simplified */}
+      <section className="py-32 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Image */}
             <div className="order-2 lg:order-1">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl relative">
+              <div className="aspect-[4/5] overflow-hidden relative">
                 <Image
                   src="/images/ideal-client.png"
                   alt="Creative professional working"
@@ -234,28 +181,26 @@ export default async function HomePage() {
               </div>
             </div>
             {/* Content */}
-            <div className="order-1 lg:order-2 space-y-10">
-              <div>
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-                  You're in the right place if you're experiencing...
-                </h2>
-              </div>
-              <div className="space-y-4">
+            <div className="order-1 lg:order-2">
+              <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-10 tracking-tight">
+                You're in the right place if you're experiencing...
+              </h2>
+              <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 {idealClientIndicators.map((indicator, index) => (
-                  <div key={index} className="flex items-start gap-4 bg-[#F5F3F0] p-5 rounded-lg border border-[#EDEBE8] shadow-sm">
-                    <Check className="h-5 w-5 text-[#CDA7B2] flex-shrink-0 mt-1" />
-                    <span className="text-[#3B3937] font-light leading-relaxed">{indicator}</span>
-                  </div>
+                  <li key={index} className="flex items-start gap-4">
+                    <span className="text-[#CDA7B2] mt-1">—</span>
+                    <span>{indicator}</span>
+                  </li>
                 ))}
-              </div>
-              <div className="mt-8">
+              </ul>
+              <div className="mt-12">
                 <Link href="/book">
                   <Button
+                    variant="outline"
                     size="lg"
-                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
+                    className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
                     Let's Fix This Together
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </div>
@@ -264,35 +209,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
-            Let's Make Production<br />Feel Manageable
+      {/* Final CTA - Quiet */}
+      <section className="py-32 bg-[#faf8f5]">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-6 tracking-tight">
+            Let's make production feel manageable.
           </h2>
-          <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
-            You don't have to figure this out alone. Whether you need a quick consultation<br />or ongoing support, I'm here to help you move forward with confidence.
+          <p className="text-lg text-[#967F71] mb-10 font-light">
+            You don't have to figure this out alone.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/services">
-              <Button
-                size="lg"
-                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group w-full sm:w-auto"
-              >
-                Work With Me
-                <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Link href="/quiz/about">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
-              >
-                Take the Quiz
-              </Button>
-            </Link>
-          </div>
+          <Link href="/services">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+            >
+              Work With Me
+            </Button>
+          </Link>
         </div>
       </section>
 

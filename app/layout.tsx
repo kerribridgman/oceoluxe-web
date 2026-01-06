@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { Raleway } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
 import { Providers } from '@/components/providers';
@@ -14,7 +14,7 @@ export const viewport: Viewport = {
   maximumScale: 1
 };
 
-const raleway = Raleway({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700', '800'] });
+const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
 
 export default async function RootLayout({
   children
@@ -24,7 +24,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${raleway.className}`}
+      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${inter.className}`}
     >
       <body className="min-h-[100dvh] bg-gray-50">
         <SWRConfig

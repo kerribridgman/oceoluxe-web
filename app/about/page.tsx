@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, Sparkles, Target, Heart, Quote } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { FactoryTruthsSection } from '@/components/marketing/factory-truths-section';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata() {
@@ -105,6 +106,9 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Factory Truths Section */}
+      <FactoryTruthsSection />
 
       {/* Core Values */}
       <section className="py-24 bg-[#faf8f5]">
