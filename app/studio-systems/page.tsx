@@ -317,14 +317,25 @@ export default async function StudioSystemsPage() {
             <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
             <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding Member Pricing: $33/month for the first 20 members</p>
           </div>
-          <Link href="/studio-systems/waitlist">
-            <Button
-              size="lg"
-              className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light mt-8"
-            >
-              Join Waitlist Now
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+            <Link href="/studio-systems/waitlist">
+              <Button
+                size="lg"
+                className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
+              >
+                Join Waitlist Now
+              </Button>
+            </Link>
+            <Link href="/book">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
+              >
+                Have Questions? Let's Talk
+              </Button>
+            </Link>
+          </div>
           <p className="text-sm text-[#967F71] mt-6 font-light">
             No thanks, I'll figure it out on my own
           </p>

@@ -82,6 +82,11 @@ export function MarketingFooter() {
             <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Get Started</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/book" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                  Book a Discovery Call
+                </Link>
+              </li>
+              <li>
                 <Link href="/studio-systems" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
                   Join Membership
                 </Link>

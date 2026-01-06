@@ -90,6 +90,17 @@ export default async function AboutPage() {
               The industry hands you one-size-fits-all advice. Produce 300 units. Use this pricing formula. Follow this timeline. But your brand is not one-size-fits-all, and your production strategy should not be either.
             </p>
           </div>
+          <div className="text-center mt-12">
+            <Link href="/book">
+              <Button
+                size="lg"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group"
+              >
+                Let's Talk About Your Vision
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

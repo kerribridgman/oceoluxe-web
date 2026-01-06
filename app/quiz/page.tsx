@@ -359,6 +359,12 @@ export default function DesignerQuizPage() {
             </button>
           </Link>
 
+          <Link href="/book">
+            <button className="w-full bg-[#cda7b2] text-white border-none py-4 px-8 rounded-full text-[15px] cursor-pointer mb-4 font-serif transition-all hover:bg-[#bd97a2] flex items-center justify-center gap-2">
+              Book a Free Discovery Call
+            </button>
+          </Link>
+
           <button
             onClick={restart}
             className="bg-transparent text-[#967f71] border border-[#967f71] py-3 px-6 rounded-full text-sm cursor-pointer font-serif transition-all hover:bg-[#967f71] hover:text-[#f4f4f4]"

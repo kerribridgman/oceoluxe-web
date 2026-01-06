@@ -202,6 +202,18 @@ export default async function HomePage() {
             ))}
           </div>
 
+          <div className="text-center">
+            <Link href="/book">
+              <Button
+                size="lg"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group"
+              >
+                Book a Discovery Call
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+
         </div>
       </section>
 
@@ -235,6 +247,17 @@ export default async function HomePage() {
                     <span className="text-[#3B3937] font-light leading-relaxed">{indicator}</span>
                   </div>
                 ))}
+              </div>
+              <div className="mt-8">
+                <Link href="/book">
+                  <Button
+                    size="lg"
+                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
+                  >
+                    Let's Fix This Together
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

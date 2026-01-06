@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, Sparkles, Layout, Users, Globe } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Layout, Users, Globe, Calendar } from 'lucide-react';
 import { Metadata } from 'next';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
@@ -113,6 +113,12 @@ export default async function ServicesPage() {
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </a>
+                  <Link href="/book" className="block">
+                    <Button size="lg" variant="outline" className="w-full border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white">
+                      <Calendar className="mr-2 w-5 h-5" />
+                      Book a Discovery Call
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
@@ -169,13 +175,19 @@ export default async function ServicesPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8">
+                <div className="mt-8 space-y-3">
                   <a href="mailto:kerrib@oceoluxe.com">
                     <Button size="lg" className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white">
                       Request Custom Pricing
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </a>
+                  <Link href="/book" className="block">
+                    <Button size="lg" variant="outline" className="w-full border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white">
+                      <Calendar className="mr-2 w-5 h-5" />
+                      Book a Discovery Call
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -207,6 +219,12 @@ export default async function ServicesPage() {
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </a>
+                  <Link href="/book" className="block">
+                    <Button size="lg" variant="outline" className="w-full border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white">
+                      <Calendar className="mr-2 w-5 h-5" />
+                      Book a Discovery Call
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
@@ -240,12 +258,20 @@ export default async function ServicesPage() {
           <p className="text-xl text-[#967F71] font-light mb-8 leading-relaxed">
             Let's connect and build a custom plan together
           </p>
-          <a href="mailto:kerrib@oceoluxe.com">
-            <Button size="lg" className="bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg px-8 h-14">
-              Get in Touch
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/book">
+              <Button size="lg" className="bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg px-8 h-14 w-full sm:w-auto">
+                <Calendar className="mr-2 w-5 h-5" />
+                Book a Discovery Call
+              </Button>
+            </Link>
+            <a href="mailto:kerrib@oceoluxe.com">
+              <Button size="lg" variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white text-lg px-8 h-14 w-full sm:w-auto">
+                Send an Email
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </a>
+          </div>
         </div>
       </section>
 
