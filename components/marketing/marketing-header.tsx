@@ -1,37 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
 import { CartIcon } from '@/components/cart';
 
 export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
-  const [mobileShopOpen, setMobileShopOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setShopDropdownOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   const navItems = [
     { name: 'About', href: '/about' },
-    { name: 'Studio Systems', href: '/studio-systems' },
-  ];
-
-  const shopItems = [
-    { name: 'Products', href: '/products' },
     { name: 'Services', href: '/services' },
+    { name: 'Studio Systems', href: '/studio-systems' },
+    { name: 'Products', href: '/products' },
+    { name: 'Blog', href: '/blog' },
   ];
 
   return (
@@ -54,43 +36,6 @@ export function MarketingHeader() {
                 {item.name}
               </Link>
             ))}
-
-            {/* Shop Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                className="flex items-center text-[#967F71] hover:text-[#CDA7B2] font-light uppercase text-sm tracking-wider transition-colors"
-                onClick={() => setShopDropdownOpen(!shopDropdownOpen)}
-                onMouseEnter={() => setShopDropdownOpen(true)}
-              >
-                Shop
-                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${shopDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {shopDropdownOpen && (
-                <div
-                  className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#967F71]/10 py-2"
-                  onMouseLeave={() => setShopDropdownOpen(false)}
-                >
-                  {shopItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="block px-4 py-2 text-[#967F71] hover:text-[#CDA7B2] hover:bg-[#CDA7B2]/5 font-light uppercase text-sm tracking-wider transition-colors"
-                      onClick={() => setShopDropdownOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Link
-              href="/blog"
-              className="text-[#967F71] hover:text-[#CDA7B2] font-light uppercase text-sm tracking-wider transition-colors"
-            >
-              Blog
-            </Link>
 
             {/* Cart Icon */}
             <CartIcon />
@@ -133,39 +78,6 @@ export function MarketingHeader() {
                 {item.name}
               </Link>
             ))}
-
-            {/* Mobile Shop Accordion */}
-            <div>
-              <button
-                className="w-full flex items-center justify-between text-[#967F71] hover:text-[#CDA7B2] hover:bg-[#CDA7B2]/5 font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors"
-                onClick={() => setMobileShopOpen(!mobileShopOpen)}
-              >
-                Shop
-                <ChevronDown className={`h-4 w-4 transition-transform ${mobileShopOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {mobileShopOpen && (
-                <div className="pl-4">
-                  {shopItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="block text-[#967F71] hover:text-[#CDA7B2] hover:bg-[#CDA7B2]/5 font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Link
-              href="/blog"
-              className="block text-[#967F71] hover:text-[#CDA7B2] hover:bg-[#CDA7B2]/5 font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Blog
-            </Link>
           </div>
         )}
       </nav>
