@@ -62,7 +62,7 @@ export default async function HomePage() {
             <div className="relative">
               <div className="aspect-[4/3] overflow-hidden relative">
                 <Image
-                  src="/images/hero-systems.png"
+                  src="/images/hero-systems.jpeg"
                   alt="Fashion production systems"
                   fill
                   className="object-cover"
