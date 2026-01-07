@@ -167,9 +167,8 @@ export default async function HomePage() {
           <div className="mt-12">
             <Link href="/book">
               <Button
-                variant="outline"
                 size="lg"
-                className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+                className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
               >
                 Book a Discovery Call
               </Button>
@@ -210,9 +209,8 @@ export default async function HomePage() {
               <div className="mt-12">
                 <Link href="/book">
                   <Button
-                    variant="outline"
                     size="lg"
-                    className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
                     Let's Fix This Together
                   </Button>
