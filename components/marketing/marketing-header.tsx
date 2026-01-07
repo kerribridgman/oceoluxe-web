@@ -22,7 +22,7 @@ export function MarketingHeader() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <h1 className="text-2xl font-serif font-light text-[#3B3937] tracking-wide">Oceo Luxe</h1>
+            <span className="text-xl font-light text-[#3B3937] tracking-wide">Oceo Luxe</span>
           </Link>
 
           {/* Desktop Navigation */}

@@ -1,16 +1,16 @@
 import { getPublicNotionProducts } from '@/lib/db/queries-notion-products';
 import { getPublicDashboardProducts } from '@/lib/db/queries-dashboard-products';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, ShoppingCart, Download, Gift, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { getPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata = {
-  title: 'Products | Oceo Luxe',
-  description: 'Notion templates, digital products, and resources for fashion entrepreneurs and creative founders',
-};
+export async function generateMetadata() {
+  return await getPageMetadata('products');
+}
 
 // Revalidate every 60 seconds to ensure products are up-to-date
 export const revalidate = 60;
@@ -33,13 +33,10 @@ export default async function ProductsPage() {
     ]);
   } catch (error) {
     console.error('Error loading products:', error);
-    // Continue with empty products array to show "No Products Yet" message
   }
 
-  // For backwards compatibility, keep using the notion products variable name
   const products = notionProducts;
 
-  // Separate free and paid products - check for "Free", "$0", or no price
   const isFreeProduct = (p: typeof products[0]) => {
     if (!p.price) return true;
     const priceStr = p.price.toLowerCase();
@@ -54,146 +51,142 @@ export default async function ProductsPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <section className="bg-[#f5f0ea]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
-              Products
-            </h1>
-            <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
-              Notion templates, digital products, and resources to streamline your fashion business operations.
-            </p>
-          </div>
+      <section className="bg-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-24">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            Products
+          </p>
+          <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight mb-6">
+            Notion templates and resources to streamline your fashion business.
+          </h1>
         </div>
       </section>
 
-      {/* Products Grid */}
-      <div className="bg-[#faf8f5] py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Products */}
+      <section className="pb-24">
+        <div className="max-w-5xl mx-auto px-6">
           {products.length === 0 && dashboardProducts.length === 0 ? (
-            <div className="text-center py-16">
-              <ShoppingCart className="w-16 h-16 text-[#967F71] mx-auto mb-4" />
-              <h2 className="text-2xl font-serif font-light text-[#3B3937] mb-2">No Products Yet</h2>
-              <p className="text-[#967F71] font-light">Check back soon for new templates and resources!</p>
+            <div className="py-16 text-center">
+              <h2 className="text-2xl font-light text-[#3B3937] mb-2">No products yet</h2>
+              <p className="text-[#967F71] font-light">Check back soon for new templates and resources.</p>
             </div>
           ) : (
             <>
-              {/* Free Products Section */}
+              {/* Free Products */}
               {freeProducts.length > 0 && (
                 <div className="mb-16">
-                  <div className="flex items-center gap-3 mb-8">
-                    <Gift className="w-8 h-8 text-[#CDA7B2]" />
-                    <h2 className="text-3xl font-serif font-light text-[#3B3937]">Free Resources</h2>
-                  </div>
-                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  <h2 className="text-xl font-medium text-[#3B3937] mb-8 tracking-tight">Free Resources</h2>
+                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
                     {freeProducts.map((product) => (
-                      <Link key={product.id} href={`/products/${product.slug}`} className="group">
-                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#EDEBE8] bg-[#F5F3F0] hover:border-[#CDA7B2]">
+                      <Link key={product.id} href={`/products/${product.slug}`} className="group block">
+                        <article className="flex gap-4">
                           {product.coverImageUrl && (
-                            <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
-                              <img
+                            <div className="w-20 h-20 flex-shrink-0 overflow-hidden relative bg-[#f5f0ea]">
+                              <Image
                                 src={product.coverImageUrl}
                                 alt={product.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                fill
+                                className="object-cover"
+                                quality={75}
                               />
-                              <div className="absolute top-4 right-4 bg-[#CDA7B2] text-white px-3 py-1 rounded-full text-sm font-medium">
-                                FREE
-                              </div>
                             </div>
                           )}
-                          <CardHeader>
-                            <CardTitle className="text-2xl line-clamp-2 group-hover:text-[#CDA7B2] transition-colors font-serif font-light">
+                          <div className="space-y-1 flex-1 min-w-0">
+                            <p className="text-xs text-[#CDA7B2] font-medium uppercase tracking-wider">Free</p>
+                            <h3 className="text-base font-medium text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors leading-snug">
                               {product.title}
-                            </CardTitle>
+                            </h3>
                             {product.description && (
-                              <CardDescription className="line-clamp-3 text-base text-[#967F71] font-light">
+                              <p className="text-sm text-[#967F71] font-light leading-relaxed line-clamp-2">
                                 {product.description}
-                              </CardDescription>
+                              </p>
                             )}
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="text-3xl font-serif font-light text-[#CDA7B2]">
-                                  Free
-                                </p>
-                              </div>
-                              <Button className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white">
-                                Get Now
-                                <Download className="w-4 h-4 ml-2" />
-                              </Button>
-                            </div>
-                            {product.productType && (
-                              <div className="mt-4 pt-4 border-t border-[#967F71]/10">
-                                <p className="text-sm text-[#967F71] font-light">
-                                  <span className="font-medium">Type:</span> {product.productType}
-                                </p>
-                              </div>
-                            )}
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </article>
                       </Link>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Paid Products Section */}
+              {/* Paid Products */}
               {paidProducts.length > 0 && (
-                <div>
-                  <div className="flex items-center gap-3 mb-8">
-                    <ShoppingCart className="w-8 h-8 text-[#CDA7B2]" />
-                    <h2 className="text-3xl font-serif font-light text-[#3B3937]">Notion Based Products</h2>
-                  </div>
-                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="mb-16">
+                  <h2 className="text-xl font-medium text-[#3B3937] mb-8 tracking-tight">Notion Templates</h2>
+                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
                     {paidProducts.map((product) => (
-                      <Link key={product.id} href={`/products/${product.slug}`} className="group">
-                        <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#EDEBE8] bg-[#F5F3F0] hover:border-[#CDA7B2]">
+                      <Link key={product.id} href={`/products/${product.slug}`} className="group block">
+                        <article className="flex gap-4">
                           {product.coverImageUrl && (
-                            <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
-                              <img
+                            <div className="w-20 h-20 flex-shrink-0 overflow-hidden relative bg-[#f5f0ea]">
+                              <Image
                                 src={product.coverImageUrl}
                                 alt={product.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                fill
+                                className="object-cover"
+                                quality={75}
                               />
                             </div>
                           )}
-                          <CardHeader>
-                            <CardTitle className="text-2xl line-clamp-2 group-hover:text-[#CDA7B2] transition-colors font-serif font-light">
-                              {product.title}
-                            </CardTitle>
-                            {product.description && (
-                              <CardDescription className="line-clamp-3 text-base text-[#967F71] font-light">
-                                {product.description}
-                              </CardDescription>
-                            )}
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="text-3xl font-serif font-light text-[#3B3937]">
-                                  {product.salePrice || product.price}
-                                </p>
-                                {product.salePrice && (
-                                  <p className="text-sm text-[#967F71] line-through font-light">
-                                    {product.price}
-                                  </p>
-                                )}
-                              </div>
-                              <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white">
-                                View Details
-                                <ExternalLink className="w-4 h-4 ml-2" />
-                              </Button>
+                          <div className="space-y-1 flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <p className="text-xs text-[#CDA7B2] font-medium uppercase tracking-wider">{product.salePrice || product.price}</p>
+                              {product.salePrice && (
+                                <p className="text-xs text-[#967F71] line-through font-light">{product.price}</p>
+                              )}
                             </div>
-                            {product.productType && (
-                              <div className="mt-4 pt-4 border-t border-[#967F71]/10">
-                                <p className="text-sm text-[#967F71] font-light">
-                                  <span className="font-medium">Type:</span> {product.productType}
-                                </p>
-                              </div>
+                            <h3 className="text-base font-medium text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors leading-snug">
+                              {product.title}
+                            </h3>
+                            {product.description && (
+                              <p className="text-sm text-[#967F71] font-light leading-relaxed line-clamp-2">
+                                {product.description}
+                              </p>
                             )}
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </article>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Dashboard Products */}
+              {dashboardProducts.length > 0 && (
+                <div>
+                  <h2 className="text-xl font-medium text-[#3B3937] mb-8 tracking-tight">Digital Products</h2>
+                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                    {dashboardProducts.map((product) => (
+                      <Link key={product.id} href={`/checkout/${product.slug}`} className="group block">
+                        <article className="flex gap-4">
+                          {product.coverImageUrl && (
+                            <div className="w-20 h-20 flex-shrink-0 overflow-hidden relative bg-[#f5f0ea]">
+                              <Image
+                                src={product.coverImageUrl}
+                                alt={product.name}
+                                fill
+                                className="object-cover"
+                                quality={75}
+                              />
+                            </div>
+                          )}
+                          <div className="space-y-1 flex-1 min-w-0">
+                            <div className="flex items-center gap-1">
+                              <p className="text-xs text-[#CDA7B2] font-medium uppercase tracking-wider">{formatPrice(product.priceInCents)}</p>
+                              {product.productType === 'subscription' && (
+                                <p className="text-xs text-[#967F71] font-light">/month</p>
+                              )}
+                            </div>
+                            <h3 className="text-base font-medium text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors leading-snug">
+                              {product.name}
+                            </h3>
+                            {product.shortDescription && (
+                              <p className="text-sm text-[#967F71] font-light leading-relaxed line-clamp-2">
+                                {product.shortDescription}
+                              </p>
+                            )}
+                          </div>
+                        </article>
                       </Link>
                     ))}
                   </div>
@@ -202,85 +195,27 @@ export default async function ProductsPage() {
             </>
           )}
         </div>
-      </div>
-
-      {/* Dashboard Products Section */}
-      {dashboardProducts.length > 0 && (
-        <div className="bg-[#faf8f5] pb-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-8">
-              <Sparkles className="w-8 h-8 text-[#CDA7B2]" />
-              <h2 className="text-3xl font-serif font-light text-[#3B3937]">Digital Products</h2>
-            </div>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {dashboardProducts.map((product) => (
-                <Link
-                  key={product.id}
-                  href={`/checkout/${product.slug}`}
-                  className="group"
-                >
-                  <Card className="h-full hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#EDEBE8] bg-[#F5F3F0] hover:border-[#CDA7B2]">
-                    {product.coverImageUrl && (
-                      <div className="relative h-56 overflow-hidden bg-[#faf8f5]">
-                        <img
-                          src={product.coverImageUrl}
-                          alt={product.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        {product.productType === 'subscription' && (
-                          <div className="absolute top-4 right-4 bg-[#3B3937] text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Subscription
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    <CardHeader>
-                      <CardTitle className="text-2xl line-clamp-2 group-hover:text-[#CDA7B2] transition-colors font-serif font-light">
-                        {product.name}
-                      </CardTitle>
-                      {product.shortDescription && (
-                        <CardDescription className="line-clamp-3 text-base text-[#967F71] font-light">
-                          {product.shortDescription}
-                        </CardDescription>
-                      )}
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-3xl font-serif font-light text-[#3B3937]">
-                            {formatPrice(product.priceInCents)}
-                          </p>
-                          {product.productType === 'subscription' && (
-                            <p className="text-sm text-[#967F71] font-light">/month</p>
-                          )}
-                        </div>
-                        <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white">
-                          {product.productType === 'subscription' ? 'Subscribe' : 'Buy Now'}
-                          <ShoppingCart className="w-4 h-4 ml-2" />
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-6">
-            Need Something Custom?
+      <section className="py-24 bg-[#3B3937]">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            Need something custom?
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-light text-white mb-6 tracking-tight">
+            We create custom Notion templates tailored to your business.
           </h2>
-          <p className="text-xl text-[#967F71] font-light mb-8 leading-relaxed">
-            We create custom Notion templates and workflows tailored to your specific business needs
+          <p className="text-lg text-white/70 mb-10 font-light">
+            Get workflows designed specifically for how you work.
           </p>
           <Link href="/services">
-            <Button size="lg" className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white text-lg px-8 h-14">
-              Explore Custom Services
-              <ExternalLink className="ml-2 w-5 h-5" />
+            <Button
+              size="lg"
+              className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
+            >
+              Explore Services
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>

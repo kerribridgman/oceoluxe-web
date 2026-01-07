@@ -1,14 +1,13 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Check, ArrowRight, Sparkles, Layout, Users, Globe, Calendar } from 'lucide-react';
-import { Metadata } from 'next';
+import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { getPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Services | Oceo Luxe',
-  description: 'Factory communication support, production systems, and sustainable sourcing guidance for independent fashion designers.',
-};
+export async function generateMetadata() {
+  return await getPageMetadata('services');
+}
 
 export default async function ServicesPage() {
   return (
@@ -16,259 +15,302 @@ export default async function ServicesPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <section className="bg-[#f5f0ea]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
-              Services
-            </h1>
-            <p className="text-xl text-[#967F71] max-w-3xl mx-auto font-light leading-relaxed">
-              Factory communication support, production systems, and strategic guidance for designers who want to produce consciously without the overwhelm.
-            </p>
+      <section className="bg-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-24">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            Services
+          </p>
+          <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight mb-6">
+            Factory communication, production systems, and strategic guidance.
+          </h1>
+          <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-2xl">
+            For designers who want to produce consciously without the overwhelm.
+          </p>
+        </div>
+      </section>
+
+      {/* Studio Systems Membership */}
+      <section id="studio-systems" className="py-24 bg-white scroll-mt-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div>
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+                Ongoing Support
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-4 tracking-tight">
+                Studio Systems Membership
+              </h2>
+              <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
+                For fashion designers who want clarity in their production process. Learn The Oceo Method framework to communicate with factories, build sustainable systems, and scale without burning out.
+              </p>
+              <div className="flex items-baseline gap-3 mb-2">
+                <span className="text-3xl font-light text-[#3B3937]">$33</span>
+                <span className="text-lg text-[#967F71] font-light">/month</span>
+                <span className="text-sm text-[#967F71] line-through">$77/month</span>
+              </div>
+              <p className="text-sm text-[#CDA7B2] font-light mb-8">Founding member pricing</p>
+              <Link href="/studio-systems">
+                <Button
+                  size="lg"
+                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
+                >
+                  Learn More
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-[#3B3937] mb-6">What's Included</h3>
+              <ul className="space-y-4 text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Twice-monthly live Q&A calls for real-time support</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Complete Notion system for production, marketing & launches</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Private designer community with insider supplier info</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Leadership, mindset & somatic support for creative founders</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
-
-          {/* Service 1: Studio Systems Membership */}
-          <div id="studio-systems" className="scroll-mt-16">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6">
-                  <span className="text-[#CDA7B2] font-medium flex items-center">
-                    <Sparkles className="w-4 h-4 mr-2" />
-                    Founding Member Pricing Available
-                  </span>
-                </div>
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Studio Systems Membership
-                </h2>
-                <p className="text-xl text-[#CDA7B2] font-light mb-4">
-                  Structure as support - The Oceo Method
-                </p>
-                <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For fashion designers who want clarity in their production process. Learn The Oceo Method framework (Organize, Optimize, Own It) to communicate with factories, build sustainable systems, and scale without burning out.
-                </p>
-                <div className="flex items-baseline gap-3 mb-4">
-                  <span className="text-3xl font-serif text-[#3B3937]">$33</span>
-                  <span className="text-lg text-[#967F71] font-light">/month</span>
-                  <span className="text-sm text-[#967F71] line-through">$77/month</span>
-                </div>
-                <p className="text-sm text-[#CDA7B2] font-light">Founding member pricing for the first 20 members</p>
-              </div>
-
-              <div className="bg-[#F5F3F0] rounded-2xl p-8 shadow-xl border border-[#EDEBE8]">
-                <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What's Included</h3>
-                <ul className="space-y-4">
-                  {[
-                    'Twice-monthly live Q&A calls for real-time support',
-                    'Complete Notion system for production, marketing & launches',
-                    'Private designer community with insider supplier info',
-                    'Leadership, mindset & somatic support for creative founders'
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#6B655C] font-light">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <Link href="/studio-systems" className="block">
-                    <Button size="lg" className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white">
-                      Learn More
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </Link>
-                </div>
+      {/* Production Systems Setup */}
+      <section id="systems-implementation" className="py-24 bg-[#faf8f5] scroll-mt-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div className="lg:order-2">
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+                Custom Engagement
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-4 tracking-tight">
+                Production Systems Setup
+              </h2>
+              <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
+                For designers who need a clean, organized foundation for factory communication and production tracking. I'll build the systems tailored to how you work and what your factories need from you.
+              </p>
+              <p className="text-lg font-light text-[#3B3937] mb-8">
+                Stop piecing together spreadsheets. Get systems that work.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="mailto:kerrib@oceoluxe.com">
+                  <Button
+                    size="lg"
+                    className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Request Pricing
+                  </Button>
+                </a>
+                <Link href="/book">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Book a Call
+                  </Button>
+                </Link>
               </div>
             </div>
-          </div>
-
-          {/* Service 2: Systems Implementation */}
-          <div id="systems-implementation" className="scroll-mt-16">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1 bg-[#F5F3F0] rounded-2xl p-8 border border-[#EDEBE8]">
-                <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">Services Include</h3>
-                <ul className="space-y-4">
-                  {[
-                    'Factory communication setup and templates',
-                    'Supplier tracking and contact management systems',
-                    'Production calendars and timeline planning',
-                    'Sampling workflow and costing sheet setup',
-                    'Custom Notion dashboards for your production process'
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#6B655C] font-light">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8 space-y-3">
-                  <a href="mailto:kerrib@oceoluxe.com">
-                    <Button size="lg" className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2] text-white">
-                      Request Custom Pricing
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </a>
-                  <Link href="/book" className="block">
-                    <Button size="lg" variant="outline" className="w-full border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white">
-                      <Calendar className="mr-2 w-5 h-5" />
-                      Book a Discovery Call
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="order-1 md:order-2">
-                <Layout className="w-16 h-16 text-[#CDA7B2] mb-6" />
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Production Systems Setup
-                </h2>
-                <p className="text-xl text-[#CDA7B2] font-light mb-4">
-                  Custom pricing upon request
-                </p>
-                <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For designers who need a clean, organized foundation for factory communication and production tracking. I'll build the systems tailored to how you work and what your factories need from you.
-                </p>
-                <p className="text-xl font-light text-[#3B3937]">
-                  Stop piecing together spreadsheets. Get systems that work.
-                </p>
-              </div>
+            <div className="lg:order-1">
+              <h3 className="text-lg font-medium text-[#3B3937] mb-6">Services Include</h3>
+              <ul className="space-y-4 text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Factory communication setup and templates</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Supplier tracking and contact management systems</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Production calendars and timeline planning</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Sampling workflow and costing sheet setup</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Custom Notion dashboards for your production process</span>
+                </li>
+              </ul>
             </div>
           </div>
-
-          {/* Service 3: Strategic Guidance */}
-          <div id="strategic-guidance" className="scroll-mt-16">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <Users className="w-16 h-16 text-[#CDA7B2] mb-6" />
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Production Strategy & Consulting
-                </h2>
-                <p className="text-xl text-[#CDA7B2] font-light mb-4">
-                  Custom pricing upon request
-                </p>
-                <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For designers navigating factory relationships, production timelines, and scaling decisions. Get expert guidance on what to expect, how to communicate, and when to make key decisions.
-                </p>
-                <p className="text-xl font-light text-[#3B3937]">
-                  Clarity in production protects your creative energy.
-                </p>
-              </div>
-
-              <div className="bg-[#F5F3F0] rounded-2xl p-8 shadow-xl border border-[#EDEBE8]">
-                <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What You Get</h3>
-                <ul className="space-y-4">
-                  {[
-                    'Factory vetting and relationship guidance',
-                    'Production timeline planning and realistic expectations',
-                    'Pricing strategy and quantity decisions',
-                    'Sustainable sourcing direction',
-                    'Ongoing support as challenges arise'
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#6B655C] font-light">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8 space-y-3">
-                  <a href="mailto:kerrib@oceoluxe.com">
-                    <Button size="lg" className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white">
-                      Request Custom Pricing
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </a>
-                  <Link href="/book" className="block">
-                    <Button size="lg" variant="outline" className="w-full border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white">
-                      <Calendar className="mr-2 w-5 h-5" />
-                      Book a Discovery Call
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Service 4: Website Development */}
-          <div id="website-development" className="scroll-mt-16">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1 bg-[#F5F3F0] rounded-2xl p-8 border border-[#EDEBE8]">
-                <h3 className="text-2xl font-serif font-light text-[#3B3937] mb-6">What's Included</h3>
-                <ul className="space-y-4">
-                  {[
-                    'Custom website built to showcase your work and experience',
-                    'Design that reflects the quality of your craft',
-                    'Portfolio, lookbook, or service pages tailored to your role',
-                    'Mobile-responsive and optimized for how clients find you',
-                    'Guidance from someone who understands the industry'
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="w-6 h-6 text-[#CDA7B2] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#6B655C] font-light">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8 space-y-3">
-                  <a href="mailto:kerrib@oceoluxe.com">
-                    <Button size="lg" className="w-full bg-[#CDA7B2] hover:bg-[#BD97A2] text-white">
-                      Request Custom Pricing
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </a>
-                  <Link href="/book" className="block">
-                    <Button size="lg" variant="outline" className="w-full border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white">
-                      <Calendar className="mr-2 w-5 h-5" />
-                      Book a Discovery Call
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="order-1 md:order-2">
-                <Globe className="w-16 h-16 text-[#CDA7B2] mb-6" />
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-4">
-                  Website Development for Fashion Professionals
-                </h2>
-                <p className="text-xl text-[#CDA7B2] font-light mb-4">
-                  Custom pricing upon request
-                </p>
-                <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
-                  For designers, production managers, stylists, consultants, and anyone in the fashion industry who needs a website that actually represents their work. Built by someone who has worked across the entire industry and understands what you do.
-                </p>
-                <p className="text-xl font-light text-[#3B3937]">
-                  Your website should work as hard as you do.
-                </p>
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#f5f0ea] to-[#faf8f5]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-6">
-            Not Sure Which is Right for You?
+      {/* Production Strategy & Consulting */}
+      <section id="strategic-guidance" className="py-24 bg-white scroll-mt-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div>
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+                Strategic Support
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-4 tracking-tight">
+                Production Strategy & Consulting
+              </h2>
+              <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
+                For designers navigating factory relationships, production timelines, and scaling decisions. Get expert guidance on what to expect, how to communicate, and when to make key decisions.
+              </p>
+              <p className="text-lg font-light text-[#3B3937] mb-8">
+                Clarity in production protects your creative energy.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="mailto:kerrib@oceoluxe.com">
+                  <Button
+                    size="lg"
+                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Request Pricing
+                  </Button>
+                </a>
+                <Link href="/book">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Book a Call
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-[#3B3937] mb-6">What You Get</h3>
+              <ul className="space-y-4 text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Factory vetting and relationship guidance</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Production timeline planning and realistic expectations</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Pricing strategy and quantity decisions</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Sustainable sourcing direction</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Ongoing support as challenges arise</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Website Development */}
+      <section id="website-development" className="py-24 bg-[#faf8f5] scroll-mt-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div className="lg:order-2">
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+                Digital Presence
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-4 tracking-tight">
+                Website Development for Fashion Professionals
+              </h2>
+              <p className="text-lg text-[#967F71] font-light mb-6 leading-relaxed">
+                For designers, production managers, stylists, consultants, and anyone in the fashion industry who needs a website that actually represents their work. Built by someone who understands what you do.
+              </p>
+              <p className="text-lg font-light text-[#3B3937] mb-8">
+                Your website should work as hard as you do.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="mailto:kerrib@oceoluxe.com">
+                  <Button
+                    size="lg"
+                    className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Request Pricing
+                  </Button>
+                </a>
+                <Link href="/book">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Book a Call
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="lg:order-1">
+              <h3 className="text-lg font-medium text-[#3B3937] mb-6">What's Included</h3>
+              <ul className="space-y-4 text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Custom website built to showcase your work and experience</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Design that reflects the quality of your craft</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Portfolio, lookbook, or service pages tailored to your role</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Mobile-responsive and optimized for how clients find you</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Guidance from someone who understands the industry</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-24 bg-[#3B3937]">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            Not sure which is right for you?
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-light text-white mb-6 tracking-tight">
+            Let's connect and build a custom plan together.
           </h2>
-          <p className="text-xl text-[#967F71] font-light mb-8 leading-relaxed">
-            Let's connect and build a custom plan together
+          <p className="text-lg text-white/70 mb-10 font-light">
+            Every designer's situation is different. Book a discovery call to talk through your goals, challenges, and what kind of support would actually help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book">
-              <Button size="lg" className="bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg px-8 h-14 w-full sm:w-auto">
-                <Calendar className="mr-2 w-5 h-5" />
+              <Button
+                size="lg"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
+              >
                 Book a Discovery Call
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <a href="mailto:kerrib@oceoluxe.com">
-              <Button size="lg" variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white text-lg px-8 h-14 w-full sm:w-auto">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 h-12 px-8 text-base font-normal tracking-wide"
+              >
                 Send an Email
-                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </a>
           </div>

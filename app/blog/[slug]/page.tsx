@@ -3,7 +3,8 @@ import { MarkdownRenderer } from '@/components/blog/markdown-renderer';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowLeft } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
@@ -77,11 +78,11 @@ export default async function BlogPostPage({ params }: Props) {
     dateModified: post.updatedAt ? new Date(post.updatedAt).toISOString() : undefined,
     author: {
       '@type': 'Person',
-      name: post.author || 'Patrick Farrell',
+      name: post.author || 'Kerri Bridgman',
     },
     publisher: {
       '@type': 'Person',
-      name: 'Patrick Farrell',
+      name: 'Kerri Bridgman',
     },
     keywords: post.metaKeywords || post.focusKeyword,
     articleSection: post.industry,
@@ -97,48 +98,50 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[#faf8f5]">
         <MarketingHeader />
-        {/* Header Navigation */}
-        <div className="bg-gray-50 border-b border-gray-200">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+
+        {/* Back Navigation */}
+        <div className="bg-[#faf8f5] border-b border-[#967F71]/10">
+          <div className="max-w-4xl mx-auto px-6 py-4">
             <Link
               href="/blog"
-              className="inline-flex items-center text-gray-600 hover:text-[#4a9fd8] transition-colors"
+              className="inline-flex items-center text-[#967F71] hover:text-[#3B3937] transition-colors font-light"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Blog
+              Back to Journal
             </Link>
           </div>
         </div>
 
         {/* Cover Image */}
         {post.coverImageUrl && (
-          <div className="w-full h-96 overflow-hidden bg-gray-900">
-            <img
+          <div className="w-full h-80 lg:h-96 overflow-hidden relative bg-[#f5f0ea]">
+            <Image
               src={post.coverImageUrl}
               alt={post.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              quality={95}
+              priority
             />
           </div>
         )}
 
         {/* Article Content */}
-        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article className="max-w-4xl mx-auto px-6 py-16">
           {/* Article Header */}
           <header className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-6 tracking-tight leading-tight">
               {post.title}
             </h1>
 
             {/* Meta Information */}
-            <div className="flex flex-wrap items-center gap-6 text-gray-600 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-gray-900">{post.author || 'Patrick Farrell'}</span>
-              </div>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-[#967F71] font-light">
+              <span className="text-[#3B3937]">{post.author || 'Kerri Bridgman'}</span>
               {post.publishedAt && (
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
+                <>
+                  <span className="text-[#CDA7B2]">—</span>
                   <time dateTime={new Date(post.publishedAt).toISOString()}>
                     {new Date(post.publishedAt).toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -146,19 +149,19 @@ export default async function BlogPostPage({ params }: Props) {
                       day: 'numeric',
                     })}
                   </time>
-                </div>
+                </>
               )}
               {post.readingTimeMinutes && (
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
+                <>
+                  <span className="text-[#CDA7B2]">—</span>
                   <span>{post.readingTimeMinutes} min read</span>
-                </div>
+                </>
               )}
             </div>
 
             {/* Excerpt */}
             {post.excerpt && (
-              <p className="text-xl text-gray-600 mt-6 leading-relaxed border-l-4 border-[#4a9fd8] pl-6 italic">
+              <p className="text-xl text-[#967F71] mt-8 leading-relaxed border-l-2 border-[#CDA7B2] pl-6 font-light italic">
                 {post.excerpt}
               </p>
             )}
@@ -170,16 +173,14 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           {/* Article Footer */}
-          <footer className="mt-16 pt-8 border-t border-gray-200">
-            <div className="flex items-center justify-between">
-              <Link
-                href="/blog"
-                className="inline-flex items-center text-[#4a9fd8] hover:text-[#3a8fc8] font-medium"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to all posts
-              </Link>
-            </div>
+          <footer className="mt-16 pt-8 border-t border-[#967F71]/10">
+            <Link
+              href="/blog"
+              className="inline-flex items-center text-[#3B3937] hover:text-[#CDA7B2] font-medium transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to all posts
+            </Link>
           </footer>
         </article>
 

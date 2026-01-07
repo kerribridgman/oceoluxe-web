@@ -1,88 +1,64 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Check, X, Layers, Zap, Heart, ArrowRight, Video, LayoutGrid, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata() {
-  return await getPageMetadata('home');
+  return await getPageMetadata('studio-systems');
 }
 
 export default async function StudioSystemsPage() {
-  const oceoMethodSteps = [
-    {
-      icon: <Layers className="h-12 w-12 text-[#CDA7B2]" />,
-      title: "Organize",
-      description: "Set up your supplier systems, calendars, and costing templates so you always know what's coming."
-    },
-    {
-      icon: <Zap className="h-12 w-12 text-[#CDA7B2]" />,
-      title: "Optimize",
-      description: "Streamline communication with human-first scripts that reduce ghosting and get faster replies."
-    },
-    {
-      icon: <Heart className="h-12 w-12 text-[#CDA7B2]" />,
-      title: "Own It",
-      description: "Implement nervous system practices + decision-making tools so you scale without sacrificing yourself."
-    }
-  ];
-
-  const struggles = [
-    "Scrambling to source fabrics last-minute with zero clarity on timelines",
-    "Writing (& rewriting) follow-up emails to factories that never respond",
-    "Missing deadlines, late deliveries, and constant rescheduling",
-    "Focusing on everything except the reason they started",
-    "Guessing at pricing, unsure if you're actually making a profit",
-    "Spending more time managing chaos than designing your collection"
-  ];
-
-  const solutions = [
-    "Working from a finalized sourcing list with vetted sustainable suppliers and materials",
-    "Using plug-and-play email scripts to get factory replies fast (no more ghosting)",
-    "Following a mapped-out production calendar that runs from sampling to delivery",
-    "Making confident pricing decisions with costing sheets that show your margins, line by line",
-    "Reclaiming 10+ hours a week to design, create, and actually breathe without burning out",
-    "Designing from a place of flow while your systems work for you"
-  ];
-
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
-      {/* Hero Section - Split Layout */}
-      <section className="bg-[#f5f0ea]">
-        <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Content */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-6xl font-serif font-light text-[#3B3937] leading-tight">
-                  The Membership That Gives Designers <span className="italic">& Visionaries</span>{' '}
-                  <span className="text-[#CDA7B2]">Structure as Support</span>
-                </h1>
-                <p className="text-xl text-[#967F71] font-light leading-relaxed">
-                  Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
-                </p>
+      {/* Hero Section */}
+      <section className="bg-[#faf8f5]">
+        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium">
+                Studio Systems Membership
+              </p>
+              <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight">
+                Structure as support for designers and visionaries.
+              </h1>
+              <p className="text-xl text-[#967F71] font-light leading-relaxed">
+                Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <Link href="/studio-systems/waitlist">
+                  <Button
+                    size="lg"
+                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Join Waitlist
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/quiz">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Find Your Designer Archetype
+                  </Button>
+                </Link>
               </div>
-              <Link href="/studio-systems/waitlist">
-                <Button
-                  size="lg"
-                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-14 px-10 text-lg font-light group"
-                >
-                  Join Waitlist Now
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
             </div>
-            {/* Right: Image */}
             <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-                <img
+              <div className="aspect-[4/5] overflow-hidden relative">
+                <Image
                   src="/images/hero-workspace.jpg"
-                  alt="Fashion design workspace with mood boards"
-                  className="w-full h-full object-cover"
+                  alt="Fashion design workspace"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                  priority
                 />
               </div>
             </div>
@@ -91,68 +67,75 @@ export default async function StudioSystemsPage() {
       </section>
 
       {/* Quiz Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6">
-            <span className="text-[#CDA7B2] font-medium text-sm tracking-wide">Free Quiz</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-            What Kind of Designer Are You?
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            Free Quiz
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-8 tracking-tight">
+            What kind of designer are you?
           </h2>
-          <p className="text-xl text-[#967F71] font-light leading-relaxed mb-4 max-w-2xl mx-auto">
-            You do not have to produce 300 pieces in every color just because that is what the industry tells you.
-            You do not have to position yourself as mass fashion if that is not your vision.
-          </p>
-          <p className="text-xl text-[#967F71] font-light leading-relaxed mb-4 max-w-2xl mx-auto">
-            Whether you are building a luxury atelier with 50 devoted clients or scaling a collection that reaches thousands, your
-            production strategy should match <span className="italic">your</span> design philosophy, not someone else's playbook.
-          </p>
-          <p className="text-lg text-[#3B3937] font-light leading-relaxed mb-10 max-w-2xl mx-auto">
-            This 2-minute quiz reveals your Designer Archetype so you can finally build production and marketing
-            systems that align with who you actually are.
-          </p>
+          <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed mb-10">
+            <p>
+              You do not have to produce 300 pieces in every color just because that is what the industry tells you. You do not have to position yourself as mass fashion if that is not your vision.
+            </p>
+            <p>
+              Whether you are building a luxury atelier with 50 devoted clients or scaling a collection that reaches thousands, your production strategy should match <em>your</em> design philosophy, not someone else's playbook.
+            </p>
+            <p className="text-[#3B3937]">
+              This 2-minute quiz reveals your Designer Archetype so you can finally build production and marketing systems that align with who you actually are.
+            </p>
+          </div>
           <Link href="/quiz">
             <Button
               size="lg"
-              className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light group"
+              className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
             >
               Discover Your Archetype
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>
       </section>
 
       {/* Problem Section */}
-      <section className="py-16 bg-[#faf8f5]">
+      <section className="py-24 bg-[#faf8f5]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            {/* Image */}
-            <div className="order-2 lg:order-1">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="lg:order-2">
+              <div className="aspect-square overflow-hidden relative">
+                <Image
                   src="/images/sewing-machine.png"
                   alt="Hands working on sewing machine"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  quality={95}
                 />
               </div>
             </div>
-            {/* Content */}
-            <div className="order-1 lg:order-2 space-y-10">
-              <div>
-                <p className="text-xl text-[#967F71] mb-6 font-light italic">In my 12 years of working in the fashion industry...</p>
-                <h2 className="text-4xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
-                  I've seen fashion designers fall into the trap of...
-                </h2>
-              </div>
-              <div className="space-y-4">
-                {struggles.slice(0, 4).map((struggle, index) => (
-                  <div key={index} className="flex items-start gap-4 bg-[#F5F3F0] p-5 rounded-lg border border-[#EDEBE8] shadow-sm">
-                    <X className="h-5 w-5 text-red-400 flex-shrink-0 mt-1" />
-                    <span className="text-[#3B3937] font-light leading-relaxed">{struggle}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="lg:order-1">
+              <p className="text-lg text-[#967F71] mb-6 font-light italic">In my 12 years of working in the fashion industry...</p>
+              <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-10 tracking-tight">
+                I've seen fashion designers fall into the trap of...
+              </h2>
+              <ul className="space-y-4 text-lg text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Scrambling to source fabrics last-minute with zero clarity on timelines</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Writing and rewriting follow-up emails to factories that never respond</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Missing deadlines, late deliveries, and constant rescheduling</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span>Focusing on everything except the reason they started</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -160,205 +143,186 @@ export default async function StudioSystemsPage() {
 
       {/* Solution Section */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-4 leading-tight">
-              When really you should be...
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {solutions.map((solution, index) => (
-              <div key={index} className="flex items-start gap-4 bg-[#F5F3F0] p-8 rounded-xl border border-[#EDEBE8] shadow-sm hover:shadow-md transition-shadow">
-                <Check className="h-6 w-6 text-[#CDA7B2] flex-shrink-0 mt-1" />
-                <span className="text-[#3B3937] font-light leading-relaxed text-lg">{solution}</span>
-              </div>
-            ))}
-          </div>
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-10 tracking-tight">
+            When really you should be...
+          </h2>
+          <ul className="space-y-4 text-lg text-[#967F71] font-light">
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">—</span>
+              <span>Working from a finalized sourcing list with vetted sustainable suppliers</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">—</span>
+              <span>Using plug-and-play email scripts to get factory replies fast</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">—</span>
+              <span>Following a mapped-out production calendar from sampling to delivery</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">—</span>
+              <span>Making confident pricing decisions with costing sheets that show your margins</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">—</span>
+              <span>Reclaiming 10+ hours a week to design, create, and actually breathe</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">—</span>
+              <span>Designing from a place of flow while your systems work for you</span>
+            </li>
+          </ul>
         </div>
       </section>
 
-      {/* The Oceo Method - Full Width Image Background */}
-      <section className="relative py-32 overflow-hidden">
-        {/* Background with Overlay */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#faf8f5]/95 to-white/95"></div>
-        </div>
+      {/* The Oceo Method */}
+      <section className="py-24 bg-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            The Signature Framework
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-6 tracking-tight">
+            The Oceo Method
+          </h2>
+          <p className="text-xl text-[#967F71] font-light leading-relaxed mb-12">
+            A calm, connected approach to production for fashion founders and visionaries who value both structure and sanity.
+          </p>
 
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="inline-block bg-[#CDA7B2]/10 px-8 py-3 rounded-full mb-8">
-              <span className="text-[#CDA7B2] font-medium text-lg">The Signature Framework</span>
+          <div className="space-y-8">
+            <div className="border-l-2 border-[#CDA7B2] pl-6">
+              <p className="text-[#3B3937] font-medium mb-2 text-lg">Organize</p>
+              <p className="text-[#967F71] font-light">Set up your supplier systems, calendars, and costing templates so you always know what's coming.</p>
             </div>
-            <h2 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-8 leading-tight">
-              The Oceo Method™
-            </h2>
-            <p className="text-2xl text-[#967F71] max-w-3xl mx-auto leading-relaxed font-light">
-              A calm, connected approach to production for fashion founders and visionaries who value both structure and sanity.
-            </p>
+            <div className="border-l-2 border-[#CDA7B2] pl-6">
+              <p className="text-[#3B3937] font-medium mb-2 text-lg">Optimize</p>
+              <p className="text-[#967F71] font-light">Streamline communication with human-first scripts that reduce ghosting and get faster replies.</p>
+            </div>
+            <div className="border-l-2 border-[#CDA7B2] pl-6">
+              <p className="text-[#3B3937] font-medium mb-2 text-lg">Own It</p>
+              <p className="text-[#967F71] font-light">Implement nervous system practices and decision-making tools so you scale without sacrificing yourself.</p>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10 mb-16">
-            {oceoMethodSteps.map((step, index) => (
-              <Card key={index} className="border border-[#EDEBE8] bg-[#F5F3F0] shadow-xl hover:shadow-2xl transition-shadow">
-                <CardContent className="pt-12 pb-10 text-center">
-                  <div className="flex justify-center mb-8 bg-[#CDA7B2]/10 w-20 h-20 rounded-full items-center mx-auto">
-                    {step.icon}
-                  </div>
-                  <h3 className="text-3xl font-serif font-light text-[#3B3937] mb-6 tracking-wide">
-                    {step.title}
-                  </h3>
-                  <p className="text-[#6B655C] leading-relaxed font-light text-lg">
-                    {step.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center max-w-4xl mx-auto">
-            <p className="text-xl text-[#3B3937]/90 leading-relaxed italic font-light">
-              If you're someone who is looking to bring more clarity to your processes, connection to your creative and operational flow, and capacity to scale your vision without burning out, this membership was built for you.
-            </p>
-          </div>
+          <p className="text-lg text-[#3B3937] mt-12 font-light leading-relaxed italic">
+            If you're someone who is looking to bring more clarity to your processes, connection to your creative and operational flow, and capacity to scale your vision without burning out, this membership was built for you.
+          </p>
         </div>
       </section>
 
       {/* What's Inside Section */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6">
-              <span className="text-[#CDA7B2] font-medium text-sm tracking-wide">What's Inside</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-              Inside Studio Systems, You'll Get:
-            </h2>
-          </div>
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            What's Inside
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-12 tracking-tight">
+            Inside Studio Systems, You'll Get
+          </h2>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Live Q&A Calls */}
-            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
-                  <Video className="w-7 h-7 text-[#CDA7B2]" />
-                </div>
-                <h3 className="text-2xl font-serif font-light text-[#3B3937]">Twice-Monthly Live Q&A Calls</h3>
-              </div>
-              <p className="text-[#6B655C] font-light leading-relaxed">
+          <div className="space-y-10">
+            <div>
+              <h3 className="text-xl font-medium text-[#3B3937] mb-3">Twice-Monthly Live Q&A Calls</h3>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed">
                 Direct access to real-time support so you can pressure-test decisions, get unstuck fast, and move your production forward with accuracy instead of second-guessing.
               </p>
             </div>
 
-            {/* Notion System */}
-            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
-                  <LayoutGrid className="w-7 h-7 text-[#CDA7B2]" />
-                </div>
-                <h3 className="text-2xl font-serif font-light text-[#3B3937]">A Complete Notion System</h3>
-              </div>
-              <p className="text-[#6B655C] font-light leading-relaxed">
-                Instant access to done-for-you Notion templates covering production, distribution, marketing, sales, and launches... so you're not building systems from scratch or keeping everything in your head.
+            <div>
+              <h3 className="text-xl font-medium text-[#3B3937] mb-3">A Complete Notion System</h3>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                Instant access to done-for-you Notion templates covering production, distribution, marketing, sales, and launches — so you're not building systems from scratch or keeping everything in your head.
               </p>
             </div>
 
-            {/* Private Community */}
-            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
-                  <Users className="w-7 h-7 text-[#CDA7B2]" />
-                </div>
-                <h3 className="text-2xl font-serif font-light text-[#3B3937]">A Private Designer Community</h3>
-              </div>
-              <p className="text-[#6B655C] font-light leading-relaxed">
-                Ask questions, share wins, and get perspective from designers navigating the same stage of business. Think: supplier insider information, real-time feedback, and people who get it.
+            <div>
+              <h3 className="text-xl font-medium text-[#3B3937] mb-3">A Private Designer Community</h3>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                Ask questions, share wins, and get perspective from designers navigating the same stage of business. Supplier insider information, real-time feedback, and people who get it.
               </p>
             </div>
 
-            {/* Somatic Support */}
-            <div className="bg-[#faf8f5] p-8 rounded-2xl border border-[#EDEBE8] hover:shadow-lg transition-shadow">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-[#CDA7B2]/10 flex items-center justify-center">
-                  <Heart className="w-7 h-7 text-[#CDA7B2]" />
-                </div>
-                <h3 className="text-2xl font-serif font-light text-[#3B3937]">Leadership & Somatic Support</h3>
-              </div>
-              <p className="text-[#6B655C] font-light leading-relaxed">
-                Regulated leaders build sustainable brands... Enjoy practical tools to help you stay grounded and decisive, including yoga flows, body scans, and nervous-system regulation practices designed for creative founders managing real pressure.
+            <div>
+              <h3 className="text-xl font-medium text-[#3B3937] mb-3">Leadership & Somatic Support</h3>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                Regulated leaders build sustainable brands. Practical tools to help you stay grounded and decisive, including yoga flows, body scans, and nervous-system regulation practices designed for creative founders.
               </p>
             </div>
           </div>
 
-          <div className="text-center mt-12">
+          <div className="mt-12">
             <Link href="/studio-systems/waitlist">
               <Button
                 size="lg"
-                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-14 px-10 text-lg font-light group"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
               >
                 Join the Waitlist
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Luxury Pricing Section */}
-      <section className="py-24 bg-[#faf8f5]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-            A Luxury-Level Membership<br />for the Price of Coffee & Croissant
+      {/* Pricing Section */}
+      <section className="py-24 bg-[#3B3937]">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+            Founding Member Pricing
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-light text-white mb-8 tracking-tight">
+            A luxury-level membership for the price of coffee and croissant.
           </h2>
-          <div className="my-8">
-            <p className="text-[#967F71] line-through text-lg mb-2 font-light">Regular Price: $77/month</p>
-            <div className="text-6xl font-serif font-light text-[#3B3937] mb-2">
-              $33<span className="text-3xl text-[#967F71]">/month</span>
+          <div className="mb-8">
+            <p className="text-white/50 line-through text-lg mb-2 font-light">Regular Price: $77/month</p>
+            <div className="text-5xl font-light text-white mb-2">
+              $33<span className="text-2xl text-white/70">/month</span>
             </div>
-            <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
-            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding Member Pricing: $33/month for the first 20 members</p>
+            <p className="text-white/70 font-light">No strings attached. Cancel anytime.</p>
+            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding member pricing for the first 20 members</p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/studio-systems/waitlist">
               <Button
                 size="lg"
-                className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
+                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
               >
-                Join Waitlist Now
+                Join Waitlist
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href="/book">
               <Button
-                size="lg"
                 variant="outline"
-                className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-16 px-12 text-xl font-light w-full sm:w-auto"
+                size="lg"
+                className="border-white/30 text-white hover:bg-white/10 h-12 px-8 text-base font-normal tracking-wide"
               >
                 Have Questions? Let's Talk
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-[#967F71] mt-6 font-light">
-            No thanks, I'll figure it out on my own
-          </p>
         </div>
       </section>
 
-      {/* Inspiration Quote with Image */}
-      <section className="relative py-32 overflow-hidden bg-[#faf8f5]">
+      {/* Quote Section */}
+      <section className="py-24 bg-[#faf8f5]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <blockquote className="text-3xl md:text-4xl font-serif font-light text-[#3B3937] leading-relaxed italic">
+              <blockquote className="text-2xl lg:text-3xl font-light text-[#3B3937] leading-relaxed italic">
                 "You didn't become a designer to chase deadlines or question your worth. You became one to create, to bring beauty and meaning into the world."
               </blockquote>
               <p className="text-lg text-[#967F71] mt-8 font-light">
-                - Studio Systems by Oceo Luxe
+                — Studio Systems by Oceo Luxe
               </p>
             </div>
-            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              <img
+            <div className="aspect-square overflow-hidden relative">
+              <Image
                 src="/images/runway.png"
                 alt="Fashion runway show"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                quality={95}
               />
             </div>
           </div>
@@ -367,24 +331,23 @@ export default async function StudioSystemsPage() {
 
       {/* Final CTA */}
       <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-            Ready to Reclaim Your Time<br />and Creative Flow?
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-6 tracking-tight">
+            Ready to reclaim your time and creative flow?
           </h2>
-          <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
-            Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
-            monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
+          <p className="text-lg text-[#967F71] mb-10 font-light leading-relaxed">
+            Join Studio Systems as a Founding Member and get access to The Oceo Method, monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
           </p>
           <Link href="/studio-systems/waitlist">
             <Button
               size="lg"
-              className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-16 px-12 text-xl font-light group"
+              className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
             >
-              Join Waitlist Now
-              <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+              Join Waitlist
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-          <p className="text-lg text-[#967F71] mt-8 font-light">
+          <p className="text-sm text-[#967F71] mt-6 font-light">
             $33/month for founding members • $77/month after the first 20
           </p>
         </div>

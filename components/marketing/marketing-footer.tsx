@@ -11,7 +11,7 @@ export function MarketingFooter() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4">
-              <h2 className="text-2xl font-serif font-light text-[#3B3937] tracking-wide mb-1">Studio Systems</h2>
+              <h2 className="text-xl font-light text-[#3B3937] tracking-wide mb-1">Studio Systems</h2>
               <p className="text-sm text-[#967F71] italic font-light">by Oceo Luxe</p>
             </div>
             <p className="text-[#967F71] mb-6 max-w-md font-light leading-relaxed">
@@ -107,7 +107,7 @@ export function MarketingFooter() {
 
         {/* Tagline */}
         <div className="border-t border-[#967F71]/10 mt-8 pt-8 text-center">
-          <p className="text-[#3B3937] text-lg font-serif italic mb-6">
+          <p className="text-[#3B3937] text-lg font-light italic mb-6">
             Structure does not limit creativity, it protects it.
           </p>
         </div>
