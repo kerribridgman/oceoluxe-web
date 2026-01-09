@@ -10,6 +10,7 @@ import { cleanNotionMarkdown } from '@/lib/notion-markdown-cleaner';
 
 interface MarkdownRendererProps {
   content: string;
+  excerpt?: string;
 }
 
 // Component to render Tally embeds
@@ -49,11 +50,52 @@ function extractTallyFormId(code: string): string | null {
   return match ? match[1] : null;
 }
 
-export function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  const { content: cleanedContent, tallyFormIds } = useMemo(
-    () => cleanNotionMarkdown(content),
-    [content]
-  );
+export function MarkdownRenderer({ content, excerpt }: MarkdownRendererProps) {
+  const { content: cleanedContent, tallyFormIds } = useMemo(() => {
+    const cleaned = cleanNotionMarkdown(content);
+
+    // If excerpt is provided, strip the first heading/paragraph if it matches
+    if (excerpt) {
+      // Normalize text for comparison (remove extra whitespace, punctuation variations)
+      const normalizeText = (text: string) =>
+        text.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
+
+      const normalizedExcerpt = normalizeText(excerpt);
+
+      // Split content into lines and find the first non-empty content
+      const lines = cleaned.content.split('\n');
+      let contentToRemove = '';
+      let linesToSkip = 0;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) {
+          linesToSkip++;
+          continue;
+        }
+
+        // Check if it's a heading or bold text that matches excerpt
+        const headingMatch = line.match(/^#+\s*(.+)$/);
+        const boldMatch = line.match(/^\*\*(.+)\*\*$/);
+        const textContent = headingMatch?.[1] || boldMatch?.[1] || line;
+
+        if (normalizeText(textContent) === normalizedExcerpt) {
+          linesToSkip = i + 1;
+          // Skip any empty lines after the matched heading
+          while (linesToSkip < lines.length && !lines[linesToSkip].trim()) {
+            linesToSkip++;
+          }
+        }
+        break;
+      }
+
+      if (linesToSkip > 0) {
+        cleaned.content = lines.slice(linesToSkip).join('\n');
+      }
+    }
+
+    return cleaned;
+  }, [content, excerpt]);
 
   return (
     <div className="prose prose-lg max-w-none">

@@ -169,7 +169,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Article Body */}
           <div className="prose-container">
-            <MarkdownRenderer content={post.content} />
+            <MarkdownRenderer content={post.content} excerpt={post.excerpt || undefined} />
           </div>
 
           {/* Article Footer */}

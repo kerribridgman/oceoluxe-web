@@ -151,8 +151,8 @@ export default async function AboutPage() {
 
       {/* This Is For You Section */}
       <section className="py-24 bg-[#faf8f5]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid lg:grid-cols-[1fr,auto] gap-8 items-center">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-10 tracking-tight">
                 This is for you if...
@@ -175,26 +175,35 @@ export default async function AboutPage() {
                   <span>You want to build sustainably without burning out</span>
                 </li>
               </ul>
+              <div className="flex flex-col sm:flex-row gap-4 mt-10">
+                <Link href="/book">
+                  <Button
+                    size="lg"
+                    className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide w-full sm:w-auto"
+                  >
+                    Book an Intro Call
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <a href="mailto:kerrib@oceoluxe.com">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide w-full sm:w-auto"
+                  >
+                    Send an Email
+                  </Button>
+                </a>
+              </div>
             </div>
-            <div className="flex flex-col gap-4 lg:items-start">
-              <Link href="/book">
-                <Button
-                  size="lg"
-                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide w-full sm:w-auto"
-                >
-                  Book an Intro Call
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <a href="mailto:kerrib@oceoluxe.com">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide w-full sm:w-auto"
-                >
-                  Send an Email
-                </Button>
-              </a>
+            {/* Decorative Element */}
+            <div className="hidden lg:flex items-center justify-center">
+              <div className="relative w-80 h-80">
+                <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-[#CDA7B2]/20" />
+                <div className="absolute bottom-8 left-0 w-36 h-36 rounded-full bg-[#967F71]/15" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-[#CDA7B2]/30" />
+                <div className="absolute bottom-0 right-12 w-20 h-20 rounded-full bg-[#3B3937]/10" />
+              </div>
             </div>
           </div>
         </div>
