@@ -3,7 +3,7 @@ import { db } from '@/lib/db/drizzle';
 import { quizLeads } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 
-// POST /api/quiz/signature-style - Save signature style quiz lead
+// POST /api/quiz/signature-style - Save signature style quiz lead (no email yet)
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Create new lead
+    // Create new lead (email will be sent after quiz completion)
     await db.insert(quizLeads).values({
       email: email.toLowerCase(),
       name,

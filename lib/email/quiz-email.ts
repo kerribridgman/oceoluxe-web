@@ -261,3 +261,410 @@ oceoluxe.com
     text,
   });
 }
+
+// Signature Style Quiz Welcome Email
+interface SendSignatureStyleWelcomeEmailParams {
+  to: string;
+  name: string | null;
+}
+
+export async function sendSignatureStyleWelcomeEmail({ to, name }: SendSignatureStyleWelcomeEmailParams) {
+  const firstName = name || 'there';
+
+  const subject = `Welcome, fashion connoisseur ✨`;
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Oceo Luxe</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #faf8f5; font-family: Georgia, 'Times New Roman', serif;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #faf8f5;">
+    <tr>
+      <td style="padding: 40px 20px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 40px 20px 40px; text-align: center;">
+              <h1 style="margin: 0; font-size: 24px; font-weight: 300; color: #3B3937; letter-spacing: 2px;">OCEO LUXE</h1>
+            </td>
+          </tr>
+
+          <!-- Welcome Badge -->
+          <tr>
+            <td style="padding: 0 40px 20px 40px; text-align: center;">
+              <div style="display: inline-block; background: linear-gradient(135deg, #faf8f5 0%, #f5f0ea 100%); border-radius: 12px; padding: 20px 32px; border: 1px solid #e8e4e1;">
+                <span style="font-size: 32px;">👗</span>
+                <p style="margin: 8px 0 0 0; font-size: 14px; color: #967F71; text-transform: uppercase; letter-spacing: 2px;">Thanks for playing</p>
+                <p style="margin: 4px 0 0 0; font-size: 22px; color: #3B3937; font-style: italic;">Signature Style Quiz</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 20px 40px 40px 40px;">
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #3B3937;">
+                Hi ${firstName},
+              </p>
+
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #3B3937;">
+                Thanks for testing your fashion knowledge with our Signature Style Quiz. Whether you aced it or discovered some new design history, we're glad you stopped by.
+              </p>
+
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #3B3937;">
+                At Oceo Luxe, we help independent fashion designers build sustainable production systems - the behind-the-scenes structure that lets creativity flourish.
+              </p>
+
+              <!-- What We Offer -->
+              <div style="background-color: #faf8f5; border-radius: 12px; padding: 24px; margin-bottom: 24px; border-left: 3px solid #CDA7B2;">
+                <p style="margin: 0 0 12px 0; font-size: 14px; color: #CDA7B2; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
+                  What We Offer
+                </p>
+                <p style="margin: 0 0 12px 0; font-size: 15px; line-height: 1.8; color: #3B3937;">
+                  <strong>Production tools & templates</strong> - Tech packs, costing sheets, and systems to streamline your workflow
+                </p>
+                <p style="margin: 0 0 12px 0; font-size: 15px; line-height: 1.8; color: #3B3937;">
+                  <strong>1:1 consulting</strong> - Personalized guidance for your brand's unique challenges
+                </p>
+                <p style="margin: 0; font-size: 15px; line-height: 1.8; color: #3B3937;">
+                  <strong>Studio Systems membership</strong> - Ongoing support and community for designers building intentionally
+                </p>
+              </div>
+
+              <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.8; color: #967F71;">
+                Want to explore further?
+              </p>
+
+              <!-- Links -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 32px;">
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <a href="${BASE_URL}/quiz" style="color: #CDA7B2; font-size: 15px; text-decoration: none;">
+                      → Take our Designer Archetype Quiz
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <a href="${BASE_URL}/products" style="color: #CDA7B2; font-size: 15px; text-decoration: none;">
+                      → Browse production tools + templates
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <a href="${BASE_URL}/studio-systems" style="color: #CDA7B2; font-size: 15px; text-decoration: none;">
+                      → Learn about Studio Systems
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #967F71; font-style: italic;">
+                No pressure. Just an open door whenever you're ready.
+              </p>
+
+              <p style="margin: 32px 0 0 0; font-size: 16px; color: #3B3937;">
+                Warmly,
+              </p>
+              <p style="margin: 4px 0 0 0; font-size: 18px; color: #CDA7B2; font-style: italic;">
+                Kerri
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 40px; background-color: #f5f0ea; text-align: center;">
+              <p style="margin: 0; font-size: 12px; color: #967F71;">
+                Oceo Luxe | Structure as Support
+              </p>
+              <p style="margin: 8px 0 0 0; font-size: 12px; color: #967F71;">
+                <a href="${BASE_URL}" style="color: #967F71; text-decoration: none;">oceoluxe.com</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `;
+
+  const text = `Hi ${firstName},
+
+Thanks for testing your fashion knowledge with our Signature Style Quiz. Whether you aced it or discovered some new design history, we're glad you stopped by.
+
+At Oceo Luxe, we help independent fashion designers build sustainable production systems - the behind-the-scenes structure that lets creativity flourish.
+
+---
+
+WHAT WE OFFER
+
+Production tools & templates - Tech packs, costing sheets, and systems to streamline your workflow
+
+1:1 consulting - Personalized guidance for your brand's unique challenges
+
+Studio Systems membership - Ongoing support and community for designers building intentionally
+
+---
+
+Want to explore further?
+
+→ Take our Designer Archetype Quiz: ${BASE_URL}/quiz
+→ Browse production tools + templates: ${BASE_URL}/products
+→ Learn about Studio Systems: ${BASE_URL}/studio-systems
+
+No pressure. Just an open door whenever you're ready.
+
+Warmly,
+Kerri
+
+---
+Oceo Luxe | Structure as Support
+oceoluxe.com
+`;
+
+  return sendEmail({
+    to,
+    subject,
+    html,
+    text,
+  });
+}
+
+// Signature Style Quiz Results Email (with score)
+interface SendSignatureStyleResultsEmailParams {
+  to: string;
+  name: string | null;
+  score: number;
+  totalQuestions: number;
+}
+
+function getResultTitle(score: number, totalQuestions: number): { emoji: string; title: string; message: string } {
+  const percentage = (score / totalQuestions) * 100;
+  if (percentage === 100) {
+    return {
+      emoji: "👑",
+      title: "Fashion Connoisseur!",
+      message: "Perfect score! You have an encyclopedic knowledge of fashion history and iconic design signatures."
+    };
+  } else if (percentage >= 80) {
+    return {
+      emoji: "✨",
+      title: "Style Expert!",
+      message: "Impressive! Your knowledge of fashion's most iconic signatures is nearly flawless."
+    };
+  } else if (percentage >= 60) {
+    return {
+      emoji: "🌟",
+      title: "Fashion Enthusiast!",
+      message: "Well done! You clearly have a strong appreciation for fashion history and design."
+    };
+  } else if (percentage >= 40) {
+    return {
+      emoji: "💫",
+      title: "Emerging Connoisseur!",
+      message: "Not bad! You know your fashion basics, with room to explore more iconic design signatures."
+    };
+  } else {
+    return {
+      emoji: "🌱",
+      title: "Fashion Curious!",
+      message: "Every expert starts somewhere! This quiz is a great beginning to exploring fashion's rich history."
+    };
+  }
+}
+
+export async function sendSignatureStyleResultsEmail({ to, name, score, totalQuestions }: SendSignatureStyleResultsEmailParams) {
+  const firstName = name || 'there';
+  const result = getResultTitle(score, totalQuestions);
+
+  const subject = `Your Signature Style Quiz Results ${result.emoji}`;
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Quiz Results</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #faf8f5; font-family: Georgia, 'Times New Roman', serif;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #faf8f5;">
+    <tr>
+      <td style="padding: 40px 20px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding: 40px 40px 20px 40px; text-align: center;">
+              <h1 style="margin: 0; font-size: 24px; font-weight: 300; color: #3B3937; letter-spacing: 2px;">OCEO LUXE</h1>
+            </td>
+          </tr>
+
+          <!-- Results Badge -->
+          <tr>
+            <td style="padding: 0 40px 20px 40px; text-align: center;">
+              <div style="display: inline-block; background: linear-gradient(135deg, #faf8f5 0%, #f5f0ea 100%); border-radius: 12px; padding: 20px 32px; border: 1px solid #e8e4e1;">
+                <span style="font-size: 40px;">${result.emoji}</span>
+                <p style="margin: 8px 0 0 0; font-size: 14px; color: #967F71; text-transform: uppercase; letter-spacing: 2px;">Your Result</p>
+                <p style="margin: 4px 0 0 0; font-size: 24px; color: #3B3937; font-style: italic;">${result.title}</p>
+                <p style="margin: 12px 0 0 0; font-size: 20px; color: #CDA7B2; font-weight: 600;">${score} out of ${totalQuestions} correct</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding: 20px 40px 40px 40px;">
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #3B3937;">
+                Hi ${firstName},
+              </p>
+
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #3B3937;">
+                ${result.message}
+              </p>
+
+              <!-- Answer Key -->
+              <div style="background-color: #faf8f5; border-radius: 12px; padding: 24px; margin-bottom: 24px; border-left: 3px solid #CDA7B2;">
+                <p style="margin: 0 0 16px 0; font-size: 14px; color: #CDA7B2; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
+                  Answer Key
+                </p>
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 15px; color: #3B3937;"><strong>1.</strong> Dior - "The New Look" (1947)</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 15px; color: #3B3937;"><strong>2.</strong> Chanel - Quilted bags with chain straps</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 15px; color: #3B3937;"><strong>3.</strong> Christian Louboutin - Red lacquered soles</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 15px; color: #3B3937;"><strong>4.</strong> Burberry - The iconic check pattern</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; font-size: 15px; color: #3B3937;"><strong>5.</strong> Alexander McQueen - Skull motifs & theatrical shows</td>
+                  </tr>
+                </table>
+              </div>
+
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #3B3937;">
+                At Oceo Luxe, we help independent fashion designers build sustainable production systems - the behind-the-scenes structure that lets creativity flourish.
+              </p>
+
+              <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.8; color: #967F71;">
+                Want to explore further?
+              </p>
+
+              <!-- Links -->
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 32px;">
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <a href="${BASE_URL}/quiz" style="color: #CDA7B2; font-size: 15px; text-decoration: none;">
+                      → Take our Designer Archetype Quiz
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <a href="${BASE_URL}/products" style="color: #CDA7B2; font-size: 15px; text-decoration: none;">
+                      → Browse production tools + templates
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <a href="${BASE_URL}/studio-systems" style="color: #CDA7B2; font-size: 15px; text-decoration: none;">
+                      → Learn about Studio Systems
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.8; color: #967F71; font-style: italic;">
+                No pressure. Just an open door whenever you're ready.
+              </p>
+
+              <p style="margin: 32px 0 0 0; font-size: 16px; color: #3B3937;">
+                Warmly,
+              </p>
+              <p style="margin: 4px 0 0 0; font-size: 18px; color: #CDA7B2; font-style: italic;">
+                Kerri
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 40px; background-color: #f5f0ea; text-align: center;">
+              <p style="margin: 0; font-size: 12px; color: #967F71;">
+                Oceo Luxe | Structure as Support
+              </p>
+              <p style="margin: 8px 0 0 0; font-size: 12px; color: #967F71;">
+                <a href="${BASE_URL}" style="color: #967F71; text-decoration: none;">oceoluxe.com</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `;
+
+  const text = `Hi ${firstName},
+
+YOUR SIGNATURE STYLE QUIZ RESULTS
+${result.emoji} ${result.title}
+Score: ${score} out of ${totalQuestions} correct
+
+${result.message}
+
+---
+
+ANSWER KEY
+
+1. Dior - "The New Look" (1947)
+2. Chanel - Quilted bags with chain straps
+3. Christian Louboutin - Red lacquered soles
+4. Burberry - The iconic check pattern
+5. Alexander McQueen - Skull motifs & theatrical shows
+
+---
+
+At Oceo Luxe, we help independent fashion designers build sustainable production systems - the behind-the-scenes structure that lets creativity flourish.
+
+Want to explore further?
+
+→ Take our Designer Archetype Quiz: ${BASE_URL}/quiz
+→ Browse production tools + templates: ${BASE_URL}/products
+→ Learn about Studio Systems: ${BASE_URL}/studio-systems
+
+No pressure. Just an open door whenever you're ready.
+
+Warmly,
+Kerri
+
+---
+Oceo Luxe | Structure as Support
+oceoluxe.com
+`;
+
+  return sendEmail({
+    to,
+    subject,
+    html,
+    text,
+  });
+}
