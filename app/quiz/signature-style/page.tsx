@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Check, X, Loader2 } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
@@ -84,16 +84,33 @@ export default function SignatureStyleQuizPage() {
     setShowFeedback(true);
 
     const isCorrect = questions[currentQ].options[index].correct;
+    const newScore = isCorrect ? score + 1 : score;
+
     if (isCorrect) {
-      setScore(score + 1);
+      setScore(newScore);
     }
 
-    setTimeout(() => {
+    setTimeout(async () => {
       if (currentQ < questions.length - 1) {
         setCurrentQ(currentQ + 1);
         setSelectedAnswer(null);
         setShowFeedback(false);
       } else {
+        // Quiz complete - send results email before showing results
+        try {
+          await fetch('/api/quiz/signature-style/results', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              name,
+              score: newScore,
+              totalQuestions: questions.length,
+            }),
+          });
+        } catch (error) {
+          console.error('Failed to send results email:', error);
+        }
         setQuizState('result');
       }
     }, 2000);
@@ -126,29 +143,6 @@ export default function SignatureStyleQuizPage() {
       setIsSubmitting(false);
     }
   };
-
-  // Send results email when quiz is completed
-  useEffect(() => {
-    if (quizState === 'result' && email) {
-      const sendResultsEmail = async () => {
-        try {
-          await fetch('/api/quiz/signature-style/results', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email,
-              name,
-              score,
-              totalQuestions: questions.length,
-            }),
-          });
-        } catch (error) {
-          console.error('Failed to send results email:', error);
-        }
-      };
-      sendResultsEmail();
-    }
-  }, [quizState, email, name, score]);
 
   const restart = () => {
     setCurrentQ(0);
