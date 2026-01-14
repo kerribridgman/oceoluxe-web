@@ -4,6 +4,18 @@ import { db } from '@/lib/db/drizzle';
 import { emailList } from '@/lib/db/schema';
 import { sendEmail } from '@/lib/email/sendgrid';
 
+// HTML escape function to prevent XSS/injection in email templates
+function escapeHtml(text: string): string {
+  const htmlEntities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
+}
+
 // POST /api/email-list/subscribe - Subscribe to email list
 export async function POST(request: NextRequest) {
   try {
@@ -50,6 +62,9 @@ export async function POST(request: NextRequest) {
       source: 'website_signup',
     });
 
+    // Escape user-provided content for safe HTML rendering
+    const safeFirstName = firstName ? escapeHtml(firstName) : '';
+
     // Send welcome email
     await sendEmail({
       to: email,
@@ -79,7 +94,7 @@ export async function POST(request: NextRequest) {
                   <tr>
                     <td style="padding: 40px;">
                       <p style="margin: 0 0 20px; color: #3B3937; font-size: 16px; line-height: 1.6;">
-                        Hi${firstName ? ` ${firstName}` : ''},
+                        Hi${safeFirstName ? ` ${safeFirstName}` : ''},
                       </p>
 
                       <p style="margin: 0 0 20px; color: #3B3937; font-size: 16px; line-height: 1.6;">

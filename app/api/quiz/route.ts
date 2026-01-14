@@ -3,10 +3,22 @@ import { db } from '@/lib/db/drizzle';
 import { quizLeads } from '@/lib/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { sendQuizResultEmail } from '@/lib/email/quiz-email';
+import { getUser } from '@/lib/db/queries';
 
-// GET /api/quiz - Get all quiz leads
+// GET /api/quiz - Get all quiz leads (admin only)
 export async function GET() {
   try {
+    const user = await getUser();
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Only allow admin or owner roles to access lead data
+    if (user.role !== 'owner' && user.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
     const allQuizLeads = await db
       .select()
       .from(quizLeads)
@@ -16,7 +28,7 @@ export async function GET() {
   } catch (error: any) {
     console.error('Error fetching quiz leads:', error);
     return NextResponse.json(
-      { message: error.message || 'Failed to fetch quiz leads' },
+      { message: 'Failed to fetch quiz leads' },
       { status: 500 }
     );
   }

@@ -4,9 +4,20 @@ import { db } from '@/lib/db/drizzle';
 import { leads, leadStatusEnum, users } from '@/lib/db/schema';
 import { getUser } from '@/lib/db/queries';
 
-// GET /api/leads - Get all leads
+// GET /api/leads - Get all leads (admin only)
 export async function GET(request: NextRequest) {
   try {
+    const user = await getUser();
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Only allow admin or owner roles to access lead data
+    if (user.role !== 'owner' && user.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
     const allLeads = await db
       .select({
         id: leads.id,
@@ -30,7 +41,7 @@ export async function GET(request: NextRequest) {
   } catch (error: any) {
     console.error('Error fetching leads:', error);
     return NextResponse.json(
-      { message: error.message || 'Failed to fetch leads' },
+      { message: 'Failed to fetch leads' },
       { status: 500 }
     );
   }

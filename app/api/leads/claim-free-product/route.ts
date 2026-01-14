@@ -5,6 +5,18 @@ import { leads } from '@/lib/db/schema';
 import { getFreeNotionProductConfig } from '@/lib/config/notion-product-prices';
 import { sendEmail } from '@/lib/email/sendgrid';
 
+// HTML escape function to prevent XSS/injection in email templates
+function escapeHtml(text: string): string {
+  const htmlEntities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
+}
+
 // POST /api/leads/claim-free-product - Save lead and send delivery email
 export async function POST(request: NextRequest) {
   try {
@@ -59,10 +71,14 @@ export async function POST(request: NextRequest) {
       source: 'free_product',
     }).returning();
 
+    // Escape user-provided content for safe HTML rendering
+    const safeName = name ? escapeHtml(name) : '';
+    const safeProductName = escapeHtml(productName);
+
     // Send the delivery email
     const emailResult = await sendEmail({
       to: email,
-      subject: `Your Free Download: ${productName}`,
+      subject: `Your Free Download: ${safeProductName}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -88,11 +104,11 @@ export async function POST(request: NextRequest) {
                   <tr>
                     <td style="padding: 40px;">
                       <p style="margin: 0 0 20px; color: #3B3937; font-size: 16px; line-height: 1.6;">
-                        Hi${name ? ` ${name}` : ''},
+                        Hi${safeName ? ` ${safeName}` : ''},
                       </p>
 
                       <p style="margin: 0 0 20px; color: #3B3937; font-size: 16px; line-height: 1.6;">
-                        Thank you for downloading <strong>${productName}</strong>! Click the button below to access your free resource:
+                        Thank you for downloading <strong>${safeProductName}</strong>! Click the button below to access your free resource:
                       </p>
 
                       <!-- CTA Button -->

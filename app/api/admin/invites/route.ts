@@ -6,14 +6,16 @@ import { getUser } from '@/lib/db/queries';
 import { randomBytes } from 'crypto';
 import { sendEmail } from '@/lib/email/sendgrid';
 
-// Only these emails can send admin invitations
-const AUTHORIZED_ADMIN_EMAILS = ['kerrib@oceoluxe.com'];
-
 export async function GET() {
   try {
     const user = await getUser();
-    if (!user || !AUTHORIZED_ADMIN_EMAILS.includes(user.email)) {
+    if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Only owner role can manage admin invitations
+    if (user.role !== 'owner') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const allInvitations = await db
@@ -41,8 +43,13 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const user = await getUser();
-    if (!user || !AUTHORIZED_ADMIN_EMAILS.includes(user.email)) {
-      return NextResponse.json({ error: 'Unauthorized - only kerrib@oceoluxe.com can send invitations' }, { status: 401 });
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Only owner role can send admin invitations
+    if (user.role !== 'owner') {
+      return NextResponse.json({ error: 'Forbidden - only owners can send admin invitations' }, { status: 403 });
     }
 
     const body = await request.json();

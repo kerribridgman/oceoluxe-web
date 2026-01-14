@@ -66,7 +66,9 @@ export async function middleware(request: NextRequest) {
 
   let res = NextResponse.next();
 
-  if (sessionCookie && request.method === 'GET') {
+  // Refresh session on all requests (not just GET) to keep sessions active
+  // This prevents sessions from expiring during active use with POST/PUT/DELETE
+  if (sessionCookie) {
     try {
       const parsed = await verifyToken(sessionCookie.value);
 

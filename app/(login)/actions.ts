@@ -19,13 +19,27 @@ import {
 import { setSession } from '@/lib/auth/session';
 import { comparePasswords, hashPassword } from '@/lib/auth/password';
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { createCheckoutSession } from '@/lib/payments/stripe';
 import { getUser, getUserWithTeam } from '@/lib/db/queries';
 import {
   validatedAction,
   validatedActionWithUser
 } from '@/lib/auth/middleware';
+import {
+  checkRateLimit,
+  resetRateLimit,
+  getAuthRateLimitKey,
+  AUTH_RATE_LIMITS
+} from '@/lib/auth/rate-limit';
+
+// Helper to get client IP from headers
+async function getClientIp(): Promise<string> {
+  const headersList = await headers();
+  return headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+         headersList.get('x-real-ip') ||
+         'unknown';
+}
 
 async function logActivity(
   teamId: number | null | undefined,
@@ -52,6 +66,20 @@ const signInSchema = z.object({
 
 export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const { email, password } = data;
+
+  // Rate limit check
+  const clientIp = await getClientIp();
+  const rateLimitKey = getAuthRateLimitKey(clientIp, email);
+  const rateLimit = checkRateLimit(rateLimitKey, AUTH_RATE_LIMITS.login);
+
+  if (!rateLimit.allowed) {
+    const minutesLeft = Math.ceil(rateLimit.resetIn / 60000);
+    return {
+      error: `Too many login attempts. Please try again in ${minutesLeft} minute${minutesLeft === 1 ? '' : 's'}.`,
+      email,
+      password
+    };
+  }
 
   const userWithTeam = await db
     .select({
@@ -92,6 +120,9 @@ export const signIn = validatedAction(signInSchema, async (data, formData) => {
     logActivity(foundTeam?.id, foundUser.id, ActivityType.SIGN_IN)
   ]);
 
+  // Reset rate limit on successful login
+  resetRateLimit(rateLimitKey);
+
   const redirectTo = formData.get('redirect') as string | null;
   if (redirectTo === 'checkout') {
     const priceId = formData.get('priceId') as string;
@@ -116,6 +147,20 @@ const signUpSchema = z.object({
 
 export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { email, password, inviteId } = data;
+
+  // Rate limit check for signups (per IP)
+  const clientIp = await getClientIp();
+  const rateLimitKey = `signup:${clientIp}`;
+  const rateLimit = checkRateLimit(rateLimitKey, AUTH_RATE_LIMITS.signup);
+
+  if (!rateLimit.allowed) {
+    const minutesLeft = Math.ceil(rateLimit.resetIn / 60000);
+    return {
+      error: `Too many signup attempts. Please try again in ${minutesLeft} minute${minutesLeft === 1 ? '' : 's'}.`,
+      email,
+      password
+    };
+  }
 
   const existingUser = await db
     .select()

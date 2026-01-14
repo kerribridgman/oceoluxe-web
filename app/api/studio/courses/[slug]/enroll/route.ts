@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/drizzle';
 import { getUser } from '@/lib/db/queries';
-import { courses, enrollments } from '@/lib/db/schema';
+import { courses, enrollments, educationSubscriptions } from '@/lib/db/schema';
 import { eq, and } from 'drizzle-orm';
 
 export async function POST(
@@ -38,8 +38,21 @@ export async function POST(
       return NextResponse.json({ message: 'Already enrolled' });
     }
 
-    // TODO: Add subscription check here
-    // If course requires subscription and user doesn't have one, return error
+    // Check if user has an active subscription
+    const subscription = await db.query.educationSubscriptions.findFirst({
+      where: eq(educationSubscriptions.userId, user.id),
+    });
+
+    // Verify subscription is active (active or trialing status)
+    const hasActiveSubscription = subscription &&
+      (subscription.status === 'active' || subscription.status === 'trialing');
+
+    if (!hasActiveSubscription) {
+      return NextResponse.json(
+        { error: 'Active subscription required to enroll in courses' },
+        { status: 403 }
+      );
+    }
 
     // Create enrollment
     await db.insert(enrollments).values({

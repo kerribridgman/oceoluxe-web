@@ -13,13 +13,18 @@ function generateSlug(name: string): string {
     .replace(/^-|-$/g, '');
 }
 
-// GET /api/dashboard-products - Get all dashboard products (admin)
+// GET /api/dashboard-products - Get all dashboard products (admin only)
 export async function GET(request: NextRequest) {
   try {
     const user = await getUser();
 
     if (!user) {
-      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Only allow admin or owner roles to access dashboard products
+    if (user.role !== 'owner' && user.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const products = await getAllDashboardProducts();
@@ -28,19 +33,24 @@ export async function GET(request: NextRequest) {
   } catch (error: any) {
     console.error('Error fetching dashboard products:', error);
     return NextResponse.json(
-      { message: error.message || 'Failed to fetch products' },
+      { message: 'Failed to fetch products' },
       { status: 500 }
     );
   }
 }
 
-// POST /api/dashboard-products - Create a new dashboard product
+// POST /api/dashboard-products - Create a new dashboard product (admin only)
 export async function POST(request: NextRequest) {
   try {
     const user = await getUser();
 
     if (!user) {
-      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Only allow admin or owner roles to create products
+    if (user.role !== 'owner' && user.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const body = await request.json();
