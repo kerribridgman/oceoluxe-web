@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db/drizzle';
-import { leads, quizLeads, educationSubscriptions, clients, emailTemplates, campaigns, dripCampaigns, emailSends } from '@/lib/db/schema';
+import { leads, quizLeads, educationSubscriptions, clients, emailTemplates, campaigns, dripCampaigns, emailSends, emailList } from '@/lib/db/schema';
 import { count, sql, gte, and, eq } from 'drizzle-orm';
 
 export async function GET() {
@@ -11,6 +11,7 @@ export async function GET() {
       quizLeadsResult,
       membersResult,
       clientsResult,
+      websiteSignupsResult,
       templatesResult,
       campaignsResult,
       dripsResult,
@@ -21,6 +22,8 @@ export async function GET() {
       db.select({ count: count() }).from(quizLeads),
       db.select({ count: count() }).from(educationSubscriptions).where(eq(educationSubscriptions.status, 'active')),
       db.select({ count: count() }).from(clients).where(eq(clients.status, 'active')),
+      // Website email signups (from popup or /join page)
+      db.select({ count: count() }).from(emailList).where(eq(emailList.source, 'website_signup')),
       db.select({ count: count() }).from(emailTemplates).where(eq(emailTemplates.isActive, true)),
       db.select({ count: count() }).from(campaigns).where(eq(campaigns.status, 'sent')),
       db.select({ count: count() }).from(dripCampaigns).where(eq(dripCampaigns.isActive, true)),
@@ -42,7 +45,8 @@ export async function GET() {
     const totalQuizLeads = quizLeadsResult[0]?.count || 0;
     const totalMembers = membersResult[0]?.count || 0;
     const totalClients = clientsResult[0]?.count || 0;
-    const totalContacts = totalLeads + totalQuizLeads + totalMembers + totalClients;
+    const totalWebsiteSignups = websiteSignupsResult[0]?.count || 0;
+    const totalContacts = totalLeads + totalQuizLeads + totalMembers + totalClients + totalWebsiteSignups;
 
     const totalTemplates = templatesResult[0]?.count || 0;
     const totalCampaigns = campaignsResult[0]?.count || 0;
@@ -63,6 +67,7 @@ export async function GET() {
       totalQuizLeads,
       totalMembers,
       totalClients,
+      totalWebsiteSignups,
       totalTemplates,
       totalCampaigns,
       totalDrips,

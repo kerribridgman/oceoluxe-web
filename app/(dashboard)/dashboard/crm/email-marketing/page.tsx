@@ -24,6 +24,7 @@ interface EmailStats {
   totalQuizLeads: number;
   totalMembers: number;
   totalClients: number;
+  totalWebsiteSignups: number;
   totalTemplates: number;
   totalCampaigns: number;
   totalDrips: number;
@@ -162,7 +163,13 @@ export default function EmailMarketingPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="text-center p-4 bg-[#faf8f5] rounded-lg">
+              <p className="text-2xl font-semibold text-[#3B3937]">
+                {isLoading ? '...' : stats?.totalWebsiteSignups || 0}
+              </p>
+              <p className="text-sm text-[#967F71]">Email Signups</p>
+            </div>
             <div className="text-center p-4 bg-[#faf8f5] rounded-lg">
               <p className="text-2xl font-semibold text-[#3B3937]">
                 {isLoading ? '...' : stats?.totalLeads || 0}

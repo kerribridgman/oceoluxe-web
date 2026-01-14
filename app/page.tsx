@@ -5,6 +5,7 @@ import { Check, ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { WhoIHelpSection } from '@/components/marketing/who-i-help-section';
+import { EmailSignupModal } from '@/components/marketing/email-signup-modal';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata() {
@@ -257,6 +258,9 @@ export default async function HomePage() {
       </section>
 
       <MarketingFooter />
+
+      {/* Email Signup Popup Modal */}
+      <EmailSignupModal />
     </div>
   );
 }

@@ -101,6 +101,11 @@ export function MarketingFooter() {
                   Resources
                 </Link>
               </li>
+              <li>
+                <Link href="/join" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                  Join Email List
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
