@@ -373,8 +373,8 @@ export default function BlogManagementPage() {
                       )}
                       <span>
                         {post.isPublished && post.publishedAt
-                          ? `Published ${new Date(post.publishedAt).toLocaleDateString()}`
-                          : `Created ${new Date(post.createdAt).toLocaleDateString()}`}
+                          ? `Published ${new Date(post.publishedAt).toLocaleDateString('en-US', { timeZone: 'America/New_York' })}`
+                          : `Created ${new Date(post.createdAt).toLocaleDateString('en-US', { timeZone: 'America/New_York' })}`}
                       </span>
                     </div>
                   </div>
