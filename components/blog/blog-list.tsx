@@ -5,6 +5,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
+// Format date using UTC to avoid timezone shifts for date-only values
+function formatBlogDate(date: Date | string): string {
+  const d = new Date(date);
+  // Add 12 hours to prevent timezone shift causing day change
+  const adjusted = new Date(d.getTime() + 12 * 60 * 60 * 1000);
+  return adjusted.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
 interface BlogPost {
   id: number;
   slug: string;
@@ -62,14 +75,7 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
               )}
               <div className="space-y-1 flex-1 min-w-0">
                 <p className="text-xs text-[#CDA7B2] font-medium uppercase tracking-wider">
-                  {post.publishedAt
-                    ? new Date(post.publishedAt).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric',
-                        timeZone: 'America/New_York',
-                      })
-                    : 'Draft'}
+                  {post.publishedAt ? formatBlogDate(post.publishedAt) : 'Draft'}
                 </p>
                 <h2 className="text-base font-medium text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors leading-snug">
                   {post.title}

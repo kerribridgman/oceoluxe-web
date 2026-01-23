@@ -8,6 +8,19 @@ import { ArrowLeft } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
+// Format date using UTC to avoid timezone shifts for date-only values
+function formatBlogDate(date: Date | string, format: 'short' | 'long' = 'long'): string {
+  const d = new Date(date);
+  // Add 12 hours to prevent timezone shift causing day change
+  const adjusted = new Date(d.getTime() + 12 * 60 * 60 * 1000);
+  return adjusted.toLocaleDateString('en-US', {
+    month: format === 'short' ? 'short' : 'long',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -143,12 +156,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <>
                   <span className="text-[#CDA7B2]">—</span>
                   <time dateTime={new Date(post.publishedAt).toISOString()}>
-                    {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                      timeZone: 'America/New_York',
-                    })}
+                    {formatBlogDate(post.publishedAt)}
                   </time>
                 </>
               )}
