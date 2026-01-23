@@ -16,20 +16,38 @@ export default async function StudioSystemsPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <section className="bg-[#faf8f5]">
+      <section className="bg-[#faf8f5] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="space-y-6">
-              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium">
+            <div className="space-y-6 relative">
+              {/* Decorative circle - top right */}
+              <div
+                className="absolute -top-4 right-0 w-20 h-20 rounded-full bg-[#CDA7B2] opacity-20 animate-float hidden lg:block"
+                aria-hidden="true"
+              />
+              {/* Decorative circle - left side */}
+              <div
+                className="absolute top-1/3 -left-12 w-14 h-14 rounded-full bg-[#967F71] opacity-15 animate-float-slow hidden lg:block"
+                aria-hidden="true"
+              />
+              {/* Decorative circle - bottom left */}
+              <div
+                className="absolute bottom-8 -left-6 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-25 animate-float-delayed hidden lg:block"
+                aria-hidden="true"
+              />
+
+              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium animate-in fade-in slide-in-from-bottom-4 duration-500">
                 Studio Systems Membership
               </p>
-              <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight">
+              {/* Decorative line under tagline */}
+              <div className="w-16 h-0.5 bg-[#CDA7B2] opacity-60 -mt-2" aria-hidden="true" />
+              <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
                 Structure as support for designers and visionaries.
               </h1>
-              <p className="text-xl text-[#967F71] font-light leading-relaxed">
+              <p className="text-xl text-[#967F71] font-light leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
                 Stop spinning in overwhelm and finally bring your ideas to life with systems that feel like luxury.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row gap-4 pt-2 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300">
                 <Link href="/studio-systems/waitlist">
                   <Button
                     size="lg"
@@ -51,12 +69,28 @@ export default async function StudioSystemsPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden relative">
+              {/* Large decorative circle - behind image */}
+              <div
+                className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-[#967F71] opacity-10 animate-float-slow hidden lg:block"
+                aria-hidden="true"
+              />
+              {/* Small decorative circle - corner accent */}
+              <div
+                className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-[#CDA7B2] opacity-30 animate-float-delayed hidden lg:block"
+                aria-hidden="true"
+              />
+              {/* Diagonal line accent */}
+              <div
+                className="absolute -bottom-6 right-8 w-24 h-0.5 bg-[#CDA7B2] opacity-40 rotate-45 hidden lg:block"
+                aria-hidden="true"
+              />
+
+              <div className="aspect-[4/5] overflow-hidden relative z-10 rounded-lg">
                 <Image
                   src="/images/hero-workspace.jpg"
                   alt="Fashion design workspace"
                   fill
-                  className="object-cover"
+                  className="object-cover rounded-lg"
                   quality={95}
                   priority
                 />
@@ -103,12 +137,12 @@ export default async function StudioSystemsPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="lg:order-2">
-              <div className="aspect-square overflow-hidden relative">
+              <div className="aspect-square overflow-hidden relative rounded-lg">
                 <Image
                   src="/images/sewing-machine.png"
                   alt="Hands working on sewing machine"
                   fill
-                  className="object-cover"
+                  className="object-cover rounded-lg"
                   quality={95}
                 />
               </div>
@@ -316,12 +350,12 @@ export default async function StudioSystemsPage() {
                 — Studio Systems by Oceo Luxe
               </p>
             </div>
-            <div className="aspect-square overflow-hidden relative">
+            <div className="aspect-square overflow-hidden relative rounded-lg">
               <Image
                 src="/images/runway.png"
                 alt="Fashion runway show"
                 fill
-                className="object-cover"
+                className="object-cover rounded-lg"
                 quality={95}
               />
             </div>

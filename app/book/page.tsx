@@ -34,14 +34,32 @@ export default function BookPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 flex flex-col">
       <MarketingHeader />
 
-      <main className="flex-1 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      <main className="flex-1 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-4xl mx-auto relative">
+          {/* Decorative circles */}
+          <div
+            className="absolute top-0 right-0 w-20 h-20 rounded-full bg-[#CDA7B2] opacity-15 animate-float hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-1/4 -left-16 w-14 h-14 rounded-full bg-[#CDA7B2] opacity-10 animate-float-slow hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-48 -left-8 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-20 animate-float-delayed hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-32 right-8 w-10 h-10 rounded-full bg-[#967F71] opacity-10 animate-float hidden lg:block"
+            aria-hidden="true"
+          />
+
           {/* Header - Visitor focused */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
               Let's Connect
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
               Ready to bring clarity to your creative business? Choose the conversation
               that feels right for where you are right now.
             </p>

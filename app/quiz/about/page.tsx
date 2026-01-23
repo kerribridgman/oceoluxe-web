@@ -36,19 +36,37 @@ export default function QuizAboutPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <section className="bg-[#f5f0ea] py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6">
+      <section className="bg-[#f5f0ea] py-20 overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 text-center relative">
+          {/* Decorative circles */}
+          <div
+            className="absolute top-4 right-4 w-20 h-20 rounded-full bg-[#CDA7B2] opacity-20 animate-float hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-1/3 -left-8 w-14 h-14 rounded-full bg-[#967F71] opacity-15 animate-float-slow hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute bottom-8 left-8 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-25 animate-float-delayed hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute bottom-4 right-16 w-12 h-12 rounded-full bg-[#967F71] opacity-10 animate-float hidden lg:block"
+            aria-hidden="true"
+          />
+
+          <div className="inline-block bg-[#CDA7B2]/10 px-6 py-2 rounded-full mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <span className="text-[#CDA7B2] font-medium text-sm tracking-wide">Free 2-Minute Quiz</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#3B3937] mb-6 leading-tight animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
             What Kind of Designer Are You?
           </h1>
-          <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-2xl mx-auto mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
             Discover your Designer Archetype and finally understand why some production strategies
             feel natural while others drain your creative energy.
           </p>
-          <Link href="/quiz">
+          <Link href="/quiz" className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300">
             <Button
               size="lg"
               className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-16 px-12 text-xl font-light group"

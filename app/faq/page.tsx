@@ -88,12 +88,30 @@ export default function FAQPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <section className="bg-[#f5f0ea]">
-        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
-          <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6">
+      <section className="bg-[#f5f0ea] overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 py-16 text-center relative">
+          {/* Decorative circles */}
+          <div
+            className="absolute top-8 right-4 w-20 h-20 rounded-full bg-[#CDA7B2] opacity-20 animate-float hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-1/3 -left-8 w-14 h-14 rounded-full bg-[#967F71] opacity-15 animate-float-slow hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute bottom-8 left-8 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-25 animate-float-delayed hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute bottom-4 right-16 w-12 h-12 rounded-full bg-[#967F71] opacity-10 animate-float hidden lg:block"
+            aria-hidden="true"
+          />
+
+          <h1 className="text-5xl md:text-6xl font-serif font-light text-[#3B3937] mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             Frequently Asked Questions
           </h1>
-          <p className="text-xl text-[#967F71] font-light leading-relaxed">
+          <p className="text-xl text-[#967F71] font-light leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
             Common questions from designers navigating production for the first time.
           </p>
         </div>

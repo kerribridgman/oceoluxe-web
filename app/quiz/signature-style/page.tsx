@@ -334,16 +334,30 @@ export default function SignatureStyleQuizPage() {
 
   // Questions screen
   return (
-    <div className="min-h-screen bg-[#f4f4f4]">
+    <div className="min-h-screen bg-[#f4f4f4] overflow-hidden">
       <MarketingHeader />
 
-      <div className="max-w-2xl mx-auto px-4 py-16">
+      <div className="max-w-2xl mx-auto px-4 py-16 relative">
+        {/* Decorative circles */}
+        <div
+          className="absolute top-8 right-0 w-16 h-16 rounded-full bg-[#CDA7B2] opacity-20 animate-float hidden lg:block"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute top-24 -left-12 w-12 h-12 rounded-full bg-[#967F71] opacity-15 animate-float-slow hidden lg:block"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute bottom-1/3 -right-8 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-25 animate-float-delayed hidden lg:block"
+          aria-hidden="true"
+        />
+
         <div className="text-center mb-10">
-          <p className="text-[#967f71] text-xs tracking-[3px] mb-2 uppercase">Oceo Luxe Presents</p>
-          <h1 className="text-[#3b3937] text-3xl font-serif font-light italic mb-2">
+          <p className="text-[#967f71] text-xs tracking-[3px] mb-2 uppercase animate-in fade-in slide-in-from-bottom-4 duration-500">Oceo Luxe Presents</p>
+          <h1 className="text-[#3b3937] text-3xl font-serif font-light italic mb-2 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
             Can You Identify the Signature Style?
           </h1>
-          <p className="text-[#967f71] text-sm">
+          <p className="text-[#967f71] text-sm animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
             Test your knowledge of fashion's most iconic design signatures
           </p>
         </div>

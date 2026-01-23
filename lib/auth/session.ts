@@ -41,6 +41,6 @@ export async function setSession(user: NewUser & { role?: string }) {
     expires: expiresInOneDay,
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    sameSite: 'strict', // Strict provides better CSRF protection
   });
 }

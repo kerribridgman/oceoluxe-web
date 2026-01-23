@@ -46,8 +46,21 @@ export default function JoinEmailListPage() {
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
-      <main className="py-16 lg:py-24">
-        <div className="max-w-xl mx-auto px-6">
+      <main className="py-16 lg:py-24 overflow-hidden">
+        <div className="max-w-xl mx-auto px-6 relative">
+          {/* Decorative circles */}
+          <div
+            className="absolute top-0 right-0 w-20 h-20 rounded-full bg-[#CDA7B2] opacity-20 animate-float hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute top-1/4 -left-16 w-14 h-14 rounded-full bg-[#967F71] opacity-15 animate-float-slow hidden lg:block"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute bottom-1/3 -left-8 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-25 animate-float-delayed hidden lg:block"
+            aria-hidden="true"
+          />
           {/* Back Link */}
           <Link
             href="/"
@@ -85,10 +98,10 @@ export default function JoinEmailListPage() {
                 <div className="w-12 h-12 bg-[#CDA7B2]/10 rounded-full flex items-center justify-center mb-6">
                   <Mail className="w-6 h-6 text-[#CDA7B2]" />
                 </div>
-                <h1 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-4 tracking-tight">
+                <h1 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-4 tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-500">
                   Join the Email List
                 </h1>
-                <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                <p className="text-lg text-[#967F71] font-light leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
                   Get production tips, industry insights, and early access to new resources for fashion designers.
                 </p>
               </div>
