@@ -156,7 +156,13 @@ export async function syncNotionBlogPosts(userId: number, onProgress?: ProgressC
         let publishedAt: Date | undefined;
         if (publishedProp) {
           if (publishedProp.type === 'date' && publishedProp.date) {
-            publishedAt = new Date(publishedProp.date.start);
+            const dateStr = publishedProp.date.start;
+            // If date-only (no time component), set to noon Eastern to prevent timezone shift
+            if (dateStr && !dateStr.includes('T')) {
+              publishedAt = new Date(`${dateStr}T12:00:00-05:00`);
+            } else {
+              publishedAt = new Date(dateStr);
+            }
           } else if (publishedProp.type === 'created_time' && 'created_time' in page) {
             publishedAt = new Date(page.created_time);
           }
