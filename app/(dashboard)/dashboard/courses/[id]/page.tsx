@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { ImageUpload } from '@/components/ui/image-upload';
 import {
   BookOpen,
   ArrowLeft,
@@ -356,11 +357,11 @@ export default function EditCoursePage({ params }: { params: Promise<{ id: strin
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="coverImageUrl">Cover Image URL</Label>
-                <Input
-                  id="coverImageUrl"
+                <Label>Cover Image</Label>
+                <ImageUpload
                   value={formData.coverImageUrl}
-                  onChange={(e) => setFormData({ ...formData, coverImageUrl: e.target.value })}
+                  onChange={(url) => setFormData({ ...formData, coverImageUrl: url })}
+                  folder="courses"
                 />
               </div>
 

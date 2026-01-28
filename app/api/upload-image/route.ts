@@ -47,11 +47,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Get optional folder from form data (default to 'uploads')
+    const folder = (formData.get('folder') as string) || 'uploads';
+
     // Generate unique filename
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(7);
     const extension = file.name.split('.').pop();
-    const filename = `blog-images/${timestamp}-${randomString}.${extension}`;
+    const filename = `${folder}/${timestamp}-${randomString}.${extension}`;
 
     // Upload to Vercel Blob
     const blob = await put(filename, file, {
