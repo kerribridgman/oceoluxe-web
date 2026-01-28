@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/db/queries';
 import { db } from '@/lib/db/drizzle';
-import { applications } from '@/lib/db/schema';
+import { applications, leads } from '@/lib/db/schema';
 import { desc } from 'drizzle-orm';
 import { sendEmail } from '@/lib/email/sendgrid';
 
@@ -54,6 +54,17 @@ export async function POST(request: NextRequest) {
       willingToInvest,
       additionalInfo: additionalInfo || null,
       status: 'pending',
+    });
+
+    // Also add to leads with "1 on 1 Client" status
+    await db.insert(leads).values({
+      email,
+      name,
+      instagramHandle: socialHandle,
+      productSlug: 'inquiry',
+      productName: '1:1 Client Inquiry',
+      source: 'inquiry',
+      status: 'one_on_one',
     });
 
     // Send notification email to admin

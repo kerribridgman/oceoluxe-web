@@ -37,6 +37,23 @@ interface Lead {
   createdAt: string;
 }
 
+interface Application {
+  id: number;
+  type: string;
+  name: string;
+  email: string;
+  phone: string;
+  socialHandle: string;
+  interest: string;
+  experiences: string;
+  growthAreas: string;
+  obstacles: string;
+  willingToInvest: string;
+  additionalInfo: string | null;
+  status: string;
+  createdAt: string;
+}
+
 interface Note {
   id: number;
   content: string;
@@ -66,6 +83,7 @@ export default function LeadDetailPage({
   const router = useRouter();
   const [lead, setLead] = useState<Lead | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [application, setApplication] = useState<Application | null>(null);
   const [newNote, setNewNote] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,6 +108,7 @@ export default function LeadDetailPage({
       const data = await res.json();
       setLead(data.lead);
       setNotes(data.notes || []);
+      setApplication(data.application || null);
     } catch (error: any) {
       console.error('Error fetching lead:', error);
       setError(error.message || 'Failed to load lead');
@@ -283,11 +302,11 @@ export default function LeadDetailPage({
 
               {!isQuizLead && lead.productName && (
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                    <Package className="w-5 h-5 text-blue-600" />
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${lead.productSlug === 'inquiry' ? 'bg-[#CDA7B2]/10' : 'bg-blue-100'}`}>
+                    <Package className={`w-5 h-5 ${lead.productSlug === 'inquiry' ? 'text-[#CDA7B2]' : 'text-blue-600'}`} />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Product Downloaded</p>
+                    <p className="text-sm text-gray-500">{lead.productSlug === 'inquiry' ? 'Inquiry Type' : 'Product Downloaded'}</p>
                     <p className="font-medium text-gray-900">{lead.productName}</p>
                   </div>
                 </div>
@@ -329,6 +348,53 @@ export default function LeadDetailPage({
               </a>
             </CardContent>
           </Card>
+
+          {/* Application Responses - Only show for inquiry leads */}
+          {application && (
+            <Card className="dashboard-card border-0">
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold text-gray-900">
+                  Application Responses
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Phone</p>
+                  <p className="text-gray-900">{application.phone}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Instagram</p>
+                  <p className="text-gray-900">{application.socialHandle}</p>
+                </div>
+                <div className="pt-2 border-t border-gray-100">
+                  <p className="text-sm font-medium text-gray-500 mb-1">About Their Brand</p>
+                  <p className="text-gray-700 text-sm whitespace-pre-wrap">{application.interest}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Brand Vision (1-2 Years)</p>
+                  <p className="text-gray-700 text-sm whitespace-pre-wrap">{application.experiences}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Areas Needing Support</p>
+                  <p className="text-gray-700 text-sm whitespace-pre-wrap">{application.growthAreas}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Current Challenges</p>
+                  <p className="text-gray-700 text-sm whitespace-pre-wrap">{application.obstacles}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500 mb-1">Ready to Invest?</p>
+                  <p className="text-gray-900">{application.willingToInvest === 'yes' ? 'Yes' : 'Not at this time'}</p>
+                </div>
+                {application.additionalInfo && (
+                  <div>
+                    <p className="text-sm font-medium text-gray-500 mb-1">Additional Info</p>
+                    <p className="text-gray-700 text-sm whitespace-pre-wrap">{application.additionalInfo}</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Notes Section */}

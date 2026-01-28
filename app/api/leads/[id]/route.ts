@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { eq } from 'drizzle-orm';
+import { eq, desc } from 'drizzle-orm';
 import { db } from '@/lib/db/drizzle';
-import { leads, leadNotes, leadStatusEnum } from '@/lib/db/schema';
+import { leads, leadNotes, leadStatusEnum, applications } from '@/lib/db/schema';
 import { getUser } from '@/lib/db/queries';
 
 // GET /api/leads/[id] - Get a single lead with notes
@@ -40,7 +40,19 @@ export async function GET(
       orderBy: (leadNotes, { desc }) => [desc(leadNotes.createdAt)],
     });
 
-    return NextResponse.json({ lead, notes });
+    // If this is an inquiry lead, fetch the associated application
+    let application = null;
+    if (lead.productSlug === 'inquiry') {
+      const [appData] = await db
+        .select()
+        .from(applications)
+        .where(eq(applications.email, lead.email))
+        .orderBy(desc(applications.createdAt))
+        .limit(1);
+      application = appData || null;
+    }
+
+    return NextResponse.json({ lead, notes, application });
   } catch (error: any) {
     console.error('Error fetching lead:', error);
     return NextResponse.json(

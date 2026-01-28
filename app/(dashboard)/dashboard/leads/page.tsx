@@ -85,7 +85,7 @@ export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [quizLeads, setQuizLeads] = useState<QuizLead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sourceFilter, setSourceFilter] = useState<'all' | 'downloads' | 'quiz'>('all');
+  const [sourceFilter, setSourceFilter] = useState<'all' | 'downloads' | 'quiz' | 'inquiry'>('all');
   const [statusFilter, setStatusFilter] = useState<LeadStatus | 'all'>('all');
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
@@ -141,7 +141,13 @@ export default function LeadsPage() {
 
   // Apply filters
   const filteredLeads = allLeads.filter(lead => {
-    if (sourceFilter !== 'all' && lead.type !== (sourceFilter === 'downloads' ? 'download' : 'quiz')) {
+    if (sourceFilter === 'downloads' && (lead.type !== 'download' || (lead as Lead).productSlug === 'inquiry')) {
+      return false;
+    }
+    if (sourceFilter === 'quiz' && lead.type !== 'quiz') {
+      return false;
+    }
+    if (sourceFilter === 'inquiry' && (lead.type !== 'download' || (lead as Lead).productSlug !== 'inquiry')) {
       return false;
     }
     if (statusFilter !== 'all' && lead.status !== statusFilter) {
@@ -567,6 +573,17 @@ export default function LeadsPage() {
                   <Brain className="w-4 h-4" />
                   Quiz Leads
                 </button>
+                <button
+                  onClick={() => setSourceFilter('inquiry')}
+                  className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                    sourceFilter === 'inquiry'
+                      ? 'bg-gray-100 text-gray-900 font-medium'
+                      : 'hover:bg-gray-50 text-gray-600'
+                  }`}
+                >
+                  <Crown className="w-4 h-4" />
+                  Inquiries
+                </button>
               </div>
             </CardContent>
           </Card>
@@ -636,6 +653,11 @@ export default function LeadsPage() {
                                 <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
                                   <RefreshCw className="w-3 h-3" />
                                   Airtable
+                                </span>
+                              ) : (lead as Lead).productSlug === 'inquiry' ? (
+                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-[#CDA7B2]/20 text-[#CDA7B2]">
+                                  <Crown className="w-3 h-3" />
+                                  Inquiry
                                 </span>
                               ) : (
                                 <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
