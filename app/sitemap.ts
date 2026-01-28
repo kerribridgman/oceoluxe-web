@@ -52,13 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9, // High priority for blog index
     },
     {
-      url: `${baseUrl}/apply/coaching`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/apply/entrepreneur-circle`,
+      url: `${baseUrl}/apply/work-with-me`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog, Key, Briefcase, Users, GraduationCap, BookOpen, MessageSquare, Trophy, FolderOpen, Mail, UserCheck } from 'lucide-react';
+import { Settings, Shield, Activity, Menu, FileText, Search, LayoutDashboard, ChevronRight, BarChart3, Link as LinkIcon, Plug, Package, UserCog, Key, Users, GraduationCap, BookOpen, MessageSquare, Trophy, FolderOpen, Mail, UserCheck } from 'lucide-react';
 
 export default function DashboardLayout({
   children
@@ -28,7 +28,6 @@ export default function DashboardLayout({
         { href: '/dashboard/blog', icon: FileText, label: 'Blog Posts' },
         { href: '/dashboard/products', icon: Package, label: 'Products' },
         { href: '/dashboard/leads', icon: Users, label: 'Leads' },
-        { href: '/dashboard/mmfc-services', icon: Briefcase, label: 'MMFC Services' },
         { href: '/dashboard/applications', icon: FileText, label: 'Applications' },
       ]
     },

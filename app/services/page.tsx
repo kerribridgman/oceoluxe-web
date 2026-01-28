@@ -122,14 +122,14 @@ export default async function ServicesPage() {
                 Stop piecing together spreadsheets. Get systems that work.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="mailto:kerrib@oceoluxe.com">
+                <Link href="/apply/work-with-me">
                   <Button
                     size="lg"
                     className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
-                    Request Pricing
+                    Let's Talk
                   </Button>
-                </a>
+                </Link>
                 <Link href="/book">
                   <Button
                     variant="outline"
@@ -188,14 +188,14 @@ export default async function ServicesPage() {
                 Clarity in production protects your creative energy.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="mailto:kerrib@oceoluxe.com">
+                <Link href="/apply/work-with-me">
                   <Button
                     size="lg"
                     className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
-                    Request Pricing
+                    Let's Talk
                   </Button>
-                </a>
+                </Link>
                 <Link href="/book">
                   <Button
                     variant="outline"

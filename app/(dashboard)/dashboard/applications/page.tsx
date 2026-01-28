@@ -30,7 +30,7 @@ export default function ApplicationsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
-  const [filter, setFilter] = useState<'all' | 'coaching' | 'entrepreneur-circle'>('all');
+  const [filter, setFilter] = useState<'all' | '1:1-clients'>('all');
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function ApplicationsPage() {
   }
 
   const filteredApplications = applications.filter((app) => {
-    if (filter !== 'all' && app.type !== filter) return false;
+    if (filter === '1:1-clients' && app.type !== '1:1-clients') return false;
     if (statusFilter !== 'all' && app.status !== statusFilter) return false;
     return true;
   });
@@ -116,7 +116,7 @@ export default function ApplicationsPage() {
           </div>
           <div>
             <h1 className="text-3xl font-bold mb-2">Applications</h1>
-            <p>Review and manage coaching and mastermind applications</p>
+            <p>Review and manage 1:1 client applications</p>
           </div>
         </div>
       </div>
@@ -135,21 +135,14 @@ export default function ApplicationsPage() {
             onClick={() => setFilter('all')}
             size="sm"
           >
-            All Programs
+            All Applications
           </Button>
           <Button
-            variant={filter === 'coaching' ? 'default' : 'outline'}
-            onClick={() => setFilter('coaching')}
+            variant={filter === '1:1-clients' ? 'default' : 'outline'}
+            onClick={() => setFilter('1:1-clients')}
             size="sm"
           >
-            1:1 Coaching
-          </Button>
-          <Button
-            variant={filter === 'entrepreneur-circle' ? 'default' : 'outline'}
-            onClick={() => setFilter('entrepreneur-circle')}
-            size="sm"
-          >
-            Entrepreneur Circle
+            1:1 Clients
           </Button>
         </div>
 
@@ -213,7 +206,7 @@ export default function ApplicationsPage() {
                           {app.status.charAt(0).toUpperCase() + app.status.slice(1)}
                         </Badge>
                         <Badge variant="outline" className="bg-[#CDA7B2]/20 border-[#CDA7B2] text-[#CDA7B2]">
-                          {app.type === 'coaching' ? '1:1 Coaching' : 'Entrepreneur Circle'}
+                          1:1 Client
                         </Badge>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm text-gray-600">
@@ -275,10 +268,8 @@ export default function ApplicationsPage() {
                   <p className="text-gray-700">{selectedApp.name}</p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">Program</h4>
-                  <p className="text-gray-700">
-                    {selectedApp.type === 'coaching' ? '1:1 Tech Coaching' : 'Entrepreneur Circle'}
-                  </p>
+                  <h4 className="font-semibold text-gray-900 mb-1">Application Type</h4>
+                  <p className="text-gray-700">1:1 Client</p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
@@ -298,35 +289,35 @@ export default function ApplicationsPage() {
               <div className="space-y-4 border-t border-gray-200 pt-4">
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">
-                    What interests you about working with Patrick?
+                    About Their Brand
                   </h4>
                   <p className="text-gray-700 whitespace-pre-wrap">{selectedApp.interest}</p>
                 </div>
 
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">
-                    What kind of experiences do you want to have in your life?
+                    Brand Vision (1-2 Years)
                   </h4>
                   <p className="text-gray-700 whitespace-pre-wrap">{selectedApp.experiences}</p>
                 </div>
 
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">
-                    Where are you looking to grow in your life right now?
+                    Areas Needing Support
                   </h4>
                   <p className="text-gray-700 whitespace-pre-wrap">{selectedApp.growthAreas}</p>
                 </div>
 
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">
-                    What is currently stopping you from achieving your goals?
+                    Current Challenges
                   </h4>
                   <p className="text-gray-700 whitespace-pre-wrap">{selectedApp.obstacles}</p>
                 </div>
 
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">
-                    Willing to invest in growth?
+                    Ready to Invest?
                   </h4>
                   <p className="text-gray-700">{selectedApp.willingToInvest === 'yes' ? 'Yes' : 'Not at this time'}</p>
                 </div>

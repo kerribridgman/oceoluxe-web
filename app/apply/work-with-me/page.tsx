@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 
-export default function CoachingApplicationPage() {
+export default function ClientApplicationPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,7 +42,7 @@ export default function CoachingApplicationPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          type: 'coaching',
+          type: '1:1-clients',
         }),
       });
 
@@ -75,10 +75,10 @@ export default function CoachingApplicationPage() {
             Application Submitted!
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Thank you for your interest in 1:1 Tech Coaching. I'll review your application and get back to you within 48 hours.
+            Thank you for your interest in working together. I'll review your application and get back to you within 3 business days.
           </p>
           <Link href="/">
-            <Button className="bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white">
+            <Button className="bg-[#CDA7B2] hover:bg-[#CDA7B2]/90 text-white">
               Return to Home
             </Button>
           </Link>
@@ -93,18 +93,17 @@ export default function CoachingApplicationPage() {
       <MarketingHeader />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <Link href="/" className="inline-flex items-center text-[#4a9fd8] hover:text-[#3a8fc8] mb-8">
+        <Link href="/" className="inline-flex items-center text-[#CDA7B2] hover:text-[#CDA7B2]/80 mb-8">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Link>
 
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Apply for 1:1 Tech Coaching
+            Apply to Work Together
           </h1>
           <p className="text-xl text-gray-600">
-            High-touch experience for founders ready to create aligned and profitable online businesses.
-            Clarity. Confidence. Clients.
+            A personalized 1:1 experience for fashion designers ready to elevate their brand and business.
           </p>
         </div>
 
@@ -179,7 +178,7 @@ export default function CoachingApplicationPage() {
 
               <div>
                 <Label htmlFor="interest" className="text-base font-medium text-gray-900">
-                  What interests you about working with Patrick? *
+                  Tell me about your brand. What do you design and who is your ideal customer? *
                 </Label>
                 <Textarea
                   id="interest"
@@ -188,13 +187,13 @@ export default function CoachingApplicationPage() {
                   required
                   rows={4}
                   className="mt-2"
-                  placeholder="Share what drew you to apply..."
+                  placeholder="Share about your brand, your aesthetic, and who you design for..."
                 />
               </div>
 
               <div>
                 <Label htmlFor="experiences" className="text-base font-medium text-gray-900">
-                  What kind of experiences do you want to have in your life? *
+                  What is your vision for your brand? Where do you want to be in 1-2 years? *
                 </Label>
                 <Textarea
                   id="experiences"
@@ -203,13 +202,13 @@ export default function CoachingApplicationPage() {
                   required
                   rows={4}
                   className="mt-2"
-                  placeholder="Describe your desired experiences..."
+                  placeholder="Describe your goals - retail partnerships, revenue targets, brand recognition..."
                 />
               </div>
 
               <div>
                 <Label htmlFor="growthAreas" className="text-base font-medium text-gray-900">
-                  Where are you looking to grow in your life right now? *
+                  What areas of your fashion business do you need the most support with? *
                 </Label>
                 <Textarea
                   id="growthAreas"
@@ -218,13 +217,13 @@ export default function CoachingApplicationPage() {
                   required
                   rows={4}
                   className="mt-2"
-                  placeholder="Share your growth goals..."
+                  placeholder="Production, marketing, sales, brand strategy, operations..."
                 />
               </div>
 
               <div>
                 <Label htmlFor="obstacles" className="text-base font-medium text-gray-900">
-                  What is currently stopping you from achieving your goals? *
+                  What is currently holding your brand back from reaching its full potential? *
                 </Label>
                 <Textarea
                   id="obstacles"
@@ -233,13 +232,13 @@ export default function CoachingApplicationPage() {
                   required
                   rows={4}
                   className="mt-2"
-                  placeholder="What challenges are you facing?"
+                  placeholder="Time, budget, knowledge gaps, resources, clarity..."
                 />
               </div>
 
               <div>
                 <Label className="text-base font-medium text-gray-900 mb-3 block">
-                  Are you willing to invest in your own growth right now? *
+                  Are you ready to invest in growing your brand? *
                 </Label>
                 <RadioGroup
                   value={formData.willingToInvest}
@@ -247,13 +246,13 @@ export default function CoachingApplicationPage() {
                   required
                   className="space-y-3"
                 >
-                  <div className="flex items-center space-x-3 border border-gray-200 rounded-lg p-4 hover:border-[#4a9fd8] transition-colors">
+                  <div className="flex items-center space-x-3 border border-gray-200 rounded-lg p-4 hover:border-[#CDA7B2] transition-colors">
                     <RadioGroupItem value="yes" id="yes" />
                     <Label htmlFor="yes" className="flex-1 cursor-pointer font-normal">
-                      Yes, I'm ready to invest in myself
+                      Yes, I'm ready to invest in my brand
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 border border-gray-200 rounded-lg p-4 hover:border-[#4a9fd8] transition-colors">
+                  <div className="flex items-center space-x-3 border border-gray-200 rounded-lg p-4 hover:border-[#CDA7B2] transition-colors">
                     <RadioGroupItem value="no" id="no" />
                     <Label htmlFor="no" className="flex-1 cursor-pointer font-normal">
                       Not at this time
@@ -264,7 +263,7 @@ export default function CoachingApplicationPage() {
 
               <div>
                 <Label htmlFor="additionalInfo" className="text-base font-medium text-gray-900">
-                  Any thing else you want to tell me to help me get to know you...
+                  Anything else you'd like me to know about you or your brand?
                 </Label>
                 <Textarea
                   id="additionalInfo"
@@ -272,7 +271,7 @@ export default function CoachingApplicationPage() {
                   onChange={(e) => handleChange('additionalInfo', e.target.value)}
                   rows={4}
                   className="mt-2"
-                  placeholder="Optional - share anything else you'd like me to know"
+                  placeholder="Optional - share your website, portfolio, or anything else..."
                 />
               </div>
 
@@ -283,19 +282,19 @@ export default function CoachingApplicationPage() {
                     type="checkbox"
                     checked={privacyConsent}
                     onChange={(e) => setPrivacyConsent(e.target.checked)}
-                    className="mt-1 h-4 w-4 rounded border-gray-300 text-[#4a9fd8] focus:ring-[#4a9fd8]"
+                    className="mt-1 h-4 w-4 rounded border-gray-300 text-[#CDA7B2] focus:ring-[#CDA7B2]"
                     required
                   />
                   <span className="text-sm text-gray-600">
                     I agree to the{' '}
-                    <Link href="/privacy" className="text-[#4a9fd8] hover:underline" target="_blank">
+                    <Link href="/privacy" className="text-[#CDA7B2] hover:underline" target="_blank">
                       Privacy Policy
                     </Link>{' '}
                     and{' '}
-                    <Link href="/terms" className="text-[#4a9fd8] hover:underline" target="_blank">
+                    <Link href="/terms" className="text-[#CDA7B2] hover:underline" target="_blank">
                       Terms of Service
                     </Link>
-                    . I consent to having my information processed for the purpose of reviewing my application and being contacted about coaching services. *
+                    . I consent to having my information processed for the purpose of reviewing my application and being contacted about services. *
                   </span>
                 </label>
               </div>
@@ -310,7 +309,7 @@ export default function CoachingApplicationPage() {
                 <Button
                   type="submit"
                   disabled={submitting || !privacyConsent}
-                  className="w-full bg-[#4a9fd8] hover:bg-[#3a8fc8] text-white text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-[#CDA7B2] hover:bg-[#CDA7B2]/90 text-white text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? (
                     <>
