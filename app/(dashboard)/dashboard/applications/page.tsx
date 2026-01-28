@@ -342,7 +342,7 @@ export default function ApplicationsPage() {
 
               {/* Actions */}
               {selectedApp.status === 'pending' && (
-                <div className="flex gap-3 border-t border-gray-200 pt-6">
+                <div className="flex flex-col sm:flex-row gap-3 border-t border-gray-200 pt-6">
                   <Button
                     onClick={() => updateApplicationStatus(selectedApp.id, 'approved')}
                     className="bg-green-600 hover:bg-green-700 text-white flex-1"
@@ -352,8 +352,7 @@ export default function ApplicationsPage() {
                   </Button>
                   <Button
                     onClick={() => updateApplicationStatus(selectedApp.id, 'rejected')}
-                    variant="destructive"
-                    className="flex-1"
+                    className="bg-red-600 hover:bg-red-700 text-white flex-1"
                   >
                     <XCircle className="w-4 h-4 mr-2" />
                     Reject Application
