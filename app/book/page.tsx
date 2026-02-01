@@ -3,6 +3,11 @@ import { Calendar, Clock, MessageCircle, Sparkles } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { CalEmbed } from '@/components/cal-booking';
+import { getPageMetadata } from '@/lib/seo/metadata';
+
+export async function generateMetadata() {
+  return await getPageMetadata('book');
+}
 
 // Define your Cal.com meeting types here
 const calMeetingTypes = [

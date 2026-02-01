@@ -4,14 +4,48 @@ import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
+import { getServiceJsonLd, getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 
 export async function generateMetadata() {
   return await getPageMetadata('services');
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
+
+const serviceSchemas = getServiceJsonLd([
+  {
+    name: 'Studio Systems Membership',
+    description: 'Ongoing support membership with live Q&A, Notion systems, private community, and somatic support for fashion designers.',
+    url: `${baseUrl}/studio-systems`,
+    price: '33',
+  },
+  {
+    name: 'Production Systems Setup',
+    description: 'Custom factory communication setup, supplier tracking, production calendars, and Notion dashboards for your production process.',
+    url: `${baseUrl}/apply/work-with-me`,
+  },
+  {
+    name: 'Production Strategy & Consulting',
+    description: 'Expert guidance on factory vetting, production timeline planning, pricing strategy, sustainable sourcing, and ongoing support.',
+    url: `${baseUrl}/apply/work-with-me`,
+  },
+  {
+    name: 'Website Development for Fashion Professionals',
+    description: 'Custom websites for designers, production managers, stylists, and fashion consultants built by someone who understands the industry.',
+    url: `${baseUrl}/services#website-development`,
+  },
+]);
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: 'Home', url: baseUrl },
+  { name: 'Services', url: `${baseUrl}/services` },
+]);
+
 export default async function ServicesPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
+      <JsonLdScript data={[...serviceSchemas, breadcrumbJsonLd] as unknown as Record<string, unknown>[]} />
       <MarketingHeader />
 
       {/* Hero Section */}

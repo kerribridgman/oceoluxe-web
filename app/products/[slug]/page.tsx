@@ -12,6 +12,8 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { ProductMarkdownRenderer } from '@/components/products/product-markdown-renderer';
 import { ProductAddToCart } from '@/components/product';
 import { FreeProductClaimForm } from '@/components/products/free-product-claim-form';
+import { getProductJsonLd, getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 
 // Revalidate every 60 seconds to ensure products are up-to-date
 export const revalidate = 60;
@@ -89,8 +91,24 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const dashboardProduct = await getDashboardProductBySlug(slug);
 
   if (dashboardProduct) {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
+    const productJsonLd = getProductJsonLd({
+      name: dashboardProduct.name,
+      description: dashboardProduct.shortDescription || dashboardProduct.description || undefined,
+      image: dashboardProduct.coverImageUrl || undefined,
+      priceInCents: dashboardProduct.priceInCents,
+      url: `${baseUrl}/products/${slug}`,
+    });
+    const breadcrumbJsonLd = getBreadcrumbJsonLd([
+      { name: 'Home', url: baseUrl },
+      { name: 'Products', url: `${baseUrl}/products` },
+      { name: dashboardProduct.name, url: `${baseUrl}/products/${slug}` },
+    ]);
+
     // Render dashboard product with Add to Cart
     return (
+      <>
+      <JsonLdScript data={[productJsonLd, breadcrumbJsonLd] as unknown as Record<string, unknown>[]} />
       <div className="min-h-screen bg-[#faf8f5]">
         <MarketingHeader />
 
@@ -211,6 +229,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
         <MarketingFooter />
       </div>
+      </>
     );
   }
 
@@ -234,7 +253,25 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   // Check if this is a configured free product (can be added to cart)
   const isConfiguredFreeProduct = isFreeNotionProduct(slug);
 
+  const baseUrlNotion = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
+  const priceStr = product.price?.replace(/[^0-9.]/g, '') || '0';
+  const priceInCents = Math.round(parseFloat(priceStr || '0') * 100);
+  const notionProductJsonLd = getProductJsonLd({
+    name: product.title,
+    description: product.description || product.excerpt || undefined,
+    image: product.coverImageUrl || undefined,
+    priceInCents: priceConfig?.priceInCents || priceInCents,
+    url: `${baseUrlNotion}/products/${slug}`,
+  });
+  const notionBreadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: 'Home', url: baseUrlNotion },
+    { name: 'Products', url: `${baseUrlNotion}/products` },
+    { name: product.title, url: `${baseUrlNotion}/products/${slug}` },
+  ]);
+
   return (
+    <>
+    <JsonLdScript data={[notionProductJsonLd, notionBreadcrumbJsonLd] as unknown as Record<string, unknown>[]} />
     <div className="min-h-screen bg-[#faf8f5]">
       <MarketingHeader />
 
@@ -417,5 +454,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       <MarketingFooter />
     </div>
+    </>
   );
 }

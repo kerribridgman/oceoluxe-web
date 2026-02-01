@@ -3,6 +3,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Target, Compass } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { getPageMetadata } from '@/lib/seo/metadata';
+
+export async function generateMetadata() {
+  return await getPageMetadata('quiz/about');
+}
 
 export default function QuizAboutPage() {
   const reasons = [

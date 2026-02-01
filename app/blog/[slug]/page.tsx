@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 
 // Format date using UTC to avoid timezone shifts for date-only values
 function formatBlogDate(date: Date | string, format: 'short' | 'long' = 'long'): string {
@@ -103,12 +104,23 @@ export default async function BlogPostPage({ params }: Props) {
     about: post.keyConcepts,
   };
 
+  const blogBaseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: 'Home', url: blogBaseUrl },
+    { name: 'Blog', url: `${blogBaseUrl}/blog` },
+    { name: post.title, url: `${blogBaseUrl}/blog/${slug}` },
+  ]);
+
   return (
     <>
       {/* JSON-LD structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <div className="min-h-screen bg-[#faf8f5]">

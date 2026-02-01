@@ -10,6 +10,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { StripeProvider } from '@/components/checkout/stripe-provider';
 import { PaymentForm } from '@/components/checkout/payment-form';
 import { Check, Package, Loader2, Shield, Star } from 'lucide-react';
+import Image from 'next/image';
 
 interface Product {
   id: number;
@@ -173,11 +174,15 @@ export default function CheckoutPage({ params }: { params: Promise<{ slug: strin
             <div className="bg-white rounded-2xl p-6 border border-[#EDEBE8] shadow-sm">
               <div className="flex gap-4">
                 {product?.coverImageUrl ? (
-                  <img
-                    src={product.coverImageUrl}
-                    alt={product.name}
-                    className="w-24 h-24 rounded-lg object-cover"
-                  />
+                  <div className="relative w-24 h-24 flex-shrink-0">
+                    <Image
+                      src={product.coverImageUrl}
+                      alt={product.name}
+                      fill
+                      className="rounded-lg object-cover"
+                      sizes="96px"
+                    />
+                  </div>
                 ) : (
                   <div className="w-24 h-24 rounded-lg bg-gradient-to-br from-[#CDA7B2]/20 to-[#967F71]/20 flex items-center justify-center">
                     <Package className="w-10 h-10 text-[#CDA7B2]" />

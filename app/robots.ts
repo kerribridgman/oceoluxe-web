@@ -17,6 +17,11 @@ export default function robots(): MetadataRoute.Robots {
           '/api/', // Disallow API routes
           '/sign-in', // Disallow auth pages
           '/sign-up',
+          '/studio-login',
+          '/studio-join',
+          '/cart', // Disallow transactional pages
+          '/checkout/',
+          '/unsubscribe',
           '/_next/', // Disallow Next.js internal files
           '/private/', // Disallow any private directories
         ],
@@ -30,6 +35,11 @@ export default function robots(): MetadataRoute.Robots {
           '/api/',
           '/sign-in',
           '/sign-up',
+          '/studio-login',
+          '/studio-join',
+          '/cart',
+          '/checkout/',
+          '/unsubscribe',
         ],
       },
       {

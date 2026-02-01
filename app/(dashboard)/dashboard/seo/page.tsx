@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search, Save, Upload, X, ExternalLink, FileCode } from 'lucide-react';
+import { Search, Save, Upload, X, ExternalLink, FileCode, AlertTriangle, CheckCircle2, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 
 interface SeoSettings {
@@ -43,6 +43,18 @@ export default function SeoSettingsPage() {
   const [uploadingOg, setUploadingOg] = useState(false);
   const [uploadingTwitter, setUploadingTwitter] = useState(false);
 
+  const [auditData, setAuditData] = useState<{
+    score: number;
+    totalPages: number;
+    pagesWithTitle: number;
+    pagesWithDescription: number;
+    pagesWithOgImage: number;
+    pagesWithKeywords: number;
+    pagesInSitemap: number;
+    issues: string[];
+  } | null>(null);
+  const [auditLoading, setAuditLoading] = useState(false);
+
   const [formData, setFormData] = useState<SeoSettings>({
     page: 'home',
     title: '',
@@ -63,6 +75,10 @@ export default function SeoSettingsPage() {
   useEffect(() => {
     fetchSeoSettings();
   }, [selectedPage]);
+
+  useEffect(() => {
+    fetchAudit();
+  }, []);
 
   async function fetchSeoSettings() {
     setLoading(true);
@@ -88,6 +104,21 @@ export default function SeoSettingsPage() {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function fetchAudit() {
+    setAuditLoading(true);
+    try {
+      const response = await fetch('/api/seo-audit');
+      if (response.ok) {
+        const data = await response.json();
+        setAuditData(data);
+      }
+    } catch (err) {
+      console.error('Error fetching SEO audit:', err);
+    } finally {
+      setAuditLoading(false);
     }
   }
 
@@ -200,6 +231,76 @@ export default function SeoSettingsPage() {
           </Link>
         </div>
       </div>
+
+      {/* SEO Audit Widget */}
+      {auditData && (
+        <Card className="dashboard-card border-0">
+          <CardHeader className="border-b border-gray-100 pb-3">
+            <CardTitle className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <BarChart3 className="w-5 h-5" />
+              SEO Health Score
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className={`text-3xl font-bold ${auditData.score >= 80 ? 'text-green-600' : auditData.score >= 60 ? 'text-yellow-600' : 'text-red-600'}`}>
+                  {auditData.score}%
+                </div>
+                <div className="text-xs text-gray-500 mt-1">Overall Score</div>
+              </div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="text-3xl font-bold text-gray-900">{auditData.pagesWithTitle}/{auditData.totalPages}</div>
+                <div className="text-xs text-gray-500 mt-1">Titles</div>
+              </div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="text-3xl font-bold text-gray-900">{auditData.pagesWithDescription}/{auditData.totalPages}</div>
+                <div className="text-xs text-gray-500 mt-1">Descriptions</div>
+              </div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="text-3xl font-bold text-gray-900">{auditData.pagesInSitemap}/{auditData.totalPages}</div>
+                <div className="text-xs text-gray-500 mt-1">In Sitemap</div>
+              </div>
+            </div>
+            {auditData.issues.length > 0 && (
+              <div className="mt-3">
+                <p className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                  <AlertTriangle className="w-4 h-4 text-yellow-500" />
+                  Issues ({auditData.issues.length})
+                </p>
+                <ul className="space-y-1 max-h-32 overflow-y-auto">
+                  {auditData.issues.slice(0, 10).map((issue, idx) => (
+                    <li key={idx} className="text-sm text-gray-600 flex items-start gap-2">
+                      <span className="text-yellow-500 mt-0.5">&#8226;</span>
+                      {issue}
+                    </li>
+                  ))}
+                  {auditData.issues.length > 10 && (
+                    <li className="text-sm text-gray-400">
+                      +{auditData.issues.length - 10} more issues
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
+            {auditData.issues.length === 0 && (
+              <div className="flex items-center gap-2 text-green-600 text-sm">
+                <CheckCircle2 className="w-4 h-4" />
+                All checks passed
+              </div>
+            )}
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-3"
+              onClick={fetchAudit}
+              disabled={auditLoading}
+            >
+              {auditLoading ? 'Scanning...' : 'Re-run Audit'}
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       <Card className="dashboard-card border-0">
         <CardContent className="pt-6 pb-6">
