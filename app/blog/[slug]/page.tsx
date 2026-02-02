@@ -1,5 +1,8 @@
 import { getPublishedBlogPostBySlug } from '@/lib/db/queries-blogs';
+import { getRelatedBlogPosts, getRecommendedProducts } from '@/lib/db/queries-blog-related';
 import { MarkdownRenderer } from '@/components/blog/markdown-renderer';
+import { RelatedPosts } from '@/components/blog/related-posts';
+import { RecommendedProducts } from '@/components/blog/recommended-products';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -81,6 +84,11 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) {
     notFound();
   }
+
+  const [relatedPosts, recommendedProducts] = await Promise.all([
+    getRelatedBlogPosts(post.id, post.industry),
+    getRecommendedProducts(),
+  ]);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -204,6 +212,9 @@ export default async function BlogPostPage({ params }: Props) {
             </Link>
           </footer>
         </article>
+
+        <RelatedPosts posts={relatedPosts} />
+        <RecommendedProducts products={recommendedProducts} />
 
         <MarketingFooter />
       </div>
