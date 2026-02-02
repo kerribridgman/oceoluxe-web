@@ -46,9 +46,9 @@ export async function getPageMetadata(page: string): Promise<Metadata> {
           settings.twitterImageUrl || settings.ogImageUrl || ''
         ] : undefined,
       },
-      alternates: settings.canonicalUrl ? {
-        canonical: settings.canonicalUrl,
-      } : undefined,
+      alternates: {
+        canonical: settings.canonicalUrl || `${baseUrl}/${page === 'home' ? '' : page}`,
+      },
     };
 
     return metadata;
@@ -64,57 +64,61 @@ function getDefaultMetadata(page: string): Metadata {
 
   const defaults: Record<string, Metadata> = {
     home: {
-      title: 'Oceo Luxe | Fashion Production & Operations',
-      description: 'Fashion production consulting and operations support for independent designers. Structure as Support — build sustainable production systems that feel like luxury.',
+      title: { absolute: 'Oceo Luxe | Fashion Production & Operations' },
+      description: 'Fashion production consulting and operations support for independent designers. Build sustainable production systems that feel like luxury.',
       keywords: ['fashion production consulting', 'production operations', 'sustainable fashion production', 'fashion designer support'],
+      alternates: { canonical: baseUrl },
       openGraph: {
         title: 'Oceo Luxe | Fashion Production & Operations',
-        description: 'Fashion production consulting and operations support for independent designers. Structure as Support — build sustainable production systems that feel like luxury.',
+        description: 'Fashion production consulting and operations support for independent designers. Build sustainable production systems that feel like luxury.',
         type: 'website',
         url: baseUrl,
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Oceo Luxe | Fashion Production & Operations',
-        description: 'Fashion production consulting and operations support for independent designers. Structure as Support — build sustainable production systems that feel like luxury.',
+        description: 'Fashion production consulting and operations support for independent designers. Build sustainable production systems that feel like luxury.',
       },
     },
     services: {
       title: 'Fashion Production Consulting & Services',
-      description: 'Fashion production consultant services: 1:1 consulting, Studio Systems membership, production systems setup, and strategic guidance for independent fashion designers.',
+      description: 'Fashion production consultant services: 1:1 consulting, Studio Systems membership, production setup, and strategic guidance for fashion designers.',
       keywords: ['fashion production consultant', '1:1 consulting', 'production systems setup', 'fashion business consulting'],
+      alternates: { canonical: `${baseUrl}/services` },
       openGraph: {
         title: 'Fashion Production Consulting & Services | Oceo Luxe',
-        description: 'Fashion production consultant services: 1:1 consulting, Studio Systems membership, production systems setup, and strategic guidance for independent fashion designers.',
+        description: 'Fashion production consultant services: 1:1 consulting, Studio Systems membership, production setup, and strategic guidance for fashion designers.',
         type: 'website',
         url: `${baseUrl}/services`,
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Fashion Production Consulting & Services | Oceo Luxe',
-        description: 'Fashion production consultant services: 1:1 consulting, Studio Systems membership, production systems setup, and strategic guidance for independent fashion designers.',
+        description: 'Fashion production consultant services: 1:1 consulting, Studio Systems membership, production setup, and strategic guidance for fashion designers.',
       },
     },
     blog: {
-      title: 'Fashion Production Blog',
-      description: 'Insights on fashion production, sustainable sourcing, factory communication, and building a fashion business with clarity. Expert advice from a production consultant.',
+      title: 'Fashion Production Blog & Resources',
+      description: 'Insights on fashion production, sustainable sourcing, factory communication, and building a fashion business with clarity. Expert consultant advice.',
       keywords: ['fashion production blog', 'sustainable fashion', 'factory communication', 'fashion business advice'],
+      alternates: { canonical: `${baseUrl}/blog` },
       openGraph: {
         title: 'Fashion Production Blog | Oceo Luxe',
-        description: 'Insights on fashion production, sustainable sourcing, factory communication, and building a fashion business with clarity. Expert advice from a production consultant.',
+        description: 'Insights on fashion production, sustainable sourcing, factory communication, and building a fashion business with clarity. Expert consultant advice.',
         type: 'website',
         url: `${baseUrl}/blog`,
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Fashion Production Blog | Oceo Luxe',
-        description: 'Insights on fashion production, sustainable sourcing, factory communication, and building a fashion business with clarity. Expert advice from a production consultant.',
+        description: 'Insights on fashion production, sustainable sourcing, factory communication, and building a fashion business with clarity. Expert consultant advice.',
       },
     },
     about: {
-      title: 'About Kerri Bridgman',
+      title: 'About Kerri Bridgman | Fashion Production Expert',
       description: 'Fashion production expert and FIT-trained production manager with 10 years of experience helping independent designers build sustainable production systems.',
       keywords: ['fashion production expert', 'kerri bridgman', 'FIT production manager', 'fashion consultant'],
+      alternates: { canonical: `${baseUrl}/about` },
       openGraph: {
         title: 'About Kerri Bridgman | Oceo Luxe',
         description: 'Fashion production expert and FIT-trained production manager with 10 years of experience helping independent designers build sustainable production systems.',
@@ -128,9 +132,10 @@ function getDefaultMetadata(page: string): Metadata {
       },
     },
     faq: {
-      title: 'Frequently Asked Questions',
-      description: 'Answers to common questions about fashion production: how to find a factory, first production run quantities, realistic timelines, factory communication, and sustainable sourcing.',
+      title: 'Frequently Asked Questions | Fashion Production',
+      description: 'Answers to common questions about fashion production: how to find a factory, first production run quantities, realistic timelines, and sourcing.',
       keywords: ['find a factory', 'first production run', 'fashion production FAQ', 'factory communication tips'],
+      alternates: { canonical: `${baseUrl}/faq` },
       openGraph: {
         title: 'FAQ | Oceo Luxe',
         description: 'Answers to common questions about fashion production: how to find a factory, first production run quantities, realistic timelines, and sustainable sourcing.',
@@ -144,9 +149,10 @@ function getDefaultMetadata(page: string): Metadata {
       },
     },
     book: {
-      title: 'Book a Fashion Consultant',
+      title: 'Book a Fashion Production Consultant',
       description: 'Book a discovery call with Kerri Bridgman. Get clarity on your fashion production process, factory relationships, and scaling strategy.',
       keywords: ['book fashion consultant', 'discovery call', 'fashion production consultation'],
+      alternates: { canonical: `${baseUrl}/book` },
       openGraph: {
         title: 'Book a Call | Oceo Luxe',
         description: 'Book a discovery call with Kerri Bridgman. Get clarity on your fashion production process, factory relationships, and scaling strategy.',
@@ -160,9 +166,10 @@ function getDefaultMetadata(page: string): Metadata {
       },
     },
     'quiz/about': {
-      title: 'Designer Archetype Quiz',
+      title: 'Discover Your Designer Archetype Quiz',
       description: 'Discover your Designer Archetype in 2 minutes. Find out what kind of fashion designer you are and align your production strategy with your creative vision.',
       keywords: ['designer archetype quiz', 'fashion designer quiz', 'production strategy alignment'],
+      alternates: { canonical: `${baseUrl}/quiz/about` },
       openGraph: {
         title: 'What Kind of Designer Are You? | Oceo Luxe',
         description: 'Discover your Designer Archetype in 2 minutes. Find out what kind of fashion designer you are and align your production strategy with your creative vision.',
@@ -179,6 +186,7 @@ function getDefaultMetadata(page: string): Metadata {
       title: 'Fashion Production Resources & Templates',
       description: 'Tech pack templates, production resources, and digital tools for independent fashion designers. Build your brand with proven systems.',
       keywords: ['tech pack templates', 'fashion production resources', 'fashion designer templates'],
+      alternates: { canonical: `${baseUrl}/products` },
       openGraph: {
         title: 'Products & Resources | Oceo Luxe',
         description: 'Tech pack templates, production resources, and digital tools for independent fashion designers. Build your brand with proven systems.',
@@ -192,9 +200,10 @@ function getDefaultMetadata(page: string): Metadata {
       },
     },
     'studio-systems': {
-      title: 'Studio Systems Membership',
-      description: 'Fashion designer education and production membership. Learn The Oceo Method framework with live Q&A, Notion systems, private community, and somatic support for creative founders.',
+      title: 'Studio Systems | Fashion Production Education',
+      description: 'Fashion designer education and production membership. Learn The Oceo Method with live Q&A, Notion systems, private community, and somatic support.',
       keywords: ['fashion designer education', 'production membership', 'oceo method', 'fashion business membership'],
+      alternates: { canonical: `${baseUrl}/studio-systems` },
       openGraph: {
         title: 'Studio Systems Membership | Oceo Luxe',
         description: 'Fashion designer education and production membership. Learn The Oceo Method framework with live Q&A, Notion systems, private community, and somatic support.',
@@ -208,9 +217,10 @@ function getDefaultMetadata(page: string): Metadata {
       },
     },
     'apply/work-with-me': {
-      title: 'Work With Me',
+      title: 'Work With Me | Fashion Production Consulting',
       description: 'Apply to work 1:1 with Kerri Bridgman on your fashion production systems, factory communication, and scaling strategy.',
       keywords: ['fashion production consulting', 'work with kerri bridgman', '1:1 fashion consulting'],
+      alternates: { canonical: `${baseUrl}/apply/work-with-me` },
       openGraph: {
         title: 'Work With Me | Oceo Luxe',
         description: 'Apply to work 1:1 with Kerri Bridgman on your fashion production systems, factory communication, and scaling strategy.',
@@ -224,9 +234,10 @@ function getDefaultMetadata(page: string): Metadata {
       },
     },
     join: {
-      title: 'Join Studio Systems',
+      title: 'Join Studio Systems | Production Membership',
       description: 'Join the Studio Systems membership for fashion designers. Get production frameworks, templates, community support, and live Q&A calls.',
       keywords: ['join studio systems', 'fashion designer membership', 'production frameworks'],
+      alternates: { canonical: `${baseUrl}/join` },
       openGraph: {
         title: 'Join Studio Systems | Oceo Luxe',
         description: 'Join the Studio Systems membership for fashion designers. Get production frameworks, templates, community support, and live Q&A calls.',

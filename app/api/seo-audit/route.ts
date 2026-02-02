@@ -11,6 +11,7 @@ interface AuditResult {
   descriptionIssue: string | null;
   hasOgImage: boolean;
   hasKeywords: boolean;
+  hasCanonical: boolean;
   hasRobots: boolean;
   inSitemap: boolean;
 }
@@ -21,6 +22,7 @@ interface AuditSummary {
   pagesWithDescription: number;
   pagesWithOgImage: number;
   pagesWithKeywords: number;
+  pagesWithCanonical: number;
   pagesInSitemap: number;
   issues: string[];
   score: number;
@@ -60,63 +62,84 @@ const SITEMAP_PAGES = [
   '/book', '/apply/work-with-me', '/privacy', '/terms',
 ];
 
-// Metadata defaults to check against (matches lib/seo/metadata.ts defaults)
-const METADATA_DEFAULTS: Record<string, { title?: string; description?: string; keywords?: string[]; ogImage?: boolean }> = {
+// Metadata defaults to check against (must match actual titles/descriptions from lib/seo/metadata.ts)
+const METADATA_DEFAULTS: Record<string, { title?: string; description?: string; keywords?: string[]; ogImage?: boolean; hasCanonical?: boolean }> = {
   home: {
     title: 'Oceo Luxe | Fashion Production & Operations',
-    description: 'Fashion production consulting and operations support for independent designers.',
-    keywords: ['fashion production consulting'],
+    description: 'Fashion production consulting and operations support for independent designers. Build sustainable production systems that feel like luxury.',
+    keywords: ['fashion production consulting', 'production operations', 'sustainable fashion production', 'fashion designer support'],
     ogImage: true,
+    hasCanonical: true,
   },
   services: {
     title: 'Fashion Production Consulting & Services',
-    description: 'Fashion production consultant services',
-    keywords: ['fashion production consultant'],
+    description: 'Fashion production consultant services: 1:1 consulting, Studio Systems membership, production setup, and strategic guidance for fashion designers.',
+    keywords: ['fashion production consultant', '1:1 consulting', 'production systems setup', 'fashion business consulting'],
+    ogImage: true,
+    hasCanonical: true,
   },
   blog: {
-    title: 'Fashion Production Blog',
-    description: 'Insights on fashion production',
-    keywords: ['fashion production blog'],
+    title: 'Fashion Production Blog & Resources',
+    description: 'Insights on fashion production, sustainable sourcing, factory communication, and building a fashion business with clarity. Expert consultant advice.',
+    keywords: ['fashion production blog', 'sustainable fashion', 'factory communication', 'fashion business advice'],
+    ogImage: true,
+    hasCanonical: true,
   },
   about: {
-    title: 'About Kerri Bridgman',
-    description: 'Fashion production expert',
-    keywords: ['fashion production expert', 'kerri bridgman'],
+    title: 'About Kerri Bridgman | Fashion Production Expert',
+    description: 'Fashion production expert and FIT-trained production manager with 10 years of experience helping independent designers build sustainable production systems.',
+    keywords: ['fashion production expert', 'kerri bridgman', 'FIT production manager', 'fashion consultant'],
+    ogImage: true,
+    hasCanonical: true,
   },
   faq: {
-    title: 'Frequently Asked Questions',
-    description: 'Answers to common questions about fashion production',
-    keywords: ['find a factory', 'first production run'],
+    title: 'Frequently Asked Questions | Fashion Production',
+    description: 'Answers to common questions about fashion production: how to find a factory, first production run quantities, realistic timelines, and sourcing.',
+    keywords: ['find a factory', 'first production run', 'fashion production FAQ', 'factory communication tips'],
+    ogImage: true,
+    hasCanonical: true,
   },
   products: {
     title: 'Fashion Production Resources & Templates',
-    description: 'Tech pack templates',
-    keywords: ['tech pack templates'],
+    description: 'Tech pack templates, production resources, and digital tools for independent fashion designers. Build your brand with proven systems.',
+    keywords: ['tech pack templates', 'fashion production resources', 'fashion designer templates'],
+    ogImage: true,
+    hasCanonical: true,
   },
   'studio-systems': {
-    title: 'Studio Systems Membership',
-    description: 'Fashion designer education',
-    keywords: ['fashion designer education'],
+    title: 'Studio Systems | Fashion Production Education',
+    description: 'Fashion designer education and production membership. Learn The Oceo Method with live Q&A, Notion systems, private community, and somatic support.',
+    keywords: ['fashion designer education', 'production membership', 'oceo method', 'fashion business membership'],
+    ogImage: true,
+    hasCanonical: true,
   },
   'quiz/about': {
-    title: 'Designer Archetype Quiz',
-    description: 'Discover your Designer Archetype',
-    keywords: ['designer archetype quiz'],
+    title: 'Discover Your Designer Archetype Quiz',
+    description: 'Discover your Designer Archetype in 2 minutes. Find out what kind of fashion designer you are and align your production strategy with your creative vision.',
+    keywords: ['designer archetype quiz', 'fashion designer quiz', 'production strategy alignment'],
+    ogImage: true,
+    hasCanonical: true,
   },
   book: {
-    title: 'Book a Fashion Consultant',
-    description: 'Book a discovery call',
-    keywords: ['book fashion consultant'],
+    title: 'Book a Fashion Production Consultant',
+    description: 'Book a discovery call with Kerri Bridgman. Get clarity on your fashion production process, factory relationships, and scaling strategy.',
+    keywords: ['book fashion consultant', 'discovery call', 'fashion production consultation'],
+    ogImage: true,
+    hasCanonical: true,
   },
   'apply/work-with-me': {
-    title: 'Work With Me',
-    description: 'Apply to work 1:1',
-    keywords: ['fashion production consulting'],
+    title: 'Work With Me | Fashion Production Consulting',
+    description: 'Apply to work 1:1 with Kerri Bridgman on your fashion production systems, factory communication, and scaling strategy.',
+    keywords: ['fashion production consulting', 'work with kerri bridgman', '1:1 fashion consulting'],
+    ogImage: true,
+    hasCanonical: true,
   },
   join: {
-    title: 'Join Studio Systems',
-    description: 'Join the Studio Systems membership',
-    keywords: ['join studio systems'],
+    title: 'Join Studio Systems | Production Membership',
+    description: 'Join the Studio Systems membership for fashion designers. Get production frameworks, templates, community support, and live Q&A calls.',
+    keywords: ['join studio systems', 'fashion designer membership', 'production frameworks'],
+    ogImage: true,
+    hasCanonical: true,
   },
 };
 
@@ -162,14 +185,19 @@ export async function GET() {
 
     const hasOgImage = !!defaults?.ogImage;
     const hasKeywords = !!defaults?.keywords && defaults.keywords.length > 0;
+    const hasCanonical = !!defaults?.hasCanonical;
     const inSitemap = SITEMAP_PAGES.includes(path);
 
-    if (!hasOgImage && page !== 'home') {
-      // Home has OG from root layout; others inherit
+    if (!hasOgImage) {
+      issues.push(`${page}: Missing OG image`);
     }
 
     if (!hasKeywords) {
       issues.push(`${page}: Missing keywords`);
+    }
+
+    if (!hasCanonical) {
+      issues.push(`${page}: Missing canonical URL`);
     }
 
     if (!inSitemap) {
@@ -187,6 +215,7 @@ export async function GET() {
       descriptionIssue,
       hasOgImage,
       hasKeywords,
+      hasCanonical,
       hasRobots: true,
       inSitemap,
     });
@@ -205,6 +234,7 @@ export async function GET() {
       descriptionIssue: null,
       hasOgImage: false,
       hasKeywords: false,
+      hasCanonical: false,
       hasRobots: true,
       inSitemap: false,
     });
@@ -218,14 +248,16 @@ export async function GET() {
   const pagesWithDescription = publicResults.filter((r) => r.hasDescription && !r.descriptionIssue).length;
   const pagesWithOgImage = publicResults.filter((r) => r.hasOgImage).length;
   const pagesWithKeywords = publicResults.filter((r) => r.hasKeywords).length;
+  const pagesWithCanonical = publicResults.filter((r) => r.hasCanonical).length;
   const pagesInSitemap = publicResults.filter((r) => r.inSitemap).length;
 
-  // Score: weight titles and descriptions heavily, sitemap and keywords moderately
+  // Score: weight titles and descriptions heavily, sitemap/canonical/keywords/OG moderately
   const totalPublic = PUBLIC_PAGES.length;
   const score = Math.round(
-    ((pagesWithTitle / totalPublic) * 25 +
-      (pagesWithDescription / totalPublic) * 25 +
-      (pagesInSitemap / totalPublic) * 20 +
+    ((pagesWithTitle / totalPublic) * 20 +
+      (pagesWithDescription / totalPublic) * 20 +
+      (pagesInSitemap / totalPublic) * 15 +
+      (pagesWithCanonical / totalPublic) * 15 +
       (pagesWithKeywords / totalPublic) * 15 +
       (pagesWithOgImage / totalPublic) * 15)
   );
@@ -236,6 +268,7 @@ export async function GET() {
     pagesWithDescription,
     pagesWithOgImage,
     pagesWithKeywords,
+    pagesWithCanonical,
     pagesInSitemap,
     issues,
     score,

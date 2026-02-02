@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     description: 'Structure as Support for fashion designers and visionaries. Build sustainable production systems that feel like luxury.',
     images: ['/images/og-default.png'],
   },
+  alternates: {
+    canonical: 'https://oceoluxe.com',
+  },
 };
 
 export const viewport: Viewport = {

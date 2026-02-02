@@ -50,6 +50,7 @@ export default function SeoSettingsPage() {
     pagesWithDescription: number;
     pagesWithOgImage: number;
     pagesWithKeywords: number;
+    pagesWithCanonical: number;
     pagesInSitemap: number;
     issues: string[];
   } | null>(null);
@@ -242,7 +243,7 @@ export default function SeoSettingsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-4">
               <div className="text-center p-3 bg-gray-50 rounded-lg">
                 <div className={`text-3xl font-bold ${auditData.score >= 80 ? 'text-green-600' : auditData.score >= 60 ? 'text-yellow-600' : 'text-red-600'}`}>
                   {auditData.score}%
@@ -256,6 +257,10 @@ export default function SeoSettingsPage() {
               <div className="text-center p-3 bg-gray-50 rounded-lg">
                 <div className="text-3xl font-bold text-gray-900">{auditData.pagesWithDescription}/{auditData.totalPages}</div>
                 <div className="text-xs text-gray-500 mt-1">Descriptions</div>
+              </div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="text-3xl font-bold text-gray-900">{auditData.pagesWithCanonical}/{auditData.totalPages}</div>
+                <div className="text-xs text-gray-500 mt-1">Canonical URLs</div>
               </div>
               <div className="text-center p-3 bg-gray-50 rounded-lg">
                 <div className="text-3xl font-bold text-gray-900">{auditData.pagesInSitemap}/{auditData.totalPages}</div>
