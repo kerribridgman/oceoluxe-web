@@ -105,7 +105,7 @@ export function getOrganizationJsonLd(): OrganizationJsonLd {
     '@type': 'Organization',
     name: 'Oceo Luxe',
     url: BASE_URL,
-    logo: `${BASE_URL}/images/logo.png`,
+    logo: `${BASE_URL}/images/Logo.png`,
     description:
       'Fashion production consulting and operations support for independent designers. Structure as Support.',
     founder: {
