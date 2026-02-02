@@ -59,7 +59,9 @@ const NOINDEX_PAGES = [
 const SITEMAP_PAGES = [
   '/', '/services', '/blog', '/about', '/faq', '/products',
   '/studio-systems', '/studio-systems/join', '/quiz/about',
-  '/book', '/apply/work-with-me', '/privacy', '/terms',
+  '/book', '/apply/work-with-me', '/join', '/quiz',
+  '/quiz/signature-style', '/studio-systems/waitlist',
+  '/privacy', '/terms',
 ];
 
 // Metadata defaults to check against (must match actual titles/descriptions from lib/seo/metadata.ts)
