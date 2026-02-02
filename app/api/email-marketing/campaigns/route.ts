@@ -81,7 +81,9 @@ export async function POST(request: NextRequest) {
         templateId: templateId || null,
         audienceType,
         audienceFilter: audienceFilter ? JSON.stringify(audienceFilter) : null,
-        attachments: attachments ? JSON.stringify(attachments) : null,
+        attachments: attachments
+          ? (typeof attachments === 'string' ? attachments : JSON.stringify(attachments))
+          : null,
         fromEmail: fromEmail || 'kerrib@oceoluxe.com',
         fromName: fromName || 'Kerri at Oceo Luxe',
         status: 'draft',

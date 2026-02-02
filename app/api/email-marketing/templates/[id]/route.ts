@@ -77,10 +77,14 @@ export async function PUT(
         body: templateBody,
         category,
         audienceType,
-        attachments: attachments ? JSON.stringify(attachments) : null,
+        attachments: attachments
+          ? (typeof attachments === 'string' ? attachments : JSON.stringify(attachments))
+          : null,
         fromEmail,
         fromName,
-        variables: variables ? JSON.stringify(variables) : null,
+        variables: variables
+          ? (typeof variables === 'string' ? variables : JSON.stringify(variables))
+          : null,
         isActive,
         updatedAt: new Date(),
       })

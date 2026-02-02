@@ -39,6 +39,7 @@ export interface SendMarketingEmailParams {
   fromName?: string;
   attachments?: EmailAttachment[];
   recipientData?: RecipientData;
+  ctaButton?: { text: string; url: string };
   campaignId?: number;
   dripCampaignId?: number;
   dripStepId?: number;
@@ -47,21 +48,40 @@ export interface SendMarketingEmailParams {
 }
 
 /**
+ * Generate a styled CTA button HTML for email
+ */
+export function generateCtaButtonHtml(text: string, url: string): string {
+  return `<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 24px auto;"><tr><td style="border-radius: 6px; background: #CDA7B2;"><a href="${url}" target="_blank" style="display: inline-block; padding: 14px 32px; font-size: 15px; font-family: Georgia, serif; color: #ffffff; text-decoration: none; border-radius: 6px; letter-spacing: 0.5px;">${text}</a></td></tr></table>`;
+}
+
+/**
  * Replace template variables with recipient data
  */
 export function substituteVariables(
   template: string,
-  data: RecipientData
+  data: RecipientData,
+  ctaButton?: { text: string; url: string }
 ): string {
-  return template
-    .replace(/\{\{firstName\}\}/g, data.firstName || 'there')
-    .replace(/\{\{lastName\}\}/g, data.lastName || '')
-    .replace(/\{\{email\}\}/g, data.email || '')
-    .replace(/\{\{productName\}\}/g, data.productName || '')
-    .replace(/\{\{archetype\}\}/g, data.archetype || '')
-    .replace(/\{\{membershipTier\}\}/g, data.membershipTier || '')
-    .replace(/\{\{clientPackage\}\}/g, data.clientPackage || '')
-    .replace(/\{\{instagramHandle\}\}/g, data.instagramHandle || '');
+  let result = template
+    .replace(/\{\{\s*first\s*name\s*\}\}/gi, data.firstName || 'there')
+    .replace(/\{\{\s*last\s*name\s*\}\}/gi, data.lastName || '')
+    .replace(/\{\{\s*email\s*\}\}/gi, data.email || '')
+    .replace(/\{\{\s*product\s*name\s*\}\}/gi, data.productName || '')
+    .replace(/\{\{\s*archetype\s*\}\}/gi, data.archetype || '')
+    .replace(/\{\{\s*membership\s*tier\s*\}\}/gi, data.membershipTier || '')
+    .replace(/\{\{\s*client\s*package\s*\}\}/gi, data.clientPackage || '')
+    .replace(/\{\{\s*instagram\s*handle\s*\}\}/gi, data.instagramHandle || '');
+
+  if (ctaButton?.text && ctaButton?.url) {
+    result = result.replace(
+      /\{\{ctaButton\}\}/g,
+      generateCtaButtonHtml(ctaButton.text, ctaButton.url)
+    );
+  } else {
+    result = result.replace(/\{\{ctaButton\}\}/g, '');
+  }
+
+  return result;
 }
 
 /**
@@ -122,6 +142,7 @@ export async function sendMarketingEmail({
   fromName = DEFAULT_FROM_NAME,
   attachments = [],
   recipientData,
+  ctaButton,
   campaignId,
   dripCampaignId,
   dripStepId,
@@ -140,8 +161,8 @@ export async function sendMarketingEmail({
   try {
     // Substitute variables in subject and body
     const data: RecipientData = recipientData || { email: to };
-    const processedSubject = substituteVariables(subject, data);
-    const processedBody = substituteVariables(body, data);
+    const processedSubject = substituteVariables(subject, data, ctaButton);
+    const processedBody = substituteVariables(body, data, ctaButton);
 
     // Generate footer with unsubscribe link
     const footer = await generateEmailFooter(emailListId, includeUnsubscribe);
@@ -276,11 +297,13 @@ export async function sendCampaign(campaignId: number): Promise<{
       return r.source === campaign.audienceType;
     });
 
-    // Parse attachments if any
+    // Parse attachments if any (handle potential double-stringification)
     let attachments: EmailAttachment[] = [];
     if (campaign.attachments) {
       try {
-        attachments = JSON.parse(campaign.attachments);
+        let parsed = JSON.parse(campaign.attachments);
+        if (typeof parsed === 'string') parsed = JSON.parse(parsed);
+        if (Array.isArray(parsed)) attachments = parsed;
       } catch (e) {
         console.error('Error parsing campaign attachments:', e);
       }
@@ -363,6 +386,7 @@ export async function sendDripStep(
         templateFromEmail: emailTemplates.fromEmail,
         templateFromName: emailTemplates.fromName,
         templateAttachments: emailTemplates.attachments,
+        templateVariables: emailTemplates.variables,
       })
       .from(dripCampaignSteps)
       .innerJoin(emailTemplates, eq(dripCampaignSteps.templateId, emailTemplates.id))
@@ -380,13 +404,28 @@ export async function sendDripStep(
       .where(eq(dripEnrollments.id, enrollmentId))
       .limit(1);
 
-    // Parse attachments
+    // Parse attachments (handle potential double-stringification)
     let attachments: EmailAttachment[] = [];
     if (step.templateAttachments) {
       try {
-        attachments = JSON.parse(step.templateAttachments);
+        let parsed = JSON.parse(step.templateAttachments);
+        if (typeof parsed === 'string') parsed = JSON.parse(parsed);
+        if (Array.isArray(parsed)) attachments = parsed;
       } catch (e) {
         console.error('Error parsing template attachments:', e);
+      }
+    }
+
+    // Parse CTA button from template variables
+    let ctaButton: { text: string; url: string } | undefined;
+    if (step.templateVariables) {
+      try {
+        const vars = JSON.parse(step.templateVariables);
+        if (vars.ctaButtonText && vars.ctaButtonUrl) {
+          ctaButton = { text: vars.ctaButtonText, url: vars.ctaButtonUrl };
+        }
+      } catch (e) {
+        console.error('Error parsing template variables:', e);
       }
     }
 
@@ -418,6 +457,7 @@ export async function sendDripStep(
       fromEmail: step.templateFromEmail || undefined,
       fromName: step.templateFromName || undefined,
       attachments,
+      ctaButton,
       recipientData: {
         email: emailEntry.email,
         firstName: emailEntry.firstName,

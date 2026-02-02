@@ -30,7 +30,10 @@ import {
   Eye,
   Copy,
   Users,
+  Paperclip,
+  Link2,
 } from 'lucide-react';
+import { AttachmentManager, Attachment } from '@/components/email-marketing/attachment-manager';
 
 interface EmailTemplate {
   id: number;
@@ -58,6 +61,9 @@ interface TemplateForm {
   audienceType: string;
   fromEmail: string;
   fromName: string;
+  attachments: Attachment[];
+  ctaButtonText: string;
+  ctaButtonUrl: string;
 }
 
 const defaultForm: TemplateForm = {
@@ -69,6 +75,9 @@ const defaultForm: TemplateForm = {
   audienceType: 'all',
   fromEmail: 'kerrib@oceoluxe.com',
   fromName: 'Kerri at Oceo Luxe',
+  attachments: [],
+  ctaButtonText: '',
+  ctaButtonUrl: '',
 };
 
 const categories = [
@@ -82,10 +91,12 @@ const categories = [
 
 const audienceTypes = [
   { value: 'all', label: 'All Contacts' },
+  { value: 'website_signup', label: 'Website Signups' },
   { value: 'lead', label: 'Free Product Leads' },
   { value: 'quiz_lead', label: 'Quiz Leads' },
   { value: 'member', label: 'Members' },
   { value: 'client', label: '1-on-1 Clients' },
+  { value: 'manual', label: 'Manual Adds' },
 ];
 
 const variablesList = [
@@ -134,6 +145,14 @@ export default function EmailTemplatesPage() {
 
   function openEditModal(template: EmailTemplate) {
     setEditingTemplate(template);
+    let parsedAttachments: Attachment[] = [];
+    let parsedVariables: { ctaButtonText?: string; ctaButtonUrl?: string } = {};
+    try {
+      if (template.attachments) parsedAttachments = JSON.parse(template.attachments);
+    } catch {}
+    try {
+      if (template.variables) parsedVariables = JSON.parse(template.variables);
+    } catch {}
     setForm({
       name: template.name,
       description: template.description || '',
@@ -143,6 +162,9 @@ export default function EmailTemplatesPage() {
       audienceType: template.audienceType || 'all',
       fromEmail: template.fromEmail,
       fromName: template.fromName,
+      attachments: parsedAttachments,
+      ctaButtonText: parsedVariables.ctaButtonText || '',
+      ctaButtonUrl: parsedVariables.ctaButtonUrl || '',
     });
     setShowModal(true);
   }
@@ -159,10 +181,22 @@ export default function EmailTemplatesPage() {
         ? `/api/email-marketing/templates/${editingTemplate.id}`
         : '/api/email-marketing/templates';
 
+      const payload = {
+        ...form,
+        attachments: form.attachments.length > 0 ? JSON.stringify(form.attachments) : null,
+        variables:
+          form.ctaButtonText || form.ctaButtonUrl
+            ? JSON.stringify({
+                ctaButtonText: form.ctaButtonText,
+                ctaButtonUrl: form.ctaButtonUrl,
+              })
+            : null,
+      };
+
       const response = await fetch(url, {
         method: editingTemplate ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -203,6 +237,14 @@ export default function EmailTemplatesPage() {
 
   function duplicateTemplate(template: EmailTemplate) {
     setEditingTemplate(null);
+    let parsedAttachments: Attachment[] = [];
+    let parsedVariables: { ctaButtonText?: string; ctaButtonUrl?: string } = {};
+    try {
+      if (template.attachments) parsedAttachments = JSON.parse(template.attachments);
+    } catch {}
+    try {
+      if (template.variables) parsedVariables = JSON.parse(template.variables);
+    } catch {}
     setForm({
       name: `${template.name} (Copy)`,
       description: template.description || '',
@@ -212,6 +254,9 @@ export default function EmailTemplatesPage() {
       audienceType: template.audienceType || 'all',
       fromEmail: template.fromEmail,
       fromName: template.fromName,
+      attachments: parsedAttachments,
+      ctaButtonText: parsedVariables.ctaButtonText || '',
+      ctaButtonUrl: parsedVariables.ctaButtonUrl || '',
     });
     setShowModal(true);
   }
@@ -283,6 +328,18 @@ export default function EmailTemplatesPage() {
                           {audienceTypes.find((a) => a.value === template.audienceType)?.label}
                         </span>
                       )}
+                      {template.attachments && (() => {
+                        try {
+                          const count = JSON.parse(template.attachments).length;
+                          if (count > 0) return (
+                            <span className="text-xs px-2 py-0.5 bg-[#faf8f5] text-[#967F71] rounded-full flex items-center gap-1">
+                              <Paperclip className="h-3 w-3" />
+                              {count}
+                            </span>
+                          );
+                        } catch {}
+                        return null;
+                      })()}
                       {!template.isActive && (
                         <span className="text-xs px-2 py-0.5 bg-gray-200 text-gray-600 rounded-full">
                           Inactive
@@ -454,19 +511,70 @@ export default function EmailTemplatesPage() {
                 className="font-mono text-sm"
               />
             </div>
+
+            {/* CTA Button URL */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Link2 className="h-4 w-4 text-[#967F71]" />
+                <span className="text-sm font-medium text-[#3B3937]">Link Button (optional)</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Label htmlFor="ctaButtonText">Button Text</Label>
+                  <Input
+                    id="ctaButtonText"
+                    value={form.ctaButtonText}
+                    onChange={(e) => setForm({ ...form, ctaButtonText: e.target.value })}
+                    placeholder="e.g., View Collection"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="ctaButtonUrl">Button URL</Label>
+                  <Input
+                    id="ctaButtonUrl"
+                    value={form.ctaButtonUrl}
+                    onChange={(e) => setForm({ ...form, ctaButtonUrl: e.target.value })}
+                    placeholder="https://..."
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-[#967F71]">
+                Use <code className="px-1 py-0.5 bg-[#faf8f5] rounded text-xs">{'{{ctaButton}}'}</code> in the email body to place the button
+              </p>
+            </div>
+
+            {/* Attachments */}
+            <AttachmentManager
+              attachments={form.attachments}
+              onChange={(attachments) => setForm({ ...form, attachments })}
+            />
           </div>
 
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShowModal(false)}>
-              Cancel
-            </Button>
-            <Button
-              onClick={handleSave}
-              disabled={isSaving || !form.name || !form.subject || !form.body}
-              className="bg-[#CDA7B2] hover:bg-[#b8909a] text-white"
-            >
-              {isSaving ? 'Saving...' : editingTemplate ? 'Update Template' : 'Create Template'}
-            </Button>
+          <DialogFooter className="flex-col items-end gap-2">
+            {(!form.name || !form.subject || !form.body) && (
+              <p className="text-xs text-amber-600 w-full text-right">
+                Missing:{' '}
+                {[
+                  !form.name && 'Template Name',
+                  !form.subject && 'Subject Line',
+                  !form.body && 'Email Body',
+                ]
+                  .filter(Boolean)
+                  .join(', ')}
+              </p>
+            )}
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setShowModal(false)}>
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSave}
+                disabled={isSaving || !form.name || !form.subject || !form.body}
+                className="bg-[#CDA7B2] hover:bg-[#b8909a] text-white"
+              >
+                {isSaving ? 'Saving...' : editingTemplate ? 'Update Template' : 'Create Template'}
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -494,6 +602,25 @@ export default function EmailTemplatesPage() {
                   dangerouslySetInnerHTML={{ __html: previewTemplate.body }}
                 />
               </div>
+              {previewTemplate.attachments && (() => {
+                try {
+                  const atts: Attachment[] = JSON.parse(previewTemplate.attachments);
+                  if (atts.length === 0) return null;
+                  return (
+                    <div className="border-t pt-4">
+                      <p className="text-xs font-medium text-[#967F71] mb-2 flex items-center gap-1">
+                        <Paperclip className="h-3 w-3" />
+                        Attachments ({atts.length})
+                      </p>
+                      <div className="space-y-1">
+                        {atts.map((att, i) => (
+                          <p key={i} className="text-sm text-[#3B3937]">{att.filename}</p>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                } catch { return null; }
+              })()}
             </div>
           )}
 

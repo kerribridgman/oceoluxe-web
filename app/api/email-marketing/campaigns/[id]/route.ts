@@ -77,7 +77,9 @@ export async function PUT(
         templateId,
         audienceType,
         audienceFilter: audienceFilter ? JSON.stringify(audienceFilter) : null,
-        attachments: attachments ? JSON.stringify(attachments) : null,
+        attachments: attachments
+          ? (typeof attachments === 'string' ? attachments : JSON.stringify(attachments))
+          : null,
         fromEmail,
         fromName,
         status,

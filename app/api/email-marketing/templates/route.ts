@@ -58,10 +58,14 @@ export async function POST(request: NextRequest) {
         body: templateBody,
         category: category || null,
         audienceType: audienceType || 'all',
-        attachments: attachments ? JSON.stringify(attachments) : null,
+        attachments: attachments
+          ? (typeof attachments === 'string' ? attachments : JSON.stringify(attachments))
+          : null,
         fromEmail: fromEmail || 'kerrib@oceoluxe.com',
         fromName: fromName || 'Kerri at Oceo Luxe',
-        variables: variables ? JSON.stringify(variables) : null,
+        variables: variables
+          ? (typeof variables === 'string' ? variables : JSON.stringify(variables))
+          : null,
         createdBy: user.id,
         isActive: true,
       })
