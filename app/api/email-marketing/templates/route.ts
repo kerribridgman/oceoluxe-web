@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
       fromEmail,
       fromName,
       variables,
+      previewText,
     } = body;
 
     if (!name || !subject || !templateBody) {
@@ -63,6 +64,7 @@ export async function POST(request: NextRequest) {
           : null,
         fromEmail: fromEmail || 'kerrib@oceoluxe.com',
         fromName: fromName || 'Kerri at Oceo Luxe',
+        previewText: previewText || null,
         variables: variables
           ? (typeof variables === 'string' ? variables : JSON.stringify(variables))
           : null,

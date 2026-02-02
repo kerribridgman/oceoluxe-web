@@ -1199,6 +1199,7 @@ export const emailTemplates = pgTable('email_templates', {
   attachments: text('attachments'), // JSON array of {filename, url, type}
   fromEmail: varchar('from_email', { length: 255 }).default('kerrib@oceoluxe.com'),
   fromName: varchar('from_name', { length: 255 }).default('Kerri at Oceo Luxe'),
+  previewText: varchar('preview_text', { length: 255 }),
   isActive: boolean('is_active').default(true),
   createdBy: integer('created_by').references(() => users.id),
   createdAt: timestamp('created_at').notNull().defaultNow(),
@@ -1220,6 +1221,7 @@ export const campaigns = pgTable('campaigns', {
   attachments: text('attachments'), // JSON array of {filename, url, type}
   fromEmail: varchar('from_email', { length: 255 }).default('kerrib@oceoluxe.com'),
   fromName: varchar('from_name', { length: 255 }).default('Kerri at Oceo Luxe'),
+  previewText: varchar('preview_text', { length: 255 }),
   status: varchar('status', { length: 50 }).notNull().default('draft'),
   scheduledAt: timestamp('scheduled_at'),
   sentAt: timestamp('sent_at'),

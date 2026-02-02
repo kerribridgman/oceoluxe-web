@@ -29,6 +29,13 @@
       "when": 1770052316505,
       "tag": "0003_lowly_agent_zero",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1770075054215,
+      "tag": "0004_secret_tigra",
+      "breakpoints": true
     }
   ]
 }

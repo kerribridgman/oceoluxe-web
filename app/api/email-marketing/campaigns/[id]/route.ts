@@ -64,6 +64,7 @@ export async function PUT(
       attachments,
       fromEmail,
       fromName,
+      previewText,
       status,
       scheduledAt,
     } = body;
@@ -82,6 +83,7 @@ export async function PUT(
           : null,
         fromEmail,
         fromName,
+        previewText: previewText !== undefined ? previewText : undefined,
         status,
         scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
         updatedAt: new Date(),

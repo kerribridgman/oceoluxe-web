@@ -45,6 +45,8 @@ export interface SendMarketingEmailParams {
   dripStepId?: number;
   templateId?: number;
   includeUnsubscribe?: boolean;
+  previewText?: string;
+  skipTracking?: boolean;
 }
 
 /**
@@ -106,27 +108,44 @@ async function fetchAttachment(attachment: EmailAttachment): Promise<{
 }
 
 /**
- * Generate email footer with unsubscribe link
+ * Generate branded email footer with social links and unsubscribe
  */
 async function generateEmailFooter(
   emailListId: number,
   includeUnsubscribe: boolean
 ): Promise<string> {
-  if (!includeUnsubscribe) {
-    return '';
-  }
-
-  const unsubscribeUrl = await getUnsubscribeUrl(emailListId);
+  const currentYear = new Date().getFullYear();
+  const unsubscribeHtml = includeUnsubscribe
+    ? `<p style="margin: 0 0 8px 0;"><a href="${await getUnsubscribeUrl(emailListId)}" style="color: #967F71; text-decoration: underline; font-size: 12px;">Unsubscribe from these emails</a></p>`
+    : '';
 
   return `
-    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e5e5; text-align: center; color: #666; font-size: 12px;">
-      <p>Oceo Luxe | Fashion Business Coaching</p>
-      <p>
-        <a href="${unsubscribeUrl}" style="color: #666; text-decoration: underline;">
-          Unsubscribe from these emails
-        </a>
-      </p>
-    </div>
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 40px; border-top: 1px solid #CDA7B2;">
+      <tr>
+        <td style="padding: 30px 0 0 0; text-align: center;">
+          <!-- Social Links -->
+          <p style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 13px; color: #967F71;">
+            <a href="https://www.instagram.com/oceoluxe" target="_blank" style="color: #967F71; text-decoration: none;">Instagram</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="https://www.linkedin.com/in/kerri-bridgman/" target="_blank" style="color: #967F71; text-decoration: none;">LinkedIn</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="https://www.pinterest.com/oceoluxe/" target="_blank" style="color: #967F71; text-decoration: none;">Pinterest</a>
+          </p>
+          <!-- Tagline -->
+          <p style="margin: 0 0 16px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 12px; color: #967F71; font-style: italic;">
+            Structure does not limit creativity, it protects it.
+          </p>
+          <!-- Legal -->
+          <p style="margin: 0 0 4px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 11px; color: #967F71;">
+            &copy; ${currentYear} Kerri Marie Consulting, LLC dba Oceo Luxe
+          </p>
+          <p style="margin: 0 0 12px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 11px; color: #967F71;">
+            2123 SW 36th Terrace, Delray Beach, FL
+          </p>
+          ${unsubscribeHtml}
+        </td>
+      </tr>
+    </table>
   `;
 }
 
@@ -148,6 +167,8 @@ export async function sendMarketingEmail({
   dripStepId,
   templateId,
   includeUnsubscribe = true,
+  previewText,
+  skipTracking = false,
 }: SendMarketingEmailParams): Promise<{
   success: boolean;
   messageId?: string;
@@ -167,26 +188,83 @@ export async function sendMarketingEmail({
     // Generate footer with unsubscribe link
     const footer = await generateEmailFooter(emailListId, includeUnsubscribe);
 
-    // Wrap body in basic HTML structure
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          body { font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; color: #3B3937; }
-          a { color: #CDA7B2; }
-        </style>
-      </head>
-      <body style="margin: 0; padding: 20px; background-color: #faf8f5;">
-        <div style="max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px;">
-          ${processedBody}
-          ${footer}
-        </div>
-      </body>
-      </html>
-    `;
+    // Preheader (hidden preview text)
+    const preheaderHtml = previewText
+      ? `<div style="display:none;font-size:1px;color:#faf8f5;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">${previewText}${'&zwnj;&nbsp;'.repeat(80)}</div>`
+      : '';
+
+    // Personal sign-off (only for Kerri)
+    const signOffHtml = fromName.toLowerCase().includes('kerri')
+      ? `<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 32px;">
+          <tr><td style="font-family: Georgia, 'Times New Roman', serif; font-size: 15px; color: #3B3937; line-height: 1.6;">With intention,</td></tr>
+          <tr><td style="font-family: Georgia, 'Times New Roman', serif; font-size: 15px; color: #CDA7B2; line-height: 1.6;">Kerri</td></tr>
+        </table>`
+      : '';
+
+    // Wrap body in branded HTML structure
+    const htmlContent = `<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>${processedSubject}</title>
+  <style>
+    body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table { border-spacing: 0; border-collapse: collapse; }
+    td { padding: 0; }
+    img { border: 0; display: block; }
+    a { color: #CDA7B2; }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #faf8f5; font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; color: #3B3937;">
+  ${preheaderHtml}
+  <!-- Outer wrapper -->
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #faf8f5;">
+    <tr>
+      <td style="padding: 20px 0;">
+        <!-- Inner container -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 0 auto; max-width: 600px;">
+          <!-- Header -->
+          <tr>
+            <td style="padding: 30px 40px 20px 40px; text-align: center;">
+              <p style="margin: 0 0 6px 0; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; color: #CDA7B2; letter-spacing: 3px; font-weight: normal;">OCEO LUXE</p>
+              <p style="margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 12px; color: #967F71; font-style: italic;">Structure does not limit creativity, it protects it.</p>
+            </td>
+          </tr>
+          <!-- Divider -->
+          <tr>
+            <td style="padding: 0 40px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr><td style="border-top: 1px solid #CDA7B2; font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Body -->
+          <tr>
+            <td style="padding: 30px 40px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: #ffffff; border-radius: 8px;">
+                <tr>
+                  <td style="padding: 32px; font-family: Georgia, 'Times New Roman', serif; font-size: 15px; color: #3B3937; line-height: 1.6;">
+                    ${processedBody}
+                    ${signOffHtml}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 0 40px 30px 40px;">
+              ${footer}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 
     // Process attachments
     const processedAttachments = await Promise.all(
@@ -213,19 +291,21 @@ export async function sendMarketingEmail({
     const messageId = response.headers['x-message-id'] as string;
 
     // Record the send in the database
-    await db.insert(emailSends).values({
-      emailListId,
-      campaignId: campaignId || null,
-      dripCampaignId: dripCampaignId || null,
-      dripStepId: dripStepId || null,
-      templateId: templateId || null,
-      toEmail: to,
-      subject: processedSubject,
-      fromEmail,
-      status: 'sent',
-      sendgridMessageId: messageId,
-      sentAt: new Date(),
-    });
+    if (!skipTracking) {
+      await db.insert(emailSends).values({
+        emailListId,
+        campaignId: campaignId || null,
+        dripCampaignId: dripCampaignId || null,
+        dripStepId: dripStepId || null,
+        templateId: templateId || null,
+        toEmail: to,
+        subject: processedSubject,
+        fromEmail,
+        status: 'sent',
+        sendgridMessageId: messageId,
+        sentAt: new Date(),
+      });
+    }
 
     console.log(`Marketing email sent to ${to} with message ID: ${messageId}`);
     return { success: true, messageId };
@@ -233,19 +313,21 @@ export async function sendMarketingEmail({
     console.error('SendGrid error:', error);
 
     // Record the failed send
-    await db.insert(emailSends).values({
-      emailListId,
-      campaignId: campaignId || null,
-      dripCampaignId: dripCampaignId || null,
-      dripStepId: dripStepId || null,
-      templateId: templateId || null,
-      toEmail: to,
-      subject,
-      fromEmail,
-      status: 'failed',
-      errorMessage: error instanceof Error ? error.message : 'Unknown error',
-      sentAt: new Date(),
-    });
+    if (!skipTracking) {
+      await db.insert(emailSends).values({
+        emailListId,
+        campaignId: campaignId || null,
+        dripCampaignId: dripCampaignId || null,
+        dripStepId: dripStepId || null,
+        templateId: templateId || null,
+        toEmail: to,
+        subject,
+        fromEmail,
+        status: 'failed',
+        errorMessage: error instanceof Error ? error.message : 'Unknown error',
+        sentAt: new Date(),
+      });
+    }
 
     return {
       success: false,
@@ -333,6 +415,7 @@ export async function sendCampaign(campaignId: number): Promise<{
           instagramHandle: recipient.instagramHandle,
         },
         campaignId,
+        previewText: campaign.previewText || undefined,
       });
 
       if (result.success) {
@@ -387,6 +470,7 @@ export async function sendDripStep(
         templateFromName: emailTemplates.fromName,
         templateAttachments: emailTemplates.attachments,
         templateVariables: emailTemplates.variables,
+        templatePreviewText: emailTemplates.previewText,
       })
       .from(dripCampaignSteps)
       .innerJoin(emailTemplates, eq(dripCampaignSteps.templateId, emailTemplates.id))
@@ -471,6 +555,7 @@ export async function sendDripStep(
       dripCampaignId: step.dripCampaignId,
       dripStepId: step.id,
       templateId: step.templateId,
+      previewText: step.templatePreviewText || undefined,
     });
 
     return result;

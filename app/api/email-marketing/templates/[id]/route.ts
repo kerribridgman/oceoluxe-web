@@ -65,6 +65,7 @@ export async function PUT(
       fromEmail,
       fromName,
       variables,
+      previewText,
       isActive,
     } = body;
 
@@ -82,6 +83,7 @@ export async function PUT(
           : null,
         fromEmail,
         fromName,
+        previewText: previewText !== undefined ? previewText : undefined,
         variables: variables
           ? (typeof variables === 'string' ? variables : JSON.stringify(variables))
           : null,

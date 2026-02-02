@@ -32,6 +32,7 @@ import {
   Users,
   Paperclip,
   Link2,
+  TestTube2,
 } from 'lucide-react';
 import { AttachmentManager, Attachment } from '@/components/email-marketing/attachment-manager';
 
@@ -46,6 +47,7 @@ interface EmailTemplate {
   attachments: string | null;
   fromEmail: string;
   fromName: string;
+  previewText: string | null;
   variables: string | null;
   isActive: boolean;
   createdAt: string;
@@ -56,6 +58,7 @@ interface TemplateForm {
   name: string;
   description: string;
   subject: string;
+  previewText: string;
   body: string;
   category: string;
   audienceType: string;
@@ -70,6 +73,7 @@ const defaultForm: TemplateForm = {
   name: '',
   description: '',
   subject: '',
+  previewText: '',
   body: '',
   category: 'general',
   audienceType: 'all',
@@ -118,6 +122,7 @@ export default function EmailTemplatesPage() {
   const [previewTemplate, setPreviewTemplate] = useState<EmailTemplate | null>(null);
   const [form, setForm] = useState<TemplateForm>(defaultForm);
   const [isSaving, setIsSaving] = useState(false);
+  const [isSendingTest, setIsSendingTest] = useState(false);
 
   useEffect(() => {
     fetchTemplates();
@@ -157,6 +162,7 @@ export default function EmailTemplatesPage() {
       name: template.name,
       description: template.description || '',
       subject: template.subject,
+      previewText: template.previewText || '',
       body: template.body,
       category: template.category || 'general',
       audienceType: template.audienceType || 'all',
@@ -183,6 +189,7 @@ export default function EmailTemplatesPage() {
 
       const payload = {
         ...form,
+        previewText: form.previewText || null,
         attachments: form.attachments.length > 0 ? JSON.stringify(form.attachments) : null,
         variables:
           form.ctaButtonText || form.ctaButtonUrl
@@ -249,6 +256,7 @@ export default function EmailTemplatesPage() {
       name: `${template.name} (Copy)`,
       description: template.description || '',
       subject: template.subject,
+      previewText: template.previewText || '',
       body: template.body,
       category: template.category || 'general',
       audienceType: template.audienceType || 'all',
@@ -266,6 +274,38 @@ export default function EmailTemplatesPage() {
       ...prev,
       body: prev.body + variable,
     }));
+  }
+
+  async function handleTestSend() {
+    setIsSendingTest(true);
+    try {
+      const response = await fetch('/api/email-marketing/test-send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subject: form.subject,
+          body: form.body,
+          fromEmail: form.fromEmail,
+          fromName: form.fromName,
+          previewText: form.previewText || null,
+          attachments: form.attachments.length > 0 ? JSON.stringify(form.attachments) : null,
+          ctaButtonText: form.ctaButtonText || null,
+          ctaButtonUrl: form.ctaButtonUrl || null,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message || 'Test email sent!');
+      } else {
+        alert(data.error || 'Failed to send test email');
+      }
+    } catch (error) {
+      console.error('Error sending test email:', error);
+      alert('Failed to send test email');
+    } finally {
+      setIsSendingTest(false);
+    }
   }
 
   return (
@@ -485,6 +525,20 @@ export default function EmailTemplatesPage() {
             </div>
 
             <div>
+              <Label htmlFor="previewText">Preview Text</Label>
+              <Input
+                id="previewText"
+                value={form.previewText}
+                onChange={(e) => setForm({ ...form, previewText: e.target.value })}
+                placeholder="Shows in inbox preview before opening the email"
+                maxLength={255}
+              />
+              <p className="text-xs text-[#967F71] mt-1">
+                Shows in inbox preview before opening the email
+              </p>
+            </div>
+
+            <div>
               <div className="flex items-center justify-between mb-2">
                 <Label htmlFor="body">Email Body (HTML)</Label>
                 <div className="flex gap-1">
@@ -566,6 +620,14 @@ export default function EmailTemplatesPage() {
             <div className="flex gap-2">
               <Button variant="outline" onClick={() => setShowModal(false)}>
                 Cancel
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleTestSend}
+                disabled={isSendingTest || !form.subject || !form.body}
+              >
+                <TestTube2 className="h-4 w-4 mr-1" />
+                {isSendingTest ? 'Sending...' : 'Send Test Email'}
               </Button>
               <Button
                 onClick={handleSave}

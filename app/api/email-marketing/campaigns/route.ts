@@ -18,6 +18,7 @@ export async function GET() {
         attachments: campaigns.attachments,
         fromEmail: campaigns.fromEmail,
         fromName: campaigns.fromName,
+        previewText: campaigns.previewText,
         status: campaigns.status,
         scheduledAt: campaigns.scheduledAt,
         sentAt: campaigns.sentAt,
@@ -62,6 +63,7 @@ export async function POST(request: NextRequest) {
       attachments,
       fromEmail,
       fromName,
+      previewText,
       scheduledAt,
     } = body;
 
@@ -86,6 +88,7 @@ export async function POST(request: NextRequest) {
           : null,
         fromEmail: fromEmail || 'kerrib@oceoluxe.com',
         fromName: fromName || 'Kerri at Oceo Luxe',
+        previewText: previewText || null,
         status: 'draft',
         scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
         createdBy: user.id,
