@@ -1,6 +1,6 @@
 import { db } from './drizzle';
 import { blogPosts, notionProducts, dashboardProducts } from './schema';
-import { eq, desc, and, ne } from 'drizzle-orm';
+import { eq, desc, and, ne, lt, gt, asc } from 'drizzle-orm';
 
 /**
  * Get related blog posts for a given post.
@@ -178,4 +178,45 @@ function formatDashboardPrice(cents: number, productType: string | null) {
     currency: 'USD',
   }).format(cents / 100);
   return productType === 'subscription' ? `${formatted}/mo` : formatted;
+}
+
+/**
+ * Get the previous and next published blog posts relative to a given post,
+ * ordered by publishedAt date.
+ */
+export async function getAdjacentPosts(
+  currentPostId: number,
+  publishedAt: Date
+) {
+  const [previousRows, nextRows] = await Promise.all([
+    db
+      .select({ id: blogPosts.id, slug: blogPosts.slug, title: blogPosts.title })
+      .from(blogPosts)
+      .where(
+        and(
+          eq(blogPosts.isPublished, true),
+          ne(blogPosts.id, currentPostId),
+          lt(blogPosts.publishedAt, publishedAt)
+        )
+      )
+      .orderBy(desc(blogPosts.publishedAt))
+      .limit(1),
+    db
+      .select({ id: blogPosts.id, slug: blogPosts.slug, title: blogPosts.title })
+      .from(blogPosts)
+      .where(
+        and(
+          eq(blogPosts.isPublished, true),
+          ne(blogPosts.id, currentPostId),
+          gt(blogPosts.publishedAt, publishedAt)
+        )
+      )
+      .orderBy(asc(blogPosts.publishedAt))
+      .limit(1),
+  ]);
+
+  return {
+    previous: previousRows[0] || null,
+    next: nextRows[0] || null,
+  };
 }

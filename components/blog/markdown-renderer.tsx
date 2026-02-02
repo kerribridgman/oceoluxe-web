@@ -8,6 +8,24 @@ import { useEffect, useMemo } from 'react';
 import Script from 'next/script';
 import { cleanNotionMarkdown } from '@/lib/notion-markdown-cleaner';
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+function getHeadingText(children: React.ReactNode): string {
+  if (typeof children === 'string') return children;
+  if (Array.isArray(children)) return children.map(getHeadingText).join('');
+  if (children && typeof children === 'object' && 'props' in children) {
+    return getHeadingText((children as any).props.children);
+  }
+  return '';
+}
+
 interface MarkdownRendererProps {
   content: string;
   excerpt?: string;
@@ -107,12 +125,14 @@ export function MarkdownRenderer({ content, excerpt }: MarkdownRendererProps) {
           h1: ({ node, ...props }) => (
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 mt-8" {...props} />
           ),
-          h2: ({ node, ...props }) => (
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-8" {...props} />
-          ),
-          h3: ({ node, ...props }) => (
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-6" {...props} />
-          ),
+          h2: ({ node, children, ...props }) => {
+            const id = slugify(getHeadingText(children));
+            return <h2 id={id} className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-8 scroll-mt-24" {...props}>{children}</h2>;
+          },
+          h3: ({ node, children, ...props }) => {
+            const id = slugify(getHeadingText(children));
+            return <h3 id={id} className="text-2xl font-bold text-gray-900 mb-4 mt-6 scroll-mt-24" {...props}>{children}</h3>;
+          },
           h4: ({ node, ...props }) => (
             <h4 className="text-xl font-bold text-gray-900 mb-4 mt-6" {...props} />
           ),

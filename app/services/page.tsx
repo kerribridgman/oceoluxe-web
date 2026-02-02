@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
@@ -6,6 +7,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getServiceJsonLd, getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
+import { getPublishedBlogPosts } from '@/lib/db/queries-blogs';
 
 export async function generateMetadata() {
   return await getPageMetadata('services');
@@ -42,7 +44,20 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
   { name: 'Services', url: `${baseUrl}/services` },
 ]);
 
+function formatBlogDate(date: Date | string): string {
+  const d = new Date(date);
+  const adjusted = new Date(d.getTime() + 12 * 60 * 60 * 1000);
+  return adjusted.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
 export default async function ServicesPage() {
+  const recentPosts = (await getPublishedBlogPosts()).slice(0, 3);
+
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <JsonLdScript data={[...serviceSchemas, breadcrumbJsonLd] as unknown as Record<string, unknown>[]} />
@@ -138,6 +153,24 @@ export default async function ServicesPage() {
         </div>
       </section>
 
+      {/* Quiz CTA */}
+      <div className="bg-white">
+        <div className="max-w-4xl mx-auto px-6 pb-12">
+          <div className="rounded-xl border border-[#CDA7B2]/20 bg-[#CDA7B2]/5 px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p className="text-[#3B3937] font-light">Not sure which archetype you are?</p>
+              <p className="text-sm text-[#967F71] font-light">Take our free quiz and get a personalized recommendation.</p>
+            </div>
+            <Link href="/quiz" className="flex-shrink-0">
+              <Button className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white px-6 text-sm font-normal tracking-wide">
+                Take the Quiz
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
       {/* Production Systems Setup */}
       <section id="systems-implementation" className="py-24 bg-[#faf8f5] scroll-mt-16">
         <div className="max-w-4xl mx-auto px-6">
@@ -203,6 +236,19 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Production Blog Link */}
+      <div className="bg-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-6 pb-12">
+          <Link
+            href="/blog"
+            className="inline-flex items-center text-[#CDA7B2] hover:text-[#BD97A2] font-medium text-sm transition-colors"
+          >
+            Read more about production systems on the blog
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
 
       {/* Production Strategy & Consulting */}
       <section id="strategic-guidance" className="py-24 bg-white scroll-mt-16">
@@ -335,6 +381,63 @@ export default async function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Products Link */}
+      <div className="bg-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-6 pb-12">
+          <Link
+            href="/products"
+            className="inline-flex items-center text-[#CDA7B2] hover:text-[#BD97A2] font-medium text-sm transition-colors"
+          >
+            Browse our Notion templates and digital products
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
+
+      {/* From the Blog */}
+      {recentPosts.length > 0 && (
+        <section className="py-20 bg-white border-t border-[#967F71]/10">
+          <div className="max-w-4xl mx-auto px-6">
+            <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+              From the Journal
+            </p>
+            <h2 className="text-2xl font-light text-[#3B3937] mb-8 tracking-tight">
+              Latest Insights
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {recentPosts.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
+                  <article className="space-y-3">
+                    {post.coverImageUrl && (
+                      <div className="aspect-[4/3] overflow-hidden relative bg-[#f5f0ea] rounded-lg">
+                        <Image
+                          src={post.coverImageUrl}
+                          alt={post.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          quality={75}
+                        />
+                      </div>
+                    )}
+                    <p className="text-xs text-[#CDA7B2] font-medium uppercase tracking-wider">
+                      {post.publishedAt ? formatBlogDate(post.publishedAt) : 'Draft'}
+                    </p>
+                    <h3 className="text-base font-medium text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors leading-snug">
+                      {post.title}
+                    </h3>
+                    {post.excerpt && (
+                      <p className="text-sm text-[#967F71] font-light leading-relaxed line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                    )}
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Final CTA */}
       <section className="py-24 bg-[#3B3937]">

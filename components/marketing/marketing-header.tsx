@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { CartIcon } from '@/components/cart';
+import { SiteSearch } from '@/components/search/site-search';
 
 export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -59,12 +60,16 @@ export function MarketingHeader() {
               </Link>
             ))}
 
+            {/* Search */}
+            <SiteSearch isScrolled={isScrolled} />
+
             {/* Cart Icon */}
             <CartIcon isScrolled={isScrolled} />
           </div>
 
           {/* Mobile Cart and Menu */}
           <div className="flex items-center gap-2 md:hidden">
+            <SiteSearch isScrolled={isScrolled} />
             <CartIcon isScrolled={isScrolled} />
             <button
               className={`p-2 rounded-lg transition-colors ${

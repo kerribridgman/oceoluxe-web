@@ -1,5 +1,5 @@
 import { getPublishedBlogPostBySlug } from '@/lib/db/queries-blogs';
-import { getRelatedBlogPosts, getRecommendedProducts } from '@/lib/db/queries-blog-related';
+import { getRelatedBlogPosts, getRecommendedProducts, getAdjacentPosts } from '@/lib/db/queries-blog-related';
 import { MarkdownRenderer } from '@/components/blog/markdown-renderer';
 import { RelatedPosts } from '@/components/blog/related-posts';
 import { RecommendedProducts } from '@/components/blog/recommended-products';
@@ -7,9 +7,12 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { PostCta } from '@/components/blog/post-cta';
+import { TableOfContents } from '@/components/blog/table-of-contents';
+import { InlineEmailSignup } from '@/components/blog/inline-email-signup';
 import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 
 // Format date using UTC to avoid timezone shifts for date-only values
@@ -85,9 +88,10 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  const [relatedPosts, recommendedProducts] = await Promise.all([
+  const [relatedPosts, recommendedProducts, adjacentPosts] = await Promise.all([
     getRelatedBlogPosts(post.id, post.industry),
     getRecommendedProducts(),
+    post.publishedAt ? getAdjacentPosts(post.id, new Date(post.publishedAt)) : Promise.resolve({ previous: null, next: null }),
   ]);
 
   const jsonLd = {
@@ -196,10 +200,19 @@ export default async function BlogPostPage({ params }: Props) {
             )}
           </header>
 
+          {/* Table of Contents */}
+          <TableOfContents markdown={post.content} />
+
           {/* Article Body */}
           <div className="prose-container">
             <MarkdownRenderer content={post.content} excerpt={post.excerpt || undefined} />
           </div>
+
+          {/* Contextual CTA */}
+          <PostCta />
+
+          {/* Inline Email Signup */}
+          <InlineEmailSignup />
 
           {/* Article Footer */}
           <footer className="mt-16 pt-8 border-t border-[#967F71]/10">
@@ -210,6 +223,39 @@ export default async function BlogPostPage({ params }: Props) {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to all posts
             </Link>
+
+            {(adjacentPosts.previous || adjacentPosts.next) && (
+              <div className="grid grid-cols-2 gap-8 mt-8 pt-8 border-t border-[#967F71]/10">
+                <div>
+                  {adjacentPosts.previous && (
+                    <Link
+                      href={`/blog/${adjacentPosts.previous.slug}`}
+                      className="group block"
+                    >
+                      <p className="text-xs text-[#967F71] uppercase tracking-wider mb-1">Previous</p>
+                      <p className="text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors font-medium leading-snug">
+                        <ArrowLeft className="w-3.5 h-3.5 inline mr-1" />
+                        {adjacentPosts.previous.title}
+                      </p>
+                    </Link>
+                  )}
+                </div>
+                <div className="text-right">
+                  {adjacentPosts.next && (
+                    <Link
+                      href={`/blog/${adjacentPosts.next.slug}`}
+                      className="group block"
+                    >
+                      <p className="text-xs text-[#967F71] uppercase tracking-wider mb-1">Next</p>
+                      <p className="text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors font-medium leading-snug">
+                        {adjacentPosts.next.title}
+                        <ArrowRight className="w-3.5 h-3.5 inline ml-1" />
+                      </p>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            )}
           </footer>
         </article>
 

@@ -98,61 +98,69 @@ export default function EmailMarketingPage() {
 
       {/* Stats Overview */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[#967F71]">Total Contacts</p>
-                <p className="text-2xl font-semibold text-[#3B3937]">
-                  {isLoading ? '...' : stats?.totalContacts || 0}
-                </p>
+        <Link href="/dashboard/crm/email-marketing/contacts">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-[#967F71]">Total Contacts</p>
+                  <p className="text-2xl font-semibold text-[#3B3937]">
+                    {isLoading ? '...' : stats?.totalContacts || 0}
+                  </p>
+                </div>
+                <Users className="h-8 w-8 text-[#CDA7B2]" />
               </div>
-              <Users className="h-8 w-8 text-[#CDA7B2]" />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[#967F71]">Templates</p>
-                <p className="text-2xl font-semibold text-[#3B3937]">
-                  {isLoading ? '...' : stats?.totalTemplates || 0}
-                </p>
+        <Link href="/dashboard/crm/email-marketing/templates">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-[#967F71]">Templates</p>
+                  <p className="text-2xl font-semibold text-[#3B3937]">
+                    {isLoading ? '...' : stats?.totalTemplates || 0}
+                  </p>
+                </div>
+                <FileText className="h-8 w-8 text-blue-500" />
               </div>
-              <FileText className="h-8 w-8 text-blue-500" />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[#967F71]">Campaigns Sent</p>
-                <p className="text-2xl font-semibold text-[#3B3937]">
-                  {isLoading ? '...' : stats?.totalCampaigns || 0}
-                </p>
+        <Link href="/dashboard/crm/email-marketing/campaigns">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-[#967F71]">Campaigns Sent</p>
+                  <p className="text-2xl font-semibold text-[#3B3937]">
+                    {isLoading ? '...' : stats?.totalCampaigns || 0}
+                  </p>
+                </div>
+                <Send className="h-8 w-8 text-green-500" />
               </div>
-              <Send className="h-8 w-8 text-green-500" />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-[#967F71]">Active Drips</p>
-                <p className="text-2xl font-semibold text-[#3B3937]">
-                  {isLoading ? '...' : stats?.totalDrips || 0}
-                </p>
+        <Link href="/dashboard/crm/email-marketing/drips">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-[#967F71]">Active Drips</p>
+                  <p className="text-2xl font-semibold text-[#3B3937]">
+                    {isLoading ? '...' : stats?.totalDrips || 0}
+                  </p>
+                </div>
+                <Zap className="h-8 w-8 text-purple-500" />
               </div>
-              <Zap className="h-8 w-8 text-purple-500" />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Audience Breakdown */}
@@ -164,36 +172,46 @@ export default function EmailMarketingPage() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div className="text-center p-4 bg-[#faf8f5] rounded-lg">
-              <p className="text-2xl font-semibold text-[#3B3937]">
-                {isLoading ? '...' : stats?.totalWebsiteSignups || 0}
-              </p>
-              <p className="text-sm text-[#967F71]">Email Signups</p>
-            </div>
-            <div className="text-center p-4 bg-[#faf8f5] rounded-lg">
-              <p className="text-2xl font-semibold text-[#3B3937]">
-                {isLoading ? '...' : stats?.totalLeads || 0}
-              </p>
-              <p className="text-sm text-[#967F71]">Free Product Leads</p>
-            </div>
-            <div className="text-center p-4 bg-[#faf8f5] rounded-lg">
-              <p className="text-2xl font-semibold text-[#3B3937]">
-                {isLoading ? '...' : stats?.totalQuizLeads || 0}
-              </p>
-              <p className="text-sm text-[#967F71]">Quiz Leads</p>
-            </div>
-            <div className="text-center p-4 bg-[#faf8f5] rounded-lg">
-              <p className="text-2xl font-semibold text-[#3B3937]">
-                {isLoading ? '...' : stats?.totalMembers || 0}
-              </p>
-              <p className="text-sm text-[#967F71]">Members</p>
-            </div>
-            <div className="text-center p-4 bg-[#faf8f5] rounded-lg">
-              <p className="text-2xl font-semibold text-[#3B3937]">
-                {isLoading ? '...' : stats?.totalClients || 0}
-              </p>
-              <p className="text-sm text-[#967F71]">1-on-1 Clients</p>
-            </div>
+            <Link href="/dashboard/crm/email-marketing/contacts?source=website_signup">
+              <div className="text-center p-4 bg-[#faf8f5] rounded-lg hover:bg-[#CDA7B2]/5 transition-colors cursor-pointer">
+                <p className="text-2xl font-semibold text-[#3B3937]">
+                  {isLoading ? '...' : stats?.totalWebsiteSignups || 0}
+                </p>
+                <p className="text-sm text-[#967F71]">Email Signups</p>
+              </div>
+            </Link>
+            <Link href="/dashboard/crm/email-marketing/contacts?source=lead">
+              <div className="text-center p-4 bg-[#faf8f5] rounded-lg hover:bg-[#CDA7B2]/5 transition-colors cursor-pointer">
+                <p className="text-2xl font-semibold text-[#3B3937]">
+                  {isLoading ? '...' : stats?.totalLeads || 0}
+                </p>
+                <p className="text-sm text-[#967F71]">Free Product Leads</p>
+              </div>
+            </Link>
+            <Link href="/dashboard/crm/email-marketing/contacts?source=quiz_lead">
+              <div className="text-center p-4 bg-[#faf8f5] rounded-lg hover:bg-[#CDA7B2]/5 transition-colors cursor-pointer">
+                <p className="text-2xl font-semibold text-[#3B3937]">
+                  {isLoading ? '...' : stats?.totalQuizLeads || 0}
+                </p>
+                <p className="text-sm text-[#967F71]">Quiz Leads</p>
+              </div>
+            </Link>
+            <Link href="/dashboard/crm/email-marketing/contacts?source=member">
+              <div className="text-center p-4 bg-[#faf8f5] rounded-lg hover:bg-[#CDA7B2]/5 transition-colors cursor-pointer">
+                <p className="text-2xl font-semibold text-[#3B3937]">
+                  {isLoading ? '...' : stats?.totalMembers || 0}
+                </p>
+                <p className="text-sm text-[#967F71]">Members</p>
+              </div>
+            </Link>
+            <Link href="/dashboard/crm/email-marketing/contacts?source=client">
+              <div className="text-center p-4 bg-[#faf8f5] rounded-lg hover:bg-[#CDA7B2]/5 transition-colors cursor-pointer">
+                <p className="text-2xl font-semibold text-[#3B3937]">
+                  {isLoading ? '...' : stats?.totalClients || 0}
+                </p>
+                <p className="text-sm text-[#967F71]">1-on-1 Clients</p>
+              </div>
+            </Link>
           </div>
         </CardContent>
       </Card>

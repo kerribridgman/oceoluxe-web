@@ -1,0 +1,114 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Check } from 'lucide-react';
+
+const STORAGE_KEY = 'oceo-inline-signup-subscribed';
+
+export function InlineEmailSignup() {
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setAlreadySubscribed(localStorage.getItem(STORAGE_KEY) === 'true');
+    setLoaded(true);
+  }, []);
+
+  if (!loaded) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const res = await fetch('/api/email-list/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, firstName }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setStatus('error');
+        setErrorMessage(data.error || 'Something went wrong.');
+        return;
+      }
+
+      setStatus('success');
+      localStorage.setItem(STORAGE_KEY, 'true');
+      setAlreadySubscribed(true);
+    } catch {
+      setStatus('error');
+      setErrorMessage('Something went wrong. Please try again.');
+    }
+  };
+
+  // Already subscribed or just submitted — show confirmation
+  if (alreadySubscribed || status === 'success') {
+    return (
+      <div className="my-16 rounded-xl border border-[#CDA7B2]/20 bg-[#CDA7B2]/5 p-8 md:p-10">
+        <div className="max-w-lg mx-auto text-center">
+          <div className="w-10 h-10 bg-[#CDA7B2]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Check className="w-5 h-5 text-[#CDA7B2]" />
+          </div>
+          <h3 className="text-xl font-light text-[#3B3937] tracking-tight mb-2">
+            You're on the list
+          </h3>
+          <p className="text-sm text-[#967F71] font-light">
+            Production tips and insights are headed your way.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="my-16 rounded-xl border border-[#967F71]/10 bg-white p-8 md:p-10">
+      <div className="max-w-lg mx-auto text-center">
+        <p className="text-[#CDA7B2] text-xs uppercase tracking-widest font-medium mb-3">
+          Stay in the Loop
+        </p>
+        <h3 className="text-xl font-light text-[#3B3937] tracking-tight mb-2">
+          Get production tips and insights delivered to your inbox
+        </h3>
+        <p className="text-sm text-[#967F71] font-light mb-6">
+          Join designers who are building smarter production systems.
+        </p>
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+          <input
+            type="text"
+            placeholder="Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className="flex-1 px-4 py-2.5 rounded-lg border border-[#967F71]/20 bg-[#faf8f5] text-[#3B3937] text-sm font-light placeholder:text-[#967F71]/50 focus:outline-none focus:border-[#CDA7B2] transition-colors"
+          />
+          <input
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="flex-1 px-4 py-2.5 rounded-lg border border-[#967F71]/20 bg-[#faf8f5] text-[#3B3937] text-sm font-light placeholder:text-[#967F71]/50 focus:outline-none focus:border-[#CDA7B2] transition-colors"
+          />
+          <Button
+            type="submit"
+            disabled={status === 'loading'}
+            className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white px-6 py-2.5 text-sm font-normal tracking-wide"
+          >
+            {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+          </Button>
+        </form>
+        {status === 'error' && (
+          <p className="text-sm text-red-500 mt-3">{errorMessage}</p>
+        )}
+      </div>
+    </div>
+  );
+}

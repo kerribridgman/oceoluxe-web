@@ -26,6 +26,7 @@ interface BlogPost {
   coverImageUrl: string | null;
   publishedAt: Date | null;
   readingTimeMinutes: number | null;
+  industry?: string | null;
 }
 
 interface BlogListProps {
@@ -35,9 +36,18 @@ interface BlogListProps {
 
 export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
   const [visibleCount, setVisibleCount] = useState(postsPerPage);
+  const [activeIndustry, setActiveIndustry] = useState<string | null>(null);
 
-  const visiblePosts = posts.slice(0, visibleCount);
-  const hasMore = visibleCount < posts.length;
+  const industries = Array.from(
+    new Set(posts.map((p) => p.industry).filter((i): i is string => !!i))
+  ).sort();
+
+  const filteredPosts = activeIndustry
+    ? posts.filter((p) => p.industry === activeIndustry)
+    : posts;
+
+  const visiblePosts = filteredPosts.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredPosts.length;
 
   const handleSeeMore = () => {
     setVisibleCount((prev) => prev + postsPerPage);
@@ -54,6 +64,34 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
 
   return (
     <>
+      {industries.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-10">
+          <button
+            onClick={() => { setActiveIndustry(null); setVisibleCount(postsPerPage); }}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+              activeIndustry === null
+                ? 'bg-[#CDA7B2]/10 text-[#CDA7B2]'
+                : 'text-[#967F71] hover:text-[#CDA7B2]'
+            }`}
+          >
+            All
+          </button>
+          {industries.map((industry) => (
+            <button
+              key={industry}
+              onClick={() => { setActiveIndustry(industry); setVisibleCount(postsPerPage); }}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                activeIndustry === industry
+                  ? 'bg-[#CDA7B2]/10 text-[#CDA7B2]'
+                  : 'text-[#967F71] hover:text-[#CDA7B2]'
+              }`}
+            >
+              {industry}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
         {visiblePosts.map((post) => (
           <Link

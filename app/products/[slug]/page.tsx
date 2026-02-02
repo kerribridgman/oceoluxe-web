@@ -4,7 +4,7 @@ import { getNotionProductPriceConfig, isFreeNotionProduct } from '@/lib/config/n
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Package, ExternalLink, Eye } from 'lucide-react';
+import { CheckCircle, Package, ExternalLink, Eye, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
@@ -224,6 +224,34 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 </div>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Service CTA */}
+        <section className="py-16 bg-white border-t border-[#967F71]/10">
+          <div className="max-w-3xl mx-auto px-6 text-center">
+            <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+              Need Help?
+            </p>
+            <h2 className="text-2xl font-light text-[#3B3937] mb-3 tracking-tight">
+              Need help implementing this in your workflow?
+            </h2>
+            <p className="text-[#967F71] font-light mb-8 max-w-lg mx-auto">
+              We offer production systems setup, strategy consulting, and hands-on support for fashion designers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/services">
+                <Button className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide">
+                  View Services
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/book">
+                <Button variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide">
+                  Book a Call
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -449,6 +477,34 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <ProductMarkdownRenderer content={product.content} />
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Service CTA */}
+      <section className="py-16 bg-white border-t border-[#967F71]/10">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+            Need Help?
+          </p>
+          <h2 className="text-2xl font-light text-[#3B3937] mb-3 tracking-tight">
+            Need help implementing this in your workflow?
+          </h2>
+          <p className="text-[#967F71] font-light mb-8 max-w-lg mx-auto">
+            We offer production systems setup, strategy consulting, and hands-on support for fashion designers.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/services">
+              <Button className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide">
+                View Services
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/book">
+              <Button variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide">
+                Book a Call
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
