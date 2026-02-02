@@ -23,9 +23,9 @@ export async function GET(
       return NextResponse.json({
         seo: {
           page,
-          title: 'Patrick Farrell | Tech Strategy & Business Growth',
-          description: 'Strategy, Systems, and Support for Start-ups, Entrepreneurs & Coaches.',
-          keywords: 'tech strategy, business growth, startups, entrepreneurs, coaches',
+          title: 'Oceo Luxe | Fashion Production & Operations',
+          description: 'Fashion production consulting and operations support for independent designers. Structure as Support — build sustainable production systems that feel like luxury.',
+          keywords: 'fashion production consulting, production operations, fashion designer resources, sustainable fashion production',
           ogTitle: null,
           ogDescription: null,
           ogImageUrl: null,
