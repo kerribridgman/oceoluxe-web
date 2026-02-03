@@ -274,8 +274,8 @@ export default function WaitlistPage() {
                       Founding Member Pricing
                     </p>
                     <div className="flex items-baseline justify-center gap-2">
-                      <span className="text-gray-400 line-through text-lg">$77</span>
-                      <span className="text-5xl font-serif text-[#3B3937]">$33</span>
+                      <span className="text-gray-400 line-through text-lg">$88</span>
+                      <span className="text-5xl font-serif text-[#3B3937]">$55</span>
                       <span className="text-gray-500">/month</span>
                     </div>
                     <p className="text-sm text-gray-500 mt-2">

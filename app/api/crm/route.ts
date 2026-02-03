@@ -113,8 +113,8 @@ export async function GET(request: NextRequest) {
       const yearlyCount = allMembers.filter(
         (m) => m.tier === 'yearly' || m.tier === 'earlyBird_yearly'
       ).length;
-      // Assuming $33/mo for monthly and $297/yr ($24.75/mo) for yearly
-      const estimatedMRR = monthlyCount * 33 + yearlyCount * 24.75;
+      // Assuming $55/mo for monthly and $495/yr ($41.25/mo) for yearly
+      const estimatedMRR = monthlyCount * 55 + yearlyCount * 41.25;
 
       return NextResponse.json({
         data: allMembers,

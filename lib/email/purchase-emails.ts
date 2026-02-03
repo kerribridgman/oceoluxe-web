@@ -321,7 +321,7 @@ export async function sendFoundingMemberWelcomeEmail(member: StudioMemberInfo) {
                   </p>
 
                   <p style="color: #6B655C; font-size: 16px; line-height: 1.8; margin: 0 0 24px 0;">
-                    You just locked in your <strong style="color: #CDA7B2;">50% founding member discount</strong> for Studio Systems. This rate ($33/month) is yours for life, no matter what we charge in the future.
+                    You just locked in your <strong style="color: #CDA7B2;">founding member discount</strong> for Studio Systems. This rate ($55/month) is yours for life, no matter what we charge in the future.
                   </p>
 
                   <!-- What You Locked In Box -->
@@ -332,7 +332,7 @@ export async function sendFoundingMemberWelcomeEmail(member: StudioMemberInfo) {
                         <table cellpadding="0" cellspacing="0" style="width: 100%;">
                           <tr>
                             <td style="padding: 8px 0; font-size: 15px; color: white;">
-                              ✓ Lifetime rate of $33/month (50% off)
+                              ✓ Lifetime rate of $55/month (founding rate)
                             </td>
                           </tr>
                           <tr>

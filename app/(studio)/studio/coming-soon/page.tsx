@@ -89,8 +89,8 @@ export default function ComingSoonPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-gray-600">Your rate:</span>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-gray-400 line-through text-sm">$77/mo</span>
-                    <span className="text-2xl font-serif text-[#3B3937]">$33</span>
+                    <span className="text-gray-400 line-through text-sm">$88/mo</span>
+                    <span className="text-2xl font-serif text-[#3B3937]">$55</span>
                     <span className="text-gray-500 text-sm">/month forever</span>
                   </div>
                 </div>

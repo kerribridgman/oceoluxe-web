@@ -139,8 +139,8 @@ export default async function StudioSystemsPage() {
             <div className="lg:order-2">
               <div className="aspect-square overflow-hidden relative rounded-lg">
                 <Image
-                  src="/images/sewing-machine.png"
-                  alt="Hands working on sewing machine"
+                  src="/images/designer-fabrics-cityview.png"
+                  alt="Fashion designer reviewing fabric swatches with city skyline in background"
                   fill
                   className="object-cover rounded-lg"
                   quality={95}
@@ -326,9 +326,9 @@ export default async function StudioSystemsPage() {
             A luxury-level membership for the price of coffee and croissant.
           </h2>
           <div className="mb-8">
-            <p className="text-white/50 line-through text-lg mb-2 font-light">Regular Price: $77/month</p>
+            <p className="text-white/50 line-through text-lg mb-2 font-light">Regular Price: $88/month</p>
             <div className="text-5xl font-light text-white mb-2">
-              $33<span className="text-2xl text-white/70">/month</span>
+              $55<span className="text-2xl text-white/70">/month</span>
             </div>
             <p className="text-white/70 font-light">No strings attached. Cancel anytime.</p>
             <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding member pricing for the first 20 members</p>
@@ -400,7 +400,7 @@ export default async function StudioSystemsPage() {
             </Button>
           </Link>
           <p className="text-sm text-[#967F71] mt-6 font-light">
-            $33/month for founding members • $77/month after the first 20
+            $55/month for founding members • $88/month after the first 20
           </p>
         </div>
       </section>

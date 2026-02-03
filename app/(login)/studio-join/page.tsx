@@ -160,7 +160,7 @@ function JoinForm() {
           <div className="mt-8 p-4 bg-white/10 rounded-xl">
             <p className="text-sm text-white/70 mb-2">Selected plan:</p>
             <p className="text-xl font-semibold">
-              {plan === 'yearly' ? '$297/year' : '$33/month'}
+              {plan === 'yearly' ? '$495/year' : '$55/month'}
             </p>
             <p className="text-sm text-white/60 mt-1">
               {plan === 'yearly' ? 'Save over 25%' : 'Cancel anytime'}

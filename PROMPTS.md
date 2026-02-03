@@ -100,7 +100,7 @@ The following were planned as homepage sections but will be blog posts instead:
   - Focus on factory communication templates
   - Production tracking systems
   - The Oceo Method framework
-  - $33/$77 pricing displayed
+  - $55/$88 pricing displayed
   - Community of first-time designers
 
 **File:** `app/services/page.tsx`
@@ -348,7 +348,7 @@ Key truths:
 ## Completed (Dec 2024)
 - [x] Quiz email capture gate (requires email before showing results)
 - [x] Archetype-specific follow-up emails with personalized content
-- [x] Pricing consistency ($33 founding members / $77 regular)
+- [x] Pricing consistency ($55 founding members / $88 regular)
 - [x] Homepage: Studio Systems section moved up (after Factory Truths pain points)
 - [x] About page: Studio Systems section added before final CTA
 - [x] Sales review slash command created (`.claude/commands/sales-review.md`)
@@ -422,7 +422,7 @@ These blog posts naturally lead readers toward Studio Systems membership:
 
 ### Email 4: Studio Systems Invitation (Day 10)
 - [ ] Create direct pitch email
-- Founding member pricing ($33/month)
+- Founding member pricing ($55/month)
 - What's included, who it's for
 - Testimonial or case study if available
 

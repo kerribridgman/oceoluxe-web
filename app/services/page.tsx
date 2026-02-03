@@ -113,9 +113,9 @@ export default async function ServicesPage() {
                 For fashion designers who want clarity in their production process. Learn The Oceo Method framework to communicate with factories, build sustainable systems, and scale without burning out.
               </p>
               <div className="flex items-baseline gap-3 mb-2">
-                <span className="text-3xl font-light text-[#3B3937]">$33</span>
+                <span className="text-3xl font-light text-[#3B3937]">$55</span>
                 <span className="text-lg text-[#967F71] font-light">/month</span>
-                <span className="text-sm text-[#967F71] line-through">$77/month</span>
+                <span className="text-sm text-[#967F71] line-through">$88/month</span>
               </div>
               <p className="text-sm text-[#CDA7B2] font-light mb-8">Founding member pricing</p>
               <Link href="/studio-systems">

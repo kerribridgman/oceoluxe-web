@@ -44,7 +44,7 @@ const experiences = [
 const plans = [
   {
     name: 'Monthly',
-    price: 33,
+    price: 55,
     interval: 'month',
     description: 'Founding member pricing',
     priceId: 'price_monthly',
@@ -54,7 +54,7 @@ const plans = [
   },
   {
     name: 'Yearly',
-    price: 297,
+    price: 495,
     interval: 'year',
     description: 'Save over 25%',
     priceId: 'price_yearly',
@@ -296,13 +296,13 @@ export default function SubscribePage() {
           </h2>
 
           <p className="text-gray-500 line-through text-lg mb-2 mt-8">
-            Normal Price: $77/month
+            Normal Price: $88/month
           </p>
 
           <div className="mb-2">
             <span className="text-6xl md:text-7xl font-serif text-[#8B7355]">
               <span className="text-4xl align-top">$</span>
-              {selectedPlanData?.price === 297 ? '297' : '33'}
+              {selectedPlanData?.price === 495 ? '495' : '55'}
             </span>
             <span className="text-2xl text-[#8B7355] font-serif">/{selectedPlanData?.interval}</span>
           </div>

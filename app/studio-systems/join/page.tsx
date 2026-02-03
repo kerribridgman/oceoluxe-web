@@ -230,12 +230,12 @@ export default function StudioSystemsJoinPage() {
             A Luxury-Level Membership<br />for the Price of Coffee & Croissant
           </h2>
           <div className="my-8">
-            <p className="text-[#967F71] line-through text-lg mb-2 font-light">Regular Price: $77/month</p>
+            <p className="text-[#967F71] line-through text-lg mb-2 font-light">Regular Price: $88/month</p>
             <div className="text-6xl font-serif font-light text-[#3B3937] mb-2">
-              $33<span className="text-3xl text-[#967F71]">/month</span>
+              $55<span className="text-3xl text-[#967F71]">/month</span>
             </div>
             <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
-            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding Member Pricing: $33/month for the first 20 members</p>
+            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding Member Pricing: $55/month for the first 20 members</p>
           </div>
           <Link href="/studio-systems/waitlist">
             <Button
@@ -294,7 +294,7 @@ export default function StudioSystemsJoinPage() {
             </Button>
           </Link>
           <p className="text-lg text-[#967F71] mt-8 font-light">
-            $33/month for founding members • $77/month after the first 20
+            $55/month for founding members • $88/month after the first 20
           </p>
         </div>
       </section>
