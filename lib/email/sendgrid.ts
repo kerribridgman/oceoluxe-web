@@ -6,7 +6,7 @@ if (process.env.SENDGRID_API_KEY) {
 }
 
 const FROM_EMAIL = process.env.FROM_EMAIL || 'kerrib@oceoluxe.com';
-const FROM_NAME = 'Oceoluxe';
+const FROM_NAME = 'Oceo Luxe';
 
 interface SendEmailParams {
   to: string;

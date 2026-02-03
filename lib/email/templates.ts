@@ -105,7 +105,7 @@ export function generatePurchaseConfirmationEmail(data: PurchaseEmailData): { su
     <body style="background: #faf8f5; margin: 0; padding: 0;">
       <div class="container">
         <div class="header">
-          <div class="logo">OCEOLUXE</div>
+          <div class="logo">OCEO LUXE</div>
         </div>
 
         <div class="card">
@@ -131,14 +131,14 @@ export function generatePurchaseConfirmationEmail(data: PurchaseEmailData): { su
 
         <div class="footer">
           <p>Questions? Reply to this email or contact us at <a href="mailto:kerrib@oceoluxe.com" style="color: #CDA7B2;">kerrib@oceoluxe.com</a></p>
-          <p style="margin-top: 16px;">© ${new Date().getFullYear()} Oceoluxe. All rights reserved.</p>
+          <p style="margin-top: 16px;">© ${new Date().getFullYear()} Oceo Luxe. All rights reserved.</p>
         </div>
       </div>
     </body>
     </html>
   `;
 
-  const subject = `Your Oceoluxe order: ${data.productName}`;
+  const subject = `Your Oceo Luxe order: ${data.productName}`;
 
   return { subject, html };
 }
@@ -158,7 +158,7 @@ export function generateSubscriptionWelcomeEmail(data: PurchaseEmailData): { sub
     <body style="background: #faf8f5; margin: 0; padding: 0;">
       <div class="container">
         <div class="header">
-          <div class="logo">OCEOLUXE</div>
+          <div class="logo">OCEO LUXE</div>
         </div>
 
         <div class="card">
@@ -184,7 +184,7 @@ export function generateSubscriptionWelcomeEmail(data: PurchaseEmailData): { sub
 
         <div class="footer">
           <p>Questions? Reply to this email or contact us at <a href="mailto:kerrib@oceoluxe.com" style="color: #CDA7B2;">kerrib@oceoluxe.com</a></p>
-          <p style="margin-top: 16px;">© ${new Date().getFullYear()} Oceoluxe. All rights reserved.</p>
+          <p style="margin-top: 16px;">© ${new Date().getFullYear()} Oceo Luxe. All rights reserved.</p>
         </div>
       </div>
     </body>
