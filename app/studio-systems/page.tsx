@@ -246,7 +246,7 @@ export default async function StudioSystemsPage() {
 
       {/* What's Inside Section */}
       <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
             What's Inside
           </p>
@@ -254,46 +254,64 @@ export default async function StudioSystemsPage() {
             Inside Studio Systems, You'll Get
           </h2>
 
-          <div className="space-y-10">
-            <div>
-              <h3 className="text-xl font-medium text-[#3B3937] mb-3">Twice-Monthly Live Q&A Calls</h3>
-              <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                Direct access to real-time support so you can pressure-test decisions, get unstuck fast, and move your production forward with accuracy instead of second-guessing.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="hidden lg:block relative">
+              <div className="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-[#CDA7B2]/20" aria-hidden="true" />
+              <div className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full bg-[#967F71]/10" aria-hidden="true" />
+              <div className="aspect-[4/5] overflow-hidden rounded-xl relative">
+                <Image
+                  src="/images/designer-workspace.png"
+                  alt="Designer working at desk with fabric swatches, sketchbooks, and computer"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                />
+              </div>
             </div>
 
             <div>
-              <h3 className="text-xl font-medium text-[#3B3937] mb-3">A Complete Notion System</h3>
-              <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                Instant access to done-for-you Notion templates covering production, distribution, marketing, sales, and launches — so you're not building systems from scratch or keeping everything in your head.
-              </p>
-            </div>
+              <div className="space-y-10">
+                <div>
+                  <h3 className="text-xl font-medium text-[#3B3937] mb-3">Twice-Monthly Live Q&A Calls</h3>
+                  <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                    Direct access to real-time support so you can pressure-test decisions, get unstuck fast, and move your production forward with accuracy instead of second-guessing.
+                  </p>
+                </div>
 
-            <div>
-              <h3 className="text-xl font-medium text-[#3B3937] mb-3">A Private Designer Community</h3>
-              <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                Ask questions, share wins, and get perspective from designers navigating the same stage of business. Supplier insider information, real-time feedback, and people who get it.
-              </p>
-            </div>
+                <div>
+                  <h3 className="text-xl font-medium text-[#3B3937] mb-3">A Complete Notion System</h3>
+                  <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                    Instant access to done-for-you Notion templates covering production, distribution, marketing, sales, and launches — so you're not building systems from scratch or keeping everything in your head.
+                  </p>
+                </div>
 
-            <div>
-              <h3 className="text-xl font-medium text-[#3B3937] mb-3">Leadership & Somatic Support</h3>
-              <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                Regulated leaders build sustainable brands. Practical tools to help you stay grounded and decisive, including yoga flows, body scans, and nervous-system regulation practices designed for creative founders.
-              </p>
-            </div>
-          </div>
+                <div>
+                  <h3 className="text-xl font-medium text-[#3B3937] mb-3">A Private Designer Community</h3>
+                  <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                    Ask questions, share wins, and get perspective from designers navigating the same stage of business. Supplier insider information, real-time feedback, and people who get it.
+                  </p>
+                </div>
 
-          <div className="mt-12">
-            <Link href="/studio-systems/waitlist">
-              <Button
-                size="lg"
-                className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
-              >
-                Join the Waitlist
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+                <div>
+                  <h3 className="text-xl font-medium text-[#3B3937] mb-3">Leadership & Somatic Support</h3>
+                  <p className="text-lg text-[#967F71] font-light leading-relaxed">
+                    Regulated leaders build sustainable brands. Practical tools to help you stay grounded and decisive, including yoga flows, body scans, and nervous-system regulation practices designed for creative founders.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-12">
+                <Link href="/studio-systems/waitlist">
+                  <Button
+                    size="lg"
+                    className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"
+                  >
+                    Join the Waitlist
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

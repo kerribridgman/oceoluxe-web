@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, FileText, Clock, Shield, Handshake } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
@@ -108,23 +108,39 @@ export default async function AboutPage() {
 
       {/* I Understand Section */}
       <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-10 tracking-tight">
-            I understand where you are.
-          </h2>
-          <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
-            <p>
-              You have the talent. You have the vision. But somewhere between the design and the delivery, things became overwhelming.
-            </p>
-            <p>
-              Maybe you're drowning in supplier quotes, unsure which manufacturer is right for your brand. Maybe you're second-guessing your pricing because the numbers don't feel quite right. Or maybe you're producing collections the way everyone says you should, but it's draining your creative energy instead of fueling it.
-            </p>
-            <p>
-              I've spent a decade in fashion production and supply chain management. I studied Production Management at FIT and have worked behind the scenes with designers who felt exactly the way you do right now.
-            </p>
-            <p className="text-[#3B3937]">
-              What I learned is this: the problem is not your talent or your vision. It's the lack of systems designed for how you actually work.
-            </p>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-5 gap-12 items-center">
+            <div className="lg:col-span-2 hidden lg:block relative">
+              <div className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-[#CDA7B2]/15" aria-hidden="true" />
+              <div className="aspect-[3/4] overflow-hidden rounded-xl relative">
+                <Image
+                  src="/images/designer-studio.png"
+                  alt="Designer at a clean studio desk with fabric swatches and garment rack"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                />
+              </div>
+            </div>
+            <div className="lg:col-span-3">
+              <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-10 tracking-tight">
+                I understand where you are.
+              </h2>
+              <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
+                <p>
+                  You have the talent. You have the vision. But somewhere between the design and the delivery, things became overwhelming.
+                </p>
+                <p>
+                  Maybe you're drowning in supplier quotes, unsure which manufacturer is right for your brand. Maybe you're second-guessing your pricing because the numbers don't feel quite right. Or maybe you're producing collections the way everyone says you should, but it's draining your creative energy instead of fueling it.
+                </p>
+                <p>
+                  I've spent a decade in fashion production and supply chain management. I studied Production Management at FIT and have worked behind the scenes with designers who felt exactly the way you do right now.
+                </p>
+                <p className="text-[#3B3937]">
+                  What I learned is this: the problem is not your talent or your vision. It's the lack of systems designed for how you actually work.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -135,22 +151,34 @@ export default async function AboutPage() {
           <h2 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-10 tracking-tight">
             What I wish someone had told me.
           </h2>
-          <div className="space-y-8">
-            <div className="border-l-2 border-[#CDA7B2] pl-6">
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-full bg-[#CDA7B2]/15 flex items-center justify-center mb-4">
+                <FileText className="h-5 w-5 text-[#CDA7B2]" />
+              </div>
               <p className="text-[#3B3937] font-medium mb-2">Complete specs upfront save you money.</p>
-              <p className="text-[#967F71] font-light">Providing detailed tech packs, patterns, and fabric decisions before production prevents expensive back-and-forth and disputes later.</p>
+              <p className="text-[#967F71] font-light text-sm leading-relaxed">Providing detailed tech packs, patterns, and fabric decisions before production prevents expensive back-and-forth and disputes later.</p>
             </div>
-            <div className="border-l-2 border-[#CDA7B2] pl-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-full bg-[#CDA7B2]/15 flex items-center justify-center mb-4">
+                <Clock className="h-5 w-5 text-[#CDA7B2]" />
+              </div>
               <p className="text-[#3B3937] font-medium mb-2">Industry timelines are longer than you think.</p>
-              <p className="text-[#967F71] font-light">Most production runs start a year in advance. Add in Chinese New Year closures and holiday rush, and timing becomes everything.</p>
+              <p className="text-[#967F71] font-light text-sm leading-relaxed">Most production runs start a year in advance. Add in Chinese New Year closures and holiday rush, and timing becomes everything.</p>
             </div>
-            <div className="border-l-2 border-[#CDA7B2] pl-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-full bg-[#CDA7B2]/15 flex items-center justify-center mb-4">
+                <Shield className="h-5 w-5 text-[#CDA7B2]" />
+              </div>
               <p className="text-[#3B3937] font-medium mb-2">One factory is never enough.</p>
-              <p className="text-[#967F71] font-light">Even great relationships can fall through. Having backup factories vetted and ready protects your business when things go sideways.</p>
+              <p className="text-[#967F71] font-light text-sm leading-relaxed">Even great relationships can fall through. Having backup factories vetted and ready protects your business when things go sideways.</p>
             </div>
-            <div className="border-l-2 border-[#CDA7B2] pl-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-full bg-[#CDA7B2]/15 flex items-center justify-center mb-4">
+                <Handshake className="h-5 w-5 text-[#CDA7B2]" />
+              </div>
               <p className="text-[#3B3937] font-medium mb-2">Factories prioritize trusted relationships.</p>
-              <p className="text-[#967F71] font-light">They give the best attention to designers they know and trust. Building that relationship takes time, visits, and clear communication.</p>
+              <p className="text-[#967F71] font-light text-sm leading-relaxed">They give the best attention to designers they know and trust. Building that relationship takes time, visits, and clear communication.</p>
             </div>
           </div>
           <p className="text-lg text-[#967F71] font-light mt-10">
@@ -240,13 +268,18 @@ export default async function AboutPage() {
                 </a>
               </div>
             </div>
-            {/* Decorative Element */}
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="relative w-80 h-80">
-                <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-[#CDA7B2]/20" />
-                <div className="absolute bottom-8 left-0 w-36 h-36 rounded-full bg-[#967F71]/15" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-[#CDA7B2]/30" />
-                <div className="absolute bottom-0 right-12 w-20 h-20 rounded-full bg-[#3B3937]/10" />
+            {/* Designer Studio Image */}
+            <div className="hidden lg:block relative">
+              <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-[#CDA7B2]/20" aria-hidden="true" />
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-[#967F71]/10" aria-hidden="true" />
+              <div className="aspect-[4/5] overflow-hidden rounded-xl relative">
+                <Image
+                  src="/images/designer-atelier.png"
+                  alt="Designer working in an atelier with mood boards and fabric swatches"
+                  fill
+                  className="object-cover"
+                  quality={95}
+                />
               </div>
             </div>
           </div>
