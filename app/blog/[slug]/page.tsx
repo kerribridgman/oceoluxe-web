@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
   const ogImage = post.ogImageUrl || post.coverImageUrl;
 
   return {
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       authors: post.author ? [post.author] : undefined,
       images: ogImage ? [
         {
-          url: ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`,
+          url: ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -71,10 +71,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: post.ogTitle || post.title,
       description: post.ogDescription || post.excerpt || '',
-      images: ogImage ? [ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`] : undefined,
+      images: ogImage ? [ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`] : undefined,
     },
     alternates: {
-      canonical: post.canonicalUrl || undefined,
+      canonical: post.canonicalUrl || `${siteUrl}/blog/${slug}`,
     },
     robots: post.metaRobots || 'index, follow',
   };
