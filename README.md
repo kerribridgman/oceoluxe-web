@@ -1,4 +1,4 @@
-# Patrick Farrell's Personal Website & Blog
+# Oceo Luxe Website & Blog
 
 A modern personal website and blog platform with Model Context Protocol (MCP) integration, allowing blog management directly through Claude Desktop.
 
