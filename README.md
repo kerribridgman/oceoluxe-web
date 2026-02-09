@@ -11,7 +11,7 @@ A modern personal website and blog platform with Model Context Protocol (MCP) in
 - Rich image upload and management (Vercel Blob storage)
 - SEO optimization with custom meta tags
 - Draft and publish workflows
-- Application forms (coaching, entrepreneur circle)
+- Application forms (studio systems, one on on work)
 - Analytics and link tracking
 
 ### MCP Integration
