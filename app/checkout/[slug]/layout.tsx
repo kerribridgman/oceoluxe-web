@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.oceoluxe.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
 
   // Use SEO fields if available, fallback to product name/description
   const title = product.seoTitle || product.name;

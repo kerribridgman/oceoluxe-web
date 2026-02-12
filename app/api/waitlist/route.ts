@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
             <p style="margin: 10px 0 0;"><strong>Signed up:</strong> ${new Date().toLocaleString()}</p>
           </div>
           <p style="color: #666; font-size: 14px;">
-            View all waitlist signups in your <a href="https://www.oceoluxe.com/dashboard/crm">CRM dashboard</a>.
+            View all waitlist signups in your <a href="https://oceoluxe.com/dashboard/crm">CRM dashboard</a>.
           </p>
         </div>
       `,
