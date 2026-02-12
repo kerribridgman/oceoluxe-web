@@ -5,9 +5,28 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   async redirects() {
     return [
+      // Old blog post URLs → new blog post URLs
       {
         source: '/blog/posts/:slug',
         destination: '/blog/:slug',
+        permanent: true,
+      },
+      // Old blog listing URL
+      {
+        source: '/blog/posts',
+        destination: '/blog',
+        permanent: true,
+      },
+      // Old nested product delivery URLs → products page
+      {
+        source: '/products/product-delivery/:path*',
+        destination: '/products',
+        permanent: true,
+      },
+      // Old product library URLs → products page
+      {
+        source: '/products/product-library/:path*',
+        destination: '/products',
         permanent: true,
       },
     ];
