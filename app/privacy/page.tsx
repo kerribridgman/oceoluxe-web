@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy | Oceo Luxe',
   description: 'How we handle your information with care and transparency.',
+  alternates: { canonical: 'https://oceoluxe.com/privacy' },
 };
 
 export default function PrivacyPage() {

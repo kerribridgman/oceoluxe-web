@@ -288,10 +288,12 @@ function getDefaultMetadata(page: string): Metadata {
     privacy: {
       title: 'Privacy Policy',
       description: 'Oceo Luxe privacy policy. Learn how we collect, use, and protect your personal information.',
+      alternates: { canonical: `${baseUrl}/privacy` },
     },
     terms: {
       title: 'Terms of Service',
       description: 'Oceo Luxe terms of service and conditions for using our website, products, and services.',
+      alternates: { canonical: `${baseUrl}/terms` },
     },
   };
 

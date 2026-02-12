@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Service | Oceo Luxe',
   description: 'Terms and conditions for using Oceo Luxe and Studio Systems services.',
+  alternates: { canonical: 'https://oceoluxe.com/terms' },
 };
 
 export default function TermsPage() {
