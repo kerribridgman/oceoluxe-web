@@ -60,6 +60,9 @@ export default async function RootLayout({
       lang="en"
       className={`bg-white dark:bg-gray-950 text-black dark:text-white ${inter.className}`}
     >
+      <head>
+        <meta name="p:domain_verify" content="507e48b67fae8bdd6f471a8ec1caa689" />
+      </head>
       <body className="min-h-[100dvh] bg-gray-50">
         <JsonLdScript data={[getOrganizationJsonLd(), getWebSiteJsonLd()] as unknown as Record<string, unknown>[]} />
         <SWRConfig
