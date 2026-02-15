@@ -4,6 +4,7 @@ import { quizLeads } from '@/lib/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { sendQuizResultEmail } from '@/lib/email/quiz-email';
 import { getUser } from '@/lib/db/queries';
+import { getOrCreateEmailListEntry } from '@/lib/email/unsubscribe';
 
 // GET /api/quiz - Get all quiz leads (admin only)
 export async function GET() {
@@ -83,12 +84,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Create new lead
-    await db.insert(quizLeads).values({
+    const [newQuizLead] = await db.insert(quizLeads).values({
       email: email.toLowerCase(),
       name,
       archetype,
       scores,
       source: 'designer_archetype_quiz',
+    }).returning();
+
+    // Sync to email list for marketing/unsubscribe tracking
+    await getOrCreateEmailListEntry(email.toLowerCase(), 'quiz_lead', newQuizLead.id, {
+      firstName: name || undefined,
+      archetype,
     });
 
     // Send quiz result email

@@ -4,6 +4,7 @@ import { db } from '@/lib/db/drizzle';
 import { leads } from '@/lib/db/schema';
 import { getFreeNotionProductConfig } from '@/lib/config/notion-product-prices';
 import { sendEmail } from '@/lib/email/sendgrid';
+import { getOrCreateEmailListEntry } from '@/lib/email/unsubscribe';
 
 // HTML escape function to prevent XSS/injection in email templates
 function escapeHtml(text: string): string {
@@ -70,6 +71,12 @@ export async function POST(request: NextRequest) {
       productName,
       source: 'free_product',
     }).returning();
+
+    // Sync to email list for marketing/unsubscribe tracking
+    await getOrCreateEmailListEntry(email, 'lead', lead.id, {
+      firstName: name || undefined,
+      productName,
+    });
 
     // Escape user-provided content for safe HTML rendering
     const safeName = name ? escapeHtml(name) : '';

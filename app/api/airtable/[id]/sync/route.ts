@@ -3,6 +3,7 @@ import { eq, and } from 'drizzle-orm';
 import { db } from '@/lib/db/drizzle';
 import { airtableConfigs, leads, leadStatusEnum } from '@/lib/db/schema';
 import { getUser } from '@/lib/db/queries';
+import { getOrCreateEmailListEntry } from '@/lib/email/unsubscribe';
 
 interface AirtableRecord {
   id: string;
@@ -149,7 +150,7 @@ export async function POST(
         }
 
         // Insert new lead
-        await db.insert(leads).values({
+        const [newLead] = await db.insert(leads).values({
           email: email.toLowerCase().trim(),
           name: name || null,
           instagramHandle: instagramHandle,
@@ -158,6 +159,12 @@ export async function POST(
           source: 'airtable',
           status: status as any,
           addedBy: user.id,
+        }).returning();
+
+        // Sync to email list for marketing/unsubscribe tracking
+        await getOrCreateEmailListEntry(email.toLowerCase().trim(), 'lead', newLead.id, {
+          firstName: name || undefined,
+          instagramHandle: instagramHandle || undefined,
         });
 
         importedCount++;

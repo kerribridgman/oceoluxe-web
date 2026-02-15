@@ -3,6 +3,7 @@ import { desc, eq } from 'drizzle-orm';
 import { db } from '@/lib/db/drizzle';
 import { leads, leadStatusEnum, users } from '@/lib/db/schema';
 import { getUser } from '@/lib/db/queries';
+import { getOrCreateEmailListEntry } from '@/lib/email/unsubscribe';
 
 // GET /api/leads - Get all leads (admin only)
 export async function GET(request: NextRequest) {
@@ -78,6 +79,12 @@ export async function POST(request: NextRequest) {
       status: leadStatus,
       addedBy: user.id,
     }).returning();
+
+    // Sync to email list for marketing/unsubscribe tracking
+    await getOrCreateEmailListEntry(email.toLowerCase().trim(), 'lead', newLead.id, {
+      firstName: name?.trim() || undefined,
+      instagramHandle: cleanedInstagram || undefined,
+    });
 
     return NextResponse.json({ success: true, lead: newLead });
   } catch (error: any) {

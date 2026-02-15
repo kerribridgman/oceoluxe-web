@@ -3,6 +3,7 @@ import { db } from '@/lib/db/drizzle';
 import { clients } from '@/lib/db/schema';
 import { desc } from 'drizzle-orm';
 import { getUser } from '@/lib/db/queries';
+import { getOrCreateEmailListEntry } from '@/lib/email/unsubscribe';
 
 export async function GET() {
   try {
@@ -70,6 +71,14 @@ export async function POST(request: NextRequest) {
         source: source || null,
       })
       .returning();
+
+    // Sync to email list for marketing/unsubscribe tracking
+    await getOrCreateEmailListEntry(email.toLowerCase(), 'client', client.id, {
+      firstName: firstName || undefined,
+      lastName: lastName || undefined,
+      clientPackage: packageType || undefined,
+      instagramHandle: instagramHandle || undefined,
+    });
 
     return NextResponse.json(client, { status: 201 });
   } catch (error) {
