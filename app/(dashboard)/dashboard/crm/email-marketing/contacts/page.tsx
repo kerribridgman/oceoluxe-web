@@ -17,11 +17,10 @@ import {
 } from 'lucide-react';
 
 interface Contact {
-  id: number;
   email: string;
   firstName: string | null;
   lastName: string | null;
-  source: string;
+  sources: string[];
   productName: string | null;
   archetype: string | null;
   membershipTier: string | null;
@@ -247,7 +246,7 @@ export default function ContactsPage() {
               <tbody>
                 {contacts.map((contact) => (
                   <tr
-                    key={contact.id}
+                    key={contact.email}
                     className="border-b border-[#967F71]/5 hover:bg-[#faf8f5]/50 transition-colors"
                   >
                     <td className="px-4 py-3">
@@ -261,11 +260,16 @@ export default function ContactsPage() {
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span
-                        className={`text-xs px-2 py-0.5 rounded-full ${getSourceColor(contact.source)}`}
-                      >
-                        {sourceLabels[contact.source] || contact.source}
-                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {contact.sources.map((src) => (
+                          <span
+                            key={src}
+                            className={`text-xs px-2 py-0.5 rounded-full ${getSourceColor(src)}`}
+                          >
+                            {sourceLabels[src] || src}
+                          </span>
+                        ))}
+                      </div>
                     </td>
                     <td className="px-4 py-3">
                       <div className="text-xs text-[#967F71] space-y-0.5">
