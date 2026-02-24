@@ -1,10 +1,10 @@
 import { getPageMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata() {
-  return await getPageMetadata('apply/work-with-me');
+  return await getPageMetadata('apply');
 }
 
-export default function WorkWithMeLayout({
+export default function ApplyLayout({
   children,
 }: {
   children: React.ReactNode;

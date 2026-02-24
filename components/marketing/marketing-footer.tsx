@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { Instagram, Linkedin } from 'lucide-react';
 
 export function MarketingFooter() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="border-t border-[#967F71]/10 bg-[#faf8f5] py-12">
       <div className="max-w-7xl mx-auto px-6">
@@ -11,18 +9,17 @@ export function MarketingFooter() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4">
-              <h2 className="text-xl font-light text-[#3B3937] tracking-wide mb-1">Studio Systems</h2>
-              <p className="text-sm text-[#967F71] italic font-light">by Oceo Luxe</p>
+              <h2 className="text-xl font-light text-[#3B3937] tracking-wide">Oceo Luxe</h2>
             </div>
             <p className="text-[#967F71] mb-6 max-w-md font-light leading-relaxed">
-              Structure as Support for fashion designers and visionaries. Build sustainable production systems that feel like luxury.
+              Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm.
             </p>
             <div className="flex space-x-4">
               <a
                 href="https://www.instagram.com/oceoluxe"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#967F71] hover:text-[#CDA7B2] transition-colors"
+                className="text-[#967F71] hover:text-[#3B3937] transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-6 h-6" />
@@ -31,7 +28,7 @@ export function MarketingFooter() {
                 href="https://www.linkedin.com/in/kerri-bridgman/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#967F71] hover:text-[#CDA7B2] transition-colors"
+                className="text-[#967F71] hover:text-[#3B3937] transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-6 h-6" />
@@ -40,7 +37,7 @@ export function MarketingFooter() {
                 href="https://www.pinterest.com/oceoluxe/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#967F71] hover:text-[#CDA7B2] transition-colors"
+                className="text-[#967F71] hover:text-[#3B3937] transition-colors"
                 aria-label="Pinterest"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -50,59 +47,54 @@ export function MarketingFooter() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Primary Links */}
           <div>
-            <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Quick Links</h3>
+            <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Explore</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                <Link href="/" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  Services
+                <Link href="/work-with-oceo-luxe" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                  Work With Oceo Luxe
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                <Link href="/blog" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  FAQ
+                <Link href="/apply" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                  Apply
+                </Link>
+              </li>
+              <li>
+                <Link href="/book" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                  Book a Call
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Get Started */}
+          {/* Secondary Links */}
           <div>
-            <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Get Started</h3>
+            <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/book" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  Book a Discovery Call
+                <Link href="/products" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                  Products
                 </Link>
               </li>
               <li>
-                <Link href="/studio-systems" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  Join Membership
+                <Link href="/faq" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                  FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/quiz/about" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  Take the Quiz
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
-                  Resources
-                </Link>
-              </li>
-              <li>
-                <Link href="/join" className="text-[#967F71] hover:text-[#CDA7B2] transition-colors font-light">
+                <Link href="/join" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
                   Join Email List
                 </Link>
               </li>
@@ -113,7 +105,7 @@ export function MarketingFooter() {
         {/* Tagline */}
         <div className="border-t border-[#967F71]/10 mt-8 pt-8 text-center">
           <p className="text-[#3B3937] text-lg font-light italic mb-6">
-            Structure does not limit creativity, it protects it.
+            Structure does not limit creativity. It protects it.
           </p>
         </div>
 
@@ -121,13 +113,13 @@ export function MarketingFooter() {
         <div className="border-t border-[#967F71]/10 pt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-[#967F71] text-sm font-light">
-              &copy; {currentYear} Studio Systems by Oceo Luxe. All rights reserved.
+              &copy; 2026 Oceo Luxe. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <Link href="/privacy" className="text-[#967F71] hover:text-[#CDA7B2] text-sm font-light transition-colors">
+              <Link href="/privacy" className="text-[#967F71] hover:text-[#3B3937] text-sm font-light transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-[#967F71] hover:text-[#CDA7B2] text-sm font-light transition-colors">
+              <Link href="/terms" className="text-[#967F71] hover:text-[#3B3937] text-sm font-light transition-colors">
                 Terms of Service
               </Link>
             </div>

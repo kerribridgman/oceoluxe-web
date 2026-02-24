@@ -22,32 +22,12 @@ export default async function BlogPage() {
 
       {/* Hero Section */}
       <section className="bg-[#faf8f5] overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-24 relative">
-          {/* Decorative circles */}
-          <div
-            className="absolute top-8 right-0 w-20 h-20 rounded-full bg-[#CDA7B2] opacity-20 animate-float hidden lg:block"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute top-1/2 -left-16 w-14 h-14 rounded-full bg-[#967F71] opacity-15 animate-float-slow hidden lg:block"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute bottom-4 -left-8 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-25 animate-float-delayed hidden lg:block"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute bottom-12 right-12 w-12 h-12 rounded-full bg-[#967F71] opacity-10 animate-float hidden lg:block"
-            aria-hidden="true"
-          />
-
-          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-24">
+          <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4 animate-fade-in-up">
             Journal
           </p>
-          {/* Decorative line under tagline */}
-          <div className="w-16 h-0.5 bg-[#CDA7B2] opacity-60 mb-6" aria-hidden="true" />
-          <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
-            Insights on fashion production and building sustainable creative ventures.
+          <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6 animate-fade-in-up">
+            Insights on fashion operations, production clarity, and building brands designed for longevity.
           </h1>
         </div>
       </section>
@@ -63,46 +43,46 @@ export default async function BlogPage() {
       <section className="py-20 bg-white border-t border-[#967F71]/10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Quiz CTA */}
+            {/* Partnership CTA */}
             <div className="space-y-4">
-              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium">
-                Take the Quiz
+              <p className="font-script text-2xl italic text-[#CDA7B2]">
+                Work Together
               </p>
-              <h3 className="text-2xl font-light text-[#3B3937] tracking-tight">
-                Find Your Designer Archetype
+              <h3 className="font-serif-display text-2xl font-normal text-[#3B3937] tracking-tight">
+                Ready for Operational Partnership?
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed">
-                Discover your production style and get personalized recommendations for building systems that match how you work.
+                Strategic operational support for fashion brands ready to scale with precision, clarity, and calm.
               </p>
-              <Link href="/quiz">
+              <Link href="/work-with-oceo-luxe">
                 <Button
+                  variant="outline"
                   size="lg"
-                  className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide mt-2"
+                  className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide mt-2"
                 >
-                  Take the Quiz
+                  Explore Services
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>
 
-            {/* Services CTA */}
+            {/* Studio Systems CTA */}
             <div className="space-y-4">
-              <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium">
-                Work With Us
+              <p className="font-script text-2xl italic text-[#CDA7B2]">
+                Studio Systems
               </p>
-              <h3 className="text-2xl font-light text-[#3B3937] tracking-tight">
-                Need Production Systems?
+              <h3 className="font-serif-display text-2xl font-normal text-[#3B3937] tracking-tight">
+                Operational Systems for Fashion Brands
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed">
-                From factory communication setup to full production dashboards, we build the systems so you can focus on designing.
+                Production frameworks, supplier management tools, and live Q&A — built from real-world production leadership.
               </p>
-              <Link href="/services">
+              <Link href="/studio-systems">
                 <Button
-                  variant="outline"
                   size="lg"
-                  className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide mt-2"
+                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide mt-2"
                 >
-                  View Services
+                  Explore Studio Systems
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>

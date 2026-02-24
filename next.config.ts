@@ -29,6 +29,17 @@ const nextConfig: NextConfig = {
         destination: '/products',
         permanent: true,
       },
+      // Redesign redirects
+      {
+        source: '/services',
+        destination: '/work-with-oceo-luxe',
+        permanent: true,
+      },
+      {
+        source: '/apply/work-with-me',
+        destination: '/apply',
+        permanent: true,
+      },
     ];
   },
   images: {

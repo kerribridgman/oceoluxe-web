@@ -230,7 +230,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         {/* Service CTA */}
         <section className="py-16 bg-white border-t border-[#967F71]/10">
           <div className="max-w-3xl mx-auto px-6 text-center">
-            <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+            <p className="font-script text-2xl italic text-[#CDA7B2] mb-4">
               Need Help?
             </p>
             <h2 className="text-2xl font-light text-[#3B3937] mb-3 tracking-tight">
@@ -240,7 +240,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               We offer production systems setup, strategy consulting, and hands-on support for fashion designers.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services">
+              <Link href="/work-with-oceo-luxe">
                 <Button className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide">
                   View Services
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -483,7 +483,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       {/* Service CTA */}
       <section className="py-16 bg-white border-t border-[#967F71]/10">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-4">
+          <p className="font-script text-2xl italic text-[#CDA7B2] mb-4">
             Need Help?
           </p>
           <h2 className="text-2xl font-light text-[#3B3937] mb-3 tracking-tight">
@@ -493,7 +493,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             We offer production systems setup, strategy consulting, and hands-on support for fashion designers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/services">
+            <Link href="/work-with-oceo-luxe">
               <Button className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide">
                 View Services
                 <ArrowRight className="ml-2 h-4 w-4" />

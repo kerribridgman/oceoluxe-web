@@ -5,42 +5,42 @@ export function PostCta() {
   return (
     <div className="my-16 rounded-xl border border-[#CDA7B2]/20 bg-white p-8 md:p-10">
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Quiz CTA */}
+        {/* Studio Systems CTA */}
         <div className="space-y-3">
           <p className="text-[#CDA7B2] text-xs uppercase tracking-widest font-medium">
-            Discover Your Style
+            Studio Systems
           </p>
           <h3 className="text-xl font-light text-[#3B3937] tracking-tight">
-            Find Your Designer Archetype
+            Operational Systems for Fashion Brands
           </h3>
           <p className="text-sm text-[#967F71] font-light leading-relaxed">
-            Take our free quiz to uncover your production personality and get tailored recommendations.
+            Production frameworks, supplier management, and live Q&A — built from real-world production leadership.
           </p>
           <Link
-            href="/quiz"
-            className="inline-flex items-center text-[#CDA7B2] hover:text-[#BD97A2] font-medium text-sm transition-colors"
+            href="/studio-systems"
+            className="inline-flex items-center text-[#3B3937] hover:text-[#967F71] font-medium text-sm transition-colors"
           >
-            Take the Quiz
+            Explore Studio Systems
             <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
           </Link>
         </div>
 
-        {/* Services CTA */}
+        {/* Partnership CTA */}
         <div className="space-y-3 md:border-l md:border-[#967F71]/10 md:pl-8">
           <p className="text-[#CDA7B2] text-xs uppercase tracking-widest font-medium">
-            Ready to Build?
+            Work Together
           </p>
           <h3 className="text-xl font-light text-[#3B3937] tracking-tight">
-            Need Help With Production Systems?
+            Strategic Operational Partnership
           </h3>
           <p className="text-sm text-[#967F71] font-light leading-relaxed">
-            We set up factory communication, supplier tracking, and Notion dashboards tailored to your workflow.
+            Embedded production leadership and systems architecture for fashion brands ready to operate at a higher level.
           </p>
           <Link
-            href="/services"
+            href="/work-with-oceo-luxe"
             className="inline-flex items-center text-[#967F71] hover:text-[#3B3937] font-medium text-sm transition-colors"
           >
-            View Services
+            Learn More
             <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
           </Link>
         </div>

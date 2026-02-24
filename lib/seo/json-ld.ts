@@ -107,7 +107,7 @@ export function getOrganizationJsonLd(): OrganizationJsonLd {
     url: BASE_URL,
     logo: `${BASE_URL}/images/Logo.png`,
     description:
-      'Fashion production consulting and operations support for independent designers. Structure as Support.',
+      'Strategic operational partnership for fashion founders. Production leadership, systems architecture, and operational clarity — rooted in real-world experience.',
     founder: {
       '@type': 'Person',
       name: 'Kerri Bridgman',
@@ -130,7 +130,7 @@ export function getWebSiteJsonLd(): WebSiteJsonLd {
     name: 'Oceo Luxe',
     url: BASE_URL,
     description:
-      'Fashion production consulting, Studio Systems membership, and resources for fashion designers and creative entrepreneurs.',
+      'Operational partnership, Studio Systems membership, and production resources for fashion founders ready to scale with structure and clarity.',
     publisher: {
       '@id': `${BASE_URL}/#organization`,
     },

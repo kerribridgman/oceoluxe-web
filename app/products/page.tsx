@@ -71,11 +71,9 @@ export default async function ProductsPage() {
             aria-hidden="true"
           />
 
-          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
             Products
           </p>
-          {/* Decorative line under tagline */}
-          <div className="w-16 h-0.5 bg-[#CDA7B2] opacity-60 mb-6" aria-hidden="true" />
           <h1 className="text-4xl lg:text-5xl font-light text-[#3B3937] leading-[1.15] tracking-tight mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
             Notion templates and resources to streamline your fashion business.
           </h1>
@@ -220,7 +218,7 @@ export default async function ProductsPage() {
       {/* CTA Section */}
       <section className="py-24 bg-[#3B3937]">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-[#CDA7B2] text-sm uppercase tracking-widest font-medium mb-6">
+          <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">
             Need something custom?
           </p>
           <h2 className="text-3xl lg:text-4xl font-light text-white mb-6 tracking-tight">
@@ -229,7 +227,7 @@ export default async function ProductsPage() {
           <p className="text-lg text-white/70 mb-10 font-light">
             Get workflows designed specifically for how you work.
           </p>
-          <Link href="/services">
+          <Link href="/work-with-oceo-luxe">
             <Button
               size="lg"
               className="bg-[#CDA7B2] hover:bg-[#BD97A2] text-white h-12 px-8 text-base font-normal tracking-wide"

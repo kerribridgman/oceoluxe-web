@@ -54,7 +54,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/services`,
+      url: `${baseUrl}/work-with-oceo-luxe`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/operational-partnership`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/strategic-production-alignment`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -108,7 +120,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/apply/work-with-me`,
+      url: `${baseUrl}/apply`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
