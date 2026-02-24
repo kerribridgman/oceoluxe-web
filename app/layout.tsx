@@ -45,7 +45,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  maximumScale: 1
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#3B3937',
 };
 
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });

@@ -1,12 +1,10 @@
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
-import { Metadata } from 'next';
+import { getPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Terms of Service | Oceo Luxe',
-  description: 'Terms and conditions for using Oceo Luxe and Studio Systems services.',
-  alternates: { canonical: 'https://oceoluxe.com/terms' },
-};
+export async function generateMetadata() {
+  return await getPageMetadata('terms');
+}
 
 export default function TermsPage() {
   return (

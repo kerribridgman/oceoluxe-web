@@ -3,6 +3,8 @@ import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { BlogList } from '@/components/blog/blog-list';
 import { getPageMetadata } from '@/lib/seo/metadata';
+import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -13,11 +15,19 @@ export async function generateMetadata() {
 
 export const dynamic = 'force-dynamic';
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: 'Home', url: baseUrl },
+  { name: 'Blog', url: `${baseUrl}/blog` },
+]);
+
 export default async function BlogPage() {
   const posts = await getPublishedBlogPosts();
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
+      <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
       <MarketingHeader />
 
       {/* Hero Section */}

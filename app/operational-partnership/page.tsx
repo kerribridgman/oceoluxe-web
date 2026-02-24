@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
-import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
+import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 
 export async function generateMetadata() {
@@ -19,10 +19,17 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
   { name: 'Operational Partnership', url: `${baseUrl}/operational-partnership` },
 ]);
 
+const serviceJsonLd = getServiceJsonLd([{
+  name: 'Operational Partnership',
+  description: 'Embedded operational partnership for growing fashion brands. Production leadership, systems architecture, strategic advisory, and team alignment.',
+  url: `${baseUrl}/operational-partnership`,
+}]);
+
 export default async function OperationalPartnershipPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
+      <JsonLdScript data={serviceJsonLd as unknown as Record<string, unknown>} />
       <MarketingHeader />
 
       {/* Hero Section */}

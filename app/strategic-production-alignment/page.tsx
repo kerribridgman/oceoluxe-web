@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
-import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
+import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 
 export async function generateMetadata() {
@@ -19,10 +19,17 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
   { name: 'Strategic Production Alignment', url: `${baseUrl}/strategic-production-alignment` },
 ]);
 
+const serviceJsonLd = getServiceJsonLd([{
+  name: 'Strategic Production Alignment',
+  description: 'Focused, short-term engagements for fashion brands that need clarity on a specific production challenge — sourcing strategy, factory evaluation, timeline restructuring, or launch readiness.',
+  url: `${baseUrl}/strategic-production-alignment`,
+}]);
+
 export default async function StrategicProductionAlignmentPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
+      <JsonLdScript data={serviceJsonLd as unknown as Record<string, unknown>} />
       <MarketingHeader />
 
       {/* Hero Section */}

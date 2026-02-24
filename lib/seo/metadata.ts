@@ -216,6 +216,40 @@ function getDefaultMetadata(page: string): Metadata {
         description: 'Book a discovery call with Kerri Bridgman. Get clarity on your fashion production process, factory relationships, and scaling strategy.',
       },
     },
+    quiz: {
+      title: 'Designer Quiz — Discover Your Designer Archetype',
+      description: 'Discover what kind of fashion designer you are. Take our quiz to learn how you connect with your clients and craft your collections.',
+      keywords: ['designer archetype quiz', 'fashion designer quiz', 'fashion production style'],
+      alternates: { canonical: `${baseUrl}/quiz` },
+      openGraph: {
+        title: 'Designer Quiz | Oceo Luxe',
+        description: 'Discover what kind of fashion designer you are. Take our quiz to learn how you connect with your clients and craft your collections.',
+        type: 'website',
+        url: `${baseUrl}/quiz`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Designer Quiz | Oceo Luxe',
+        description: 'Discover what kind of fashion designer you are. Take our quiz to learn how you connect with your clients and craft your collections.',
+      },
+    },
+    'quiz/signature-style': {
+      title: 'Can You Identify the Signature Style?',
+      description: 'Test your knowledge of fashion history. Can you identify the iconic signature styles of legendary fashion houses and designers?',
+      keywords: ['fashion signature style quiz', 'fashion history quiz', 'designer style identification'],
+      alternates: { canonical: `${baseUrl}/quiz/signature-style` },
+      openGraph: {
+        title: 'Signature Style Quiz | Oceo Luxe',
+        description: 'Test your knowledge of fashion history. Can you identify the iconic signature styles of legendary fashion houses and designers?',
+        type: 'website',
+        url: `${baseUrl}/quiz/signature-style`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Signature Style Quiz | Oceo Luxe',
+        description: 'Test your knowledge of fashion history. Can you identify the iconic signature styles of legendary fashion houses and designers?',
+      },
+    },
     'quiz/about': {
       title: 'Discover Your Designer Archetype Quiz',
       description: 'Discover your Designer Archetype in 2 minutes. Find out what kind of fashion designer you are and align your production strategy with your creative vision.',

@@ -1,12 +1,10 @@
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
-import { Metadata } from 'next';
+import { getPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | Oceo Luxe',
-  description: 'How we handle your information with care and transparency.',
-  alternates: { canonical: 'https://oceoluxe.com/privacy' },
-};
+export async function generateMetadata() {
+  return await getPageMetadata('privacy');
+}
 
 export default function PrivacyPage() {
   return (

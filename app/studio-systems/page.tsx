@@ -5,14 +5,24 @@ import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
+import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 
 export async function generateMetadata() {
   return await getPageMetadata('studio-systems');
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
+
+const breadcrumbJsonLd = getBreadcrumbJsonLd([
+  { name: 'Home', url: baseUrl },
+  { name: 'Studio Systems', url: `${baseUrl}/studio-systems` },
+]);
+
 export default async function StudioSystemsPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
+      <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
       <MarketingHeader />
 
       {/* Hero Section */}
