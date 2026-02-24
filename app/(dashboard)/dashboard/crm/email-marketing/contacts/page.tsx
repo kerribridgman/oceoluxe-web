@@ -14,6 +14,7 @@ import {
   Mail,
   MailX,
   Users,
+  Trash2,
 } from 'lucide-react';
 
 interface Contact {
@@ -83,6 +84,9 @@ export default function ContactsPage() {
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedEmails, setSelectedEmails] = useState<Set<string>>(new Set());
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchContacts = useCallback(async () => {
     setIsLoading(true);
@@ -111,6 +115,11 @@ export default function ContactsPage() {
     fetchContacts();
   }, [fetchContacts]);
 
+  // Clear selection when page/source/search changes
+  useEffect(() => {
+    setSelectedEmails(new Set());
+  }, [page, source, search]);
+
   function handleSourceChange(newSource: string) {
     setSource(newSource);
     setPage(1);
@@ -130,7 +139,49 @@ export default function ContactsPage() {
     });
   }
 
+  function toggleSelectAll() {
+    if (selectedEmails.size === contacts.length) {
+      setSelectedEmails(new Set());
+    } else {
+      setSelectedEmails(new Set(contacts.map((c) => c.email)));
+    }
+  }
+
+  function toggleSelect(email: string) {
+    setSelectedEmails((prev) => {
+      const next = new Set(prev);
+      if (next.has(email)) {
+        next.delete(email);
+      } else {
+        next.add(email);
+      }
+      return next;
+    });
+  }
+
+  async function handleBulkDelete() {
+    setIsDeleting(true);
+    try {
+      const response = await fetch('/api/email-marketing/contacts/bulk-delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ emails: Array.from(selectedEmails) }),
+      });
+
+      if (response.ok) {
+        setSelectedEmails(new Set());
+        setShowDeleteConfirm(false);
+        fetchContacts();
+      }
+    } catch (error) {
+      console.error('Error deleting contacts:', error);
+    } finally {
+      setIsDeleting(false);
+    }
+  }
+
   const emailableCount = contacts.filter((c) => !c.unsubscribedFromAll).length;
+  const allSelected = contacts.length > 0 && selectedEmails.size === contacts.length;
 
   return (
     <div className="space-y-6">
@@ -158,14 +209,56 @@ export default function ContactsPage() {
               )}
             </p>
           </div>
-          <Link href="/dashboard/crm/email-marketing/campaigns">
-            <Button className="bg-[#CDA7B2] hover:bg-[#b8909a] text-white">
-              <Mail className="h-4 w-4 mr-2" />
-              Send Campaign
-            </Button>
-          </Link>
+          <div className="flex items-center gap-3">
+            {selectedEmails.size > 0 && (
+              <Button
+                variant="outline"
+                onClick={() => setShowDeleteConfirm(true)}
+                className="border-red-300 text-red-600 hover:bg-red-50 hover:text-red-700"
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                Delete Selected ({selectedEmails.size})
+              </Button>
+            )}
+            <Link href="/dashboard/crm/email-marketing/campaigns">
+              <Button className="bg-[#CDA7B2] hover:bg-[#b8909a] text-white">
+                <Mail className="h-4 w-4 mr-2" />
+                Send Campaign
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg p-6 max-w-md mx-4 shadow-xl">
+            <h3 className="text-lg font-medium text-[#3B3937] mb-2">
+              Delete {selectedEmails.size} contact{selectedEmails.size !== 1 ? 's' : ''}?
+            </h3>
+            <p className="text-[#967F71] text-sm mb-6">
+              This will permanently remove the selected contacts from the email list. This cannot be undone.
+            </p>
+            <div className="flex justify-end gap-3">
+              <Button
+                variant="outline"
+                onClick={() => setShowDeleteConfirm(false)}
+                disabled={isDeleting}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleBulkDelete}
+                disabled={isDeleting}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                {isDeleting ? 'Deleting...' : 'Delete'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
@@ -236,6 +329,14 @@ export default function ContactsPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-[#967F71]/10">
+                  <th className="px-4 py-3 w-10">
+                    <input
+                      type="checkbox"
+                      checked={allSelected}
+                      onChange={toggleSelectAll}
+                      className="h-4 w-4 rounded border-[#967F71]/30 text-[#CDA7B2] focus:ring-[#CDA7B2]"
+                    />
+                  </th>
                   <th className="text-left px-4 py-3 text-sm font-medium text-[#967F71]">Contact</th>
                   <th className="text-left px-4 py-3 text-sm font-medium text-[#967F71]">Source</th>
                   <th className="text-left px-4 py-3 text-sm font-medium text-[#967F71]">Details</th>
@@ -247,14 +348,24 @@ export default function ContactsPage() {
                 {contacts.map((contact) => (
                   <tr
                     key={contact.email}
-                    className="border-b border-[#967F71]/5 hover:bg-[#faf8f5]/50 transition-colors"
+                    className={`border-b border-[#967F71]/5 hover:bg-[#faf8f5]/50 transition-colors ${
+                      selectedEmails.has(contact.email) ? 'bg-[#CDA7B2]/5' : ''
+                    }`}
                   >
+                    <td className="px-4 py-3">
+                      <input
+                        type="checkbox"
+                        checked={selectedEmails.has(contact.email)}
+                        onChange={() => toggleSelect(contact.email)}
+                        className="h-4 w-4 rounded border-[#967F71]/30 text-[#CDA7B2] focus:ring-[#CDA7B2]"
+                      />
+                    </td>
                     <td className="px-4 py-3">
                       <div>
                         <p className="text-sm font-medium text-[#3B3937]">
                           {contact.firstName || contact.lastName
                             ? `${contact.firstName || ''} ${contact.lastName || ''}`.trim()
-                            : '—'}
+                            : '\u2014'}
                         </p>
                         <p className="text-sm text-[#967F71]">{contact.email}</p>
                       </div>
@@ -282,7 +393,7 @@ export default function ContactsPage() {
                           !contact.archetype &&
                           !contact.membershipTier &&
                           !contact.clientPackage &&
-                          !contact.instagramHandle && <p className="text-[#967F71]/50">—</p>}
+                          !contact.instagramHandle && <p className="text-[#967F71]/50">{'\u2014'}</p>}
                       </div>
                     </td>
                     <td className="px-4 py-3">

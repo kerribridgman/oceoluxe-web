@@ -3,6 +3,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '@/lib/db/drizzle';
 import { emailList } from '@/lib/db/schema';
 import { sendEmail } from '@/lib/email/sendgrid';
+import { checkRateLimit } from '@/lib/auth/rate-limit';
 
 // HTML escape function to prevent XSS/injection in email templates
 function escapeHtml(text: string): string {
@@ -19,11 +20,45 @@ function escapeHtml(text: string): string {
 // POST /api/email-list/subscribe - Subscribe to email list
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit by IP: 5 attempts per 15 minutes
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const rateLimit = checkRateLimit(`subscribe:${ip}`, {
+      maxAttempts: 5,
+      windowMs: 15 * 60 * 1000,
+    });
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { message: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
-    const { email, firstName } = body as {
+    const { email, firstName, website, _t } = body as {
       email: string;
       firstName?: string;
+      website?: string;
+      _t?: number;
     };
+
+    // Honeypot: if the hidden "website" field has a value, a bot filled it in
+    if (website) {
+      return NextResponse.json({
+        success: true,
+        message: "You're on the list! Check your inbox for updates.",
+      });
+    }
+
+    // Timestamp validation: reject if form was filled in under 2 seconds
+    if (_t) {
+      const elapsed = Date.now() - _t;
+      if (elapsed < 2000) {
+        return NextResponse.json({
+          success: true,
+          message: "You're on the list! Check your inbox for updates.",
+        });
+      }
+    }
 
     // Validate required fields
     if (!email) {
@@ -36,6 +71,23 @@ export async function POST(request: NextRequest) {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { message: 'Please enter a valid email address' },
+        { status: 400 }
+      );
+    }
+
+    // Block emails exceeding RFC max length (254 chars)
+    if (email.length > 254) {
+      return NextResponse.json(
+        { message: 'Please enter a valid email address' },
+        { status: 400 }
+      );
+    }
+
+    // Block emails with 3+ consecutive dots in local part (common bot pattern)
+    const localPart = email.split('@')[0];
+    if (/\.{3,}/.test(localPart)) {
       return NextResponse.json(
         { message: 'Please enter a valid email address' },
         { status: 400 }

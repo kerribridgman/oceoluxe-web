@@ -25,6 +25,8 @@ export function EmailSignupModal({ forceOpen, onOpenChange }: EmailSignupModalPr
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [website, setWebsite] = useState('');
+  const [formTimestamp] = useState(() => Date.now());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -69,7 +71,7 @@ export function EmailSignupModal({ forceOpen, onOpenChange }: EmailSignupModalPr
       const response = await fetch('/api/email-list/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName }),
+        body: JSON.stringify({ email, firstName, website, _t: formTimestamp }),
       });
 
       const data = await response.json();
@@ -151,6 +153,20 @@ export function EmailSignupModal({ forceOpen, onOpenChange }: EmailSignupModalPr
                   placeholder="you@example.com"
                   required
                   className="mt-1 h-11 border-[#967F71]/20 focus:border-[#CDA7B2] focus:ring-[#CDA7B2] bg-white"
+                />
+              </div>
+
+              {/* Honeypot field - visually hidden from users, bots auto-fill it */}
+              <div className="absolute overflow-hidden" style={{ width: 0, height: 0, opacity: 0 }} aria-hidden="true">
+                <label htmlFor="modal-website">Website</label>
+                <input
+                  id="modal-website"
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
                 />
               </div>
 

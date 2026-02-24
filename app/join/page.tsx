@@ -12,6 +12,8 @@ import { ArrowLeft, Mail, Check } from 'lucide-react';
 export default function JoinEmailListPage() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [website, setWebsite] = useState('');
+  const [formTimestamp] = useState(() => Date.now());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -25,7 +27,7 @@ export default function JoinEmailListPage() {
       const response = await fetch('/api/email-list/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName }),
+        body: JSON.stringify({ email, firstName, website, _t: formTimestamp }),
       });
 
       const data = await response.json();
@@ -107,6 +109,20 @@ export default function JoinEmailListPage() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot field - visually hidden from users, bots auto-fill it */}
+                <div className="absolute overflow-hidden" style={{ width: 0, height: 0, opacity: 0 }} aria-hidden="true">
+                  <label htmlFor="join-website">Website</label>
+                  <input
+                    id="join-website"
+                    type="text"
+                    name="website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div>
                   <Label htmlFor="firstName" className="text-[#3B3937] font-light">
                     First Name <span className="text-[#967F71]">(optional)</span>
