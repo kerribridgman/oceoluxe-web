@@ -13,6 +13,9 @@ export async function GET(
     if (!currentUser) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
+    if (currentUser.role !== 'owner' && currentUser.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
 
     const { userId } = await params;
     const userIdNum = parseInt(userId, 10);

@@ -69,6 +69,12 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
+      return NextResponse.json(
+        { success: false, error: 'Password must include uppercase, lowercase, and a number' },
+        { status: 400 }
+      );
+    }
 
     // Get the invitation
     const [invitation] = await db

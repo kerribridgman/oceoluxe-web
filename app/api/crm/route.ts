@@ -6,6 +6,14 @@ import { getUser } from '@/lib/db/queries';
 
 export async function GET(request: NextRequest) {
   try {
+    const currentUser = await getUser();
+    if (!currentUser) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+    if (currentUser.role !== 'owner' && currentUser.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
     const { searchParams } = new URL(request.url);
     const tab = searchParams.get('tab') || 'waitlist';
 
@@ -194,6 +202,9 @@ export async function DELETE(request: NextRequest) {
     const currentUser = await getUser();
     if (!currentUser) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+    if (currentUser.role !== 'owner' && currentUser.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const { searchParams } = new URL(request.url);

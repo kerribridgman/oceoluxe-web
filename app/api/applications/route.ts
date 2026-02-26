@@ -7,6 +7,17 @@ import { sendEmail } from '@/lib/email/sendgrid';
 
 const ADMIN_EMAIL = 'kerrib@oceoluxe.com';
 
+function escapeHtml(text: string): string {
+  const htmlEntities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -49,7 +60,19 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Insert application into database
+    // Escape user inputs for safe HTML rendering in emails
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safePhone = phone ? escapeHtml(phone) : '';
+    const safeSocialHandle = socialHandle ? escapeHtml(socialHandle) : '';
+    const safeInterest = escapeHtml(interest);
+    const safeExperiences = escapeHtml(experiences);
+    const safeGrowthAreas = growthAreas ? escapeHtml(growthAreas) : '';
+    const safeObstacles = escapeHtml(obstacles);
+    const safeWillingToInvest = willingToInvest ? escapeHtml(willingToInvest) : '';
+    const safeAdditionalInfo = additionalInfo ? escapeHtml(additionalInfo) : '';
+
+    // Insert application into database (raw values — DB is parameterized)
     await db.insert(applications).values({
       type,
       name,
@@ -80,7 +103,7 @@ export async function POST(request: NextRequest) {
       // Send admin notification
       await sendEmail({
         to: ADMIN_EMAIL,
-        subject: `New Partnership Application from ${name}`,
+        subject: `New Partnership Application from ${safeName}`,
         html: `
           <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #3B3937;">
             <h1 style="color: #CDA7B2; font-weight: normal; border-bottom: 1px solid #CDA7B2; padding-bottom: 16px;">
@@ -88,24 +111,24 @@ export async function POST(request: NextRequest) {
             </h1>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Contact Information</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            ${socialHandle ? `<p><strong>Brand Name:</strong> ${socialHandle}</p>` : ''}
-            ${additionalInfo ? `<p><strong>Website:</strong> ${additionalInfo}</p>` : ''}
+            <p><strong>Name:</strong> ${safeName}</p>
+            <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+            ${safeSocialHandle ? `<p><strong>Brand Name:</strong> ${safeSocialHandle}</p>` : ''}
+            ${safeAdditionalInfo ? `<p><strong>Website:</strong> ${safeAdditionalInfo}</p>` : ''}
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Current Stage</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${interest}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeInterest}</p>
 
-            ${willingToInvest ? `
+            ${safeWillingToInvest ? `
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Revenue Range</h2>
-            <p>${willingToInvest}</p>
+            <p>${safeWillingToInvest}</p>
             ` : ''}
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Biggest Operational Challenge</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${obstacles}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeObstacles}</p>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Why Oceo Luxe</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${experiences}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeExperiences}</p>
 
             <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e5e5e5;">
               <p style="color: #967F71; font-size: 14px;">
@@ -127,7 +150,7 @@ export async function POST(request: NextRequest) {
             </h1>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937;">
-              Hi ${name.split(' ')[0]},
+              Hi ${escapeHtml(name.split(' ')[0])},
             </p>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937;">
@@ -174,7 +197,7 @@ export async function POST(request: NextRequest) {
 
       await sendEmail({
         to: ADMIN_EMAIL,
-        subject: `New 1:1 Client Application from ${name}`,
+        subject: `New 1:1 Client Application from ${safeName}`,
         html: `
           <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #3B3937;">
             <h1 style="color: #CDA7B2; font-weight: normal; border-bottom: 1px solid #CDA7B2; padding-bottom: 16px;">
@@ -182,29 +205,29 @@ export async function POST(request: NextRequest) {
             </h1>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Contact Information</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Social:</strong> ${socialHandle}</p>
+            <p><strong>Name:</strong> ${safeName}</p>
+            <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+            <p><strong>Phone:</strong> ${safePhone}</p>
+            <p><strong>Social:</strong> ${safeSocialHandle}</p>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">About Their Brand</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${interest}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeInterest}</p>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Brand Vision (1-2 Years)</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${experiences}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeExperiences}</p>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Areas Needing Support</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${growthAreas}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeGrowthAreas}</p>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Current Challenges</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${obstacles}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeObstacles}</p>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Ready to Invest?</h2>
             <p>${willingToInvest === 'yes' ? 'Yes, ready to invest' : 'Not at this time'}</p>
 
-            ${additionalInfo ? `
+            ${safeAdditionalInfo ? `
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Additional Information</h2>
-            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${additionalInfo}</p>
+            <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeAdditionalInfo}</p>
             ` : ''}
 
             <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e5e5e5;">
@@ -218,7 +241,7 @@ export async function POST(request: NextRequest) {
 
       await sendEmail({
         to: email,
-        subject: `Thanks for reaching out, ${name.split(' ')[0]}!`,
+        subject: `Thanks for reaching out, ${escapeHtml(name.split(' ')[0])}!`,
         html: `
           <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #3B3937;">
             <h1 style="color: #CDA7B2; font-weight: normal; font-size: 28px; margin-bottom: 24px;">
@@ -226,7 +249,7 @@ export async function POST(request: NextRequest) {
             </h1>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937;">
-              Hi ${name.split(' ')[0]},
+              Hi ${escapeHtml(name.split(' ')[0])},
             </p>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937;">

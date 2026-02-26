@@ -19,6 +19,14 @@ import useSWR, { mutate } from 'swr';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
+function sanitizeHtml(html: string): string {
+  return html
+    .replace(/<script[\s>][\s\S]*?<\/script>/gi, '')
+    .replace(/\son\w+\s*=\s*["'][^"']*["']/gi, '')
+    .replace(/\son\w+\s*=\s*[^\s>]+/gi, '')
+    .replace(/javascript\s*:/gi, '');
+}
+
 interface LessonContent {
   id: number;
   title: string;
@@ -264,7 +272,7 @@ export default function LessonViewerPage({
           <CardContent className="p-6">
             <div
               className="prose prose-gray max-w-none"
-              dangerouslySetInnerHTML={{ __html: lesson.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(lesson.content) }}
             />
           </CardContent>
         </Card>
