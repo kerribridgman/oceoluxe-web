@@ -11,6 +11,10 @@ export function InlineEmailSignup() {
   const [firstName, setFirstName] = useState('');
   const [website, setWebsite] = useState('');
   const [formTimestamp] = useState(() => Date.now());
+  const [proofToken] = useState(() => {
+    const t = Date.now();
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+  });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
@@ -32,7 +36,7 @@ export function InlineEmailSignup() {
       const res = await fetch('/api/email-list/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName, website, _t: formTimestamp }),
+        body: JSON.stringify({ email, firstName, website, _t: proofToken._t, _proof: proofToken._proof }),
       });
 
       const data = await res.json();

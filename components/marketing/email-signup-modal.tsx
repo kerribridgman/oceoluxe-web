@@ -27,6 +27,10 @@ export function EmailSignupModal({ forceOpen, onOpenChange }: EmailSignupModalPr
   const [firstName, setFirstName] = useState('');
   const [website, setWebsite] = useState('');
   const [formTimestamp] = useState(() => Date.now());
+  const [proofToken] = useState(() => {
+    const t = Date.now();
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -71,7 +75,7 @@ export function EmailSignupModal({ forceOpen, onOpenChange }: EmailSignupModalPr
       const response = await fetch('/api/email-list/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName, website, _t: formTimestamp }),
+        body: JSON.stringify({ email, firstName, website, _t: proofToken._t, _proof: proofToken._proof }),
       });
 
       const data = await response.json();

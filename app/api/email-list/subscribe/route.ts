@@ -17,6 +17,50 @@ function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
 }
 
+// Detect gibberish names commonly used by spam bots
+function isLikelyBotName(name: string): boolean {
+  if (!name || name.trim().length === 0) return false;
+
+  const trimmed = name.trim();
+
+  // First names longer than 20 characters without spaces are extremely rare
+  if (trimmed.length > 20 && !trimmed.includes(' ')) return true;
+
+  // Count upper↔lower case transitions (real names have 0-3)
+  let caseTransitions = 0;
+  for (let i = 1; i < trimmed.length; i++) {
+    const prevLower = /[a-z]/.test(trimmed[i - 1]);
+    const prevUpper = /[A-Z]/.test(trimmed[i - 1]);
+    const currLower = /[a-z]/.test(trimmed[i]);
+    const currUpper = /[A-Z]/.test(trimmed[i]);
+    if ((prevLower && currUpper) || (prevUpper && currLower)) caseTransitions++;
+  }
+  if (caseTransitions > 4) return true;
+
+  // 5+ consecutive consonants is extremely rare in real names
+  if (/[^aeiouAEIOU\s\-']{5,}/.test(trimmed)) return true;
+
+  // Very low vowel ratio for names longer than 6 chars
+  const letters = trimmed.replace(/[^a-zA-Z]/g, '');
+  if (letters.length > 6) {
+    const vowelCount = (letters.match(/[aeiouAEIOU]/g) || []).length;
+    if (vowelCount / letters.length < 0.15) return true;
+  }
+
+  return false;
+}
+
+// Validate the proof token sent by the client
+function isValidProofToken(timestamp: number | undefined, proof: string | undefined): boolean {
+  if (!timestamp || !proof) return false;
+  try {
+    const expected = Buffer.from(String(timestamp).split('').reverse().join('') + 'oceo').toString('base64');
+    return proof === expected;
+  } catch {
+    return false;
+  }
+}
+
 // POST /api/email-list/subscribe - Subscribe to email list
 export async function POST(request: NextRequest) {
   try {
@@ -34,31 +78,35 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { email, firstName, website, _t } = body as {
+    const { email, firstName, website, _t, _proof } = body as {
       email: string;
       firstName?: string;
       website?: string;
       _t?: number;
+      _proof?: string;
     };
 
-    // Honeypot: if the hidden "website" field has a value, a bot filled it in
-    if (website) {
-      return NextResponse.json({
+    // Silent rejection helper — returns fake success to not tip off bots
+    const silentReject = () =>
+      NextResponse.json({
         success: true,
         message: "You're on the list! Check your inbox for updates.",
       });
-    }
 
-    // Timestamp validation: reject if form was filled in under 2 seconds
+    // Honeypot: if the hidden "website" field has a value, a bot filled it in
+    if (website) return silentReject();
+
+    // Proof token: client must compute a token from the timestamp
+    if (!isValidProofToken(_t, _proof)) return silentReject();
+
+    // Timestamp validation: reject if form was filled in under 3 seconds
     if (_t) {
       const elapsed = Date.now() - _t;
-      if (elapsed < 2000) {
-        return NextResponse.json({
-          success: true,
-          message: "You're on the list! Check your inbox for updates.",
-        });
-      }
+      if (elapsed < 3000) return silentReject();
     }
+
+    // Gibberish name detection: catch random-string bot names
+    if (firstName && isLikelyBotName(firstName)) return silentReject();
 
     // Validate required fields
     if (!email) {

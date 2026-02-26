@@ -36,7 +36,7 @@ export default async function BlogPage() {
           <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4 animate-fade-in-up">
             Journal
           </p>
-          <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6 animate-fade-in-up">
+          <h1 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] leading-[1.25] tracking-tight mb-6 animate-fade-in-up">
             Insights on fashion operations, production clarity, and building brands designed for longevity.
           </h1>
         </div>
