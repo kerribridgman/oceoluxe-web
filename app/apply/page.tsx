@@ -24,7 +24,7 @@ export default function ApplyPage() {
   const [honeypot, setHoneypot] = useState('');
   const [proofToken] = useState(() => {
     const t = Date.now();
-    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'luxe' + String(t % 9973)) };
   });
   const [privacyConsent, setPrivacyConsent] = useState(false);
 

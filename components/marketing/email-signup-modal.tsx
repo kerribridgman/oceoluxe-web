@@ -29,7 +29,7 @@ export function EmailSignupModal({ forceOpen, onOpenChange }: EmailSignupModalPr
   const [formTimestamp] = useState(() => Date.now());
   const [proofToken] = useState(() => {
     const t = Date.now();
-    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'luxe' + String(t % 9973)) };
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

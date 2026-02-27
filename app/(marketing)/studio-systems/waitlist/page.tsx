@@ -52,7 +52,7 @@ export default function WaitlistPage() {
   const [honeypot, setHoneypot] = useState('');
   const [proofToken] = useState(() => {
     const t = Date.now();
-    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'luxe' + String(t % 9973)) };
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);

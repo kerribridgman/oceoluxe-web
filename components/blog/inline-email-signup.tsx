@@ -13,7 +13,7 @@ export function InlineEmailSignup() {
   const [formTimestamp] = useState(() => Date.now());
   const [proofToken] = useState(() => {
     const t = Date.now();
-    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'luxe' + String(t % 9973)) };
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');

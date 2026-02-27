@@ -10,7 +10,11 @@ import { checkRateLimit } from '@/lib/auth/rate-limit';
 export function isValidProofToken(timestamp: number | undefined, proof: string | undefined): boolean {
   if (!timestamp || !proof) return false;
   try {
-    const expected = Buffer.from(String(timestamp).split('').reverse().join('') + 'oceo').toString('base64');
+    // Reject tokens older than 1 hour (prevents replay)
+    if (Date.now() - timestamp > 3600000) return false;
+    const expected = Buffer.from(
+      String(timestamp).split('').reverse().join('') + 'luxe' + String(timestamp % 9973)
+    ).toString('base64');
     return proof === expected;
   } catch {
     return false;
@@ -33,7 +37,7 @@ export function isLikelyBotName(name: string): boolean {
     const currUpper = /[A-Z]/.test(trimmed[i]);
     if ((prevLower && currUpper) || (prevUpper && currLower)) caseTransitions++;
   }
-  if (caseTransitions > 4) return true;
+  if (caseTransitions > 3) return true;
 
   if (/[^aeiouAEIOU\s\-']{5,}/.test(trimmed)) return true;
 
@@ -44,6 +48,26 @@ export function isLikelyBotName(name: string): boolean {
   }
 
   return false;
+}
+
+/** Detect Gmail dot-trick pattern (e.g. j.bo.g.a.n.80@gmail.com) */
+export function isGmailDotTrick(email: string): boolean {
+  if (!email) return false;
+  const lower = email.toLowerCase();
+  const [localPart, domain] = lower.split('@');
+  if (!domain || !localPart) return false;
+
+  // Only applies to Gmail/Googlemail
+  if (domain !== 'gmail.com' && domain !== 'googlemail.com') return false;
+
+  // Split local part by dots and count single-char segments
+  const segments = localPart.split('.');
+  const singleCharSegments = segments.filter((s) => s.length === 1).length;
+
+  // 3+ single-char segments between dots is almost certainly a dot-trick bot
+  // e.g. "j.bo.g.a.n.80" has segments: ["j","bo","g","a","n","80"] → 4 single-char = flagged
+  // Real emails like "kerri.b" have segments: ["kerri","b"] → 1 single-char = not flagged
+  return singleCharSegments >= 3;
 }
 
 /** Validate email format */
@@ -79,6 +103,7 @@ export function checkBotProtection(body: {
   _t?: number;
   _proof?: string;
   name?: string;
+  email?: string;
 }): NextResponse | null {
   const silentReject = () =>
     NextResponse.json({ success: true, message: 'Request received.' });
@@ -97,6 +122,9 @@ export function checkBotProtection(body: {
 
   // Gibberish name detection
   if (body.name && isLikelyBotName(body.name)) return silentReject();
+
+  // Gmail dot-trick detection
+  if (body.email && isGmailDotTrick(body.email)) return silentReject();
 
   return null;
 }
