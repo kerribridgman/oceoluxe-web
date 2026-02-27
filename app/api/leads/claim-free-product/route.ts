@@ -5,29 +5,29 @@ import { leads } from '@/lib/db/schema';
 import { getFreeNotionProductConfig } from '@/lib/config/notion-product-prices';
 import { sendEmail } from '@/lib/email/sendgrid';
 import { getOrCreateEmailListEntry } from '@/lib/email/unsubscribe';
-
-// HTML escape function to prevent XSS/injection in email templates
-function escapeHtml(text: string): string {
-  const htmlEntities: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-  };
-  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
-}
+import { checkBotProtection, checkPublicRateLimit, isValidEmail, escapeHtml } from '@/lib/security/bot-protection';
 
 // POST /api/leads/claim-free-product - Save lead and send delivery email
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: 5 attempts per 15 minutes per IP
+    const rateLimited = checkPublicRateLimit(request, 'claim-free-product');
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
-    const { email, name, productSlug, productName } = body as {
+    const { email, name, productSlug, productName, _honeypot, _t, _proof } = body as {
       email: string;
       name?: string;
       productSlug: string;
       productName: string;
+      _honeypot?: string;
+      _t?: number;
+      _proof?: string;
     };
+
+    // Bot protection checks
+    const botCheck = checkBotProtection({ _honeypot, _t, _proof, name });
+    if (botCheck) return botCheck;
 
     // Validate required fields
     if (!email || !productSlug || !productName) {

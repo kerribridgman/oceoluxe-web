@@ -74,6 +74,11 @@ export default function SignatureStyleQuizPage() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [proofToken] = useState(() => {
+    const t = Date.now();
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
@@ -129,6 +134,9 @@ export default function SignatureStyleQuizPage() {
           email,
           name,
           sendEmail: false, // Don't send email yet - wait for results
+          _honeypot: honeypot,
+          _t: proofToken._t,
+          _proof: proofToken._proof,
         }),
       });
 
@@ -237,6 +245,20 @@ export default function SignatureStyleQuizPage() {
                   placeholder="you@example.com"
                   required
                   className="w-full px-4 py-3 rounded-xl border border-[#e8e4e1] focus:border-[#cda7b2] focus:outline-none focus:ring-2 focus:ring-[#cda7b2]/20 transition-all text-[#3b3937]"
+                />
+              </div>
+
+              {/* Honeypot field - visually hidden from users, bots auto-fill it */}
+              <div className="absolute overflow-hidden" style={{ width: 0, height: 0, opacity: 0 }} aria-hidden="true">
+                <label htmlFor="quiz-website">Website</label>
+                <input
+                  id="quiz-website"
+                  type="text"
+                  name="website"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
                 />
               </div>
 

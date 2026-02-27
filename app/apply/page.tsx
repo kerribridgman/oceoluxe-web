@@ -21,6 +21,11 @@ export default function ApplyPage() {
     obstacles: '',
     experiences: '',
   });
+  const [honeypot, setHoneypot] = useState('');
+  const [proofToken] = useState(() => {
+    const t = Date.now();
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+  });
   const [privacyConsent, setPrivacyConsent] = useState(false);
 
   const [submitting, setSubmitting] = useState(false);
@@ -39,6 +44,9 @@ export default function ApplyPage() {
         body: JSON.stringify({
           ...formData,
           type: 'operational-partnership',
+          _honeypot: honeypot,
+          _t: proofToken._t,
+          _proof: proofToken._proof,
         }),
       });
 
@@ -238,6 +246,20 @@ export default function ApplyPage() {
               rows={4}
               className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
               placeholder="Looking for a strategic partner who understands production at a high level..."
+            />
+          </div>
+
+          {/* Honeypot field - visually hidden from users, bots auto-fill it */}
+          <div className="absolute overflow-hidden" style={{ width: 0, height: 0, opacity: 0 }} aria-hidden="true">
+            <label htmlFor="apply-company-url">Company URL</label>
+            <input
+              id="apply-company-url"
+              type="text"
+              name="company_url"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
             />
           </div>
 

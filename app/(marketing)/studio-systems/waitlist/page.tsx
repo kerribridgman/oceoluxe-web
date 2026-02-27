@@ -49,6 +49,11 @@ export default function WaitlistPage() {
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [proofToken] = useState(() => {
+    const t = Date.now();
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -102,7 +107,7 @@ export default function WaitlistPage() {
       const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ name, email, _honeypot: honeypot, _t: proofToken._t, _proof: proofToken._proof }),
       });
 
       if (!response.ok) {
@@ -238,6 +243,20 @@ export default function WaitlistPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         className="mt-1"
+                      />
+                    </div>
+
+                    {/* Honeypot field - visually hidden from users, bots auto-fill it */}
+                    <div className="absolute overflow-hidden" style={{ width: 0, height: 0, opacity: 0 }} aria-hidden="true">
+                      <label htmlFor="waitlist-website">Website</label>
+                      <input
+                        id="waitlist-website"
+                        type="text"
+                        name="website"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
                       />
                     </div>
 

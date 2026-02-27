@@ -4,23 +4,26 @@ import { db } from '@/lib/db/drizzle';
 import { applications, leads } from '@/lib/db/schema';
 import { desc } from 'drizzle-orm';
 import { sendEmail } from '@/lib/email/sendgrid';
+import { checkBotProtection, checkPublicRateLimit, isValidEmail, escapeHtml } from '@/lib/security/bot-protection';
 
 const ADMIN_EMAIL = 'kerrib@oceoluxe.com';
 
-function escapeHtml(text: string): string {
-  const htmlEntities: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-  };
-  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
-}
-
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: 3 attempts per 15 minutes per IP
+    const rateLimited = checkPublicRateLimit(request, 'applications', 3);
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
+
+    // Bot protection checks
+    const botCheck = checkBotProtection({
+      _honeypot: body._honeypot,
+      _t: body._t,
+      _proof: body._proof,
+      name: body.name,
+    });
+    if (botCheck) return botCheck;
     const {
       type,
       name,
@@ -39,6 +42,14 @@ export async function POST(request: NextRequest) {
     if (type !== '1:1-clients' && type !== 'operational-partnership') {
       return NextResponse.json(
         { message: 'Invalid application type' },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { message: 'Please enter a valid email address' },
         { status: 400 }
       );
     }

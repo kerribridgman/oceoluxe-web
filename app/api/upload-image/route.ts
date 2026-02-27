@@ -48,7 +48,16 @@ export async function POST(request: NextRequest) {
     }
 
     // Get optional folder from form data (default to 'uploads')
-    const folder = (formData.get('folder') as string) || 'uploads';
+    // SECURITY: Validate folder to prevent path traversal
+    const rawFolder = (formData.get('folder') as string) || 'uploads';
+    const allowedFolders = ['uploads', 'blog-images', 'products', 'avatars', 'covers'];
+    const folder = allowedFolders.includes(rawFolder) ? rawFolder : 'uploads';
+    if (rawFolder.includes('..') || rawFolder.includes('/') || rawFolder.includes('\\')) {
+      return NextResponse.json(
+        { message: 'Invalid folder name' },
+        { status: 400 }
+      );
+    }
 
     // Generate unique filename
     const timestamp = Date.now();

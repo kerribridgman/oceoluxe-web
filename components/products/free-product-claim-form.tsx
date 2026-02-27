@@ -16,6 +16,11 @@ interface FreeProductClaimFormProps {
 export function FreeProductClaimForm({ productSlug, productName }: FreeProductClaimFormProps) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [proofToken] = useState(() => {
+    const t = Date.now();
+    return { _t: t, _proof: btoa(String(t).split('').reverse().join('') + 'oceo') };
+  });
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,6 +45,9 @@ export function FreeProductClaimForm({ productSlug, productName }: FreeProductCl
           productSlug,
           productName,
           marketingConsent,
+          _honeypot: honeypot,
+          _t: proofToken._t,
+          _proof: proofToken._proof,
         }),
       });
 
@@ -118,6 +126,20 @@ export function FreeProductClaimForm({ productSlug, productName }: FreeProductCl
               placeholder="Your name"
               required
               className="mt-1 border-[#EDEBE8] focus:border-[#CDA7B2] focus:ring-[#CDA7B2]"
+            />
+          </div>
+
+          {/* Honeypot field - visually hidden from users, bots auto-fill it */}
+          <div className="absolute overflow-hidden" style={{ width: 0, height: 0, opacity: 0 }} aria-hidden="true">
+            <label htmlFor="claim-website">Website</label>
+            <input
+              id="claim-website"
+              type="text"
+              name="website"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
             />
           </div>
 

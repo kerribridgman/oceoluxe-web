@@ -2,16 +2,33 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/drizzle';
 import { quizLeads } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
+import { checkBotProtection, checkPublicRateLimit, isValidEmail } from '@/lib/security/bot-protection';
 
 // POST /api/quiz/signature-style - Save signature style quiz lead (no email yet)
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: 5 attempts per 15 minutes per IP
+    const rateLimited = checkPublicRateLimit(request, 'quiz-signature');
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
-    const { email, name } = body;
+    const { email, name, _honeypot, _t, _proof } = body;
+
+    // Bot protection checks
+    const botCheck = checkBotProtection({ _honeypot, _t, _proof, name });
+    if (botCheck) return botCheck;
 
     if (!email) {
       return NextResponse.json(
         { message: 'Email is required' },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { message: 'Please enter a valid email address' },
         { status: 400 }
       );
     }
