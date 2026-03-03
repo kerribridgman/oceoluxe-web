@@ -53,20 +53,7 @@ export default function JoinEmailListPage() {
       <MarketingHeader />
 
       <main className="py-16 lg:py-24 overflow-hidden">
-        <div className="max-w-xl mx-auto px-6 relative">
-          {/* Decorative circles */}
-          <div
-            className="absolute top-0 right-0 w-20 h-20 rounded-full bg-[#CDA7B2] opacity-20 animate-float hidden lg:block"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute top-1/4 -left-16 w-14 h-14 rounded-full bg-[#967F71] opacity-15 animate-float-slow hidden lg:block"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute bottom-1/3 -left-8 w-8 h-8 rounded-full bg-[#CDA7B2] opacity-25 animate-float-delayed hidden lg:block"
-            aria-hidden="true"
-          />
+        <div className="max-w-xl lg:max-w-2xl mx-auto px-6">
           {/* Back Link */}
           <Link
             href="/"
