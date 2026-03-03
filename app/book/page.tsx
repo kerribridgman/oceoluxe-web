@@ -2,7 +2,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Clock, MessageCircle, Sparkles } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
-import { CalEmbed } from '@/components/cal-booking';
 import { getPageMetadata } from '@/lib/seo/metadata';
 
 export async function generateMetadata() {
@@ -139,26 +138,6 @@ export default function BookPage() {
                 </p>
               </CardContent>
             </Card>
-          )}
-
-          {/* Embedded Calendar for 30-min Discovery Call */}
-          {hasCalCom && (
-            <div className="mt-12">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-                  Book a Discovery Call
-                </h2>
-                <p className="text-gray-600">
-                  Choose a time that works for you
-                </p>
-              </div>
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <CalEmbed
-                  calUsername={calUsername}
-                  eventSlug="30min"
-                />
-              </div>
-            </div>
           )}
 
           {/* Reassurance text */}
