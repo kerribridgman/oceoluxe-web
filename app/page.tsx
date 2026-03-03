@@ -181,7 +181,7 @@ export default async function HomePage() {
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;She brought systems, structure, and a fresh perspective that reshaped how we work.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— Former Colleague</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
           </div>
         </div>
       </section>

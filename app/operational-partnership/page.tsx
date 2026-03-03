@@ -117,7 +117,7 @@ export default async function OperationalPartnershipPage() {
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— Former Colleague</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
           </div>
         </div>
       </section>

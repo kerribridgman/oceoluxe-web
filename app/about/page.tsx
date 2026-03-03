@@ -115,13 +115,13 @@ export default async function AboutPage() {
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;With a production background in fashion, Kerri added a creative edge to everything from financial controls to internal communications.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— Former Colleague</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
           </div>
           <div className="border-l-2 border-[#CDA7B2] pl-8">
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;Her calm presence, clear communication, and ability to spot issues before they surfaced made her a stabilizing force in a high-pressure environment.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— Former Colleague</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
           </div>
         </div>
       </section>
