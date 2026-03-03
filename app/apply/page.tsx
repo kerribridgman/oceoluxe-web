@@ -324,7 +324,7 @@ export default function ApplyPage() {
 
         {/* Secondary CTA */}
         <div className="mt-12 text-center border-t border-[#EDEBE8] pt-12">
-          <p className="text-[#967F71] font-light mb-4">
+          <p className="text-xl text-[#967F71] font-light mb-4">
             Prefer to talk first?
           </p>
           <Link href="/book">
