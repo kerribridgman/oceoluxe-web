@@ -153,7 +153,7 @@ export async function POST(request: NextRequest) {
       // Send confirmation to applicant
       await sendEmail({
         to: email,
-        subject: `Application Received — Oceo Luxe`,
+        subject: `Application Received | Oceo Luxe`,
         html: `
           <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #3B3937;">
             <h1 style="color: #CDA7B2; font-weight: normal; font-size: 28px; margin-bottom: 24px;">

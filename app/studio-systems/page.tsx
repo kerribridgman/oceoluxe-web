@@ -37,7 +37,7 @@ export default async function StudioSystemsPage() {
                 Operational Systems Designed for Independent Fashion Brands
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
-                These systems reflect real-world production leadership, not generic digital templates. Built from the same frameworks used in private partnerships — now available as an ongoing membership for brands ready to operate with precision.
+                These systems reflect real-world production leadership, not generic digital templates. Built from the same frameworks used in private partnerships, now available as an ongoing membership for brands ready to operate with precision.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-2 animate-fade-in-up">
                 <Link href="/studio-systems/waitlist">
@@ -75,7 +75,7 @@ export default async function StudioSystemsPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              Every system inside Studio Systems was developed through real production work — factory relationships, supplier management, collection launches, and the operational decisions that determine whether a brand scales or stalls.
+              Every system inside Studio Systems was developed through real production work: factory relationships, supplier management, collection launches, and the operational decisions that determine whether a brand scales or stalls.
             </p>
             <p>
               This is not a library of generic Notion templates. It is a curated operational environment designed to give independent fashion brands the same level of structure and clarity that larger operations rely on.
@@ -142,7 +142,7 @@ export default async function StudioSystemsPage() {
           <div className="space-y-8">
             <div className="border-l-2 border-[#CDA7B2] pl-6">
               <p className="text-[#3B3937] font-medium mb-2 text-lg">Organize</p>
-              <p className="text-[#967F71] font-light">Build your operational foundation — supplier systems, production calendars, and costing frameworks that give you clarity at every stage.</p>
+              <p className="text-[#967F71] font-light">Build your operational foundation. Supplier systems, production calendars, and costing frameworks that give you clarity at every stage.</p>
             </div>
             <div className="border-l-2 border-[#CDA7B2] pl-6">
               <p className="text-[#3B3937] font-medium mb-2 text-lg">Optimize</p>
@@ -191,7 +191,7 @@ export default async function StudioSystemsPage() {
                 <div>
                   <h3 className="text-xl font-medium text-[#3B3937] mb-3">Complete Notion System</h3>
                   <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                    Done-for-you operational templates covering production, distribution, marketing, sales, and launches — built from real production workflows, not generic frameworks.
+                    Done-for-you operational templates covering production, distribution, marketing, sales, and launches. Built from real production workflows, not generic frameworks.
                   </p>
                 </div>
 
@@ -205,7 +205,7 @@ export default async function StudioSystemsPage() {
                 <div>
                   <h3 className="text-xl font-medium text-[#3B3937] mb-3">Leadership & Somatic Support</h3>
                   <p className="text-lg text-[#967F71] font-light leading-relaxed">
-                    Practical tools for staying grounded and decisive — including regulation practices designed for creative founders managing complex operations.
+                    Practical tools for staying grounded and decisive, including regulation practices designed for creative founders managing complex operations.
                   </p>
                 </div>
               </div>
@@ -280,10 +280,10 @@ export default async function StudioSystemsPage() {
                   Most fashion founders are forced to choose between expensive one-on-one consulting or free content that stays surface-level. Neither builds the operational foundation a growing brand actually needs.
                 </p>
                 <p>
-                  Studio Systems was created to close that gap — to give independent fashion brands access to the same caliber of production systems, frameworks, and strategic thinking that private partnership clients receive, at a price point that makes ongoing support sustainable.
+                  Studio Systems was created to close that gap. To give independent fashion brands access to the same caliber of production systems, frameworks, and strategic thinking that private partnership clients receive, at a price point that makes ongoing support sustainable.
                 </p>
                 <p className="text-[#3B3937]">
-                  This is not a course you complete and forget. It is an operational environment you work inside — updated, supported, and built to evolve alongside your brand.
+                  This is not a course you complete and forget. It is an operational environment you work inside. Updated, supported, and built to evolve alongside your brand.
                 </p>
               </div>
             </div>

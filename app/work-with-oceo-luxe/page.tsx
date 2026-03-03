@@ -22,7 +22,7 @@ const offerings = [
   {
     title: 'Strategic Production Alignment',
     description:
-      'Focused, short-term engagements for brands that need clarity on a specific production challenge — sourcing strategy, factory evaluation, timeline restructuring, or launch readiness.',
+      'Focused, short-term engagements for brands that need clarity on a specific production challenge: sourcing strategy, factory evaluation, timeline restructuring, or launch readiness.',
     href: '/strategic-production-alignment',
     cta: 'Explore Production Alignment',
     flagship: false,
@@ -30,7 +30,7 @@ const offerings = [
   {
     title: 'Private Operational Partnership',
     description:
-      'An embedded, ongoing engagement for fashion founders who need a strategic operator working alongside them. Production leadership, systems architecture, and operational clarity — delivered as a true partnership.',
+      'An embedded, ongoing engagement for fashion founders who need a strategic operator working alongside them. Production leadership, systems architecture, and operational clarity, delivered as a true partnership.',
     href: '/operational-partnership',
     cta: 'Learn More',
     flagship: true,
@@ -38,7 +38,7 @@ const offerings = [
   {
     title: 'Studio Systems',
     description:
-      'Operational systems, frameworks, and community designed for independent fashion brands. Production calendars, costing tools, supplier management, and live Q&A — built from real-world production leadership.',
+      'Operational systems, frameworks, and community designed for independent fashion brands. Production calendars, costing tools, supplier management, and live Q&A. Built from real-world production leadership.',
     href: '/studio-systems',
     cta: 'Explore Studio Systems',
     flagship: false,
@@ -61,7 +61,7 @@ export default async function WorkWithOceoLuxePage() {
             Strategic Operational Partnership for Fashion Founders
           </h1>
           <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            Oceo Luxe partners with fashion founders who are past the startup phase and ready for operational precision. Whether you need an embedded operator, strategic production guidance, or proven systems — we meet you where your brand is and build what it needs to scale.
+            Oceo Luxe partners with fashion founders who are past the startup phase and ready for operational precision. Whether you need an embedded operator, strategic production guidance, or proven systems, we meet you where your brand is and build what it needs to scale.
           </p>
         </div>
       </section>

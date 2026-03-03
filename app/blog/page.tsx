@@ -85,7 +85,7 @@ export default async function BlogPage() {
                 Operational Systems for Fashion Brands
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed">
-                Production frameworks, supplier management tools, and live Q&A — built from real-world production leadership.
+                Production frameworks, supplier management tools, and live Q&A. Built from real-world production leadership.
               </p>
               <Link href="/studio-systems">
                 <Button

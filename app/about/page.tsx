@@ -37,7 +37,7 @@ export default async function AboutPage() {
                 Behind Oceo Luxe
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
-                Oceo Luxe was founded by Kerri Bridgman — a FIT-trained production manager with over a decade of experience in fashion production and supply chain leadership.
+                Oceo Luxe was founded by Kerri Bridgman, a FIT-trained production manager with over a decade of experience in fashion production and supply chain leadership.
               </p>
               <p className="text-sm text-[#967F71] font-light animate-fade-in-up">
                 FIT-trained Production Manager • 10+ Years in Fashion Production & Operations
@@ -91,16 +91,16 @@ export default async function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
                 <p>
-                  Before Oceo Luxe, Kerri spent years inside the fashion industry — managing production runs, coordinating with factories, building supplier relationships, and solving the operational problems that most founders face alone.
+                  Before Oceo Luxe, Kerri spent years inside the fashion industry managing production runs, coordinating with factories, building supplier relationships, and solving the operational problems that most founders face alone.
                 </p>
                 <p>
-                  That experience taught her something that most consulting frameworks miss: operational excellence in fashion is not about templates or theory. It is about understanding how production actually works — the timelines, the relationships, the decisions that compound — and building systems around that reality.
+                  That experience taught her something that most consulting frameworks miss: operational excellence in fashion is not about templates or theory. It is about understanding how production actually works. The timelines, the relationships, the decisions that compound. And building systems around that reality.
                 </p>
                 <p>
                   Kerri has worked with brands ranging from emerging independent labels to established luxury houses. Her approach draws from the same operational rigor found at the highest levels of the industry, delivered at a scale that works for growing brands.
                 </p>
                 <p className="text-[#3B3937]">
-                  Oceo Luxe exists because fashion founders deserve an operational partner who has done the work — not someone who has only studied it.
+                  Oceo Luxe exists because fashion founders deserve an operational partner who has done the work. Not someone who has only studied it.
                 </p>
               </div>
             </div>
@@ -144,13 +144,13 @@ export default async function AboutPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              <span className="text-[#3B3937]">Structure protects creativity.</span> The best creative work happens when the operational foundation is solid. Systems are not constraints — they are the infrastructure that gives founders the freedom to focus on vision.
+              <span className="text-[#3B3937]">Structure protects creativity.</span> The best creative work happens when the operational foundation is solid. Systems are not constraints. They are the infrastructure that gives founders the freedom to focus on vision.
             </p>
             <p>
               <span className="text-[#3B3937]">Precision over speed.</span> Rushing production creates problems that compound. Every decision, every timeline, every supplier relationship is built with intention and accuracy.
             </p>
             <p>
-              <span className="text-[#3B3937]">Partnership, not dependency.</span> The goal is not to create reliance on external support. It is to build internal capacity — systems your team can operate, processes that scale, and clarity that persists after the engagement ends.
+              <span className="text-[#3B3937]">Partnership, not dependency.</span> The goal is not to create reliance on external support. It is to build internal capacity: systems your team can operate, processes that scale, and clarity that persists after the engagement ends.
             </p>
             <p>
               <span className="text-[#3B3937]">Calm authority.</span> Operational leadership does not require urgency or pressure. It requires confidence, clear communication, and the experience to know what actually matters.
@@ -166,7 +166,7 @@ export default async function AboutPage() {
             &ldquo;Structure protects creativity.&rdquo;
           </p>
           <p className="text-lg text-white/70 font-light leading-relaxed max-w-2xl mx-auto">
-            The best creative work happens when the operational foundation is solid. Systems are not constraints — they are the infrastructure that gives founders the freedom to focus on vision.
+            The best creative work happens when the operational foundation is solid. Systems are not constraints. They are the infrastructure that gives founders the freedom to focus on vision.
           </p>
         </div>
       </section>

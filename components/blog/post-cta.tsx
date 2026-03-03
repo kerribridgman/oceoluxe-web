@@ -14,7 +14,7 @@ export function PostCta() {
             Operational Systems for Fashion Brands
           </h3>
           <p className="text-sm text-[#967F71] font-light leading-relaxed">
-            Production frameworks, supplier management, and live Q&A — built from real-world production leadership.
+            Production frameworks, supplier management, and live Q&A. Built from real-world production leadership.
           </p>
           <Link
             href="/studio-systems"

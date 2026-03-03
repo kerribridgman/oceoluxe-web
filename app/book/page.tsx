@@ -165,7 +165,7 @@ export default function BookPage() {
           {hasCalCom && (
             <div className="text-center mt-12">
               <p className="text-sm text-gray-500">
-                Not sure which to choose? Start with a Quick Chat — no pressure, just conversation.
+                Not sure which to choose? Start with a Quick Chat. No pressure, just conversation.
               </p>
             </div>
           )}

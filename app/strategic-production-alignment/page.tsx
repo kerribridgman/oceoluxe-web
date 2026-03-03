@@ -21,7 +21,7 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 
 const serviceJsonLd = getServiceJsonLd([{
   name: 'Strategic Production Alignment',
-  description: 'Focused, short-term engagements for fashion brands that need clarity on a specific production challenge — sourcing strategy, factory evaluation, timeline restructuring, or launch readiness.',
+  description: 'Focused, short-term engagements for fashion brands that need clarity on a specific production challenge: sourcing strategy, factory evaluation, timeline restructuring, or launch readiness.',
   url: `${baseUrl}/strategic-production-alignment`,
 }]);
 
@@ -42,7 +42,7 @@ export default async function StrategicProductionAlignmentPage() {
             Strategic Production Alignment
           </h1>
           <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            A focused, short-term engagement for fashion founders who need clarity on a specific production challenge. Whether it is sourcing strategy, factory evaluation, timeline restructuring, or launch readiness — this is targeted operational support designed to move your brand forward with precision.
+            A focused, short-term engagement for fashion founders who need clarity on a specific production challenge. Sourcing strategy, factory evaluation, timeline restructuring, or launch readiness. Targeted operational support designed to move your brand forward with precision.
           </p>
         </div>
       </section>
@@ -55,16 +55,16 @@ export default async function StrategicProductionAlignmentPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              <span className="text-[#3B3937]">Sourcing strategy.</span> Supplier evaluation, vendor alignment, and sourcing clarity — so you can move forward with confidence in your production partners.
+              <span className="text-[#3B3937]">Sourcing strategy.</span> Supplier evaluation, vendor alignment, and sourcing clarity, so you can move forward with confidence in your production partners.
             </p>
             <p>
-              <span className="text-[#3B3937]">Factory evaluation.</span> Production partner assessment, capacity and quality review — ensuring your factory relationships are set up for long-term success.
+              <span className="text-[#3B3937]">Factory evaluation.</span> Production partner assessment, capacity and quality review. Ensuring your factory relationships are set up for long-term success.
             </p>
             <p>
-              <span className="text-[#3B3937]">Timeline restructuring.</span> Production calendar audit and milestone clarity — transforming chaotic timelines into structured, actionable plans.
+              <span className="text-[#3B3937]">Timeline restructuring.</span> Production calendar audit and milestone clarity. Transforming chaotic timelines into structured, actionable plans.
             </p>
             <p>
-              <span className="text-[#3B3937]">Launch readiness.</span> Pre-launch operational review and workflow sequencing — making sure every piece is in place before you go to market.
+              <span className="text-[#3B3937]">Launch readiness.</span> Pre-launch operational review and workflow sequencing. Every piece in place before you go to market.
             </p>
           </div>
         </div>
@@ -101,7 +101,7 @@ export default async function StrategicProductionAlignmentPage() {
               <div>
                 <h3 className="text-[#3B3937] text-lg font-medium mb-2">Alignment call</h3>
                 <p className="text-[#967F71] font-light leading-relaxed">
-                  A conversation to understand the full picture — your brand, your challenge, and the outcome you need. From here, we scope the engagement together.
+                  A conversation to understand the full picture: your brand, your challenge, and the outcome you need. From here, we scope the engagement together.
                 </p>
               </div>
             </div>

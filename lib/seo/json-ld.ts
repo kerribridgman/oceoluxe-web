@@ -107,7 +107,7 @@ export function getOrganizationJsonLd(): OrganizationJsonLd {
     url: BASE_URL,
     logo: `${BASE_URL}/images/Logo.png`,
     description:
-      'Strategic operational partnership for fashion founders. Production leadership, systems architecture, and operational clarity — rooted in real-world experience.',
+      'Strategic operational partnership for fashion founders. Production leadership, systems architecture, and operational clarity rooted in real-world experience.',
     founder: {
       '@type': 'Person',
       name: 'Kerri Bridgman',

@@ -24,7 +24,7 @@ export async function GET(
         seo: {
           page,
           title: 'Oceo Luxe | Fashion Production & Operations',
-          description: 'Fashion production consulting and operations support for independent designers. Structure as Support — build sustainable production systems that feel like luxury.',
+          description: 'Fashion production consulting and operations support for independent designers. Structure as Support. Build sustainable production systems that feel like luxury.',
           keywords: 'fashion production consulting, production operations, fashion designer resources, sustainable fashion production',
           ogTitle: null,
           ogDescription: null,

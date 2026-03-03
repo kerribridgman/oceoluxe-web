@@ -42,7 +42,7 @@ export default async function OperationalPartnershipPage() {
             Embedded Operational Partnership for Growing Fashion Brands
           </h1>
           <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            This is not consulting from the sidelines. This is an embedded operational partnership — a strategic operator working inside your brand, building the systems, managing the timelines, and creating the clarity your team needs to execute at a higher level.
+            This is not consulting from the sidelines. This is an embedded operational partnership. A strategic operator working inside your brand, building the systems, managing the timelines, and creating the clarity your team needs to execute at a higher level.
           </p>
         </div>
       </section>
@@ -55,16 +55,16 @@ export default async function OperationalPartnershipPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              <span className="text-[#3B3937]">Production leadership.</span> Oversight of your production calendar, sampling timelines, and factory relationships — ensuring nothing falls through the cracks and every deadline is met with precision.
+              <span className="text-[#3B3937]">Production leadership.</span> Oversight of your production calendar, sampling timelines, and factory relationships. Nothing falls through the cracks. Every deadline is met with precision.
             </p>
             <p>
               <span className="text-[#3B3937]">Systems architecture.</span> Custom operational systems built for your brand: supplier management, costing frameworks, launch workflows, and communication protocols that scale with you.
             </p>
             <p>
-              <span className="text-[#3B3937]">Strategic advisory.</span> Ongoing decision support on sourcing, pricing, production sequencing, and growth strategy — rooted in over a decade of real-world production experience.
+              <span className="text-[#3B3937]">Strategic advisory.</span> Ongoing decision support on sourcing, pricing, production sequencing, and growth strategy. Rooted in over a decade of real-world production experience.
             </p>
             <p>
-              <span className="text-[#3B3937]">Team alignment.</span> Clear documentation, process handoffs, and training so your internal team can operate with confidence — whether you have a team of two or twenty.
+              <span className="text-[#3B3937]">Team alignment.</span> Clear documentation, process handoffs, and training so your internal team can operate with confidence. Whether you have a team of two or twenty.
             </p>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default async function OperationalPartnershipPage() {
             </li>
           </ul>
           <p className="text-[#3B3937] mt-10 text-lg font-light">
-            This is not entry-level support. This is a partnership built for brands operating at a level where operational clarity is no longer optional — it is essential.
+            This is not entry-level support. This is a partnership built for brands operating at a level where operational clarity is no longer optional. It is essential.
           </p>
         </div>
       </section>

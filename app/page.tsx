@@ -27,7 +27,7 @@ export default async function HomePage() {
                 Operational Partnership for Visionary Fashion Founders
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
-                You built the brand. Now build the infrastructure it deserves. Oceo Luxe provides strategic operational partnership rooted in real-world production leadership — so you can scale with precision, not pressure.
+                You built the brand. Now build the infrastructure it deserves. Oceo Luxe provides strategic operational partnership rooted in real-world production leadership, so you can scale with precision, not pressure.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-2 animate-fade-in-up">
                 <Link href="/apply">
@@ -81,7 +81,7 @@ export default async function HomePage() {
               The cost is not just financial. It is creative. When operations consume your attention, the work that made your brand exceptional takes a back seat.
             </p>
             <p className="text-[#3B3937]">
-              The solution is not more hustle. It is operational infrastructure — designed specifically for how fashion brands actually work.
+              The solution is not more hustle. It is operational infrastructure designed specifically for how fashion brands actually work.
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
           <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;Structure is not a limitation — it is the foundation that lets creativity scale.&rdquo;
+            &ldquo;Structure is not a limitation. It is the foundation that lets creativity scale.&rdquo;
           </p>
         </div>
       </section>
@@ -106,10 +106,10 @@ export default async function HomePage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              Oceo Luxe operates as your embedded operational partner — not a consultant who hands you a PDF and disappears. This is production leadership integrated into your business: managing timelines, building systems, aligning your team, and creating the clarity that allows you to focus on what you do best.
+              Oceo Luxe operates as your embedded operational partner. Not a consultant who hands you a PDF and disappears. This is production leadership integrated into your business: managing timelines, building systems, aligning your team, and creating the clarity that allows you to focus on what you do best.
             </p>
             <p>
-              With over a decade of experience in fashion production and supply chain management, Kerri Bridgman brings the same operational rigor found in luxury houses — delivered at a scale that works for independent and growing brands.
+              With over a decade of experience in fashion production and supply chain management, Kerri Bridgman brings the same operational rigor found in luxury houses, delivered at a scale that works for independent and growing brands.
             </p>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default async function HomePage() {
             Clarity. Timelines. Confidence.
           </h2>
           <p className="text-lg text-[#967F71] font-light leading-relaxed">
-            Founders who work with Oceo Luxe gain production calendars that hold, supplier relationships that function, pricing structures they trust, and the operational confidence to make decisions without second-guessing. The work is not theoretical — it is built inside your brand, for your brand, and alongside you.
+            Founders who work with Oceo Luxe gain production calendars that hold, supplier relationships that function, pricing structures they trust, and the operational confidence to make decisions without second-guessing. The work is not theoretical. It is built inside your brand, for your brand, and alongside you.
           </p>
         </div>
       </section>
@@ -191,7 +191,7 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="font-script text-2xl lg:text-3xl italic text-[#CDA7B2] mb-4">The belief</p>
           <h3 className="font-serif-display text-2xl lg:text-3xl font-normal text-white tracking-tight">
-            At Oceo Luxe, we believe structure is a form of support — not restriction.
+            At Oceo Luxe, we believe structure is a form of support. Not restriction.
           </h3>
         </div>
       </section>
