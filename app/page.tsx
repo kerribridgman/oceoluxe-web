@@ -48,15 +48,6 @@ export default async function HomePage() {
                     Explore Services
                   </Button>
                 </Link>
-                <Link href="/book">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
-                  >
-                    Book a Call
-                  </Button>
-                </Link>
               </div>
             </div>
             <div className="relative">
