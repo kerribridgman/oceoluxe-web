@@ -109,7 +109,7 @@ export default async function WorkWithOceoLuxePage() {
                   <Link href={offering.href}>
                     <Button
                       variant="outline"
-                      className={`h-12 px-6 text-base font-normal tracking-wide w-full ${
+                      className={`h-12 px-6 text-base font-normal tracking-wide w-full justify-center ${
                         isFlagship
                           ? 'bg-white text-[#3B3937] border-white hover:bg-white/90'
                           : 'border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white'
