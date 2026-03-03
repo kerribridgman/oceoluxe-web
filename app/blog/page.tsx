@@ -66,9 +66,8 @@ export default async function BlogPage() {
               </p>
               <Link href="/work-with-oceo-luxe">
                 <Button
-                  variant="outline"
                   size="lg"
-                  className="border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white h-12 px-8 text-base font-normal tracking-wide mt-2"
+                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide mt-2"
                 >
                   Explore Services
                   <ArrowRight className="ml-2 h-4 w-4" />
