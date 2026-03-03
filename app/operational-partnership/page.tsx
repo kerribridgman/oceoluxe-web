@@ -110,6 +110,18 @@ export default async function OperationalPartnershipPage() {
         </div>
       </section>
 
+      {/* Testimonial */}
+      <section className="bg-white py-16 lg:py-20">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="border-l-2 border-[#CDA7B2] pl-8">
+            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
+              &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
+            </p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— Former Colleague</p>
+          </div>
+        </div>
+      </section>
+
       {/* Investment */}
       <section className="section-spacing bg-white">
         <div className="max-w-4xl mx-auto px-6">

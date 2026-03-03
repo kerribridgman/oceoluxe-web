@@ -108,6 +108,24 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="bg-white py-16 lg:py-20">
+        <div className="max-w-3xl mx-auto px-6 space-y-12">
+          <div className="border-l-2 border-[#CDA7B2] pl-8">
+            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
+              &ldquo;With a production background in fashion, Kerri added a creative edge to everything from financial controls to internal communications.&rdquo;
+            </p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— Former Colleague</p>
+          </div>
+          <div className="border-l-2 border-[#CDA7B2] pl-8">
+            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
+              &ldquo;Her calm presence, clear communication, and ability to spot issues before they surfaced made her a stabilizing force in a high-pressure environment.&rdquo;
+            </p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— Former Colleague</p>
+          </div>
+        </div>
+      </section>
+
       {/* Editorial Quote */}
       <section className="bg-[#3B3937] py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
