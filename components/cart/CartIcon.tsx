@@ -11,6 +11,8 @@ interface CartIconProps {
 export function CartIcon({ isScrolled = false }: CartIconProps) {
   const { totalItems, toggleCart } = useCart();
 
+  if (totalItems === 0) return null;
+
   return (
     <Button
       variant="ghost"

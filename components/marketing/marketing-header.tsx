@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { CartIcon } from '@/components/cart';
 import { SiteSearch } from '@/components/search/site-search';
 
 const serviceSubLinks = [
@@ -116,6 +117,9 @@ export function MarketingHeader() {
             {/* Search */}
             <SiteSearch isScrolled={isScrolled} />
 
+            {/* Cart - only visible when items added */}
+            <CartIcon isScrolled={isScrolled} />
+
             {/* Apply CTA Button */}
             <Link
               href="/apply"
@@ -132,6 +136,7 @@ export function MarketingHeader() {
           {/* Mobile Cart and Menu */}
           <div className="flex items-center gap-2 md:hidden">
             <SiteSearch isScrolled={isScrolled} />
+            <CartIcon isScrolled={isScrolled} />
             <button
               className={`p-2 rounded-lg transition-colors ${
                 isScrolled ? 'hover:bg-white/20' : 'hover:bg-[#967F71]/10'
