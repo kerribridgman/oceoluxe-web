@@ -117,14 +117,6 @@ export default function ApplyPage() {
           </p>
         </div>
 
-        {/* Testimonial */}
-        <div className="mb-12 border-l-2 border-[#CDA7B2] pl-8">
-          <p className="font-serif-display text-lg lg:text-xl font-normal text-[#3B3937] leading-relaxed">
-            &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
-          </p>
-          <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
-        </div>
-
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
           <div>
@@ -321,6 +313,14 @@ export default function ApplyPage() {
             </Button>
           </div>
         </form>
+
+        {/* Testimonial */}
+        <div className="mt-12 border-l-2 border-[#CDA7B2] pl-8 pt-12 border-t border-t-[#EDEBE8]">
+          <p className="font-serif-display text-lg lg:text-xl font-normal text-[#3B3937] leading-relaxed">
+            &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
+          </p>
+          <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
+        </div>
 
         {/* Secondary CTA */}
         <div className="mt-12 text-center border-t border-[#EDEBE8] pt-12">
