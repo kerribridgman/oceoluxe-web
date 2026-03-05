@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Serif_Display, Cormorant_Garamond } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
 import { Providers } from '@/components/providers';
@@ -93,6 +94,9 @@ export default async function RootLayout({
         >
           <Providers>{children}</Providers>
         </SWRConfig>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
