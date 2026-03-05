@@ -4,7 +4,7 @@ import { db } from '@/lib/db/drizzle';
 import { blogPosts } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { put } from '@vercel/blob';
-import { generateSlug, extractExcerpt } from './notion-import';
+import { generateSlug, extractExcerpt, extractImageUrls, replaceImageUrls } from './notion-import';
 
 interface SyncResult {
   success: boolean;
@@ -115,6 +115,37 @@ export async function syncNotionBlogPosts(userId: number, onProgress?: ProgressC
         // Extract excerpt
         const excerpt = extractExcerpt(markdown);
 
+        // Download and rehost inline images from markdown
+        const inlineImageUrls = extractImageUrls(markdown);
+        const inlineUrlMap = new Map<string, string>();
+
+        for (const imageUrl of inlineImageUrls) {
+          try {
+            const imageResponse = await fetch(imageUrl);
+            if (!imageResponse.ok) continue;
+
+            const imageBlob = await imageResponse.blob();
+            const contentType = imageResponse.headers.get('content-type') || 'image/png';
+            const extension = contentType.includes('jpeg') || contentType.includes('jpg') ? 'jpg' : 'png';
+            const timestamp = Date.now();
+            const randomString = Math.random().toString(36).substring(7);
+            const filename = `blog-images/notion-${page.id}-${timestamp}-${randomString}.${extension}`;
+
+            const blob = await put(filename, imageBlob, {
+              access: 'public',
+              addRandomSuffix: false,
+              contentType,
+            });
+
+            inlineUrlMap.set(imageUrl, blob.url);
+          } catch (error) {
+            console.error(`Failed to rehost inline image: ${imageUrl}`, error);
+          }
+        }
+
+        // Replace Notion image URLs with Vercel Blob URLs in markdown
+        const processedMarkdown = replaceImageUrls(markdown, inlineUrlMap);
+
         // Get cover image if exists
         let coverImageUrl: string | undefined;
         if ('cover' in page && page.cover) {
@@ -178,7 +209,7 @@ export async function syncNotionBlogPosts(userId: number, onProgress?: ProgressC
           await db.update(blogPosts)
             .set({
               title,
-              content: markdown,
+              content: processedMarkdown,
               excerpt,
               coverImageUrl,
               publishedAt: publishedAt || existing.publishedAt,
@@ -206,7 +237,7 @@ export async function syncNotionBlogPosts(userId: number, onProgress?: ProgressC
           await db.insert(blogPosts).values({
             title,
             slug,
-            content: markdown,
+            content: processedMarkdown,
             excerpt,
             coverImageUrl,
             author: 'Kerri Bridgman',
@@ -323,6 +354,37 @@ export async function syncSingleBlogPost(userId: number, postId: number): Promis
     const markdown = n2m.toMarkdownString(mdBlocks).parent;
     const excerpt = extractExcerpt(markdown);
 
+    // Download and rehost inline images from markdown
+    const inlineImageUrls = extractImageUrls(markdown);
+    const inlineUrlMap = new Map<string, string>();
+
+    for (const imageUrl of inlineImageUrls) {
+      try {
+        const imageResponse = await fetch(imageUrl);
+        if (!imageResponse.ok) continue;
+
+        const imageBlob = await imageResponse.blob();
+        const contentType = imageResponse.headers.get('content-type') || 'image/png';
+        const extension = contentType.includes('jpeg') || contentType.includes('jpg') ? 'jpg' : 'png';
+        const timestamp = Date.now();
+        const randomString = Math.random().toString(36).substring(7);
+        const filename = `blog-images/notion-${matchedPage.id}-${timestamp}-${randomString}.${extension}`;
+
+        const blob = await put(filename, imageBlob, {
+          access: 'public',
+          addRandomSuffix: false,
+          contentType,
+        });
+
+        inlineUrlMap.set(imageUrl, blob.url);
+      } catch (error) {
+        console.error(`Failed to rehost inline image: ${imageUrl}`, error);
+      }
+    }
+
+    // Replace Notion image URLs with Vercel Blob URLs in markdown
+    const processedMarkdown = replaceImageUrls(markdown, inlineUrlMap);
+
     // Get cover image
     let coverImageUrl: string | undefined;
     if ('cover' in matchedPage && matchedPage.cover) {
@@ -363,7 +425,7 @@ export async function syncSingleBlogPost(userId: number, postId: number): Promis
     await db.update(blogPosts)
       .set({
         title,
-        content: markdown,
+        content: processedMarkdown,
         excerpt,
         coverImageUrl,
         updatedAt: new Date(),
