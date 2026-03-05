@@ -83,9 +83,8 @@ export function cleanNotionMarkdown(content: string): CleanedContent {
   // Remove images pointing to Notion's temporary S3 URLs (they expire quickly)
   cleaned = cleaned.replace(/!\[[^\]]*\]\(https?:\/\/prod-files-secure\.s3[^)]+\)/gi, '');
 
-  // Remove standalone image filenames
+  // Remove standalone image filenames (on their own line only — not within URLs)
   cleaned = cleaned.replace(/^[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)$/gim, '');
-  cleaned = cleaned.replace(/\b[A-Za-z0-9_-]+\.(jpe?g|png|gif|webp|svg)\b/gi, '');
 
   // Convert inline checkmarks into list items
   // Note: Use Unicode escapes to avoid accidentally matching variation selectors (U+FE0F)
