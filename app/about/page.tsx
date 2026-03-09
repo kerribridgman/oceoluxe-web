@@ -57,7 +57,7 @@ export default async function AboutPage() {
             <div className="relative">
               <div className="aspect-[4/5] overflow-hidden relative z-10 rounded-lg">
                 <Image
-                  src="/images/kerri-profile.png"
+                  src="/images/Kerri-11copy.jpeg"
                   alt="Kerri Bridgman"
                   fill
                   className="object-cover rounded-lg"
