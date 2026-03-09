@@ -35,6 +35,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                       src={product.coverImageUrl}
                       alt={product.title}
                       fill
+                      sizes="80px"
                       className="object-cover"
                       quality={75}
                     />

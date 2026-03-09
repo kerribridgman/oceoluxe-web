@@ -145,7 +145,7 @@ export function SiteSearch({ isScrolled }: { isScrolled: boolean }) {
                       >
                         {result.coverImageUrl && (
                           <div className="w-10 h-10 rounded overflow-hidden flex-shrink-0 relative bg-[#f5f0ea]">
-                            <Image src={result.coverImageUrl} alt="" fill className="object-cover" />
+                            <Image src={result.coverImageUrl} alt="" fill sizes="40px" className="object-cover" />
                           </div>
                         )}
                         <div className="min-w-0 flex-1">
@@ -174,7 +174,7 @@ export function SiteSearch({ isScrolled }: { isScrolled: boolean }) {
                       >
                         {result.coverImageUrl && (
                           <div className="w-10 h-10 rounded overflow-hidden flex-shrink-0 relative bg-[#f5f0ea]">
-                            <Image src={result.coverImageUrl} alt="" fill className="object-cover" />
+                            <Image src={result.coverImageUrl} alt="" fill sizes="40px" className="object-cover" />
                           </div>
                         )}
                         <div className="min-w-0 flex-1">

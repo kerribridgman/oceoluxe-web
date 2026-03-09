@@ -104,6 +104,7 @@ export default async function ProductsPage() {
                                 src={product.coverImageUrl}
                                 alt={product.title}
                                 fill
+                                sizes="80px"
                                 className="object-cover"
                                 quality={75}
                               />
@@ -141,6 +142,7 @@ export default async function ProductsPage() {
                                 src={product.coverImageUrl}
                                 alt={product.title}
                                 fill
+                                sizes="80px"
                                 className="object-cover"
                                 quality={75}
                               />
@@ -183,6 +185,7 @@ export default async function ProductsPage() {
                                 src={product.coverImageUrl}
                                 alt={product.name}
                                 fill
+                                sizes="80px"
                                 className="object-cover"
                                 quality={75}
                               />

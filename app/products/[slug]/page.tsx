@@ -134,6 +134,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         src={dashboardProduct.coverImageUrl}
                         alt={dashboardProduct.name}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
                         priority
                       />

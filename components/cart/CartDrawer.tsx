@@ -95,6 +95,7 @@ export function CartDrawer() {
                           src={item.coverImageUrl}
                           alt={item.name}
                           fill
+                          sizes="80px"
                           className="object-cover"
                         />
                       ) : (

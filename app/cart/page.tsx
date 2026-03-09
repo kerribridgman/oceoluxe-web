@@ -84,6 +84,7 @@ export default function CartPage() {
                               src={item.coverImageUrl}
                               alt={item.name}
                               fill
+                              sizes="96px"
                               className="object-cover"
                             />
                           ) : (

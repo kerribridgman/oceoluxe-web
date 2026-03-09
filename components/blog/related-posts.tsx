@@ -38,6 +38,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
                       src={post.coverImageUrl}
                       alt={post.title}
                       fill
+                      sizes="80px"
                       className="object-cover"
                       quality={75}
                     />

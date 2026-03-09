@@ -106,6 +106,7 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
                     src={post.coverImageUrl}
                     alt={post.title}
                     fill
+                    sizes="80px"
                     className="object-cover"
                     quality={75}
                   />
