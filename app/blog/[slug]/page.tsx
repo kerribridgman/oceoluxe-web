@@ -15,12 +15,10 @@ import { TableOfContents } from '@/components/blog/table-of-contents';
 import { InlineEmailSignup } from '@/components/blog/inline-email-signup';
 import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 
-// Format date using UTC to avoid timezone shifts for date-only values
+// Format date using UTC to avoid timezone shifts (sync stores dates at noon Eastern = 5pm UTC)
 function formatBlogDate(date: Date | string, format: 'short' | 'long' = 'long'): string {
   const d = new Date(date);
-  // Add 12 hours to prevent timezone shift causing day change
-  const adjusted = new Date(d.getTime() + 12 * 60 * 60 * 1000);
-  return adjusted.toLocaleDateString('en-US', {
+  return d.toLocaleDateString('en-US', {
     month: format === 'short' ? 'short' : 'long',
     day: 'numeric',
     year: 'numeric',

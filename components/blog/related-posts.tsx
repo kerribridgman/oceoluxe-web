@@ -4,8 +4,7 @@ import type { BlogPost } from '@/lib/db/schema';
 
 function formatBlogDate(date: Date | string): string {
   const d = new Date(date);
-  const adjusted = new Date(d.getTime() + 12 * 60 * 60 * 1000);
-  return adjusted.toLocaleDateString('en-US', {
+  return d.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',

@@ -5,12 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
-// Format date using UTC to avoid timezone shifts for date-only values
+// Format date using UTC to avoid timezone shifts (sync stores dates at noon Eastern = 5pm UTC)
 function formatBlogDate(date: Date | string): string {
   const d = new Date(date);
-  // Add 12 hours to prevent timezone shift causing day change
-  const adjusted = new Date(d.getTime() + 12 * 60 * 60 * 1000);
-  return adjusted.toLocaleDateString('en-US', {
+  return d.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
