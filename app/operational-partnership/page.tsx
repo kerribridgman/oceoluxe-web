@@ -123,7 +123,7 @@ export default async function OperationalPartnershipPage() {
       </section>
 
       {/* Investment */}
-      <section className="section-spacing bg-white">
+      <section className="section-spacing bg-[#faf8f5]">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
             Investment
