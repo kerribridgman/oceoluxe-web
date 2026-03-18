@@ -20,17 +20,17 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 
 const offerings = [
   {
-    title: 'Strategic Production Alignment',
+    title: 'Production Risk Assessment',
     description:
-      'Focused, short-term engagements for brands that need clarity on a specific production challenge: sourcing strategy, factory evaluation, timeline restructuring, or launch readiness.',
+      'Focused, short-term engagements for brands preparing for a significant production order. Factory evaluation, costing audit, timeline pressure-testing, or pre-production risk review.',
     href: '/strategic-production-alignment',
-    cta: 'Explore Production Alignment',
+    cta: 'Explore Risk Assessment',
     flagship: false,
   },
   {
-    title: 'Private Operational Partnership',
+    title: 'Fractional Production Director',
     description:
-      'An embedded, ongoing engagement for fashion founders who need a strategic operator working alongside them. Production leadership, systems architecture, and operational clarity, delivered as a true partnership.',
+      'An embedded, ongoing engagement for fashion founders who need senior production leadership without a full-time hire. Production risk management, factory oversight, costing strategy, and margin protection — deployed inside your business.',
     href: '/operational-partnership',
     cta: 'Learn More',
     flagship: true,
@@ -58,10 +58,10 @@ export default async function WorkWithOceoLuxePage() {
             Work With Oceo Luxe
           </p>
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 animate-fade-in-up">
-            Strategic Operational Partnership for Fashion Founders
+            Production Risk Strategy for Fashion Founders
           </h1>
           <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            Oceo Luxe partners with fashion founders who are past the startup phase and ready for operational precision. Whether you need an embedded operator, strategic production guidance, or proven systems, we meet you where your brand is and build what it needs to scale.
+            Oceo Luxe works with fashion founders placing $50K–$500K production orders who need strategic production oversight. Whether you need an embedded production director, a focused risk assessment before a major order, or proven operational systems, we protect your production investment at every stage.
           </p>
         </div>
       </section>
@@ -71,7 +71,7 @@ export default async function WorkWithOceoLuxePage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
           <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;We meet you where your brand is and build what it needs to scale.&rdquo;
+            &ldquo;Your factory will say everything is under control. We make sure it actually is.&rdquo;
           </p>
         </div>
       </section>
@@ -131,18 +131,18 @@ export default async function WorkWithOceoLuxePage() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="font-script text-2xl italic text-[#CDA7B2] mb-4">Ready to begin?</p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
-            Apply for Partnership
+            Protect Your Next Production Order
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            Every engagement begins with an application. Share where your brand is, and we will determine together whether this is the right fit.
+            Every engagement starts with a conversation about your production risk. Share what you are manufacturing, the capital at stake, and where you need oversight.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/apply">
+            <Link href="/book">
               <Button
                 size="lg"
                 className="bg-white text-[#3B3937] hover:bg-white/90 h-12 px-8 text-base font-normal tracking-wide"
               >
-                Apply Now
+                Schedule a Consultation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

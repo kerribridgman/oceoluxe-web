@@ -84,17 +84,19 @@ export async function POST(request: NextRequest) {
     const safeAdditionalInfo = additionalInfo ? escapeHtml(additionalInfo) : '';
 
     // Insert application into database (raw values — DB is parameterized)
+    // phone, socialHandle, growthAreas, willingToInvest are NOT NULL in schema
+    // but optional for operational-partnership type — use empty string fallback
     await db.insert(applications).values({
       type,
       name,
       email,
-      phone: phone || null,
-      socialHandle: socialHandle || null,
+      phone: phone || '',
+      socialHandle: socialHandle || '',
       interest,
       experiences,
-      growthAreas: growthAreas || null,
+      growthAreas: growthAreas || '',
       obstacles,
-      willingToInvest: willingToInvest || null,
+      willingToInvest: willingToInvest || '',
       additionalInfo: additionalInfo || null,
       status: 'pending',
     });
@@ -106,7 +108,7 @@ export async function POST(request: NextRequest) {
         name,
         instagramHandle: socialHandle || null,
         productSlug: 'inquiry',
-        productName: 'Operational Partnership Inquiry',
+        productName: 'Production Consultation Inquiry',
         source: 'partnership-inquiry',
         status: 'one_on_one',
       });
@@ -114,11 +116,11 @@ export async function POST(request: NextRequest) {
       // Send admin notification
       await sendEmail({
         to: ADMIN_EMAIL,
-        subject: `New Partnership Application from ${safeName}`,
+        subject: `New Production Consultation Inquiry from ${safeName}`,
         html: `
           <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #3B3937;">
             <h1 style="color: #CDA7B2; font-weight: normal; border-bottom: 1px solid #CDA7B2; padding-bottom: 16px;">
-              New Partnership Application
+              New Production Consultation Inquiry
             </h1>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Contact Information</h2>
@@ -135,7 +137,7 @@ export async function POST(request: NextRequest) {
             <p>${safeWillingToInvest}</p>
             ` : ''}
 
-            <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Biggest Operational Challenge</h2>
+            <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Biggest Production Risk</h2>
             <p style="white-space: pre-wrap; background: #faf8f5; padding: 16px; border-radius: 8px;">${safeObstacles}</p>
 
             <h2 style="font-size: 18px; color: #3B3937; margin-top: 24px;">Why Oceo Luxe</h2>
@@ -165,26 +167,26 @@ export async function POST(request: NextRequest) {
             </p>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937;">
-              Thank you for your application. I have reviewed the details you shared about your brand and operations.
+              Thank you for sharing your production details. I have reviewed what you submitted about your brand and the challenge you are facing.
             </p>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937;">
-              <strong>If aligned, you will receive next steps to discuss partnership within 5 business days.</strong>
+              <strong>If aligned, you will receive next steps within 5 business days.</strong>
             </p>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937;">
-              In the meantime, you may find these <a href="https://oceoluxe.com/blog" style="color: #CDA7B2;">insights on fashion operations</a> relevant to where your brand is right now.
+              In the meantime, you may find these <a href="https://oceoluxe.com/blog" style="color: #CDA7B2;">insights on production strategy</a> relevant to where your brand is right now.
             </p>
 
             <p style="font-size: 16px; line-height: 1.7; color: #3B3937; margin-top: 32px;">
-              With clarity,<br/>
+              Best,<br/>
               <strong>Kerri</strong><br/>
               <span style="color: #967F71;">Oceo Luxe</span>
             </p>
 
             <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e5e5e5; text-align: center;">
               <p style="color: #967F71; font-size: 14px; font-style: italic;">
-                Structure does not limit creativity. It protects it.
+                Verify, then trust.
               </p>
               <div style="margin-top: 16px;">
                 <a href="https://www.instagram.com/oceoluxe" style="color: #967F71; text-decoration: none; margin: 0 8px;">Instagram</a>
@@ -283,7 +285,7 @@ export async function POST(request: NextRequest) {
 
             <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e5e5e5; text-align: center;">
               <p style="color: #967F71; font-size: 14px; font-style: italic;">
-                Structure does not limit creativity. It protects it.
+                Verify, then trust.
               </p>
               <div style="margin-top: 16px;">
                 <a href="https://www.instagram.com/oceoluxe" style="color: #967F71; text-decoration: none; margin: 0 8px;">Instagram</a>

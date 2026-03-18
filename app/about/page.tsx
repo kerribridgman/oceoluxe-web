@@ -37,10 +37,10 @@ export default async function AboutPage() {
                 Behind Oceo Luxe
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
-                Oceo Luxe was founded by Kerri Bridgman, a FIT-trained production manager with over a decade of experience in fashion production and supply chain leadership.
+                Oceo Luxe was founded by Kerri Bridgman, a FIT-trained production manager who has spent over a decade inside fashion production — managing factories, auditing costing, and catching the risks that cost brands real money.
               </p>
               <p className="text-sm text-[#967F71] font-light animate-fade-in-up">
-                FIT-trained Production Manager • 10+ Years in Fashion Production & Operations
+                FIT-trained Production Manager • 10+ Years Managing Factory Operations & Supply Chains
               </p>
               <div className="pt-2 animate-fade-in-up">
                 <Link href="/work-with-oceo-luxe">
@@ -93,20 +93,20 @@ export default async function AboutPage() {
             </div>
             <div className="lg:col-span-3">
               <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-                Production Leadership, Not Theory
+                Production Experience, Not Theory
               </h2>
               <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
                 <p>
-                  Before Oceo Luxe, Kerri spent years inside the fashion industry managing production runs, coordinating with factories, building supplier relationships, and solving the operational problems that most founders face alone.
+                  Before Oceo Luxe, Kerri spent years inside fashion companies managing production at scale — cutting over $10 million in orders in a single season, tracking five concurrent seasons, running four production lines while owning all buying and purchasing across each one. She has been the person negotiating with factories, auditing costing structures, and solving the production problems that most founders do not see until they become expensive.
                 </p>
                 <p>
-                  That experience taught her something that most consulting frameworks miss: operational excellence in fashion is not about templates or theory. It is about understanding how production actually works. The timelines, the relationships, the decisions that compound. And building systems around that reality.
+                  That experience taught her something that most consulting frameworks miss: production risk in fashion is not about checklists or templates. It is about understanding how factories actually operate — not how they say they operate. Where costs get hidden. Where timelines slip. Where communication gaps turn into five-figure problems.
                 </p>
                 <p>
-                  Kerri has worked with brands ranging from emerging independent labels to established luxury houses. Her approach draws from the same operational rigor found at the highest levels of the industry, delivered at a scale that works for growing brands.
+                  Kerri has managed production for brands ranging from independent labels to established houses — and she has been the cross-departmental accountability partner when production stalled because other teams were not getting answers from the people they should have been. She has seen a company spend $35,000 on emergency air freight because factory paperwork delays were not caught. She has helped scale an account 10x in one year by watching the operational efficiency of a single team and finding what everyone else missed.
                 </p>
                 <p className="text-[#3B3937]">
-                  Oceo Luxe exists because fashion founders deserve an operational partner who has done the work. Not someone who has only studied it.
+                  What sets her apart is the approach: systematic frameworks over one-off fixes, knowledge transfer over dependency, and a steady presence in the high-pressure moments where most production relationships fall apart. Oceo Luxe exists because fashion founders deserve a production strategist who has been inside the factories. Not someone who has only studied them.
                 </p>
               </div>
             </div>
@@ -137,7 +137,7 @@ export default async function AboutPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
           <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;Operational excellence in fashion is not about templates. It is about understanding how production actually works.&rdquo;
+            &ldquo;Production risk management is not about distrust. It is about understanding how factories actually operate.&rdquo;
           </p>
         </div>
       </section>
@@ -146,20 +146,20 @@ export default async function AboutPage() {
       <section className="section-spacing bg-[#faf8f5]">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            Operational Philosophy
+            Production Philosophy
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              <span className="text-[#3B3937]">Structure protects creativity.</span> The best creative work happens when the operational foundation is solid. Systems are not constraints. They are the infrastructure that gives founders the freedom to focus on vision.
+              <span className="text-[#3B3937]">Verify, then trust.</span> Factories are not adversaries, but they are businesses with their own margins to protect. The best production relationships are built on verification, not blind trust. When you understand how factories actually operate, you negotiate better, plan better, and protect your margins.
             </p>
             <p>
-              <span className="text-[#3B3937]">Precision over speed.</span> Rushing production creates problems that compound. Every decision, every timeline, every supplier relationship is built with intention and accuracy.
+              <span className="text-[#3B3937]">Catch it early or pay for it later.</span> Every production mistake has a cost curve. Caught at the costing stage, it costs nothing. Caught after delivery, it costs thousands. The entire value of production oversight is in the timing.
             </p>
             <p>
-              <span className="text-[#3B3937]">Partnership, not dependency.</span> The goal is not to create reliance on external support. It is to build internal capacity: systems your team can operate, processes that scale, and clarity that persists after the engagement ends.
+              <span className="text-[#3B3937]">Protect the investment.</span> A production order is not a purchase — it is a capital deployment. It deserves the same level of strategic oversight as any other significant business investment.
             </p>
             <p>
-              <span className="text-[#3B3937]">Calm authority.</span> Operational leadership does not require urgency or pressure. It requires confidence, clear communication, and the experience to know what actually matters.
+              <span className="text-[#3B3937]">Build internal capacity.</span> For focused engagements, the goal is to send you back with the knowledge to make stronger production decisions on your own. For ongoing partnerships, the goal is deeper — your team&apos;s production intelligence compounds with every season, and your operation gets sharper whether we are in the room or not.
             </p>
           </div>
         </div>
@@ -169,10 +169,10 @@ export default async function AboutPage() {
       <section className="bg-[#3B3937] py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="font-script text-3xl lg:text-4xl italic text-white/90 leading-relaxed mb-6">
-            &ldquo;Structure protects creativity.&rdquo;
+            &ldquo;Verify, then trust.&rdquo;
           </p>
           <p className="text-lg text-white/70 font-light leading-relaxed max-w-2xl mx-auto">
-            The best creative work happens when the operational foundation is solid. Systems are not constraints. They are the infrastructure that gives founders the freedom to focus on vision.
+            The best production outcomes happen when someone who understands factory operations is reviewing every detail. Not to micromanage, but to protect the investment before problems surface.
           </p>
         </div>
       </section>
@@ -188,19 +188,19 @@ export default async function AboutPage() {
               <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>Fashion founders who are generating revenue but operating without dedicated operations leadership</span>
+                  <span>Fashion founders placing $50K–$500K production orders who need expert production oversight</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>Brands that have outgrown piecemeal solutions and need integrated operational strategy</span>
+                  <span>Brands that have been burned by factory miscommunication and refuse to let it happen again</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>Founders who value precision and are ready to invest in building systems that scale</span>
+                  <span>Founders who understand that production risk management is a strategic investment, not an expense</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>Brands committed to operational excellence as a competitive advantage</span>
+                  <span>Brands committed to protecting their margins through production-level oversight and factory accountability</span>
                 </li>
               </ul>
               <div className="flex flex-col sm:flex-row gap-4 mt-10">
@@ -213,13 +213,13 @@ export default async function AboutPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/apply">
+                <Link href="/book">
                   <Button
                     variant="outline"
                     size="lg"
                     className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide w-full sm:w-auto"
                   >
-                    Apply for Partnership
+                    Schedule a Consultation
                   </Button>
                 </Link>
               </div>
@@ -249,18 +249,18 @@ export default async function AboutPage() {
             Next step
           </p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
-            Ready to Work Together?
+            Protect Your Next Production Order
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light">
-            Start with an application or book a call to explore alignment.
+            Before you commit capital, make sure someone who has been inside factory operations is reviewing the details.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/apply">
+            <Link href="/book">
               <Button
                 size="lg"
                 className="bg-white text-[#3B3937] hover:bg-white/90 h-12 px-8 text-base font-normal tracking-wide"
               >
-                Apply for Partnership
+                Schedule a Consultation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

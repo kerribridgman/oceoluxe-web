@@ -7,8 +7,8 @@ import { CartIcon } from '@/components/cart';
 import { SiteSearch } from '@/components/search/site-search';
 
 const serviceSubLinks = [
-  { name: 'Operational Partnership', href: '/operational-partnership' },
-  { name: 'Strategic Production Alignment', href: '/strategic-production-alignment' },
+  { name: 'Fractional Production Director', href: '/operational-partnership' },
+  { name: 'Production Risk Assessment', href: '/strategic-production-alignment' },
   { name: 'Studio Systems', href: '/studio-systems' },
 ];
 
@@ -120,16 +120,16 @@ export function MarketingHeader() {
             {/* Cart - only visible when items added */}
             <CartIcon isScrolled={isScrolled} />
 
-            {/* Apply CTA Button */}
+            {/* Book CTA Button */}
             <Link
-              href="/apply"
+              href="/book"
               className={`inline-flex items-center px-5 py-2 text-sm font-medium tracking-wide rounded-full transition-all duration-300 ${
                 isScrolled
                   ? 'bg-white text-[#3B3937] hover:bg-white/90'
                   : 'bg-[#3B3937] text-white hover:bg-[#4A4745]'
               }`}
             >
-              Apply
+              Book a Call
             </Link>
           </div>
 
@@ -197,11 +197,11 @@ export function MarketingHeader() {
               </Link>
             ))}
             <Link
-              href="/apply"
+              href="/book"
               className="block text-center bg-[#3B3937] text-white font-medium py-3 px-4 mx-4 mt-2 rounded-full text-sm tracking-wide"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Apply
+              Book a Call
             </Link>
           </div>
         )}

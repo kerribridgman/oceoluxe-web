@@ -79,7 +79,7 @@ export default function ApplyPage() {
             Application Received
           </h1>
           <p className="text-lg text-[#967F71] font-light mb-8 max-w-lg mx-auto leading-relaxed">
-            Thank you for your application. If aligned, you will receive next steps to discuss partnership.
+            Thank you for sharing your production details. If aligned, you will receive next steps to discuss how we can protect your next order.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
@@ -107,13 +107,13 @@ export default function ApplyPage() {
         {/* Header */}
         <div className="mb-12">
           <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">
-            Partnership Application
+            Production Consultation
           </p>
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6">
-            Apply to Work With Oceo Luxe
+            Tell Us About Your Production Challenge
           </h1>
           <p className="text-lg text-[#967F71] font-light leading-relaxed">
-            Every engagement begins with understanding where your brand is and where it needs to go. Complete this application so we can determine alignment.
+            Every engagement begins with understanding what you are manufacturing, the capital at stake, and where you need oversight. Share the details below so we can determine fit.
           </p>
         </div>
 
@@ -180,7 +180,7 @@ export default function ApplyPage() {
               Current Stage *
             </Label>
             <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
-              Where is your brand right now? Tell us about your products, production setup, and current operations.
+              Where is your brand right now? Tell us about your products, production volume, and factory relationships.
             </p>
             <Textarea
               id="interest"
@@ -215,10 +215,10 @@ export default function ApplyPage() {
 
           <div>
             <Label htmlFor="obstacles" className="text-base font-medium text-[#3B3937]">
-              Biggest Operational Challenge *
+              Biggest Production Risk *
             </Label>
             <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
-              What is the primary operational issue you need resolved?
+              What is the primary production challenge or risk you need addressed?
             </p>
             <Textarea
               id="obstacles"
@@ -227,7 +227,7 @@ export default function ApplyPage() {
               required
               rows={4}
               className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
-              placeholder="Managing multiple production timelines, supplier communication gaps..."
+              placeholder="Factory costing feels off, timeline keeps slipping, no one reviewing quality checkpoints..."
             />
           </div>
 
@@ -236,7 +236,7 @@ export default function ApplyPage() {
               Why Oceo Luxe *
             </Label>
             <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
-              What drew you to Oceo Luxe, and what are you hoping to achieve through this partnership?
+              What drew you to Oceo Luxe, and what outcome would make this engagement worth it?
             </p>
             <Textarea
               id="experiences"
@@ -245,7 +245,7 @@ export default function ApplyPage() {
               required
               rows={4}
               className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
-              placeholder="Looking for a strategic partner who understands production at a high level..."
+              placeholder="Need someone who can verify our factory is actually delivering what they promised..."
             />
           </div>
 

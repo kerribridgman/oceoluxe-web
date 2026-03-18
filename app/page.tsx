@@ -24,18 +24,18 @@ export default async function HomePage() {
                 Structure as Strategy
               </p>
               <h1 className="font-serif-display text-4xl lg:text-[42px] font-normal text-[#3B3937] leading-[1.15] tracking-tight animate-fade-in-up">
-                Operational Partnership for Visionary Fashion Founders
+                Production Risk Strategy for Fashion Founders
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
-                You built the brand. Now build the infrastructure it deserves. Oceo Luxe provides strategic operational partnership rooted in real-world production leadership, so you can scale with precision, not pressure.
+                Your next production order is a six-figure decision. One missed deadline, one costing error, one factory miscommunication can cost tens of thousands. Oceo Luxe provides embedded production strategy so you protect your margins before problems start.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-2 animate-fade-in-up">
-                <Link href="/apply">
+                <Link href="/book">
                   <Button
                     size="lg"
                     className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
-                    Apply for Partnership
+                    Schedule a Consultation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -45,7 +45,7 @@ export default async function HomePage() {
                     size="lg"
                     className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
                   >
-                    Explore Services
+                    How It Works
                   </Button>
                 </Link>
               </div>
@@ -54,7 +54,7 @@ export default async function HomePage() {
               <div className="aspect-[4/3] overflow-hidden relative z-10 rounded-lg">
                 <Image
                   src="/images/hero-systems.jpeg"
-                  alt="Fashion production systems and operational clarity"
+                  alt="Fashion production strategy and risk management"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover rounded-lg"
@@ -74,17 +74,17 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto px-6">
           <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">The reality</p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            Creative Excellence Requires Operational Precision
+            Factories Will Tell You Everything Is Under Control. Until It Costs Them Money.
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              Most fashion brands are not held back by a lack of creativity. They are held back by systems that cannot keep up with their vision. Production timelines slip, supplier communication fragments, and founders spend more time managing chaos than designing.
+              Your factory will say they have everything handled. And they mean it — until the mistake costs the factory more time or money than they are willing to absorb. At that point, your brand absorbs the cost. A costing error that was not caught early. A timeline that slipped because nobody was watching the paperwork. A quality issue that surfaces after delivery when it is ten times more expensive to fix.
             </p>
             <p>
-              The cost is not just financial. It is creative. When operations consume your attention, the work that made your brand exceptional takes a back seat.
+              One company spent $35,000 flying product from Italy to New York in a single day because factory paperwork delays were not caught early enough. That is not an unusual story. It is the kind of production risk that brands face every season when nobody is watching the details at the factory level.
             </p>
             <p className="text-[#3B3937]">
-              The solution is not more hustle. It is operational infrastructure designed specifically for how fashion brands actually work.
+              The solution is not more trust. It is strategic production oversight from someone who understands how factories actually operate.
             </p>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
           <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;Structure is not a limitation. It is the foundation that lets creativity scale.&rdquo;
+            &ldquo;The most expensive production mistakes are the ones nobody saw coming. The second most expensive are the ones someone saw but did not escalate.&rdquo;
           </p>
         </div>
       </section>
@@ -105,14 +105,14 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto px-6">
           <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">The approach</p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            Your Strategic Operator
+            Your Fractional Production Director
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              Oceo Luxe operates as your embedded operational partner. Not a consultant who hands you a PDF and disappears. This is production leadership integrated into your business: managing timelines, building systems, aligning your team, and creating the clarity that allows you to focus on what you do best.
+              Oceo Luxe operates as your embedded production strategist. Not a consultant who reviews your tech packs and disappears. This is production risk management integrated into your business: auditing factory communication, catching costing errors before they compound, pressure-testing timelines, and ensuring your production investment is protected at every stage.
             </p>
             <p>
-              With over a decade of experience in fashion production and supply chain management, Kerri Bridgman brings the same operational rigor found in luxury houses, delivered at a scale that works for independent and growing brands.
+              Kerri Bridgman has spent over a decade inside fashion production — on factory floors, in supply chain operations, in the rooms where production decisions get made under pressure. She has cut over $10 million in production orders in a single season and tracked five seasons simultaneously. She brings the rigor of established houses, a systematic approach to building production frameworks that outlast any single season, and the composure to hold steady when factories start missing deadlines.
             </p>
           </div>
         </div>
@@ -123,10 +123,10 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto px-6">
           <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">What changes</p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            Clarity. Timelines. Confidence.
+            Protection. Precision. Profit.
           </h2>
           <p className="text-lg text-[#967F71] font-light leading-relaxed">
-            Founders who work with Oceo Luxe gain production calendars that hold, supplier relationships that function, pricing structures they trust, and the operational confidence to make decisions without second-guessing. The work is not theoretical. It is built inside your brand, for your brand, and alongside you.
+            Founders who work with Oceo Luxe gain production oversight that catches problems before they become expensive, costing structures that protect real margins, and the strategic confidence to commit to six-figure production orders knowing the risk has been managed. The work is not theoretical. It is built from real production experience, deployed inside your brand. And the frameworks built during the engagement — the costing structures, the factory communication protocols, the production systems — those stay with your brand long after the season ends.
           </p>
         </div>
       </section>
@@ -138,28 +138,28 @@ export default async function HomePage() {
             <div>
               <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">Alignment</p>
               <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-                Designed for Founders Ready to Operate at a Higher Level
+                Built for Founders With Production at Stake
               </h2>
               <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>You are producing and selling, but your operations are reactive instead of strategic</span>
+                  <span>You are placing production orders between $50K and $500K and cannot afford costly mistakes</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>You are managing production yourself and need someone who understands the work at a high level</span>
+                  <span>You are trusting factories with significant capital but have no production expert reviewing the details</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>You want to scale without sacrificing the quality or integrity of your brand</span>
+                  <span>You need someone who understands how factories actually operate — not how they say they operate</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>You value precision, clear communication, and long-term operational excellence</span>
+                  <span>You want strategic oversight on costing, timelines, and supplier communication before committing capital</span>
                 </li>
               </ul>
               <p className="text-[#3B3937] mt-10 text-lg font-light">
-                This is not entry-level support. This is partnership for brands that are ready.
+                This is not general consulting. This is production risk management for brands with real money on the line.
               </p>
             </div>
             <div className="hidden lg:block">
@@ -197,7 +197,7 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="font-script text-2xl lg:text-3xl italic text-[#CDA7B2] mb-4">The belief</p>
           <h3 className="font-serif-display text-2xl lg:text-3xl font-normal text-white tracking-tight">
-            At Oceo Luxe, we believe structure is a form of support. Not restriction.
+            At Oceo Luxe, we believe the most expensive production mistake is the one you did not know to look for.
           </h3>
         </div>
       </section>
@@ -214,10 +214,10 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-[#faf8f5] rounded-xl p-8 border border-[#EDEBE8] hover:shadow-lg transition-shadow">
               <h3 className="font-serif-display text-xl font-normal text-[#3B3937] mb-3">
-                Operational Partnership
+                Fractional Production Director
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed mb-6">
-                Embedded, ongoing operational leadership for brands that need a strategic partner inside the business.
+                Embedded production leadership for brands placing $50K–$500K production orders who need senior strategic oversight.
               </p>
               <Link href="/operational-partnership" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
                 Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
@@ -239,7 +239,7 @@ export default async function HomePage() {
                 Blog
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed mb-6">
-                Insights on fashion operations, production clarity, and building brands designed for longevity.
+                Insights on production strategy, factory management, and protecting margins in fashion manufacturing.
               </p>
               <Link href="/blog" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
                 Read <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
@@ -256,18 +256,18 @@ export default async function HomePage() {
             The next step
           </p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
-            Build with Structure. Scale with Calm.
+            Protect Your Production Investment.
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed max-w-2xl mx-auto">
-            Your brand deserves operational infrastructure that matches your creative vision. Start with an application or a conversation.
+            Before you commit capital to your next production run, make sure someone who understands factory operations is reviewing the details. Start with a conversation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/apply">
+            <Link href="/book">
               <Button
                 size="lg"
                 className="bg-white text-[#3B3937] hover:bg-white/90 h-12 px-8 text-base font-normal tracking-wide"
               >
-                Apply for Partnership
+                Schedule a Consultation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

@@ -21,7 +21,7 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 
 const serviceJsonLd = getServiceJsonLd([{
   name: 'Strategic Production Alignment',
-  description: 'Focused, short-term engagements for fashion brands that need clarity on a specific production challenge: sourcing strategy, factory evaluation, timeline restructuring, or launch readiness.',
+  description: 'Focused, short-term engagements for fashion brands preparing for a significant production order. Factory vetting, costing audit, timeline pressure-testing, or pre-production risk review.',
   url: `${baseUrl}/strategic-production-alignment`,
 }]);
 
@@ -39,10 +39,10 @@ export default async function StrategicProductionAlignmentPage() {
             Focused Engagement
           </p>
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 animate-fade-in-up">
-            Strategic Production Alignment
+            Production Risk Assessment
           </h1>
           <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            A focused, short-term engagement for fashion founders who need clarity on a specific production challenge. Sourcing strategy, factory evaluation, timeline restructuring, or launch readiness. Targeted operational support designed to move your brand forward with precision.
+            A focused engagement for fashion founders preparing for a significant production order. Factory vetting, costing audit, timeline pressure-testing, or pre-production risk review. Strategic production oversight designed to protect your investment before capital is committed.
           </p>
         </div>
       </section>
@@ -55,16 +55,16 @@ export default async function StrategicProductionAlignmentPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              <span className="text-[#3B3937]">Sourcing strategy.</span> Supplier evaluation, vendor alignment, and sourcing clarity, so you can move forward with confidence in your production partners.
+              <span className="text-[#3B3937]">Factory vetting.</span> Supplier evaluation, production partner assessment, and capacity review. Verifying that your factory can actually deliver what they promise — before your capital is on the line.
             </p>
             <p>
-              <span className="text-[#3B3937]">Factory evaluation.</span> Production partner assessment, capacity and quality review. Ensuring your factory relationships are set up for long-term success.
+              <span className="text-[#3B3937]">Costing audit.</span> Full production costing review that exposes hidden expenses and validates factory quotes. Ensuring your margins are real — not assumptions that erode once invoices arrive.
             </p>
             <p>
-              <span className="text-[#3B3937]">Timeline restructuring.</span> Production calendar audit and milestone clarity. Transforming chaotic timelines into structured, actionable plans.
+              <span className="text-[#3B3937]">Timeline pressure-testing.</span> Production calendar audit, milestone sequencing, and delivery risk identification. Catching the timeline failures that delay launches and cost brands money.
             </p>
             <p>
-              <span className="text-[#3B3937]">Launch readiness.</span> Pre-launch operational review and workflow sequencing. Every piece in place before you go to market.
+              <span className="text-[#3B3937]">Pre-production risk review.</span> A comprehensive assessment of your production plan before capital is committed. Every risk identified, every assumption tested, every detail verified.
             </p>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default async function StrategicProductionAlignmentPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
           <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;Clarity on a single production challenge can reshape how your entire brand operates.&rdquo;
+            &ldquo;One unverified assumption in your production plan can cost more than the entire order is worth.&rdquo;
           </p>
         </div>
       </section>
@@ -90,9 +90,9 @@ export default async function StrategicProductionAlignmentPage() {
             <div className="flex items-start gap-6">
               <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">01</span>
               <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Apply</h3>
+                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Share your production challenge</h3>
                 <p className="text-[#967F71] font-light leading-relaxed">
-                  Share where your brand is and the specific production challenge you are facing. This helps determine whether a focused engagement is the right fit.
+                  Tell us what you are manufacturing, the capital at stake, and the specific production risk you need assessed. This helps determine whether a focused engagement is the right fit.
                 </p>
               </div>
             </div>
@@ -108,9 +108,9 @@ export default async function StrategicProductionAlignmentPage() {
             <div className="flex items-start gap-6">
               <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">03</span>
               <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Focused engagement</h3>
+                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Risk assessment delivered</h3>
                 <p className="text-[#967F71] font-light leading-relaxed">
-                  Targeted operational support delivered with precision. You receive clear recommendations, actionable next steps, and the clarity to move forward.
+                  Targeted production risk analysis delivered with precision. You receive a detailed assessment, specific recommendations, and a verified production plan you can trust.
                 </p>
               </div>
             </div>
@@ -129,11 +129,11 @@ export default async function StrategicProductionAlignmentPage() {
               This engagement is scoped and project-based. Investment is discussed during the alignment call and depends on the specific challenge, depth of review, and deliverables required.
             </p>
             <p className="text-[#3B3937]">
-              Every engagement is tailored to deliver maximum clarity on the challenge at hand.
+              Every engagement is designed to protect your production investment before capital is committed. You walk away with the assessment, the framework, and the production knowledge to make stronger decisions going forward.
             </p>
             <blockquote className="border-l-2 border-[#CDA7B2] pl-6 mt-8">
               <p className="font-script text-xl lg:text-2xl italic text-[#3B3937]/80 leading-relaxed">
-                &ldquo;One focused engagement. One clear challenge. Total clarity on the path forward.&rdquo;
+                &ldquo;One focused engagement. One production risk. Total confidence in the path forward.&rdquo;
               </p>
             </blockquote>
           </div>
@@ -145,10 +145,10 @@ export default async function StrategicProductionAlignmentPage() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="font-script text-2xl italic text-[#CDA7B2] mb-4">Next step</p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
-            Get Clarity on Your Production Challenge
+            Protect Your Next Production Order
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            Share where your brand is and the challenge you are facing. If aligned, we will scope a focused engagement together.
+            Share what you are manufacturing, the capital at stake, and where you need oversight. If aligned, we will scope a focused risk assessment together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book">
@@ -156,17 +156,17 @@ export default async function StrategicProductionAlignmentPage() {
                 size="lg"
                 className="bg-white text-[#3B3937] hover:bg-white/90 h-12 px-8 text-base font-normal tracking-wide"
               >
-                Book a Call
+                Schedule a Consultation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/apply">
+            <Link href="/book">
               <Button
                 variant="outline"
                 size="lg"
                 className="border-white/30 text-white hover:bg-white/10 h-12 px-8 text-base font-normal tracking-wide"
               >
-                Apply
+                Book a Call
               </Button>
             </Link>
           </div>

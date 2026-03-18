@@ -37,7 +37,7 @@ export default async function BlogPage() {
             Journal
           </p>
           <h1 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] leading-[1.25] tracking-tight mb-6 animate-fade-in-up">
-            Insights on fashion operations, production clarity, and building brands designed for longevity.
+            Insights on fashion production strategy, factory management, and protecting your brand&apos;s bottom line.
           </h1>
         </div>
       </section>
@@ -59,10 +59,10 @@ export default async function BlogPage() {
                 Work Together
               </p>
               <h3 className="font-serif-display text-2xl font-normal text-[#3B3937] tracking-tight">
-                Ready for Operational Partnership?
+                Protect Your Production Investment
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed">
-                Strategic operational support for fashion brands ready to scale with precision, clarity, and calm.
+                Production risk strategy for fashion founders placing $50K–$500K orders who need senior production oversight.
               </p>
               <Link href="/work-with-oceo-luxe">
                 <Button

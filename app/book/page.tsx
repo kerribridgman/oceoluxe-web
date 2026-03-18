@@ -12,9 +12,9 @@ export async function generateMetadata() {
 const calMeetingTypes = [
   {
     slug: '15min',
-    title: 'Quick Chat',
+    title: 'Initial Consultation',
     subtitle: '15 minutes',
-    description: 'Perfect for a quick question or to see if we\'re a good fit to work together.',
+    description: 'A brief conversation to discuss your production challenge and determine if we\'re the right fit.',
     icon: MessageCircle,
     color: '#CDA7B2',
     hoverColor: '#b8929d',
@@ -23,7 +23,7 @@ const calMeetingTypes = [
     slug: '30min',
     title: 'Discovery Call',
     subtitle: '30 minutes',
-    description: 'Let\'s dive deeper into your goals and explore how I can support your journey.',
+    description: 'A deeper conversation about your production risk, factory relationships, and how we can protect your next order.',
     icon: Sparkles,
     color: '#CDA7B2',
     hoverColor: '#b8929d',
@@ -64,8 +64,8 @@ export default function BookPage() {
               Let's Connect
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
-              Ready to bring clarity to your creative business? Choose the conversation
-              that feels right for where you are right now.
+              Ready to protect your next production investment? Choose the conversation
+              that fits where your brand is right now.
             </p>
           </div>
 
@@ -144,7 +144,7 @@ export default function BookPage() {
           {hasCalCom && (
             <div className="text-center mt-12">
               <p className="text-sm text-gray-500">
-                Not sure which to choose? Start with a Quick Chat. No pressure, just conversation.
+                Not sure which to choose? Start with an Initial Consultation to discuss your production challenge.
               </p>
             </div>
           )}

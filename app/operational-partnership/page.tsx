@@ -21,7 +21,7 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 
 const serviceJsonLd = getServiceJsonLd([{
   name: 'Operational Partnership',
-  description: 'Embedded operational partnership for growing fashion brands. Production leadership, systems architecture, strategic advisory, and team alignment.',
+  description: 'Embedded production leadership for fashion brands placing significant production orders. Factory oversight, costing audits, timeline pressure-testing, and margin protection.',
   url: `${baseUrl}/operational-partnership`,
 }]);
 
@@ -39,10 +39,10 @@ export default async function OperationalPartnershipPage() {
             Flagship Engagement
           </p>
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 animate-fade-in-up">
-            Embedded Operational Partnership for Growing Fashion Brands
+            Fractional Production Director for Fashion Brands
           </h1>
           <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            This is not consulting from the sidelines. This is an embedded operational partnership. A strategic operator working inside your brand, building the systems, managing the timelines, and creating the clarity your team needs to execute at a higher level.
+            This is not consulting from the sidelines. This is embedded production leadership. A senior production strategist working inside your brand — managing factory relationships, auditing costing, pressure-testing timelines, and catching the risks that cost brands tens of thousands of dollars every season. Kerri has managed four concurrent production lines while owning all buying and purchasing for those lines. She has helped scale an account 10x in a single year by identifying operational inefficiencies that everyone else walked past.
           </p>
         </div>
       </section>
@@ -55,16 +55,16 @@ export default async function OperationalPartnershipPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              <span className="text-[#3B3937]">Production leadership.</span> Oversight of your production calendar, sampling timelines, and factory relationships. Nothing falls through the cracks. Every deadline is met with precision.
+              <span className="text-[#3B3937]">Factory oversight.</span> Direct management of factory communication, production milestones, and quality checkpoints. When other departments are not getting answers from the people they should be, this engagement bridges that gap. Every detail reviewed before it becomes a problem — not after it becomes an expense.
             </p>
             <p>
-              <span className="text-[#3B3937]">Systems architecture.</span> Custom operational systems built for your brand: supplier management, costing frameworks, launch workflows, and communication protocols that scale with you.
+              <span className="text-[#3B3937]">Costing and margin protection.</span> Full production costing audits that expose hidden expenses, validate factory quotes, and ensure your margins are real — not assumptions that erode once invoices arrive.
             </p>
             <p>
-              <span className="text-[#3B3937]">Strategic advisory.</span> Ongoing decision support on sourcing, pricing, production sequencing, and growth strategy. Rooted in over a decade of real-world production experience.
+              <span className="text-[#3B3937]">Production risk management.</span> Timeline pressure-testing, supplier vetting, and pre-production reviews. Identifying the specific risks in your production plan before capital is committed.
             </p>
             <p>
-              <span className="text-[#3B3937]">Team alignment.</span> Clear documentation, process handoffs, and training so your internal team can operate with confidence. Whether you have a team of two or twenty.
+              <span className="text-[#3B3937]">Strategic advisory.</span> Ongoing decision support on sourcing, pricing architecture, production sequencing, and factory negotiation. Not reactive problem-solving — a systematic production intelligence that deepens with every season your brand grows.
             </p>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default async function OperationalPartnershipPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
           <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;This is not consulting from the sidelines. This is operational leadership, embedded in your brand.&rdquo;
+            &ldquo;Factories will tell you everything is under control. We verify that it actually is — before your capital is on the line.&rdquo;
           </p>
         </div>
       </section>
@@ -89,23 +89,23 @@ export default async function OperationalPartnershipPage() {
           <ul className="space-y-4 text-lg text-[#967F71] font-light">
             <li className="flex items-start gap-4">
               <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Fashion founders generating revenue and producing collections, but operating without a dedicated operations lead</span>
+              <span>Fashion founders placing production orders between $50K and $500K who need expert production oversight</span>
             </li>
             <li className="flex items-start gap-4">
               <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Brands managing multiple suppliers, SKUs, or production cycles who need someone to hold the operational overview</span>
+              <span>Brands managing multiple factories and complex supply chains without a senior production person reviewing the details</span>
             </li>
             <li className="flex items-start gap-4">
               <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Founders who are ready to step back from day-to-day production management and focus on creative direction and growth</span>
+              <span>Founders who have been burned by factory miscommunication, costing surprises, or timeline failures and refuse to let it happen again</span>
             </li>
             <li className="flex items-start gap-4">
               <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Brands that value precision, clear communication, and long-term operational excellence over quick fixes</span>
+              <span>Brands that understand production risk management is not optional — it is the difference between profit and loss</span>
             </li>
           </ul>
           <p className="text-[#3B3937] mt-10 text-lg font-light">
-            This is not entry-level support. This is a partnership built for brands operating at a level where operational clarity is no longer optional. It is essential.
+            This is not general consulting. This is embedded production leadership for brands with significant capital at stake. The longer we work together, the sharper your production operation becomes.
           </p>
         </div>
       </section>
@@ -133,11 +133,11 @@ export default async function OperationalPartnershipPage() {
               This engagement is application-based and scoped to your brand's specific needs. Investment is discussed during the alignment call and depends on the depth, duration, and complexity of the partnership.
             </p>
             <p className="text-[#3B3937]">
-              Ready to bring real clarity to how your brand operates? It starts with an application.
+              Ready to protect your next production investment? It starts with a conversation about your risk.
             </p>
             <blockquote className="border-l-2 border-[#CDA7B2] pl-6 mt-8">
               <p className="font-script text-xl lg:text-2xl italic text-[#3B3937]/80 leading-relaxed">
-                &ldquo;If your brand has outgrown guesswork, this is where precision begins.&rdquo;
+                &ldquo;If your brand has outgrown trusting factories without verification, this is where protection begins.&rdquo;
               </p>
             </blockquote>
           </div>
@@ -149,18 +149,18 @@ export default async function OperationalPartnershipPage() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="font-script text-2xl italic text-[#CDA7B2] mb-4">Next step</p>
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
-            Apply to Work Together
+            Protect Your Production Investment
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            Share where your brand is and what you need. If aligned, you will receive next steps to discuss partnership.
+            Share what you are manufacturing, the capital at stake, and where you need oversight. If aligned, you will receive a production risk assessment framework.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/apply">
+            <Link href="/book">
               <Button
                 size="lg"
                 className="bg-white text-[#3B3937] hover:bg-white/90 h-12 px-8 text-base font-normal tracking-wide"
               >
-                Apply Now
+                Schedule a Consultation
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
