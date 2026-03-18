@@ -236,13 +236,13 @@ export default async function HomePage() {
             </div>
             <div className="bg-[#faf8f5] rounded-xl p-8 border border-[#EDEBE8] hover:shadow-lg transition-shadow">
               <h3 className="font-serif-display text-xl font-normal text-[#3B3937] mb-3">
-                Blog
+                Production Risk Assessment
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed mb-6">
-                Insights on production strategy, factory management, and protecting margins in fashion manufacturing.
+                A focused engagement to vet your factory, audit your costing, or pressure-test your timeline before capital is committed.
               </p>
-              <Link href="/blog" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
-                Read <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              <Link href="/strategic-production-alignment" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
+                Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Link>
             </div>
           </div>
