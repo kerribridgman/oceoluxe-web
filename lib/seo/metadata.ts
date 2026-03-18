@@ -65,19 +65,19 @@ function getDefaultMetadata(page: string): Metadata {
   const defaults: Record<string, Metadata> = {
     home: {
       title: { absolute: 'Oceo Luxe | Operational Partnership for Fashion Founders' },
-      description: 'Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm. Production leadership rooted in real-world experience.',
+      description: 'Production leadership for fashion founders. Risk assessment, fractional production director, and operational systems built from real experience.',
       keywords: ['fashion operational partnership', 'fashion production consulting', 'fashion brand operations', 'production leadership'],
       alternates: { canonical: baseUrl },
       openGraph: {
         title: 'Oceo Luxe | Operational Partnership for Fashion Founders',
-        description: 'Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm. Production leadership rooted in real-world experience.',
+        description: 'Production leadership for fashion founders. Risk assessment, fractional production director, and operational systems built from real experience.',
         type: 'website',
         url: baseUrl,
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Oceo Luxe | Operational Partnership for Fashion Founders',
-        description: 'Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm. Production leadership rooted in real-world experience.',
+        description: 'Production leadership for fashion founders. Risk assessment, fractional production director, and operational systems built from real experience.',
       },
     },
     'work-with-oceo-luxe': {

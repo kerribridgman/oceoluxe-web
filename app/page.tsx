@@ -220,7 +220,7 @@ export default async function HomePage() {
                 Embedded production leadership for brands placing $50K–$500K production orders who need senior strategic oversight.
               </p>
               <Link href="/operational-partnership" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
-                Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                See How It Works <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Link>
             </div>
             <div className="relative bg-[#3B3937] rounded-xl p-8 border-2 border-[#CDA7B2] shadow-lg md:-mt-2 md:mb-[-8px]">
@@ -234,7 +234,7 @@ export default async function HomePage() {
                 A focused engagement to vet your factory, audit your costing, or pressure-test your timeline before capital is committed.
               </p>
               <Link href="/strategic-production-alignment" className="inline-flex items-center text-[#CDA7B2] font-medium text-sm hover:text-white transition-colors">
-                Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                View the Process <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Link>
             </div>
             <div className="bg-[#faf8f5] rounded-xl p-8 border border-[#EDEBE8] hover:shadow-lg transition-shadow">
