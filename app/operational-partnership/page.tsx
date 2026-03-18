@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
@@ -47,6 +48,35 @@ export default async function OperationalPartnershipPage() {
         </div>
       </section>
 
+      {/* Engagement Structure */}
+      <section className="section-spacing bg-[#3B3937]">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-10 tracking-tight">
+            Engagement Structure
+          </h2>
+          <p className="text-lg text-white/70 font-light leading-relaxed mb-10">
+            A 3-month minimum engagement designed to transform reactive production management into a structured, oversight-driven operation.
+          </p>
+          <div className="space-y-8">
+            <div className="border-l-2 border-[#CDA7B2] pl-6">
+              <p className="text-white font-medium mb-2 text-lg">Month 1: Full Production Audit + Immediate Risk Stabilization</p>
+              <p className="text-white/60 font-light">Complete review of your production operation. Factory communication, costing, timelines, and supplier relationships assessed and stabilized.</p>
+            </div>
+            <div className="border-l-2 border-[#CDA7B2] pl-6">
+              <p className="text-white font-medium mb-2 text-lg">Month 2: Systems Implementation + Supplier Alignment</p>
+              <p className="text-white/60 font-light">Production systems built and embedded into your operation. Factory relationships structured for accountability, clarity, and consistent delivery.</p>
+            </div>
+            <div className="border-l-2 border-[#CDA7B2] pl-6">
+              <p className="text-white font-medium mb-2 text-lg">Month 3: Production Oversight + Optimization</p>
+              <p className="text-white/60 font-light">Ongoing production management with continuous oversight. Systems refined, margins protected, and your operation running with precision.</p>
+            </div>
+          </div>
+          <p className="text-white/90 text-lg font-light leading-relaxed mt-10">
+            This is not advisory. This is operational leadership embedded inside your business.
+          </p>
+        </div>
+      </section>
+
       {/* What the Engagement Includes */}
       <section className="section-spacing bg-white">
         <div className="max-w-4xl mx-auto px-6">
@@ -80,33 +110,112 @@ export default async function OperationalPartnershipPage() {
         </div>
       </section>
 
+      {/* What This Replaces + Where I Step In */}
+      <section className="section-spacing bg-[#faf8f5]">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* What This Replaces */}
+            <div className="bg-white rounded-lg p-8 lg:p-10 border border-[#e8e2dc]">
+              <h2 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] mb-8 tracking-tight">
+                What This Replaces
+              </h2>
+              <ul className="space-y-4 text-lg text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Guesswork in factory communication</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Unverified costing decisions</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Reactive production management</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Founder-led problem solving under pressure</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Where I Step In */}
+            <div className="bg-white rounded-lg p-8 lg:p-10 border border-[#e8e2dc]">
+              <h2 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] mb-8 tracking-tight">
+                Where I Step In
+              </h2>
+              <ul className="space-y-4 text-lg text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Before production orders are placed</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>When factories begin slipping timelines</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>When costing needs validation before approval</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>When teams are not getting clear answers</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <blockquote className="border-l-2 border-[#CDA7B2] pl-6 mt-12">
+            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
+              Factories do not operate based on your brand&apos;s priorities. They operate based on their own capacity, margins, and constraints. Without oversight, your brand absorbs the risk.
+            </p>
+          </blockquote>
+        </div>
+      </section>
+
       {/* Ideal Client */}
       <section className="section-spacing bg-[#faf8f5]">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            This Partnership Is Designed For
-          </h2>
-          <ul className="space-y-4 text-lg text-[#967F71] font-light">
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Fashion founders placing production orders between $50K and $500K who need expert production oversight</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Brands managing multiple factories and complex supply chains without a senior production person reviewing the details</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Founders who have been burned by factory miscommunication, costing surprises, or timeline failures and refuse to let it happen again</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">—</span>
-              <span>Brands that understand production risk management is not optional — it is the difference between profit and loss</span>
-            </li>
-          </ul>
-          <p className="text-[#3B3937] mt-10 text-lg font-light">
-            This is not general consulting. This is embedded production leadership for brands with significant capital at stake. The longer we work together, the sharper your production operation becomes.
-          </p>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
+                This Partnership Is Designed For
+              </h2>
+              <ul className="space-y-4 text-lg text-[#967F71] font-light">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Fashion founders placing production orders between $50K and $500K who need expert production oversight</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Brands managing multiple factories and complex supply chains without a senior production person reviewing the details</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Founders who have been burned by factory miscommunication, costing surprises, or timeline failures and refuse to let it happen again</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span>Brands that understand production risk management is not optional — it is the difference between profit and loss</span>
+                </li>
+              </ul>
+              <p className="text-[#3B3937] mt-10 text-lg font-light">
+                This is not general consulting. This is embedded production leadership for brands with significant capital at stake. The longer we work together, the sharper your production operation becomes.
+              </p>
+            </div>
+            <div className="hidden lg:block">
+              <div className="aspect-square overflow-hidden relative rounded-lg">
+                <Image
+                  src="/images/designer-fabrics-cityview.png"
+                  alt="Fashion designer reviewing fabric swatches with city skyline in background"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover rounded-lg"
+                  quality={75}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -122,8 +231,35 @@ export default async function OperationalPartnershipPage() {
         </div>
       </section>
 
-      {/* Investment */}
+      {/* Expected Outcome After 90 Days */}
       <section className="section-spacing bg-[#faf8f5]">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
+            Expected Outcome After 90 Days
+          </h2>
+          <ul className="space-y-4 text-lg text-[#967F71] font-light">
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>Production system fully structured</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>Costing verified and margin clarity established</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>Supplier communication stabilized</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>Founder no longer operating reactively</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Investment */}
+      <section className="section-spacing bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
             Investment
@@ -152,7 +288,7 @@ export default async function OperationalPartnershipPage() {
             Protect Your Production Investment
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            Share what you are manufacturing, the capital at stake, and where you need oversight. If aligned, you will receive a production risk assessment framework.
+            If your production decisions involve real capital, this is the stage where oversight is required &mdash; not optional.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book">

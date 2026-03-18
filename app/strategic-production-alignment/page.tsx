@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
@@ -47,25 +48,94 @@ export default async function StrategicProductionAlignmentPage() {
         </div>
       </section>
 
-      {/* What's Included */}
-      <section className="section-spacing bg-white">
+      {/* Engagement Structure */}
+      <section className="section-spacing bg-[#faf8f5]">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            What&apos;s Included
+            Engagement Structure
           </h2>
-          <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
-            <p>
-              <span className="text-[#3B3937]">Factory vetting.</span> Supplier evaluation, production partner assessment, and capacity review. Verifying that your factory can actually deliver what they promise — before your capital is on the line.
-            </p>
-            <p>
-              <span className="text-[#3B3937]">Costing audit.</span> Full production costing review that exposes hidden expenses and validates factory quotes. Ensuring your margins are real — not assumptions that erode once invoices arrive.
-            </p>
-            <p>
-              <span className="text-[#3B3937]">Timeline pressure-testing.</span> Production calendar audit, milestone sequencing, and delivery risk identification. Catching the timeline failures that delay launches and cost brands money.
-            </p>
-            <p>
-              <span className="text-[#3B3937]">Pre-production risk review.</span> A comprehensive assessment of your production plan before capital is committed. Every risk identified, every assumption tested, every detail verified.
-            </p>
+          <p className="text-lg text-[#967F71] font-light leading-relaxed mb-10">
+            A focused, 4&ndash;6 week engagement designed to give you complete visibility into your production risk before capital is committed.
+          </p>
+          <div className="space-y-8">
+            <div className="flex items-start gap-6">
+              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">01</span>
+              <div>
+                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Week 1: Alignment + Scope Definition</h3>
+                <p className="text-[#967F71] font-light leading-relaxed">
+                  Understanding your brand, your production challenge, and the specific risks that need to be assessed. From here, the engagement is scoped to your situation.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-6">
+              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">02</span>
+              <div>
+                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Weeks 2&ndash;3: Deep Production Review</h3>
+                <p className="text-[#967F71] font-light leading-relaxed">
+                  Factory evaluation, costing audit, and timeline analysis. Every detail examined with the precision that protects your investment.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-6">
+              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">03</span>
+              <div>
+                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Weeks 4&ndash;5: Risk Analysis + Pressure-Testing</h3>
+                <p className="text-[#967F71] font-light leading-relaxed">
+                  Every assumption in your production plan tested. Every risk identified and quantified before you commit capital.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-6">
+              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">04</span>
+              <div>
+                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Weeks 5&ndash;6: Delivery of Findings + Strategic Recommendations</h3>
+                <p className="text-[#967F71] font-light leading-relaxed">
+                  A complete production risk assessment with specific recommendations and a verified plan you can trust.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p className="text-[#3B3937] text-lg font-light leading-relaxed mt-10">
+            This is a defined engagement with a clear endpoint. You leave with a complete understanding of your production risk and exactly how to address it.
+          </p>
+        </div>
+      </section>
+
+      {/* What's Included */}
+      <section className="section-spacing bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
+                What&apos;s Included
+              </h2>
+              <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
+                <p>
+                  <span className="text-[#3B3937]">Factory vetting.</span> Supplier evaluation, production partner assessment, and capacity review. Verifying that your factory can actually deliver what they promise — before your capital is on the line.
+                </p>
+                <p>
+                  <span className="text-[#3B3937]">Costing audit.</span> Full production costing review that exposes hidden expenses and validates factory quotes. Ensuring your margins are real — not assumptions that erode once invoices arrive.
+                </p>
+                <p>
+                  <span className="text-[#3B3937]">Timeline pressure-testing.</span> Production calendar audit, milestone sequencing, and delivery risk identification. Catching the timeline failures that delay launches and cost brands money.
+                </p>
+                <p>
+                  <span className="text-[#3B3937]">Pre-production risk review.</span> A comprehensive assessment of your production plan before capital is committed. Every risk identified, every assumption tested, every detail verified.
+                </p>
+              </div>
+            </div>
+            <div className="hidden lg:block">
+              <div className="aspect-[3/4] overflow-hidden relative rounded-lg">
+                <Image
+                  src="/images/runway.png"
+                  alt="Fashion runway show"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover rounded-lg"
+                  quality={75}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -80,41 +150,33 @@ export default async function StrategicProductionAlignmentPage() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* When Founders Typically Engage */}
       <section className="section-spacing bg-[#faf8f5]">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            How It Works
+            When Founders Typically Engage
           </h2>
-          <div className="space-y-8">
-            <div className="flex items-start gap-6">
-              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">01</span>
-              <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Share your production challenge</h3>
-                <p className="text-[#967F71] font-light leading-relaxed">
-                  Tell us what you are manufacturing, the capital at stake, and the specific production risk you need assessed. This helps determine whether a focused engagement is the right fit.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-6">
-              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">02</span>
-              <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Alignment call</h3>
-                <p className="text-[#967F71] font-light leading-relaxed">
-                  A conversation to understand the full picture: your brand, your challenge, and the outcome you need. From here, we scope the engagement together.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-6">
-              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">03</span>
-              <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Risk assessment delivered</h3>
-                <p className="text-[#967F71] font-light leading-relaxed">
-                  Targeted production risk analysis delivered with precision. You receive a detailed assessment, specific recommendations, and a verified production plan you can trust.
-                </p>
-              </div>
-            </div>
-          </div>
+          <ul className="space-y-4 text-lg text-[#967F71] font-light">
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>Before placing a production order</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>After receiving factory quotes that feel unclear</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>When timelines feel compressed or unrealistic</span>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span>When something feels off but cannot be identified</span>
+            </li>
+          </ul>
+          <p className="text-[#3B3937] text-lg font-light leading-relaxed mt-10">
+            Most production issues are visible before they become expensive. They are just not being reviewed by someone who knows where to look.
+          </p>
         </div>
       </section>
 
@@ -148,7 +210,7 @@ export default async function StrategicProductionAlignmentPage() {
             Protect Your Next Production Order
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            Share what you are manufacturing, the capital at stake, and where you need oversight. If aligned, we will scope a focused risk assessment together.
+            If you are committing capital to production this season, this is the stage where mistakes are prevented &mdash; not fixed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book">
