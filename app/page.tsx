@@ -223,6 +223,20 @@ export default async function HomePage() {
                 Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Link>
             </div>
+            <div className="relative bg-[#3B3937] rounded-xl p-8 border-2 border-[#CDA7B2] shadow-lg md:-mt-2 md:mb-[-8px]">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#CDA7B2] text-white text-xs font-medium tracking-wider uppercase px-4 py-1 rounded-full">
+                Start Here
+              </span>
+              <h3 className="font-serif-display text-xl font-normal text-white mb-3">
+                Production Risk Assessment
+              </h3>
+              <p className="text-white/70 font-light leading-relaxed mb-6">
+                A focused engagement to vet your factory, audit your costing, or pressure-test your timeline before capital is committed.
+              </p>
+              <Link href="/strategic-production-alignment" className="inline-flex items-center text-[#CDA7B2] font-medium text-sm hover:text-white transition-colors">
+                Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              </Link>
+            </div>
             <div className="bg-[#faf8f5] rounded-xl p-8 border border-[#EDEBE8] hover:shadow-lg transition-shadow">
               <h3 className="font-serif-display text-xl font-normal text-[#3B3937] mb-3">
                 Studio Systems
@@ -232,17 +246,6 @@ export default async function HomePage() {
               </p>
               <Link href="/studio-systems" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
                 Explore <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-              </Link>
-            </div>
-            <div className="bg-[#faf8f5] rounded-xl p-8 border border-[#EDEBE8] hover:shadow-lg transition-shadow">
-              <h3 className="font-serif-display text-xl font-normal text-[#3B3937] mb-3">
-                Production Risk Assessment
-              </h3>
-              <p className="text-[#967F71] font-light leading-relaxed mb-6">
-                A focused engagement to vet your factory, audit your costing, or pressure-test your timeline before capital is committed.
-              </p>
-              <Link href="/strategic-production-alignment" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
-                Learn More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Link>
             </div>
           </div>
