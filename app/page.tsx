@@ -29,7 +29,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight animate-fade-in-up">
-                Production Risk Strategy for Fashion Founders
+                Your Factory Has a Plan. Who&apos;s Verifying It?
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
                 Your next production order is a six-figure decision. One missed deadline, one costing error, one factory miscommunication can cost tens of thousands. Oceo Luxe provides embedded production strategy so you protect your margins before problems start.
