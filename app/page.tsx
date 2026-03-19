@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
+import { ChecklistCapture } from '@/components/marketing/checklist-capture';
 
 export async function generateMetadata() {
   return await getPageMetadata('home');
@@ -283,6 +284,11 @@ export default async function HomePage() {
                 Book a Call
               </Button>
             </Link>
+          </div>
+
+          {/* Checklist Lead Capture */}
+          <div className="mt-16 pt-12 border-t border-white/10">
+            <ChecklistCapture variant="dark" />
           </div>
         </div>
       </section>

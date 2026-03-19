@@ -7,6 +7,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
+import { ChecklistCapture } from '@/components/marketing/checklist-capture';
 
 export async function generateMetadata() {
   return await getPageMetadata('strategic-production-alignment');
@@ -49,20 +50,20 @@ export default async function StrategicProductionAlignmentPage() {
       </section>
 
       {/* Engagement Structure */}
-      <section className="section-spacing bg-[#faf8f5]">
+      <section className="section-spacing bg-[#3B3937]">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
+          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-10 tracking-tight">
             Engagement Structure
           </h2>
-          <p className="text-lg text-[#967F71] font-light leading-relaxed mb-10">
+          <p className="text-lg text-white/70 font-light leading-relaxed mb-10">
             A focused, 4&ndash;6 week engagement designed to give you complete visibility into your production risk before capital is committed.
           </p>
           <div className="space-y-8">
             <div className="flex items-start gap-6">
               <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">01</span>
               <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Week 1: Alignment + Scope Definition</h3>
-                <p className="text-[#967F71] font-light leading-relaxed">
+                <h3 className="text-white text-lg font-medium mb-2">Week 1: Alignment + Scope Definition</h3>
+                <p className="text-white/60 font-light leading-relaxed">
                   Understanding your brand, your production challenge, and the specific risks that need to be assessed. From here, the engagement is scoped to your situation.
                 </p>
               </div>
@@ -70,8 +71,8 @@ export default async function StrategicProductionAlignmentPage() {
             <div className="flex items-start gap-6">
               <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">02</span>
               <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Weeks 2&ndash;3: Deep Production Review</h3>
-                <p className="text-[#967F71] font-light leading-relaxed">
+                <h3 className="text-white text-lg font-medium mb-2">Weeks 2&ndash;3: Deep Production Review</h3>
+                <p className="text-white/60 font-light leading-relaxed">
                   Factory evaluation, costing audit, and timeline analysis. Every detail examined with the precision that protects your investment.
                 </p>
               </div>
@@ -79,8 +80,8 @@ export default async function StrategicProductionAlignmentPage() {
             <div className="flex items-start gap-6">
               <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">03</span>
               <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Weeks 4&ndash;5: Risk Analysis + Pressure-Testing</h3>
-                <p className="text-[#967F71] font-light leading-relaxed">
+                <h3 className="text-white text-lg font-medium mb-2">Weeks 4&ndash;5: Risk Analysis + Pressure-Testing</h3>
+                <p className="text-white/60 font-light leading-relaxed">
                   Every assumption in your production plan tested. Every risk identified and quantified before you commit capital.
                 </p>
               </div>
@@ -88,14 +89,14 @@ export default async function StrategicProductionAlignmentPage() {
             <div className="flex items-start gap-6">
               <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">04</span>
               <div>
-                <h3 className="text-[#3B3937] text-lg font-medium mb-2">Weeks 5&ndash;6: Delivery of Findings + Strategic Recommendations</h3>
-                <p className="text-[#967F71] font-light leading-relaxed">
+                <h3 className="text-white text-lg font-medium mb-2">Weeks 5&ndash;6: Delivery of Findings + Strategic Recommendations</h3>
+                <p className="text-white/60 font-light leading-relaxed">
                   A complete production risk assessment with specific recommendations and a verified plan you can trust.
                 </p>
               </div>
             </div>
           </div>
-          <p className="text-[#3B3937] text-lg font-light leading-relaxed mt-10">
+          <p className="text-white/90 text-lg font-light leading-relaxed mt-10">
             This is a defined engagement with a clear endpoint. You leave with a complete understanding of your production risk and exactly how to address it.
           </p>
         </div>
@@ -179,6 +180,9 @@ export default async function StrategicProductionAlignmentPage() {
           </p>
         </div>
       </section>
+
+      {/* Lead Capture - Production Risk Checklist */}
+      <ChecklistCapture />
 
       {/* Investment */}
       <section className="section-spacing bg-white">
