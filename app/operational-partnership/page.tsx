@@ -7,6 +7,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
+import { SectionDivider } from '@/components/marketing/section-divider';
 
 export async function generateMetadata() {
   return await getPageMetadata('operational-partnership');
@@ -172,6 +173,8 @@ export default async function OperationalPartnershipPage() {
           </blockquote>
         </div>
       </section>
+
+      <SectionDivider variant="dots" className="bg-[#faf8f5] pt-0 pb-0" />
 
       {/* Ideal Client */}
       <section className="section-spacing bg-[#faf8f5]">

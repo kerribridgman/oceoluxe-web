@@ -6,6 +6,7 @@ import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { ChecklistCapture } from '@/components/marketing/checklist-capture';
+import { SectionDivider } from '@/components/marketing/section-divider';
 
 export async function generateMetadata() {
   return await getPageMetadata('home');

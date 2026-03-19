@@ -7,6 +7,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
+import { SectionDivider } from '@/components/marketing/section-divider';
 
 export async function generateMetadata() {
   return await getPageMetadata('studio-systems');
@@ -69,6 +70,8 @@ export default async function StudioSystemsPage() {
           </div>
         </div>
       </section>
+
+      <SectionDivider variant="diamond" className="bg-[#faf8f5] pt-0 pb-0" />
 
       {/* How Studio Systems Works */}
       <section className="section-spacing bg-[#faf8f5]">

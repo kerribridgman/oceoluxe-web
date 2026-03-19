@@ -8,6 +8,7 @@ import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { ChecklistCapture } from '@/components/marketing/checklist-capture';
+import { SectionDivider } from '@/components/marketing/section-divider';
 
 export async function generateMetadata() {
   return await getPageMetadata('strategic-production-alignment');
@@ -180,6 +181,8 @@ export default async function StrategicProductionAlignmentPage() {
           </p>
         </div>
       </section>
+
+      <SectionDivider variant="diamond" className="bg-[#faf8f5] pt-0 pb-0" />
 
       {/* Lead Capture - Production Risk Checklist */}
       <ChecklistCapture />
