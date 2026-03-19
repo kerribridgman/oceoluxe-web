@@ -182,21 +182,21 @@ export default async function HomePage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-[#faf8f5] rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow">
-              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">Fewer surprises</p>
+              <p className="font-script text-2xl text-[#CDA7B2] italic mb-3">Fewer surprises</p>
               <p className="text-[#3B3937] font-light leading-relaxed">
-                Costing errors, timeline delays, and factory miscommunications get caught before they cost you money &mdash; not after.
+                Costing errors, timeline delays, and factory miscommunications get caught before they cost you money. Not after.
               </p>
             </div>
             <div className="bg-[#faf8f5] rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow">
-              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">Stronger margins</p>
+              <p className="font-script text-2xl text-[#CDA7B2] italic mb-3">Stronger margins</p>
               <p className="text-[#3B3937] font-light leading-relaxed">
                 Every line item in your production budget verified. Every factory quote pressure-tested. Margins that are real, not assumptions.
               </p>
             </div>
             <div className="bg-[#faf8f5] rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow">
-              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">Frameworks that stay</p>
+              <p className="font-script text-2xl text-[#CDA7B2] italic mb-3">Frameworks that stay</p>
               <p className="text-[#3B3937] font-light leading-relaxed">
-                The costing structures, communication protocols, and production systems built during the engagement belong to your brand &mdash; long after the season ends.
+                The costing structures, communication protocols, and production systems built during the engagement belong to your brand. Long after the season ends.
               </p>
             </div>
           </div>
