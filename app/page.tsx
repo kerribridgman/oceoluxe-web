@@ -165,7 +165,7 @@ export default async function HomePage() {
               Oceo Luxe operates as your embedded production strategist. Not a consultant who reviews your tech packs and disappears. Your factory communication gets audited. Your costing errors get caught before they compound. Your timelines get pressure-tested. Your production investment is protected at every stage.
             </p>
             <p>
-              Kerri Bridgman has spent over a decade inside fashion production — on factory floors, in supply chain operations, in the rooms where production decisions get made under pressure. She has cut over $10 million in production orders over five years and tracked five seasons simultaneously. She brings the rigor of established houses, a systematic approach to building production frameworks that outlast any single season, and the composure to hold steady when factories start missing deadlines.
+              Kerri Bridgman has spent over a decade inside fashion production — on factory floors, in supply chain operations, in the rooms where production decisions get made under pressure. She has cut over $10 million in production orders over five years, tracked five seasons simultaneously, and managed active production across 15 suppliers. She has been trusted to hire over 100 people based on her understanding of a founder&apos;s vision and standards. The factory and supplier relationships she built over seven years have followed her across companies and industries. She brings the rigor of established houses, a systematic approach to building production frameworks that outlast any single season, and the composure to hold steady when factories start missing deadlines.
             </p>
           </div>
         </div>
