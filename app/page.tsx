@@ -173,14 +173,33 @@ export default async function HomePage() {
 
       {/* 4. Core Outcomes */}
       <section className="section-spacing bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">What changes</p>
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            Protection. Precision. Profit.
-          </h2>
-          <p className="text-lg text-[#967F71] font-light leading-relaxed">
-            Founders who work with Oceo Luxe gain production oversight that catches problems before they become expensive, costing structures that protect real margins, and the strategic confidence to commit to six-figure production orders knowing the risk has been managed. The work is not theoretical. It is built from real production experience, deployed inside your brand. And the frameworks built during the engagement — the costing structures, the factory communication protocols, the production systems — those stay with your brand long after the season ends.
-          </p>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">What changes</p>
+            <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] tracking-tight">
+              Protection. Precision. Profit.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-[#faf8f5] rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">Fewer surprises</p>
+              <p className="text-[#3B3937] font-light leading-relaxed">
+                Costing errors, timeline delays, and factory miscommunications get caught before they cost you money &mdash; not after.
+              </p>
+            </div>
+            <div className="bg-[#faf8f5] rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">Stronger margins</p>
+              <p className="text-[#3B3937] font-light leading-relaxed">
+                Every line item in your production budget verified. Every factory quote pressure-tested. Margins that are real, not assumptions.
+              </p>
+            </div>
+            <div className="bg-[#faf8f5] rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">Frameworks that stay</p>
+              <p className="text-[#3B3937] font-light leading-relaxed">
+                The costing structures, communication protocols, and production systems built during the engagement belong to your brand &mdash; long after the season ends.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
