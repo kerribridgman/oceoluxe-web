@@ -270,7 +270,7 @@ export default async function HomePage() {
                 Fractional Production Director
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed mb-6">
-                Embedded production leadership for brands placing $50K–$500K production orders who need senior strategic oversight.
+                Your production orders are protected by someone who has been on the factory floor. Senior oversight embedded in your brand, season after season.
               </p>
               <Link href="/operational-partnership" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
                 See How It Works <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
@@ -284,7 +284,7 @@ export default async function HomePage() {
                 Production Risk Assessment
               </h3>
               <p className="text-white/70 font-light leading-relaxed mb-6">
-                A focused engagement to vet your factory, audit your costing, or pressure-test your timeline before capital is committed.
+                Know exactly what you are committing to before you write the check. One focused engagement, one production risk, total clarity.
               </p>
               <Link href="/strategic-production-alignment" className="inline-flex items-center text-[#CDA7B2] font-medium text-sm hover:text-white transition-colors">
                 View the Process <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
@@ -295,7 +295,7 @@ export default async function HomePage() {
                 Studio Systems
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed mb-6">
-                Operational systems, frameworks, and community built from real-world production leadership for independent fashion brands.
+                Production frameworks, templates, and community access built from real experience &mdash; so you can operate with more structure and less guesswork.
               </p>
               <Link href="/studio-systems" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
                 Explore <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
