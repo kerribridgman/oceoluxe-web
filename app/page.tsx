@@ -162,10 +162,10 @@ export default async function HomePage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              Oceo Luxe operates as your embedded production strategist. Not a consultant who reviews your tech packs and disappears. This is production risk management integrated into your business: auditing factory communication, catching costing errors before they compound, pressure-testing timelines, and ensuring your production investment is protected at every stage.
+              Oceo Luxe operates as your embedded production strategist. Not a consultant who reviews your tech packs and disappears. Your factory communication gets audited. Your costing errors get caught before they compound. Your timelines get pressure-tested. Your production investment is protected at every stage.
             </p>
             <p>
-              Kerri Bridgman has spent over a decade inside fashion production — on factory floors, in supply chain operations, in the rooms where production decisions get made under pressure. She has cut over $10 million in production orders in a single season and tracked five seasons simultaneously. She brings the rigor of established houses, a systematic approach to building production frameworks that outlast any single season, and the composure to hold steady when factories start missing deadlines.
+              Kerri Bridgman has spent over a decade inside fashion production — on factory floors, in supply chain operations, in the rooms where production decisions get made under pressure. She has cut over $10 million in production orders over five years and tracked five seasons simultaneously. She brings the rigor of established houses, a systematic approach to building production frameworks that outlast any single season, and the composure to hold steady when factories start missing deadlines.
             </p>
           </div>
         </div>

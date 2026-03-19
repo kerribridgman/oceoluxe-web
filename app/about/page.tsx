@@ -97,7 +97,7 @@ export default async function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
                 <p>
-                  Before Oceo Luxe, Kerri spent years inside fashion companies managing production at scale — cutting over $10 million in orders in a single season, tracking five concurrent seasons, running four production lines while owning all buying and purchasing across each one. She has been the person negotiating with factories, auditing costing structures, and solving the production problems that most founders do not see until they become expensive.
+                  Before Oceo Luxe, Kerri spent years inside fashion companies managing production at scale — cutting over $10 million in orders over five years, tracking five concurrent seasons, running four production lines while owning all buying and purchasing across each one. She has been the person negotiating with factories, auditing costing structures, and solving the production problems that most founders do not see until they become expensive.
                 </p>
                 <p>
                   That experience taught her something that most consulting frameworks miss: production risk in fashion is not about checklists or templates. It is about understanding how factories actually operate — not how they say they operate. Where costs get hidden. Where timelines slip. Where communication gaps turn into five-figure problems.
