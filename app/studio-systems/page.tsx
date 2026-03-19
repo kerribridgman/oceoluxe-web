@@ -81,20 +81,20 @@ export default async function StudioSystemsPage() {
           </h2>
           <ul className="space-y-4 text-lg text-[#967F71] font-light">
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Immediate access to the full Oceo Luxe production system inside Notion</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Implement at your own pace with structured workflows across costing, production, and supplier management</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Join twice-monthly live calls to pressure-test decisions and get direct feedback</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
-              <span>Use the system during active production cycles &mdash; not as theory</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
+              <span>Use the system during active production cycles &ndash; not as theory</span>
             </li>
           </ul>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed mt-10">
@@ -133,19 +133,19 @@ export default async function StudioSystemsPage() {
           </h2>
           <ul className="space-y-4 text-lg text-[#967F71] font-light">
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Production timelines that slip because there is no system to hold them</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Supplier communication that fragments across email, DMs, and spreadsheets</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Pricing decisions made without clear costing frameworks</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Launch coordination that relies on memory instead of process</span>
             </li>
           </ul>
@@ -339,7 +339,7 @@ export default async function StudioSystemsPage() {
             Ready to Operate with Precision?
           </h2>
           <p className="text-lg text-[#967F71] mb-10 font-light leading-relaxed">
-            If you are still managing production through scattered spreadsheets, WhatsApp messages, and memory &mdash; this is where structure begins.
+            If you are still managing production through scattered spreadsheets, WhatsApp messages, and memory &ndash; this is where structure begins.
           </p>
           <Link href="/studio-systems/waitlist">
             <Button

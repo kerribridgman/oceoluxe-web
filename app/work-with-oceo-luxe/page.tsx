@@ -30,7 +30,7 @@ const offerings = [
   {
     title: 'Fractional Production Director',
     description:
-      'An embedded, ongoing engagement for fashion founders who need senior production leadership without a full-time hire. Production risk management, factory oversight, costing strategy, and margin protection — deployed inside your business.',
+      'An embedded, ongoing engagement for fashion founders who need senior production leadership without a full-time hire. Production risk management, factory oversight, costing strategy, and margin protection –deployed inside your business.',
     href: '/operational-partnership',
     cta: 'Learn More',
     flagship: true,

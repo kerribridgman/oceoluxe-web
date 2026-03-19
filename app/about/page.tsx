@@ -37,7 +37,7 @@ export default async function AboutPage() {
                 Behind Oceo Luxe
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
-                Oceo Luxe was founded by Kerri Bridgman, a FIT-trained production manager who has spent over a decade inside fashion production — managing factories, auditing costing, and catching the risks that cost brands real money.
+                Oceo Luxe was founded by Kerri Bridgman, a FIT-trained production manager who has spent over a decade inside fashion production –managing factories, auditing costing, and catching the risks that cost brands real money.
               </p>
               <p className="text-sm text-[#967F71] font-light animate-fade-in-up">
                 FIT-trained Production Manager • 10+ Years Managing Factory Operations & Supply Chains
@@ -97,13 +97,13 @@ export default async function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
                 <p>
-                  Before Oceo Luxe, Kerri spent years inside fashion companies managing production at scale — cutting over $10 million in orders over five years, tracking five concurrent seasons, running four production lines while owning all buying and purchasing across each one. She managed active inventory across 15 suppliers, oversaw multiple sample rounds including inbound CITES samples for runway shows, and was trusted to hire over 100 people based on her understanding of a founder&apos;s vision and standards. The supplier and factory relationships she built over seven years have followed her across companies and industries — a testament to how she operates at the factory level. She has been the person negotiating with factories, auditing costing structures, and solving the production problems that most founders do not see until they become expensive.
+                  Before Oceo Luxe, Kerri spent years inside fashion companies managing production at scale –cutting over $10 million in orders over five years, tracking five concurrent seasons, running four production lines while owning all buying and purchasing across each one. She managed active inventory across 15 suppliers, oversaw multiple sample rounds including inbound CITES samples for runway shows, and was trusted to hire over 100 people based on her understanding of a founder&apos;s vision and standards. The supplier and factory relationships she built over seven years have followed her across companies and industries –a testament to how she operates at the factory level. She has been the person negotiating with factories, auditing costing structures, and solving the production problems that most founders do not see until they become expensive.
                 </p>
                 <p>
-                  That experience taught her something that most consulting frameworks miss: production risk in fashion is not about checklists or templates. It is about understanding how factories actually operate — not how they say they operate. Where costs get hidden. Where timelines slip. Where communication gaps turn into five-figure problems.
+                  That experience taught her something that most consulting frameworks miss: production risk in fashion is not about checklists or templates. It is about understanding how factories actually operate –not how they say they operate. Where costs get hidden. Where timelines slip. Where communication gaps turn into five-figure problems.
                 </p>
                 <p>
-                  Kerri has managed production for brands ranging from independent labels to established houses — and she has been the cross-departmental accountability partner when production stalled because other teams were not getting answers from the people they should have been. She has seen a company spend $35,000 on emergency air freight because factory paperwork delays were not caught. She has helped scale an account 10x in one year by watching the operational efficiency of a single team and finding what everyone else missed.
+                  Kerri has managed production for brands ranging from independent labels to established houses –and she has been the cross-departmental accountability partner when production stalled because other teams were not getting answers from the people they should have been. She has seen a company spend $35,000 on emergency air freight because factory paperwork delays were not caught. She has helped scale an account 10x in one year by watching the operational efficiency of a single team and finding what everyone else missed.
                 </p>
                 <p className="text-[#3B3937]">
                   What sets her apart is the approach: systematic frameworks over one-off fixes, knowledge transfer over dependency, and a steady presence in the high-pressure moments where most production relationships fall apart. Oceo Luxe exists because fashion founders deserve a production strategist who has been inside the factories. Not someone who has only studied them.
@@ -121,13 +121,13 @@ export default async function AboutPage() {
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;With a production background in fashion, Kerri added a creative edge to everything from financial controls to internal communications.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">– C-Suite Executive</p>
           </div>
           <div className="border-l-2 border-[#CDA7B2] pl-8">
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;Her calm presence, clear communication, and ability to spot issues before they surfaced made her a stabilizing force in a high-pressure environment.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">– C-Suite Executive</p>
           </div>
         </div>
       </section>
@@ -156,10 +156,10 @@ export default async function AboutPage() {
               <span className="text-[#3B3937]">Catch it early or pay for it later.</span> Every production mistake has a cost curve. Caught at the costing stage, it costs nothing. Caught after delivery, it costs thousands. The entire value of production oversight is in the timing.
             </p>
             <p>
-              <span className="text-[#3B3937]">Protect the investment.</span> A production order is not a purchase — it is a capital deployment. It deserves the same level of strategic oversight as any other significant business investment.
+              <span className="text-[#3B3937]">Protect the investment.</span> A production order is not a purchase –it is a capital deployment. It deserves the same level of strategic oversight as any other significant business investment.
             </p>
             <p>
-              <span className="text-[#3B3937]">Build internal capacity.</span> For focused engagements, the goal is to send you back with the knowledge to make stronger production decisions on your own. For ongoing partnerships, the goal is deeper — your team&apos;s production intelligence compounds with every season, and your operation gets sharper whether we are in the room or not.
+              <span className="text-[#3B3937]">Build internal capacity.</span> For focused engagements, the goal is to send you back with the knowledge to make stronger production decisions on your own. For ongoing partnerships, the goal is deeper –your team&apos;s production intelligence compounds with every season, and your operation gets sharper whether we are in the room or not.
             </p>
           </div>
         </div>
@@ -187,19 +187,19 @@ export default async function AboutPage() {
               </h2>
               <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span className="text-[#CDA7B2] mt-1">–</span>
                   <span>Fashion founders placing $50K–$500K production orders who need expert production oversight</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span className="text-[#CDA7B2] mt-1">–</span>
                   <span>Brands that have been burned by factory miscommunication and refuse to let it happen again</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span className="text-[#CDA7B2] mt-1">–</span>
                   <span>Founders who understand that production risk management is a strategic investment, not an expense</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span className="text-[#CDA7B2] mt-1">–</span>
                   <span>Brands committed to protecting their margins through production-level oversight and factory accountability</span>
                 </li>
               </ul>

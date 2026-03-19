@@ -168,15 +168,15 @@ export default function JoinEmailListPage() {
                 <h2 className="text-lg font-light text-[#3B3937] mb-4">What to expect:</h2>
                 <ul className="space-y-3 text-[#967F71] font-light">
                   <li className="flex items-start gap-3">
-                    <span className="text-[#CDA7B2]">—</span>
+                    <span className="text-[#CDA7B2]">–</span>
                     <span>Production tips and industry insights</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-[#CDA7B2]">—</span>
+                    <span className="text-[#CDA7B2]">–</span>
                     <span>Early access to new resources and templates</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-[#CDA7B2]">—</span>
+                    <span className="text-[#CDA7B2]">–</span>
                     <span>Exclusive content for our email community</span>
                   </li>
                 </ul>

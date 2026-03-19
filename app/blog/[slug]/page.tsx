@@ -177,7 +177,7 @@ export default async function BlogPostPage({ params }: Props) {
               <span className="text-[#3B3937]">{post.author || 'Kerri Bridgman'}</span>
               {post.publishedAt && (
                 <>
-                  <span className="text-[#CDA7B2]">—</span>
+                  <span className="text-[#CDA7B2]">–</span>
                   <time dateTime={new Date(post.publishedAt).toISOString()}>
                     {formatBlogDate(post.publishedAt)}
                   </time>
@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: Props) {
               )}
               {post.readingTimeMinutes && (
                 <>
-                  <span className="text-[#CDA7B2]">—</span>
+                  <span className="text-[#CDA7B2]">–</span>
                   <span>{post.readingTimeMinutes} min read</span>
                 </>
               )}

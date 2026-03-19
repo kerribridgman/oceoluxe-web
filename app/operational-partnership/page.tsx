@@ -44,7 +44,7 @@ export default async function OperationalPartnershipPage() {
             Fractional Production Director for Fashion Brands
           </h1>
           <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            This is not consulting from the sidelines. This is embedded production leadership. A senior production strategist working inside your brand — managing factory relationships, auditing costing, pressure-testing timelines, and catching the risks that cost brands tens of thousands of dollars every season. Kerri has managed four concurrent production lines while owning all buying and purchasing for those lines. She has helped scale an account 10x in a single year by identifying operational inefficiencies that everyone else walked past.
+            This is not consulting from the sidelines. This is embedded production leadership. A senior production strategist working inside your brand –managing factory relationships, auditing costing, pressure-testing timelines, and catching the risks that cost brands tens of thousands of dollars every season. Kerri has managed four concurrent production lines while owning all buying and purchasing for those lines. She has helped scale an account 10x in a single year by identifying operational inefficiencies that everyone else walked past.
           </p>
         </div>
       </section>
@@ -86,16 +86,16 @@ export default async function OperationalPartnershipPage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              <span className="text-[#3B3937]">Factory oversight.</span> Direct management of factory communication, production milestones, and quality checkpoints. When other departments are not getting answers from the people they should be, this engagement bridges that gap. Every detail reviewed before it becomes a problem — not after it becomes an expense.
+              <span className="text-[#3B3937]">Factory oversight.</span> Direct management of factory communication, production milestones, and quality checkpoints. When other departments are not getting answers from the people they should be, this engagement bridges that gap. Every detail reviewed before it becomes a problem –not after it becomes an expense.
             </p>
             <p>
-              <span className="text-[#3B3937]">Costing and margin protection.</span> Full production costing audits that expose hidden expenses, validate factory quotes, and ensure your margins are real — not assumptions that erode once invoices arrive.
+              <span className="text-[#3B3937]">Costing and margin protection.</span> Full production costing audits that expose hidden expenses, validate factory quotes, and ensure your margins are real –not assumptions that erode once invoices arrive.
             </p>
             <p>
               <span className="text-[#3B3937]">Production risk management.</span> Timeline pressure-testing, supplier vetting, and pre-production reviews. Identifying the specific risks in your production plan before capital is committed.
             </p>
             <p>
-              <span className="text-[#3B3937]">Strategic advisory.</span> Ongoing decision support on sourcing, pricing architecture, production sequencing, and factory negotiation. Not reactive problem-solving — a systematic production intelligence that deepens with every season your brand grows.
+              <span className="text-[#3B3937]">Strategic advisory.</span> Ongoing decision support on sourcing, pricing architecture, production sequencing, and factory negotiation. Not reactive problem-solving –a systematic production intelligence that deepens with every season your brand grows.
             </p>
           </div>
         </div>
@@ -106,7 +106,7 @@ export default async function OperationalPartnershipPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
           <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;Factories will tell you everything is under control. We verify that it actually is — before your capital is on the line.&rdquo;
+            &ldquo;Factories will tell you everything is under control. We verify that it actually is –before your capital is on the line.&rdquo;
           </p>
         </div>
       </section>
@@ -122,19 +122,19 @@ export default async function OperationalPartnershipPage() {
               </h2>
               <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Guesswork in factory communication</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Unverified costing decisions</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Reactive production management</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Founder-led problem solving under pressure</span>
                 </li>
               </ul>
@@ -147,19 +147,19 @@ export default async function OperationalPartnershipPage() {
               </h2>
               <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Before production orders are placed</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>When factories begin slipping timelines</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>When costing needs validation before approval</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>When teams are not getting clear answers</span>
                 </li>
               </ul>
@@ -186,20 +186,20 @@ export default async function OperationalPartnershipPage() {
               </h2>
               <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Fashion founders placing production orders between $50K and $500K who need expert production oversight</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Brands managing multiple factories and complex supply chains without a senior production person reviewing the details</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>Founders who have been burned by factory miscommunication, costing surprises, or timeline failures and refuse to let it happen again</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&mdash;</span>
-                  <span>Brands that understand production risk management is not optional — it is the difference between profit and loss</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
+                  <span>Brands that understand production risk management is not optional –it is the difference between profit and loss</span>
                 </li>
               </ul>
               <p className="text-[#3B3937] mt-10 text-lg font-light">
@@ -229,7 +229,7 @@ export default async function OperationalPartnershipPage() {
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">– C-Suite Executive</p>
           </div>
         </div>
       </section>
@@ -242,19 +242,19 @@ export default async function OperationalPartnershipPage() {
           </h2>
           <ul className="space-y-4 text-lg text-[#967F71] font-light">
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Production system fully structured</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Costing verified and margin clarity established</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Supplier communication stabilized</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Founder no longer operating reactively</span>
             </li>
           </ul>
@@ -291,7 +291,7 @@ export default async function OperationalPartnershipPage() {
             Protect Your Production Investment
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            If your production decisions involve real capital, this is the stage where oversight is required &mdash; not optional.
+            If your production decisions involve real capital, this is the stage where oversight is required &ndash; not optional.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book">

@@ -27,7 +27,7 @@ const experiences = [
   {
     icon: Sparkles,
     title: 'A Complete Notion System',
-    description: 'Done-for-you Notion templates covering production, distribution, marketing, sales, and launches—so you\'re not building from scratch.',
+    description: 'Done-for-you Notion templates covering production, distribution, marketing, sales, and launches – so you\'re not building from scratch.',
   },
   {
     icon: CheckCircle,

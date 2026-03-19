@@ -84,7 +84,7 @@ export default async function HomePage() {
           </h2>
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
             <p>
-              Your factory will say they have everything handled. And they mean it — until the mistake costs the factory more time or money than they are willing to absorb. At that point, your brand absorbs the cost. A costing error that was not caught early. A timeline that slipped because nobody was watching the paperwork. A quality issue that surfaces after delivery when it is ten times more expensive to fix.
+              Your factory will say they have everything handled. And they mean it –until the mistake costs the factory more time or money than they are willing to absorb. At that point, your brand absorbs the cost. A costing error that was not caught early. A timeline that slipped because nobody was watching the paperwork. A quality issue that surfaces after delivery when it is ten times more expensive to fix.
             </p>
             <p>
               One company spent $35,000 flying product from Italy to New York in a single day because factory paperwork delays were not caught early enough. That is not an unusual story. It is the kind of production risk that brands face every season when nobody is watching the details at the factory level.
@@ -109,13 +109,13 @@ export default async function HomePage() {
             <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
               <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The quotes</p>
               <p className="text-[#3B3937] font-light leading-relaxed flex-1">
-                &ldquo;I received factory quotes that <span className="text-[#CDA7B2] font-medium">don&apos;t add up</span> &mdash; but I don&apos;t know enough about their cost structure to push back.&rdquo;
+                &ldquo;I received factory quotes that <span className="text-[#CDA7B2] font-medium">don&apos;t add up</span> &ndash; but I don&apos;t know enough about their cost structure to push back.&rdquo;
               </p>
             </div>
             <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
               <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The timeline</p>
               <p className="text-[#3B3937] font-light leading-relaxed flex-1">
-                &ldquo;My factory says everything is <span className="text-[#CDA7B2] font-medium">on schedule</span> &mdash; but last season they said the same thing and we shipped six weeks late.&rdquo;
+                &ldquo;My factory says everything is <span className="text-[#CDA7B2] font-medium">on schedule</span> &ndash; but last season they said the same thing and we shipped six weeks late.&rdquo;
               </p>
             </div>
             <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
@@ -127,13 +127,13 @@ export default async function HomePage() {
             <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
               <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The instinct</p>
               <p className="text-[#3B3937] font-light leading-relaxed flex-1">
-                &ldquo;I know something feels <span className="text-[#CDA7B2] font-medium">off</span> with my production plan &mdash; but I can&apos;t identify exactly what it is.&rdquo;
+                &ldquo;I know something feels <span className="text-[#CDA7B2] font-medium">off</span> with my production plan &ndash; but I can&apos;t identify exactly what it is.&rdquo;
               </p>
             </div>
             <div className="bg-white rounded-lg p-8 border border-[#CDA7B2]/30 hover:shadow-md transition-shadow flex flex-col md:col-span-2">
               <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The weight</p>
               <p className="text-[#3B3937] font-light leading-relaxed">
-                &ldquo;I&apos;m managing production <span className="text-[#CDA7B2] font-medium">myself</span> &mdash; and I&apos;m not sure if what I&apos;m doing is protecting my margins or quietly eroding them.&rdquo;
+                &ldquo;I&apos;m managing production <span className="text-[#CDA7B2] font-medium">myself</span> &ndash; and I&apos;m not sure if what I&apos;m doing is protecting my margins or quietly eroding them.&rdquo;
               </p>
             </div>
           </div>
@@ -165,7 +165,7 @@ export default async function HomePage() {
               Oceo Luxe operates as your embedded production strategist. Not a consultant who reviews your tech packs and disappears. Your factory communication gets audited. Your costing errors get caught before they compound. Your timelines get pressure-tested. Your production investment is protected at every stage.
             </p>
             <p>
-              Kerri Bridgman has spent over a decade inside fashion production — on factory floors, in supply chain operations, in the rooms where production decisions get made under pressure. She has cut over $10 million in production orders over five years, tracked five seasons simultaneously, and managed active production across 15 suppliers. She has been trusted to hire over 100 people based on her understanding of a founder&apos;s vision and standards. The factory and supplier relationships she built over seven years have followed her across companies and industries. She brings the rigor of established houses, a systematic approach to building production frameworks that outlast any single season, and the composure to hold steady when factories start missing deadlines.
+              Kerri Bridgman has spent over a decade inside fashion production –on factory floors, in supply chain operations, in the rooms where production decisions get made under pressure. She has cut over $10 million in production orders over five years, tracked five seasons simultaneously, and managed active production across 15 suppliers. She has been trusted to hire over 100 people based on her understanding of a founder&apos;s vision and standards. The factory and supplier relationships she built over seven years have followed her across companies and industries. She brings the rigor of established houses, a systematic approach to building production frameworks that outlast any single season, and the composure to hold steady when factories start missing deadlines.
             </p>
           </div>
         </div>
@@ -214,19 +214,19 @@ export default async function HomePage() {
               </h2>
               <ul className="space-y-4 text-lg text-[#967F71] font-light">
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>You are placing production orders between $50K and $500K and cannot afford costly mistakes</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>You are trusting factories with significant capital but have no production expert reviewing the details</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
-                  <span>You need someone who understands how factories actually operate — not how they say they operate</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
+                  <span>You need someone who understands how factories actually operate –not how they say they operate</span>
                 </li>
                 <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">—</span>
+                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
                   <span>You want strategic oversight on costing, timelines, and supplier communication before committing capital</span>
                 </li>
               </ul>
@@ -259,7 +259,7 @@ export default async function HomePage() {
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
               &ldquo;She brought systems, structure, and a fresh perspective that reshaped how we work.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">— C-Suite Executive</p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">– C-Suite Executive</p>
           </div>
         </div>
       </section>
@@ -314,7 +314,7 @@ export default async function HomePage() {
                 Studio Systems
               </h3>
               <p className="text-[#967F71] font-light leading-relaxed mb-6">
-                Production frameworks, templates, and community access built from real experience &mdash; so you can operate with more structure and less guesswork.
+                Production frameworks, templates, and community access built from real experience &ndash; so you can operate with more structure and less guesswork.
               </p>
               <Link href="/studio-systems" className="inline-flex items-center text-[#3B3937] font-medium text-sm hover:text-[#967F71] transition-colors">
                 Explore <ArrowRight className="ml-1.5 h-3.5 w-3.5" />

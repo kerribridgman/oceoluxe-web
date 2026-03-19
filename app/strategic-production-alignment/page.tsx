@@ -87,7 +87,7 @@ export default async function StrategicProductionAlignmentPage() {
                 Every assumption in your production plan tested. Every risk identified and quantified before you commit capital.
               </p>
             </div>
-            {/* Timeline step 4 (last — no border-l) */}
+            {/* Timeline step 4 (last –no border-l) */}
             <div className="relative pl-10 ml-3">
               <div className="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-[#CDA7B2] border-2 border-[#3B3937]" />
               <span className="font-script text-lg italic text-[#CDA7B2] mb-1 block">Weeks 5&ndash;6</span>
@@ -113,10 +113,10 @@ export default async function StrategicProductionAlignmentPage() {
               </h2>
               <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
                 <p>
-                  <span className="text-[#3B3937]">Factory vetting.</span> Supplier evaluation, production partner assessment, and capacity review. Verifying that your factory can actually deliver what they promise — before your capital is on the line.
+                  <span className="text-[#3B3937]">Factory vetting.</span> Supplier evaluation, production partner assessment, and capacity review. Verifying that your factory can actually deliver what they promise –before your capital is on the line.
                 </p>
                 <p>
-                  <span className="text-[#3B3937]">Costing audit.</span> Full production costing review that exposes hidden expenses and validates factory quotes. Ensuring your margins are real — not assumptions that erode once invoices arrive.
+                  <span className="text-[#3B3937]">Costing audit.</span> Full production costing review that exposes hidden expenses and validates factory quotes. Ensuring your margins are real –not assumptions that erode once invoices arrive.
                 </p>
                 <p>
                   <span className="text-[#3B3937]">Timeline pressure-testing.</span> Production calendar audit, milestone sequencing, and delivery risk identification. Catching the timeline failures that delay launches and cost brands money.
@@ -160,19 +160,19 @@ export default async function StrategicProductionAlignmentPage() {
           </h2>
           <ul className="space-y-4 text-lg text-[#967F71] font-light">
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>Before placing a production order</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>After receiving factory quotes that feel unclear</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>When timelines feel compressed or unrealistic</span>
             </li>
             <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&mdash;</span>
+              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
               <span>When something feels off but cannot be identified</span>
             </li>
           </ul>
@@ -217,7 +217,7 @@ export default async function StrategicProductionAlignmentPage() {
             Protect Your Next Production Order
           </h2>
           <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            If you are committing capital to production this season, this is the stage where mistakes are prevented &mdash; not fixed.
+            If you are committing capital to production this season, this is the stage where mistakes are prevented &ndash; not fixed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book">
