@@ -92,6 +92,53 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Does This Sound Like You? */}
+      <section className="pt-10 pb-20 bg-[#faf8f5]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">Recognition</p>
+            <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] tracking-tight">
+              Does This Sound Like You?
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The quotes</p>
+              <p className="text-[#3B3937] font-light leading-relaxed flex-1">
+                &ldquo;I received factory quotes that <span className="text-[#CDA7B2] font-medium">don&apos;t add up</span> &mdash; but I don&apos;t know enough about their cost structure to push back.&rdquo;
+              </p>
+            </div>
+            <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The timeline</p>
+              <p className="text-[#3B3937] font-light leading-relaxed flex-1">
+                &ldquo;My factory says everything is <span className="text-[#CDA7B2] font-medium">on schedule</span> &mdash; but last season they said the same thing and we shipped six weeks late.&rdquo;
+              </p>
+            </div>
+            <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The stakes</p>
+              <p className="text-[#3B3937] font-light leading-relaxed flex-1">
+                &ldquo;I&apos;m about to commit <span className="text-[#CDA7B2] font-medium">six figures</span> to a production run and I have no one reviewing the details at the factory level.&rdquo;
+              </p>
+            </div>
+            <div className="bg-white rounded-lg p-8 border border-[#e8e2dc] hover:shadow-md transition-shadow flex flex-col">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The instinct</p>
+              <p className="text-[#3B3937] font-light leading-relaxed flex-1">
+                &ldquo;I know something feels <span className="text-[#CDA7B2] font-medium">off</span> with my production plan &mdash; but I can&apos;t identify exactly what it is.&rdquo;
+              </p>
+            </div>
+            <div className="bg-white rounded-lg p-8 border border-[#CDA7B2]/30 hover:shadow-md transition-shadow flex flex-col md:col-span-2">
+              <p className="font-script text-xl text-[#CDA7B2] italic mb-3">The weight</p>
+              <p className="text-[#3B3937] font-light leading-relaxed">
+                &ldquo;I&apos;m managing production <span className="text-[#CDA7B2] font-medium">myself</span> &mdash; and I&apos;m not sure if what I&apos;m doing is protecting my margins or quietly eroding them.&rdquo;
+              </p>
+            </div>
+          </div>
+          <p className="text-[#967F71] font-light text-lg mt-12 leading-relaxed text-center max-w-2xl mx-auto">
+            If any of this resonates, you are not behind. You are simply operating without the production oversight that protects brands at this level.
+          </p>
+        </div>
+      </section>
+
       {/* Editorial Quote */}
       <section className="bg-[#3B3937] py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
