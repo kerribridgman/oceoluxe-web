@@ -59,42 +59,42 @@ export default async function StrategicProductionAlignmentPage() {
           <p className="text-lg text-white/70 font-light leading-relaxed mb-10">
             A focused, 4&ndash;6 week engagement designed to give you complete visibility into your production risk before capital is committed.
           </p>
-          <div className="space-y-8">
-            <div className="flex items-start gap-6">
-              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">01</span>
-              <div>
-                <h3 className="text-white text-lg font-medium mb-2">Week 1: Alignment + Scope Definition</h3>
-                <p className="text-white/60 font-light leading-relaxed">
-                  Understanding your brand, your production challenge, and the specific risks that need to be assessed. From here, the engagement is scoped to your situation.
-                </p>
-              </div>
+          <div className="relative">
+            {/* Timeline step 1 */}
+            <div className="relative pl-10 pb-10 border-l border-white/20 ml-3">
+              <div className="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-[#CDA7B2] border-2 border-[#3B3937]" />
+              <span className="font-script text-lg italic text-[#CDA7B2] mb-1 block">Week 1</span>
+              <h3 className="text-white text-lg font-medium mb-2">Alignment + Scope Definition</h3>
+              <p className="text-white/60 font-light leading-relaxed">
+                Understanding your brand, your production challenge, and the specific risks that need to be assessed. From here, the engagement is scoped to your situation.
+              </p>
             </div>
-            <div className="flex items-start gap-6">
-              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">02</span>
-              <div>
-                <h3 className="text-white text-lg font-medium mb-2">Weeks 2&ndash;3: Deep Production Review</h3>
-                <p className="text-white/60 font-light leading-relaxed">
-                  Factory evaluation, costing audit, and timeline analysis. Every detail examined with the precision that protects your investment.
-                </p>
-              </div>
+            {/* Timeline step 2 */}
+            <div className="relative pl-10 pb-10 border-l border-white/20 ml-3">
+              <div className="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-[#CDA7B2] border-2 border-[#3B3937]" />
+              <span className="font-script text-lg italic text-[#CDA7B2] mb-1 block">Weeks 2&ndash;3</span>
+              <h3 className="text-white text-lg font-medium mb-2">Deep Production Review</h3>
+              <p className="text-white/60 font-light leading-relaxed">
+                Factory evaluation, costing audit, and timeline analysis. Every detail examined with the precision that protects your investment.
+              </p>
             </div>
-            <div className="flex items-start gap-6">
-              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">03</span>
-              <div>
-                <h3 className="text-white text-lg font-medium mb-2">Weeks 4&ndash;5: Risk Analysis + Pressure-Testing</h3>
-                <p className="text-white/60 font-light leading-relaxed">
-                  Every assumption in your production plan tested. Every risk identified and quantified before you commit capital.
-                </p>
-              </div>
+            {/* Timeline step 3 */}
+            <div className="relative pl-10 pb-10 border-l border-white/20 ml-3">
+              <div className="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-[#CDA7B2] border-2 border-[#3B3937]" />
+              <span className="font-script text-lg italic text-[#CDA7B2] mb-1 block">Weeks 4&ndash;5</span>
+              <h3 className="text-white text-lg font-medium mb-2">Risk Analysis + Pressure-Testing</h3>
+              <p className="text-white/60 font-light leading-relaxed">
+                Every assumption in your production plan tested. Every risk identified and quantified before you commit capital.
+              </p>
             </div>
-            <div className="flex items-start gap-6">
-              <span className="font-serif-display text-3xl text-[#CDA7B2] font-light leading-none mt-1">04</span>
-              <div>
-                <h3 className="text-white text-lg font-medium mb-2">Weeks 5&ndash;6: Delivery of Findings + Strategic Recommendations</h3>
-                <p className="text-white/60 font-light leading-relaxed">
-                  A complete production risk assessment with specific recommendations and a verified plan you can trust.
-                </p>
-              </div>
+            {/* Timeline step 4 (last — no border-l) */}
+            <div className="relative pl-10 ml-3">
+              <div className="absolute -left-[7px] top-1 w-3.5 h-3.5 rounded-full bg-[#CDA7B2] border-2 border-[#3B3937]" />
+              <span className="font-script text-lg italic text-[#CDA7B2] mb-1 block">Weeks 5&ndash;6</span>
+              <h3 className="text-white text-lg font-medium mb-2">Delivery of Findings + Strategic Recommendations</h3>
+              <p className="text-white/60 font-light leading-relaxed">
+                A complete production risk assessment with specific recommendations and a verified plan you can trust.
+              </p>
             </div>
           </div>
           <p className="text-white/90 text-lg font-light leading-relaxed mt-10">
