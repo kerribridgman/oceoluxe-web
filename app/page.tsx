@@ -19,13 +19,16 @@ export default async function HomePage() {
 
       {/* 1. Hero Section */}
       <section className="bg-[#faf8f5] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-20 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="space-y-6">
-              <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] animate-fade-in-up">
-                Structure as Strategy
-              </p>
-              <h1 className="font-serif-display text-4xl lg:text-[42px] font-normal text-[#3B3937] leading-[1.15] tracking-tight animate-fade-in-up">
+              <div className="animate-fade-in-up">
+                <div className="w-12 h-px bg-[#CDA7B2] mb-6" />
+                <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2]">
+                  Structure as Strategy
+                </p>
+              </div>
+              <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight animate-fade-in-up">
                 Production Risk Strategy for Fashion Founders
               </h1>
               <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
@@ -53,6 +56,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="relative">
+              <div className="absolute -right-3 -bottom-3 w-full h-full border border-[#CDA7B2]/40 rounded-lg hidden lg:block" />
               <div className="aspect-[4/3] overflow-hidden relative z-10 rounded-lg">
                 <Image
                   src="/images/hero-systems.jpeg"
