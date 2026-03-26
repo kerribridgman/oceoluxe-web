@@ -36,16 +36,32 @@ export default async function OperationalPartnershipPage() {
 
       {/* Hero Section */}
       <section className="section-spacing-lg">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4 animate-fade-in-up">
-            Flagship Engagement
-          </p>
-          <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 animate-fade-in-up">
-            Fractional Production Director for Fashion Brands
-          </h1>
-          <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            This is not consulting from the sidelines. This is embedded production leadership. A senior production strategist working inside your brand –managing factory relationships, auditing costing, pressure-testing timelines, and catching the risks that cost brands tens of thousands of dollars every season. Kerri has managed four concurrent production lines while owning all buying and purchasing for those lines. She has helped scale an account 10x in a single year by identifying operational inefficiencies that everyone else walked past.
-          </p>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4 animate-fade-in-up">
+                Flagship Engagement
+              </p>
+              <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 animate-fade-in-up">
+                Fractional Production Director for Fashion Brands
+              </h1>
+              <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
+                This is not consulting from the sidelines. This is embedded production leadership. A senior production strategist working inside your brand –managing factory relationships, auditing costing, pressure-testing timelines, and catching the risks that cost brands tens of thousands of dollars every season. Kerri has managed four concurrent production lines while owning all buying and purchasing for those lines. She has helped scale an account 10x in a single year by identifying operational inefficiencies that everyone else walked past.
+              </p>
+            </div>
+            <div className="animate-fade-in-up">
+              <div className="aspect-[3/4] overflow-hidden relative rounded-lg">
+                <Image
+                  src="/images/kerri-13-hero.jpg"
+                  alt="Kerri Bridgman, Fractional Production Director"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover rounded-lg"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
