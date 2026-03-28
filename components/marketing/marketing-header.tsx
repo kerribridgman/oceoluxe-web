@@ -155,7 +155,7 @@ export function MarketingHeader() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-2 border-t border-[#967F71]/10 bg-white/50 backdrop-blur-sm">
+          <div className="md:hidden py-4 space-y-2 border-t border-[#967F71]/10 bg-[#E8D4DB]">
             {/* Work With Oceo Luxe - Expandable */}
             <button
               className="flex items-center justify-between w-full text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5 font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors"
