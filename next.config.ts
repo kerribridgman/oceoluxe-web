@@ -20,9 +20,9 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://js.stripe.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://*.public.blob.vercel-storage.com https://images.unsplash.com https://prod-files-secure.s3.us-west-2.amazonaws.com",
+              "img-src 'self' data: blob: https://*.public.blob.vercel-storage.com https://images.unsplash.com https://prod-files-secure.s3.us-west-2.amazonaws.com https://storage.googleapis.com https://api.adharaweb.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://www.google-analytics.com https://api.stripe.com https://vitals.vercel-insights.com",
+              "connect-src 'self' https://www.google-analytics.com https://api.stripe.com https://vitals.vercel-insights.com https://api.adharaweb.com",
               "frame-src https://js.stripe.com",
               "object-src 'none'",
               "base-uri 'self'",
@@ -108,6 +108,16 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      // Adhara CMS — images stored in Google Cloud Storage
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+      },
+      // Adhara API — proxy-served images
+      {
+        protocol: 'https',
+        hostname: 'api.adharaweb.com',
       },
     ],
   },

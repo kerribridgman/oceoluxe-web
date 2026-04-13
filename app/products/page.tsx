@@ -1,5 +1,6 @@
 import { getPublicNotionProducts } from '@/lib/db/queries-notion-products';
 import { getPublicDashboardProducts } from '@/lib/db/queries-dashboard-products';
+import { fetchAdharaProducts } from '@/lib/adhara';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -35,9 +36,25 @@ export default async function ProductsPage() {
     console.error('Error loading products:', error);
   }
 
-  const products = notionProducts;
+  // Adhara is the primary product source when NEXT_PUBLIC_ADHARA_WORKSPACE_SLUG is set.
+  // Falls back to Notion + Dashboard products if not configured.
+  const adharaProducts = await fetchAdharaProducts();
 
-  const isFreeProduct = (p: typeof products[0]) => {
+  // Use Adhara products if available; otherwise fall back to Notion products from DB
+  type ProductItem = {
+    id: string | number;
+    slug: string;
+    title: string;
+    description: string | null | undefined;
+    price: string | null | undefined;
+    salePrice: string | null | undefined;
+    coverImageUrl: string | null | undefined;
+  };
+  const products: ProductItem[] = adharaProducts.length > 0
+    ? adharaProducts
+    : notionProducts;
+
+  const isFreeProduct = (p: ProductItem) => {
     if (!p.price) return true;
     const priceStr = p.price.toLowerCase();
     return priceStr === 'free' || priceStr === '$0' || priceStr === '0' || p.title.toLowerCase().includes('free');

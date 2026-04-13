@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { BlogPost } from '@/lib/db/schema';
+
+interface RelatedPost {
+  id: string | number;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  coverImageUrl: string | null;
+  publishedAt: Date | null;
+}
 
 function formatBlogDate(date: Date | string): string {
   const d = new Date(date);
@@ -13,7 +21,7 @@ function formatBlogDate(date: Date | string): string {
 }
 
 interface RelatedPostsProps {
-  posts: BlogPost[];
+  posts: RelatedPost[];
 }
 
 export function RelatedPosts({ posts }: RelatedPostsProps) {

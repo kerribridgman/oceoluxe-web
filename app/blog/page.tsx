@@ -1,4 +1,5 @@
 import { getPublishedBlogPosts } from '@/lib/db/queries-blogs';
+import { fetchAdharaBlogPosts, dbPostToAdharaPost } from '@/lib/adhara';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { BlogList } from '@/components/blog/blog-list';
@@ -13,7 +14,8 @@ export async function generateMetadata() {
   return await getPageMetadata('blog');
 }
 
-export const dynamic = 'force-dynamic';
+// ISR: revalidate cached blog list every 60 seconds
+export const revalidate = 60;
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
 
@@ -23,7 +25,11 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 ]);
 
 export default async function BlogPage() {
-  const posts = await getPublishedBlogPosts();
+  // Adhara is the primary CMS source. Falls back to local DB if not configured.
+  const adharaPosts = await fetchAdharaBlogPosts();
+  const posts = adharaPosts.length > 0
+    ? adharaPosts
+    : (await getPublishedBlogPosts()).map(dbPostToAdharaPost);
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">

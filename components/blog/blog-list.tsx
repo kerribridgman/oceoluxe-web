@@ -17,7 +17,7 @@ function formatBlogDate(date: Date | string): string {
 }
 
 interface BlogPost {
-  id: number;
+  id: string | number;
   slug: string;
   title: string;
   excerpt: string | null;
