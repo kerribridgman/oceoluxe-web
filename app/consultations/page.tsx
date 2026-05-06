@@ -107,65 +107,43 @@ export default async function ConsultationsPage() {
       <section className="section-spacing bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="space-y-16">
-            {consultations.map((consultation, index) => {
-              const isFlagship = consultation.flagship;
+            {consultations.map((consultation) => {
               return (
                 <div
                   key={consultation.title}
-                  className={`rounded-xl overflow-hidden ${
-                    isFlagship
-                      ? 'bg-[#3B3937] border border-[#4A4745]'
-                      : 'bg-[#faf8f5] border border-[#EDEBE8]'
-                  }`}
+                  className="rounded-xl overflow-hidden bg-[#faf8f5] border border-[#EDEBE8]"
                 >
                   <div className="p-8 lg:p-12">
                     {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
                       <div>
-                        {isFlagship && (
-                          <p className="font-script text-lg italic text-[#CDA7B2] mb-2">Strategic</p>
-                        )}
-                        <h2 className={`font-serif-display text-2xl lg:text-3xl font-normal tracking-tight ${
-                          isFlagship ? 'text-white' : 'text-[#3B3937]'
-                        }`}>
+                        <h2 className="font-serif-display text-2xl lg:text-3xl font-normal tracking-tight text-[#3B3937]">
                           {consultation.title}
                         </h2>
-                        <p className={`text-lg font-light mt-2 ${
-                          isFlagship ? 'text-white/60' : 'text-[#967F71]'
-                        }`}>
+                        <p className="text-lg font-light mt-2 text-[#967F71]">
                           {consultation.tagline}
                         </p>
                       </div>
-                      <div className={`text-3xl lg:text-4xl font-light tracking-tight shrink-0 ${
-                        isFlagship ? 'text-white' : 'text-[#3B3937]'
-                      }`}>
+                      <div className="text-3xl lg:text-4xl font-light tracking-tight shrink-0 text-[#3B3937]">
                         {consultation.price}
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className={`text-lg font-light leading-relaxed mb-8 ${
-                      isFlagship ? 'text-white/70' : 'text-[#967F71]'
-                    }`}>
+                    <p className="text-lg font-light leading-relaxed mb-8 text-[#967F71]">
                       {consultation.description}
                     </p>
 
                     {/* What's Included */}
                     <div className="mb-8">
-                      <h3 className={`text-sm uppercase tracking-widest font-medium mb-4 ${
-                        isFlagship ? 'text-white/50' : 'text-[#967F71]/70'
-                      }`}>
+                      <h3 className="text-sm uppercase tracking-widest font-medium mb-4 text-[#967F71]/70">
                         What&apos;s Included
                       </h3>
                       <ul className="space-y-3">
                         {consultation.included.map((item) => (
                           <li key={item} className="flex items-start gap-3">
-                            <Check className={`h-5 w-5 mt-0.5 shrink-0 ${
-                              isFlagship ? 'text-[#CDA7B2]' : 'text-[#CDA7B2]'
-                            }`} />
-                            <span className={`text-base font-light ${
-                              isFlagship ? 'text-white/80' : 'text-[#3B3937]'
-                            }`}>
+                            <Check className="h-5 w-5 mt-0.5 shrink-0 text-[#CDA7B2]" />
+                            <span className="text-base font-light text-[#3B3937]">
                               {item}
                             </span>
                           </li>
@@ -174,12 +152,8 @@ export default async function ConsultationsPage() {
                     </div>
 
                     {/* Positioning */}
-                    <div className={`border-l-2 border-[#CDA7B2] pl-6 mb-8 ${
-                      isFlagship ? '' : ''
-                    }`}>
-                      <p className={`font-light leading-relaxed italic ${
-                        isFlagship ? 'text-white/60' : 'text-[#967F71]'
-                      }`}>
+                    <div className="border-l-2 border-[#CDA7B2] pl-6 mb-8">
+                      <p className="font-light leading-relaxed italic text-[#967F71]">
                         {consultation.positioning}
                       </p>
                     </div>
@@ -189,11 +163,7 @@ export default async function ConsultationsPage() {
                       <a href={consultation.paymentLink} target="_blank" rel="noopener noreferrer">
                         <Button
                           size="lg"
-                          className={`h-12 px-8 text-base font-normal tracking-wide ${
-                            isFlagship
-                              ? 'bg-white text-[#3B3937] hover:bg-white/90'
-                              : 'bg-[#3B3937] text-white hover:bg-[#4A4745]'
-                          }`}
+                          className="h-12 px-8 text-base font-normal tracking-wide bg-[#3B3937] text-white hover:bg-[#4A4745]"
                         >
                           Book This Session
                           <ArrowRight className="ml-2 h-4 w-4" />
@@ -203,11 +173,7 @@ export default async function ConsultationsPage() {
                       <Link href={consultation.paymentLink}>
                         <Button
                           size="lg"
-                          className={`h-12 px-8 text-base font-normal tracking-wide ${
-                            isFlagship
-                              ? 'bg-white text-[#3B3937] hover:bg-white/90'
-                              : 'bg-[#3B3937] text-white hover:bg-[#4A4745]'
-                          }`}
+                          className="h-12 px-8 text-base font-normal tracking-wide bg-[#3B3937] text-white hover:bg-[#4A4745]"
                         >
                           Book This Session
                           <ArrowRight className="ml-2 h-4 w-4" />
