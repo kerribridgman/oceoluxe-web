@@ -9,6 +9,7 @@ import { SiteSearch } from '@/components/search/site-search';
 const serviceSubLinks = [
   { name: 'Fractional Production Director', href: '/operational-partnership' },
   { name: 'Production Risk Assessment', href: '/strategic-production-alignment' },
+  { name: 'Consultations', href: '/consultations' },
   { name: 'Studio Systems', href: '/studio-systems' },
 ];
 
