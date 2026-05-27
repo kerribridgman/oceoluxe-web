@@ -7,7 +7,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
-import { SectionDivider } from '@/components/marketing/section-divider';
+import { AnimateIn } from '@/components/animate-in';
 
 export async function generateMetadata() {
   return await getPageMetadata('operational-partnership');
@@ -22,8 +22,8 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 ]);
 
 const serviceJsonLd = getServiceJsonLd([{
-  name: 'Operational Partnership',
-  description: 'Embedded production leadership for fashion brands placing significant production orders. Factory oversight, costing audits, timeline pressure-testing, and margin protection.',
+  name: 'Private Operational Partnership',
+  description: 'An embedded operator inside your business. Long-form, ongoing operational partnership for founders who need a partner running the operational backbone of a growing business.',
   url: `${baseUrl}/operational-partnership`,
 }]);
 
@@ -35,300 +35,93 @@ export default async function OperationalPartnershipPage() {
       <MarketingHeader />
 
       {/* Hero Section */}
-      <section className="section-spacing-lg">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
-              <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4 animate-fade-in-up">
-                Flagship Engagement
-              </p>
-              <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 animate-fade-in-up">
-                Fractional Production Director for Fashion Brands
-              </h1>
-              <p className="text-xl text-[#967F71] font-light leading-relaxed animate-fade-in-up">
-                This is not consulting from the sidelines. This is embedded production leadership. A senior production strategist working inside your brand –managing factory relationships, auditing costing, pressure-testing timelines, and catching the risks that cost brands tens of thousands of dollars every season. Kerri has managed four concurrent production lines while owning all buying and purchasing for those lines. She has helped scale an account 10x in a single year by identifying operational inefficiencies that everyone else walked past.
-              </p>
-            </div>
-            <div className="animate-fade-in-up">
-              <div className="aspect-[3/4] overflow-hidden relative rounded-lg">
-                <Image
-                  src="/images/kerri-13-hero.jpg"
-                  alt="Kerri Bridgman, Fractional Production Director"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover rounded-lg"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Engagement Structure */}
-      <section className="section-spacing bg-[#3B3937]">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-10 tracking-tight">
-            Engagement Structure
-          </h2>
-          <p className="text-lg text-white/70 font-light leading-relaxed mb-10">
-            A 3-month minimum engagement designed to transform reactive production management into a structured, oversight-driven operation.
-          </p>
-          <div className="space-y-8">
-            <div className="border-l-2 border-[#CDA7B2] pl-6">
-              <p className="text-white font-medium mb-2 text-lg">Month 1: Full Production Audit + Immediate Risk Stabilization</p>
-              <p className="text-white/60 font-light">Complete review of your production operation. Factory communication, costing, timelines, and supplier relationships assessed and stabilized.</p>
-            </div>
-            <div className="border-l-2 border-[#CDA7B2] pl-6">
-              <p className="text-white font-medium mb-2 text-lg">Month 2: Systems Implementation + Supplier Alignment</p>
-              <p className="text-white/60 font-light">Production systems built and embedded into your operation. Factory relationships structured for accountability, clarity, and consistent delivery.</p>
-            </div>
-            <div className="border-l-2 border-[#CDA7B2] pl-6">
-              <p className="text-white font-medium mb-2 text-lg">Month 3: Production Oversight + Optimization</p>
-              <p className="text-white/60 font-light">Ongoing production management with continuous oversight. Systems refined, margins protected, and your operation running with precision.</p>
-            </div>
-          </div>
-          <p className="text-white/90 text-lg font-light leading-relaxed mt-10">
-            This is not advisory. This is operational leadership embedded inside your business.
-          </p>
-        </div>
-      </section>
-
-      {/* What the Engagement Includes */}
-      <section className="section-spacing bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            What This Engagement Includes
-          </h2>
-          <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
-            <p>
-              <span className="text-[#3B3937]">Factory oversight.</span> Direct management of factory communication, production milestones, and quality checkpoints. When other departments are not getting answers from the people they should be, this engagement bridges that gap. Every detail reviewed before it becomes a problem –not after it becomes an expense.
-            </p>
-            <p>
-              <span className="text-[#3B3937]">Costing and margin protection.</span> Full production costing audits that expose hidden expenses, validate factory quotes, and ensure your margins are real –not assumptions that erode once invoices arrive.
-            </p>
-            <p>
-              <span className="text-[#3B3937]">Production risk management.</span> Timeline pressure-testing, supplier vetting, and pre-production reviews. Identifying the specific risks in your production plan before capital is committed.
-            </p>
-            <p>
-              <span className="text-[#3B3937]">Strategic advisory.</span> Ongoing decision support on sourcing, pricing architecture, production sequencing, and factory negotiation. Not reactive problem-solving –a systematic production intelligence that deepens with every season your brand grows.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Editorial Quote */}
-      <section className="bg-[#3B3937] py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
-          <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;Factories will tell you everything is under control. We verify that it actually is –before your capital is on the line.&rdquo;
-          </p>
-        </div>
-      </section>
-
-      {/* What This Replaces + Where I Step In */}
-      <section className="section-spacing bg-[#faf8f5]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* What This Replaces */}
-            <div className="bg-white rounded-lg p-8 lg:p-10 border border-[#e8e2dc]">
-              <h2 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] mb-8 tracking-tight">
-                What This Replaces
-              </h2>
-              <ul className="space-y-4 text-lg text-[#967F71] font-light">
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Guesswork in factory communication</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Unverified costing decisions</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Reactive production management</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Founder-led problem solving under pressure</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Where I Step In */}
-            <div className="bg-white rounded-lg p-8 lg:p-10 border border-[#e8e2dc]">
-              <h2 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] mb-8 tracking-tight">
-                Where I Step In
-              </h2>
-              <ul className="space-y-4 text-lg text-[#967F71] font-light">
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Before production orders are placed</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>When factories begin slipping timelines</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>When costing needs validation before approval</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>When teams are not getting clear answers</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <blockquote className="border-l-2 border-[#CDA7B2] pl-6 mt-12">
-            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
-              Factories do not operate based on your brand&apos;s priorities. They operate based on their own capacity, margins, and constraints. Without oversight, your brand absorbs the risk.
-            </p>
-          </blockquote>
-        </div>
-      </section>
-
-      <SectionDivider variant="dots" className="bg-[#faf8f5] pt-0 pb-0" />
-
-      {/* Ideal Client */}
-      <section className="section-spacing bg-[#faf8f5]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-                This Partnership Is Designed For
-              </h2>
-              <ul className="space-y-4 text-lg text-[#967F71] font-light">
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Fashion founders placing production orders between $50K and $500K who need expert production oversight</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Brands managing multiple factories and complex supply chains without a senior production person reviewing the details</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Founders who have been burned by factory miscommunication, costing surprises, or timeline failures and refuse to let it happen again</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-                  <span>Brands that understand production risk management is not optional –it is the difference between profit and loss</span>
-                </li>
-              </ul>
-              <p className="text-[#3B3937] mt-10 text-lg font-light">
-                This is not general consulting. This is embedded production leadership for brands with significant capital at stake. The longer we work together, the sharper your production operation becomes.
-              </p>
-            </div>
-            <div className="hidden lg:block">
-              <div className="aspect-square overflow-hidden relative rounded-lg">
-                <Image
-                  src="/images/designer-fabrics-cityview.png"
-                  alt="Fashion designer reviewing fabric swatches with city skyline in background"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover rounded-lg"
-                  quality={75}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial */}
-      <section className="bg-white py-16 lg:py-20">
+      <section className="py-24 lg:py-32">
         <div className="max-w-3xl mx-auto px-6">
-          <div className="border-l-2 border-[#CDA7B2] pl-8">
-            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] leading-relaxed">
-              &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
+          <AnimateIn animation="fade-in">
+            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-4 text-glow-warm">
+              Private Operational Partnership
+            </h1>
+            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#967F71] mb-8">
+              An embedded operator inside your business.
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">– C-Suite Executive</p>
-          </div>
+            <p className="text-sm tracking-wider uppercase text-[#967F71] font-light">
+              Investment: $8,500 to $12,000 monthly. Application-only.
+            </p>
+          </AnimateIn>
         </div>
       </section>
 
-      {/* Expected Outcome After 90 Days */}
-      <section className="section-spacing bg-[#faf8f5]">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            Expected Outcome After 90 Days
-          </h2>
-          <ul className="space-y-4 text-lg text-[#967F71] font-light">
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-              <span>Production system fully structured</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-              <span>Costing verified and margin clarity established</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-              <span>Supplier communication stabilized</span>
-            </li>
-            <li className="flex items-start gap-4">
-              <span className="text-[#CDA7B2] mt-1">&ndash;</span>
-              <span>Founder no longer operating reactively</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      {/* Investment */}
-      <section className="section-spacing bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-10 tracking-tight">
-            Investment
-          </h2>
-          <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed">
-            <p>
-              This engagement is application-based and scoped to your brand's specific needs. Investment is discussed during the alignment call and depends on the depth, duration, and complexity of the partnership.
-            </p>
-            <p className="text-[#3B3937]">
-              Ready to protect your next production investment? It starts with a conversation about your risk.
-            </p>
-            <blockquote className="border-l-2 border-[#CDA7B2] pl-6 mt-8">
-              <p className="font-script text-xl lg:text-2xl italic text-[#3B3937]/80 leading-relaxed">
-                &ldquo;If your brand has outgrown trusting factories without verification, this is where protection begins.&rdquo;
+      {/* Body Section 1 */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-3xl mx-auto px-6">
+          <AnimateIn>
+            <div className="space-y-10 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+              <p>
+                Private Operational Partnership is for founders who need an internal operator, not an external consultant. This is not a project, not a deliverable, and not a fixed engagement. Oceo Luxe becomes a calm, structured presence inside the company, running the operational layer the founder no longer has time to hold.
               </p>
-            </blockquote>
-          </div>
+            </div>
+          </AnimateIn>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-spacing bg-[#3B3937]">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="font-script text-2xl italic text-[#CDA7B2] mb-4">Next step</p>
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
-            Protect Your Production Investment
-          </h2>
-          <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            If your production decisions involve real capital, this is the stage where oversight is required &ndash; not optional.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book">
-              <Button
-                size="lg"
-                className="bg-white text-[#3B3937] hover:bg-white/90 h-12 px-8 text-base font-normal tracking-wide"
-              >
-                Schedule a Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="/book">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white/30 text-white hover:bg-white/10 h-12 px-8 text-base font-normal tracking-wide"
-              >
-                Book a Call
-              </Button>
-            </Link>
-          </div>
+      {/* Body Section 2 — What it covers */}
+      <section className="py-20 lg:py-28 bg-[#faf8f5] ambient-glow-rose">
+        <div className="max-w-3xl mx-auto px-6 relative z-10">
+          <AnimateIn>
+            <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+              <p>
+                The partnership covers operational system design, vendor and team coordination, decision architecture, weekly operational rhythm, calendar and priority structure, and the strategic execution layer that translates founder vision into actual movement. The scope is shaped to the business, not pre-packaged. Some partnerships are heavy on systems design. Others are heavy on team coordination. The work is determined by what the business needs, not by what is easy to sell.
+              </p>
+
+              {/* Pull-quote */}
+              <blockquote className="border-l-2 border-[#CDA7B2] pl-6 my-10 py-4 bg-[#CDA7B2]/5 rounded-r-lg">
+                <p className="font-script text-xl lg:text-2xl italic text-[#CDA7B2] leading-relaxed">
+                  The scope is shaped to the business, not pre-packaged.
+                </p>
+              </blockquote>
+            </div>
+          </AnimateIn>
+        </div>
+      </section>
+
+      {/* Body Section 3 — Who it is for */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-3xl mx-auto px-6">
+          <AnimateIn>
+            <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+              <p>
+                This partnership is for founders generating revenue, with a team or contractors, who need operational structure to scale without losing the integrity of the brand. It is not for early-stage founders still finding the offer.
+              </p>
+            </div>
+            <div className="mt-12">
+              <Link href="/apply">
+                <Button
+                  size="lg"
+                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20"
+                >
+                  Apply
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </AnimateIn>
+        </div>
+      </section>
+
+      {/* Editorial Image */}
+      <section className="py-16 lg:py-24 bg-[#faf8f5]">
+        <div className="max-w-3xl mx-auto px-6">
+          <AnimateIn animation="fade-in">
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+              <Image
+                src="/images/Kerri-11.webp"
+                alt="Kerri Bridgman"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+          </AnimateIn>
         </div>
       </section>
 

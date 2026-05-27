@@ -4,25 +4,33 @@ import { ArrowRight } from 'lucide-react';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
-import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
+import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { AnimateIn } from '@/components/animate-in';
 
 export async function generateMetadata() {
-  return await getPageMetadata('studio-systems');
+  return await getPageMetadata('strategic-operational-alignment');
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
 
 const breadcrumbJsonLd = getBreadcrumbJsonLd([
   { name: 'Home', url: baseUrl },
-  { name: 'Studio Systems', url: `${baseUrl}/studio-systems` },
+  { name: 'Work With Oceo Luxe', url: `${baseUrl}/work-with-oceo-luxe` },
+  { name: 'Strategic Operational Alignment', url: `${baseUrl}/strategic-operational-alignment` },
 ]);
 
-export default async function StudioSystemsPage() {
+const serviceJsonLd = getServiceJsonLd([{
+  name: 'Strategic Operational Alignment',
+  description: 'A focused operational reset for founders. Bounded scope engagement where Oceo Luxe maps the business, identifies operational fractures, and rebuilds the systems slowing growth.',
+  url: `${baseUrl}/strategic-operational-alignment`,
+}]);
+
+export default async function StrategicOperationalAlignmentPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
+      <JsonLdScript data={serviceJsonLd as unknown as Record<string, unknown>} />
       <MarketingHeader />
 
       {/* Hero Section */}
@@ -30,13 +38,13 @@ export default async function StudioSystemsPage() {
         <div className="max-w-3xl mx-auto px-6">
           <AnimateIn animation="fade-in">
             <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-4 text-glow-warm">
-              Studio Systems
+              Strategic Operational Alignment
             </h1>
             <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#967F71] mb-8">
-              Hands-on operational and web build support, by the hour.
+              A focused operational reset.
             </p>
             <p className="text-sm tracking-wider uppercase text-[#967F71] font-light">
-              Investment: $111 per hour. Maximum five hours per week.
+              Investment: $5,500 to $8,500. Flat engagement.
             </p>
           </AnimateIn>
         </div>
@@ -48,26 +56,26 @@ export default async function StudioSystemsPage() {
           <AnimateIn>
             <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
               <p>
-                Studio Systems is for founders who need a focused operator inside their business for a few hours a week. Not a partnership, not a membership. A direct working relationship measured in hours, capped at five per week so the work stays high-quality and the calendar stays sustainable on both sides.
+                Strategic Operational Alignment is a defined engagement for founders who need an operational reset. Not a partnership, not a membership. A bounded scope of work where Oceo Luxe maps the current state of the business, identifies the operational fractures, and rebuilds the systems that are slowing growth.
               </p>
             </div>
           </AnimateIn>
         </div>
       </section>
 
-      {/* Body Section 2 — What the hours cover */}
-      <section className="py-20 lg:py-28 bg-[#faf8f5] ambient-glow-rose">
+      {/* Body Section 2 — What you walk away with */}
+      <section className="py-20 lg:py-28 bg-[#faf8f5] ambient-glow-taupe">
         <div className="max-w-3xl mx-auto px-6 relative z-10">
           <AnimateIn>
             <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
               <p>
-                The hours are split between operational support and web build support, shaped to what the business actually needs that week. One week the work might be vendor coordination, decision architecture, and weekly operational rhythm. Another week it might be mapping the structure of a website, planning a build, or laying the groundwork for the digital infrastructure the business is about to need. The point is to put real operational and technical hands on the work without committing the founder to a long-form partnership.
+                Every engagement ends with a documented operational architecture the founder owns. The systems built during the engagement are designed to keep working without Oceo Luxe holding them. The point of the alignment is to leave the founder with structure, not dependency.
               </p>
 
               {/* Pull-quote */}
               <blockquote className="border-l-2 border-[#CDA7B2] pl-6 my-10 py-4 bg-[#CDA7B2]/5 rounded-r-lg">
                 <p className="font-script text-xl lg:text-2xl italic text-[#CDA7B2] leading-relaxed">
-                  Real operational and technical hands on the work.
+                  The point of the alignment is to leave the founder with structure, not dependency.
                 </p>
               </blockquote>
             </div>
@@ -75,26 +83,13 @@ export default async function StudioSystemsPage() {
         </div>
       </section>
 
-      {/* Body Section 3 — Where it leads */}
+      {/* Body Section 3 — Who it is for */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-3xl mx-auto px-6">
           <AnimateIn>
             <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
               <p>
-                Studio Systems often becomes the first step in something larger. Founders who start here frequently move into a deeper build of their digital infrastructure once the operational picture is clear and the systems underneath the business are ready to support what comes next.
-              </p>
-            </div>
-          </AnimateIn>
-        </div>
-      </section>
-
-      {/* Body Section 4 — Who it is for */}
-      <section className="py-20 lg:py-28 bg-[#faf8f5] ambient-glow-taupe">
-        <div className="max-w-3xl mx-auto px-6 relative z-10">
-          <AnimateIn>
-            <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
-              <p>
-                Founders who are building, growing, and ready to bring an operator into the work for a few focused hours a week. Founders who want their vision to take shape in real systems and real infrastructure, not slide decks and not theory.
+                This engagement is for founders who can identify the operational problem but do not have the time or the framework to solve it. Most often the business has grown faster than its systems, and the founder needs an operator to come in, build the structure, and leave it stable.
               </p>
             </div>
             <div className="mt-12">
@@ -103,7 +98,7 @@ export default async function StudioSystemsPage() {
                   size="lg"
                   className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20"
                 >
-                  Start with Studio Systems
+                  Apply for Strategic Alignment
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>

@@ -88,6 +88,52 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      // Rebrand redirects
+      {
+        source: '/strategic-production-alignment',
+        destination: '/strategic-operational-alignment',
+        permanent: true,
+      },
+      {
+        source: '/consultations',
+        destination: '/work-with-oceo-luxe',
+        permanent: true,
+      },
+      {
+        source: '/quiz/:path*',
+        destination: '/apply',
+        permanent: true,
+      },
+      {
+        source: '/quiz',
+        destination: '/apply',
+        permanent: true,
+      },
+      {
+        source: '/products/:path*',
+        destination: '/apply',
+        permanent: true,
+      },
+      {
+        source: '/cart',
+        destination: '/apply',
+        permanent: true,
+      },
+      {
+        source: '/checkout',
+        destination: '/apply',
+        permanent: true,
+      },
+      {
+        source: '/faq',
+        destination: '/apply',
+        permanent: true,
+      },
+      {
+        source: '/join',
+        destination: '/apply',
+        permanent: true,
+      },
     ];
   },
   images: {

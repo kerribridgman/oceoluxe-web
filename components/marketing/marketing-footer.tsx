@@ -12,7 +12,7 @@ export function MarketingFooter() {
               <h2 className="text-xl font-light text-[#3B3937] tracking-wide">Oceo Luxe</h2>
             </div>
             <p className="text-[#967F71] mb-6 max-w-md font-light leading-relaxed">
-              Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm.
+              Studio Operational Partner for founders building businesses they intend to keep.
             </p>
             <div className="flex space-x-4">
               <a
@@ -62,6 +62,11 @@ export function MarketingFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/about" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                  About
+                </Link>
+              </li>
+              <li>
                 <Link href="/blog" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
                   Blog
                 </Link>
@@ -71,41 +76,14 @@ export function MarketingFooter() {
                   Apply
                 </Link>
               </li>
-              <li>
-                <Link href="/book" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
-                  Book a Call
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Secondary Links */}
-          <div>
-            <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/products" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/join" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
-                  Join Email List
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
 
         {/* Tagline */}
         <div className="border-t border-[#967F71]/10 mt-8 pt-8 text-center">
-          <p className="text-[#3B3937] text-lg font-light italic mb-6">
-            Structure does not limit creativity. It protects it.
+          <p className="font-script text-xl italic text-[#CDA7B2] mb-6">
+            Structure does not limit creativity, it protects it.
           </p>
         </div>
 

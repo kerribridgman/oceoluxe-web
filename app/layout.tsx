@@ -11,11 +11,11 @@ import { getOrganizationJsonLd, getWebSiteJsonLd } from '@/lib/seo/json-ld';
 export const metadata: Metadata = {
   metadataBase: new URL('https://oceoluxe.com'),
   title: {
-    default: 'Oceo Luxe | Operational Partnership for Fashion Founders',
+    default: 'Oceo Luxe | Studio Operational Partner for Founders',
     template: '%s | Oceo Luxe',
   },
-  description: 'Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm. Production leadership rooted in real-world experience.',
-  keywords: ['fashion operational partnership', 'fashion production consulting', 'fashion brand operations', 'production leadership', 'fashion founder support'],
+  description: 'Operational partnership for founders building businesses they intend to keep. Systems, decision frameworks, and structured execution from a studio operational partner.',
+  keywords: ['founder operations', 'operational partnership', 'studio operational partner', 'founder operator', 'operational systems', 'business operations'],
   authors: [{ name: 'Kerri Bridgman' }],
   creator: 'Oceo Luxe',
   openGraph: {
@@ -23,21 +23,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://oceoluxe.com',
     siteName: 'Oceo Luxe',
-    title: 'Oceo Luxe | Operational Partnership for Fashion Founders',
-    description: 'Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm. Production leadership rooted in real-world experience.',
+    title: 'Oceo Luxe | Studio Operational Partner for Founders',
+    description: 'Operational partnership for founders building businesses they intend to keep. Systems, decision frameworks, and structured execution.',
     images: [
       {
         url: '/images/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'Oceo Luxe - Operational Partnership for Fashion Founders',
+        alt: 'Oceo Luxe - Studio Operational Partner for Founders',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Oceo Luxe | Operational Partnership for Fashion Founders',
-    description: 'Strategic operational partnership for fashion founders ready to scale with structure, clarity, and calm. Production leadership rooted in real-world experience.',
+    title: 'Oceo Luxe | Studio Operational Partner for Founders',
+    description: 'Operational partnership for founders building businesses they intend to keep. Systems, decision frameworks, and structured execution.',
     images: ['/images/og-default.png'],
   },
   alternates: {

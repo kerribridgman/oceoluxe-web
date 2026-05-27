@@ -6,6 +6,7 @@ import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
+import { AnimateIn } from '@/components/animate-in';
 
 export async function generateMetadata() {
   return await getPageMetadata('work-with-oceo-luxe');
@@ -18,144 +19,79 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
   { name: 'Work With Oceo Luxe', url: `${baseUrl}/work-with-oceo-luxe` },
 ]);
 
-const offerings = [
-  {
-    title: 'Production Risk Assessment',
-    description:
-      'Focused, short-term engagements for brands preparing for a significant production order. Factory evaluation, costing audit, timeline pressure-testing, or pre-production risk review.',
-    href: '/strategic-production-alignment',
-    cta: 'Explore Risk Assessment',
-    flagship: false,
-  },
-  {
-    title: 'Fractional Production Director',
-    description:
-      'An embedded, ongoing engagement for fashion founders who need senior production leadership without a full-time hire. Production risk management, factory oversight, costing strategy, and margin protection –deployed inside your business.',
-    href: '/operational-partnership',
-    cta: 'Learn More',
-    flagship: true,
-  },
-  {
-    title: 'Studio Systems',
-    description:
-      'Operational systems, frameworks, and community designed for independent fashion brands. Production calendars, costing tools, supplier management, and live Q&A. Built from real-world production leadership.',
-    href: '/studio-systems',
-    cta: 'Explore Studio Systems',
-    flagship: false,
-  },
-];
-
 export default async function WorkWithOceoLuxePage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
       <MarketingHeader />
 
-      {/* Intro Section */}
-      <section className="section-spacing-lg">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4 animate-fade-in-up">
-            Work With Oceo Luxe
-          </p>
-          <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 animate-fade-in-up">
-            Production Risk Strategy for Fashion Founders
-          </h1>
-          <p className="text-xl text-[#967F71] font-light leading-relaxed max-w-3xl animate-fade-in-up">
-            Oceo Luxe works with fashion founders placing $50K–$500K production orders who need strategic production oversight. Whether you need an embedded production director, a focused risk assessment before a major order, or proven operational systems, we protect your production investment at every stage.
-          </p>
+      {/* Hero Section */}
+      <section className="py-24 lg:py-32">
+        <div className="max-w-3xl mx-auto px-6">
+          <AnimateIn animation="fade-in">
+            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-8 text-glow-warm">
+              Three Operational Depths, One Standard
+            </h1>
+            <p className="text-xl text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+              Oceo Luxe meets founders at three levels of operational depth. The level is matched to where the business is, not where the founder wants it to be. The standard of work is the same across all three.
+            </p>
+          </AnimateIn>
         </div>
       </section>
 
-      {/* Editorial Quote */}
-      <section className="bg-[#3B3937] py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="w-12 h-px bg-[#CDA7B2] mx-auto mb-8" />
-          <p className="font-script text-2xl lg:text-3xl italic text-white/90 leading-relaxed">
-            &ldquo;Your factory will say everything is under control. We make sure it actually is.&rdquo;
-          </p>
-        </div>
-      </section>
+      {/* Tier Blocks — Stacked Vertically */}
+      <section className="py-20 lg:py-28 bg-white ambient-glow-taupe">
+        <div className="max-w-3xl mx-auto px-6 relative z-10">
 
-      {/* Offering Cards */}
-      <section className="section-spacing bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {offerings.map((offering) => {
-              const isFlagship = offering.flagship;
-              return (
-                <div
-                  key={offering.title}
-                  className={`rounded-xl p-8 flex flex-col justify-between transition-shadow hover:shadow-lg ${
-                    isFlagship
-                      ? 'bg-[#3B3937] border border-[#4A4745]'
-                      : 'bg-[#faf8f5] border border-[#EDEBE8]'
-                  }`}
-                >
-                  <div>
-                    {isFlagship && (
-                      <p className="font-script text-lg italic text-[#CDA7B2] mb-2">Flagship</p>
-                    )}
-                    <h2 className={`font-serif-display text-2xl font-normal mb-4 tracking-tight ${
-                      isFlagship ? 'text-white' : 'text-[#3B3937]'
-                    }`}>
-                      {offering.title}
-                    </h2>
-                    <p className={`font-light leading-relaxed mb-8 ${
-                      isFlagship ? 'text-white/70' : 'text-[#967F71]'
-                    }`}>
-                      {offering.description}
-                    </p>
-                  </div>
-                  <Link href={offering.href}>
-                    <Button
-                      variant="outline"
-                      className={`h-12 px-6 text-base font-normal tracking-wide w-full justify-center ${
-                        isFlagship
-                          ? 'bg-white text-[#3B3937] border-white hover:bg-white/90'
-                          : 'border-[#3B3937] text-[#3B3937] hover:bg-[#3B3937] hover:text-white'
-                      }`}
-                    >
-                      {offering.cta}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+          {/* Private Operational Partnership */}
+          <AnimateIn delay={100}>
+            <div className="py-10 transition-all duration-300 hover:translate-x-1">
+              <h2 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] mb-4 tracking-tight">
+                Private Operational Partnership
+              </h2>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed mb-6" style={{ maxWidth: '65ch' }}>
+                An embedded operator inside the business. Long-form, ongoing, shaped to the company. For founders who need a partner running the operational backbone of a growing business.
+              </p>
+              <Link href="/operational-partnership" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors">
+                Read More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </AnimateIn>
 
-      {/* CTA Section */}
-      <section className="section-spacing bg-[#3B3937]">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="font-script text-2xl italic text-[#CDA7B2] mb-4">Ready to begin?</p>
-          <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
-            Protect Your Next Production Order
-          </h2>
-          <p className="text-lg text-white/70 mb-10 font-light leading-relaxed">
-            Every engagement starts with a conversation about your production risk. Share what you are manufacturing, the capital at stake, and where you need oversight.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book">
-              <Button
-                size="lg"
-                className="bg-white text-[#3B3937] hover:bg-white/90 h-12 px-8 text-base font-normal tracking-wide"
-              >
-                Schedule a Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="/book">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white/30 text-white hover:bg-white/10 h-12 px-8 text-base font-normal tracking-wide"
-              >
-                Book a Call
-              </Button>
-            </Link>
-          </div>
+          <div className="divider-gradient" />
+
+          {/* Strategic Operational Alignment */}
+          <AnimateIn delay={200}>
+            <div className="py-10 transition-all duration-300 hover:translate-x-1">
+              <h2 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] mb-4 tracking-tight">
+                Strategic Operational Alignment
+              </h2>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed mb-6" style={{ maxWidth: '65ch' }}>
+                A defined engagement for founders who need a focused operational reset. Bounded scope. The studio maps the business, identifies the fractures, and rebuilds the systems slowing growth.
+              </p>
+              <Link href="/strategic-operational-alignment" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors">
+                Read More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </AnimateIn>
+
+          <div className="divider-gradient" />
+
+          {/* Studio Systems */}
+          <AnimateIn delay={300}>
+            <div className="py-10 transition-all duration-300 hover:translate-x-1">
+              <h2 className="font-serif-display text-2xl lg:text-3xl font-normal text-[#3B3937] mb-4 tracking-tight">
+                Studio Systems
+              </h2>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed mb-6" style={{ maxWidth: '65ch' }}>
+                Hands-on operational and web build support, by the hour. Capped at five hours per week so the work stays focused and the standard stays high. The most direct way to put an operator inside the business without committing to a long-form partnership.
+              </p>
+              <Link href="/studio-systems" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors">
+                Read More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </AnimateIn>
+
         </div>
       </section>
 
