@@ -8,7 +8,7 @@ import { getBreadcrumbJsonLd, getServiceJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 
 export async function generateMetadata() {
-  return await getPageMetadata('operational-partnership');
+  return await getPageMetadata('strategic-operational-alignment');
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
@@ -16,16 +16,16 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://oceoluxe.com';
 const breadcrumbJsonLd = getBreadcrumbJsonLd([
   { name: 'Home', url: baseUrl },
   { name: 'Work With Oceo Luxe', url: `${baseUrl}/work-with-oceo-luxe` },
-  { name: 'Operational Partnership', url: `${baseUrl}/operational-partnership` },
+  { name: 'Strategic Operational Alignment', url: `${baseUrl}/strategic-operational-alignment` },
 ]);
 
 const serviceJsonLd = getServiceJsonLd([{
-  name: 'Private Operational Partnership',
-  description: 'An embedded operator inside your business. Long-form, ongoing operational partnership for founders who need a partner running the operational backbone of a growing business.',
-  url: `${baseUrl}/operational-partnership`,
+  name: 'Strategic Operational Alignment',
+  description: 'A focused operational reset for founders. Bounded scope engagement where Oceo Luxe maps the business, identifies operational fractures, and rebuilds the systems slowing growth.',
+  url: `${baseUrl}/strategic-operational-alignment`,
 }]);
 
-export default async function OperationalPartnershipPage() {
+export default async function StrategicOperationalAlignmentPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
@@ -36,13 +36,13 @@ export default async function OperationalPartnershipPage() {
       <section className="py-24 lg:py-32">
         <div className="max-w-3xl mx-auto px-6">
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-4">
-            Private Operational Partnership
+            Strategic Operational Alignment
           </h1>
           <p className="font-serif-display text-xl lg:text-2xl font-normal text-[#967F71] mb-8">
-            An embedded operator inside your business.
+            A focused operational reset.
           </p>
           <p className="text-sm tracking-wider uppercase text-[#967F71] font-light">
-            Investment: $8,500 to $12,000 monthly. Application-only.
+            Investment: $5,500 to $8,500. Flat engagement.
           </p>
         </div>
       </section>
@@ -50,26 +50,26 @@ export default async function OperationalPartnershipPage() {
       {/* Body Section 1 */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-3xl mx-auto px-6">
-          <div className="space-y-10 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+          <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
             <p>
-              Private Operational Partnership is for founders who need an internal operator, not an external consultant. This is not a project, not a deliverable, and not a fixed engagement. Oceo Luxe becomes a calm, structured presence inside the company, running the operational layer the founder no longer has time to hold.
+              Strategic Operational Alignment is a defined engagement for founders who need an operational reset. Not a partnership, not a membership. A bounded scope of work where Oceo Luxe maps the current state of the business, identifies the operational fractures, and rebuilds the systems that are slowing growth.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Body Section 2 — What it covers */}
+      {/* Body Section 2 — What you walk away with */}
       <section className="py-20 lg:py-28 bg-[#faf8f5]">
         <div className="max-w-3xl mx-auto px-6">
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
             <p>
-              The partnership covers operational system design, vendor and team coordination, decision architecture, weekly operational rhythm, calendar and priority structure, and the strategic execution layer that translates founder vision into actual movement. The scope is shaped to the business, not pre-packaged. Some partnerships are heavy on systems design. Others are heavy on team coordination. The work is determined by what the business needs, not by what is easy to sell.
+              Every engagement ends with a documented operational architecture the founder owns. The systems built during the engagement are designed to keep working without Oceo Luxe holding them. The point of the alignment is to leave the founder with structure, not dependency.
             </p>
 
             {/* Pull-quote */}
             <blockquote className="border-l-2 border-[#CDA7B2] pl-6 my-10">
               <p className="font-script text-xl lg:text-2xl italic text-[#CDA7B2] leading-relaxed">
-                The scope is shaped to the business, not pre-packaged.
+                The point of the alignment is to leave the founder with structure, not dependency.
               </p>
             </blockquote>
           </div>
@@ -81,7 +81,7 @@ export default async function OperationalPartnershipPage() {
         <div className="max-w-3xl mx-auto px-6">
           <div className="space-y-6 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
             <p>
-              This partnership is for founders generating revenue, with a team or contractors, who need operational structure to scale without losing the integrity of the brand. It is not for early-stage founders still finding the offer.
+              This engagement is for founders who can identify the operational problem but do not have the time or the framework to solve it. Most often the business has grown faster than its systems, and the founder needs an operator to come in, build the structure, and leave it stable.
             </p>
           </div>
           <div className="mt-12">
@@ -90,15 +90,13 @@ export default async function OperationalPartnershipPage() {
                 size="lg"
                 className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide"
               >
-                Apply
+                Apply for Strategic Alignment
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
-
-      {/* IMAGE PLACEHOLDER: editorial portrait or studio image, to be added by Kerri */}
 
       <MarketingFooter />
     </div>

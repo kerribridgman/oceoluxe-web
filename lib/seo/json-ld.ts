@@ -107,7 +107,7 @@ export function getOrganizationJsonLd(): OrganizationJsonLd {
     url: BASE_URL,
     logo: `${BASE_URL}/images/Logo.png`,
     description:
-      'Strategic operational partnership for fashion founders. Production leadership, systems architecture, and operational clarity rooted in real-world experience.',
+      'Studio operational partner for founders building businesses they intend to keep. Systems, decision frameworks, and structured execution.',
     founder: {
       '@type': 'Person',
       name: 'Kerri Bridgman',
@@ -130,7 +130,7 @@ export function getWebSiteJsonLd(): WebSiteJsonLd {
     name: 'Oceo Luxe',
     url: BASE_URL,
     description:
-      'Operational partnership, Studio Systems membership, and production resources for fashion founders ready to scale with structure and clarity.',
+      'Operational partnership and Studio Systems for founders ready to scale with structure and clarity.',
     publisher: {
       '@id': `${BASE_URL}/#organization`,
     },

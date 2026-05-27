@@ -106,14 +106,11 @@ export default function ApplyPage() {
       <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
         {/* Header */}
         <div className="mb-12">
-          <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">
-            Production Consultation
-          </p>
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6">
-            Tell Us About Your Production Challenge
+            Apply to Work With Oceo Luxe
           </h1>
-          <p className="text-lg text-[#967F71] font-light leading-relaxed">
-            Every engagement begins with understanding what you are manufacturing, the capital at stake, and where you need oversight. Share the details below so we can determine fit.
+          <p className="text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+            Oceo Luxe is application-only. Every partnership begins with a conversation. The studio is selective about who it works with because the work requires alignment on both sides. The application below is the first step.
           </p>
         </div>
 
