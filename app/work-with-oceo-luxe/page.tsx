@@ -84,7 +84,7 @@ export default async function WorkWithOceoLuxePage() {
                 Studio Systems
               </h2>
               <p className="text-lg text-[#967F71] font-light leading-relaxed mb-6" style={{ maxWidth: '65ch' }}>
-                The operational foundation layer. A monthly membership of systems, frameworks, and operational tools for founders building their own internal structure.
+                Hands-on operational and web build support, by the hour. Capped at five hours per week so the work stays focused and the standard stays high. The most direct way to put an operator inside the business without committing to a long-form partnership.
               </p>
               <Link href="/studio-systems" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors">
                 Read More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
