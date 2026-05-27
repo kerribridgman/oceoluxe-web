@@ -9,6 +9,7 @@ import { Send, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import { MarketingHeader } from '@/components/marketing/marketing-header';
 import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { AnimateIn } from '@/components/animate-in';
 
 export default function ApplyPage() {
   const [formData, setFormData] = useState({
@@ -83,12 +84,12 @@ export default function ApplyPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
-              <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide">
+              <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20">
                 Return to Home
               </Button>
             </Link>
             <Link href="/book">
-              <Button variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide">
+              <Button variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#967F71]/20">
                 Book a Consultation
               </Button>
             </Link>
@@ -105,14 +106,16 @@ export default function ApplyPage() {
 
       <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6">
-            Apply to Work With Oceo Luxe
-          </h1>
-          <p className="text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
-            Oceo Luxe is application-only. Every partnership begins with a conversation. The studio is selective about who it works with because the work requires alignment on both sides. The application below is the first step.
-          </p>
-        </div>
+        <AnimateIn animation="fade-in">
+          <div className="mb-12">
+            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6 text-glow-warm">
+              Apply to Work With Oceo Luxe
+            </h1>
+            <p className="text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+              Oceo Luxe is application-only. Every partnership begins with a conversation. The studio is selective about who it works with because the work requires alignment on both sides. The application below is the first step.
+            </p>
+          </div>
+        </AnimateIn>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
@@ -205,7 +208,7 @@ export default function ApplyPage() {
             >
               <option value="">Select a range</option>
               <option value="< 100k">Under $100K</option>
-              <option value="100-500k">$100K – $500K</option>
+              <option value="100-500k">$100K - $500K</option>
               <option value="500k+">$500K+</option>
             </select>
           </div>
@@ -294,7 +297,7 @@ export default function ApplyPage() {
             <Button
               type="submit"
               disabled={submitting || !privacyConsent}
-              className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20"
             >
               {submitting ? (
                 <>
@@ -312,27 +315,31 @@ export default function ApplyPage() {
         </form>
 
         {/* Testimonial */}
-        <div className="mt-12 border-l-2 border-[#CDA7B2] pl-8 pt-12 border-t border-t-[#EDEBE8]">
-          <p className="font-serif-display text-lg lg:text-xl font-normal text-[#3B3937] leading-relaxed">
-            &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
-          </p>
-          <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">– C-Suite Executive</p>
-        </div>
+        <AnimateIn>
+          <div className="mt-12 border-l-2 border-[#CDA7B2] pl-8 py-6 bg-[#CDA7B2]/5 rounded-r-lg">
+            <p className="font-serif-display text-lg lg:text-xl font-normal text-[#3B3937] leading-relaxed">
+              &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
+            </p>
+            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">&ndash; C-Suite Executive</p>
+          </div>
+        </AnimateIn>
 
         {/* Secondary CTA */}
-        <div className="mt-12 text-center border-t border-[#EDEBE8] pt-12">
-          <p className="text-xl text-[#967F71] font-light mb-4">
-            Prefer to talk first?
-          </p>
-          <Link href="/book">
-            <Button
-              variant="outline"
-              className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
-            >
-              Book a Consultation
-            </Button>
-          </Link>
-        </div>
+        <AnimateIn>
+          <div className="mt-12 text-center border-t border-[#EDEBE8] pt-12">
+            <p className="text-xl text-[#967F71] font-light mb-4">
+              Prefer to talk first?
+            </p>
+            <Link href="/book">
+              <Button
+                variant="outline"
+                className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#967F71]/20"
+              >
+                Book a Consultation
+              </Button>
+            </Link>
+          </div>
+        </AnimateIn>
       </div>
 
       <MarketingFooter />
