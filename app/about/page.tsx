@@ -40,57 +40,58 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Editorial Portrait */}
-      <section className="pb-8 lg:pb-12">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimateIn animation="fade-in">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
-              <Image
-                src="/images/kerri-13-hero.webp"
-                alt="Kerri Bridgman, founder of Oceo Luxe"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-                priority
-              />
-            </div>
-          </AnimateIn>
-        </div>
-      </section>
-
-      {/* Body */}
+      {/* Portrait + Bio — Side by Side */}
       <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimateIn>
-            <div className="space-y-8 text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
-              {/* Paragraph 1 — Foundation */}
-              <p>
-                Oceo Luxe was founded by Kerri Bridgman. The studio exists because most businesses do not fail at the idea. They fail at the operational layer underneath it. The work is to absorb that layer so the founder can stay in the work only they can do.
-              </p>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-              {/* Paragraph 2 — Background as credibility (fashion context lives HERE only) */}
-              <p>
-                Kerri spent the early part of her career inside the production operations of brands where margin compression, supply chain fragility, and tight timelines made operational precision non-negotiable. Production management at Michael Kors. Production coordination at The Shade Store. Project engineering at Atlantic Infra. A degree in Production Management with a minor in Economics from FIT. The pattern across every role was the same: take a chaotic operational environment, build the structure underneath it, and let the creative or commercial work breathe.
-              </p>
+            {/* Editorial Portrait */}
+            <AnimateIn animation="fade-in">
+              <div className="relative aspect-[2/3] w-full max-w-md mx-auto lg:mx-0 overflow-hidden rounded-lg">
+                <Image
+                  src="/images/kerri-13-hero.webp"
+                  alt="Kerri Bridgman, founder of Oceo Luxe"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 450px"
+                  priority
+                />
+              </div>
+            </AnimateIn>
 
-              {/* Paragraph 3 — Philosophy (industry-agnostic) */}
-              <p>
-                The work at Oceo Luxe is the same work, applied beyond fashion. Founders in any industry hit the same operational ceiling. The systems that worked at one stage stop working at the next. Oceo Luxe is the operational partner that helps them cross that line without losing the business in the process.
-              </p>
-            </div>
+            {/* Bio */}
+            <AnimateIn animation="fade-in" delay={100}>
+              <div className="space-y-8 text-lg text-[#967F71] font-light leading-relaxed">
+                {/* Paragraph 1 — Foundation */}
+                <p>
+                  Oceo Luxe was founded by Kerri Bridgman. The studio exists because most businesses do not fail at the idea. They fail at the operational layer underneath it. The work is to absorb that layer so the founder can stay in the work only they can do.
+                </p>
 
-            <div className="mt-12">
-              <Link href="/apply">
-                <Button
-                  size="lg"
-                  className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20"
-                >
-                  Apply to Work Together
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </AnimateIn>
+                {/* Paragraph 2 — Background as credibility (fashion context lives HERE only) */}
+                <p>
+                  Kerri spent the early part of her career inside the production operations of brands where margin compression, supply chain fragility, and tight timelines made operational precision non-negotiable. Production management at Michael Kors. Production coordination at The Shade Store. Project engineering at Atlantic Infra. A degree in Production Management with a minor in Economics from FIT. The pattern across every role was the same: take a chaotic operational environment, build the structure underneath it, and let the creative or commercial work breathe.
+                </p>
+
+                {/* Paragraph 3 — Philosophy (industry-agnostic) */}
+                <p>
+                  The work at Oceo Luxe is the same work, applied beyond fashion. Founders in any industry hit the same operational ceiling. The systems that worked at one stage stop working at the next. Oceo Luxe is the operational partner that helps them cross that line without losing the business in the process.
+                </p>
+
+                <div className="pt-4">
+                  <Link href="/apply">
+                    <Button
+                      size="lg"
+                      className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20"
+                    >
+                      Apply to Work Together
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </AnimateIn>
+
+          </div>
         </div>
       </section>
 
