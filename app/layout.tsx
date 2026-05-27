@@ -49,7 +49,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#3B3937',
+  themeColor: '#1A1A1A',
 };
 
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });

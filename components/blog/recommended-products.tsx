@@ -18,9 +18,9 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
   if (products.length === 0) return null;
 
   return (
-    <section className="border-t border-[#967F71]/10 bg-[#faf8f5]">
+    <section className="border-t border-[var(--color-taupe)]/10 bg-[var(--color-charcoal)]">
       <div className="max-w-4xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-light text-[#3B3937] mb-8">From the Shop</h2>
+        <h2 className="text-2xl font-light text-[var(--color-cream)] mb-8">From the Shop</h2>
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
           {products.map((product) => (
             <Link
@@ -30,7 +30,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
             >
               <article className="flex gap-4">
                 {product.coverImageUrl && (
-                  <div className="w-20 h-20 flex-shrink-0 overflow-hidden relative bg-[#f5f0ea]">
+                  <div className="w-20 h-20 flex-shrink-0 overflow-hidden relative bg-[var(--color-ink)]">
                     <Image
                       src={product.coverImageUrl}
                       alt={product.title}
@@ -42,14 +42,14 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
                   </div>
                 )}
                 <div className="space-y-1 flex-1 min-w-0">
-                  <p className="text-xs text-[#CDA7B2] font-medium uppercase tracking-wider">
+                  <p className="text-xs text-[var(--color-dusty-rose)] font-medium uppercase tracking-wider">
                     {product.price}
                   </p>
-                  <h3 className="text-base font-medium text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors leading-snug">
+                  <h3 className="text-base font-medium text-[var(--color-cream)] group-hover:text-[var(--color-dusty-rose)] transition-colors leading-snug">
                     {product.title}
                   </h3>
                   {product.description && (
-                    <p className="text-sm text-[#967F71] font-light leading-relaxed line-clamp-2">
+                    <p className="text-sm text-[var(--color-bone)] font-light leading-relaxed line-clamp-2">
                       {product.description}
                     </p>
                   )}

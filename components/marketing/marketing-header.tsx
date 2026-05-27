@@ -12,7 +12,11 @@ const serviceSubLinks = [
   { name: 'Studio Systems', href: '/studio-systems' },
 ];
 
-export function MarketingHeader() {
+interface MarketingHeaderProps {
+  theme?: 'dark' | 'light';
+}
+
+export function MarketingHeader({ theme = 'dark' }: MarketingHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,12 +47,16 @@ export function MarketingHeader() {
     { name: 'Blog', href: '/blog' },
   ];
 
+  const isDark = theme === 'dark';
+
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#3B3937] shadow-md'
-          : 'bg-[#faf8f5] border-b border-[#967F71]/10 shadow-sm'
+          ? 'bg-[var(--color-charcoal)] shadow-md backdrop-blur-sm'
+          : isDark
+            ? 'bg-[var(--color-ink)] border-b border-[var(--color-taupe)]/10'
+            : 'bg-[#faf8f5] border-b border-[#967F71]/10 shadow-sm'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,7 +64,9 @@ export function MarketingHeader() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <span className={`text-xl font-light tracking-wide transition-colors duration-300 ${
-              isScrolled ? 'text-white' : 'text-[#3B3937]'
+              isScrolled
+                ? isDark ? 'text-[var(--color-cream)]' : 'text-white'
+                : isDark ? 'text-[var(--color-cream)]' : 'text-[#3B3937]'
             }`}>Oceo Luxe</span>
           </Link>
 
@@ -73,8 +83,8 @@ export function MarketingHeader() {
                 href="/work-with-oceo-luxe"
                 className={`inline-flex items-center gap-1 font-light uppercase text-sm tracking-wider transition-colors duration-300 ${
                   isScrolled
-                    ? 'text-white/90 hover:text-white'
-                    : 'text-[#967F71] hover:text-[#3B3937]'
+                    ? isDark ? 'text-[var(--color-cream)]/90 hover:text-[var(--color-cream)]' : 'text-white/90 hover:text-white'
+                    : isDark ? 'text-[var(--color-bone)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
                 }`}
               >
                 Work With Oceo Luxe
@@ -84,12 +94,20 @@ export function MarketingHeader() {
               {/* Dropdown Menu */}
               {dropdownOpen && (
                 <div className="absolute top-full left-0 pt-2">
-                  <div className="bg-white rounded-lg shadow-lg border border-[#967F71]/10 py-2 min-w-[260px]">
+                  <div className={`rounded-lg shadow-lg py-2 min-w-[260px] ${
+                    isDark
+                      ? 'bg-[var(--color-charcoal)] border border-[var(--color-taupe)]/20'
+                      : 'bg-white border border-[#967F71]/10'
+                  }`}>
                     {serviceSubLinks.map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
-                        className="block px-5 py-2.5 text-sm text-[#967F71] hover:text-[#3B3937] hover:bg-[#faf8f5] font-light tracking-wide transition-colors"
+                        className={`block px-5 py-2.5 text-sm font-light tracking-wide transition-colors ${
+                          isDark
+                            ? 'text-[var(--color-bone)] hover:text-[var(--color-cream)] hover:bg-[var(--color-ink)]'
+                            : 'text-[#967F71] hover:text-[#3B3937] hover:bg-[#faf8f5]'
+                        }`}
                         onClick={() => setDropdownOpen(false)}
                       >
                         {sub.name}
@@ -106,8 +124,8 @@ export function MarketingHeader() {
                 href={item.href}
                 className={`font-light uppercase text-sm tracking-wider transition-colors duration-300 ${
                   isScrolled
-                    ? 'text-white/90 hover:text-white'
-                    : 'text-[#967F71] hover:text-[#3B3937]'
+                    ? isDark ? 'text-[var(--color-cream)]/90 hover:text-[var(--color-cream)]' : 'text-white/90 hover:text-white'
+                    : isDark ? 'text-[var(--color-bone)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
                 }`}
               >
                 {item.name}
@@ -124,9 +142,13 @@ export function MarketingHeader() {
             <Link
               href="/apply"
               className={`inline-flex items-center px-5 py-2 text-sm font-medium tracking-wide rounded-full transition-all duration-300 ${
-                isScrolled
-                  ? 'bg-white text-[#3B3937] hover:bg-white/90'
-                  : 'bg-[#3B3937] text-white hover:bg-[#4A4745]'
+                isDark
+                  ? isScrolled
+                    ? 'bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-bone)]'
+                    : 'bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-bone)]'
+                  : isScrolled
+                    ? 'bg-white text-[#3B3937] hover:bg-white/90'
+                    : 'bg-[#3B3937] text-white hover:bg-[#4A4745]'
               }`}
             >
               Apply
@@ -139,15 +161,19 @@ export function MarketingHeader() {
             <CartIcon isScrolled={isScrolled} />
             <button
               className={`p-2 rounded-lg transition-colors ${
-                isScrolled ? 'hover:bg-white/20' : 'hover:bg-[#967F71]/10'
+                isScrolled || isDark ? 'hover:bg-white/20' : 'hover:bg-[#967F71]/10'
               }`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
-                <X className={`h-6 w-6 transition-colors duration-300 ${isScrolled ? 'text-white' : 'text-[#3B3937]'}`} />
+                <X className={`h-6 w-6 transition-colors duration-300 ${
+                  isScrolled || isDark ? 'text-[var(--color-cream)]' : 'text-[#3B3937]'
+                }`} />
               ) : (
-                <Menu className={`h-6 w-6 transition-colors duration-300 ${isScrolled ? 'text-white' : 'text-[#3B3937]'}`} />
+                <Menu className={`h-6 w-6 transition-colors duration-300 ${
+                  isScrolled || isDark ? 'text-[var(--color-cream)]' : 'text-[#3B3937]'
+                }`} />
               )}
             </button>
           </div>
@@ -155,10 +181,18 @@ export function MarketingHeader() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-2 border-t border-[#967F71]/10 bg-[#E8D4DB]">
+          <div className={`md:hidden py-4 space-y-2 border-t ${
+            isDark
+              ? 'border-[var(--color-taupe)]/20 bg-[var(--color-charcoal)]'
+              : 'border-[#967F71]/10 bg-[#E8D4DB]'
+          }`}>
             {/* Work With Oceo Luxe - Expandable */}
             <button
-              className="flex items-center justify-between w-full text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5 font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors"
+              className={`flex items-center justify-between w-full font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors ${
+                isDark
+                  ? 'text-[var(--color-bone)] hover:text-[var(--color-cream)] hover:bg-[var(--color-ink)]'
+                  : 'text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5'
+              }`}
               onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
             >
               Work With Oceo Luxe
@@ -168,7 +202,11 @@ export function MarketingHeader() {
               <div className="pl-6 space-y-1">
                 <Link
                   href="/work-with-oceo-luxe"
-                  className="block text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5 font-light py-2.5 px-4 text-sm tracking-wider rounded-lg transition-colors"
+                  className={`block font-light py-2.5 px-4 text-sm tracking-wider rounded-lg transition-colors ${
+                    isDark
+                      ? 'text-[var(--color-bone)] hover:text-[var(--color-cream)] hover:bg-[var(--color-ink)]'
+                      : 'text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Overview
@@ -177,7 +215,11 @@ export function MarketingHeader() {
                   <Link
                     key={sub.href}
                     href={sub.href}
-                    className="block text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5 font-light py-2.5 px-4 text-sm tracking-wider rounded-lg transition-colors"
+                    className={`block font-light py-2.5 px-4 text-sm tracking-wider rounded-lg transition-colors ${
+                      isDark
+                        ? 'text-[var(--color-bone)] hover:text-[var(--color-cream)] hover:bg-[var(--color-ink)]'
+                        : 'text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5'
+                    }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {sub.name}
@@ -190,7 +232,11 @@ export function MarketingHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5 font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors"
+                className={`block font-light py-3 px-4 uppercase text-sm tracking-wider rounded-lg transition-colors ${
+                  isDark
+                    ? 'text-[var(--color-bone)] hover:text-[var(--color-cream)] hover:bg-[var(--color-ink)]'
+                    : 'text-[#967F71] hover:text-[#3B3937] hover:bg-[#3B3937]/5'
+                }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -198,7 +244,11 @@ export function MarketingHeader() {
             ))}
             <Link
               href="/apply"
-              className="block text-center bg-[#3B3937] text-white font-medium py-3 px-4 mx-4 mt-2 rounded-full text-sm tracking-wide"
+              className={`block text-center font-medium py-3 px-4 mx-4 mt-2 rounded-full text-sm tracking-wide ${
+                isDark
+                  ? 'bg-[var(--color-cream)] text-[var(--color-ink)]'
+                  : 'bg-[#3B3937] text-white'
+              }`}
               onClick={() => setMobileMenuOpen(false)}
             >
               Apply

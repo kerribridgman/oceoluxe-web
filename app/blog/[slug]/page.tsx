@@ -8,8 +8,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { MarketingHeader } from '@/components/marketing/marketing-header';
-import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { MarketingShell } from '@/components/marketing/marketing-shell';
 import { PostCta } from '@/components/blog/post-cta';
 import { TableOfContents } from '@/components/blog/table-of-contents';
 import { InlineEmailSignup } from '@/components/blog/inline-email-signup';
@@ -133,15 +132,14 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <div className="min-h-screen bg-[#faf8f5]">
-        <MarketingHeader />
+      <MarketingShell>
 
         {/* Back Navigation */}
-        <div className="bg-[#faf8f5] border-b border-[#967F71]/10">
+        <div className="border-b border-[var(--color-taupe)]/10">
           <div className="max-w-4xl mx-auto px-6 py-4">
             <Link
               href="/blog"
-              className="inline-flex items-center text-[#967F71] hover:text-[#3B3937] transition-colors font-light"
+              className="inline-flex items-center text-[var(--color-bone)] hover:text-[var(--color-cream)] transition-colors font-light"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Journal
@@ -151,7 +149,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Cover Image */}
         {post.coverImageUrl && (
-          <div className="w-full h-80 lg:h-96 overflow-hidden relative bg-[#f5f0ea]">
+          <div className="w-full h-80 lg:h-96 overflow-hidden relative bg-[var(--color-charcoal)]">
             <Image
               src={post.coverImageUrl}
               alt={post.title}
@@ -168,16 +166,16 @@ export default async function BlogPostPage({ params }: Props) {
         <article className="max-w-4xl mx-auto px-6 py-16">
           {/* Article Header */}
           <header className="mb-12">
-            <h1 className="text-3xl lg:text-4xl font-light text-[#3B3937] mb-6 tracking-tight leading-tight">
+            <h1 className="text-3xl lg:text-4xl font-light text-[var(--color-cream)] mb-6 tracking-tight leading-tight">
               {post.title}
             </h1>
 
             {/* Meta Information */}
-            <div className="flex flex-wrap items-center gap-4 text-sm text-[#967F71] font-light">
-              <span className="text-[#3B3937]">{post.author || 'Kerri Bridgman'}</span>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--color-bone)] font-light">
+              <span className="text-[var(--color-cream)]">{post.author || 'Kerri Bridgman'}</span>
               {post.publishedAt && (
                 <>
-                  <span className="text-[#CDA7B2]">–</span>
+                  <span className="text-[var(--color-dusty-rose)]">–</span>
                   <time dateTime={new Date(post.publishedAt).toISOString()}>
                     {formatBlogDate(post.publishedAt)}
                   </time>
@@ -185,7 +183,7 @@ export default async function BlogPostPage({ params }: Props) {
               )}
               {post.readingTimeMinutes && (
                 <>
-                  <span className="text-[#CDA7B2]">–</span>
+                  <span className="text-[var(--color-dusty-rose)]">–</span>
                   <span>{post.readingTimeMinutes} min read</span>
                 </>
               )}
@@ -193,7 +191,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Excerpt */}
             {post.excerpt && (
-              <p className="text-xl text-[#967F71] mt-8 leading-relaxed border-l-2 border-[#CDA7B2] pl-6 font-light italic">
+              <p className="text-xl text-[var(--color-bone)] mt-8 leading-relaxed border-l-2 border-[var(--color-dusty-rose)] pl-6 font-light italic">
                 {post.excerpt}
               </p>
             )}
@@ -214,25 +212,25 @@ export default async function BlogPostPage({ params }: Props) {
           <InlineEmailSignup />
 
           {/* Article Footer */}
-          <footer className="mt-16 pt-8 border-t border-[#967F71]/10">
+          <footer className="mt-16 pt-8 border-t border-[var(--color-taupe)]/10">
             <Link
               href="/blog"
-              className="inline-flex items-center text-[#3B3937] hover:text-[#CDA7B2] font-medium transition-colors"
+              className="inline-flex items-center text-[var(--color-cream)] hover:text-[var(--color-dusty-rose)] font-medium transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to all posts
             </Link>
 
             {(adjacentPosts.previous || adjacentPosts.next) && (
-              <div className="grid grid-cols-2 gap-8 mt-8 pt-8 border-t border-[#967F71]/10">
+              <div className="grid grid-cols-2 gap-8 mt-8 pt-8 border-t border-[var(--color-taupe)]/10">
                 <div>
                   {adjacentPosts.previous && (
                     <Link
                       href={`/blog/${adjacentPosts.previous.slug}`}
                       className="group block"
                     >
-                      <p className="text-xs text-[#967F71] uppercase tracking-wider mb-1">Previous</p>
-                      <p className="text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors font-medium leading-snug">
+                      <p className="text-xs text-[var(--color-taupe)] uppercase tracking-wider mb-1">Previous</p>
+                      <p className="text-[var(--color-cream)] group-hover:text-[var(--color-dusty-rose)] transition-colors font-medium leading-snug">
                         <ArrowLeft className="w-3.5 h-3.5 inline mr-1" />
                         {adjacentPosts.previous.title}
                       </p>
@@ -245,8 +243,8 @@ export default async function BlogPostPage({ params }: Props) {
                       href={`/blog/${adjacentPosts.next.slug}`}
                       className="group block"
                     >
-                      <p className="text-xs text-[#967F71] uppercase tracking-wider mb-1">Next</p>
-                      <p className="text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors font-medium leading-snug">
+                      <p className="text-xs text-[var(--color-taupe)] uppercase tracking-wider mb-1">Next</p>
+                      <p className="text-[var(--color-cream)] group-hover:text-[var(--color-dusty-rose)] transition-colors font-medium leading-snug">
                         {adjacentPosts.next.title}
                         <ArrowRight className="w-3.5 h-3.5 inline ml-1" />
                       </p>
@@ -261,8 +259,7 @@ export default async function BlogPostPage({ params }: Props) {
         <RelatedPosts posts={relatedPosts} />
         <RecommendedProducts products={recommendedProducts} />
 
-        <MarketingFooter />
-      </div>
+      </MarketingShell>
     </>
   );
 }

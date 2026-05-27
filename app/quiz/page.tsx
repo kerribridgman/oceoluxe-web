@@ -232,7 +232,7 @@ export default function DesignerQuizPage() {
   if (quizState === 'email_capture') {
     return (
       <div className="min-h-screen bg-[#f4f4f4]">
-        <MarketingHeader />
+        <MarketingHeader theme="light" />
 
         <div className="max-w-xl mx-auto px-4 py-16">
           <div className="text-center mb-10">
@@ -305,7 +305,7 @@ export default function DesignerQuizPage() {
           </form>
         </div>
 
-        <MarketingFooter />
+        <MarketingFooter theme="light" />
       </div>
     );
   }
@@ -317,7 +317,7 @@ export default function DesignerQuizPage() {
 
     return (
       <div className="min-h-screen bg-[#f4f4f4]">
-        <MarketingHeader />
+        <MarketingHeader theme="light" />
 
         <div className="max-w-2xl mx-auto px-4 py-16 text-center">
           <p className="text-[#967f71] text-xs tracking-[3px] mb-2 uppercase">Your Result</p>
@@ -373,7 +373,7 @@ export default function DesignerQuizPage() {
           </button>
         </div>
 
-        <MarketingFooter />
+        <MarketingFooter theme="light" />
       </div>
     );
   }
@@ -381,7 +381,7 @@ export default function DesignerQuizPage() {
   // Questions screen
   return (
     <div className="min-h-screen bg-[#f4f4f4] overflow-hidden">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       <div className="max-w-2xl mx-auto px-4 py-16 relative">
         {/* Decorative circles */}
@@ -443,7 +443,7 @@ export default function DesignerQuizPage() {
         </div>
       </div>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

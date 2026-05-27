@@ -36,7 +36,7 @@ export default function BookPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 flex flex-col">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       <main className="flex-1 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-4xl mx-auto relative">
@@ -151,7 +151,7 @@ export default function BookPage() {
         </div>
       </main>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

@@ -299,7 +299,7 @@ export default function StudioSystemsJoinPage() {
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

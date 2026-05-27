@@ -123,31 +123,31 @@ export function MarkdownRenderer({ content, excerpt }: MarkdownRendererProps) {
         components={{
           // Headings
           h1: ({ node, ...props }) => (
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 mt-8" {...props} />
+            <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-cream)] mb-6 mt-8" {...props} />
           ),
           h2: ({ node, children, ...props }) => {
             const id = slugify(getHeadingText(children));
-            return <h2 id={id} className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 mt-8 scroll-mt-24" {...props}>{children}</h2>;
+            return <h2 id={id} className="text-3xl md:text-4xl font-bold text-[var(--color-cream)] mb-6 mt-8 scroll-mt-24" {...props}>{children}</h2>;
           },
           h3: ({ node, children, ...props }) => {
             const id = slugify(getHeadingText(children));
-            return <h3 id={id} className="text-2xl font-bold text-gray-900 mb-4 mt-6 scroll-mt-24" {...props}>{children}</h3>;
+            return <h3 id={id} className="text-2xl font-bold text-[var(--color-cream)] mb-4 mt-6 scroll-mt-24" {...props}>{children}</h3>;
           },
           h4: ({ node, ...props }) => (
-            <h4 className="text-xl font-bold text-gray-900 mb-4 mt-6" {...props} />
+            <h4 className="text-xl font-bold text-[var(--color-cream)] mb-4 mt-6" {...props} />
           ),
 
           // Paragraphs
           p: ({ node, ...props }) => (
-            <p className="text-gray-700 leading-relaxed mb-6 text-lg" {...props} />
+            <p className="text-[var(--color-bone)] leading-relaxed mb-6 text-lg" {...props} />
           ),
 
           // Lists
           ul: ({ node, ...props }) => (
-            <ul className="space-y-3 my-8 ml-6 text-gray-700 list-disc list-outside" {...props} />
+            <ul className="space-y-3 my-8 ml-6 text-[var(--color-bone)] list-disc list-outside" {...props} />
           ),
           ol: ({ node, ...props }) => (
-            <ol className="space-y-3 my-8 ml-6 text-gray-700 list-decimal list-outside" {...props} />
+            <ol className="space-y-3 my-8 ml-6 text-[var(--color-bone)] list-decimal list-outside" {...props} />
           ),
           li: ({ node, ...props }) => (
             <li className="text-lg leading-relaxed pl-2" {...props} />
@@ -156,7 +156,7 @@ export function MarkdownRenderer({ content, excerpt }: MarkdownRendererProps) {
           // Links
           a: ({ node, ...props }) => (
             <a
-              className="text-orange-600 hover:text-orange-700 underline"
+              className="text-[var(--color-dusty-rose)] hover:text-[var(--color-rose-deep)] underline"
               target="_blank"
               rel="noopener noreferrer"
               {...props}
@@ -200,7 +200,7 @@ export function MarkdownRenderer({ content, excerpt }: MarkdownRendererProps) {
           // Blockquotes
           blockquote: ({ node, ...props }) => (
             <blockquote
-              className="border-l-4 border-orange-500 pl-6 py-4 my-8 bg-orange-50 rounded-r-lg"
+              className="border-l-4 border-[var(--color-dusty-rose)] pl-6 py-4 my-8 bg-[var(--color-charcoal)] rounded-r-lg"
               {...props}
             />
           ),
@@ -208,23 +208,23 @@ export function MarkdownRenderer({ content, excerpt }: MarkdownRendererProps) {
           // Tables
           table: ({ node, ...props }) => (
             <div className="overflow-x-auto my-8">
-              <table className="min-w-full border border-gray-200 rounded-lg" {...props} />
+              <table className="min-w-full border border-[var(--color-taupe)]/20 rounded-lg" {...props} />
             </div>
           ),
           thead: ({ node, ...props }) => (
-            <thead className="bg-gray-50" {...props} />
+            <thead className="bg-[var(--color-charcoal)]" {...props} />
           ),
           tbody: ({ node, ...props }) => (
-            <tbody className="divide-y divide-gray-200" {...props} />
+            <tbody className="divide-y divide-[var(--color-taupe)]/20" {...props} />
           ),
           tr: ({ node, ...props }) => (
-            <tr className="hover:bg-gray-50" {...props} />
+            <tr className="hover:bg-[var(--color-charcoal)]" {...props} />
           ),
           th: ({ node, ...props }) => (
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900" {...props} />
+            <th className="px-6 py-3 text-left text-sm font-semibold text-[var(--color-cream)]" {...props} />
           ),
           td: ({ node, ...props }) => (
-            <td className="px-6 py-4 text-sm text-gray-700" {...props} />
+            <td className="px-6 py-4 text-sm text-[var(--color-bone)]" {...props} />
           ),
 
           // Images
@@ -238,12 +238,12 @@ export function MarkdownRenderer({ content, excerpt }: MarkdownRendererProps) {
 
           // Horizontal rule
           hr: ({ node, ...props }) => (
-            <hr className="my-12 border-gray-200" {...props} />
+            <hr className="my-12 border-[var(--color-taupe)]/20" {...props} />
           ),
 
           // Strong (bold)
           strong: ({ node, ...props }) => (
-            <strong className="font-bold text-gray-900" {...props} />
+            <strong className="font-bold text-[var(--color-cream)]" {...props} />
           ),
 
           // Emphasis (italic)

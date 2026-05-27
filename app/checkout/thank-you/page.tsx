@@ -76,7 +76,7 @@ function ThankYouContent() {
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       <div className="max-w-2xl mx-auto px-4 py-24">
         <Card className="border-[#EDEBE8] overflow-hidden">
@@ -171,7 +171,7 @@ function ThankYouContent() {
         </p>
       </div>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

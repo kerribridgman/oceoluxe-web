@@ -75,7 +75,7 @@ export default async function ConsultationsPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       {/* Hero Section */}
       <section className="section-spacing-lg">
@@ -253,7 +253,7 @@ export default async function ConsultationsPage() {
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

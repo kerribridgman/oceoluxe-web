@@ -48,7 +48,7 @@ export default async function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       {/* Hero Section */}
       <section className="bg-[#faf8f5] overflow-hidden">
@@ -242,7 +242,7 @@ export default async function ProductsPage() {
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

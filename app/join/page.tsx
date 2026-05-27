@@ -50,7 +50,7 @@ export default function JoinEmailListPage() {
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       <main className="py-16 lg:py-24 overflow-hidden">
         <div className="max-w-xl lg:max-w-2xl mx-auto px-6">
@@ -186,7 +186,7 @@ export default function JoinEmailListPage() {
         </div>
       </main>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

@@ -52,16 +52,16 @@ export function TableOfContents({ markdown }: TableOfContentsProps) {
   };
 
   return (
-    <div className="mb-12 border border-[#967F71]/10 rounded-lg bg-white">
+    <div className="mb-12 border border-[var(--color-taupe)]/10 rounded-lg bg-[var(--color-charcoal)]">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between px-6 py-4 text-left"
       >
-        <span className="text-sm font-medium text-[#3B3937] uppercase tracking-wider">
+        <span className="text-sm font-medium text-[var(--color-cream)] uppercase tracking-wider">
           Table of Contents
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-[#967F71] transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-[var(--color-bone)] transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
       {isOpen && (
@@ -71,8 +71,8 @@ export function TableOfContents({ markdown }: TableOfContentsProps) {
               <li key={`${heading.id}-${i}`}>
                 <button
                   onClick={() => handleClick(heading.id)}
-                  className={`text-sm font-light transition-colors text-left hover:text-[#CDA7B2] ${
-                    heading.level === 3 ? 'pl-4 text-[#967F71]' : 'text-[#3B3937]'
+                  className={`text-sm font-light transition-colors text-left hover:text-[var(--color-dusty-rose)] ${
+                    heading.level === 3 ? 'pl-4 text-[var(--color-bone)]' : 'text-[var(--color-cream)]'
                   }`}
                 >
                   {heading.text}

@@ -9,7 +9,7 @@ export async function generateMetadata() {
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       {/* Header */}
       <section className="bg-[#f5f0ea] py-16">
@@ -252,7 +252,7 @@ export default function TermsPage() {
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

@@ -7,8 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
-import { MarketingHeader } from '@/components/marketing/marketing-header';
-import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { MarketingShell } from '@/components/marketing/marketing-shell';
 import { AnimateIn } from '@/components/animate-in';
 
 export default function ApplyPage() {
@@ -70,48 +69,45 @@ export default function ApplyPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-[#faf8f5]">
-        <MarketingHeader />
+      <MarketingShell>
         <div className="max-w-3xl mx-auto px-6 py-24 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-[#CDA7B2]/10 rounded-full mb-6">
-            <CheckCircle2 className="w-10 h-10 text-[#CDA7B2]" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-[var(--color-dusty-rose)]/10 rounded-full mb-6">
+            <CheckCircle2 className="w-10 h-10 text-[var(--color-dusty-rose)]" />
           </div>
-          <h1 className="font-serif-display text-4xl font-normal text-[#3B3937] mb-4">
+          <h1 className="font-serif-display text-4xl font-normal text-[var(--color-cream)] mb-4">
             Application Received
           </h1>
-          <p className="text-lg text-[#967F71] font-light mb-8 max-w-lg mx-auto leading-relaxed">
+          <p className="text-lg text-[var(--color-bone)] font-light mb-8 max-w-lg mx-auto leading-relaxed">
             Thank you for sharing your production details. If aligned, you will receive next steps to discuss how we can protect your next order.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
-              <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20">
+              <Button className="bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-bone)] h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
                 Return to Home
               </Button>
             </Link>
             <Link href="/book">
-              <Button variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#967F71]/20">
+              <Button variant="outline" className="border-[var(--color-taupe)] text-[var(--color-bone)] hover:bg-[var(--color-taupe)] hover:text-[var(--color-cream)] h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
                 Book a Consultation
               </Button>
             </Link>
           </div>
         </div>
-        <MarketingFooter />
-      </div>
+      </MarketingShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+    <MarketingShell>
 
       <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
         {/* Header */}
         <AnimateIn animation="fade-in">
           <div className="mb-12">
-            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6 text-glow-warm">
+            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-6 text-glow-warm">
               Apply to Work With Oceo Luxe
             </h1>
-            <p className="text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+            <p className="text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
               Oceo Luxe is application-only. Every partnership begins with a conversation. The studio is selective about who it works with because the work requires alignment on both sides. The application below is the first step.
             </p>
           </div>
@@ -120,7 +116,7 @@ export default function ApplyPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
           <div>
-            <Label htmlFor="name" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="name" className="text-base font-medium text-[var(--color-cream)]">
               Name *
             </Label>
             <Input
@@ -128,13 +124,13 @@ export default function ApplyPage() {
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
               required
-              className="mt-2 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+              className="mt-2 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
               placeholder="Your full name"
             />
           </div>
 
           <div>
-            <Label htmlFor="email" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="email" className="text-base font-medium text-[var(--color-cream)]">
               Email *
             </Label>
             <Input
@@ -143,13 +139,13 @@ export default function ApplyPage() {
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
               required
-              className="mt-2 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+              className="mt-2 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
               placeholder="your@email.com"
             />
           </div>
 
           <div>
-            <Label htmlFor="socialHandle" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="socialHandle" className="text-base font-medium text-[var(--color-cream)]">
               Brand Name *
             </Label>
             <Input
@@ -157,29 +153,29 @@ export default function ApplyPage() {
               value={formData.socialHandle}
               onChange={(e) => handleChange('socialHandle', e.target.value)}
               required
-              className="mt-2 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+              className="mt-2 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
               placeholder="Your brand name"
             />
           </div>
 
           <div>
-            <Label htmlFor="additionalInfo" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="additionalInfo" className="text-base font-medium text-[var(--color-cream)]">
               Website
             </Label>
             <Input
               id="additionalInfo"
               value={formData.additionalInfo}
               onChange={(e) => handleChange('additionalInfo', e.target.value)}
-              className="mt-2 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+              className="mt-2 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
               placeholder="https://yourbrand.com"
             />
           </div>
 
           <div>
-            <Label htmlFor="interest" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="interest" className="text-base font-medium text-[var(--color-cream)]">
               Current Stage *
             </Label>
-            <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
+            <p className="text-sm text-[var(--color-bone)] font-light mt-1 mb-2">
               Where is your brand right now? Tell us about your products, production volume, and factory relationships.
             </p>
             <Textarea
@@ -188,23 +184,23 @@ export default function ApplyPage() {
               onChange={(e) => handleChange('interest', e.target.value)}
               required
               rows={4}
-              className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+              className="mt-1 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
               placeholder="Currently producing with two factories, managing 40 SKUs per season..."
             />
           </div>
 
           <div>
-            <Label htmlFor="willingToInvest" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="willingToInvest" className="text-base font-medium text-[var(--color-cream)]">
               Revenue Range
             </Label>
-            <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
+            <p className="text-sm text-[var(--color-bone)] font-light mt-1 mb-2">
               Optional. Helps us understand the scale of your operations.
             </p>
             <select
               id="willingToInvest"
               value={formData.willingToInvest}
               onChange={(e) => handleChange('willingToInvest', e.target.value)}
-              className="mt-1 w-full rounded-md bg-white border border-[#EDEBE8] px-3 py-2 text-[#3B3937] focus:border-[#3B3937] focus:ring-[#3B3937] focus:outline-none"
+              className="mt-1 w-full rounded-md bg-[var(--color-charcoal)] border border-[var(--color-taupe)]/30 px-3 py-2 text-[var(--color-cream)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)] focus:outline-none"
             >
               <option value="">Select a range</option>
               <option value="< 100k">Under $100K</option>
@@ -214,10 +210,10 @@ export default function ApplyPage() {
           </div>
 
           <div>
-            <Label htmlFor="obstacles" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="obstacles" className="text-base font-medium text-[var(--color-cream)]">
               Biggest Production Risk *
             </Label>
-            <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
+            <p className="text-sm text-[var(--color-bone)] font-light mt-1 mb-2">
               What is the primary production challenge or risk you need addressed?
             </p>
             <Textarea
@@ -226,16 +222,16 @@ export default function ApplyPage() {
               onChange={(e) => handleChange('obstacles', e.target.value)}
               required
               rows={4}
-              className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+              className="mt-1 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
               placeholder="Factory costing feels off, timeline keeps slipping, no one reviewing quality checkpoints..."
             />
           </div>
 
           <div>
-            <Label htmlFor="experiences" className="text-base font-medium text-[#3B3937]">
+            <Label htmlFor="experiences" className="text-base font-medium text-[var(--color-cream)]">
               Why Oceo Luxe *
             </Label>
-            <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
+            <p className="text-sm text-[var(--color-bone)] font-light mt-1 mb-2">
               What drew you to Oceo Luxe, and what outcome would make this engagement worth it?
             </p>
             <Textarea
@@ -244,7 +240,7 @@ export default function ApplyPage() {
               onChange={(e) => handleChange('experiences', e.target.value)}
               required
               rows={4}
-              className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+              className="mt-1 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
               placeholder="Need someone who can verify our factory is actually delivering what they promised..."
             />
           </div>
@@ -264,22 +260,22 @@ export default function ApplyPage() {
           </div>
 
           {/* Privacy Consent */}
-          <div className="border border-[#EDEBE8] rounded-lg p-4 bg-white">
+          <div className="border border-[var(--color-taupe)]/30 rounded-lg p-4 bg-[var(--color-charcoal)]">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={privacyConsent}
                 onChange={(e) => setPrivacyConsent(e.target.checked)}
-                className="mt-1 h-4 w-4 rounded border-gray-300 text-[#3B3937] focus:ring-[#3B3937]"
+                className="mt-1 h-4 w-4 rounded border-gray-300 text-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
                 required
               />
-              <span className="text-sm text-[#967F71]">
+              <span className="text-sm text-[var(--color-bone)]">
                 I agree to the{' '}
-                <Link href="/privacy" className="text-[#3B3937] hover:underline" target="_blank">
+                <Link href="/privacy" className="text-[var(--color-cream)] hover:underline" target="_blank">
                   Privacy Policy
                 </Link>{' '}
                 and{' '}
-                <Link href="/terms" className="text-[#3B3937] hover:underline" target="_blank">
+                <Link href="/terms" className="text-[var(--color-cream)] hover:underline" target="_blank">
                   Terms of Service
                 </Link>
                 . I consent to having my information processed for the purpose of reviewing my application and being contacted about services. *
@@ -297,7 +293,7 @@ export default function ApplyPage() {
             <Button
               type="submit"
               disabled={submitting || !privacyConsent}
-              className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20"
+              className="w-full bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-bone)] text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
             >
               {submitting ? (
                 <>
@@ -316,24 +312,24 @@ export default function ApplyPage() {
 
         {/* Testimonial */}
         <AnimateIn>
-          <div className="mt-12 border-l-2 border-[#CDA7B2] pl-8 py-6 bg-[#CDA7B2]/5 rounded-r-lg">
-            <p className="font-serif-display text-lg lg:text-xl font-normal text-[#3B3937] leading-relaxed">
+          <div className="mt-12 border-l-2 border-[var(--color-dusty-rose)] pl-8 py-6 bg-[var(--color-dusty-rose)]/5 rounded-r-lg">
+            <p className="font-serif-display text-lg lg:text-xl font-normal text-[var(--color-cream)] leading-relaxed">
               &ldquo;If you&apos;re looking for someone who combines sharp business instincts with strong people skills, someone who brings both order and energy, Kerri&apos;s it.&rdquo;
             </p>
-            <p className="text-[#967F71] font-light text-sm mt-4 tracking-wide uppercase">&ndash; C-Suite Executive</p>
+            <p className="text-[var(--color-bone)] font-light text-sm mt-4 tracking-wide uppercase">&ndash; C-Suite Executive</p>
           </div>
         </AnimateIn>
 
         {/* Secondary CTA */}
         <AnimateIn>
-          <div className="mt-12 text-center border-t border-[#EDEBE8] pt-12">
-            <p className="text-xl text-[#967F71] font-light mb-4">
+          <div className="mt-12 text-center border-t border-[var(--color-taupe)]/20 pt-12">
+            <p className="text-xl text-[var(--color-bone)] font-light mb-4">
               Prefer to talk first?
             </p>
             <Link href="/book">
               <Button
                 variant="outline"
-                className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#967F71]/20"
+                className="border-[var(--color-taupe)] text-[var(--color-bone)] hover:bg-[var(--color-taupe)] hover:text-[var(--color-cream)] h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
               >
                 Book a Consultation
               </Button>
@@ -342,7 +338,6 @@ export default function ApplyPage() {
         </AnimateIn>
       </div>
 
-      <MarketingFooter />
-    </div>
+    </MarketingShell>
   );
 }

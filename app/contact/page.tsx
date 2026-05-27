@@ -7,8 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, CheckCircle2, Calendar, Clock, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { MarketingHeader } from '@/components/marketing/marketing-header';
-import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { MarketingShell } from '@/components/marketing/marketing-shell';
 
 const ADHARA_SCHEDULING_SLUG = process.env.NEXT_PUBLIC_ADHARA_SCHEDULING_SLUG || 'consultation';
 
@@ -66,26 +65,25 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-[#faf8f5]">
-        <MarketingHeader />
+      <MarketingShell>
         <div className="max-w-3xl mx-auto px-6 py-24 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-[#CDA7B2]/10 rounded-full mb-6">
-            <CheckCircle2 className="w-10 h-10 text-[#CDA7B2]" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-[var(--color-dusty-rose)]/10 rounded-full mb-6">
+            <CheckCircle2 className="w-10 h-10 text-[var(--color-dusty-rose)]" />
           </div>
-          <h1 className="font-serif-display text-4xl font-normal text-[#3B3937] mb-4">
+          <h1 className="font-serif-display text-4xl font-normal text-[var(--color-cream)] mb-4">
             Request Received
           </h1>
-          <p className="text-lg text-[#967F71] font-light mb-8 max-w-lg mx-auto leading-relaxed">
+          <p className="text-lg text-[var(--color-bone)] font-light mb-8 max-w-lg mx-auto leading-relaxed">
             Thank you for reaching out. I&apos;ll review your request and get back to you within 24 hours to schedule a time to connect.
           </p>
 
           {/* Scheduling CTA */}
-          <div className="bg-white border border-[#EDEBE8] rounded-xl p-8 mb-8 max-w-md mx-auto">
-            <Calendar className="w-8 h-8 text-[#CDA7B2] mx-auto mb-4" />
-            <h2 className="font-serif-display text-xl font-normal text-[#3B3937] mb-2">
+          <div className="bg-[var(--color-charcoal)] border border-[var(--color-taupe)]/20 rounded-xl p-8 mb-8 max-w-md mx-auto">
+            <Calendar className="w-8 h-8 text-[var(--color-dusty-rose)] mx-auto mb-4" />
+            <h2 className="font-serif-display text-xl font-normal text-[var(--color-cream)] mb-2">
               Want to book now?
             </h2>
-            <p className="text-sm text-[#967F71] font-light mb-6">
+            <p className="text-sm text-[var(--color-bone)] font-light mb-6">
               Skip the wait and schedule a 15-minute consultation directly.
             </p>
             <a
@@ -93,7 +91,7 @@ export default function ContactPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-[#CDA7B2] hover:bg-[#b8929d] text-white h-12 px-8 text-base font-normal tracking-wide">
+              <Button className="bg-[var(--color-dusty-rose)] hover:bg-[var(--color-rose-deep)] text-[var(--color-ink)] h-12 px-8 text-base font-normal tracking-wide">
                 <Calendar className="w-5 h-5 mr-2" />
                 Book a Consultation
               </Button>
@@ -102,25 +100,23 @@ export default function ContactPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/">
-              <Button className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide">
+              <Button className="bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-bone)] h-12 px-8 text-base font-normal tracking-wide">
                 Return to Home
               </Button>
             </Link>
             <Link href="/consultations">
-              <Button variant="outline" className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide">
+              <Button variant="outline" className="border-[var(--color-taupe)] text-[var(--color-bone)] hover:bg-[var(--color-taupe)] hover:text-[var(--color-cream)] h-12 px-8 text-base font-normal tracking-wide">
                 View Consultations
               </Button>
             </Link>
           </div>
         </div>
-        <MarketingFooter />
-      </div>
+      </MarketingShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+    <MarketingShell>
 
       <div className="max-w-5xl mx-auto px-6 py-16 lg:py-24">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
@@ -128,13 +124,13 @@ export default function ContactPage() {
           <div className="lg:col-span-3">
             {/* Header */}
             <div className="mb-12">
-              <p className="font-script text-3xl lg:text-4xl italic text-[#CDA7B2] mb-4">
+              <p className="font-script text-3xl lg:text-4xl italic text-[var(--color-dusty-rose)] mb-4">
                 Get in Touch
               </p>
-              <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6">
+              <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-6">
                 Request a Consultation
               </h1>
-              <p className="text-lg text-[#967F71] font-light leading-relaxed">
+              <p className="text-lg text-[var(--color-bone)] font-light leading-relaxed">
                 Tell me about your production challenge and when you&apos;re available. I&apos;ll review your request and reach out within 24 hours.
               </p>
             </div>
@@ -142,7 +138,7 @@ export default function ContactPage() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
-                <Label htmlFor="full_name" className="text-base font-medium text-[#3B3937]">
+                <Label htmlFor="full_name" className="text-base font-medium text-[var(--color-cream)]">
                   Your Name *
                 </Label>
                 <Input
@@ -150,13 +146,13 @@ export default function ContactPage() {
                   value={formData.full_name}
                   onChange={(e) => handleChange('full_name', e.target.value)}
                   required
-                  className="mt-2 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+                  className="mt-2 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
                   placeholder="Your full name"
                 />
               </div>
 
               <div>
-                <Label htmlFor="email" className="text-base font-medium text-[#3B3937]">
+                <Label htmlFor="email" className="text-base font-medium text-[var(--color-cream)]">
                   Email Address *
                 </Label>
                 <Input
@@ -165,13 +161,13 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
                   required
-                  className="mt-2 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+                  className="mt-2 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
                   placeholder="your@email.com"
                 />
               </div>
 
               <div>
-                <Label htmlFor="phone" className="text-base font-medium text-[#3B3937]">
+                <Label htmlFor="phone" className="text-base font-medium text-[var(--color-cream)]">
                   Phone Number *
                 </Label>
                 <Input
@@ -180,16 +176,16 @@ export default function ContactPage() {
                   value={formData.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
                   required
-                  className="mt-2 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+                  className="mt-2 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
                   placeholder="(555) 123-4567"
                 />
               </div>
 
               <div>
-                <Label htmlFor="topic" className="text-base font-medium text-[#3B3937]">
+                <Label htmlFor="topic" className="text-base font-medium text-[var(--color-cream)]">
                   What would you like to discuss? *
                 </Label>
-                <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
+                <p className="text-sm text-[var(--color-bone)] font-light mt-1 mb-2">
                   Describe your production challenge, question, or project.
                 </p>
                 <Textarea
@@ -198,16 +194,16 @@ export default function ContactPage() {
                   onChange={(e) => handleChange('topic', e.target.value)}
                   required
                   rows={4}
-                  className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+                  className="mt-1 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
                   placeholder="I need help evaluating a new factory relationship before placing a $150K order..."
                 />
               </div>
 
               <div>
-                <Label htmlFor="availability" className="text-base font-medium text-[#3B3937]">
+                <Label htmlFor="availability" className="text-base font-medium text-[var(--color-cream)]">
                   Your Availability *
                 </Label>
-                <p className="text-sm text-[#967F71] font-light mt-1 mb-2">
+                <p className="text-sm text-[var(--color-bone)] font-light mt-1 mb-2">
                   When are you available for a consultation call?
                 </p>
                 <Textarea
@@ -216,7 +212,7 @@ export default function ContactPage() {
                   onChange={(e) => handleChange('availability', e.target.value)}
                   required
                   rows={3}
-                  className="mt-1 bg-white border-[#EDEBE8] focus:border-[#3B3937] focus:ring-[#3B3937]"
+                  className="mt-1 bg-[var(--color-charcoal)] border-[var(--color-taupe)]/30 text-[var(--color-cream)] placeholder:text-[var(--color-taupe)] focus:border-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
                   placeholder="e.g., Weekdays 9am-5pm PST, specific dates, etc."
                 />
               </div>
@@ -236,22 +232,22 @@ export default function ContactPage() {
               </div>
 
               {/* Privacy Consent */}
-              <div className="border border-[#EDEBE8] rounded-lg p-4 bg-white">
+              <div className="border border-[var(--color-taupe)]/30 rounded-lg p-4 bg-[var(--color-charcoal)]">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={privacyConsent}
                     onChange={(e) => setPrivacyConsent(e.target.checked)}
-                    className="mt-1 h-4 w-4 rounded border-gray-300 text-[#3B3937] focus:ring-[#3B3937]"
+                    className="mt-1 h-4 w-4 rounded border-gray-300 text-[var(--color-dusty-rose)] focus:ring-[var(--color-dusty-rose)]"
                     required
                   />
-                  <span className="text-sm text-[#967F71]">
+                  <span className="text-sm text-[var(--color-bone)]">
                     I agree to the{' '}
-                    <Link href="/privacy" className="text-[#3B3937] hover:underline" target="_blank">
+                    <Link href="/privacy" className="text-[var(--color-cream)] hover:underline" target="_blank">
                       Privacy Policy
                     </Link>{' '}
                     and{' '}
-                    <Link href="/terms" className="text-[#3B3937] hover:underline" target="_blank">
+                    <Link href="/terms" className="text-[var(--color-cream)] hover:underline" target="_blank">
                       Terms of Service
                     </Link>
                     . I consent to having my information processed for the purpose of scheduling a consultation. *
@@ -269,7 +265,7 @@ export default function ContactPage() {
                 <Button
                   type="submit"
                   disabled={submitting || !privacyConsent}
-                  className="w-full bg-[#3B3937] hover:bg-[#4A4745] text-white text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-bone)] text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? (
                     <>
@@ -291,16 +287,16 @@ export default function ContactPage() {
           <div className="lg:col-span-2">
             <div className="lg:sticky lg:top-8 space-y-8">
               {/* Schedule Directly Card */}
-              <div className="bg-white border border-[#EDEBE8] rounded-xl p-8">
+              <div className="bg-[var(--color-charcoal)] border border-[var(--color-taupe)]/20 rounded-xl p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-[#CDA7B2]/10 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-[#CDA7B2]" />
+                  <div className="w-10 h-10 rounded-full bg-[var(--color-dusty-rose)]/10 flex items-center justify-center">
+                    <Calendar className="w-5 h-5 text-[var(--color-dusty-rose)]" />
                   </div>
-                  <h2 className="font-serif-display text-xl font-normal text-[#3B3937]">
+                  <h2 className="font-serif-display text-xl font-normal text-[var(--color-cream)]">
                     Book Directly
                   </h2>
                 </div>
-                <p className="text-sm text-[#967F71] font-light mb-6 leading-relaxed">
+                <p className="text-sm text-[var(--color-bone)] font-light mb-6 leading-relaxed">
                   Prefer to pick a time now? Schedule a 15-minute consultation call directly from my calendar.
                 </p>
                 <a
@@ -308,7 +304,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button className="w-full bg-[#CDA7B2] hover:bg-[#b8929d] text-white h-12 text-base font-normal tracking-wide">
+                  <Button className="w-full bg-[var(--color-dusty-rose)] hover:bg-[var(--color-rose-deep)] text-[var(--color-ink)] h-12 text-base font-normal tracking-wide">
                     <Calendar className="w-5 h-5 mr-2" />
                     View Available Times
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -317,49 +313,49 @@ export default function ContactPage() {
               </div>
 
               {/* What to Expect */}
-              <div className="bg-white border border-[#EDEBE8] rounded-xl p-8">
-                <h3 className="font-serif-display text-lg font-normal text-[#3B3937] mb-4">
+              <div className="bg-[var(--color-charcoal)] border border-[var(--color-taupe)]/20 rounded-xl p-8">
+                <h3 className="font-serif-display text-lg font-normal text-[var(--color-cream)] mb-4">
                   What to Expect
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-[#CDA7B2]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-medium text-[#CDA7B2]">1</span>
+                    <div className="w-6 h-6 rounded-full bg-[var(--color-dusty-rose)]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-xs font-medium text-[var(--color-dusty-rose)]">1</span>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-[#3B3937]">Submit your request</p>
-                      <p className="text-xs text-[#967F71] font-light">Tell me about your challenge and availability</p>
+                      <p className="text-sm font-medium text-[var(--color-cream)]">Submit your request</p>
+                      <p className="text-xs text-[var(--color-bone)] font-light">Tell me about your challenge and availability</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-[#CDA7B2]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-medium text-[#CDA7B2]">2</span>
+                    <div className="w-6 h-6 rounded-full bg-[var(--color-dusty-rose)]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-xs font-medium text-[var(--color-dusty-rose)]">2</span>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-[#3B3937]">I review within 24 hours</p>
-                      <p className="text-xs text-[#967F71] font-light">I&apos;ll assess fit and prepare for our conversation</p>
+                      <p className="text-sm font-medium text-[var(--color-cream)]">I review within 24 hours</p>
+                      <p className="text-xs text-[var(--color-bone)] font-light">I&apos;ll assess fit and prepare for our conversation</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-[#CDA7B2]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-medium text-[#CDA7B2]">3</span>
+                    <div className="w-6 h-6 rounded-full bg-[var(--color-dusty-rose)]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-xs font-medium text-[var(--color-dusty-rose)]">3</span>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-[#3B3937]">We connect</p>
-                      <p className="text-xs text-[#967F71] font-light">A focused conversation about your production needs</p>
+                      <p className="text-sm font-medium text-[var(--color-cream)]">We connect</p>
+                      <p className="text-xs text-[var(--color-bone)] font-light">A focused conversation about your production needs</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Quick Info */}
-              <div className="bg-[#3B3937] rounded-xl p-8 text-white">
+              <div className="bg-[var(--color-charcoal)] rounded-xl p-8 text-white">
                 <div className="flex items-center gap-2 mb-3">
-                  <Clock className="w-4 h-4 text-[#CDA7B2]" />
+                  <Clock className="w-4 h-4 text-[var(--color-dusty-rose)]" />
                   <span className="text-sm font-light">15-minute initial consultation</span>
                 </div>
-                <div className="w-8 h-px bg-[#CDA7B2] mb-4" />
-                <p className="font-script text-lg italic text-[#CDA7B2] leading-relaxed">
+                <div className="w-8 h-px bg-[var(--color-dusty-rose)] mb-4" />
+                <p className="font-script text-lg italic text-[var(--color-dusty-rose)] leading-relaxed">
                   &ldquo;Your factory will say everything is under control. We make sure it actually is.&rdquo;
                 </p>
               </div>
@@ -368,7 +364,6 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <MarketingFooter />
-    </div>
+    </MarketingShell>
   );
 }

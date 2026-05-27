@@ -151,20 +151,20 @@ export default function CheckoutPage({ params }: { params: Promise<{ slug: strin
   if (error && !product) {
     return (
       <div className="min-h-screen bg-[#faf8f5]">
-        <MarketingHeader />
+        <MarketingHeader theme="light" />
         <div className="max-w-4xl mx-auto px-4 py-24 text-center">
           <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h1 className="text-2xl font-serif font-light text-[#3B3937] mb-2">Product Not Found</h1>
           <p className="text-[#967F71]">The product you're looking for doesn't exist or is no longer available.</p>
         </div>
-        <MarketingFooter />
+        <MarketingFooter theme="light" />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-2 gap-12">
@@ -394,7 +394,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ slug: strin
         </div>
       </div>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

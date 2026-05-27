@@ -2,24 +2,29 @@
 
 ## What This Job Is
 
-This is a content rewrite of the existing Oceo Luxe website with a light visual richness pass on the existing pages. It is not a redesign, not a rebuild, and not a stack migration. The site is moving from "operational partnership studio for fashion founders" to "Studio Operational Partner for founders in any industry who need operations support." Fashion experience stays on the About page as credibility. The brand is no longer fashion-facing.
+This is a brand-level rebuild of the Oceo Luxe website. New positioning, new copy, new visual foundation, new media architecture, new motion layer. The tech stack stays. The component library stays as a starting point but can be extended. The blog stays untouched.
 
-The visual layer of this job is narrow. Claude Code is adding texture, imagery placement, and type treatment inside the existing component system. Not building new components, not generating assets, not redesigning sections.
+The site is moving from "operations consultant in a beige room" to a composed editorial site that demonstrates the synthesis of skills Kerri actually brings: fashion-trained eye, production-trained discipline, developer-trained craft, traveled and lived sensibility. The visual language references YSL editorial confidence, the warmth of designed travel, and the calm of a practiced operator.
+
+Phase order is non-negotiable. Each phase ships before the next begins.
 
 ## What Stays Untouched
 
-Do not modify, refactor, or improve any of the following.
-
 - Tech stack: Next.js on Vercel
-- Typography: Noto Serif Display, Halimum script
-- Color palette: charcoal, taupe, cream, dusty rose
-- Adhara CRM backend integration
-- Existing component library and section types
 - The entire `/blog` directory: content, structure, categories, URLs, metadata
-- Page routing for non-blog pages (only swap content inside the existing routes)
-- Footer, header, and navigation component structure (only the link labels and copy change)
+- Page routing for non-blog pages (only content and layout inside the routes change)
+- Adhara CRM integration (form endpoints and lead routing stay wired)
 
-If a page route currently exists, it continues to exist. If a component currently renders, it continues to render.
+## What Is Changing
+
+- Color palette (darker, more contrast, cream as accent not base)
+- Typography scale and treatment (more confident, more editorial)
+- Layout system (asymmetric, composed, not gridded)
+- Media architecture (image and video slots throughout, header backgrounds, structured for Adhara media gallery connection)
+- Motion layer (subtle, slow, silk not JavaScript)
+- All non-blog page copy
+
+---
 
 ## Brand Foundation
 
@@ -31,20 +36,22 @@ Oceo Luxe is a Studio Operational Partner for founders building businesses they 
 
 > Structure does not limit creativity, it protects it.
 
-Appears on Home hero and About page. Do not rewrite, shorten, or rephrase.
+Appears on Home hero and About page and footer. Do not rewrite, shorten, or rephrase.
 
-### Brand Archetype
+### Brand Sensibility
 
-The Operator. Calm authority. Quietly elite. A trusted internal operator rather than an external consultant.
+The synthesis of an operator whose taste was built by years inside fashion, travel, and luxury, whose discipline came from production, whose medium became code, and whose calm came from practice. The site reads like the inside of that person's head. Composed. Confident. Warm but precise. American polish with European weight.
+
+Reference touchpoints, in Kerri's words: YSL editorial confidence, Blake Lively or Taylor Swift owning a room, a yoga mat in Ubud, dinner above the ruins in Athens, a designed date night in NYC or Miami.
 
 ### Voice Rules
 
 - American English
 - Paragraph-based writing, not bullet-heavy
-- Editorial, grounded, confident without being aggressive
+- Editorial, grounded, confident, with personality underneath
+- Operational gravity at depth, warmth at the surface
 - No em dashes
 - No exclamation points
-- Assume sophistication, never over-explain
 - Founder-to-founder voice
 
 ### Banned Vocabulary
@@ -58,25 +65,25 @@ beginner, just starting out, tips, learn how, step-by-step, easy guide, DIY, aff
 - "coaching session" becomes "strategic alignment"
 - "clients" becomes "founders" or "partners"
 
-## Primary Audience
+### Primary Audience
 
-Founders in any industry who are growing but do not yet have operational systems in place. Industry-agnostic. Do not list industries anywhere on the site.
+Creative founders in any industry who are growing and need operational structure that matches their vision. Industry-agnostic on the site copy. Do not list industries.
+
+---
 
 ## Site Architecture
-
-Existing primary navigation stays.
 
 ```
 Home | Work With Oceo Luxe | Operational Partnership | Studio Systems | About | Blog | Apply
 ```
 
-Blog is out of scope.
+Blog stays out of scope.
 
 ---
 
-## PHASE 1A — Page Copy (Final, Not Direction)
+## PHASE 1A — Page Copy (Verbatim)
 
-This is the copy. Use it verbatim unless a layout constraint forces an adjustment, in which case flag it for review rather than rewriting.
+Use the copy below as written. If a layout constraint forces an adjustment, flag for review rather than rewriting.
 
 ### Home Page
 
@@ -111,7 +118,7 @@ Secondary CTA: Explore the Partnership
 >
 > Every partnership begins with where the business actually is, not where the founder wishes it were. Oceo Luxe meets founders at three operational depths.
 
-Then three tier cards, each with one paragraph from the tier pages below. Each card links to its full page.
+Three tier cards, each with one paragraph from the tier pages. Each card links to its full page.
 
 **Section 5 — Closing CTA**
 
@@ -131,25 +138,19 @@ CTA: Apply
 >
 > Oceo Luxe meets founders at three levels of operational depth. The level is matched to where the business is, not where the founder wants it to be. The standard of work is the same across all three.
 
-**Tier overview section, three blocks:**
+**Three tier blocks:**
 
 **Private Operational Partnership**
 
 > An embedded operator inside the business. Long-form, ongoing, shaped to the company. For founders who need a partner running the operational backbone of a growing business.
 
-Link to full page.
-
 **Strategic Operational Alignment**
 
 > A defined engagement for founders who need a focused operational reset. Bounded scope. The studio maps the business, identifies the fractures, and rebuilds the systems slowing growth.
 
-Link to full page.
-
 **Studio Systems**
 
 > Hands-on operational and web build support, by the hour. Capped at five hours per week so the work stays focused and the standard stays high. The most direct way to put an operator inside the business without committing to a long-form partnership.
-
-Link to full page.
 
 ---
 
@@ -275,95 +276,225 @@ Remove any fashion-specific links. Blog links untouched.
 
 ---
 
-## PHASE 1B — Visual Richness Pass
+## PHASE 1B — Visual Foundation
 
-The current site reads flat. The work this studio produces does not. The visual layer of this rewrite closes that gap, inside the existing component system. No new components, no new section types, no generated assets.
+This phase resets the visual language of the site. Color, typography, layout, spacing. Foundation work before any media or motion goes in.
 
-### Visual Principles
+### Color Palette (Updated — Darker)
 
-**Editorial weight, not decoration.** Every visual choice should make the page feel like an editorial spread, not a marketing template. Think Cereal Magazine, RISD publications, the Aesop website. Quiet, considered, intentional.
+The site shifts from cream-base-with-charcoal-accents to charcoal-base-with-cream-accents. Cream is no longer the dominant background. It is a punctuation color and a text color on dark backgrounds.
 
-**Negative space is the texture.** Cream is not empty. The most luxurious thing on the page is what is not there. Increase white space around hero elements, between sections, and around the byline.
+Define these as CSS custom properties at the root level so they propagate through the system:
 
-**Type as visual element.** Noto Serif Display at scale is the strongest visual asset on the site. Use it bigger. Use Halimum script sparingly, for the byline and one or two pull-quote moments per page.
+```css
+:root {
+  --color-ink: #1A1A1A;           /* near-black, primary background and text */
+  --color-charcoal: #2B2926;       /* warm charcoal, secondary surfaces */
+  --color-cream: #F4EFE6;          /* warm cream, accent text and surfaces */
+  --color-bone: #E8DFD0;           /* slightly deeper cream, secondary text */
+  --color-taupe: #8B7D6B;          /* warm taupe, meta and tertiary text */
+  --color-dusty-rose: #C9A0A0;     /* feminine accent, sparingly used */
+  --color-rose-deep: #A87878;      /* darker rose for hover or emphasis */
+}
+```
 
-**Single accent, not many.** Dusty rose is a punctuation color, not a fill color. Use it for one element per section maximum: a divider, a small caps label, a single underline.
+Default page background is ink. Default body text is cream on ink. Section variation uses charcoal as a slightly different dark surface for visual rhythm. Cream sections exist but are intentional moments, not the base.
 
-### Page-by-Page Visual Direction
+This is the YSL editorial direction. Confident, dark, warm.
 
-**Home Hero**
+### Typography
 
-- Headline set in Noto Serif Display at the largest scale used on the site
-- Subheadline in DM Sans or whatever sans-serif is current, at a comfortable reading size
-- Byline directly below in Halimum script, smaller scale, dusty rose color
-- Background: cream with a subtle grain or paper texture if available in the existing asset library. If not, leave solid and let typography carry weight.
-- Generous vertical padding above and below. The hero should breathe.
-- One image or graphic anchor only. If no asset is available, hold the space empty rather than fill it.
+Keep Noto Serif Display and Halimum. Add a confident sans-serif for body if DM Sans is current and feels too utilitarian. Suggested: Suisse Int'l, Söhne, or if free is required, Inter at tight tracking.
 
-**Home Section Dividers**
+Type scale (desktop):
 
-- Replace any hard horizontal rules with either generous whitespace or a thin dusty rose hairline divider
-- Section labels (if any) in small caps, letter-spaced, taupe color
+- Display: Noto Serif Display, 96 to 128 pixels, line-height 0.95, letter-spacing -0.02em
+- H1: Noto Serif Display, 72 to 88 pixels, line-height 1.0, letter-spacing -0.015em
+- H2: Noto Serif Display, 48 to 56 pixels, line-height 1.1
+- H3: Noto Serif Display, 32 to 36 pixels, line-height 1.2
+- Body large: 18 to 20 pixels, line-height 1.6
+- Body: 16 to 17 pixels, line-height 1.7
+- Small caps label: 12 to 13 pixels, letter-spacing 0.15em, uppercase
+- Halimum script: used for byline, pull quotes, and signature moments only
 
-**Tier Cards on Home**
+Mobile scales down proportionally but keeps display type large enough to feel editorial.
 
-- Stack vertically rather than three-across, if the existing component allows. Vertical stacking reads more editorial.
-- Each card opens with the tier name in Noto Serif Display
-- One-line description in sans-serif
-- A single thin divider in dusty rose between cards
-- Link styled as a small-caps "Read More" with a subtle arrow
+### Layout Principles
 
-**Tier Pages (Operational Partnership, Strategic Operational Alignment, Studio Systems)**
+**Asymmetric, not gridded.** Hero sections should break the center. Headlines anchor left. Subheadlines may sit off-axis. Images and copy alternate sides between sections to create rhythm.
 
-- Hero with tier name in Noto Serif Display at large scale
-- Investment line set apart in small caps, taupe color, not bolded
-- Body paragraphs in a comfortable serif reading size, max-width around 65 characters
-- Single pull-quote per page in Halimum script, dusty rose, pulled from the body copy
+**Composed, not balanced.** Each section is composed deliberately. Some sections are heavy on the left, some on the right, some centered. The composition tells the reader where to look.
 
-**About Page**
+**Generous vertical rhythm.** Section padding minimum 120 pixels top and bottom on desktop. 80 pixels on mobile. The site should breathe.
 
-- Hero headline in Noto Serif Display
-- Byline directly below in Halimum script, dusty rose
-- Body paragraphs in a serif reading size with generous line height
-- Optional: a single editorial portrait or studio image if available. If not, leave the page typographically driven.
+**Maximum content width.** Body paragraphs cap at 65 to 70 characters per line. Display type can extend wider but never edge-to-edge without intention.
+
+**Margin and bleed.** Some sections bleed full-width edge-to-edge (especially hero backgrounds). Others sit inset with visible margin. Mix these intentionally per page.
+
+### Component-Level Direction
+
+**Navigation.** Header sits on ink background. Logo wordmark in cream. Nav links in cream with letter-spacing. Apply button reverses: cream pill on ink, or ink pill on cream depending on section background. Header is sticky with subtle background blur on scroll.
+
+**Buttons.** Primary CTA is a pill with strong contrast — ink on cream, cream on ink. No drop shadow. No gradient. Underline-only secondary CTAs with small-caps treatment.
+
+**Dividers.** Replace any hard horizontal rules with either generous whitespace, a hairline in taupe at 30 percent opacity, or a single dusty rose hairline as punctuation.
+
+**Section labels.** Small caps in taupe or dusty rose, sitting above main headlines as a quiet category marker.
+
+---
+
+## PHASE 1C — Media Architecture
+
+Build the structural slots for images and video throughout the site. The actual media populates later from the Adhara media gallery connection. For now, every slot renders a labeled empty state.
+
+### Media Types Supported
+
+- Static images (jpg, webp, preferred webp for performance)
+- Background video on hero sections only (mp4, autoplay muted loop, with poster image fallback)
+
+### Header Background Treatment (Every Non-Blog Page)
+
+Every page header sits on a full-width background image with a dark overlay for legibility. Structure each one as follows.
+
+**Component structure:**
+
+```jsx
+<PageHeader>
+  <HeaderMedia
+    type="image | video"
+    slotId="home-hero"
+    fallback="placeholder"
+  />
+  <HeaderOverlay opacity={0.55} />
+  <HeaderContent>
+    {/* headline, subheadline, CTAs */}
+  </HeaderContent>
+</PageHeader>
+```
+
+**Overlay specification:**
+
+- Linear gradient from rgba(26, 26, 26, 0.7) at the bottom to rgba(26, 26, 26, 0.45) at the top
+- Or a flat overlay at 0.55 opacity if gradient feels heavy
+- Text on top of overlay must be cream and pass WCAG AA contrast minimum
+
+**Media slot specification:**
+
+- Full viewport width
+- Height: 80vh on Home, 60vh on tier and About pages, 40vh on Apply
+- Object-fit cover, object-position center
+- Loading priority high on Home hero, lazy on others
+- Video slots: muted, autoplay, loop, playsinline, with poster attribute pointing to a still image
+
+### Per-Page Media Slot Inventory
+
+Define each slot with a unique ID so the Adhara media gallery can target it.
+
+**Home Page**
+- `home-hero-bg`: hero background, video preferred, image fallback. Atmospheric. Travel, fashion, or designed-life imagery. Dark enough to support cream text overlay.
+- `home-section-2-bg`: optional subtle background image on Section 2 with high overlay opacity, or solid charcoal
+- `home-section-3-image`: editorial image accompanying Section 3, asymmetric placement, anchored right with copy left
+- `home-section-4-tier-images`: three tier cards each with an optional small image slot, atmospheric not literal
 
 **Work With Oceo Luxe**
+- `work-hero-bg`: hero background image, composed editorial
 
-- Hero in Noto Serif Display
-- Three tier blocks stacked vertically, separated by dusty rose hairline dividers
-- Each block: tier name large, one paragraph, link
+**Operational Partnership**
+- `op-hero-bg`: hero background image, more serious in tone (operational gravity)
+- `op-mid-image`: editorial image partway down the page as a visual break
 
-**Footer**
+**Strategic Operational Alignment**
+- `align-hero-bg`: hero background image
+- `align-mid-image`: editorial image partway down
 
-- Tagline in Halimum script, dusty rose, centered
-- Everything else current
+**Studio Systems**
+- `studio-hero-bg`: hero background image, slightly warmer or lighter in tone (more approachable)
 
-### What Claude Code Should NOT Do in the Visual Pass
+**About**
+- `about-hero-bg`: hero background image, atmospheric
+- `about-portrait`: Kerri's portrait (`Kerri-11.jpg`), color as-shot, placed between body paragraph 2 and body paragraph 3. Max width 480 to 560 pixels on desktop. Sharp rectangular crop. No filter.
 
-- Do not add stock photography
-- Do not generate or insert decorative SVGs, illustrations, or icons beyond what already exists
-- Do not change the color palette
-- Do not introduce new fonts
-- Do not animate elements unless animation already exists on the page
-- Do not redesign navigation
-- Do not add background images that compete with type
-- Do not add CSS gradients
+**Apply**
+- `apply-hero-bg`: hero background image, quieter in tone
 
-### Image Placeholders
+### Empty State Treatment
 
-For any image slot that would benefit from an asset Kerri does not yet have, leave a clean empty container with a comment in the code: `{/* IMAGE PLACEHOLDER: editorial portrait or studio image, to be added by Kerri */}`. Do not fill with stock. Do not fill with AI-generated imagery. Empty and labeled is the correct state.
+Until the Adhara media gallery is connected, every media slot renders an empty state. Do not use gray placeholder boxes. Do not use stock or AI imagery.
+
+Empty state styling:
+
+```jsx
+<div className="media-slot-empty" data-slot-id="home-hero-bg">
+  <span className="media-slot-label">
+    HOME HERO BACKGROUND
+  </span>
+  <span className="media-slot-meta">
+    Video or image, 1920x1080 minimum
+  </span>
+</div>
+```
+
+Empty state visual: solid charcoal background, small caps label in taupe, meta text below in 50 percent opacity taupe. Reads as intentional placeholder, not broken.
+
+### Spacing System
+
+Vertical spacing between media and content needs to be tight enough to feel composed, not airy. Use these tokens:
+
+- `--space-media-tight`: 24 pixels (image adjacent to its caption or headline)
+- `--space-section`: 120 pixels desktop, 80 pixels mobile (between page sections)
+- `--space-hero-bottom`: 160 pixels (extra breathing room below hero before first content section)
+- `--space-content-block`: 48 pixels (between paragraphs of body copy)
+
+### Image Sizing Reference
+
+All images served through Next.js Image component with appropriate sizes prop.
+
+- Header backgrounds: 1920x1080 minimum, 2560x1440 ideal
+- Editorial body images: 1200x1500 portrait or 1600x1000 landscape
+- Tier card images: 800x600
+- Portrait: as provided, do not crop, do not resize at source
+
+---
+
+## PHASE 1D — Motion Layer
+
+Motion should feel like silk. Slow, considered, never bouncy, never trendy. Every motion has a reason.
+
+### Global Motion Principles
+
+- Default easing: cubic-bezier(0.25, 0.1, 0.25, 1) — calm ease-out
+- Default duration: 600 to 800 milliseconds for fades, 1000 to 1200 for larger transitions
+- Reduce motion respected at the OS level — wrap all motion in a media query check for prefers-reduced-motion
+
+### Specific Motion Treatments
+
+**Hero entrance.** Display headline animates in on page load. Lines split and rise individually with a 100 millisecond stagger. Subheadline and CTAs fade in 400 milliseconds after headline completes.
+
+**Scroll-triggered reveals.** Section headlines and body content fade up subtly on scroll into view. 40 pixel translateY origin, fade from 0 to 1 opacity, duration 800 milliseconds.
+
+**Image reveals.** Editorial images reveal with a subtle clip-path or scale transition on scroll into view. Start at scale 1.05, settle to 1.0 over 1200 milliseconds. Or a slow opacity fade if scale feels heavy.
+
+**Header background.** Hero backgrounds have a very slow Ken Burns effect on video, or a parallax shift on image (image moves up at 0.5x scroll speed). Subtle, never dramatic.
+
+**Hover states.** Buttons and links have a 300 millisecond transition on color and background. Image hovers in tier cards have a subtle scale to 1.02 over 500 milliseconds.
+
+**Navigation.** Sticky header background fades in from transparent to ink with subtle blur after 100 pixels of scroll, 400 millisecond duration.
+
+### Motion Libraries
+
+Use Framer Motion for component-level animation. Use vanilla CSS for hover and simple transitions. Do not introduce additional motion libraries beyond Framer Motion.
 
 ---
 
 ## Pages and Redirects
 
-If any of these routes exist, set up redirects:
+Set up redirects for any of these legacy routes if they exist:
 
 - `/services` to `/work-with-oceo-luxe`
 - `/book` to `/apply`
-- `/strategic-production-alignment` to `/strategic-operational-alignment` (update internal links accordingly)
+- `/strategic-production-alignment` to `/strategic-operational-alignment`
 
-Check the codebase for legacy routes (quiz, products, faq, join). Redirect to `/apply` or remove from sitemap.
+Check the codebase for any other legacy routes (quiz, products, faq, join) and either redirect or remove from sitemap.
 
 ---
 
@@ -373,7 +504,7 @@ For every non-blog page, update:
 
 - Page title tag
 - Meta description (under 160 characters)
-- Open Graph title and description
+- Open Graph title, description, and image
 - H1 to match the new headlines
 
 Title pattern: lead with page topic, end with "Oceo Luxe." Comma-separated keywords where natural.
@@ -386,37 +517,57 @@ Do not touch blog metadata.
 
 ## Execution Order
 
-Work this sequence. Do not jump ahead. Do not parallelize.
+Work this sequence. Do not parallelize phases. Each phase ships before the next begins.
 
-**Copy first:**
+**Phase 1A — Copy**
 
 1. Create a feature branch off main
-2. Update the byline component with the verbatim byline
+2. Update byline component with verbatim byline
 3. Update Home page copy
-4. Update Work With Oceo Luxe
-5. Update Operational Partnership
+4. Update Work With Oceo Luxe copy
+5. Update Operational Partnership copy
 6. Rename Strategic Production Alignment to Strategic Operational Alignment. Update routing and internal links. Then rewrite the page.
-7. Update Studio Systems
-8. Update About
+7. Update Studio Systems copy
+8. Update About copy
 9. Update Apply intro
 10. Update footer tagline
-11. Update SEO metadata across all non-blog pages
+11. Update SEO metadata across non-blog pages
 12. Add redirect rules
-13. Build, verify pages render, confirm no broken links
+13. Build and verify
 
-**Visual pass next:**
+**Phase 1B — Visual Foundation**
 
-14. Pull all hero sections to the visual direction above, page by page in the same order
-15. Adjust section dividers and tier card layout on Home
-16. Apply pull-quote treatment on tier pages
-17. Add Halimum script byline placement on Home, About, and footer
-18. Place image placeholders where assets are missing
+14. Update CSS custom properties with the new dark palette
+15. Implement type scale across the site
+16. Refactor layout to asymmetric composition per page
+17. Update header navigation styling for ink background
+18. Update button and divider components
+19. Build and verify
 
-**Ship:**
+**Phase 1C — Media Architecture**
 
-19. Deploy to Vercel preview
-20. Hold for Kerri review
-21. Merge to production on approval
+20. Build PageHeader, HeaderMedia, HeaderOverlay components
+21. Implement media slot system with unique slot IDs per page
+22. Build empty state component
+23. Place Kerri's portrait on About page with specified treatment
+24. Verify all slots render correctly in empty state
+25. Build and verify
+
+**Phase 1D — Motion Layer**
+
+26. Install Framer Motion if not present
+27. Implement hero entrance animations
+28. Implement scroll-triggered reveals
+29. Implement image reveal treatments
+30. Implement navigation scroll behavior
+31. Verify prefers-reduced-motion is respected
+32. Build and verify
+
+**Ship**
+
+33. Deploy to Vercel preview
+34. Kerri reviews each phase output in the preview
+35. Merge to production on final approval
 
 ---
 
@@ -424,27 +575,30 @@ Work this sequence. Do not jump ahead. Do not parallelize.
 
 Explicitly not part of this job:
 
-- New page creation
+- Adhara media gallery connection (separate project)
 - Portfolio or case study sections (separate document with Patrick)
 - Blog content, blog layout, blog metadata
-- Adhara CRM integration changes
-- Asset generation of any kind
+- Adhara CRM integration changes beyond what already exists
+- Sourcing or generating imagery
 - Stock photography
-- New components
-- Color palette changes
-- Typography changes
-- Work on Akari, Bridgman Properties, Adhara, or NestClear
+- AI-generated imagery
+- Work on Akari, Bridgman Properties, Adhara backend, or NestClear
 
 ---
 
 ## Definition of Done
 
-- Every non-blog page reflects the new positioning with the embedded copy
+- Every non-blog page reflects the new positioning with embedded copy
 - Byline appears verbatim on Home, About, and footer
 - No fashion-specific language outside the About credibility paragraph
 - Renamed routes resolve correctly with redirects
 - SEO metadata updated across non-blog pages
-- Visual richness pass applied per page-by-page direction above
-- Image placeholders labeled and empty where assets are missing
-- Vercel preview deploys cleanly
+- New dark palette implemented across the site
+- Asymmetric composed layout in place on every non-blog page
+- Type scale implemented and used consistently
+- Media slot architecture built and ready to receive media from Adhara
+- Empty states render cleanly and intentionally on every slot
+- Kerri's portrait placed on About per specification
+- Motion layer implemented with prefers-reduced-motion respected
+- Vercel preview deploys cleanly with no console errors or build warnings
 - Kerri reviews and approves before merging to production

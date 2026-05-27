@@ -25,6 +25,15 @@
   --brand-rose-hover: #BD97A2;
   --brand-rose-light: #E8D4DB;
 
+  /* Phase 1B — Dark Editorial Palette */
+  --color-ink: #1A1A1A;
+  --color-charcoal: #2B2926;
+  --color-cream: #F4EFE6;
+  --color-bone: #E8DFD0;
+  --color-taupe: #8B7D6B;
+  --color-dusty-rose: #C9A0A0;
+  --color-rose-deep: #A87878;
+
   /* Warm Gray Palette - Luxury Depth */
   --brand-gray-50: #FAFAF9;
   --brand-gray-100: #F5F3F0;
@@ -198,6 +207,15 @@
   --color-brand-rose: var(--brand-rose);
   --color-brand-rose-hover: var(--brand-rose-hover);
   --color-brand-rose-light: var(--brand-rose-light);
+
+  /* Phase 1B Dark Editorial Colors */
+  --color-ink: #1A1A1A;
+  --color-charcoal: #2B2926;
+  --color-cream: #F4EFE6;
+  --color-bone: #E8DFD0;
+  --color-taupe: #8B7D6B;
+  --color-dusty-rose: #C9A0A0;
+  --color-rose-deep: #A87878;
 }
 
 @theme inline {
@@ -741,6 +759,15 @@
     animation: pulse-soft 4s ease-in-out infinite;
   }
 
+  /* Phase 1B — Fluid Typography Scale */
+  .text-display   { font-size: clamp(3rem, 5vw + 1rem, 8rem); line-height: 0.95; letter-spacing: -0.02em; }
+  .text-h1        { font-size: clamp(2.5rem, 4vw + 1rem, 5.5rem); line-height: 1.0; letter-spacing: -0.015em; }
+  .text-h2        { font-size: clamp(2rem, 3vw + 0.5rem, 3.5rem); line-height: 1.1; }
+  .text-h3        { font-size: clamp(1.5rem, 2vw + 0.5rem, 2.25rem); line-height: 1.2; }
+  .text-body-lg   { font-size: clamp(1.125rem, 1vw + 0.5rem, 1.25rem); line-height: 1.6; }
+  .text-body      { font-size: clamp(1rem, 0.8vw + 0.5rem, 1.0625rem); line-height: 1.7; }
+  .text-label     { font-size: clamp(0.75rem, 0.5vw + 0.5rem, 0.8125rem); letter-spacing: 0.15em; text-transform: uppercase; }
+
   /* Font Utilities */
   .font-serif-display {
     font-family: var(--font-family-serif-display);
@@ -853,7 +880,7 @@
 
   /* Hero text glow — warm, editorial, subtle */
   .text-glow-warm {
-    text-shadow: 0 0 40px rgba(205, 167, 178, 0.15), 0 0 80px rgba(205, 167, 178, 0.08);
+    text-shadow: 0 0 40px rgba(201, 160, 160, 0.15), 0 0 80px rgba(201, 160, 160, 0.08);
   }
 
   .text-glow-charcoal {
@@ -873,7 +900,7 @@
     transform: translate(-50%, -50%);
     width: 60%;
     height: 60%;
-    background: radial-gradient(ellipse, rgba(205, 167, 178, 0.08) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(201, 160, 160, 0.08) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -898,6 +925,6 @@
   /* Gradient divider — richer than a flat hairline */
   .divider-gradient {
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(205, 167, 178, 0.5) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(201, 160, 160, 0.5) 50%, transparent 100%);
   }
 }

@@ -38,7 +38,7 @@ export default function QuizAboutPage() {
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       {/* Hero Section */}
       <section className="bg-[#f5f0ea] py-20 overflow-hidden">
@@ -197,7 +197,7 @@ export default function QuizAboutPage() {
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

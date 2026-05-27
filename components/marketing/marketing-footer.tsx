@@ -1,17 +1,31 @@
 import Link from 'next/link';
 import { Instagram, Linkedin } from 'lucide-react';
 
-export function MarketingFooter() {
+interface MarketingFooterProps {
+  theme?: 'dark' | 'light';
+}
+
+export function MarketingFooter({ theme = 'dark' }: MarketingFooterProps) {
+  const isDark = theme === 'dark';
+
   return (
-    <footer className="border-t border-[#967F71]/10 bg-[#faf8f5] py-12">
+    <footer className={`border-t py-12 ${
+      isDark
+        ? 'border-[var(--color-taupe)]/20 bg-[var(--color-ink)]'
+        : 'border-[#967F71]/10 bg-[#faf8f5]'
+    }`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4">
-              <h2 className="text-xl font-light text-[#3B3937] tracking-wide">Oceo Luxe</h2>
+              <h2 className={`text-xl font-light tracking-wide ${
+                isDark ? 'text-[var(--color-cream)]' : 'text-[#3B3937]'
+              }`}>Oceo Luxe</h2>
             </div>
-            <p className="text-[#967F71] mb-6 max-w-md font-light leading-relaxed">
+            <p className={`mb-6 max-w-md font-light leading-relaxed ${
+              isDark ? 'text-[var(--color-taupe)]' : 'text-[#967F71]'
+            }`}>
               Studio Operational Partner for founders building businesses they intend to keep.
             </p>
             <div className="flex space-x-4">
@@ -19,7 +33,9 @@ export function MarketingFooter() {
                 href="https://www.instagram.com/oceoluxe"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#967F71] hover:text-[#3B3937] transition-colors"
+                className={`transition-colors ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}
                 aria-label="Instagram"
               >
                 <Instagram className="w-6 h-6" />
@@ -28,7 +44,9 @@ export function MarketingFooter() {
                 href="https://www.linkedin.com/in/kerri-bridgman/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#967F71] hover:text-[#3B3937] transition-colors"
+                className={`transition-colors ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-6 h-6" />
@@ -37,7 +55,9 @@ export function MarketingFooter() {
                 href="https://www.pinterest.com/oceoluxe/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#967F71] hover:text-[#3B3937] transition-colors"
+                className={`transition-colors ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}
                 aria-label="Pinterest"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -49,30 +69,42 @@ export function MarketingFooter() {
 
           {/* Primary Links */}
           <div>
-            <h3 className="text-[#3B3937] font-semibold mb-4 uppercase tracking-wider text-sm">Explore</h3>
+            <h3 className={`font-semibold mb-4 uppercase tracking-wider text-sm ${
+              isDark ? 'text-[var(--color-cream)]' : 'text-[#3B3937]'
+            }`}>Explore</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                <Link href="/" className={`transition-colors font-light ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/work-with-oceo-luxe" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                <Link href="/work-with-oceo-luxe" className={`transition-colors font-light ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}>
                   Work With Oceo Luxe
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                <Link href="/about" className={`transition-colors font-light ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}>
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                <Link href="/blog" className={`transition-colors font-light ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}>
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/apply" className="text-[#967F71] hover:text-[#3B3937] transition-colors font-light">
+                <Link href="/apply" className={`transition-colors font-light ${
+                  isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+                }`}>
                   Apply
                 </Link>
               </li>
@@ -81,23 +113,33 @@ export function MarketingFooter() {
         </div>
 
         {/* Tagline */}
-        <div className="border-t border-[#967F71]/10 mt-8 pt-8 text-center">
-          <p className="font-script text-xl italic text-[#CDA7B2] mb-6">
+        <div className={`border-t mt-8 pt-8 text-center ${
+          isDark ? 'border-[var(--color-taupe)]/20' : 'border-[#967F71]/10'
+        }`}>
+          <p className="font-script text-xl italic text-[var(--color-dusty-rose)] mb-6">
             Structure does not limit creativity, it protects it.
           </p>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[#967F71]/10 pt-6">
+        <div className={`border-t pt-6 ${
+          isDark ? 'border-[var(--color-taupe)]/20' : 'border-[#967F71]/10'
+        }`}>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-[#967F71] text-sm font-light">
+            <p className={`text-sm font-light ${
+              isDark ? 'text-[var(--color-taupe)]' : 'text-[#967F71]'
+            }`}>
               &copy; 2026 Oceo Luxe. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <Link href="/privacy" className="text-[#967F71] hover:text-[#3B3937] text-sm font-light transition-colors">
+              <Link href="/privacy" className={`text-sm font-light transition-colors ${
+                isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+              }`}>
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-[#967F71] hover:text-[#3B3937] text-sm font-light transition-colors">
+              <Link href="/terms" className={`text-sm font-light transition-colors ${
+                isDark ? 'text-[var(--color-taupe)] hover:text-[var(--color-cream)]' : 'text-[#967F71] hover:text-[#3B3937]'
+              }`}>
                 Terms of Service
               </Link>
             </div>

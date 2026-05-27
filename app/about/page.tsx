@@ -2,8 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { MarketingHeader } from '@/components/marketing/marketing-header';
-import { MarketingFooter } from '@/components/marketing/marketing-footer';
+import { MarketingShell } from '@/components/marketing/marketing-shell';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
@@ -22,18 +21,17 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 
 export default async function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#faf8f5]">
+    <MarketingShell>
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
-      <MarketingHeader />
 
       {/* Hero Section */}
       <section className="py-24 lg:py-32">
         <div className="max-w-3xl mx-auto px-6">
           <AnimateIn animation="fade-in">
-            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[#3B3937] leading-[1.15] tracking-tight mb-6 text-glow-warm">
+            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-6 text-glow-warm">
               Oceo Luxe Was Built to Solve the Operational Layer
             </h1>
-            <p className="font-script text-2xl italic text-[#CDA7B2]">
+            <p className="font-script text-2xl italic text-[var(--color-dusty-rose)]">
               Structure does not limit creativity, it protects it.
             </p>
           </AnimateIn>
@@ -41,7 +39,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Portrait + Bio — Side by Side */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section className="py-20 lg:py-28 bg-[var(--color-charcoal)]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
@@ -61,7 +59,7 @@ export default async function AboutPage() {
 
             {/* Bio */}
             <AnimateIn animation="fade-in" delay={100}>
-              <div className="space-y-8 text-lg text-[#967F71] font-light leading-relaxed">
+              <div className="space-y-8 text-lg text-[var(--color-bone)] font-light leading-relaxed">
                 {/* Paragraph 1 — Foundation */}
                 <p>
                   Oceo Luxe was founded by Kerri Bridgman. The studio exists because most businesses do not fail at the idea. They fail at the operational layer underneath it. The work is to absorb that layer so the founder can stay in the work only they can do.
@@ -81,7 +79,7 @@ export default async function AboutPage() {
                   <Link href="/apply">
                     <Button
                       size="lg"
-                      className="bg-[#3B3937] hover:bg-[#4A4745] text-white h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3B3937]/20"
+                      className="bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-bone)] h-12 px-8 text-base font-normal tracking-wide transition-all duration-300 hover:-translate-y-0.5"
                     >
                       Apply to Work Together
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -95,7 +93,6 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <MarketingFooter />
-    </div>
+    </MarketingShell>
   );
 }

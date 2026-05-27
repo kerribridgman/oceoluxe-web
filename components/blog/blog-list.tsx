@@ -54,8 +54,8 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
   if (posts.length === 0) {
     return (
       <div className="py-16 text-center">
-        <h2 className="text-2xl font-light text-[#3B3937] mb-2">No posts yet</h2>
-        <p className="text-[#967F71] font-light">Check back soon for insights and articles.</p>
+        <h2 className="text-2xl font-light text-[var(--color-cream)] mb-2">No posts yet</h2>
+        <p className="text-[var(--color-bone)] font-light">Check back soon for insights and articles.</p>
       </div>
     );
   }
@@ -68,8 +68,8 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
             onClick={() => { setActiveIndustry(null); setVisibleCount(postsPerPage); }}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
               activeIndustry === null
-                ? 'bg-[#CDA7B2]/10 text-[#CDA7B2]'
-                : 'text-[#967F71] hover:text-[#CDA7B2]'
+                ? 'bg-[var(--color-dusty-rose)]/10 text-[var(--color-dusty-rose)]'
+                : 'text-[var(--color-bone)] hover:text-[var(--color-dusty-rose)]'
             }`}
           >
             All
@@ -80,8 +80,8 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
               onClick={() => { setActiveIndustry(industry); setVisibleCount(postsPerPage); }}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 activeIndustry === industry
-                  ? 'bg-[#CDA7B2]/10 text-[#CDA7B2]'
-                  : 'text-[#967F71] hover:text-[#CDA7B2]'
+                  ? 'bg-[var(--color-dusty-rose)]/10 text-[var(--color-dusty-rose)]'
+                  : 'text-[var(--color-bone)] hover:text-[var(--color-dusty-rose)]'
               }`}
             >
               {industry}
@@ -99,7 +99,7 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
           >
             <article className="flex gap-4">
               {post.coverImageUrl && (
-                <div className="w-20 h-20 flex-shrink-0 overflow-hidden relative bg-[#f5f0ea]">
+                <div className="w-20 h-20 flex-shrink-0 overflow-hidden relative bg-[var(--color-charcoal)]">
                   <Image
                     src={post.coverImageUrl}
                     alt={post.title}
@@ -111,14 +111,14 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
                 </div>
               )}
               <div className="space-y-1 flex-1 min-w-0">
-                <p className="text-xs text-[#CDA7B2] font-medium uppercase tracking-wider">
+                <p className="text-xs text-[var(--color-dusty-rose)] font-medium uppercase tracking-wider">
                   {post.publishedAt ? formatBlogDate(post.publishedAt) : 'Draft'}
                 </p>
-                <h2 className="text-base font-medium text-[#3B3937] group-hover:text-[#CDA7B2] transition-colors leading-snug">
+                <h2 className="text-base font-medium text-[var(--color-cream)] group-hover:text-[var(--color-dusty-rose)] transition-colors leading-snug">
                   {post.title}
                 </h2>
                 {post.excerpt && (
-                  <p className="text-sm text-[#967F71] font-light leading-relaxed line-clamp-2">
+                  <p className="text-sm text-[var(--color-bone)] font-light leading-relaxed line-clamp-2">
                     {post.excerpt}
                   </p>
                 )}
@@ -134,7 +134,7 @@ export function BlogList({ posts, postsPerPage = 12 }: BlogListProps) {
             variant="outline"
             size="lg"
             onClick={handleSeeMore}
-            className="border-[#967F71] text-[#967F71] hover:bg-[#967F71] hover:text-white h-12 px-8 text-base font-normal tracking-wide"
+            className="border-[var(--color-taupe)] text-[var(--color-bone)] hover:bg-[var(--color-taupe)] hover:text-[var(--color-cream)] h-12 px-8 text-base font-normal tracking-wide"
           >
             See More
           </Button>

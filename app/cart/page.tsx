@@ -22,7 +22,7 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-[#faf8f5]">
-        <MarketingHeader />
+        <MarketingHeader theme="light" />
 
         <section className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -44,14 +44,14 @@ export default function CartPage() {
           </div>
         </section>
 
-        <MarketingFooter />
+        <MarketingFooter theme="light" />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       {/* Back Button */}
       <div className="bg-[#faf8f5] border-b border-[#967F71]/10">
@@ -211,7 +211,7 @@ export default function CartPage() {
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }

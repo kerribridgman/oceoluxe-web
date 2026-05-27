@@ -110,7 +110,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <>
       <JsonLdScript data={[productJsonLd, breadcrumbJsonLd] as unknown as Record<string, unknown>[]} />
       <div className="min-h-screen bg-[#faf8f5]">
-        <MarketingHeader />
+        <MarketingHeader theme="light" />
 
         {/* Back Button */}
         <div className="bg-[#faf8f5] border-b border-[#967F71]/10">
@@ -256,7 +256,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
         </section>
 
-        <MarketingFooter />
+        <MarketingFooter theme="light" />
       </div>
       </>
     );
@@ -302,7 +302,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     <>
     <JsonLdScript data={[notionProductJsonLd, notionBreadcrumbJsonLd] as unknown as Record<string, unknown>[]} />
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       {/* Back Button */}
       <div className="bg-[#faf8f5] border-b border-[#967F71]/10">
@@ -511,7 +511,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
     </>
   );

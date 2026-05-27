@@ -42,7 +42,7 @@ export function FAQClient({ faqs }: { faqs: FAQItem[] }) {
 
   return (
     <div className="min-h-screen bg-[#faf8f5]">
-      <MarketingHeader />
+      <MarketingHeader theme="light" />
 
       {/* Hero Section */}
       <section className="bg-[#f5f0ea] overflow-hidden">
@@ -120,7 +120,7 @@ export function FAQClient({ faqs }: { faqs: FAQItem[] }) {
         </div>
       </section>
 
-      <MarketingFooter />
+      <MarketingFooter theme="light" />
     </div>
   );
 }
