@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { MarketingHeader } from '@/components/marketing/marketing-header';
-import { MarketingFooter } from '@/components/marketing/marketing-footer';
 import { MarketingShell } from '@/components/marketing/marketing-shell';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { AnimateIn } from '@/components/animate-in';
@@ -14,7 +12,6 @@ export async function generateMetadata() {
 export default async function HomePage() {
   return (
     <MarketingShell>
-      <MarketingHeader />
 
       {/* 1. Hero Section */}
       <section className="bg-[var(--color-ink)]">
@@ -182,7 +179,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <MarketingFooter />
     </MarketingShell>
   );
 }

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { MarketingShell } from '@/components/marketing/marketing-shell';
@@ -101,23 +100,6 @@ export default async function OperationalPartnershipPage() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-            </div>
-          </AnimateIn>
-        </div>
-      </section>
-
-      {/* Editorial Image */}
-      <section className="py-16 lg:py-24 bg-[var(--color-ink)]">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimateIn animation="fade-in">
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
-              <Image
-                src="/images/Kerri-11.webp"
-                alt="Kerri Bridgman"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-              />
             </div>
           </AnimateIn>
         </div>
