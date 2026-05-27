@@ -96,62 +96,60 @@ export default async function HomePage() {
 
       {/* 4. How We Work — Three Levels of Operational Depth */}
       <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-3xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
-            <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-6 tracking-tight">
-              Three Levels of Operational Depth
-            </h2>
-            <p className="text-lg text-[#967F71] font-light leading-relaxed mb-16" style={{ maxWidth: '65ch' }}>
-              Every partnership begins with where the business actually is, not where the founder wishes it were. Oceo Luxe meets founders at three operational depths.
-            </p>
+            <div className="max-w-3xl mb-16">
+              <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-[#3B3937] mb-6 tracking-tight">
+                Three Levels of Operational Depth
+              </h2>
+              <p className="text-lg text-[#967F71] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+                Every partnership begins with where the business actually is, not where the founder wishes it were. Oceo Luxe meets founders at three operational depths.
+              </p>
+            </div>
           </AnimateIn>
 
-          {/* Tier Cards — Stacked Vertically */}
-          <div className="space-y-0">
+          {/* Tier Cards — Three Across */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Private Operational Partnership */}
             <AnimateIn delay={100}>
-              <div className="py-10 transition-all duration-300 hover:translate-x-1">
-                <h3 className="font-serif-display text-2xl font-normal text-[#3B3937] mb-3 tracking-tight">
+              <div className="flex flex-col bg-white border border-[#EDEBE8] rounded-xl p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_40px_-8px_rgba(205,167,178,0.3)] hover:border-[#CDA7B2]/30">
+                <h3 className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] mb-3 tracking-tight">
                   Private Operational Partnership
                 </h3>
-                <p className="text-[#967F71] font-light leading-relaxed mb-4" style={{ maxWidth: '65ch' }}>
+                <p className="text-[#967F71] font-light leading-relaxed mb-6 flex-1">
                   An embedded operator inside the business. Long-form, ongoing, shaped to the company. For founders who need a partner running the operational backbone of a growing business.
                 </p>
-                <Link href="/operational-partnership" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors">
+                <Link href="/operational-partnership" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors mt-auto">
                   Read More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                 </Link>
               </div>
             </AnimateIn>
-
-            <div className="divider-gradient" />
 
             {/* Strategic Operational Alignment */}
             <AnimateIn delay={200}>
-              <div className="py-10 transition-all duration-300 hover:translate-x-1">
-                <h3 className="font-serif-display text-2xl font-normal text-[#3B3937] mb-3 tracking-tight">
+              <div className="flex flex-col bg-white border border-[#EDEBE8] rounded-xl p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_40px_-8px_rgba(205,167,178,0.3)] hover:border-[#CDA7B2]/30">
+                <h3 className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] mb-3 tracking-tight">
                   Strategic Operational Alignment
                 </h3>
-                <p className="text-[#967F71] font-light leading-relaxed mb-4" style={{ maxWidth: '65ch' }}>
+                <p className="text-[#967F71] font-light leading-relaxed mb-6 flex-1">
                   A defined engagement for founders who need a focused operational reset. Bounded scope. The studio maps the business, identifies the fractures, and rebuilds the systems slowing growth.
                 </p>
-                <Link href="/strategic-operational-alignment" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors">
+                <Link href="/strategic-operational-alignment" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors mt-auto">
                   Read More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                 </Link>
               </div>
             </AnimateIn>
 
-            <div className="divider-gradient" />
-
             {/* Studio Systems */}
             <AnimateIn delay={300}>
-              <div className="py-10 transition-all duration-300 hover:translate-x-1">
-                <h3 className="font-serif-display text-2xl font-normal text-[#3B3937] mb-3 tracking-tight">
+              <div className="flex flex-col bg-white border border-[#EDEBE8] rounded-xl p-8 h-full transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_40px_-8px_rgba(205,167,178,0.3)] hover:border-[#CDA7B2]/30">
+                <h3 className="font-serif-display text-xl lg:text-2xl font-normal text-[#3B3937] mb-3 tracking-tight">
                   Studio Systems
                 </h3>
-                <p className="text-[#967F71] font-light leading-relaxed mb-4" style={{ maxWidth: '65ch' }}>
+                <p className="text-[#967F71] font-light leading-relaxed mb-6 flex-1">
                   Hands-on operational and web build support, by the hour. Capped at five hours per week so the work stays focused and the standard stays high. The most direct way to put an operator inside the business without committing to a long-form partnership.
                 </p>
-                <Link href="/studio-systems" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors">
+                <Link href="/studio-systems" className="inline-flex items-center text-[#3B3937] text-sm font-medium tracking-wider uppercase hover:text-[#967F71] transition-colors mt-auto">
                   Read More <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                 </Link>
               </div>
