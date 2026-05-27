@@ -34,6 +34,13 @@
   --color-dusty-rose: #C9A0A0;
   --color-rose-deep: #A87878;
 
+  /* Phase 1C — Media Architecture Spacing */
+  --space-media-tight: 24px;
+  --space-section: 120px;
+  --space-section-mobile: 80px;
+  --space-hero-bottom: 160px;
+  --space-content-block: 48px;
+
   /* Warm Gray Palette - Luxury Depth */
   --brand-gray-50: #FAFAF9;
   --brand-gray-100: #F5F3F0;

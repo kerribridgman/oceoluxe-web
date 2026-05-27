@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { MarketingShell } from '@/components/marketing/marketing-shell';
+import { PageHeader } from '@/components/marketing/page-header';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
@@ -24,21 +25,19 @@ export default async function StudioSystemsPage() {
       <JsonLdScript data={breadcrumbJsonLd as unknown as Record<string, unknown>} />
 
       {/* Hero Section */}
-      <section className="py-24 lg:py-32">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimateIn animation="fade-in">
-            <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-4 text-glow-warm">
-              Studio Systems
-            </h1>
-            <p className="font-serif-display text-xl lg:text-2xl font-normal text-[var(--color-bone)] mb-8">
-              Hands-on operational and web build support, by the hour.
-            </p>
-            <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
-              Maximum five hours per week.
-            </p>
-          </AnimateIn>
-        </div>
-      </section>
+      <PageHeader slotId="studio-hero-bg" height="60vh">
+        <AnimateIn animation="fade-in">
+          <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-4 text-glow-warm">
+            Studio Systems
+          </h1>
+          <p className="font-serif-display text-xl lg:text-2xl font-normal text-[var(--color-bone)] mb-8">
+            Hands-on operational and web build support, by the hour.
+          </p>
+          <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
+            Maximum five hours per week.
+          </p>
+        </AnimateIn>
+      </PageHeader>
 
       {/* Body Section 1 */}
       <section className="py-20 lg:py-28 bg-[var(--color-charcoal)]">
