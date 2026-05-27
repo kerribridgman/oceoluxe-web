@@ -43,7 +43,7 @@ export default async function OperationalPartnershipPage() {
               An embedded operator inside your business.
             </p>
             <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
-              Investment: $8,500 to $12,000 monthly. Application-only.
+              Application-only.
             </p>
           </AnimateIn>
         </div>

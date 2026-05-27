@@ -223,20 +223,13 @@ export default function StudioSystemsJoinPage() {
         </div>
       </section>
 
-      {/* Luxury Pricing Section */}
-      <section id="pricing" className="py-24 bg-white scroll-mt-20">
+      {/* Membership CTA Section */}
+      <section id="membership" className="py-24 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-[#3B3937] mb-6 leading-tight">
-            A Luxury-Level Membership<br />for the Price of Coffee & Croissant
+            A Luxury-Level Membership<br />Built for Fashion Founders
           </h2>
-          <div className="my-8">
-            <p className="text-[#967F71] line-through text-lg mb-2 font-light">Regular Price: $88/month</p>
-            <div className="text-6xl font-serif font-light text-[#3B3937] mb-2">
-              $55<span className="text-3xl text-[#967F71]">/month</span>
-            </div>
-            <p className="text-[#967F71] font-light italic">(No strings attached, cancel anytime)</p>
-            <p className="text-sm text-[#CDA7B2] mt-4 font-medium">Founding Member Pricing: $55/month for the first 20 members</p>
-          </div>
+          <p className="text-[#967F71] font-light italic my-8">(No strings attached, cancel anytime)</p>
           <Link href="/studio-systems/waitlist">
             <Button
               size="lg"
@@ -245,9 +238,6 @@ export default function StudioSystemsJoinPage() {
               Join the Waitlist
             </Button>
           </Link>
-          <p className="text-sm text-[#967F71] mt-6 font-light">
-            No thanks, I'll figure it out on my own
-          </p>
         </div>
       </section>
 
@@ -281,7 +271,7 @@ export default function StudioSystemsJoinPage() {
             Ready to Reclaim Your Time<br />and Creative Flow?
           </h2>
           <p className="text-xl text-[#967F71] mb-12 leading-relaxed font-light">
-            Join Studio Systems as a Founding Member and get access to The Oceo Method™,<br />
+            Join Studio Systems and get access to The Oceo Method™,<br />
             monthly Studio Sessions, and a community of fashion founders building with clarity and calm.
           </p>
           <Link href="/studio-systems/waitlist">
@@ -294,7 +284,7 @@ export default function StudioSystemsJoinPage() {
             </Button>
           </Link>
           <p className="text-lg text-[#967F71] mt-8 font-light">
-            $55/month for founding members • $88/month after the first 20
+            Cancel anytime • No long-term commitment
           </p>
         </div>
       </section>

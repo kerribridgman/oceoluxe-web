@@ -42,7 +42,7 @@ export default async function StrategicOperationalAlignmentPage() {
               A focused operational reset.
             </p>
             <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
-              Investment: $5,500 to $8,500. Flat engagement.
+              Flat engagement.
             </p>
           </AnimateIn>
         </div>

@@ -22,7 +22,6 @@ const breadcrumbJsonLd = getBreadcrumbJsonLd([
 const consultations = [
   {
     title: 'The Production Pulse',
-    price: '$500',
     tagline: 'Fast, expert clarity on a specific production problem.',
     description:
       'A one-hour live consultation built for designers who need fast, expert clarity on a specific production problem. Before the call, you complete a structured intake form covering your current production stage, active issues, factory situation, timeline pressure, and the top three questions you want answered. I arrive prepared. The hour is spent diagnosing what is actually happening and giving direct guidance you can act on the same week.',
@@ -33,12 +32,11 @@ const consultations = [
       'Short Loom or written recap with 3\u20135 priority actions discussed',
     ],
     positioning:
-      'The intake form does the qualifying work. I arrive prepared instead of cold. The price filters out tire-kickers while keeping the offer accessible to early-stage designers and Studio Systems members who need a one-time intervention.',
+      'The intake form does the qualifying work. I arrive prepared instead of cold. Accessible to early-stage designers and Studio Systems members who need a one-time intervention.',
     paymentLink: process.env.NEXT_PUBLIC_STRIPE_LINK_PRODUCTION_PULSE || '/book',
   },
   {
     title: 'The Production Audit',
-    price: '$750',
     tagline: 'A focused diagnostic for designers with active production running.',
     description:
       'A focused diagnostic for designers who have active production running and suspect something is breaking. The differentiator versus the Pulse is pre-call review of your actual materials. You send your tech packs, factory communication threads, production calendar, or sample correspondence in advance. I review before the call, identify the structural gaps, then use the hour to walk you through what I found and what to fix first.',
@@ -54,7 +52,6 @@ const consultations = [
   },
   {
     title: 'The Production Strategy Session',
-    price: '$900',
     tagline: 'A senior strategic consultation for real decision points.',
     description:
       'A senior strategic consultation for designers standing at a real decision point. Common triggers: deciding whether to switch factories, scoping a new product category, evaluating whether to move into wholesale, or restructuring how your production calendar interacts with your cash flow. This is the hour where the question is not tactical \u2014 it is directional.',
@@ -123,9 +120,6 @@ export default async function ConsultationsPage() {
                         <p className="text-lg font-light mt-2 text-[#967F71]">
                           {consultation.tagline}
                         </p>
-                      </div>
-                      <div className="text-3xl lg:text-4xl font-light tracking-tight shrink-0 text-[#3B3937]">
-                        {consultation.price}
                       </div>
                     </div>
 

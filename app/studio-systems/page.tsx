@@ -34,7 +34,7 @@ export default async function StudioSystemsPage() {
               Hands-on operational and web build support, by the hour.
             </p>
             <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
-              Investment: $111 per hour. Maximum five hours per week.
+              Maximum five hours per week.
             </p>
           </AnimateIn>
         </div>
