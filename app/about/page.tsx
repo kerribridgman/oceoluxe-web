@@ -31,6 +31,8 @@ export default async function AboutPage() {
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-6 text-glow-warm">
             Oceo Luxe Was Built to Solve the Operational Layer
           </h1>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={200}>
           <p className="font-script text-2xl italic text-[var(--color-dusty-rose)]">
             Structure does not limit creativity, it protects it.
           </p>

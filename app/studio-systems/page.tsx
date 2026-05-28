@@ -30,9 +30,13 @@ export default async function StudioSystemsPage() {
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-4 text-glow-warm">
             Studio Systems
           </h1>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={200}>
           <p className="font-serif-display text-xl lg:text-2xl font-normal text-[var(--color-bone)] mb-8">
             Hands-on operational and web build support, by the hour.
           </p>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={400}>
           <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
             Maximum five hours per week.
           </p>
@@ -60,14 +64,14 @@ export default async function StudioSystemsPage() {
               <p>
                 The hours are split between operational support and web build support, shaped to what the business actually needs that week. One week the work might be vendor coordination, decision architecture, and weekly operational rhythm. Another week it might be mapping the structure of a website, planning a build, or laying the groundwork for the digital infrastructure the business is about to need. The point is to put real operational and technical hands on the work without committing the founder to a long-form partnership.
               </p>
-
-              {/* Pull-quote */}
-              <blockquote className="border-l-2 border-[var(--color-dusty-rose)] pl-6 my-10 py-4 bg-[var(--color-dusty-rose)]/5 rounded-r-lg">
-                <p className="font-script text-xl lg:text-2xl italic text-[var(--color-dusty-rose)] leading-relaxed">
-                  Real operational and technical hands on the work.
-                </p>
-              </blockquote>
             </div>
+          </AnimateIn>
+          <AnimateIn animation="reveal-quote">
+            <blockquote className="border-l-2 border-[var(--color-dusty-rose)] pl-6 my-10 py-4 bg-[var(--color-dusty-rose)]/5 rounded-r-lg" style={{ maxWidth: '65ch' }}>
+              <p className="font-script text-xl lg:text-2xl italic text-[var(--color-dusty-rose)] leading-relaxed">
+                Real operational and technical hands on the work.
+              </p>
+            </blockquote>
           </AnimateIn>
         </div>
       </section>

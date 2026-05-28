@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 interface AnimateInProps {
   children: ReactNode;
-  animation?: 'fade-up' | 'fade-in' | 'slide-left' | 'slide-right';
+  animation?: 'fade-up' | 'fade-in' | 'slide-left' | 'slide-right' | 'reveal-quote';
   delay?: number;
   threshold?: number;
   className?: string;
@@ -15,6 +15,7 @@ const animationClasses: Record<string, string> = {
   'fade-in': 'animate-reveal-in',
   'slide-left': 'animate-reveal-slide-left',
   'slide-right': 'animate-reveal-slide-right',
+  'reveal-quote': 'animate-reveal-quote',
 };
 
 export function AnimateIn({

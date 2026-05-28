@@ -30,6 +30,8 @@ export default async function WorkWithOceoLuxePage() {
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-8 text-glow-warm">
             Three Operational Depths, One Standard
           </h1>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={200}>
           <p className="text-xl text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
             Oceo Luxe meets founders at three levels of operational depth. The level is matched to where the business is, not where the founder wants it to be. The standard of work is the same across all three.
           </p>

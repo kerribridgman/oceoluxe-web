@@ -55,7 +55,7 @@ export function MarketingHeader({ theme = 'dark' }: MarketingHeaderProps) {
         isScrolled
           ? 'bg-[var(--color-charcoal)] shadow-md backdrop-blur-sm'
           : isDark
-            ? 'bg-[var(--color-ink)] border-b border-[var(--color-taupe)]/10'
+            ? 'bg-[var(--color-ink)]/95 backdrop-blur-sm border-b border-[var(--color-taupe)]/10'
             : 'bg-[#faf8f5] border-b border-[#967F71]/10 shadow-sm'
       }`}
     >

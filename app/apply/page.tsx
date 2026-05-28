@@ -13,6 +13,8 @@ export default async function ApplyPage() {
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-6 text-glow-warm">
             Apply to Work With Oceo Luxe
           </h1>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={200}>
           <p className="text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
             Oceo Luxe is application-only. Every partnership begins with a conversation. The studio is selective about who it works with because the work requires alignment on both sides. The application below is the first step.
           </p>

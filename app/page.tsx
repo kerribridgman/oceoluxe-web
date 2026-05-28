@@ -17,17 +17,21 @@ export default async function HomePage() {
 
       {/* 1. Hero Section */}
       <PageHeader slotId="home-hero-bg" height="80vh" priority>
-        <AnimateIn animation="fade-in">
-          <div className="space-y-8">
+        <div className="space-y-8">
+          <AnimateIn animation="fade-in">
             <h1 className="font-serif-display text-5xl lg:text-6xl xl:text-7xl font-normal text-[var(--color-cream)] leading-[1.1] tracking-tight text-glow-warm">
               Operational Partnership for Founders Building Businesses They Intend to Keep
             </h1>
+          </AnimateIn>
+          <AnimateIn animation="fade-up" delay={200}>
             <p className="text-xl lg:text-2xl text-[var(--color-bone)] font-light leading-relaxed max-w-3xl">
               Oceo Luxe is a Studio Operational Partner. We translate vision into structured execution through operational systems, decision frameworks, and the kind of behind-the-scenes clarity that lets founders stay in the work only they can do.
             </p>
-            <p className="font-script text-2xl italic text-[var(--color-dusty-rose)]">
+            <p className="font-script text-2xl italic text-[var(--color-dusty-rose)] mt-6">
               Structure does not limit creativity, it protects it.
             </p>
+          </AnimateIn>
+          <AnimateIn animation="fade-up" delay={400}>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link href="/apply">
                 <Button
@@ -48,8 +52,8 @@ export default async function HomePage() {
                 </Button>
               </Link>
             </div>
-          </div>
-        </AnimateIn>
+          </AnimateIn>
+        </div>
       </PageHeader>
 
       {/* 2. The Problem */}
@@ -72,9 +76,11 @@ export default async function HomePage() {
       </section>
 
       {/* Gradient divider */}
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="divider-gradient" />
-      </div>
+      <AnimateIn animation="fade-in">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="divider-gradient" />
+        </div>
+      </AnimateIn>
 
       {/* 3. The Role — Two Column with Media Slot */}
       <section className="py-20 lg:py-28 bg-[var(--color-ink)] ambient-glow-rose">

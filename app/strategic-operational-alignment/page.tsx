@@ -39,9 +39,13 @@ export default async function StrategicOperationalAlignmentPage() {
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-4 text-glow-warm">
             Strategic Operational Alignment
           </h1>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={200}>
           <p className="font-serif-display text-xl lg:text-2xl font-normal text-[var(--color-bone)] mb-8">
             A focused operational reset.
           </p>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={400}>
           <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
             Flat engagement.
           </p>
@@ -76,14 +80,14 @@ export default async function StrategicOperationalAlignmentPage() {
               <p>
                 Every engagement ends with a documented operational architecture the founder owns. The systems built during the engagement are designed to keep working without Oceo Luxe holding them. The point of the alignment is to leave the founder with structure, not dependency.
               </p>
-
-              {/* Pull-quote */}
-              <blockquote className="border-l-2 border-[var(--color-dusty-rose)] pl-6 my-10 py-4 bg-[var(--color-dusty-rose)]/5 rounded-r-lg">
-                <p className="font-script text-xl lg:text-2xl italic text-[var(--color-dusty-rose)] leading-relaxed">
-                  The point of the alignment is to leave the founder with structure, not dependency.
-                </p>
-              </blockquote>
             </div>
+          </AnimateIn>
+          <AnimateIn animation="reveal-quote">
+            <blockquote className="border-l-2 border-[var(--color-dusty-rose)] pl-6 my-10 py-4 bg-[var(--color-dusty-rose)]/5 rounded-r-lg" style={{ maxWidth: '65ch' }}>
+              <p className="font-script text-xl lg:text-2xl italic text-[var(--color-dusty-rose)] leading-relaxed">
+                The point of the alignment is to leave the founder with structure, not dependency.
+              </p>
+            </blockquote>
           </AnimateIn>
         </div>
       </section>

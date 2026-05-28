@@ -39,9 +39,13 @@ export default async function OperationalPartnershipPage() {
           <h1 className="font-serif-display text-4xl lg:text-5xl font-normal text-[var(--color-cream)] leading-[1.15] tracking-tight mb-4 text-glow-warm">
             Private Operational Partnership
           </h1>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={200}>
           <p className="font-serif-display text-xl lg:text-2xl font-normal text-[var(--color-bone)] mb-8">
             An embedded operator inside your business.
           </p>
+        </AnimateIn>
+        <AnimateIn animation="fade-up" delay={400}>
           <p className="text-sm tracking-wider uppercase text-[var(--color-bone)] font-light">
             Application-only.
           </p>
@@ -76,14 +80,14 @@ export default async function OperationalPartnershipPage() {
               <p>
                 The partnership covers operational system design, vendor and team coordination, decision architecture, weekly operational rhythm, calendar and priority structure, and the strategic execution layer that translates founder vision into actual movement. The scope is shaped to the business, not pre-packaged. Some partnerships are heavy on systems design. Others are heavy on team coordination. The work is determined by what the business needs, not by what is easy to sell.
               </p>
-
-              {/* Pull-quote */}
-              <blockquote className="border-l-2 border-[var(--color-dusty-rose)] pl-6 my-10 py-4 bg-[var(--color-dusty-rose)]/5 rounded-r-lg">
-                <p className="font-script text-xl lg:text-2xl italic text-[var(--color-dusty-rose)] leading-relaxed">
-                  The scope is shaped to the business, not pre-packaged.
-                </p>
-              </blockquote>
             </div>
+          </AnimateIn>
+          <AnimateIn animation="reveal-quote">
+            <blockquote className="border-l-2 border-[var(--color-dusty-rose)] pl-6 my-10 py-4 bg-[var(--color-dusty-rose)]/5 rounded-r-lg" style={{ maxWidth: '65ch' }}>
+              <p className="font-script text-xl lg:text-2xl italic text-[var(--color-dusty-rose)] leading-relaxed">
+                The scope is shaped to the business, not pre-packaged.
+              </p>
+            </blockquote>
           </AnimateIn>
         </div>
       </section>
