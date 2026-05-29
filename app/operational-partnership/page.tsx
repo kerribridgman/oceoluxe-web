@@ -73,7 +73,7 @@ export default async function OperationalPartnershipPage() {
       </section>
 
       {/* Body Section 2 — What it covers */}
-      <section className="py-20 lg:py-28 bg-[var(--color-ink)] ambient-glow-rose">
+      <section className="py-20 lg:py-28 bg-[var(--color-charcoal)] ambient-glow-rose">
         <div className="max-w-3xl mx-auto px-6 relative z-10">
           <AnimateIn>
             <div className="space-y-6 text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
@@ -93,7 +93,7 @@ export default async function OperationalPartnershipPage() {
       </section>
 
       {/* Body Section 3 — Who it is for */}
-      <section className="py-20 lg:py-28 bg-[var(--color-charcoal)]">
+      <section className="py-20 lg:py-28 bg-[var(--color-ink)]">
         <div className="max-w-3xl mx-auto px-6">
           <AnimateIn>
             <div className="space-y-6 text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>

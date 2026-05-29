@@ -177,7 +177,7 @@ export default async function HomePage() {
       </section>
 
       {/* 5. Closing CTA */}
-      <section className="py-20 lg:py-28 bg-[var(--color-charcoal)]">
+      <section className="py-14 lg:py-20 bg-[var(--color-ink)]">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <AnimateIn>
             <h2 className="font-serif-display text-3xl lg:text-4xl font-normal text-white mb-6 tracking-tight">
