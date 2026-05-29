@@ -16,7 +16,7 @@ export function PageHeader({ slotId, height = '60vh', priority = false, children
     >
       <HeaderMedia slotId={slotId} priority={priority} />
       <HeaderOverlay />
-      <div className="relative z-10 max-w-4xl mx-auto px-6 w-full" style={{ paddingBottom: 'var(--space-hero-bottom)' }}>
+      <div className="relative z-10 max-w-4xl mx-auto px-6 pt-28 lg:pt-36 w-full" style={{ paddingBottom: 'var(--space-hero-bottom)' }}>
         {children}
       </div>
     </section>
