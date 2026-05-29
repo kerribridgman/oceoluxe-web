@@ -1,9 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { MarketingShell } from '@/components/marketing/marketing-shell';
 import { PageHeader } from '@/components/marketing/page-header';
-import { MediaSlot } from '@/components/marketing/media-slot';
 import { getPageMetadata } from '@/lib/seo/metadata';
 import { getBreadcrumbJsonLd } from '@/lib/seo/json-ld';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
@@ -39,16 +39,30 @@ export default async function AboutPage() {
         </AnimateIn>
       </PageHeader>
 
-      {/* Body 1 — Foundation */}
+      {/* Body 1 — Foundation + Portrait */}
       <section className="py-20 lg:py-28 bg-[var(--color-charcoal)]">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimateIn>
-            <div className="space-y-6 text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
-              <p>
-                Oceo Luxe was founded by Kerri Bridgman. The studio exists because most businesses do not fail at the idea. They fail at the operational layer underneath it. The work is to absorb that layer so the founder can stay in the work only they can do.
-              </p>
-            </div>
-          </AnimateIn>
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+            <AnimateIn className="flex-1">
+              <div className="space-y-6 text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+                <p>
+                  Oceo Luxe was founded by Kerri Bridgman. The studio exists because most businesses do not fail at the idea. They fail at the operational layer underneath it. The work is to absorb that layer so the founder can stay in the work only they can do.
+                </p>
+              </div>
+            </AnimateIn>
+            <AnimateIn animation="fade-in" className="w-full lg:w-auto lg:flex-shrink-0">
+              <div className="relative aspect-[2/3] w-full max-w-[320px] lg:max-w-[360px] mx-auto lg:mx-0 overflow-hidden rounded-lg">
+                <Image
+                  src="/images/Kerri-13.webp"
+                  alt="Kerri Bridgman, founder of Oceo Luxe, in a champagne dress"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 320px, 360px"
+                  priority
+                />
+              </div>
+            </AnimateIn>
+          </div>
         </div>
       </section>
 
@@ -61,15 +75,6 @@ export default async function AboutPage() {
                 Kerri spent the early part of her career inside the production operations of brands where margin compression, supply chain fragility, and tight timelines made operational precision non-negotiable. Production management at Michael Kors. Production coordination at The Shade Store. Project engineering at Atlantic Infra. A degree in Production Management with a minor in Economics from FIT. The pattern across every role was the same: take a chaotic operational environment, build the structure underneath it, and let the creative or commercial work breathe.
               </p>
             </div>
-          </AnimateIn>
-        </div>
-      </section>
-
-      {/* Portrait */}
-      <section className="py-20 lg:py-28 bg-[var(--color-charcoal)]">
-        <div className="max-w-3xl mx-auto px-6 flex justify-center">
-          <AnimateIn animation="fade-in">
-            <MediaSlot slotId="about-portrait" className="aspect-[2/3] w-full max-w-[560px]" priority />
           </AnimateIn>
         </div>
       </section>

@@ -9,7 +9,7 @@ export interface MediaSlotConfig {
 
 export const MEDIA_SLOTS: Record<string, MediaSlotConfig> = {
   'home-hero-bg': { slotId: 'home-hero-bg', label: 'HOME HERO BACKGROUND', meta: 'Video or image, 1920x1080 minimum', type: 'image', src: '/images/home-hero.webp', alt: 'Ocean sunset with golden light reflecting off dark water' },
-  'home-section-3-image': { slotId: 'home-section-3-image', label: 'EDITORIAL IMAGE', meta: 'Portrait or landscape, 1200px min', type: 'image', src: '/images/home-editorial.webp', alt: 'Working from a beachfront palapa with laptop and ocean view' },
+  'home-section-3-image': { slotId: 'home-section-3-image', label: 'EDITORIAL IMAGE', meta: 'Portrait or landscape, 1200px min', type: 'image', src: '/images/home-editorial.webp', alt: 'Kerri Bridgman at a Tulum resort in white shirt and black shorts' },
   'home-tier-op': { slotId: 'home-tier-op', label: 'OPERATIONAL PARTNERSHIP', meta: 'Card image, 800x600', type: 'image', src: '/images/tier-op.webp', alt: 'Harbor at sunset with silhouetted coastline' },
   'home-tier-sa': { slotId: 'home-tier-sa', label: 'STRATEGIC ALIGNMENT', meta: 'Card image, 800x600', type: 'image', src: '/images/tier-sa.webp', alt: 'Ancient ruins framed by cypress trees at sunset' },
   'home-tier-ss': { slotId: 'home-tier-ss', label: 'STUDIO SYSTEMS', meta: 'Card image, 800x600', type: 'image', src: '/images/tier-ss.webp', alt: 'Latte art on a sandy beach with ocean rocks' },
