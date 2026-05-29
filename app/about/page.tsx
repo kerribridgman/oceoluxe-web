@@ -50,8 +50,8 @@ export default async function AboutPage() {
                 </p>
               </div>
             </AnimateIn>
-            <AnimateIn animation="fade-in" className="w-full lg:w-auto lg:flex-shrink-0">
-              <div className="relative aspect-[2/3] w-full max-w-[320px] lg:max-w-[360px] mx-auto lg:mx-0 overflow-hidden rounded-lg">
+            <AnimateIn animation="fade-in" className="w-full lg:w-[360px] lg:flex-shrink-0">
+              <div className="relative aspect-[2/3] w-full mx-auto lg:mx-0 overflow-hidden rounded-lg">
                 <Image
                   src="/images/Kerri-13.webp"
                   alt="Kerri Bridgman, founder of Oceo Luxe, in a champagne dress"
