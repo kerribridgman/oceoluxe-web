@@ -44,9 +44,12 @@ export default async function AboutPage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
             <AnimateIn className="flex-1">
-              <div className="space-y-6 text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+              <div className="space-y-6 text-xl text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
                 <p>
                   Oceo Luxe was founded by Kerri Bridgman. The studio exists because most businesses do not fail at the idea. They fail at the operational layer underneath it. The work is to absorb that layer so the founder can stay in the work only they can do.
+                </p>
+                <p>
+                  Kerri spent the early part of her career inside the production operations of brands where margin compression, supply chain fragility, and tight timelines made operational precision non-negotiable. Production management at Michael Kors. Production coordination at The Shade Store. Project engineering at Atlantic Infra. A degree in Production Management with a minor in Economics from FIT. The pattern across every role was the same: take a chaotic operational environment, build the structure underneath it, and let the creative or commercial work breathe.
                 </p>
               </div>
             </AnimateIn>
@@ -66,24 +69,11 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Body 2 — Career Credentials */}
+      {/* Body 2 — Philosophy */}
       <section className="py-20 lg:py-28 bg-[var(--color-ink)]">
         <div className="max-w-3xl mx-auto px-6">
           <AnimateIn>
-            <div className="space-y-6 text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
-              <p>
-                Kerri spent the early part of her career inside the production operations of brands where margin compression, supply chain fragility, and tight timelines made operational precision non-negotiable. Production management at Michael Kors. Production coordination at The Shade Store. Project engineering at Atlantic Infra. A degree in Production Management with a minor in Economics from FIT. The pattern across every role was the same: take a chaotic operational environment, build the structure underneath it, and let the creative or commercial work breathe.
-              </p>
-            </div>
-          </AnimateIn>
-        </div>
-      </section>
-
-      {/* Body 3 — Philosophy */}
-      <section className="py-20 lg:py-28 bg-[var(--color-ink)]">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimateIn>
-            <div className="space-y-6 text-lg text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
+            <div className="space-y-6 text-xl text-[var(--color-bone)] font-light leading-relaxed" style={{ maxWidth: '65ch' }}>
               <p>
                 The work at Oceo Luxe is the same work, applied beyond fashion. Founders in any industry hit the same operational ceiling. The systems that worked at one stage stop working at the next. Oceo Luxe is the operational partner that helps them cross that line without losing the business in the process.
               </p>
